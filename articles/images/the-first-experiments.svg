@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">The ladder: from browser mockups to a launcher above the agent</title>
+  <desc id="d">Five rungs drawn left to right and rising. Rung 0, the browser: the policy hash and the edge matrix mockups, and three storyboards. Rung 1, any Claude session: E01 probe and E02 policy hash. Rung 2, Linux: E03 run and E04 hello, marked measured on 24 October 2026. Rung 3, planned: E05 edges, E06 the process tree, E07 the LLM gateway, E08 the KMS. Rung 4, designed: the components under one manifest hash, started by a launcher above the agent. A caption under rung 2 reads: a Boundary for the child, a Setting for whoever ran it.</desc>
+  <rect width="960" height="420" fill="#faf9f5"/>
+  <text x="24" y="38" font-size="12" font-weight="700" letter-spacing="2" fill="#5c5f66">THE LADDER · 24 OCTOBER 2026</text>
+  <!-- rails -->
+  <line x1="60" y1="380" x2="900" y2="80" stroke="#d5d0c2" stroke-width="2"/>
+  <line x1="60" y1="400" x2="900" y2="100" stroke="#d5d0c2" stroke-width="2"/>
+  <g font-size="12">
+    <!-- rung 0 -->
+    <rect x="40" y="300" width="170" height="92" rx="10" fill="#ffffff" stroke="#0f766e" stroke-width="2"/>
+    <text x="54" y="322" font-weight="700" fill="#115e59">0 · the browser</text>
+    <text x="54" y="342" fill="#34363c">policy hash mockup</text>
+    <text x="54" y="358" fill="#34363c">edge matrix mockup</text>
+    <text x="54" y="374" fill="#34363c">three storyboards</text>
+    <text x="54" y="408" font-size="10" fill="#8a8d94">published</text>
+    <!-- rung 1 -->
+    <rect x="230" y="236" width="170" height="78" rx="10" fill="#ffffff" stroke="#0f766e" stroke-width="2"/>
+    <text x="244" y="258" font-weight="700" fill="#115e59">1 · any Claude session</text>
+    <text x="244" y="278" fill="#34363c">E01 probe: the grant</text>
+    <text x="244" y="294" fill="#34363c">E02 policy hash</text>
+    <text x="244" y="330" font-size="10" fill="#8a8d94">runnable · stdlib only</text>
+    <!-- rung 2 -->
+    <rect x="420" y="168" width="170" height="82" rx="10" fill="#0f766e" stroke="#0f766e" stroke-width="2"/>
+    <text x="434" y="190" font-weight="700" fill="#ffffff">2 · Linux, Landlock</text>
+    <text x="434" y="210" fill="#e6fffa">E03 run under a policy</text>
+    <text x="434" y="226" fill="#e6fffa">E04 hello: 5 of 5 held</text>
+    <text x="434" y="266" font-size="10" fill="#115e59" font-weight="700">measured 24 Oct 2026</text>
+    <text x="434" y="280" font-size="10" fill="#8a8d94">a Boundary for the child,</text>
+    <text x="434" y="292" font-size="10" fill="#8a8d94">a Setting for whoever ran it</text>
+    <!-- rung 3 -->
+    <rect x="610" y="100" width="170" height="92" rx="10" fill="#ffffff" stroke="#b45309" stroke-width="2" stroke-dasharray="5 4"/>
+    <text x="624" y="122" font-weight="700" fill="#b45309">3 · planned</text>
+    <text x="624" y="142" fill="#34363c">E05 edges · E06 process tree</text>
+    <text x="624" y="158" fill="#34363c">E07 sharness.llm v0</text>
+    <text x="624" y="174" fill="#34363c">E08 sharness.kms v0</text>
+    <!-- rung 4 -->
+    <rect x="780" y="30" width="160" height="96" rx="10" fill="#ffffff" stroke="#6d28d9" stroke-width="2" stroke-dasharray="5 4"/>
+    <text x="794" y="52" font-weight="700" fill="#6d28d9">4 · designed</text>
+    <text x="794" y="72" fill="#34363c">the components,</text>
+    <text x="794" y="88" fill="#34363c">one manifest hash,</text>
+    <text x="794" y="104" fill="#34363c" font-weight="700">a launcher</text>
+    <text x="794" y="118" fill="#34363c" font-weight="700">above the agent</text>
+  </g>
+  <text x="24" y="412" font-size="10" fill="#8a8d94">No component is built. Rungs 0 to 2 exist; 3 is planned; 4 is the design.</text>
+</svg>

@@ -15,6 +15,8 @@
 | Policies are hashed (canonical JSON, SHA-256); the hash comes from the person or is signed by the root key | otherwise a prompt-injected agent could widen them |
 | Host allowlisting is done by `sharness.net` as the TLS client, not by the kernel | the kernel only sees the platform proxy's port; `.net` sees and verifies the name |
 | The command is `sharness-ai`, not plain `sharness` (decided 24 Oct 2026, after the design pack) | `sharness` is the Debian / pkgsrc / OpenBSD package of the unrelated shell test library; `sharness-ai` matches the PyPI distribution |
+| **Build order: the ladder** (decided 24 Oct 2026, from the memo): browser mockups, then experiments any session can run, then Linux experiments, then components, then the launcher above the agent | start small, each piece in isolation; see [Mockups and experiments](../experiments/index.md). E01 to E04 are runnable |
+| A **v0 policy** of six keys that the CLI and the browser hash identically, enforced with Landlock, growing towards the full schema | two implementations, one hash, before layers and signing |
 
 ## Open decisions
 
@@ -28,6 +30,8 @@
 | 6 | Run the process-tree proof of concept and publish its results | see [Enforcing the process tree](../process-tree/index.md); follow its safety rules |
 | 7 | One CLI project, or one per component | one for now (memo of 24 Oct); revisit when a component is useful on its own |
 | 8 | What "a skill" means for SHarness | a skill can install and start the harness, but locks it applies to the agent that loaded it are only Settings; binding needs the launcher above the agent |
+| 9 | **Claude Code's sandbox as a layer.** Should a PBP generate the sandbox's settings (`bubblewrap`, network namespace, hostname allowlist) as its transparent `sharness.bash` on a laptop, and what does the design still add there | prior art the pages had missed; comparison on [Mockups and experiments](../experiments/index.md#what-claude-codes-own-sandbox-already-gives-and-what-sharness-adds) |
+| 10 | **Order of E05 to E08** | proposed on the [research note](../research/index.md#4-what-is-still-open-in-the-order-to-take-it): E06 (the process tree), E05 (the edges as a script), E08 before E07 (the KMS before the LLM gateway), then the launcher as a script on a laptop |
 
 ## Guidance from Dinis Cruz's memo of 24 October {#memo-guidance}
 
@@ -38,8 +42,8 @@ From [voice memo 01](../briefs/memos/2026-10-24-memo-01-secure-harness.md), writ
 | How to build | very simple examples first; each component (network, KMS, file, LLM) built and tested in isolation; one CLI project for now, separate ones later if needed | proposed |
 | Order of work | as simple, as fast and as slim as possible; then harden; then test, and see how the flow works | proposed |
 | First users | (1) Dinis's own Claude sessions; (2) sgit, and the agents that use it all day, including the newsroom's agents, which run around the clock and read untrusted data | proposed |
-| Acceptance test | a hello world with Claude, run inside SHarness, shows the agent cannot reach the internet, cannot write to the file system, and cannot make other requests, because SHarness is inline | proposed |
-| Reach | as generic as possible; possibly packaged as a skill | open: a skill the agent loads cannot by itself apply locks that bind that agent (see [Policies §2](../policies/index.md#2-who-enforces-decides-the-barrier-kind)) |
+| Acceptance test | a hello world with Claude, run inside SHarness, shows the agent cannot reach the internet, cannot write to the file system, and cannot make other requests, because SHarness is inline | **runnable for one child process** (E04, `sharness-ai hello`, measured 24 Oct 2026); for the agent itself it needs the launcher above the agent |
+| Reach | as generic as possible; possibly packaged as a skill | partly answered: the `sharness-hello` skill runs E01 and E04 inside a session under the safety rules; a skill cannot apply locks that bind the session that loaded it (see [Policies §2](../policies/index.md#2-who-enforces-decides-the-barrier-kind)) |
 | Policies | extend process behaviour policies with file behaviour policies and network behaviour policies | proposed ([Policies §10](../policies/index.md#10-next-file-and-network-behaviour-policies-proposed)) |
 | As a service | run some components with a cloud provider (Cloudflare, AWS or another), to apply controls outside the agent's machine | proposal; no such service exists |
 | Laptops | protect Claude running locally; disposable users per session | designed; ~49 ms per user measured in one cloud workspace, not on a laptop |

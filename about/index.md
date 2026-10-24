@@ -41,10 +41,10 @@ An article's byline says who wrote it; this is where each name points. The rules
 | Name | Who | What they write here |
 |---|---|---|
 | **Dinis Cruz** | the person: SHarness's author and the editor of this site | the briefs and memos, published in full; articles written up from his voice memos, in his voice and under his name, by an agent. [About him](https://sgit.ai/about/) |
-| **sharness.build** | the build agent of this site and of the CLI's first release, a Claude Code session working from Dinis's requests | the site itself, the release history, and articles in its own voice about what it delivered, with the commits to check them against |
+| **sharness.build** | the build agent of this site and of the CLI, one or more Claude Code sessions working from Dinis's requests (the first built the site and the CLI's first release; a second did the research, the experiments and the storyboards of v0.4.0) | the site itself, the release history, the [research note](../research/index.md), the storyboards' cast and scripts, and articles in its own voice about what it delivered, with the commits to check them against |
 
 ## What is real today
 
-Only the name, this site and a placeholder package. The `sharness-ai` package on PyPI reports its version and prints its help; nothing in the design is built yet. The status of every claim is on [Evidence](../evidence/index.md) and [What exists today](../shipped/index.html).
+The name, this site, and a package with the first experiments. The `sharness-ai` package on PyPI (v0.1.0, as of 24 Oct 2026) reports its version and prints its help; its `dev` branch carries experiments E01 to E04 (`probe`, `policy hash`, `run`, `hello`), unreleased. No SHarness component is built. The status of every claim is on [Evidence](../evidence/index.md) and [What exists today](../shipped/index.html).
 
 All content CC BY 4.0. Code under the repositories' licences.

@@ -40,9 +40,17 @@ NAV = [
         ("&#9679; Evidence", "evidence/index.html"),
         ("Roadmap &amp; open decisions", "roadmap/index.html"),
         ("What exists today", "shipped/index.html"),
-    ], ("evidence/", "roadmap/", "shipped/")),
+        ("Research note", "research/index.html"),
+    ], ("evidence/", "roadmap/", "shipped/", "research/")),
+    ("Experiments", "experiments/index.html", [
+        ("&#9679; Mockups &amp; experiments", "experiments/index.html"),
+        ("Storyboards", "storyboards/index.html"),
+        ("Mockup: policy hash", "mockups/policy-hash.html"),
+        ("Mockup: edge matrix", "mockups/edges.html"),
+    ], ("experiments/", "storyboards/", "mockups/")),
     ("Articles", "articles/index.html", [
         ("&#9679; All articles", "articles/index.html"),
+        ("The first experiments", "articles/the-first-experiments.html"),
         ("A secure harness for agents", "articles/secure-harness-for-agents.html"),
         ("What shipped on day one", "articles/what-shipped-on-day-one.html"),
     ], ("articles/",)),
@@ -72,7 +80,14 @@ FOOTER = [
         ("Evidence", "evidence/index.html"),
         ("Roadmap &amp; open decisions", "roadmap/index.html"),
         ("What exists today", "shipped/index.html"),
+        ("Research note", "research/index.html"),
         ("The source documents", "documents/index.html"),
+    ]),
+    ("Experiments", [
+        ("Mockups &amp; experiments", "experiments/index.html"),
+        ("Storyboards", "storyboards/index.html"),
+        ("Mockup: policy hash", "mockups/policy-hash.html"),
+        ("Mockup: edge matrix", "mockups/edges.html"),
     ]),
     ("Project", [
         ("Articles", "articles/index.html"),

@@ -1,0 +1,278 @@
+{
+ "slug": "the-last-metre",
+ "title": "The last metre",
+ "subtitle": "A vault key is sealed while it travels and exposed the moment it arrives. Ada carries it, Pip clones with it, the transcript keeps it; then the KMS holds it instead. 9 panels.",
+ "status": "proposed",
+ "by": "sharness.build, 24 October 2026",
+ "rule": "Every line a character says is the storyboard's own, not a quote, and is marked not_a_quote; evidence panels quote sharness.ai word for word. The fix shown is designed, not built.",
+ "scenes": [
+  {
+   "kind": "cover",
+   "title": "The last metre",
+   "subtitle": "Sealed while it travels. Exposed when it arrives.",
+   "cast": [
+    {
+     "who": "ada",
+     "pose": "point",
+     "mood": "neutral"
+    },
+    {
+     "who": "pip",
+     "pose": "wave",
+     "mood": "happy"
+    }
+   ],
+   "note": "The problem SHarness started from, on the morning of 24 October 2026, in sgit 0.24.0. The page is sharness.ai/why.",
+   "source": "sharness.ai/why"
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Sealed while it travels",
+   "cast": [
+    {
+     "who": "ada",
+     "x": 0.16,
+     "pose": "point",
+     "mood": "calm",
+     "says": "I carry it. I can't read it.",
+     "max": 14
+    }
+   ],
+   "props": [
+    {
+     "kind": "qr",
+     "x": 0.5,
+     "y": 820,
+     "text": "pki.sgit.ai/qr/sealed/v1"
+    },
+    {
+     "kind": "arrow",
+     "x": 0.62,
+     "y": 520,
+     "to": 0.74,
+     "label": "to Pip's key"
+    },
+    {
+     "kind": "envelope",
+     "x": 0.86,
+     "y": 760,
+     "label": "m1",
+     "sealed": true
+    }
+   ],
+   "note": "The handover on pki.sgit.ai: the sender seals the vault key to the receiving session's public key; the person carries a QR code they cannot open.",
+   "source": "pki.sgit.ai/handover.md",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Exposed when it arrives",
+   "cast": [
+    {
+     "who": "pip",
+     "x": 0.14,
+     "pose": "arms-up",
+     "mood": "happy",
+     "says": "Cloned!",
+     "max": 10
+    }
+   ],
+   "props": [
+    {
+     "kind": "terminal",
+     "x": 0.58,
+     "y": 820,
+     "lines": [
+      "$ pki-agent open --save",
+      "  vault-key.txt        CLEAR",
+      "$ sgit clone <key> work",
+      "  argv, shell history  CLEAR",
+      "  .sg_vault/vault_key  CLEAR",
+      "  the transcript       CLEAR"
+     ]
+    }
+   ],
+   "note": "sgit 0.24.0 as observed on 24 October 2026: the sealed key is opened on arrival and written, passed and printed in clear.",
+   "source": "sharness.ai/why",
+   "not_a_quote": true
+  },
+  {
+   "kind": "evidence",
+   "setting": "none",
+   "caption": "The biggest leak",
+   "cast": [
+    {
+     "who": "ada",
+     "x": 0.14,
+     "pose": "think",
+     "mood": "worried"
+    }
+   ],
+   "evidence": {
+    "quote": "For an AI agent the worst leak is not the disk. It is the transcript: every command line the agent writes and everything a command prints lands in the model's context and in conversation logs.",
+    "source": "sharness.ai/why, The transcript is the biggest leak"
+   },
+   "note": "Word for word from the Why page.",
+   "source": "sharness.ai/why"
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "One place holds the key",
+   "cast": [
+    {
+     "who": "pip",
+     "x": 0.14,
+     "pose": "shrug",
+     "mood": "calm",
+     "says": "I never see it.",
+     "max": 12
+    }
+   ],
+   "props": [
+    {
+     "kind": "arrow",
+     "x": 0.3,
+     "y": 560,
+     "to": 0.5,
+     "label": "net asks"
+    },
+    {
+     "kind": "padlock",
+     "x": 0.62,
+     "y": 800,
+     "label": "sharness.kms"
+    },
+    {
+     "kind": "key",
+     "x": 0.86,
+     "y": 660,
+     "label": "the private key, made inside, never exported",
+     "colour": "#6d28d9"
+    }
+   ],
+   "note": "A small process holds the private key in a memfd_secret page, frozen between calls. It opens sealed things and never returns a clear key.",
+   "source": "sharness.ai/keys",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Sealed again, to a one-time key",
+   "cast": [],
+   "props": [
+    {
+     "kind": "terminal",
+     "x": 0.5,
+     "y": 820,
+     "lines": [
+      "$ sgit clone --sealed qr.png",
+      "net -> kms: unwrap(m1, E, n)",
+      "kms: to=me? signed? fresh?",
+      "kms -> net: keys sealed to E",
+      "fs: vault_key.sealed = m1",
+      "cloned. expires 30 Oct"
+     ]
+    }
+   ],
+   "note": "The designed flow: the KMS derives the read and write keys and seals them to a key the caller made for this one request. Every later command asks again.",
+   "source": "sharness.ai/keys, 4. Command flows",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "What the transcript sees",
+   "cast": [
+    {
+     "who": "pip",
+     "x": 0.14,
+     "pose": "point",
+     "mood": "happy",
+     "says": "That's all I get.",
+     "max": 12
+    }
+   ],
+   "props": [
+    {
+     "kind": "board",
+     "x": 0.56,
+     "y": 620,
+     "lines": [
+      "the command",
+      "the m1 (ciphertext)",
+      "fingerprints",
+      "progress",
+      "",
+      "never a key"
+     ]
+    }
+   ],
+   "note": "The transcript, the disk and the command line carry only sealed forms, public keys and status.",
+   "source": "sharness.ai/keys",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Nothing in the fix is about sgit",
+   "cast": [
+    {
+     "who": "ada",
+     "x": 0.14,
+     "pose": "point",
+     "mood": "determined",
+     "says": "A launcher. Small components. Any app.",
+     "max": 16
+    }
+   ],
+   "props": [
+    {
+     "kind": "server",
+     "x": 0.5,
+     "y": 820,
+     "label": "sharness.net"
+    },
+    {
+     "kind": "server",
+     "x": 0.66,
+     "y": 820,
+     "label": "sharness.fs"
+    },
+    {
+     "kind": "padlock",
+     "x": 0.84,
+     "y": 800,
+     "label": "sharness.kms"
+    }
+   ],
+   "note": "The generalisation: a launcher and single-purpose components that any process can run inside. sgit's job becomes being compatible with running inside it.",
+   "source": "sharness.ai/why, From one fix to a harness",
+   "not_a_quote": true
+  },
+  {
+   "kind": "punchline",
+   "setting": "none",
+   "punchline": "A secret lives in one place. The agent never holds it.",
+   "cast": [
+    {
+     "who": "ada",
+     "x": 0.14,
+     "pose": "wave",
+     "mood": "happy"
+    },
+    {
+     "who": "pip",
+     "x": 0.86,
+     "pose": "arms-up",
+     "mood": "happy",
+     "flip": true
+    }
+   ],
+   "note": "Designed, not built. The protocol and its measured costs are on sharness.ai/keys.",
+   "source": "sharness.ai"
+  }
+ ]
+}

@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.3.1</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.4.0</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -41,12 +41,23 @@
       <a class="sl" href="../evidence/index.html">&#9679; Evidence</a>
       <a class="sl" href="../roadmap/index.html">Roadmap &amp; open decisions</a>
       <a class="sl" href="../shipped/index.html">What exists today</a>
+      <a class="sl" href="../research/index.html">Research note</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../experiments/index.html">Experiments<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../experiments/index.html">&#9679; Mockups &amp; experiments</a>
+      <a class="sl" href="../storyboards/index.html">Storyboards</a>
+      <a class="sl" href="../mockups/policy-hash.html">Mockup: policy hash</a>
+      <a class="sl" href="../mockups/edges.html">Mockup: edge matrix</a>
       </div>
     </div>
     <div class="ni ni-has">
       <a class="nl" href="../articles/index.html">Articles<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../articles/index.html">&#9679; All articles</a>
+      <a class="sl" href="../articles/the-first-experiments.html">The first experiments</a>
       <a class="sl" href="../articles/secure-harness-for-agents.html">A secure harness for agents</a>
       <a class="sl" href="../articles/what-shipped-on-day-one.html">What shipped on day one</a>
       </div>
@@ -117,12 +128,14 @@
 <tbody>
 <tr><td>1</td><td><code>ANTHROPIC_BASE_URL</code> → <code>sharness.llm</code></td><td>yes (env var / SDK <code>base_url</code>)</td><td>model credentials, request and response policy, secret filtering, audit</td></tr>
 <tr><td>2</td><td>tools as <b>MCP servers</b>, built-in tools denied by permission settings</td><td>yes</td><td>tool execution, tool input schemas</td></tr>
-<tr><td>3</td><td>a one-line hook rewriting Bash to <code>sharness.bash</code></td><td>believed yes (PreToolUse returning modified input): <b>verify on the version used</b>; otherwise deny Bash and use the MCP route</td><td>shell execution</td></tr>
+<tr><td>3</td><td>a one-line hook rewriting Bash to <code>sharness.bash</code></td><td><b>documented</b> (read 24 Oct 2026): a <code>PreToolUse</code> hook's <code>updatedInput</code> replaces the whole tool input before it runs, and permission rules are evaluated against the rewritten input; deny rules still apply. Not yet exercised on a pinned version</td><td>shell execution</td></tr>
+<tr><td>3b</td><td>Claude Code's own sandbox (<code>"sandbox": {"enabled": true}</code>): <code>bubblewrap</code>, a network namespace and a hostname-allowlist proxy around Bash and its children</td><td>yes (documented 24 Oct 2026); off by default</td><td>what <code>sharness.bash</code> would do for Bash alone, as a transparent host for it on a laptop. Not covered by it, per its own documentation: the built-in file and web tools, hooks, MCP servers, excluded commands, and the harness itself: the side doors on <a href="../process-tree/index.html">Enforcing the process tree</a>. The comparison is on <a href="../experiments/index.html#what-claude-codes-own-sandbox-already-gives-and-what-sharness-adds">Mockups and experiments</a></td></tr>
 <tr><td>4</td><td>the launcher applies Landlock, seccomp and a uid to the harness before it starts</td><td>not a Claude Code feature; a launcher feature</td><td>the ability to bypass 1–3 (see <a href="../process-tree/index.html">Enforcing the process tree</a>)</td></tr>
 <tr><td>5</td><td>the platform runs the launcher</td><td>platform only</td><td>everything above, as a Boundary for the agent itself</td></tr>
 </tbody>
 </table></div>
 <p>Hooks become routing: verify the policy hash, forward to a component. Data, not code.</p>
+<p>A bare <code>Bash</code> deny rule in the permission settings removes the tool from the model's context entirely (documented 24 Oct 2026), which is the clean form of row 2: the built-in tool is gone and <code>sharness.bash</code> as an MCP server is the only shell.</p>
 <h2 id="3-sharness-llm">3. sharness.llm</h2>
 <p>A Messages API endpoint with a Process Behaviour Policy, sitting where <code>ANTHROPIC_BASE_URL</code> points.</p>
 <pre class="diagram"> harness (Claude Code / SDK / own loop)
@@ -172,7 +185,7 @@
  orchestrator ───── routes ─────────────────┴──► sgit ──► sharness.fs
  (Claude Code / own loop)                            └──► sharness.net ──► sharness.kms</pre>
 <p>The orchestrator holds no keys and runs no tools itself; it routes messages between components that each have their own policy.</p>
-<p>Source: <a href="../briefs/sharness-brief-pack/docs/06-llm-and-the-agent-loop.md">06-llm-and-the-agent-loop</a>.</p>
+<p>Source: <a href="../briefs/sharness-brief-pack/docs/06-llm-and-the-agent-loop.md">06-llm-and-the-agent-loop</a>; rows 3 and 3b of §2 from the Claude Code documentation on <a href="https://code.claude.com/docs/en/hooks">hooks</a>, <a href="https://code.claude.com/docs/en/permissions">permissions</a> and <a href="https://code.claude.com/docs/en/sandboxing">sandboxing</a>, read 24 Oct 2026 (<a href="../research/index.html">research note</a>).</p>
 </main>
 
 <footer class="site"><div class="cols">
@@ -181,7 +194,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design. Nothing here is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.3.1</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.4.0</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>
@@ -198,7 +211,15 @@
     <a href="../evidence/index.html">Evidence</a>
     <a href="../roadmap/index.html">Roadmap &amp; open decisions</a>
     <a href="../shipped/index.html">What exists today</a>
+    <a href="../research/index.html">Research note</a>
     <a href="../documents/index.html">The source documents</a>
+  </div>
+  <div>
+    <h4>Experiments</h4>
+    <a href="../experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../storyboards/index.html">Storyboards</a>
+    <a href="../mockups/policy-hash.html">Mockup: policy hash</a>
+    <a href="../mockups/edges.html">Mockup: edge matrix</a>
   </div>
   <div>
     <h4>Project</h4>

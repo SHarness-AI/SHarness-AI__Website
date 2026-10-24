@@ -156,12 +156,40 @@ Observed as of 24 Oct 2026; may differ elsewhere. Method: `ps --forest`, `/proc/
 
 The probes left users `sgit-dec` and `sgit-run`, a folder of probe scripts (`/opt/sgit-probe/`) and a user-keyring entry `sgit:persist-probe` (root). All died with the VM.
 
+## 9. The first experiments, run by the CLI
+
+Run on 24 October 2026 in a second Claude Code cloud session (as of 24 Oct 2026). The commands are experiments E01 to E04 in the CLI repository, [experiments/README.md](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md); the map is [Mockups and experiments](../experiments/index.md). Method: `sharness-ai probe` for the environment (read-only; it prints the names of proxy variables, never values), `sharness-ai hello --json` for the result; each probe is `python3 -I -c …` run as a child under the policy by `sharness-ai run`.
+
+| Fact | Observed (E01, probe) |
+|---|---|
+| Environment | Ubuntu 24.04.5, Linux 6.18.44, Python 3.13.17; uid 0, every capability, `NoNewPrivs 0`, `Seccomp 0` |
+| Kernel | Landlock ABI 7; `memfd_secret` available; cgroups v1 with a unified mount; `CONFIG_PKCS8_PRIVATE_KEY_PARSER` not set |
+| Tools | `unshare`, `setpriv`, `strace`, `iptables`, `nft`, `useradd` present; `bwrap`, `fusermount3`, `criu` absent |
+| Egress | `HTTPS_PROXY` and `NO_PROXY` set (names only); the proxy port differed from the one seen in §7 |
+| Harness | Claude Code **2.1.310** (§7 observed 2.1.42 on the same day in another session): versions move between sessions |
+
+| Probe (E04, `hello`) | Policy says | Result |
+|---|---|---|
+| list `/usr` | allowed | allowed |
+| create `/tmp/sharness-ai-hello.tmp` | refused | `EACCES` (Landlock) |
+| create a file in the workspace | refused | `EACCES` (Landlock) |
+| TCP connect to `1.1.1.1:443` | refused | `EACCES` (Landlock port rule; an empty network namespace was also applied) |
+| run with a wrong `--expect-hash` | refused, nothing runs | exit 125, nothing ran |
+
+Policy hash `sha256:ad37e58bea6f4da65656687045b33ae9977caf90feef0ff5716a44db041b35af` (the `hello` policy generated for that interpreter; the paths include the workspace, so the hash differs per machine). 5 of 5 held; the whole run took 0.6 s. Under E03 with the `allow-https-example` policy, a connect to `1.1.1.1:443` succeeded and one to port 80 was refused.
+
+**What this does not show.** The policy was applied by the session to its own children. It is a Boundary for them and a Setting for the session (the same root process that could have skipped it). It says nothing about seccomp, uids, cgroups, mutual TLS or the process tree, none of which the experiments touch yet.
+
+## Documented, not yet exercised
+
+- A Claude Code `PreToolUse` hook can replace a tool's input before it runs (`updatedInput`, documented 24 Oct 2026), which answers [Agents §2](../agents/index.md#2-where-sharness-plugs-in) row 3. Not yet exercised on a pinned version.
+
 ## Not yet measured
 
 - seccomp filters (available in the kernel; no filter tested)
 - read-only bind mounts (namespaces tested; read-only binds not separately)
 - every side door on [Enforcing the process tree](../process-tree/index.md): the proof of concept has not been run
 - AWS KMS asymmetric RSA-4096 with OAEP-SHA-256 matching sgit's envelope
-- whether a Claude Code PreToolUse hook can rewrite a Bash call on the version used
+- the experiments E01 to E04 on a laptop (no root; on Ubuntu 24.04 an unprivileged user namespace may be refused, so `network: "none"` falls back to Landlock's TCP rules, which do not cover UDP)
 
-Source: [04-environment-evidence](../briefs/sharness-brief-pack/docs/04-environment-evidence.md).
+Source: [04-environment-evidence](../briefs/sharness-brief-pack/docs/04-environment-evidence.md); §9 from the CLI's experiments, run 24 Oct 2026.

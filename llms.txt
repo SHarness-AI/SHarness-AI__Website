@@ -4,7 +4,8 @@
 > the kernel and talking only over allowed, mutually authenticated connections, so a secret
 > lives in one place and a tricked process can only do its one job.
 
-Site version: v0.3.1. Status of the project: DESIGN. Nothing described on this site is built.
+Site version: v0.4.0. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04
+in the CLI). No SHarness component is built.
 By Dinis Cruz; design session written up with Claude, 24 October 2026. All content CC BY 4.0.
 SHarness is unrelated to Sharness, the shell testing library.
 
@@ -46,6 +47,22 @@ SHarness is unrelated to Sharness, the shell testing library.
 - /process-tree/index.md — making every process go through sharness.bash; side doors;
   safety rules for testing in a live session. PROOF OF CONCEPT NOT YET RUN
 
+## Mockups, experiments and storyboards (added in v0.4.0)
+
+- /experiments/index.md — the ladder: browser mockups, experiments any session can run, Linux
+  experiments, components, the launcher above the agent; E01 to E08 with what each shows and
+  does not show; E04 measured 24 Oct 2026; what Claude Code's own sandbox gives and what
+  SHarness adds. E01 to E04 are RUNNABLE in the CLI (probe, policy hash, run, hello)
+- /cli/index.md — the sharness-ai package: what exists (PyPI v0.1.0 vs dev), the first version
+  as proposed (experiments today, components tomorrow), the v0 policy and its hash, releases
+- /research/index.md — the published design read in full on 24 Oct 2026: what holds up, ten
+  findings and what this release did about each, what is still open and in what order
+- /storyboards/index.md — three storyboards drawn from data by the storyboards.sgit.ai kit
+  (the last metre, its one job, hello world inside), the cast, how they are made; each
+  storyboard's script at /storyboards/<slug>/index.md, data at storyboard.json and bundle.json
+- /mockups/policy-hash.html and /mockups/edges.html — browser mockups (HTML only): the policy
+  hash the CLI must agree with, and the edge matrix with the layer that refuses each edge
+
 ## Articles (newsroom format; /articles/<slug>.md beside each page)
 
 - /articles/index.md — every article, newest first, with its author
@@ -53,6 +70,8 @@ SHarness is unrelated to Sharness, the shell testing library.
   up by sharness.build): SHarness as a secure harness, behaviour policies enforced from outside
   the agent; small components built in isolation; first users his Claude sessions, then sgit and
   the newsroom's agents; file and network behaviour policies; a hello-world acceptance test
+- /articles/the-first-experiments.md — by sharness.build, in its own voice: four commands, three
+  storyboards, two mockups, and what a full read of the design found, with the commits
 - /articles/what-shipped-on-day-one.md — by sharness.build, in its own voice: the CLI package and
   pipeline, the site's four releases, and three mistakes, with commits
 - /briefs/memos/ — the memos, verbatim as transcribed
@@ -67,7 +86,8 @@ SHarness is unrelated to Sharness, the shell testing library.
 - /documents/index.md — the source documents, verbatim, with known issues
 - /shipped/index.html — what exists as code today (a placeholder package) vs the design
 - /cli/index.html — the sharness-ai package on PyPI and its release pipeline
-- /admin/comms.html — open requests (R3: the design pages need review before briefing builders)
+- /admin/comms.html — open requests (R3: the design pages need review; R6: the research note,
+  the experiments and the storyboards' cast; R7: releasing the CLI's dev to main)
 
 ## Related
 

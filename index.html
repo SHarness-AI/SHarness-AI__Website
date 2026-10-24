@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="admin/versions.html" title="Site release history">v0.3.1</a>
+  <a class="ver" href="admin/versions.html" title="Site release history">v0.4.0</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -41,12 +41,23 @@
       <a class="sl" href="evidence/index.html">&#9679; Evidence</a>
       <a class="sl" href="roadmap/index.html">Roadmap &amp; open decisions</a>
       <a class="sl" href="shipped/index.html">What exists today</a>
+      <a class="sl" href="research/index.html">Research note</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="experiments/index.html">Experiments<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="experiments/index.html">&#9679; Mockups &amp; experiments</a>
+      <a class="sl" href="storyboards/index.html">Storyboards</a>
+      <a class="sl" href="mockups/policy-hash.html">Mockup: policy hash</a>
+      <a class="sl" href="mockups/edges.html">Mockup: edge matrix</a>
       </div>
     </div>
     <div class="ni ni-has">
       <a class="nl" href="articles/index.html">Articles<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="articles/index.html">&#9679; All articles</a>
+      <a class="sl" href="articles/the-first-experiments.html">The first experiments</a>
       <a class="sl" href="articles/secure-harness-for-agents.html">A secure harness for agents</a>
       <a class="sl" href="articles/what-shipped-on-day-one.html">What shipped on day one</a>
       </div>
@@ -73,13 +84,13 @@
 </div></nav>
 
 <header class="hero">
-  <div class="eyebrow">SHarness · status: design · nothing here is built yet</div>
+  <div class="eyebrow">SHarness · status: design · the first experiments are runnable · no component is built</div>
   <h1>A secret lives in one place.<br>A tricked process can only do its one job.</h1>
   <p class="sub"><b>SHarness</b> runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. This site publishes the design for review: what is proposed, what was measured, and what is still open.</p>
   <div class="ctas">
     <a class="cta1" href="architecture/index.html">The architecture →</a>
     <a class="cta2" href="why/index.html">Why it exists →</a>
-    <a class="cta2" href="evidence/index.html">The evidence →</a>
+    <a class="cta2" href="experiments/index.html">Mockups and experiments →</a>
   </div>
 </header>
 
@@ -127,17 +138,31 @@
   </div>
 </section>
 
-<section class="band alt" id="articles">
+<section class="band alt" id="experiments">
+  <h2>Start small: mockups, experiments, storyboards</h2>
+  <p class="blurb">The memo's method: very simple examples first, each piece in isolation. The ladder runs from the browser to a launcher above the agent. Experiments E01 to E04 are runnable in the CLI; E04 was measured <span class="asof">as of 24 Oct 2026</span>. No component is built.</p>
+  <div class="cards">
+    <a class="card" href="experiments/index.html"><span class="tag">The ladder</span><h3>Mockups and experiments</h3><p>Eight numbered experiments, where each runs, what it shows and does not show; what Claude Code's own sandbox already gives and what SHarness adds.</p><span class="go">Open →</span></a>
+    <a class="card" href="cli/index.html"><span class="tag">sharness-ai</span><h3>The CLI: probe, policy hash, run, hello</h3><p>The first version as proposed: experiments today, components tomorrow, one package. A hello world that cannot phone home, for one child process.</p><span class="go">Read →</span></a>
+    <a class="card" href="mockups/policy-hash.html"><span class="tag">In the browser</span><h3>The policy hash</h3><p>Paste a v0 policy, get the hash the person supplies; the same one the CLI prints. Then watch an added host change it.</p><span class="go">Try →</span></a>
+    <a class="card" href="mockups/edges.html"><span class="tag">In the browser</span><h3>The edge matrix</h3><p>Click caller and callee; see which layer refuses first. The app never talks to the KMS.</p><span class="go">Try →</span></a>
+    <a class="card" href="storyboards/index.html"><span class="tag">Three strips</span><h3>Storyboards</h3><p>The last metre, its one job, and hello world inside: the design drawn from data by the storyboards.sgit.ai kit, with a cast of four.</p><span class="go">Open →</span></a>
+    <a class="card" href="research/index.html"><span class="tag">24 Oct 2026</span><h3>Research note</h3><p>The published design read in full: what holds up, ten things to improve, what this release did, and the order for what is still open.</p><span class="go">Read →</span></a>
+  </div>
+</section>
+
+<section class="band" id="articles">
   <h2>Articles</h2>
   <p class="blurb">Dinis Cruz's memos written up in his voice, and the build agent's record of what it delivered. In the newsroom's format, so each can be imported there unchanged.</p>
   <div class="cards">
     <a class="card" href="articles/secure-harness-for-agents.html"><span class="tag">Dinis Cruz · 24 Oct 2026</span><h3>A secure harness for agents</h3><p>Behaviour policies enforced from outside the agent, one small component at a time, starting with my own Claude sessions.</p><span class="go">Read →</span></a>
+    <a class="card" href="articles/the-first-experiments.html"><span class="tag">sharness.build · 24 Oct 2026</span><h3>The first experiments</h3><p>Four commands, three storyboards, two mockups, and what a full read of the design found.</p><span class="go">Read →</span></a>
     <a class="card" href="articles/what-shipped-on-day-one.html"><span class="tag">sharness.build · 24 Oct 2026</span><h3>What shipped on day one</h3><p>A package on PyPI, a site with a gate, the design published for review, and the three things the agent got wrong.</p><span class="go">Read →</span></a>
     <a class="card" href="articles/index.html"><span class="tag">All</span><h3>Every article</h3><p>Newest first, with who wrote each and how.</p><span class="go">Open →</span></a>
   </div>
 </section>
 
-<section class="band" id="claims">
+<section class="band alt" id="claims">
   <h2>What this site claims, and how</h2>
   <p class="blurb">The same distinction runs through every page. Every number is labelled; nothing is presented as built.</p>
   <div class="split">
@@ -160,7 +185,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design. Nothing here is built; measured figures carry their date. <a href="evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="admin/versions.html">v0.3.1</a> · <a href="admin/index.html">engineering</a> · <a href="index.md">this page as markdown</a></p>
+    <p class="verline">site <a href="admin/versions.html">v0.4.0</a> · <a href="admin/index.html">engineering</a> · <a href="index.md">this page as markdown</a></p>
   </div>
   <div>
     <h4>The design</h4>
@@ -177,7 +202,15 @@
     <a href="evidence/index.html">Evidence</a>
     <a href="roadmap/index.html">Roadmap &amp; open decisions</a>
     <a href="shipped/index.html">What exists today</a>
+    <a href="research/index.html">Research note</a>
     <a href="documents/index.html">The source documents</a>
+  </div>
+  <div>
+    <h4>Experiments</h4>
+    <a href="experiments/index.html">Mockups &amp; experiments</a>
+    <a href="storyboards/index.html">Storyboards</a>
+    <a href="mockups/policy-hash.html">Mockup: policy hash</a>
+    <a href="mockups/edges.html">Mockup: edge matrix</a>
   </div>
   <div>
     <h4>Project</h4>

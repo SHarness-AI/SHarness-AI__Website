@@ -19,7 +19,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.3.1</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.4.0</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -40,12 +40,23 @@
       <a class="sl" href="../evidence/index.html">&#9679; Evidence</a>
       <a class="sl" href="../roadmap/index.html">Roadmap &amp; open decisions</a>
       <a class="sl" href="../shipped/index.html">What exists today</a>
+      <a class="sl" href="../research/index.html">Research note</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../experiments/index.html">Experiments<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../experiments/index.html">&#9679; Mockups &amp; experiments</a>
+      <a class="sl" href="../storyboards/index.html">Storyboards</a>
+      <a class="sl" href="../mockups/policy-hash.html">Mockup: policy hash</a>
+      <a class="sl" href="../mockups/edges.html">Mockup: edge matrix</a>
       </div>
     </div>
     <div class="ni ni-has">
       <a class="nl" href="../articles/index.html">Articles<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../articles/index.html">&#9679; All articles</a>
+      <a class="sl" href="../articles/the-first-experiments.html">The first experiments</a>
       <a class="sl" href="../articles/secure-harness-for-agents.html">A secure harness for agents</a>
       <a class="sl" href="../articles/what-shipped-on-day-one.html">What shipped on day one</a>
       </div>
@@ -82,10 +93,14 @@
       <tr id="r3"><td><b>R3</b></td><td><b>Review the design pages</b> against the source pack before they are used to brief the building agents. Especially: the claim labels (measured / designed / not yet measured), the renaming of sgit-* components to <code>sharness.*</code>, and the published observations of the Claude workspace on <a href="../evidence/index.html#7-the-agent-loop-in-this-environment-read-only-observation">Evidence §7</a>.</td><td><span class="tstat t-need">needs review</span></td></tr>
       <tr id="r4"><td><b>R4</b></td><td>Command name: <code>sharness-ai</code>, decided 24 Oct 2026. Applied on the CLI's <code>dev</code> branch (the <code>sharness</code> shorthand removed); ships with the next CLI release.</td><td><span class="tstat t-done">decided</span></td></tr>
       <tr id="r5"><td><b>R5</b></td><td><b>Read the two articles.</b> <a href="../articles/secure-harness-for-agents.html">A secure harness for agents</a> is written in Dinis's voice from voice memo 01 and he has not read it yet; two phrases of the transcript were left out as unclear. <a href="../articles/what-shipped-on-day-one.html">What shipped on day one</a> is the build agent's own.</td><td><span class="tstat t-need">needs review</span></td></tr>
-      <tr id="t4"><td><b>T4</b></td><td>The memo's acceptance test as a runnable example: a hello world with Claude inside SHarness, showing no internet and no file-system writes. Depends on the first components.</td><td><span class="tstat t-open">open</span></td></tr>
+      <tr id="r6"><td><b>R6</b></td><td><b>Review the research note, the experiments and the storyboards' cast.</b> The <a href="../research/index.html">research note</a> lists ten findings and an order for E05 to E08; the <a href="../storyboards/index.html#cast">cast</a> (Ada, Pip, Rook, the Launcher) is proposed for Dinis to accept, change or replace; the article <a href="../articles/the-first-experiments.html">The first experiments</a> is the build agent's own.</td><td><span class="tstat t-need">needs review</span></td></tr>
+      <tr id="r7"><td><b>R7</b></td><td><b>Release the CLI's <code>dev</code> to <code>main</code></b> when ready: the next release would carry <code>sharness-ai</code> as the only command and experiments E01 to E04; until then the experiments install from the repository.</td><td><span class="tstat t-need">decision</span></td></tr>
+      <tr id="t4"><td><b>T4</b></td><td>The memo's acceptance test as a runnable example: a hello world with Claude inside SHarness, showing no internet and no file-system writes. <b>Done for one child process</b> (E04, <code>sharness-ai hello</code>, measured 24 Oct 2026, Evidence §9); for the agent itself it waits on the launcher above the agent.</td><td><span class="tstat t-done">done for one process</span></td></tr>
+      <tr id="t5"><td><b>T5</b></td><td>List the SHarness storyboards as a series on storyboards.sgit.ai (its importer takes <code>admin/content/storyboards/</code> as it is).</td><td><span class="tstat t-open">open</span></td></tr>
+      <tr id="t6"><td><b>T6</b></td><td>E05 to E08, in the order on the research note: the process tree (E06), the edges as a script (E05), the KMS v0 (E08), the LLM gateway v0 (E07); then the launcher as a script above the agent on a laptop.</td><td><span class="tstat t-open">open</span></td></tr>
       <tr id="t1"><td><b>T1</b></td><td>Run the process-tree proof of concept and publish its results on Evidence (roadmap decision 6).</td><td><span class="tstat t-open">open</span></td></tr>
       <tr id="t2"><td><b>T2</b></td><td>Fix the known issues in the source pack (a broken link, mixed component names) in the next revision of the pack; the published copy stays verbatim. See <a href="../documents/index.html#known-issues-in-the-pack">the list</a>.</td><td><span class="tstat t-open">open</span></td></tr>
-      <tr id="t3"><td><b>T3</b></td><td>Pages for the CLI's commands as they are built, each with a markdown twin.</td><td><span class="tstat t-open">open</span></td></tr>
+      <tr id="t3"><td><b>T3</b></td><td>Pages for the CLI's commands as they are built, each with a markdown twin. The <a href="../cli/index.html">CLI page</a> is now markdown and carries E01 to E04; per-command pages when the components come.</td><td><span class="tstat t-open">in progress</span></td></tr>
     </tbody>
   </table></div>
   <div class="pagenav"><a href="index.html">← Admin</a><a href="versions.html">Release history →</a></div>
@@ -97,7 +112,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design. Nothing here is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.3.1</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.4.0</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>
@@ -114,7 +129,15 @@
     <a href="../evidence/index.html">Evidence</a>
     <a href="../roadmap/index.html">Roadmap &amp; open decisions</a>
     <a href="../shipped/index.html">What exists today</a>
+    <a href="../research/index.html">Research note</a>
     <a href="../documents/index.html">The source documents</a>
+  </div>
+  <div>
+    <h4>Experiments</h4>
+    <a href="../experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../storyboards/index.html">Storyboards</a>
+    <a href="../mockups/policy-hash.html">Mockup: policy hash</a>
+    <a href="../mockups/edges.html">Mockup: edge matrix</a>
   </div>
   <div>
     <h4>Project</h4>

@@ -4,7 +4,9 @@
 #
 #   1. validate     — the pre-release gate (admin/build/validate.js: version agreement,
 #                     internal links, canonical/CNAME agreement, key-leak tripwire, dated
-#                     figures), plus gen_pages.py --check (HTML matches its markdown source). A failure stops the release: no tag, no publish. Also runs
+#                     figures), plus the --check of each generator (HTML matches its markdown
+#                     source; storyboards match their data and pass the kit's validator). A failure
+#                     stops the release: no tag, no publish. Also runs
 #                     on pull requests, so branch work is gated before it reaches dev.
 #   2. tag-release  — every push to dev is a release, tagged v{X}.{Y}.{Z}. The version is
 #                     owned by admin/build/version.txt (bumped exactly once per release)
@@ -41,6 +43,10 @@ jobs:
         run: python3 admin/build/gen_pages.py --check
       - name: Articles match their sources
         run: python3 admin/build/gen_articles.py --check
+      - name: Storyboards match their sources and have their previews
+        run: python3 admin/build/gen_storyboards.py --check
+      - name: Storyboards are valid for the pinned kit (the kit's own validator)
+        run: node admin/build/validate_storyboards.cjs
 
   tag-release:
     runs-on: ubuntu-latest

@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The last metre — a SHarness storyboard</title>
+<meta name="description" content="A vault key is sealed while it travels and exposed the moment it arrives. Ada carries it, Pip clones with it, the transcript keeps it; then the KMS holds it instead. 9 panels.">
+<link rel="canonical" href="https://sharness.ai/storyboards/the-last-metre/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/storyboards/the-last-metre/index.html">
+<meta property="og:title" content="The last metre — a SHarness storyboard">
+<meta property="og:description" content="A vault key is sealed while it travels and exposed the moment it arrives. Ada carries it, Pip clones with it, the transcript keeps it; then the KMS holds it instead. 9 panels.">
+<meta property="og:image" content="https://sharness.ai/storyboards/the-last-metre/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../../assets/site.css">
+<script src="https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/embed.js" defer></script>
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
+  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.4.0</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../why/index.html">The design<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../why/index.html">Why: the last metre</a>
+      <a class="sl" href="../../architecture/index.html">&#9679; Architecture</a>
+      <a class="sl" href="../../components/index.html">Components</a>
+      <a class="sl" href="../../keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../../policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../../agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../../process-tree/index.html">Enforcing the process tree</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../evidence/index.html">Evidence &amp; status<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../evidence/index.html">&#9679; Evidence</a>
+      <a class="sl" href="../../roadmap/index.html">Roadmap &amp; open decisions</a>
+      <a class="sl" href="../../shipped/index.html">What exists today</a>
+      <a class="sl" href="../../research/index.html">Research note</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../experiments/index.html">Experiments<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../experiments/index.html">&#9679; Mockups &amp; experiments</a>
+      <a class="sl" href="../../storyboards/index.html">Storyboards</a>
+      <a class="sl" href="../../mockups/policy-hash.html">Mockup: policy hash</a>
+      <a class="sl" href="../../mockups/edges.html">Mockup: edge matrix</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../articles/index.html">Articles<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../articles/index.html">&#9679; All articles</a>
+      <a class="sl" href="../../articles/the-first-experiments.html">The first experiments</a>
+      <a class="sl" href="../../articles/secure-harness-for-agents.html">A secure harness for agents</a>
+      <a class="sl" href="../../articles/what-shipped-on-day-one.html">What shipped on day one</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../about/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../about/index.html">About &amp; naming</a>
+      <a class="sl" href="../../cli/index.html">The CLI</a>
+      <a class="sl" href="../../documents/index.html">The source documents</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../admin/index.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../admin/versions.html">Release history</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__Website">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+  <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">storyboards</a> / the-last-metre · <a href="index.md">this page as markdown</a></div>
+  <h1>The last metre</h1>
+  <p class="byline">A vault key is sealed while it travels and exposed the moment it arrives. Ada carries it, Pip clones with it, the transcript keeps it; then the KMS holds it instead. 9 panels.</p>
+  <p class="small dim">Status: <b>proposed</b> · by sharness.build, 24 October 2026 · 9 panels, drawn from data in your browser by the storyboards.sgit.ai kit (release v0.1.0, pinned) · checked against the design <span class="asof">as of 24 Oct 2026</span>.</p>
+  <div class="note">What the strip shows is the <b>design</b>: nothing drawn here is built, except where a panel says it was measured, and then the date and the method are on <a href="../../evidence/index.html">Evidence</a>. Every line a character says is the storyboard's own words, not a quote; evidence panels quote this site word for word.</div>
+  <sg-storyboard src="bundle.json" view="deck"></sg-storyboard>
+  <p class="small dim">Flick through as a deck. Every panel at once: <a href="index.html#script">the script below</a>, or the data itself: <a href="storyboard.json">storyboard.json</a> · <a href="../cast.json">cast.json</a> · <a href="bundle.json">bundle.json</a>.</p>
+  <h2 id="script">The script</h2>
+<p><b>Rule:</b> Every line a character says is the storyboard's own, not a quote, and is marked not_a_quote; evidence panels quote sharness.ai word for word. The fix shown is designed, not built.</p>
+<h2 id="1-the-last-metre">1. The last metre</h2>
+<p><em>Cover.</em> Sealed while it travels. Exposed when it arrives. On the cover: Ada, Pip.</p>
+<p><em>Note:</em> The problem SHarness started from, on the morning of 24 October 2026, in sgit 0.24.0. The page is sharness.ai/why.</p>
+<p><em>Source:</em> sharness.ai/why</p>
+<h2 id="2-sealed-while-it-travels">2. Sealed while it travels</h2>
+<ul>
+<li><b>Ada:</b> I carry it. I can't read it.</li>
+<li><em>qr:</em> pki.sgit.ai/qr/sealed/v1</li>
+<li><em>arrow:</em> to Pip's key</li>
+<li><em>envelope:</em> m1</li>
+</ul>
+<p><em>Note:</em> The handover on pki.sgit.ai: the sender seals the vault key to the receiving session's public key; the person carries a QR code they cannot open.</p>
+<p><em>Source:</em> pki.sgit.ai/handover.md</p>
+<h2 id="3-exposed-when-it-arrives">3. Exposed when it arrives</h2>
+<ul>
+<li><b>Pip:</b> Cloned!</li>
+</ul>
+<pre class="diagram">$ pki-agent open --save
+  vault-key.txt        CLEAR
+$ sgit clone &lt;key&gt; work
+  argv, shell history  CLEAR
+  .sg_vault/vault_key  CLEAR
+  the transcript       CLEAR</pre>
+<p><em>Note:</em> sgit 0.24.0 as observed on 24 October 2026: the sealed key is opened on arrival and written, passed and printed in clear.</p>
+<p><em>Source:</em> sharness.ai/why</p>
+<h2 id="4-the-biggest-leak">4. The biggest leak</h2>
+<div class="note">"For an AI agent the worst leak is not the disk. It is the transcript: every command line the agent writes and everything a command prints lands in the model's context and in conversation logs." (sharness.ai/why, The transcript is the biggest leak)</div>
+<p><em>Note:</em> Word for word from the Why page.</p>
+<p><em>Source:</em> sharness.ai/why</p>
+<h2 id="5-one-place-holds-the-key">5. One place holds the key</h2>
+<ul>
+<li><b>Pip:</b> I never see it.</li>
+<li><em>arrow:</em> net asks</li>
+<li><em>padlock:</em> sharness.kms</li>
+<li><em>key:</em> the private key, made inside, never exported</li>
+</ul>
+<p><em>Note:</em> A small process holds the private key in a memfd_secret page, frozen between calls. It opens sealed things and never returns a clear key.</p>
+<p><em>Source:</em> sharness.ai/keys</p>
+<h2 id="6-sealed-again-to-a-one-time-key">6. Sealed again, to a one-time key</h2>
+<pre class="diagram">$ sgit clone --sealed qr.png
+net -&gt; kms: unwrap(m1, E, n)
+kms: to=me? signed? fresh?
+kms -&gt; net: keys sealed to E
+fs: vault_key.sealed = m1
+cloned. expires 30 Oct</pre>
+<p><em>Note:</em> The designed flow: the KMS derives the read and write keys and seals them to a key the caller made for this one request. Every later command asks again.</p>
+<p><em>Source:</em> sharness.ai/keys, 4. Command flows</p>
+<h2 id="7-what-the-transcript-sees">7. What the transcript sees</h2>
+<ul>
+<li><b>Pip:</b> That's all I get.</li>
+</ul>
+<pre class="diagram">the command
+the m1 (ciphertext)
+fingerprints
+progress
+
+never a key</pre>
+<p><em>Note:</em> The transcript, the disk and the command line carry only sealed forms, public keys and status.</p>
+<p><em>Source:</em> sharness.ai/keys</p>
+<h2 id="8-nothing-in-the-fix-is-about-sgit">8. Nothing in the fix is about sgit</h2>
+<ul>
+<li><b>Ada:</b> A launcher. Small components. Any app.</li>
+<li><em>server:</em> sharness.net</li>
+<li><em>server:</em> sharness.fs</li>
+<li><em>padlock:</em> sharness.kms</li>
+</ul>
+<p><em>Note:</em> The generalisation: a launcher and single-purpose components that any process can run inside. sgit's job becomes being compatible with running inside it.</p>
+<p><em>Source:</em> sharness.ai/why, From one fix to a harness</p>
+<h2 id="9-punchline">9. Punchline</h2>
+<p><b>A secret lives in one place. The agent never holds it.</b></p>
+<p><em>Note:</em> Designed, not built. The protocol and its measured costs are on sharness.ai/keys.</p>
+<p><em>Source:</em> sharness.ai</p>
+  <h2 id="embed">Embed it</h2>
+  <p>One script tag and one element; the kit draws it from the data at this address. The release is pinned, so the drawing never changes under you.</p>
+  <pre class="diagram">&lt;script src="https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/embed.js" defer&gt;&lt;/script&gt;
+&lt;sg-storyboard src="https://sharness.ai/storyboards/the-last-metre/bundle.json" view="deck"&gt;&lt;/sg-storyboard&gt;</pre>
+  <div class="pagenav"><a href="../index.html">← All storyboards</a><a href="../../experiments/index.html">Mockups and experiments →</a></div>
+
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design. Nothing here is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../../admin/versions.html">v0.4.0</a> · <a href="../../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The design</h4>
+    <a href="../../why/index.html">Why: the last metre</a>
+    <a href="../../architecture/index.html">Architecture</a>
+    <a href="../../components/index.html">Components</a>
+    <a href="../../keys/index.html">Keys and the KMS</a>
+    <a href="../../policies/index.html">Process Behaviour Policies</a>
+    <a href="../../agents/index.html">Agents and LLMs</a>
+    <a href="../../process-tree/index.html">Enforcing the process tree</a>
+  </div>
+  <div>
+    <h4>Evidence &amp; status</h4>
+    <a href="../../evidence/index.html">Evidence</a>
+    <a href="../../roadmap/index.html">Roadmap &amp; open decisions</a>
+    <a href="../../shipped/index.html">What exists today</a>
+    <a href="../../research/index.html">Research note</a>
+    <a href="../../documents/index.html">The source documents</a>
+  </div>
+  <div>
+    <h4>Experiments</h4>
+    <a href="../../experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../../storyboards/index.html">Storyboards</a>
+    <a href="../../mockups/policy-hash.html">Mockup: policy hash</a>
+    <a href="../../mockups/edges.html">Mockup: edge matrix</a>
+  </div>
+  <div>
+    <h4>Project</h4>
+    <a href="../../articles/index.html">Articles</a>
+    <a href="../../about/index.html">About &amp; naming</a>
+    <a href="../../cli/index.html">The CLI</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI">GitHub: SHarness-AI</a>
+    <a href="../../admin/comms.html">Comms &amp; release history</a>
+  </div>
+  <div>
+    <h4>For agents</h4>
+    <a href="../../llms.txt">llms.txt</a>
+    <a href="../../llms-full.txt">llms-full.txt</a>
+    <a href="../../index.md">index.md</a>
+    <a href="../../sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.3.1</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.4.0</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -41,12 +41,23 @@
       <a class="sl" href="../evidence/index.html">&#9679; Evidence</a>
       <a class="sl" href="../roadmap/index.html">Roadmap &amp; open decisions</a>
       <a class="sl" href="../shipped/index.html">What exists today</a>
+      <a class="sl" href="../research/index.html">Research note</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../experiments/index.html">Experiments<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../experiments/index.html">&#9679; Mockups &amp; experiments</a>
+      <a class="sl" href="../storyboards/index.html">Storyboards</a>
+      <a class="sl" href="../mockups/policy-hash.html">Mockup: policy hash</a>
+      <a class="sl" href="../mockups/edges.html">Mockup: edge matrix</a>
       </div>
     </div>
     <div class="ni ni-has">
       <a class="nl" href="../articles/index.html">Articles<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../articles/index.html">&#9679; All articles</a>
+      <a class="sl" href="../articles/the-first-experiments.html">The first experiments</a>
       <a class="sl" href="../articles/secure-harness-for-agents.html">A secure harness for agents</a>
       <a class="sl" href="../articles/what-shipped-on-day-one.html">What shipped on day one</a>
       </div>
@@ -110,11 +121,11 @@
 <thead><tr><th>Name</th><th>Who</th><th>What they write here</th></tr></thead>
 <tbody>
 <tr><td><b>Dinis Cruz</b></td><td>the person: SHarness's author and the editor of this site</td><td>the briefs and memos, published in full; articles written up from his voice memos, in his voice and under his name, by an agent. <a href="https://sgit.ai/about/">About him</a></td></tr>
-<tr><td><b>sharness.build</b></td><td>the build agent of this site and of the CLI's first release, a Claude Code session working from Dinis's requests</td><td>the site itself, the release history, and articles in its own voice about what it delivered, with the commits to check them against</td></tr>
+<tr><td><b>sharness.build</b></td><td>the build agent of this site and of the CLI, one or more Claude Code sessions working from Dinis's requests (the first built the site and the CLI's first release; a second did the research, the experiments and the storyboards of v0.4.0)</td><td>the site itself, the release history, the <a href="../research/index.html">research note</a>, the storyboards' cast and scripts, and articles in its own voice about what it delivered, with the commits to check them against</td></tr>
 </tbody>
 </table></div>
 <h2 id="what-is-real-today">What is real today</h2>
-<p>Only the name, this site and a placeholder package. The <code>sharness-ai</code> package on PyPI reports its version and prints its help; nothing in the design is built yet. The status of every claim is on <a href="../evidence/index.html">Evidence</a> and <a href="../shipped/index.html">What exists today</a>.</p>
+<p>The name, this site, and a package with the first experiments. The <code>sharness-ai</code> package on PyPI (v0.1.0, <span class="asof">as of 24 Oct 2026</span>) reports its version and prints its help; its <code>dev</code> branch carries experiments E01 to E04 (<code>probe</code>, <code>policy hash</code>, <code>run</code>, <code>hello</code>), unreleased. No SHarness component is built. The status of every claim is on <a href="../evidence/index.html">Evidence</a> and <a href="../shipped/index.html">What exists today</a>.</p>
 <p>All content CC BY 4.0. Code under the repositories' licences.</p>
 </main>
 
@@ -124,7 +135,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design. Nothing here is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.3.1</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.4.0</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>
@@ -141,7 +152,15 @@
     <a href="../evidence/index.html">Evidence</a>
     <a href="../roadmap/index.html">Roadmap &amp; open decisions</a>
     <a href="../shipped/index.html">What exists today</a>
+    <a href="../research/index.html">Research note</a>
     <a href="../documents/index.html">The source documents</a>
+  </div>
+  <div>
+    <h4>Experiments</h4>
+    <a href="../experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../storyboards/index.html">Storyboards</a>
+    <a href="../mockups/policy-hash.html">Mockup: policy hash</a>
+    <a href="../mockups/edges.html">Mockup: edge matrix</a>
   </div>
   <div>
     <h4>Project</h4>

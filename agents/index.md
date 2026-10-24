@@ -48,11 +48,14 @@ The request is a standard Messages API call: `model`, `system`, `tools` (each wi
 |---|---|---|---|
 | 1 | `ANTHROPIC_BASE_URL` → `sharness.llm` | yes (env var / SDK `base_url`) | model credentials, request and response policy, secret filtering, audit |
 | 2 | tools as **MCP servers**, built-in tools denied by permission settings | yes | tool execution, tool input schemas |
-| 3 | a one-line hook rewriting Bash to `sharness.bash` | believed yes (PreToolUse returning modified input): **verify on the version used**; otherwise deny Bash and use the MCP route | shell execution |
+| 3 | a one-line hook rewriting Bash to `sharness.bash` | **documented** (read 24 Oct 2026): a `PreToolUse` hook's `updatedInput` replaces the whole tool input before it runs, and permission rules are evaluated against the rewritten input; deny rules still apply. Not yet exercised on a pinned version | shell execution |
+| 3b | Claude Code's own sandbox (`"sandbox": {"enabled": true}`): `bubblewrap`, a network namespace and a hostname-allowlist proxy around Bash and its children | yes (documented 24 Oct 2026); off by default | what `sharness.bash` would do for Bash alone, as a transparent host for it on a laptop. Not covered by it, per its own documentation: the built-in file and web tools, hooks, MCP servers, excluded commands, and the harness itself: the side doors on [Enforcing the process tree](../process-tree/index.md). The comparison is on [Mockups and experiments](../experiments/index.md#what-claude-codes-own-sandbox-already-gives-and-what-sharness-adds) |
 | 4 | the launcher applies Landlock, seccomp and a uid to the harness before it starts | not a Claude Code feature; a launcher feature | the ability to bypass 1–3 (see [Enforcing the process tree](../process-tree/index.md)) |
 | 5 | the platform runs the launcher | platform only | everything above, as a Boundary for the agent itself |
 
 Hooks become routing: verify the policy hash, forward to a component. Data, not code.
+
+A bare `Bash` deny rule in the permission settings removes the tool from the model's context entirely (documented 24 Oct 2026), which is the clean form of row 2: the built-in tool is gone and `sharness.bash` as an MCP server is the only shell.
 
 ## 3. sharness.llm
 
@@ -124,4 +127,4 @@ In SHarness these are two `sharness.llm` policies (two uids, two tool sets), wit
 
 The orchestrator holds no keys and runs no tools itself; it routes messages between components that each have their own policy.
 
-Source: [06-llm-and-the-agent-loop](../briefs/sharness-brief-pack/docs/06-llm-and-the-agent-loop.md).
+Source: [06-llm-and-the-agent-loop](../briefs/sharness-brief-pack/docs/06-llm-and-the-agent-loop.md); rows 3 and 3b of §2 from the Claude Code documentation on [hooks](https://code.claude.com/docs/en/hooks), [permissions](https://code.claude.com/docs/en/permissions) and [sandboxing](https://code.claude.com/docs/en/sandboxing), read 24 Oct 2026 ([research note](../research/index.md)).

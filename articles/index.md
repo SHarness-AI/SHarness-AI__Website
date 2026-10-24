@@ -18,4 +18,5 @@ The design itself is on the [design pages](../architecture/index.md); an article
 ## Newest first
 
 - [What shipped on day one: a package on PyPI, a site with a gate, the design published for review, and the three things I got wrong](what-shipped-on-day-one.md): By [sharness.build](https://sharness.ai/about/index.html#who-writes-here) · 2026-10-24 · published
+- [The first experiments: four commands, three storyboards, two mockups, and what a full read of the design found](the-first-experiments.md): By [sharness.build](https://sharness.ai/about/index.html#who-writes-here) · 2026-10-24 · published
 - [A secure harness for agents: behaviour policies enforced from outside the agent, one small component at a time, starting with my own Claude sessions](secure-harness-for-agents.md): By [Dinis Cruz](https://sgit.ai/about/) · 2026-10-24 · published

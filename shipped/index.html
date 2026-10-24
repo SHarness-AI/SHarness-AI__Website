@@ -19,7 +19,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.3.1</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.4.0</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -40,12 +40,23 @@
       <a class="sl" href="../evidence/index.html">&#9679; Evidence</a>
       <a class="sl" href="../roadmap/index.html">Roadmap &amp; open decisions</a>
       <a class="sl here" href="../shipped/index.html">What exists today</a>
+      <a class="sl" href="../research/index.html">Research note</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../experiments/index.html">Experiments<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../experiments/index.html">&#9679; Mockups &amp; experiments</a>
+      <a class="sl" href="../storyboards/index.html">Storyboards</a>
+      <a class="sl" href="../mockups/policy-hash.html">Mockup: policy hash</a>
+      <a class="sl" href="../mockups/edges.html">Mockup: edge matrix</a>
       </div>
     </div>
     <div class="ni ni-has">
       <a class="nl" href="../articles/index.html">Articles<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../articles/index.html">&#9679; All articles</a>
+      <a class="sl" href="../articles/the-first-experiments.html">The first experiments</a>
       <a class="sl" href="../articles/secure-harness-for-agents.html">A secure harness for agents</a>
       <a class="sl" href="../articles/what-shipped-on-day-one.html">What shipped on day one</a>
       </div>
@@ -81,6 +92,9 @@
     <tbody>
       <tr><td><b>The <code>sharness-ai</code> package on PyPI</b></td><td><a href="https://pypi.org/project/sharness-ai/">pypi.org/project/sharness-ai</a></td></tr>
       <tr><td><b>The CLI source and its release pipeline</b></td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI">SHarness-AI/SHarness-AI__CLI</a></td></tr>
+      <tr><td><b>Experiments E01 to E04</b> (<code>probe</code>, <code>policy hash</code>, <code>run</code>, <code>hello</code>), with tests, on the CLI's <code>dev</code> branch; unreleased</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md">experiments/README.md</a> · <a href="../experiments/index.html">the ladder</a> · E04 measured <span class="asof">as of 24 Oct 2026</span> on <a href="../evidence/index.html#9-the-first-experiments-run-by-the-cli">Evidence §9</a></td></tr>
+      <tr><td><b>Two browser mockups</b> that compute and enforce nothing</td><td><a href="../mockups/policy-hash.html">the policy hash</a> (the same hash as the CLI) · <a href="../mockups/edges.html">the edge matrix</a></td></tr>
+      <tr><td><b>Three storyboards</b>, data drawn by the storyboards.sgit.ai kit</td><td><a href="../storyboards/index.html">Storyboards</a>; what they show is the design, not something built</td></tr>
       <tr><td><b>The design, published for review</b></td><td><a href="../architecture/index.html">the design pages</a> · <a href="../documents/index.html">the source documents, verbatim</a></td></tr>
       <tr><td><b>Measurements behind the design</b></td><td><a href="../evidence/index.html">Evidence</a>: one Claude agent workspace, with method and date</td></tr>
       <tr><td><b>This site, its gate and its deploy pipeline</b></td><td><a href="https://github.com/SHarness-AI/SHarness-AI__Website">SHarness-AI/SHarness-AI__Website</a> · <a href="../admin/index.html">how it is built</a></td></tr>
@@ -92,9 +106,10 @@
     <thead><tr><th>Missing</th><th>Status</th></tr></thead>
     <tbody>
       <tr><td><b>Any SHarness component</b> (launcher, kms, net, fs, bash, llm)</td><td>Not built. Designed on <a href="../components/index.html">Components</a>.</td></tr>
-      <tr><td><b>Any CLI command beyond <code>--version</code></b></td><td>Not built. The first release is the skeleton and the pipeline.</td></tr>
+      <tr><td><b>A CLI release beyond <code>--version</code></b></td><td>v0.1.0 on PyPI is the skeleton and the pipeline; the experiments are on <code>dev</code>, unreleased (<a href="../admin/comms.html#r7">R7</a>).</td></tr>
+      <tr><td><b>The launcher above the agent</b></td><td>Not built. Every experiment applies a policy to a child process; nothing yet binds the agent itself.</td></tr>
       <tr><td><b>The process-tree proof of concept</b></td><td>Started, not completed, not run. See <a href="../process-tree/index.html">Enforcing the process tree</a>.</td></tr>
-      <tr><td><b>Markdown twins for the hand-written pages</b></td><td>The design pages and the front page have twins (<code>…/index.md</code>); the CLI, status and admin pages do not yet.</td></tr>
+      <tr><td><b>Markdown twins for the hand-written pages</b></td><td>The design pages, the front page, the CLI, experiments, research and storyboard pages have twins (<code>…/index.md</code>); the status, mockup and admin pages do not.</td></tr>
     </tbody>
   </table></div>
 
@@ -107,7 +122,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design. Nothing here is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.3.1</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.4.0</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>
@@ -124,7 +139,15 @@
     <a href="../evidence/index.html">Evidence</a>
     <a href="../roadmap/index.html">Roadmap &amp; open decisions</a>
     <a href="../shipped/index.html">What exists today</a>
+    <a href="../research/index.html">Research note</a>
     <a href="../documents/index.html">The source documents</a>
+  </div>
+  <div>
+    <h4>Experiments</h4>
+    <a href="../experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../storyboards/index.html">Storyboards</a>
+    <a href="../mockups/policy-hash.html">Mockup: policy hash</a>
+    <a href="../mockups/edges.html">Mockup: edge matrix</a>
   </div>
   <div>
     <h4>Project</h4>

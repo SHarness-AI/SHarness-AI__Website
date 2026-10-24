@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mockups and experiments — SHarness</title>
+<meta name="description" content="The ladder from browser mockups to runnable experiments to components: what each shows, where it runs, what was measured, and what Claude Code&#x27;s own sandbox already gives.">
+<link rel="canonical" href="https://sharness.ai/experiments/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/experiments/index.html">
+<meta property="og:title" content="Mockups and experiments — SHarness">
+<meta property="og:description" content="The ladder from browser mockups to runnable experiments to components: what each shows, where it runs, what was measured, and what Claude Code&#x27;s own sandbox already gives.">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.4.0</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../why/index.html">The design<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../why/index.html">Why: the last metre</a>
+      <a class="sl" href="../architecture/index.html">&#9679; Architecture</a>
+      <a class="sl" href="../components/index.html">Components</a>
+      <a class="sl" href="../keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../process-tree/index.html">Enforcing the process tree</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../evidence/index.html">Evidence &amp; status<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../evidence/index.html">&#9679; Evidence</a>
+      <a class="sl" href="../roadmap/index.html">Roadmap &amp; open decisions</a>
+      <a class="sl" href="../shipped/index.html">What exists today</a>
+      <a class="sl" href="../research/index.html">Research note</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../experiments/index.html">Experiments<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl here" href="../experiments/index.html">&#9679; Mockups &amp; experiments</a>
+      <a class="sl" href="../storyboards/index.html">Storyboards</a>
+      <a class="sl" href="../mockups/policy-hash.html">Mockup: policy hash</a>
+      <a class="sl" href="../mockups/edges.html">Mockup: edge matrix</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../articles/index.html">Articles<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../articles/index.html">&#9679; All articles</a>
+      <a class="sl" href="../articles/the-first-experiments.html">The first experiments</a>
+      <a class="sl" href="../articles/secure-harness-for-agents.html">A secure harness for agents</a>
+      <a class="sl" href="../articles/what-shipped-on-day-one.html">What shipped on day one</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../about/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../about/index.html">About &amp; naming</a>
+      <a class="sl" href="../cli/index.html">The CLI</a>
+      <a class="sl" href="../documents/index.html">The source documents</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../admin/index.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__Website">★ GitHub</a>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+  <div class="crumb"><a href="../index.html">sharness.ai</a> / mockups and experiments · <a href="index.md">this page as markdown</a></div>
+  <h1>Mockups and experiments</h1>
+<div class="note"><b>Status: experiments.</b> No SHarness component is built. What is runnable is listed here with where it runs; what was measured carries its date; everything else is planned. The design these experiments test is on the <a href="../architecture/index.html">design pages</a>.</div>
+<p>Dinis Cruz's memo of 24 October 2026 sets the method: <em>start with very simple examples, each component done in isolation, as simple, as fast and as slim as possible; then harden; then test</em>. This page is that method as a ladder. Each rung is something a person can run, in the browser, in any Claude session, or on a Linux box, and each says what it shows and what it does not.</p>
+<h2 id="the-ladder">The ladder</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Rung</th><th>Where it runs</th><th>What is on it</th><th>Status <span class="asof">as of 24 Oct 2026</span></th></tr></thead>
+<tbody>
+<tr><td>0</td><td><b>the browser</b>, nothing installed</td><td>the <a href="../mockups/policy-hash.html">policy hash mockup</a> and the <a href="../mockups/edges.html">edge matrix mockup</a>; the <a href="../storyboards/index.html">storyboards</a></td><td>published</td></tr>
+<tr><td>1</td><td><b>any Claude session, any laptop</b> (Python 3.11+)</td><td>E01 <code>sharness-ai probe</code>, E02 <code>sharness-ai policy hash</code></td><td>runnable</td></tr>
+<tr><td>2</td><td><b>Linux</b> (Landlock, 5.13+; TCP rules 6.7+); a Claude Code session via the skill</td><td>E03 <code>sharness-ai run</code>, E04 <code>sharness-ai hello</code></td><td>runnable; E04 measured 24 Oct 2026</td></tr>
+<tr><td>3</td><td>Linux, a checkout, <code>cryptography</code></td><td>E05 session CA and the edge matrix over mutual TLS; E06 the process-tree proof of concept; E07 <code>sharness.llm</code> v0; E08 <code>sharness.kms</code> v0</td><td>planned</td></tr>
+<tr><td>4</td><td>a launcher <b>above</b> the agent: a script on a laptop, then a platform</td><td>the components as <code>sharness.&lt;role&gt;</code> processes under one manifest hash</td><td>designed</td></tr>
+</tbody>
+</table></div>
+<p>The rungs are ordered by what they need, not by importance. Rung 4 is the point; rungs 0 to 3 are how to get there without claiming anything before it is true.</p>
+<h2 id="the-experiments">The experiments</h2>
+<p>Numbered in the CLI repository, <a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md">experiments/README.md</a>, where each has its command, its output and its caveats.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>#</th><th>Experiment</th><th>Shows</th><th>Does not show</th></tr></thead>
+<tbody>
+<tr><td>E01</td><td><code>sharness-ai probe</code>: the <b>grant</b>, what a process here can do before any policy: uid, capabilities, <code>NoNewPrivs</code>, seccomp, Landlock ABI, <code>memfd_secret</code>, namespaces, cgroups, the tools present, whether egress is proxied</td><td>the delta in one sentence: in the measured workspace the grant is everything</td><td>anything about what a policy would do; it only measures the starting point. Prints the names of proxy variables, never their values</td></tr>
+<tr><td>E02</td><td><code>sharness-ai policy hash</code>: canonical JSON (sorted keys, no whitespace, UTF-8, integers only) → <code>sha256:…</code>, the one value the person supplies; the same hash from the <a href="../mockups/policy-hash.html">browser mockup</a></td><td>two implementations, one hash, so a hash can travel from the person to a launcher out of band</td><td>signing by the root key; policy layers composed by intersection; the full schema. The v0 shape is six keys</td></tr>
+<tr><td>E03</td><td><code>sharness-ai run --policy p.json [--expect-hash sha256:…] -- cmd</code>: one command under a policy: Landlock read, write and exec rules per path; TCP connect per port; <code>network: "none"</code> as an empty network namespace where the process may make one, else Landlock denying every TCP bind and connect</td><td>a policy enforced by the kernel on a child and all its descendants, and a launcher's first check (the hash) in one flag</td><td>seccomp, a separate uid, cgroups, mutual TLS; UDP (Landlock does not see it, so without a namespace DNS still resolves)</td></tr>
+<tr><td>E04</td><td><code>sharness-ai hello</code>: the memo's acceptance test for one child process: read allowed, write to <code>/tmp</code> and to the workspace refused, TCP connect refused, a wrong hash runs nothing; exit 0 when every expectation held</td><td>the test the memo asks for, for one process, with the caveat printed as part of the result</td><td>that <b>the agent</b> is confined: a policy a process applies to its own children is a Boundary for them and a Setting for itself</td></tr>
+<tr><td>E05</td><td>a script that makes a session CA, four role certificates and checks the edge matrix over mutual TLS (what the design measured by hand)</td><td>the edges allowed and denied exactly per the matrix, repeatably</td><td>anything new; it makes the measured figures reproducible</td></tr>
+<tr><td>E06</td><td>the process-tree proof of concept: a mini orchestrator that cannot exec a shell, and a bash server outside its domain</td><td>every side door on <a href="../process-tree/index.html">Enforcing the process tree</a> closed or not</td><td>runs only under the <a href="../process-tree/index.html#4-safety-rules-for-testing-inside-a-live-agent-session">safety rules</a></td></tr>
+<tr><td>E07</td><td><code>sharness.llm</code> v0: a Messages API pass-through at <code>ANTHROPIC_BASE_URL</code> with a secret filter on every tool result and user message</td><td>the transcript leak closed for every tool at once</td><td>the real API key via the KMS; that is E08</td></tr>
+<tr><td>E08</td><td><code>sharness.kms</code> v0: an identity made in-process, a sealed <code>m1</code> opened, derived keys re-sealed to a one-time key, never a clear key printed</td><td>the KMS protocol's <code>unwrap</code>, end to end, locally</td><td>remote binding; hardware keys</td></tr>
+</tbody>
+</table></div>
+<h2 id="e04-measured">E04, measured</h2>
+<p>Run on 24 October 2026 in one Claude Code cloud session (Ubuntu 24.04, Linux 6.18, Landlock ABI 7, uid 0, Python 3.13), <span class="asof">as of 24 Oct 2026</span>. Method and the JSON are on <a href="../evidence/index.html#9-the-first-experiments-run-by-the-cli">Evidence §9</a>.</p>
+<pre class="diagram">$ sharness-ai hello
+sharness-ai hello   experiment E04: the memo's acceptance test, for one child process
+policy      hello  sha256:ad37e58bea6f4da65656687045b33ae9977caf90feef0ff5716a44db041b35af
+            read-only: /bin, /etc, /lib, /lib64, /opt, /sbin, &lt;the workspace&gt;, /usr, /usr/bin
+            write: none · exec: system and Python · network: none
+kernel      Landlock ABI 7 · empty network namespace: yes (uid 0)
+  ✔ read       expected allowed  got allowed
+  ✔ write-tmp  expected refused  got refused (PermissionError: [Errno 13] Permission denied: '/tmp/sharness-ai-hello.tmp')
+  ✔ write-cwd  expected refused  got refused (PermissionError: [Errno 13] Permission denied: 'sharness-ai-hello.tmp')
+  ✔ net        expected refused  got refused (PermissionError: [Errno 13] Permission denied)
+  ✔ hash       expected refused  got refused
+result      5/5 held
+caveat      applied by this process to its own children: a Boundary for them, a Setting for whoever ran
+            this, who could have skipped it. The launcher that makes it a Boundary for the agent too is the design.</pre>
+<p>The whole run took 0.6 s. The same policy under E03 with port 443 allowed connected to <code>1.1.1.1:443</code> and was refused on port 80, as the policy said.</p>
+<h2 id="running-them-in-a-claude-session">Running them in a Claude session</h2>
+<p>The CLI repository carries a skill, <a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/.claude/skills/sharness-hello/SKILL.md"><code>sharness-hello</code></a>, that runs E01 and E04 inside a Claude Code session under the design's <a href="../process-tree/index.html#4-safety-rules-for-testing-inside-a-live-agent-session">safety rules</a>: never touch the orchestrator, never firewall uid 0 or the model API, everything as a child subtree, leave nothing behind. It reports in the site's status words and says, every time, that a policy the session applies to its child does not bind the session.</p>
+<p>That is the honest answer to the memo's <em>maybe even a skill</em> (<a href="../roadmap/index.html#open-decisions">roadmap decision 8</a>): a skill can install the CLI, run the experiments and apply a policy to everything the session starts from then on; it cannot apply one to the session itself. Binding the session needs the launcher above it.</p>
+<h2 id="what-claude-code-s-own-sandbox-already-gives-and-what-sharness-adds">What Claude Code's own sandbox already gives, and what SHarness adds</h2>
+<p>Claude Code ships a sandbox for shell commands (documented at <a href="https://code.claude.com/docs/en/sandboxing">code.claude.com/docs/en/sandboxing</a>, read 24 Oct 2026): on Linux, <code>bubblewrap</code> for the filesystem, a separate network namespace, and a proxy outside the sandbox that checks each connection's <b>hostname</b> against allowed and denied domains; on macOS, Seatbelt. It is off by default and on with <code>"sandbox": {"enabled": true}</code>. The design pages did not mention it; the research behind this release did, and the comparison is useful because the two agree on the mechanism and differ on exactly the points SHarness is about.</p>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th>Claude Code sandbox (as documented 24 Oct 2026)</th><th>SHarness (designed)</th></tr></thead>
+<tbody>
+<tr><td>What it covers</td><td>Bash, PowerShell and Monitor commands and their children</td><td>every process, including the orchestrator: enforced at the root of the process tree</td></tr>
+<tr><td>Not covered</td><td>built-in Read, Edit, Write, WebFetch; hooks; MCP servers; <code>excludedCommands</code>; the harness itself</td><td>the design's "side doors" list is this list; <code>sharness.bash</code> as the only way to run a process is how it closes them</td></tr>
+<tr><td>Files</td><td>writes limited to the working directory and a temp dir; reads of most of the machine, credentials included</td><td>per-component, per-subcommand read, write and exec lists; the workspace with no execute right; <code>sharness.fs</code> as the only writer</td></tr>
+<tr><td>Network</td><td>a hostname allowlist at a proxy that does not terminate TLS (domain fronting noted as a limit in its own docs)</td><td><code>sharness.net</code> <b>is</b> the TLS client, so it sees and verifies the name; endpoint and vault-id allowlists; no redirects, no IP literals</td></tr>
+<tr><td>Secrets</td><td>the sandbox does not hold or hide them; the model API key stays with the harness</td><td><code>sharness.kms</code> holds them; the harness holds a dummy; <code>sharness.llm</code> adds the real key</td></tr>
+<tr><td>Who decides</td><td>settings the user (or a managed policy) sets; <code>allowUnsandboxedCommands</code> and the unsandboxed retry are escape hatches by design</td><td>one manifest hash the person supplies out of band; the launcher refuses anything else; no retry path</td></tr>
+<tr><td>Who enforces</td><td>the Claude Code process, for its own children</td><td>a launcher above the agent; the platform in the end state</td></tr>
+</tbody>
+</table></div>
+<p>Two conclusions for the design, carried to <a href="../agents/index.html#2-where-sharness-plugs-in">Agents and LLMs §2</a> and <a href="../policies/index.html#9-prior-art-reuse-dont-rebuild">Policies §9</a>: the sandbox is the natural <b>transparent</b> host for <code>sharness.bash</code> on a laptop today, and its documented limits are a checklist of what the components add. A SHarness policy should be able to generate the sandbox's settings as one of its enforcement layers, the same way it would generate a Kubernetes <code>securityContext</code>.</p>
+<h2 id="what-is-not-here">What is not here</h2>
+<ul>
+<li><b>No component.</b> Every experiment is a probe or a one-process enforcement; <code>sharness.launcher</code>, <code>.kms</code>, <code>.net</code>, <code>.fs</code>, <code>.bash</code> and <code>.llm</code> are designs.</li>
+<li><b>One environment.</b> E04 was measured in one cloud session on one day. A laptop will differ: no root, and on Ubuntu 24.04 an unprivileged user namespace may be refused, so <code>network: "none"</code> falls back to Landlock's TCP rules, which do not cover UDP.</li>
+<li><b>The browser mockups compute, they do not enforce.</b> A hash in a browser proves two implementations agree; nothing in a browser can confine a process.</li>
+</ul>
+<p>Sources: <a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md">experiments/README.md</a> in the CLI repository; <a href="../articles/secure-harness-for-agents.md">A secure harness for agents</a>; the Claude Code documentation on <a href="https://code.claude.com/docs/en/sandboxing">sandboxing</a>, <a href="https://code.claude.com/docs/en/permissions">permissions</a> and <a href="https://code.claude.com/docs/en/hooks">hooks</a>, read 24 Oct 2026.</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design. Nothing here is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.4.0</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The design</h4>
+    <a href="../why/index.html">Why: the last metre</a>
+    <a href="../architecture/index.html">Architecture</a>
+    <a href="../components/index.html">Components</a>
+    <a href="../keys/index.html">Keys and the KMS</a>
+    <a href="../policies/index.html">Process Behaviour Policies</a>
+    <a href="../agents/index.html">Agents and LLMs</a>
+    <a href="../process-tree/index.html">Enforcing the process tree</a>
+  </div>
+  <div>
+    <h4>Evidence &amp; status</h4>
+    <a href="../evidence/index.html">Evidence</a>
+    <a href="../roadmap/index.html">Roadmap &amp; open decisions</a>
+    <a href="../shipped/index.html">What exists today</a>
+    <a href="../research/index.html">Research note</a>
+    <a href="../documents/index.html">The source documents</a>
+  </div>
+  <div>
+    <h4>Experiments</h4>
+    <a href="../experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../storyboards/index.html">Storyboards</a>
+    <a href="../mockups/policy-hash.html">Mockup: policy hash</a>
+    <a href="../mockups/edges.html">Mockup: edge matrix</a>
+  </div>
+  <div>
+    <h4>Project</h4>
+    <a href="../articles/index.html">Articles</a>
+    <a href="../about/index.html">About &amp; naming</a>
+    <a href="../cli/index.html">The CLI</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI">GitHub: SHarness-AI</a>
+    <a href="../admin/comms.html">Comms &amp; release history</a>
+  </div>
+  <div>
+    <h4>For agents</h4>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="../llms-full.txt">llms-full.txt</a>
+    <a href="../index.md">index.md</a>
+    <a href="../sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

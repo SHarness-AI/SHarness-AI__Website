@@ -20,6 +20,9 @@ from gen_pages import PAGES                                      # noqa: E402
 ORDER   = ([("llms.txt", "llms.txt — the annotated map"),
             ("index.md", "index.md — the front page")]
            + [(f"{d}/index.md", f"{d}/index.md — {title}") for d, title, _ in PAGES]
+           + [("storyboards/index.md", "storyboards/index.md — the storyboards")]
+           + [(f"storyboards/{p.parent.name}/index.md", f"storyboards/{p.parent.name}/index.md — a storyboard's script")
+              for p in sorted((ROOT / "storyboards").glob("*/index.md"))]
            + [("articles/index.md", "articles/index.md — the articles")]
            + [(f"articles/{p.stem}.md", f"articles/{p.stem}.md")
               for p in sorted((ROOT / "admin/content/articles").glob("*.md"), reverse=True)])

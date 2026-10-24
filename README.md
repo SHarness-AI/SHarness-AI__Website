@@ -1,6 +1,6 @@
 # sharness.ai — the SHarness-AI website
 
-The home of the SHarness-AI project and its command line tool, `sharness`
+The home of the SHarness-AI project and its command line tool, `sharness-ai`
 ([PyPI: `sharness-ai`](https://pypi.org/project/sharness-ai/),
 [source](https://github.com/SHarness-AI/SHarness-AI__CLI)).
 
@@ -13,7 +13,9 @@ static HTML, no framework, no build step, a pre-release gate, and validate → t
 ## Structure
 
 - `index.html` / `index.md` — the front page and its markdown twin
-- `cli/` — the `sharness` CLI: install, versioning, release pipeline
+- `<page>/index.md` — the design pages, the CLI page, the experiments map and the research note: markdown is the source, `gen_pages.py` writes the HTML
+- `experiments/` — the ladder of mockups and experiments; `mockups/` — the browser mockups (hand-written HTML)
+- `storyboards/` — generated from `admin/content/storyboards/` by `gen_storyboards.py`; previews rendered by the kit (see the script's docstring)
 - `shipped/` — what exists today, and what is not here yet
 - `admin/` — engineering, comms (tasks & requests), release history
 - `admin/build/version.txt` — owns the site version
@@ -30,9 +32,10 @@ static HTML, no framework, no build step, a pre-release gate, and validate → t
    `admin/versions.html`; update `admin/comms.html` if the state of play changed.
 2. `python3 admin/build/chrome.py` — propagates the version badge and any nav/footer change
    to every page, and stamps the version into `llms.txt` and `index.md`.
-3. `python3 admin/build/gen_sitemap.py && python3 admin/build/gen_llms_full.py`
-4. `node admin/build/validate.js`
-5. `git commit -am "site vX.Y.Z: ..." && git push origin dev`
+3. `python3 admin/build/gen_pages.py && python3 admin/build/gen_articles.py && python3 admin/build/gen_storyboards.py`
+4. `python3 admin/build/gen_sitemap.py && python3 admin/build/gen_llms_full.py`
+5. `node admin/build/validate.js && node admin/build/validate_storyboards.cjs`
+6. `git commit -am "site vX.Y.Z: ..." && git push origin dev`
 
 Every push to `dev` runs `.github/workflows/deploy-pages.yml`: validate → auto-tag
 (`vX.Y.Z`, verified against `version.txt` and the commit subject, next-minor enforced) →

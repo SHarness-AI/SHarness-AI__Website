@@ -207,10 +207,14 @@ Cautions: a trace only covers the paths the tests exercised, so generate from th
 
 ## 9. Prior art (reuse, don't rebuild)
 
-AppArmor complain mode and `aa-genprof`, SELinux `audit2allow`, `systemd-analyze security`, nsjail, bubblewrap, Docker/OCI seccomp profiles, Kubernetes securityContext and NetworkPolicy, SPIFFE/SPIRE and service-mesh authorisation policies. What is new here is the ABP layer: a policy that describes rather than scores, a derived delta, intersection-composed layers that ship with the code, a hash the person controls, and business rules enforced by separate components.
+AppArmor complain mode and `aa-genprof`, SELinux `audit2allow`, `systemd-analyze security`, nsjail, bubblewrap, Docker/OCI seccomp profiles, Kubernetes securityContext and NetworkPolicy, SPIFFE/SPIRE and service-mesh authorisation policies. Closest to home: **Claude Code's own sandbox** (`@anthropic-ai/sandbox-runtime`: bubblewrap, a network namespace and a hostname-allowlist proxy around shell commands, documented 24 Oct 2026) and OpenAI Codex's seatbelt and Landlock sandboxes. A PBP should be able to generate the settings of each of these as one enforcement layer, rather than compete with them; the comparison with the Claude Code sandbox is on [Mockups and experiments](../experiments/index.md#what-claude-codes-own-sandbox-already-gives-and-what-sharness-adds). What is new here is the ABP layer: a policy that describes rather than scores, a derived delta, intersection-composed layers that ship with the code, a hash the person controls, and business rules enforced by separate components.
 
-## 10. Next: file and network behaviour policies (proposed)
+## 10. A v0 that two implementations hash the same (runnable)
+
+The schema above is the target. The first thing built from it is smaller: a v0 of six keys (`pbp`, `id`, `files` with `read`, `write` and `exec` lists, `network` as `"none"` or TCP ports, `process` with `no_new_privs`), integers only, hashed as canonical JSON. `sharness-ai policy hash` and the [browser mockup](../mockups/policy-hash.html) produce the same hash for the same file, and `sharness-ai run` enforces the v0 with Landlock. See [The CLI](../cli/index.md#the-v0-policy) and [Mockups and experiments](../experiments/index.md). v0 grows towards the schema above (layers by intersection, signing by the root key), never away from it.
+
+## 11. Next: file and network behaviour policies (proposed)
 
 Dinis Cruz's memo of 24 Oct 2026 extends the idea: alongside process behaviour policies, **file behaviour policies** (what we want to happen to the file system) and **network behaviour policies** (what we want to happen on the network). In the design, these are the policies of `sharness.fs` and `sharness.net` written as policies in their own right, so that they can be read, hashed and reused apart from any one process. Today they are names for a direction, not a specification: the schema above is the only one written down. See [A secure harness for agents](../articles/secure-harness-for-agents.md).
 
-Source: [03-process-behaviour-policy](../briefs/sharness-brief-pack/docs/03-process-behaviour-policy.md); for §10, [voice memo 01](../briefs/memos/2026-10-24-memo-01-secure-harness.md).
+Source: [03-process-behaviour-policy](../briefs/sharness-brief-pack/docs/03-process-behaviour-policy.md); for §11, [voice memo 01](../briefs/memos/2026-10-24-memo-01-secure-harness.md).
