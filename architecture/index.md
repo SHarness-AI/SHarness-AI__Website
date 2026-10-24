@@ -140,4 +140,22 @@ Same components, same protocol, same policies. Only the launcher changes. Only A
 
 Topology E is a proposal for what agent platforms should offer. No such service is known to exist today.
 
-Sources: [05-sharness](../briefs/sharness-brief-pack/docs/05-sharness.md) §2, [01-architecture](../briefs/sharness-brief-pack/docs/01-architecture.md) §1, §3 and §5.
+## Glossary
+
+| Term | Meaning |
+|---|---|
+| **vault key** | the secret that opens an sgit vault; the read key, write key, vault id and file ids are derived from it (PBKDF2, 600,000 iterations, ~108 ms) |
+| **derived keys** | the read key and the write key. Almost all of sgit runs on these, not on the vault key |
+| **k1 / `pki.sgit.ai/qr/key/v1`** | a public key bundle, as a QR or JSON |
+| **m1 / `pki.sgit.ai/qr/sealed/v1`** | a sealed message: RSA-OAEP 4096 wraps an AES-256-GCM key; the sender signs with ECDSA P-256 over recipient, time and expiry |
+| **session identity** | the key pair (RSA-4096 encryption + ECDSA P-256 signing) the KMS makes for this session; its public half is what the person carries to the sender |
+| **record fingerprint** | the signing key's fingerprint; what `--to` names |
+| **E** | a one-time key pair made by the caller for a single KMS request; the response is sealed to E.pub |
+| **session CA** | a throwaway certificate authority that issues one TLS certificate per component, then has its private key destroyed |
+| **edge** | an allowed caller → callee connection between components |
+| **PBP** | Process Behaviour Policy: the ABP model (grant, mandate, delta, barrier) applied to a process |
+| **launcher / runtime** | whatever creates the users, CA, certificates and policies and starts the components; ideally the agent platform, not the agent |
+| **harnessed app** | a program running inside the harness (sgit, a shell command, an agent) |
+| **harness-aware / transparent** | an app that speaks the harness protocol directly, or an unmodified app that works because the harness presents ordinary interfaces (a proxy, a mount) |
+
+Sources: [05-sharness](../briefs/sharness-brief-pack/docs/05-sharness.md) §1–2, [01-architecture](../briefs/sharness-brief-pack/docs/01-architecture.md) §1, §3 and §5, and the glossary in [00-README](../briefs/sharness-brief-pack/docs/00-README.md) §4.

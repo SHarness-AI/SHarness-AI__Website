@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.3.0</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.3.1</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -186,7 +186,26 @@
    net ──► local platform endpoint (vsock / proxy) ──► platform KMS; session identity
    = the platform's own knowledge of the session; no auth key in the container</pre>
 <p>Topology E is a proposal for what agent platforms should offer. No such service is known to exist today.</p>
-<p>Sources: <a href="../briefs/sharness-brief-pack/docs/05-sharness.md">05-sharness</a> §2, <a href="../briefs/sharness-brief-pack/docs/01-architecture.md">01-architecture</a> §1, §3 and §5.</p>
+<h2 id="glossary">Glossary</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td><b>vault key</b></td><td>the secret that opens an sgit vault; the read key, write key, vault id and file ids are derived from it (PBKDF2, 600,000 iterations, ~108 ms)</td></tr>
+<tr><td><b>derived keys</b></td><td>the read key and the write key. Almost all of sgit runs on these, not on the vault key</td></tr>
+<tr><td><b>k1 / <code>pki.sgit.ai/qr/key/v1</code></b></td><td>a public key bundle, as a QR or JSON</td></tr>
+<tr><td><b>m1 / <code>pki.sgit.ai/qr/sealed/v1</code></b></td><td>a sealed message: RSA-OAEP 4096 wraps an AES-256-GCM key; the sender signs with ECDSA P-256 over recipient, time and expiry</td></tr>
+<tr><td><b>session identity</b></td><td>the key pair (RSA-4096 encryption + ECDSA P-256 signing) the KMS makes for this session; its public half is what the person carries to the sender</td></tr>
+<tr><td><b>record fingerprint</b></td><td>the signing key's fingerprint; what <code>--to</code> names</td></tr>
+<tr><td><b>E</b></td><td>a one-time key pair made by the caller for a single KMS request; the response is sealed to E.pub</td></tr>
+<tr><td><b>session CA</b></td><td>a throwaway certificate authority that issues one TLS certificate per component, then has its private key destroyed</td></tr>
+<tr><td><b>edge</b></td><td>an allowed caller → callee connection between components</td></tr>
+<tr><td><b>PBP</b></td><td>Process Behaviour Policy: the ABP model (grant, mandate, delta, barrier) applied to a process</td></tr>
+<tr><td><b>launcher / runtime</b></td><td>whatever creates the users, CA, certificates and policies and starts the components; ideally the agent platform, not the agent</td></tr>
+<tr><td><b>harnessed app</b></td><td>a program running inside the harness (sgit, a shell command, an agent)</td></tr>
+<tr><td><b>harness-aware / transparent</b></td><td>an app that speaks the harness protocol directly, or an unmodified app that works because the harness presents ordinary interfaces (a proxy, a mount)</td></tr>
+</tbody>
+</table></div>
+<p>Sources: <a href="../briefs/sharness-brief-pack/docs/05-sharness.md">05-sharness</a> §1–2, <a href="../briefs/sharness-brief-pack/docs/01-architecture.md">01-architecture</a> §1, §3 and §5, and the glossary in <a href="../briefs/sharness-brief-pack/docs/00-README.md">00-README</a> §4.</p>
 </main>
 
 <footer class="site"><div class="cols">
@@ -195,7 +214,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design. Nothing here is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.3.0</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.3.1</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>

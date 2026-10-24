@@ -94,7 +94,9 @@ def _href(url):
 
 
 def split_row(line):
-    return [c.strip() for c in line.strip().strip("|").split("|")]
+    """Cells split on |, except an escaped \\| (a literal pipe, e.g. in a grep pattern)."""
+    cells = re.split(r"(?<!\\)\|", line.strip().strip("|"))
+    return [c.strip().replace("\\|", "|") for c in cells]
 
 
 def md_to_html(md):

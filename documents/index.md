@@ -21,6 +21,10 @@
 | 06 | [06-llm-and-the-agent-loop.md](../briefs/sharness-brief-pack/docs/06-llm-and-the-agent-loop.md) | how an agent message flows (observed), `sharness.llm`, `sharness.bash`, the dual-LLM split | [Agents and LLMs](../agents/index.md) |
 | 07 | [07-enforcing-the-process-tree.md](../briefs/sharness-brief-pack/docs/07-enforcing-the-process-tree.md) | every process through `sharness.bash`; side doors; safe testing; proof of concept not yet run | [Enforcing the process tree](../process-tree/index.md) |
 
+## How this pack relates to sgit's
+
+The design began as cli.sgit.ai's [sealed vault keys design pack](https://cli.sgit.ai/dev/sealed-vault-keys/index.html). Compared against the sgit pack's documents 00–04 as Dinis Cruz shared them, as of 24 Oct 2026: 01, 02 and 03 here are **identical**; 00 here adds documents 05–07 to the reading list and the note on names; 04 here adds §7, the observation of the agent loop. Nothing in the sgit pack's 00–04 is missing from this one. The sgit pack also has a 05, *compatibility and rollout* (with nothing switched on, sgit behaves exactly as 0.24.0 does; sealed and plain clones side by side; staged rollout), which is sgit-specific and is linked, not republished.
+
 ## Memos
 
 | Date | Memo | Written up as |

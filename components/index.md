@@ -4,6 +4,7 @@
 
 | Component | Its one job | Was (early docs) |
 |---|---|---|
+| the harnessed app | orchestrates: parses the command, calls the components, renders output; holds no keys | sgit-cli |
 | `sharness.launcher` | verifies the policy hash; makes uids, the session CA and certificates; starts, freezes and stops components | launcher |
 | `sharness.kms` | holds private keys and secrets; opens sealed things; re-seals to one-time keys | sgit-kms |
 | `sharness.net` | the only network client: host, endpoint and id allowlists; the TLS client | sgit-net |
@@ -13,6 +14,20 @@
 | `sharness.policy` | not a process: the manifest, its layers, its hash | Process Behaviour Policy |
 
 Where the components sit and which may talk to which is on [Architecture](../architecture/index.md).
+
+## The harnessed app (for sgit: its CLI)
+
+| | |
+|---|---|
+| Job | parse the user's command, call `sharness.fs` and `sharness.net`, render output |
+| Holds | no key of any kind; sees file **contents** (it must, to show diffs) |
+| Talks to | `.fs` and `.net` only |
+| Files | read-only on the clone folder; writes nothing (every write goes through `.fs`) |
+| Network | none: a network namespace with only loopback, or Landlock network rules allowing only the `.fs` and `.net` ports |
+| Lockdown | its own uid, all capabilities dropped, `no_new_privs`, `RLIMIT_NPROC=0`, Landlock, a seccomp allowlist |
+| Refuses | `show-key` on a sealed clone without `--reveal`; any plain vault key on argv (all 14 sgit commands that take one) |
+
+An agent loop such as Claude Code is the same role for agents: it routes, and runs nothing itself (see [Agents and LLMs](../agents/index.md#6-the-full-set)).
 
 ## sharness.launcher
 
@@ -46,7 +61,7 @@ It **never returns a clear key**. Protocol and key lifetime: [Keys and the KMS](
 | Job | every byte to and from the outside; the KMS client; (in the full split) all vault encryption, decryption and signing |
 | Holds | derived read/write keys for **one command**, in a `memfd_secret` page; never the vault key |
 | Business rules | host allowlist; endpoint allowlist; vault-id allowlist; read-only vs read-write per policy; no redirects to other hosts; IP literals refused |
-| Why it is the TLS client | the kernel only sees the platform proxy's port. `sharness.net` sends `CONNECT host:443`, sets SNI and Host, and verifies the certificate for that name. A pure relay would let the inner process choose SNI and Host (domain fronting) |
+| Why it is the TLS client | the kernel only sees `127.0.0.1:<proxy port>`. `sharness.net` sends `CONNECT host:443`, sets SNI and Host, and verifies the certificate for that name. A pure relay would let the inner process choose SNI and Host (domain fronting) |
 
 ## sharness.fs
 

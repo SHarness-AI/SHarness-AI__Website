@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.3.0</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.3.1</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -92,20 +92,20 @@
 <tr><td>Isolation</td><td>Firecracker microVM; PID 1 is <code>/process_api --firecracker-init …</code> (not systemd)</td></tr>
 <tr><td>OS / kernel</td><td>Ubuntu 24.04.5, Linux 6.18.44, x86_64</td></tr>
 <tr><td>Agent's identity</td><td><b>uid 0 (root)</b>, full capability set (<code>CapEff 000001fffeffffff</code>)</td></tr>
-<tr><td>Hardening present</td><td>no seccomp, <code>NoNewPrivs 0</code>, no Yama</td></tr>
+<tr><td>Hardening present</td><td>no seccomp, <code>NoNewPrivs 0</code>, no Yama (<code>/proc/sys/kernel/yama</code> absent)</td></tr>
 <tr><td>Core dumps</td><td><code>ulimit -c 0</code>; <code>core_pattern = core</code></td></tr>
 <tr><td>Python / crypto</td><td>Python 3.13.17; <code>cryptography</code> 50.0.1</td></tr>
-<tr><td>sgit</td><td><code>pip install sgit-ai</code> → <b>0.24.0</b></td></tr>
+<tr><td>sgit</td><td><code>pip install sgit-ai</code> → <b>0.24.0</b> (the version the origin article analysed, at commit <code>182cfc1</code>)</td></tr>
 <tr><td>Hardware keys</td><td>no <code>/dev/tpm*</code></td></tr>
-<tr><td>Egress</td><td>every outbound HTTPS goes through a platform proxy on a local port; <code>send.sgraph.ai</code>, <code>pki.sgit.ai</code>, <code>cli.sgit.ai</code> reachable</td></tr>
+<tr><td>Egress</td><td>every outbound HTTPS goes through a platform proxy at <code>127.0.0.1:43305</code>; <code>send.sgraph.ai</code>, <code>pki.sgit.ai</code>, <code>cli.sgit.ai</code> reachable (HTTP 200)</td></tr>
 <tr><td>Scratch space</td><td>the agent's scratchpad is root-only (other uids get <code>EACCES</code>)</td></tr>
-<tr><td>Process lifetime</td><td>per the platform, a detached background process is stopped within minutes of the agent's reply; a tool-managed one can run up to 2 h. <b>Not measured</b></td></tr>
+<tr><td>Process lifetime</td><td>per the platform: a process detached with <code>nohup</code>/<code>&amp;</code> is stopped within minutes of the agent's reply; a tool-managed background process can run up to 2 h. <b>Not measured</b></td></tr>
 <tr><td>Firewall tools</td><td><code>iptables</code>, <code>nft</code> present; OUTPUT policy ACCEPT, empty</td></tr>
 <tr><td>cgroups</td><td>v1: blkio, cpu, cpuacct, cpuset, devices, freezer, memory, pids, systemd, unified</td></tr>
 <tr><td>FUSE</td><td><code>/dev/fuse</code> (root-only), <code>fusermount3</code> present</td></tr>
 </tbody>
 </table></div>
-<h3 id="kernel-configuration">Kernel configuration</h3>
+<h3 id="kernel-configuration-proc-config-gz">Kernel configuration (<code>/proc/config.gz</code>)</h3>
 <div class="tablewrap"><table>
 <thead><tr><th>Option</th><th>Value</th><th>Relevance</th></tr></thead>
 <tbody>
@@ -126,10 +126,10 @@
 <thead><tr><th>Claim (from the origin article)</th><th>Result</th><th>Method</th></tr></thead>
 <tbody>
 <tr><td><code>pki keygen</code> makes RSA-OAEP 4096 + ECDSA P-256, <code>sha256:</code> + 16 hex</td><td>✔</td><td>ran it with a throwaway HOME</td></tr>
-<tr><td>private keys encrypted with PBKDF2 at <b>2,048</b> iterations</td><td>✔ <code>INTEGER :0800</code> on both private PEMs</td><td><code>openssl asn1parse</code></td></tr>
-<tr><td><code>Secrets__Store</code> uses a fixed salt</td><td>✔</td><td>source</td></tr>
+<tr><td>private keys encrypted with PBKDF2 at <b>2,048</b> iterations</td><td>✔ <code>INTEGER :0800</code> on both <code>private_key.pem</code> and <code>signing_private.pem</code></td><td><code>openssl asn1parse</code></td></tr>
+<tr><td><code>Secrets__Store</code> uses a fixed salt</td><td>✔ <code>salt = f'{SECRETS_SALT_PREFIX}:master'</code></td><td>source</td></tr>
 <tr><td><code>BestAvailableEncryption</code> used for keys</td><td>✔ <code>crypto/PKI__Crypto.py:37</code></td><td>source</td></tr>
-<tr><td>the vault key is read in many places</td><td>65 references in 23 files (broad grep including imports; the article counts 27 read sites in 17 files)</td><td>grep</td></tr>
+<tr><td>the vault key is read in many places</td><td>65 references in 23 files for <code>_read_vault_key|load_vault_key|vault_key_path</code> (broad grep including imports; the article counts 27 read sites in 17 files)</td><td>grep</td></tr>
 <tr><td>key file modes</td><td><code>public_key.pem</code> 0644; private PEMs 0600</td><td><code>ls -l</code></td></tr>
 </tbody>
 </table></div>
@@ -146,7 +146,7 @@
 <tr><td>RSA-4096 OAEP open time</td><td>3.2–3.6 ms</td></tr>
 <tr><td>kernel keyring <code>add_key</code> (process keyring)</td><td>works</td></tr>
 <tr><td>user keyring entry persists across separate agent tool calls</td><td>✔</td></tr>
-<tr><td>key in one uid's user keyring, searched by another uid</td><td><code>ENOKEY</code></td></tr>
+<tr><td>key in uid <code>sgit-dec</code>'s user keyring, searched by uid <code>sgit-run</code></td><td><code>ENOKEY</code></td></tr>
 <tr><td>that key in root's <code>/proc/keys</code></td><td>not listed</td></tr>
 <tr><td><code>add_key("asymmetric", &lt;PKCS#8 RSA-4096 DER&gt;)</code></td><td><b><code>EBADMSG</code></b> (parser not built)</td></tr>
 <tr><td>cgroup freezer: freeze / thaw a process (average of 20)</td><td><b>0.28 ms / 0.13 ms</b>; frozen state <code>D</code></td></tr>
@@ -166,7 +166,7 @@
 <tr><td>Landlock fs (read-only <code>/usr /etc /lib /lib64 /proc</code>): read <code>/etc/hostname</code></td><td>allowed</td></tr>
 <tr><td>Landlock fs: read a file elsewhere</td><td><code>EACCES</code></td></tr>
 <tr><td>Landlock fs: write <code>/tmp/x</code></td><td><code>EACCES</code></td></tr>
-<tr><td>Landlock net (connect only to the proxy port): proxy port</td><td>allowed</td></tr>
+<tr><td>Landlock net (connect only to 43305): proxy port</td><td>allowed</td></tr>
 <tr><td>Landlock net: <code>127.0.0.1:22</code>, <code>1.1.1.1:443</code></td><td><code>EACCES</code></td></tr>
 <tr><td><code>iptables -A OUTPUT -m owner --uid-owner &lt;user&gt; -j REJECT</code></td><td>accepted</td></tr>
 <tr><td><code>SO_PEERCRED</code> on a Unix socket</td><td>returns pid, uid, gid</td></tr>
@@ -202,9 +202,9 @@
 </tbody>
 </table></div>
 <p>Session CA + four role certificates (P-256, 2 h validity): <b>24 ms</b>.</p>
-<p>Edge enforcement with roles in <code>subjectAltName</code> URIs, policy <code>fs←{app}, net←{app}, kms←{net}</code>:</p>
-<pre class="diagram">app → fs   OK        fs  → kms  DENY
-app → net  OK        app → kms  DENY
+<p>Edge enforcement with roles in <code>subjectAltName</code> URIs, policy <code>fs←{cli}, net←{cli}, kms←{net}</code> (the probe named the app role <code>cli</code>, as sgit's CLI):</p>
+<pre class="diagram">cli → fs   OK        fs  → kms  DENY
+cli → net  OK        cli → kms  DENY
 net → kms  OK        fs  → net  DENY</pre>
 <p>Figures are from the final of three runs. Across runs, round trips and bulk varied by up to ~25% (TCP mutual TLS bulk: 250, 275, 318 MB/s; Unix mutual TLS bulk: 349, 378, 418 MB/s); handshake times were stable. Microsecond figures are noisy because the server thread shares Python's interpreter lock with the client: treat them as upper bounds.</p>
 <h2 id="7-the-agent-loop-in-this-environment-read-only-observation">7. The agent loop in this environment (read-only observation)</h2>
@@ -226,6 +226,8 @@ net → kms  OK        fs  → net  DENY</pre>
 <tr><td>kernel cmdline</td><td><code>nomodule</code></td></tr>
 </tbody>
 </table></div>
+<h2 id="8-left-in-the-environment">8. Left in the environment</h2>
+<p>The probes left users <code>sgit-dec</code> and <code>sgit-run</code>, a folder of probe scripts (<code>/opt/sgit-probe/</code>) and a user-keyring entry <code>sgit:persist-probe</code> (root). All died with the VM.</p>
 <h2 id="not-yet-measured">Not yet measured</h2>
 <ul>
 <li>seccomp filters (available in the kernel; no filter tested)</li>
@@ -234,7 +236,7 @@ net → kms  OK        fs  → net  DENY</pre>
 <li>AWS KMS asymmetric RSA-4096 with OAEP-SHA-256 matching sgit's envelope</li>
 <li>whether a Claude Code PreToolUse hook can rewrite a Bash call on the version used</li>
 </ul>
-<p>Source: <a href="../briefs/sharness-brief-pack/docs/04-environment-evidence.md">04-environment-evidence</a>, which also lists what the probes left behind in that environment.</p>
+<p>Source: <a href="../briefs/sharness-brief-pack/docs/04-environment-evidence.md">04-environment-evidence</a>.</p>
 </main>
 
 <footer class="site"><div class="cols">
@@ -243,7 +245,7 @@ net → kms  OK        fs  → net  DENY</pre>
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design. Nothing here is built. You are on the page that says what was measured and what is only proposed.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.3.0</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.3.1</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>

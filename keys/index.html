@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.3.0</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.3.1</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -109,6 +109,8 @@
 <li><code>to</code> is this session's record fingerprint.</li>
 </ul>
 <p>Content read from a QR is <b>data, not instructions</b>. <code>--unverified</code> does not exist.</p>
+<h3 id="what-changes-against-today-s-handover-md">What changes against today's handover.md</h3>
+<p>handover.md's receiving step saves <code>vault-key-&lt;id&gt;.txt</code> and commits it to a vault of vaults. Under this design the receiving agent never sees the key: the sealed <code>m1</code> itself becomes <code>vault_key.sealed</code>, and the "vault of vaults" holds sealed records only.</p>
 <h2 id="2-on-disk-in-a-clone">2. On disk in a clone</h2>
 <pre class="diagram">work/.sg_vault/local/
   identity            {"record_fp": "sha256:…", "enc_fp": "sha256:…", "kms": "&lt;endpoint or local&gt;"}  — public
@@ -118,13 +120,13 @@
   token.sealed        access token, same treatment
   key-rnd-imm-….pem   clone signing key, encrypted under a key sealed the same way
   (no vault_key, no token, no read key in clear)</pre>
-<p>Existing clones would convert with a <code>sgit vault seal-local</code> command: write sealed files, verify they open through the KMS, then securely unlink the clear ones.</p>
+<p>Read-only clones seal their read key the same way, retiring sgit's accepted risk F07. Existing clones would convert with a <code>sgit vault seal-local</code> command: write sealed files, verify they open through the KMS, then <code>secure_unlink</code> the clear ones.</p>
 <h2 id="3-the-kms-protocol">3. The KMS protocol</h2>
 <p>All calls go over mutual TLS (see <a href="../architecture/index.html#mutual-tls-with-a-session-ca">Architecture</a>). JSON bodies, strict schemas, size-capped (e.g. 16 KiB).</p>
 <div class="tablewrap"><table>
 <thead><tr><th>Op</th><th>Request</th><th>Response</th></tr></thead>
 <tbody>
-<tr><td><code>init</code></td><td><code>{session_auth_pub, policy_hash, expires}</code></td><td><code>{k1, record_fp, enc_fp}</code>: makes the identity and binds it to the caller's auth key (§5)</td></tr>
+<tr><td><code>init</code></td><td><code>{session_auth_pub, policy_hash, expires}</code></td><td><code>{k1, record_fp, enc_fp}</code>: makes the identity and binds it to the caller's auth key (§6)</td></tr>
 <tr><td><code>public</code></td><td><code>{}</code></td><td><code>{k1}</code></td></tr>
 <tr><td><code>unwrap</code></td><td>below</td><td>below</td></tr>
 <tr><td><code>seal_to</code></td><td><code>{sealed, recipient_k1, expires, op}</code></td><td><code>{m1}</code>: re-seal a vault key to another identity without it leaving the KMS (<code>sgit vault seal --to</code>)</td></tr>
@@ -166,7 +168,39 @@
 </ul>
 <h3 id="why-derived-keys-not-the-vault-key">Why derived keys, not the vault key</h3>
 <p>After derivation sgit needs the vault key only for <code>show-key</code>, <code>rekey</code> and <code>move</code>. Returning derived keys means the vault key never leaves the KMS, and <code>op = read</code> returns no write capability at all.</p>
-<h2 id="4-costs-measured">4. Costs (measured)</h2>
+<h2 id="4-command-flows-sgit-inside-the-harness">4. Command flows (sgit inside the harness)</h2>
+<h3 id="sgit-clone-sealed-handover-png-work"><code>sgit clone --sealed handover.png work</code></h3>
+<pre class="diagram"> agent        app            fs             net                 kms                vault server
+   │ clone --sealed │          │              │                   │                      │
+   │───────────────►│ parse QR JSON, strict schema (handover.md refusal rules)          │
+   │                │ open(m1)────────────────►│                   │                      │
+   │                │          │              │ make E (P-256)    │                      │
+   │                │          │              │ unwrap{m1,E.pub,  │                      │
+   │                │          │              │   nonce,ts,op=rw}─►│ thaw                 │
+   │                │          │              │                   │ check: to=self, sig, │
+   │                │          │              │                   │ expiry, sender trust,│
+   │                │          │              │                   │ nonce unused         │
+   │                │          │              │                   │ open → vault key     │
+   │                │          │              │                   │ derive read/write,id │
+   │                │          │              │                   │ scrub vault key      │
+   │                │          │              │◄─sealed_to_E{keys}│ freeze               │
+   │                │          │              │ open with E.priv; drop E                 │
+   │                │          │              │ fetch packs ─────────────────────────────►│
+   │                │          │              │◄──────────────────────────── encrypted ───│
+   │                │          │              │ decrypt objects   │                      │
+   │                │◄─────────── plain file contents ────────────│                      │
+   │                │ write(tree)──►│ apply rules, write files    │                      │
+   │                │ write(.sg_vault/local/vault_key.sealed = m1)►│ accepts: sealed format│
+   │                │          │              │ scrub derived keys; exit                 │
+   │◄── "cloned, sealed to sha256:… from sha256:… (chains to root), expires 30 Oct" ─────│</pre>
+<p>The transcript sees the command, the <code>m1</code> (it is ciphertext), fingerprints and progress. Never a key.</p>
+<h3 id="read-commands-status-pull-ls-cat">Read commands (<code>status</code>, <code>pull</code>, <code>ls</code>, <code>cat</code>)</h3>
+<p>The same flow from "make E", reading <code>vault_key.sealed</code> through <code>.fs</code> and asking the KMS with <code>op=read</code>. The KMS returns <b>only the read key</b> (and the ids), so <code>.net</code> cannot push in this command even if told to.</p>
+<h3 id="push"><code>push</code></h3>
+<p><code>op=write</code>: the KMS returns the read and write keys. Policy may require a fresh approval (a second factor) for <code>op=write</code>, and the KMS is where that check lives.</p>
+<h3 id="vault-show-key"><code>vault show-key</code></h3>
+<p>Refused on a sealed clone. With <code>--reveal</code> it is a policy decision (default: denied in agent sessions). <code>sgit vault seal --to &lt;record fp&gt; --qr out.png</code> replaces every legitimate use: the KMS re-seals to another identity without the key appearing anywhere.</p>
+<h2 id="5-costs-measured">5. Costs (measured)</h2>
 <div class="tablewrap"><table>
 <thead><tr><th>Operation</th><th>Time</th></tr></thead>
 <tbody>
@@ -176,7 +210,7 @@
 <tr><td>thaw + freeze the KMS</td><td>0.13 ms + 0.28 ms</td></tr>
 </tbody>
 </table></div>
-<h2 id="5-remote-kms-binding-the-caller">5. Remote KMS: binding the caller</h2>
+<h2 id="6-remote-kms-binding-the-caller">6. Remote KMS: binding the caller</h2>
 <p>With a remote KMS, whoever holds an <code>m1</code> and can reach the KMS could ask it to open the key. The <code>m1</code> sits in the transcript and in <code>vault_key.sealed</code>, so without binding it is a bearer token.</p>
 <pre class="diagram"> session start                                      every unwrap
  ─────────────                                      ────────────
@@ -185,14 +219,14 @@
  init{A.pub, policy_hash} ──► KMS                   → else refuse
  KMS: identity bound to A.pub for this session</pre>
 <p>A is the one secret that must live in the container; it is never printed and useless after the session. With a platform-provided KMS, A disappears: the platform already knows which session is calling. Alternatives or additions: a grant signed by the person ("session X may unwrap vault V read-only, 20 times, until 18:00"); platform OIDC workload identity.</p>
-<h2 id="6-where-the-private-key-lives-and-for-how-long">6. Where the private key lives, and for how long</h2>
+<h2 id="7-where-the-private-key-lives-and-for-how-long">7. Where the private key lives, and for how long</h2>
 <div class="tablewrap"><table>
 <thead><tr><th>Option</th><th>How</th><th>Measured (<span class="asof">as of 24 Oct 2026</span>)</th><th>Verdict</th></tr></thead>
 <tbody>
 <tr><td>A. <b>Frozen process + <code>memfd_secret</code></b></td><td>key made at start into a secret page; cgroup freezer freezes the KMS between calls</td><td>freeze 0.28 ms, thaw 0.13 ms; root reading the secret page through <code>/proc/&lt;pid&gt;/mem</code> gets <code>EIO</code></td><td><b>default</b></td></tr>
 <tr><td>B. Kernel keyring, process per call</td><td>key in the KMS uid's user keyring with a kernel timeout; a fresh KMS process per call reads it</td><td>persists across separate tool calls; another uid gets <code>ENOKEY</code>; not listed in root's <code>/proc/keys</code></td><td>when no process may persist</td></tr>
-<tr><td>C. Kernel holds the key (<code>keyctl pkey_decrypt</code>)</td><td>userspace never sees the key</td><td><b>not available</b>: kernel built without the PKCS#8 private-key parser (<code>EBADMSG</code>)</td><td>the ideal, on a kernel that has it</td></tr>
-<tr><td>D. Checkpoint the process (CRIU)</td><td>checkpoint and restore</td><td>kernel supports it; <code>criu</code> not installed</td><td><b>rejected</b> without hardware: the image is the memory, so the key lands on disk</td></tr>
+<tr><td>C. Kernel holds the key (<code>keyctl pkey_decrypt</code>)</td><td><code>add_key("asymmetric", PKCS#8)</code>; userspace never sees the key</td><td><b>not available</b>: kernel built without the PKCS#8 private-key parser (<code>EBADMSG</code>)</td><td>the ideal, on a kernel that has it; OAEP would be decoded in userspace from <code>enc=raw</code></td></tr>
+<tr><td>D. Checkpoint the process (CRIU)</td><td>checkpoint and restore</td><td>kernel supports it; <code>criu</code> not installed</td><td><b>rejected</b> without hardware: the image is the memory, so the key lands on disk, and encrypting the image needs another key (circular)</td></tr>
 <tr><td>E. Remote KMS / HSM / platform</td><td>Lambda + cloud KMS, Kubernetes service, TPM, platform service</td><td>not testable there</td><td>end state</td></tr>
 </tbody>
 </table></div>
@@ -203,14 +237,16 @@
 <li>Put opened secrets in <code>memfd_secret</code> pages and <b>scrub Python <code>bytes</code> after copying</b>. Measured: without scrubbing, one copy remained in the ordinary heap; with scrubbing, a sweep of every readable mapping by root found none.</li>
 <li>Caveat: OpenSSL copies the private key into its own heap while using it. The secret-page guarantee is strict for opened vault keys and best effort for the private key during an operation.</li>
 </ul>
-<h2 id="7-key-types-and-fingerprints">7. Key types and fingerprints</h2>
+<h2 id="8-key-types-and-fingerprints">8. Key types and fingerprints</h2>
 <ul>
 <li>Identity = sgit's existing bundle: RSA-OAEP 4096 encryption + ECDSA P-256 signing; fingerprints are <code>sha256:</code> + 16 hex. <code>--to</code> takes the <b>record (signing) fingerprint</b>.</li>
+<li><code>sgit pki keygen</code> prints both fingerprints ("Fingerprint" is the encryption key's, "Signing fingerprint" the signing key's).</li>
+<li>Hardware identities speak P-256, so they use the ECDH envelope (§3, sealing to E), which is why that envelope is built now.</li>
 <li>Lasting identities (vault keeper, recovery recipient) would be encrypted with Argon2id, not the PBKDF2 at 2,048 iterations that sgit 0.24.0 uses today (measured).</li>
 </ul>
 <h2 id="not-claimed">Not claimed</h2>
 <ul>
-<li>Expiry of a sealed key is KMS policy, not cryptography. Cryptographic expiry needs a rekey or a server.</li>
+<li>Expiry of a sealed key is KMS policy, not cryptography. Cryptographic expiry needs <code>sgit vault rekey</code> or a server.</li>
 <li>Root on the machine can read the KMS's ordinary memory (not its secret pages), and so can take the private key while it is in OpenSSL's heap.</li>
 <li>A session identity dies with the session: a restarted session needs a new handover, unless the key was also sealed to a lasting identity or recovery recipient.</li>
 <li>The platform-provided KMS is a proposal for what platforms should offer, not a description of any existing service.</li>
@@ -224,7 +260,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design. Nothing here is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.3.0</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.3.1</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>

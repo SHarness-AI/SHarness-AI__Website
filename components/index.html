@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.3.0</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.3.1</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -79,6 +79,7 @@
 <div class="tablewrap"><table>
 <thead><tr><th>Component</th><th>Its one job</th><th>Was (early docs)</th></tr></thead>
 <tbody>
+<tr><td>the harnessed app</td><td>orchestrates: parses the command, calls the components, renders output; holds no keys</td><td>sgit-cli</td></tr>
 <tr><td><code>sharness.launcher</code></td><td>verifies the policy hash; makes uids, the session CA and certificates; starts, freezes and stops components</td><td>launcher</td></tr>
 <tr><td><code>sharness.kms</code></td><td>holds private keys and secrets; opens sealed things; re-seals to one-time keys</td><td>sgit-kms</td></tr>
 <tr><td><code>sharness.net</code></td><td>the only network client: host, endpoint and id allowlists; the TLS client</td><td>sgit-net</td></tr>
@@ -89,6 +90,20 @@
 </tbody>
 </table></div>
 <p>Where the components sit and which may talk to which is on <a href="../architecture/index.html">Architecture</a>.</p>
+<h2 id="the-harnessed-app-for-sgit-its-cli">The harnessed app (for sgit: its CLI)</h2>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th></th></tr></thead>
+<tbody>
+<tr><td>Job</td><td>parse the user's command, call <code>sharness.fs</code> and <code>sharness.net</code>, render output</td></tr>
+<tr><td>Holds</td><td>no key of any kind; sees file <b>contents</b> (it must, to show diffs)</td></tr>
+<tr><td>Talks to</td><td><code>.fs</code> and <code>.net</code> only</td></tr>
+<tr><td>Files</td><td>read-only on the clone folder; writes nothing (every write goes through <code>.fs</code>)</td></tr>
+<tr><td>Network</td><td>none: a network namespace with only loopback, or Landlock network rules allowing only the <code>.fs</code> and <code>.net</code> ports</td></tr>
+<tr><td>Lockdown</td><td>its own uid, all capabilities dropped, <code>no_new_privs</code>, <code>RLIMIT_NPROC=0</code>, Landlock, a seccomp allowlist</td></tr>
+<tr><td>Refuses</td><td><code>show-key</code> on a sealed clone without <code>--reveal</code>; any plain vault key on argv (all 14 sgit commands that take one)</td></tr>
+</tbody>
+</table></div>
+<p>An agent loop such as Claude Code is the same role for agents: it routes, and runs nothing itself (see <a href="../agents/index.html#6-the-full-set">Agents and LLMs</a>).</p>
 <h2 id="sharness-launcher">sharness.launcher</h2>
 <p>Runs outside every domain. In order:</p>
 <ol>
@@ -119,7 +134,7 @@
 <tr><td>Job</td><td>every byte to and from the outside; the KMS client; (in the full split) all vault encryption, decryption and signing</td></tr>
 <tr><td>Holds</td><td>derived read/write keys for <b>one command</b>, in a <code>memfd_secret</code> page; never the vault key</td></tr>
 <tr><td>Business rules</td><td>host allowlist; endpoint allowlist; vault-id allowlist; read-only vs read-write per policy; no redirects to other hosts; IP literals refused</td></tr>
-<tr><td>Why it is the TLS client</td><td>the kernel only sees the platform proxy's port. <code>sharness.net</code> sends <code>CONNECT host:443</code>, sets SNI and Host, and verifies the certificate for that name. A pure relay would let the inner process choose SNI and Host (domain fronting)</td></tr>
+<tr><td>Why it is the TLS client</td><td>the kernel only sees <code>127.0.0.1:&lt;proxy port&gt;</code>. <code>sharness.net</code> sends <code>CONNECT host:443</code>, sets SNI and Host, and verifies the certificate for that name. A pure relay would let the inner process choose SNI and Host (domain fronting)</td></tr>
 </tbody>
 </table></div>
 <h2 id="sharness-fs">sharness.fs</h2>
@@ -206,7 +221,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design. Nothing here is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.3.0</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.3.1</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>

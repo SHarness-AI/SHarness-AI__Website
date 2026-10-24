@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.3.0</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.3.1</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -121,13 +121,13 @@
 </tbody>
 </table></div>
 <h2 id="refactor-path-in-sgit">Refactor path in sgit</h2>
-<p>sgit 0.24.0 reads the vault key directly in many places (the origin article counts 27 read sites in 17 files). After derivation almost nothing needs the clear key except <code>show-key</code>, <code>rekey</code> and <code>move</code>.</p>
+<p>sgit 0.24.0 reads the vault key directly in many places (the origin article counts 27 read sites in 17 files; a broad grep for <code>_read_vault_key|load_vault_key|vault_key_path</code> finds 65 references in 23 files, including imports). After derivation almost nothing needs the clear key except <code>show-key</code>, <code>rekey</code> and <code>move</code>.</p>
 <div class="tablewrap"><table>
 <thead><tr><th>Step</th><th>Change</th><th>Effect</th></tr></thead>
 <tbody>
-<tr><td>0</td><td>Fix independently: private keys from <code>pki keygen</code> use PBKDF2 at 2,048 iterations → Argon2id; <code>Secrets__Store</code> fixed salt → per-user random salt</td><td>removes two weaknesses whatever else happens</td></tr>
-<tr><td>1</td><td><b>The door</b>: one key-source interface ("vault id + derived keys for this folder"), reading <code>vault_key</code> today; lazy imports per subcommand</td><td>no behaviour change; all call sites go through it; tests prove it</td></tr>
-<tr><td>2</td><td>The key source backed by the KMS protocol; <code>clone --sealed</code>, <code>vault_key.sealed</code>, <code>vault seal-local</code>, <code>vault seal --to</code>; <code>.net</code> filters traffic; the app receives derived keys sealed to its own one-time key</td><td>key never on disk, argv or stdout</td></tr>
+<tr><td>0</td><td>Fix independently: private keys from <code>pki keygen</code> use PBKDF2 at 2,048 iterations (measured, <code>0x0800</code>) → Argon2id; <code>Secrets__Store</code> fixed salt → per-user random salt</td><td>removes two weaknesses whatever else happens</td></tr>
+<tr><td>1</td><td><b>The door</b>: one <code>Key_Source</code> interface ("vault id + derived keys for this folder"), reading <code>vault_key</code> today; lazy imports per subcommand</td><td>no behaviour change; all call sites go through it; tests prove it</td></tr>
+<tr><td>2</td><td><code>Key_Source</code> backed by the KMS protocol; <code>clone --sealed</code>, <code>vault_key.sealed</code>, <code>vault seal-local</code>, <code>vault seal --to</code>; <code>.net</code> filters traffic; the app receives derived keys sealed to its own one-time key</td><td>key never on disk, argv or stdout</td></tr>
 <tr><td>3</td><td><b>Full split</b>: vault crypto and server I/O move into <code>.net</code>; the app asks for operations, not keys</td><td>the app holds no keys and has no network</td></tr>
 <tr><td>4</td><td><code>.fs</code> as the only writer; then optionally FUSE</td><td>business rules on disk enforced outside the app</td></tr>
 <tr><td>5</td><td>P-256 ECDH envelope for hardware keys (TPM / PIV / Secure Enclave); commit signing with the identity</td><td>hardware-backed KMS</td></tr>
@@ -156,7 +156,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design. Nothing here is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.3.0</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.3.1</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>

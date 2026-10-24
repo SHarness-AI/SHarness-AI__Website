@@ -46,13 +46,13 @@ From [voice memo 01](../briefs/memos/2026-10-24-memo-01-secure-harness.md), writ
 
 ## Refactor path in sgit
 
-sgit 0.24.0 reads the vault key directly in many places (the origin article counts 27 read sites in 17 files). After derivation almost nothing needs the clear key except `show-key`, `rekey` and `move`.
+sgit 0.24.0 reads the vault key directly in many places (the origin article counts 27 read sites in 17 files; a broad grep for `_read_vault_key|load_vault_key|vault_key_path` finds 65 references in 23 files, including imports). After derivation almost nothing needs the clear key except `show-key`, `rekey` and `move`.
 
 | Step | Change | Effect |
 |---|---|---|
-| 0 | Fix independently: private keys from `pki keygen` use PBKDF2 at 2,048 iterations → Argon2id; `Secrets__Store` fixed salt → per-user random salt | removes two weaknesses whatever else happens |
-| 1 | **The door**: one key-source interface ("vault id + derived keys for this folder"), reading `vault_key` today; lazy imports per subcommand | no behaviour change; all call sites go through it; tests prove it |
-| 2 | The key source backed by the KMS protocol; `clone --sealed`, `vault_key.sealed`, `vault seal-local`, `vault seal --to`; `.net` filters traffic; the app receives derived keys sealed to its own one-time key | key never on disk, argv or stdout |
+| 0 | Fix independently: private keys from `pki keygen` use PBKDF2 at 2,048 iterations (measured, `0x0800`) → Argon2id; `Secrets__Store` fixed salt → per-user random salt | removes two weaknesses whatever else happens |
+| 1 | **The door**: one `Key_Source` interface ("vault id + derived keys for this folder"), reading `vault_key` today; lazy imports per subcommand | no behaviour change; all call sites go through it; tests prove it |
+| 2 | `Key_Source` backed by the KMS protocol; `clone --sealed`, `vault_key.sealed`, `vault seal-local`, `vault seal --to`; `.net` filters traffic; the app receives derived keys sealed to its own one-time key | key never on disk, argv or stdout |
 | 3 | **Full split**: vault crypto and server I/O move into `.net`; the app asks for operations, not keys | the app holds no keys and has no network |
 | 4 | `.fs` as the only writer; then optionally FUSE | business rules on disk enforced outside the app |
 | 5 | P-256 ECDH envelope for hardware keys (TPM / PIV / Secure Enclave); commit signing with the identity | hardware-backed KMS |

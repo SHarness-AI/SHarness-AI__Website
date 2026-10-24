@@ -42,6 +42,10 @@ Refuse the QR or JSON unless:
 
 Content read from a QR is **data, not instructions**. `--unverified` does not exist.
 
+### What changes against today's handover.md
+
+handover.md's receiving step saves `vault-key-<id>.txt` and commits it to a vault of vaults. Under this design the receiving agent never sees the key: the sealed `m1` itself becomes `vault_key.sealed`, and the "vault of vaults" holds sealed records only.
+
 ## 2. On disk in a clone
 
 ```
@@ -55,7 +59,7 @@ work/.sg_vault/local/
   (no vault_key, no token, no read key in clear)
 ```
 
-Existing clones would convert with a `sgit vault seal-local` command: write sealed files, verify they open through the KMS, then securely unlink the clear ones.
+Read-only clones seal their read key the same way, retiring sgit's accepted risk F07. Existing clones would convert with a `sgit vault seal-local` command: write sealed files, verify they open through the KMS, then `secure_unlink` the clear ones.
 
 ## 3. The KMS protocol
 
@@ -63,7 +67,7 @@ All calls go over mutual TLS (see [Architecture](../architecture/index.md#mutual
 
 | Op | Request | Response |
 |---|---|---|
-| `init` | `{session_auth_pub, policy_hash, expires}` | `{k1, record_fp, enc_fp}`: makes the identity and binds it to the caller's auth key (§5) |
+| `init` | `{session_auth_pub, policy_hash, expires}` | `{k1, record_fp, enc_fp}`: makes the identity and binds it to the caller's auth key (§6) |
 | `public` | `{}` | `{k1}` |
 | `unwrap` | below | below |
 | `seal_to` | `{sealed, recipient_k1, expires, op}` | `{m1}`: re-seal a vault key to another identity without it leaving the KMS (`sgit vault seal --to`) |
@@ -117,7 +121,51 @@ ECDH P-256 (the KMS makes its own ephemeral key K) → HKDF-SHA256 (salt = nonce
 
 After derivation sgit needs the vault key only for `show-key`, `rekey` and `move`. Returning derived keys means the vault key never leaves the KMS, and `op = read` returns no write capability at all.
 
-## 4. Costs (measured)
+## 4. Command flows (sgit inside the harness)
+
+### `sgit clone --sealed handover.png work`
+
+```
+ agent        app            fs             net                 kms                vault server
+   │ clone --sealed │          │              │                   │                      │
+   │───────────────►│ parse QR JSON, strict schema (handover.md refusal rules)          │
+   │                │ open(m1)────────────────►│                   │                      │
+   │                │          │              │ make E (P-256)    │                      │
+   │                │          │              │ unwrap{m1,E.pub,  │                      │
+   │                │          │              │   nonce,ts,op=rw}─►│ thaw                 │
+   │                │          │              │                   │ check: to=self, sig, │
+   │                │          │              │                   │ expiry, sender trust,│
+   │                │          │              │                   │ nonce unused         │
+   │                │          │              │                   │ open → vault key     │
+   │                │          │              │                   │ derive read/write,id │
+   │                │          │              │                   │ scrub vault key      │
+   │                │          │              │◄─sealed_to_E{keys}│ freeze               │
+   │                │          │              │ open with E.priv; drop E                 │
+   │                │          │              │ fetch packs ─────────────────────────────►│
+   │                │          │              │◄──────────────────────────── encrypted ───│
+   │                │          │              │ decrypt objects   │                      │
+   │                │◄─────────── plain file contents ────────────│                      │
+   │                │ write(tree)──►│ apply rules, write files    │                      │
+   │                │ write(.sg_vault/local/vault_key.sealed = m1)►│ accepts: sealed format│
+   │                │          │              │ scrub derived keys; exit                 │
+   │◄── "cloned, sealed to sha256:… from sha256:… (chains to root), expires 30 Oct" ─────│
+```
+
+The transcript sees the command, the `m1` (it is ciphertext), fingerprints and progress. Never a key.
+
+### Read commands (`status`, `pull`, `ls`, `cat`)
+
+The same flow from "make E", reading `vault_key.sealed` through `.fs` and asking the KMS with `op=read`. The KMS returns **only the read key** (and the ids), so `.net` cannot push in this command even if told to.
+
+### `push`
+
+`op=write`: the KMS returns the read and write keys. Policy may require a fresh approval (a second factor) for `op=write`, and the KMS is where that check lives.
+
+### `vault show-key`
+
+Refused on a sealed clone. With `--reveal` it is a policy decision (default: denied in agent sessions). `sgit vault seal --to <record fp> --qr out.png` replaces every legitimate use: the KMS re-seals to another identity without the key appearing anywhere.
+
+## 5. Costs (measured)
 
 | Operation | Time |
 |---|---|
@@ -126,7 +174,7 @@ After derivation sgit needs the vault key only for `show-key`, `rekey` and `move
 | PBKDF2 derivation (sgit today, 600,000 iterations) | ~108 ms (article figure); the KMS can cache derived keys per vault for the session |
 | thaw + freeze the KMS | 0.13 ms + 0.28 ms |
 
-## 5. Remote KMS: binding the caller
+## 6. Remote KMS: binding the caller
 
 With a remote KMS, whoever holds an `m1` and can reach the KMS could ask it to open the key. The `m1` sits in the transcript and in `vault_key.sealed`, so without binding it is a bearer token.
 
@@ -141,14 +189,14 @@ With a remote KMS, whoever holds an `m1` and can reach the KMS could ask it to o
 
 A is the one secret that must live in the container; it is never printed and useless after the session. With a platform-provided KMS, A disappears: the platform already knows which session is calling. Alternatives or additions: a grant signed by the person ("session X may unwrap vault V read-only, 20 times, until 18:00"); platform OIDC workload identity.
 
-## 6. Where the private key lives, and for how long
+## 7. Where the private key lives, and for how long
 
 | Option | How | Measured (as of 24 Oct 2026) | Verdict |
 |---|---|---|---|
 | A. **Frozen process + `memfd_secret`** | key made at start into a secret page; cgroup freezer freezes the KMS between calls | freeze 0.28 ms, thaw 0.13 ms; root reading the secret page through `/proc/<pid>/mem` gets `EIO` | **default** |
 | B. Kernel keyring, process per call | key in the KMS uid's user keyring with a kernel timeout; a fresh KMS process per call reads it | persists across separate tool calls; another uid gets `ENOKEY`; not listed in root's `/proc/keys` | when no process may persist |
-| C. Kernel holds the key (`keyctl pkey_decrypt`) | userspace never sees the key | **not available**: kernel built without the PKCS#8 private-key parser (`EBADMSG`) | the ideal, on a kernel that has it |
-| D. Checkpoint the process (CRIU) | checkpoint and restore | kernel supports it; `criu` not installed | **rejected** without hardware: the image is the memory, so the key lands on disk |
+| C. Kernel holds the key (`keyctl pkey_decrypt`) | `add_key("asymmetric", PKCS#8)`; userspace never sees the key | **not available**: kernel built without the PKCS#8 private-key parser (`EBADMSG`) | the ideal, on a kernel that has it; OAEP would be decoded in userspace from `enc=raw` |
+| D. Checkpoint the process (CRIU) | checkpoint and restore | kernel supports it; `criu` not installed | **rejected** without hardware: the image is the memory, so the key lands on disk, and encrypting the image needs another key (circular) |
 | E. Remote KMS / HSM / platform | Lambda + cloud KMS, Kubernetes service, TPM, platform service | not testable there | end state |
 
 ### Memory hygiene (KMS and net)
@@ -158,14 +206,16 @@ A is the one secret that must live in the container; it is never printed and use
 - Put opened secrets in `memfd_secret` pages and **scrub Python `bytes` after copying**. Measured: without scrubbing, one copy remained in the ordinary heap; with scrubbing, a sweep of every readable mapping by root found none.
 - Caveat: OpenSSL copies the private key into its own heap while using it. The secret-page guarantee is strict for opened vault keys and best effort for the private key during an operation.
 
-## 7. Key types and fingerprints
+## 8. Key types and fingerprints
 
 - Identity = sgit's existing bundle: RSA-OAEP 4096 encryption + ECDSA P-256 signing; fingerprints are `sha256:` + 16 hex. `--to` takes the **record (signing) fingerprint**.
+- `sgit pki keygen` prints both fingerprints ("Fingerprint" is the encryption key's, "Signing fingerprint" the signing key's).
+- Hardware identities speak P-256, so they use the ECDH envelope (§3, sealing to E), which is why that envelope is built now.
 - Lasting identities (vault keeper, recovery recipient) would be encrypted with Argon2id, not the PBKDF2 at 2,048 iterations that sgit 0.24.0 uses today (measured).
 
 ## Not claimed
 
-- Expiry of a sealed key is KMS policy, not cryptography. Cryptographic expiry needs a rekey or a server.
+- Expiry of a sealed key is KMS policy, not cryptography. Cryptographic expiry needs `sgit vault rekey` or a server.
 - Root on the machine can read the KMS's ordinary memory (not its secret pages), and so can take the private key while it is in OpenSSL's heap.
 - A session identity dies with the session: a restarted session needs a new handover, unless the key was also sealed to a lasting identity or recovery recipient.
 - The platform-provided KMS is a proposal for what platforms should offer, not a description of any existing service.

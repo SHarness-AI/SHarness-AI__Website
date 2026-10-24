@@ -66,6 +66,7 @@ extends: [sha256:<L0>, sha256:<L1>, sha256:<L2>, sha256:<L3>]   # parents, by ha
 subject:
   component: net
   code: { package: sgit-ai, version: 0.24.0, wheel_sha256: "…" }  # policy binds to what runs
+  entry: [python3, -I, -m, sgit_ai.net]
 identity:
   uid: ephemeral            # launcher creates one per session
   spiffe: spiffe://<session>/net

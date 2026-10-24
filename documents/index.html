@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.3.0</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.3.1</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -97,6 +97,8 @@
 <tr><td>07</td><td><a href="../briefs/sharness-brief-pack/docs/07-enforcing-the-process-tree.md">07-enforcing-the-process-tree.md</a></td><td>every process through <code>sharness.bash</code>; side doors; safe testing; proof of concept not yet run</td><td><a href="../process-tree/index.html">Enforcing the process tree</a></td></tr>
 </tbody>
 </table></div>
+<h2 id="how-this-pack-relates-to-sgit-s">How this pack relates to sgit's</h2>
+<p>The design began as cli.sgit.ai's <a href="https://cli.sgit.ai/dev/sealed-vault-keys/index.html">sealed vault keys design pack</a>. Compared against the sgit pack's documents 00–04 as Dinis Cruz shared them, <span class="asof">as of 24 Oct 2026</span>: 01, 02 and 03 here are <b>identical</b>; 00 here adds documents 05–07 to the reading list and the note on names; 04 here adds §7, the observation of the agent loop. Nothing in the sgit pack's 00–04 is missing from this one. The sgit pack also has a 05, <em>compatibility and rollout</em> (with nothing switched on, sgit behaves exactly as 0.24.0 does; sealed and plain clones side by side; staged rollout), which is sgit-specific and is linked, not republished.</p>
 <h2 id="memos">Memos</h2>
 <div class="tablewrap"><table>
 <thead><tr><th>Date</th><th>Memo</th><th>Written up as</th></tr></thead>
@@ -129,7 +131,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design. Nothing here is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.3.0</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.3.1</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>

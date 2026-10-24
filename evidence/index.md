@@ -17,19 +17,19 @@ Three labels are used across the site, and this page is where they are earned:
 | Isolation | Firecracker microVM; PID 1 is `/process_api --firecracker-init …` (not systemd) |
 | OS / kernel | Ubuntu 24.04.5, Linux 6.18.44, x86_64 |
 | Agent's identity | **uid 0 (root)**, full capability set (`CapEff 000001fffeffffff`) |
-| Hardening present | no seccomp, `NoNewPrivs 0`, no Yama |
+| Hardening present | no seccomp, `NoNewPrivs 0`, no Yama (`/proc/sys/kernel/yama` absent) |
 | Core dumps | `ulimit -c 0`; `core_pattern = core` |
 | Python / crypto | Python 3.13.17; `cryptography` 50.0.1 |
-| sgit | `pip install sgit-ai` → **0.24.0** |
+| sgit | `pip install sgit-ai` → **0.24.0** (the version the origin article analysed, at commit `182cfc1`) |
 | Hardware keys | no `/dev/tpm*` |
-| Egress | every outbound HTTPS goes through a platform proxy on a local port; `send.sgraph.ai`, `pki.sgit.ai`, `cli.sgit.ai` reachable |
+| Egress | every outbound HTTPS goes through a platform proxy at `127.0.0.1:43305`; `send.sgraph.ai`, `pki.sgit.ai`, `cli.sgit.ai` reachable (HTTP 200) |
 | Scratch space | the agent's scratchpad is root-only (other uids get `EACCES`) |
-| Process lifetime | per the platform, a detached background process is stopped within minutes of the agent's reply; a tool-managed one can run up to 2 h. **Not measured** |
+| Process lifetime | per the platform: a process detached with `nohup`/`&` is stopped within minutes of the agent's reply; a tool-managed background process can run up to 2 h. **Not measured** |
 | Firewall tools | `iptables`, `nft` present; OUTPUT policy ACCEPT, empty |
 | cgroups | v1: blkio, cpu, cpuacct, cpuset, devices, freezer, memory, pids, systemd, unified |
 | FUSE | `/dev/fuse` (root-only), `fusermount3` present |
 
-### Kernel configuration
+### Kernel configuration (`/proc/config.gz`)
 
 | Option | Value | Relevance |
 |---|---|---|
@@ -49,10 +49,10 @@ Three labels are used across the site, and this page is where they are earned:
 | Claim (from the origin article) | Result | Method |
 |---|---|---|
 | `pki keygen` makes RSA-OAEP 4096 + ECDSA P-256, `sha256:` + 16 hex | ✔ | ran it with a throwaway HOME |
-| private keys encrypted with PBKDF2 at **2,048** iterations | ✔ `INTEGER :0800` on both private PEMs | `openssl asn1parse` |
-| `Secrets__Store` uses a fixed salt | ✔ | source |
+| private keys encrypted with PBKDF2 at **2,048** iterations | ✔ `INTEGER :0800` on both `private_key.pem` and `signing_private.pem` | `openssl asn1parse` |
+| `Secrets__Store` uses a fixed salt | ✔ `salt = f'{SECRETS_SALT_PREFIX}:master'` | source |
 | `BestAvailableEncryption` used for keys | ✔ `crypto/PKI__Crypto.py:37` | source |
-| the vault key is read in many places | 65 references in 23 files (broad grep including imports; the article counts 27 read sites in 17 files) | grep |
+| the vault key is read in many places | 65 references in 23 files for `_read_vault_key\|load_vault_key\|vault_key_path` (broad grep including imports; the article counts 27 read sites in 17 files) | grep |
 | key file modes | `public_key.pem` 0644; private PEMs 0600 | `ls -l` |
 
 ## 3. Memory
@@ -68,7 +68,7 @@ Three labels are used across the site, and this page is where they are earned:
 | RSA-4096 OAEP open time | 3.2–3.6 ms |
 | kernel keyring `add_key` (process keyring) | works |
 | user keyring entry persists across separate agent tool calls | ✔ |
-| key in one uid's user keyring, searched by another uid | `ENOKEY` |
+| key in uid `sgit-dec`'s user keyring, searched by uid `sgit-run` | `ENOKEY` |
 | that key in root's `/proc/keys` | not listed |
 | `add_key("asymmetric", <PKCS#8 RSA-4096 DER>)` | **`EBADMSG`** (parser not built) |
 | cgroup freezer: freeze / thaw a process (average of 20) | **0.28 ms / 0.13 ms**; frozen state `D` |
@@ -87,7 +87,7 @@ Three labels are used across the site, and this page is where they are earned:
 | Landlock fs (read-only `/usr /etc /lib /lib64 /proc`): read `/etc/hostname` | allowed |
 | Landlock fs: read a file elsewhere | `EACCES` |
 | Landlock fs: write `/tmp/x` | `EACCES` |
-| Landlock net (connect only to the proxy port): proxy port | allowed |
+| Landlock net (connect only to 43305): proxy port | allowed |
 | Landlock net: `127.0.0.1:22`, `1.1.1.1:443` | `EACCES` |
 | `iptables -A OUTPUT -m owner --uid-owner <user> -j REJECT` | accepted |
 | `SO_PEERCRED` on a Unix socket | returns pid, uid, gid |
@@ -123,11 +123,11 @@ Python `ssl`, TLS 1.3, P-256; the server is a thread in the benchmark process.
 
 Session CA + four role certificates (P-256, 2 h validity): **24 ms**.
 
-Edge enforcement with roles in `subjectAltName` URIs, policy `fs←{app}, net←{app}, kms←{net}`:
+Edge enforcement with roles in `subjectAltName` URIs, policy `fs←{cli}, net←{cli}, kms←{net}` (the probe named the app role `cli`, as sgit's CLI):
 
 ```
-app → fs   OK        fs  → kms  DENY
-app → net  OK        app → kms  DENY
+cli → fs   OK        fs  → kms  DENY
+cli → net  OK        cli → kms  DENY
 net → kms  OK        fs  → net  DENY
 ```
 
@@ -152,6 +152,10 @@ Observed as of 24 Oct 2026; may differ elsewhere. Method: `ps --forest`, `/proc/
 | `/etc/hosts` | writable by root; its mtime changed mid-session |
 | kernel cmdline | `nomodule` |
 
+## 8. Left in the environment
+
+The probes left users `sgit-dec` and `sgit-run`, a folder of probe scripts (`/opt/sgit-probe/`) and a user-keyring entry `sgit:persist-probe` (root). All died with the VM.
+
 ## Not yet measured
 
 - seccomp filters (available in the kernel; no filter tested)
@@ -160,4 +164,4 @@ Observed as of 24 Oct 2026; may differ elsewhere. Method: `ps --forest`, `/proc/
 - AWS KMS asymmetric RSA-4096 with OAEP-SHA-256 matching sgit's envelope
 - whether a Claude Code PreToolUse hook can rewrite a Bash call on the version used
 
-Source: [04-environment-evidence](../briefs/sharness-brief-pack/docs/04-environment-evidence.md), which also lists what the probes left behind in that environment.
+Source: [04-environment-evidence](../briefs/sharness-brief-pack/docs/04-environment-evidence.md).
