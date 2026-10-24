@@ -27,15 +27,18 @@ HOST    = (ROOT / "CNAME").read_text().strip()
 #   · `prefixes` decides the "here" state, so a page not itself in the nav still
 #     lights up the group it belongs to.
 NAV = [
-    ("The design", "why/index.html", [
+    ("The design", "brief/index.html", [
+        ("&#9679; The brief: in one read", "brief/index.html"),
         ("Why: the last metre", "why/index.html"),
-        ("&#9679; Architecture", "architecture/index.html"),
+        ("Architecture", "architecture/index.html"),
         ("Components", "components/index.html"),
         ("Keys and the KMS", "keys/index.html"),
         ("Process Behaviour Policies", "policies/index.html"),
         ("Agents and LLMs", "agents/index.html"),
         ("Enforcing the process tree", "process-tree/index.html"),
-    ], ("why/", "architecture/", "components/", "keys/", "policies/", "agents/", "process-tree/")),
+        ("What a process can do", "surface/index.html"),
+        ("The spectrum: hello world to sgit", "spectrum/index.html"),
+    ], ("brief/", "why/", "architecture/", "components/", "keys/", "policies/", "agents/", "process-tree/", "surface/", "spectrum/")),
     ("Evidence &amp; status", "evidence/index.html", [
         ("&#9679; Evidence", "evidence/index.html"),
         ("Roadmap &amp; open decisions", "roadmap/index.html"),
@@ -69,6 +72,7 @@ NAV = [
 
 FOOTER = [
     ("The design", [
+        ("The brief: in one read", "brief/index.html"),
         ("Why: the last metre", "why/index.html"),
         ("Architecture", "architecture/index.html"),
         ("Components", "components/index.html"),
@@ -76,6 +80,8 @@ FOOTER = [
         ("Process Behaviour Policies", "policies/index.html"),
         ("Agents and LLMs", "agents/index.html"),
         ("Enforcing the process tree", "process-tree/index.html"),
+        ("What a process can do", "surface/index.html"),
+        ("The spectrum", "spectrum/index.html"),
     ]),
     ("Evidence &amp; status", [
         ("Evidence", "evidence/index.html"),

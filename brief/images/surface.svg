@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">The whole surface of a process, and what bounds each part</title>
+  <desc id="d">A process in the centre, surrounded by twelve boxes, one per kind of thing a process can do: files, network, start processes, signals and IPC, memory, time and limits, devices, identity and privilege, kernel services, environment and arguments, the model, and secrets. Each box names what bounds it in SHarness: Landlock and sharness.fs; a network namespace, Landlock ports and sharness.net; a pids cgroup, no-fork and sharness.bash; Landlock scoping and the mutual TLS edges; a memory cgroup and memfd_secret; max runtime and the freezer; no device nodes; an ephemeral uid, no capabilities, no_new_privs; a seccomp denylist; the launcher sets them; sharness.llm; sharness.kms. What is left is the process's own policy: its virtual operating system.</desc>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d5d0c2"/></marker></defs>
+  <rect width="960" height="600" fill="#faf9f5"/>
+  <text x="24" y="30" font-size="12" font-weight="700" letter-spacing="2" fill="#5c5f66">THE WHOLE SURFACE · WHAT ELSE CAN A PROCESS DO?</text>
+  <!-- centre -->
+  <rect x="370" y="250" width="220" height="100" rx="14" fill="#fff" stroke="#1c1d21" stroke-width="2.5"/>
+  <text x="480" y="280" font-size="14" font-weight="700" fill="#1c1d21" text-anchor="middle">one process</text>
+  <text x="480" y="300" font-size="11.5" fill="#5c5f66" text-anchor="middle">its policy is its operating system:</text>
+  <text x="480" y="316" font-size="11.5" fill="#5c5f66" text-anchor="middle">what is listed exists, nothing else does</text>
+  <text x="480" y="338" font-size="10.5" fill="#8a8d94" text-anchor="middle">own uid · one certificate · one job</text>
+  <!-- boxes: x,y,w,h, title, line1, line2 -->
+  <g font-size="11">
+    <!-- top row -->
+    <rect x="24" y="60" width="210" height="76" rx="10" fill="#fff" stroke="#0f766e" stroke-width="1.8"/>
+    <text x="36" y="80" font-weight="700" fill="#115e59">files: read, write, exec</text>
+    <text x="36" y="98" fill="#34363c">Landlock path rules per process</text>
+    <text x="36" y="113" fill="#34363c">writes only through sharness.fs</text>
+    <text x="36" y="128" fill="#8a8d94">measured ✔ (E03, E04)</text>
+
+    <rect x="258" y="60" width="210" height="76" rx="10" fill="#fff" stroke="#0f766e" stroke-width="1.8"/>
+    <text x="270" y="80" font-weight="700" fill="#115e59">network: connect, listen</text>
+    <text x="270" y="98" fill="#34363c">empty namespace, or Landlock TCP ports</text>
+    <text x="270" y="113" fill="#34363c">bytes out only via sharness.net</text>
+    <text x="270" y="128" fill="#8a8d94">measured ✔ · UDP needs the namespace</text>
+
+    <rect x="492" y="60" width="210" height="76" rx="10" fill="#fff" stroke="#0f766e" stroke-width="1.8"/>
+    <text x="504" y="80" font-weight="700" fill="#115e59">processes: fork, exec</text>
+    <text x="504" y="98" fill="#34363c">RLIMIT_NPROC=0 or a pids cgroup;</text>
+    <text x="504" y="113" fill="#34363c">Landlock exec allowlist; bash server</text>
+    <text x="504" y="128" fill="#8a8d94">fork ✔ · exec allowlist not yet measured</text>
+
+    <rect x="726" y="60" width="210" height="76" rx="10" fill="#fff" stroke="#0f766e" stroke-width="1.8"/>
+    <text x="738" y="80" font-weight="700" fill="#115e59">signals and IPC</text>
+    <text x="738" y="98" fill="#34363c">Landlock scoping: signals, sockets;</text>
+    <text x="738" y="113" fill="#34363c">pid namespace; the mTLS edge matrix</text>
+    <text x="738" y="128" fill="#8a8d94">edges measured ✔ · scoping not yet</text>
+
+    <!-- left column -->
+    <rect x="24" y="190" width="210" height="76" rx="10" fill="#fff" stroke="#0f766e" stroke-width="1.8"/>
+    <text x="36" y="210" font-weight="700" fill="#115e59">memory</text>
+    <text x="36" y="228" fill="#34363c">memory cgroup; dumpable off; mlock</text>
+    <text x="36" y="243" fill="#34363c">secrets in memfd_secret pages</text>
+    <text x="36" y="258" fill="#8a8d94">memfd_secret vs root ✔ (EIO)</text>
+
+    <rect x="24" y="334" width="210" height="76" rx="10" fill="#fff" stroke="#0f766e" stroke-width="1.8"/>
+    <text x="36" y="354" font-weight="700" fill="#115e59">time and limits</text>
+    <text x="36" y="372" fill="#34363c">max_runtime, cpu cgroup;</text>
+    <text x="36" y="387" fill="#34363c">the freezer between calls (KMS)</text>
+    <text x="36" y="402" fill="#8a8d94">freeze 0.28 ms / thaw 0.13 ms ✔</text>
+
+    <!-- right column -->
+    <rect x="726" y="190" width="210" height="76" rx="10" fill="#fff" stroke="#0f766e" stroke-width="1.8"/>
+    <text x="738" y="210" font-weight="700" fill="#115e59">devices and mounts</text>
+    <text x="738" y="228" fill="#34363c">no device nodes; mount namespace;</text>
+    <text x="738" y="243" fill="#34363c">Landlock IOCTL_DEV; read-only binds</text>
+    <text x="738" y="258" fill="#8a8d94">namespaces ✔ · ro binds not yet</text>
+
+    <rect x="726" y="334" width="210" height="76" rx="10" fill="#fff" stroke="#0f766e" stroke-width="1.8"/>
+    <text x="738" y="354" font-weight="700" fill="#115e59">identity and privilege</text>
+    <text x="738" y="372" fill="#34363c">one ephemeral uid; no capabilities;</text>
+    <text x="738" y="387" fill="#34363c">no_new_privs; disposable per session</text>
+    <text x="738" y="402" fill="#8a8d94">measured ✔ (49 ms per user)</text>
+
+    <!-- bottom row -->
+    <rect x="24" y="464" width="210" height="76" rx="10" fill="#fff" stroke="#0f766e" stroke-width="1.8"/>
+    <text x="36" y="484" font-weight="700" fill="#115e59">kernel services</text>
+    <text x="36" y="502" fill="#34363c">seccomp allowlist: no ptrace, mount,</text>
+    <text x="36" y="517" fill="#34363c">keyctl, bpf, unshare, execveat …</text>
+    <text x="36" y="532" fill="#8a8d94">available · not yet measured</text>
+
+    <rect x="258" y="464" width="210" height="76" rx="10" fill="#fff" stroke="#0f766e" stroke-width="1.8"/>
+    <text x="270" y="484" font-weight="700" fill="#115e59">environment and arguments</text>
+    <text x="270" y="502" fill="#34363c">the launcher sets them; no secret in</text>
+    <text x="270" y="517" fill="#34363c">argv or env, ever; policy hash passed</text>
+    <text x="270" y="532" fill="#8a8d94">E03 sets SHARNESS_AI_POLICY_HASH ✔</text>
+
+    <rect x="492" y="464" width="210" height="76" rx="10" fill="#fff" stroke="#6d28d9" stroke-width="1.8"/>
+    <text x="504" y="484" font-weight="700" fill="#6d28d9">the model</text>
+    <text x="504" y="502" fill="#34363c">only via sharness.llm: pinned tools,</text>
+    <text x="504" y="517" fill="#34363c">budget, secret filter on tool results</text>
+    <text x="504" y="532" fill="#8a8d94">designed (E07)</text>
+
+    <rect x="726" y="464" width="210" height="76" rx="10" fill="#fff" stroke="#6d28d9" stroke-width="1.8"/>
+    <text x="738" y="484" font-weight="700" fill="#6d28d9">secrets</text>
+    <text x="738" y="502" fill="#34363c">only in sharness.kms; derived keys</text>
+    <text x="738" y="517" fill="#34363c">sealed to one-time keys; never clear</text>
+    <text x="738" y="532" fill="#8a8d94">designed (E08)</text>
+  </g>
+  <!-- spokes -->
+  <g stroke="#d5d0c2" stroke-width="1.5" marker-end="url(#a)">
+    <line x1="400" y1="250" x2="200" y2="138"/><line x1="440" y1="250" x2="370" y2="138"/><line x1="520" y1="250" x2="590" y2="138"/><line x1="560" y1="250" x2="760" y2="138"/>
+    <line x1="370" y1="290" x2="236" y2="240"/><line x1="370" y1="320" x2="236" y2="372"/>
+    <line x1="590" y1="290" x2="724" y2="240"/><line x1="590" y1="320" x2="724" y2="372"/>
+    <line x1="400" y1="350" x2="200" y2="462"/><line x1="440" y1="350" x2="370" y2="462"/><line x1="520" y1="350" x2="590" y2="462"/><line x1="560" y1="350" x2="760" y2="462"/>
+  </g>
+  <text x="480" y="580" font-size="10.5" fill="#8a8d94" text-anchor="middle">Not bounded by any of this: the intent of what travels on an allowed channel (a schema bounds shape), covert channels, kernel bugs, root. Dates and methods on Evidence.</text>
+</svg>

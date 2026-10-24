@@ -4,7 +4,7 @@
 > down by the kernel and talking only over allowed, mutually authenticated connections, so a
 > secret lives in one place and a tricked process can only do its one job.
 
-*Source: <https://sharness.ai/index.html> · site v0.5.0 · markdown twin of the front page.*
+*Source: <https://sharness.ai/index.html> · site v0.5.1 · markdown twin of the front page.*
 *Status: **design**, with the first experiments runnable. No SHarness component is built.*
 
 ---
@@ -38,6 +38,7 @@ The memo's method is to start with very simple examples. [Mockups and experiment
 
 ## Pages (each also available as markdown at `<page>/index.md`)
 
+- **Read first:** [The brief: SHarness in one read](brief/index.md), with the diagrams · [What a process can do](surface/index.md) · [The spectrum: hello world to sgit](spectrum/index.md)
 - [Why: the last metre](why/index.md) · [Architecture](architecture/index.md) · [Components](components/index.md)
 - [Keys and the KMS](keys/index.md) · [Process Behaviour Policies](policies/index.md) · [Agents and LLMs](agents/index.md)
 - [Enforcing the process tree](process-tree/index.md) · [Evidence](evidence/index.md) · [Roadmap and open decisions](roadmap/index.md)

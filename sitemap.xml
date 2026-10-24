@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://sharness.ai/index.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://sharness.ai/brief/index.html</loc><lastmod>2026-10-24</lastmod></url>
   <url><loc>https://sharness.ai/why/index.html</loc><lastmod>2026-10-24</lastmod></url>
   <url><loc>https://sharness.ai/architecture/index.html</loc><lastmod>2026-10-24</lastmod></url>
   <url><loc>https://sharness.ai/components/index.html</loc><lastmod>2026-10-24</lastmod></url>
@@ -8,6 +9,8 @@
   <url><loc>https://sharness.ai/policies/index.html</loc><lastmod>2026-10-24</lastmod></url>
   <url><loc>https://sharness.ai/agents/index.html</loc><lastmod>2026-10-24</lastmod></url>
   <url><loc>https://sharness.ai/process-tree/index.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://sharness.ai/surface/index.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://sharness.ai/spectrum/index.html</loc><lastmod>2026-10-24</lastmod></url>
   <url><loc>https://sharness.ai/experiments/index.html</loc><lastmod>2026-10-24</lastmod></url>
   <url><loc>https://sharness.ai/storyboards/hello-world-inside/index.html</loc><lastmod>2026-10-24</lastmod></url>
   <url><loc>https://sharness.ai/storyboards/index.html</loc><lastmod>2026-10-24</lastmod></url>

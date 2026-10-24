@@ -19,19 +19,22 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.5.0</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.5.1</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
-      <a class="nl" href="../why/index.html">The design<span class="caret">&#9662;</span></a>
+      <a class="nl" href="../brief/index.html">The design<span class="caret">&#9662;</span></a>
       <div class="sub">
+      <a class="sl" href="../brief/index.html">&#9679; The brief: in one read</a>
       <a class="sl" href="../why/index.html">Why: the last metre</a>
-      <a class="sl" href="../architecture/index.html">&#9679; Architecture</a>
+      <a class="sl" href="../architecture/index.html">Architecture</a>
       <a class="sl" href="../components/index.html">Components</a>
       <a class="sl" href="../keys/index.html">Keys and the KMS</a>
       <a class="sl" href="../policies/index.html">Process Behaviour Policies</a>
       <a class="sl" href="../agents/index.html">Agents and LLMs</a>
       <a class="sl" href="../process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="../surface/index.html">What a process can do</a>
+      <a class="sl" href="../spectrum/index.html">The spectrum: hello world to sgit</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -85,10 +88,11 @@
 <main class="doc">
   <div class="crumb"><a href="../index.html">sharness.ai</a> / <a href="index.html">admin</a> / release history</div>
   <h1>Release history</h1>
-  <p class="lead">One row per release, newest first. Each version is tagged in git by CI.</p>
+  <p class="lead">One row per release, newest first. Each version is tagged in git by CI. A push to <code>dev</code> is a patch release (<code>vX.Y.Z+1</code>); a merge to <code>main</code> is a minor release (<code>vX.Y+1.0</code>).</p>
   <div class="tablewrap"><table class="vers">
     <thead><tr><th>Version</th><th>Date</th><th>What changed</th></tr></thead>
     <tbody>
+      <tr><td class="vnum">v0.5.1</td><td>24 Oct 2026</td><td><a href="../brief/index.html">The brief</a>: SHarness in one read, with four drawn diagrams (the moving parts, one request end to end, the whole surface of a process, the spectrum). <a href="../surface/index.html">What a process can do</a>: the whole surface, one row per interface, what bounds it, what was measured, what is not covered: a virtual operating system for one process. <a href="../spectrum/index.html">The spectrum</a>: five profiles from a hello world to sgit and the compatibility map for sgit's next version, with two sgit commands measured under a v0 policy. The versioning rule: a push to <code>dev</code> is a patch release, a merge to <code>main</code> a minor one, enforced by CI.</td></tr>
       <tr><td class="vnum">v0.5.0</td><td>24 Oct 2026</td><td><a href="../market/index.html">Market and competitive analysis</a>: what exists that does part of what SHarness is designed to do (sandboxes and runtimes, guardrails, MCP and tool security, LLM gateways, secrets and identity, enterprise platforms, standards), every row sourced and dated, five rows re-checked on their primary pages; where SHarness sits, what to reuse, direct competitors and complements, honest gaps, market signals with numbers, and the threats to the thesis.</td></tr>
       <tr><td class="vnum">v0.4.0</td><td>24 Oct 2026</td><td>Research, mockups, experiments and storyboards. A <a href="../research/index.html">research note</a>: the published design read in full, what holds up, what to improve, what this release did. <a href="../experiments/index.html">Mockups and experiments</a>: the ladder from the browser to the launcher, experiments E01 to E08 (E01 to E04 runnable in the CLI: <code>probe</code>, <code>policy hash</code>, <code>run</code>, <code>hello</code>; E04 measured, Evidence §9), and the comparison with Claude Code's own sandbox. Two browser mockups: <a href="../mockups/policy-hash.html">the policy hash</a> (the same hash as the CLI) and <a href="../mockups/edges.html">the edge matrix</a>. Three <a href="../storyboards/index.html">storyboards</a> in the storyboards.sgit.ai kit with a cast of four, <code>gen_storyboards.py</code> and the kit's validator in the gate. The CLI page as markdown with the first version of <code>sharness-ai</code> as proposed. Agents §2 (hooks documented; the sandbox), Policies §9 and §10, Roadmap (two decisions, two open), About. Article: <em>The first experiments</em>.</td></tr>
       <tr><td class="vnum">v0.3.1</td><td>24 Oct 2026</td><td>Completeness pass against the sgit design pack 00–04: the glossary (Architecture); the command flows, what changes against handover.md, and two notes on key holding (Keys); the harnessed app's own role (Components); the schema's <code>entry</code> line (Policies); what the probes left behind (Evidence §8); how this pack relates to sgit's (Documents).</td></tr>
@@ -107,10 +111,11 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design. Nothing here is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.5.0</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.5.1</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>
+    <a href="../brief/index.html">The brief: in one read</a>
     <a href="../why/index.html">Why: the last metre</a>
     <a href="../architecture/index.html">Architecture</a>
     <a href="../components/index.html">Components</a>
@@ -118,6 +123,8 @@
     <a href="../policies/index.html">Process Behaviour Policies</a>
     <a href="../agents/index.html">Agents and LLMs</a>
     <a href="../process-tree/index.html">Enforcing the process tree</a>
+    <a href="../surface/index.html">What a process can do</a>
+    <a href="../spectrum/index.html">The spectrum</a>
   </div>
   <div>
     <h4>Evidence &amp; status</h4>

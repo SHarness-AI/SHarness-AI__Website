@@ -32,6 +32,8 @@ ROOT = chrome.ROOT
 
 # (dir, title, description) in reading order. The first heading of each .md is the page's h1.
 PAGES = [
+    ("brief",        "The brief",
+     "SHarness in one read: what it is, the moving parts and how they work together, one request end to end, what binds a process, the spectrum from a hello world to sgit, where it is now and what to decide."),
     ("why",          "Why: the last metre",
      "A vault key sealed while it travels is exposed the moment it arrives: on disk, on the command line and in the agent's transcript. The problem SHarness started from."),
     ("architecture", "Architecture",
@@ -50,6 +52,10 @@ PAGES = [
      "Every measurement behind the SHarness design, with method, date and caveats, and the list of what has not been measured."),
     ("roadmap",      "Roadmap and open decisions",
      "The decisions still open, the refactor path in sgit, the end state, and the first tasks for the agents that will build SHarness."),
+    ("surface",      "What a process can do",
+     "The whole surface of a process, one row per interface: what bounds it in SHarness, whether that was measured, and what the bound does not cover. What is left is a virtual operating system for one process."),
+    ("spectrum",     "The spectrum",
+     "Five profiles of one harness, from a hello world to sgit: what each runs, its threat, its policy, its components, its mode and its status; and the map of how sgit's next version stays compatible."),
     ("experiments",  "Mockups and experiments",
      "The ladder from browser mockups to runnable experiments to components: what each shows, where it runs, what was measured, and what Claude Code's own sandbox already gives."),
     ("cli",          "The CLI",

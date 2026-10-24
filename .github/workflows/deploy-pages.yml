@@ -8,15 +8,16 @@
 #                     source; storyboards match their data and pass the kit's validator). A failure
 #                     stops the release: no tag, no publish. Also runs
 #                     on pull requests, so branch work is gated before it reaches dev.
-#   2. tag-release  — every push to dev is a release, tagged v{X}.{Y}.{Z}. The version is
+#   2. tag-release  — every push to dev is a PATCH release (vX.Y.Z+1) and every push to
+#                     main is a MINOR release (vX.Y+1.0), tagged v{X}.{Y}.{Z}. The version is
 #                     owned by admin/build/version.txt (bumped exactly once per release)
 #                     and must also appear in the release commit's subject
 #                     ("site vX.Y.Z: ..."). CI verifies the two agree and that the bump is
-#                     the next minor (or a deliberate major), then tags the release commit,
-#                     which is HEAD on a direct push and HEAD's parent when a pull request
-#                     lands as a merge commit.
-#   3. deploy       — publishes the tree. A push to main, or a manual run, deploys without
-#                     tagging. Never runs when validation failed, never from a pull request.
+#                     the right one for the branch, then tags the release commit, which is
+#                     HEAD on a direct push and HEAD's parent when a pull request lands as
+#                     a merge commit.
+#   3. deploy       — publishes the tree from dev or main, or on a manual run. Never runs
+#                     when validation failed, never from a pull request.
 name: deploy-pages
 on:
   push:
@@ -52,7 +53,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     needs: [validate]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main')
     permissions:
       contents: write                        # pushes the release tag
     steps:
@@ -99,14 +100,20 @@ jobs:
             exit 1
           fi
 
-          # The new tag must be the next minor after the latest, or a deliberate major
-          # (.0). `|| true`: on the very first release there is no previous tag.
+          # The versioning rule (Dinis Cruz, 24 Oct 2026): every push to dev is a PATCH
+          # release, vX.Y.Z+1; a merge to main is a MINOR release, vX.Y+1.0, tagged on main.
+          # `|| true`: on the very first release there is no previous tag.
           PREV=$(git tag --list 'v*' | sort -V | tail -1 || true)
           if [ -n "$PREV" ]; then
-            NEXT_MINOR=$(echo "$PREV" | awk -F. '{printf "%s.%s.%d", $1, $2, $3+1}')
-            NEXT_MAJOR=$(echo "$PREV" | awk -F. '{split($1,a,"v"); printf "v%s.%d.0", a[2], $2+1}')
-            if [ "$TAG" != "$NEXT_MINOR" ] && [ "$TAG" != "$NEXT_MAJOR" ]; then
-              echo "::error::latest tag is $PREV; expected $NEXT_MINOR (minor) or $NEXT_MAJOR (major), got $TAG"
+            NEXT_PATCH=$(echo "$PREV" | awk -F. '{printf "%s.%s.%d", $1, $2, $3+1}')
+            NEXT_MINOR=$(echo "$PREV" | awk -F. '{split($1,a,"v"); printf "v%s.%d.0", a[2], $2+1}')
+            if [ "$GITHUB_REF" = "refs/heads/main" ]; then
+              if [ "$TAG" != "$NEXT_MINOR" ]; then
+                echo "::error::a push to main is a minor release: latest tag is $PREV, expected $NEXT_MINOR, got $TAG"
+                exit 1
+              fi
+            elif [ "$TAG" != "$NEXT_PATCH" ]; then
+              echo "::error::a push to dev is a patch release: latest tag is $PREV, expected $NEXT_PATCH, got $TAG (minor releases, $NEXT_MINOR, are cut on main)"
               exit 1
             fi
           fi

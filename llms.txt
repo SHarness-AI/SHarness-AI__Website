@@ -4,7 +4,7 @@
 > the kernel and talking only over allowed, mutually authenticated connections, so a secret
 > lives in one place and a tricked process can only do its one job.
 
-Site version: v0.5.0. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04
+Site version: v0.5.1. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04
 in the CLI). No SHarness component is built.
 By Dinis Cruz; design session written up with Claude, 24 October 2026. All content CC BY 4.0.
 SHarness is unrelated to Sharness, the shell testing library.
@@ -28,6 +28,9 @@ SHarness is unrelated to Sharness, the shell testing library.
 
 ## The design (read in this order)
 
+- /brief/index.md — SHarness in one read: what it is, the moving parts (drawn), one request end to
+  end (drawn), the whole surface of a process (drawn), the spectrum from a hello world to sgit
+  (drawn), where it is now, what to decide. READ THIS FIRST
 - /why/index.md — the last metre: a sealed vault key exposed on arrival (disk, argv, the
   transcript); goals; threat model (kernel trusted; root out of scope)
 - /architecture/index.md — the components and the edge matrix (deny by default; the app never
@@ -46,6 +49,13 @@ SHarness is unrelated to Sharness, the shell testing library.
   sharness.bash; the dual-LLM split
 - /process-tree/index.md — making every process go through sharness.bash; side doors;
   safety rules for testing in a live session. PROOF OF CONCEPT NOT YET RUN
+- /surface/index.md — what a process can do: the whole surface, one row per interface (files,
+  network, processes, IPC, memory, time, devices, identity, kernel services, environment, the
+  model, secrets), what bounds each, measured or not, what is not covered; a virtual operating
+  system for one process
+- /spectrum/index.md — five profiles of one harness, from a hello world (runnable) to sgit
+  (harness-aware), and the compatibility map for sgit's next version; two sgit commands measured
+  under a v0 policy on 24 Oct 2026
 
 ## Mockups, experiments and storyboards (added in v0.4.0)
 

@@ -37,9 +37,14 @@ static HTML, no framework, no build step, a pre-release gate, and validate → t
 5. `node admin/build/validate.js && node admin/build/validate_storyboards.cjs`
 6. `git commit -am "site vX.Y.Z: ..." && git push origin dev`
 
-Every push to `dev` runs `.github/workflows/deploy-pages.yml`: validate → auto-tag
-(`vX.Y.Z`, verified against `version.txt` and the commit subject, next-minor enforced) →
-deploy to GitHub Pages. A push to `main` deploys without tagging. Pull requests run
-validation only.
+Every push to `dev` runs `.github/workflows/deploy-pages.yml`: validate → auto-tag → deploy to
+GitHub Pages. The versioning rule: **every push to `dev` is a patch release** (`vX.Y.Z+1`);
+**a merge to `main` is a minor release** (`vX.Y+1.0`), tagged on `main`. CI verifies the version
+in `version.txt` against the commit subject and against the latest tag, and refuses the wrong
+bump for the branch. Pull requests run validation only.
+
+To cut a minor: on `main`, merge `dev`, add a release commit that bumps `version.txt` to
+`vX.Y+1.0` (subject `site vX.Y+1.0: ...`), push; then fast-forward `dev` to `main` (CI sees the
+tag already on that commit and does nothing). The next push to `dev` is `vX.Y+1.1`.
 
 All content CC BY 4.0 unless noted. Code under the repository licence.

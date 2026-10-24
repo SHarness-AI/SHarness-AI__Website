@@ -14,8 +14,8 @@ from pathlib import Path
 ROOT      = Path(__file__).resolve().parents[2]
 HOST      = (ROOT / "CNAME").read_text().strip()
 SKIP_DIRS = {".git", ".github", "node_modules", "assets"}
-ORDER     = ["index.html", "why/", "architecture/", "components/", "keys/", "policies/",
-             "agents/", "process-tree/", "experiments/", "storyboards/", "mockups/", "evidence/",
+ORDER     = ["index.html", "brief/", "why/", "architecture/", "components/", "keys/", "policies/",
+             "agents/", "process-tree/", "surface/", "spectrum/", "experiments/", "storyboards/", "mockups/", "evidence/",
              "roadmap/", "shipped/", "research/", "market/", "about/", "articles/", "cli/", "documents/", "admin/"]                          # reading order
 
 
