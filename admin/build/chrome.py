@@ -41,6 +41,11 @@ NAV = [
         ("Roadmap &amp; open decisions", "roadmap/index.html"),
         ("What exists today", "shipped/index.html"),
     ], ("evidence/", "roadmap/", "shipped/")),
+    ("Articles", "articles/index.html", [
+        ("&#9679; All articles", "articles/index.html"),
+        ("A secure harness for agents", "articles/secure-harness-for-agents.html"),
+        ("What shipped on day one", "articles/what-shipped-on-day-one.html"),
+    ], ("articles/",)),
     ("Project", "about/index.html", [
         ("About &amp; naming", "about/index.html"),
         ("The CLI", "cli/index.html"),
@@ -70,6 +75,7 @@ FOOTER = [
         ("The source documents", "documents/index.html"),
     ]),
     ("Project", [
+        ("Articles", "articles/index.html"),
         ("About &amp; naming", "about/index.html"),
         ("The CLI", "cli/index.html"),
         ("PyPI: sharness-ai", "https://pypi.org/project/sharness-ai/"),

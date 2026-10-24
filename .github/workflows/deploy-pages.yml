@@ -39,6 +39,8 @@ jobs:
         run: node admin/build/validate.js
       - name: Design pages' HTML matches their markdown source
         run: python3 admin/build/gen_pages.py --check
+      - name: Articles match their sources
+        run: python3 admin/build/gen_articles.py --check
 
   tag-release:
     runs-on: ubuntu-latest

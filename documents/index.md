@@ -21,6 +21,22 @@
 | 06 | [06-llm-and-the-agent-loop.md](../briefs/sharness-brief-pack/docs/06-llm-and-the-agent-loop.md) | how an agent message flows (observed), `sharness.llm`, `sharness.bash`, the dual-LLM split | [Agents and LLMs](../agents/index.md) |
 | 07 | [07-enforcing-the-process-tree.md](../briefs/sharness-brief-pack/docs/07-enforcing-the-process-tree.md) | every process through `sharness.bash`; side doors; safe testing; proof of concept not yet run | [Enforcing the process tree](../process-tree/index.md) |
 
+## Memos
+
+| Date | Memo | Written up as |
+|---|---|---|
+| 24 Oct 2026 | [Voice memo 01: guidance notes for SHarness](../briefs/memos/2026-10-24-memo-01-secure-harness.md), as transcribed | [A secure harness for agents](../articles/secure-harness-for-agents.md) |
+
+## The evolution, on cli.sgit.ai
+
+SHarness began as a fix for sgit, and that history is published where it happened:
+
+1. [A vault key that never lands](https://cli.sgit.ai/articles/a-vault-key-that-never-lands.html): the analysis that started it, the morning of 24 October 2026.
+2. [Sealed vault keys in sgit: requirements](https://cli.sgit.ai/research/sealed-vault-keys-requirements.html), from an agent that moves vault keys for a living, the same day.
+3. [The requirements and the design, side by side](https://cli.sgit.ai/research/sealed-vault-keys-side-by-side.html): the two read against each other and against the code.
+4. [Sealed vault keys for sgit: a design pack](https://cli.sgit.ai/dev/sealed-vault-keys/index.html): the sgit-specific design, with its compatibility and rollout document.
+5. The SHarness design pack, above: the same design, generalised.
+
 ## Known issues in the pack
 
 Published as received, so these remain in the raw files:

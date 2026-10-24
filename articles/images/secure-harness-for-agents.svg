@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">From a policy the agent reads to a policy the agent runs inside</title>
+  <desc id="d">Left: an Agent Behaviour Policy as text in the agent's context, followed or not by the agent. Right: SHarness, the same policy hashed by the person and enforced from outside by a launcher that starts four components, network, KMS, file and LLM, each under its own disposable user.</desc>
+  <rect width="960" height="440" fill="#faf9f5"/>
+  <!-- left panel -->
+  <rect x="24" y="24" width="360" height="392" rx="14" fill="#ffffff" stroke="#e5e1d5"/>
+  <text x="44" y="56" font-size="12" font-weight="700" letter-spacing="2" fill="#b45309">TODAY · AGENT BEHAVIOUR POLICY</text>
+  <text x="44" y="80" font-size="15" font-weight="700" fill="#101114">The agent reads the rules</text>
+  <rect x="64" y="104" width="280" height="200" rx="12" fill="#f2f0e9" stroke="#d5d0c2"/>
+  <text x="84" y="132" font-size="13" font-weight="700" fill="#1c1d21">agent</text>
+  <rect x="84" y="146" width="240" height="64" rx="8" fill="#ffffff" stroke="#e5e1d5" stroke-dasharray="4 3"/>
+  <text x="98" y="170" font-size="12" fill="#5c5f66">policy, as text in its context:</text>
+  <text x="98" y="190" font-size="12" fill="#5c5f66">"do not reach the network…"</text>
+  <text x="84" y="236" font-size="12" fill="#34363c">keys · network · disk · shell</text>
+  <text x="84" y="256" font-size="12" fill="#34363c">all reachable by the agent</text>
+  <text x="84" y="284" font-size="12" fill="#b91c1c">a prompt injection can talk it out of them</text>
+  <text x="44" y="344" font-size="12" fill="#5c5f66">The barrier is the agent itself:</text>
+  <text x="44" y="364" font-size="12" fill="#5c5f66">an expectation, or a setting it can undo.</text>
+  <!-- arrow -->
+  <path d="M398 220 h40" stroke="#0f766e" stroke-width="3" fill="none"/>
+  <path d="M438 212 l12 8 l-12 8 z" fill="#0f766e"/>
+  <!-- right panel -->
+  <rect x="462" y="24" width="474" height="392" rx="14" fill="#ffffff" stroke="#e5e1d5"/>
+  <text x="482" y="56" font-size="12" font-weight="700" letter-spacing="2" fill="#0f766e">SHARNESS · DESIGNED, NOT BUILT</text>
+  <text x="482" y="80" font-size="15" font-weight="700" fill="#101114">The agent runs inside the rules</text>
+  <text x="482" y="104" font-size="12" fill="#5c5f66">person supplies the policy hash · launcher enforces it from outside</text>
+  <rect x="482" y="116" width="434" height="282" rx="12" fill="none" stroke="#0f766e" stroke-width="2"/>
+  <text x="498" y="138" font-size="12" font-weight="700" fill="#0f766e">sharness.launcher</text>
+  <rect x="602" y="152" width="194" height="58" rx="10" fill="#f2f0e9" stroke="#d5d0c2"/>
+  <text x="699" y="176" font-size="13" font-weight="700" fill="#1c1d21" text-anchor="middle">agent</text>
+  <text x="699" y="196" font-size="11" fill="#5c5f66" text-anchor="middle">no keys · no network · no writes</text>
+  <g font-size="12" text-anchor="middle">
+    <rect x="498" y="262" width="96" height="58" rx="10" fill="#ffffff" stroke="#0f766e"/>
+    <text x="546" y="286" font-weight="700" fill="#115e59">.net</text><text x="546" y="304" font-size="10" fill="#5c5f66">network</text>
+    <rect x="604" y="262" width="96" height="58" rx="10" fill="#ffffff" stroke="#0f766e"/>
+    <text x="652" y="286" font-weight="700" fill="#115e59">.kms</text><text x="652" y="304" font-size="10" fill="#5c5f66">private keys</text>
+    <rect x="710" y="262" width="96" height="58" rx="10" fill="#ffffff" stroke="#0f766e"/>
+    <text x="758" y="286" font-weight="700" fill="#115e59">.fs</text><text x="758" y="304" font-size="10" fill="#5c5f66">file writes</text>
+    <rect x="816" y="262" width="88" height="58" rx="10" fill="#ffffff" stroke="#0f766e"/>
+    <text x="860" y="286" font-weight="700" fill="#115e59">.llm</text><text x="860" y="304" font-size="10" fill="#5c5f66">model calls</text>
+  </g>
+  <g stroke="#0f766e" stroke-width="1.5" fill="none">
+    <path d="M640 210 L546 262"/><path d="M690 210 L652 262" stroke-dasharray="3 3" stroke="#b91c1c"/><path d="M720 210 L758 262"/><path d="M770 210 L860 262"/>
+  </g>
+  <text x="664" y="244" font-size="10" fill="#b91c1c">no edge</text>
+  <text x="498" y="346" font-size="12" fill="#34363c">each component: one job, its own disposable user,</text>
+  <text x="498" y="366" font-size="12" fill="#34363c">its own policy, mutual TLS on every edge</text>
+  <text x="498" y="386" font-size="12" fill="#5c5f66">(file and network behaviour policies: proposed)</text>
+</svg>

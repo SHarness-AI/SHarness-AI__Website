@@ -26,6 +26,23 @@
 | 4 | `.fs` as a process owning the folder vs. a FUSE mount | FUSE was available in the measured environment; start with the owning process |
 | 5 | Who runs the launcher | the agent today (so locks are only Settings against the agent itself), a local script, or the platform (end state) |
 | 6 | Run the process-tree proof of concept and publish its results | see [Enforcing the process tree](../process-tree/index.md); follow its safety rules |
+| 7 | One CLI project, or one per component | one for now (memo of 24 Oct); revisit when a component is useful on its own |
+| 8 | What "a skill" means for SHarness | a skill can install and start the harness, but locks it applies to the agent that loaded it are only Settings; binding needs the launcher above the agent |
+
+## Guidance from Dinis Cruz's memo of 24 October {#memo-guidance}
+
+From [voice memo 01](../briefs/memos/2026-10-24-memo-01-secure-harness.md), written up as [A secure harness for agents](../articles/secure-harness-for-agents.md). All of it is direction, not design yet.
+
+| Topic | Guidance | Status |
+|---|---|---|
+| How to build | very simple examples first; each component (network, KMS, file, LLM) built and tested in isolation; one CLI project for now, separate ones later if needed | proposed |
+| Order of work | as simple, as fast and as slim as possible; then harden; then test, and see how the flow works | proposed |
+| First users | (1) Dinis's own Claude sessions; (2) sgit, and the agents that use it all day, including the newsroom's agents, which run around the clock and read untrusted data | proposed |
+| Acceptance test | a hello world with Claude, run inside SHarness, shows the agent cannot reach the internet, cannot write to the file system, and cannot make other requests, because SHarness is inline | proposed |
+| Reach | as generic as possible; possibly packaged as a skill | open: a skill the agent loads cannot by itself apply locks that bind that agent (see [Policies §2](../policies/index.md#2-who-enforces-decides-the-barrier-kind)) |
+| Policies | extend process behaviour policies with file behaviour policies and network behaviour policies | proposed ([Policies §10](../policies/index.md#10-next-file-and-network-behaviour-policies-proposed)) |
+| As a service | run some components with a cloud provider (Cloudflare, AWS or another), to apply controls outside the agent's machine | proposal; no such service exists |
+| Laptops | protect Claude running locally; disposable users per session | designed; ~49 ms per user measured in one cloud workspace, not on a laptop |
 
 ## Refactor path in sgit
 

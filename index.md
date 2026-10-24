@@ -4,7 +4,7 @@
 > down by the kernel and talking only over allowed, mutually authenticated connections, so a
 > secret lives in one place and a tricked process can only do its one job.
 
-*Source: <https://sharness.ai/index.html> · site v0.2.0 · markdown twin of the front page.*
+*Source: <https://sharness.ai/index.html> · site v0.3.0 · markdown twin of the front page.*
 *Status: **design**. Nothing described here is built yet.*
 
 ---
@@ -38,6 +38,12 @@ widen it. sgit (sgit.ai's encrypted vault CLI) is the first app designed to run 
 - [Keys and the KMS](keys/index.md) · [Process Behaviour Policies](policies/index.md) · [Agents and LLMs](agents/index.md)
 - [Enforcing the process tree](process-tree/index.md) · [Evidence](evidence/index.md) · [Roadmap and open decisions](roadmap/index.md)
 - [About and naming](about/index.md) · [The source documents](documents/index.md)
+
+## Articles
+
+- [A secure harness for agents](articles/secure-harness-for-agents.md), by Dinis Cruz, 24 Oct 2026
+- [What shipped on day one](articles/what-shipped-on-day-one.md), by sharness.build, 24 Oct 2026
+- [All articles](articles/index.md)
 
 ## What this site claims
 

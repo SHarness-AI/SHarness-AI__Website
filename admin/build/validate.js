@@ -12,6 +12,8 @@
 //      (a >=20-char passphrase joined by a colon to a uuid-shaped id)
 //   5. generate or date every number — every page carrying a figure carries an
 //      as-of date in a <span class="asof">, so a stale figure is visible
+//   6. articles hold the newsroom's format (front matter, summary length, anchors,
+//      lead figure, no em-dash), so each imports into newsroom.sgit.ai unchanged
 // Any failure exits 1: no tag, no publish.
 'use strict';
 const fs = require('fs');
@@ -69,7 +71,8 @@ for (const f of htmlFiles) {
   for (const m of t.matchAll(/(?:href|src)="([^"#]+)(?:#[^"]*)?"/g)) {
     const target = m[1];
     if (/^(https?:|mailto:|data:|\/\/)/.test(target) || target === '') continue;
-    const resolved = path.resolve(dir, target);
+    // a leading "/" is the site root (the newsroom's article shape uses /articles/images/…)
+    const resolved = target.startsWith('/') ? path.join(ROOT, target) : path.resolve(dir, target);
     if (!fs.existsSync(resolved)) {
       errors.push(`${path.relative(ROOT, f)}: broken link -> ${target}`);
     }
@@ -128,7 +131,9 @@ for (const f of htmlFiles) {
   const rel = path.relative(ROOT, f);
   if (rel.startsWith('admin/')) continue;      // the versions table is dated by row
   const t = fs.readFileSync(f, 'utf8');
-  const dated = /class="asof"/.test(t);
+  // an article is dated by its byline (<time datetime>), as nfrs.sgit.ai's document
+  // pages are dated by their metadata block: the page is as fresh as its publication
+  const dated = /class="asof"/.test(t) || /<p class="byline">[^\n]*<time datetime="\d{4}-\d{2}-\d{2}">/.test(t);
   if (dated) continue;
   const prose = bodyOnly(t)
     .replace(/<[^>]+>/g, ' ')                  // attributes hold paths and versions
@@ -139,6 +144,43 @@ for (const f of htmlFiles) {
   if (figures.length) {
     errors.push(`${rel}: carries figures (${figures.slice(0, 3).join(', ')}) but no `
       + `<span class="asof"> date — generate or date every number`);
+  }
+}
+
+// --- 6. articles hold the newsroom's format --------------------------------
+// The shape send.sgit.ai's "Every site its own articles" sets out, so a source in
+// admin/content/articles/ imports into newsroom.sgit.ai unchanged: the front matter,
+// a summary of 220 to 360 words, the three anchors the newsroom's build reads, a lead
+// figure that exists, and no em-dash (rule 1 of that guidance; the build fails on one).
+const ART = path.join(ROOT, 'admin/content/articles');
+const FIELDS = ['title', 'date', 'author', 'author_url', 'summary', 'version', 'license', 'tags', 'status'];
+if (fs.existsSync(ART)) {
+  for (const name of fs.readdirSync(ART).filter(n => n.endsWith('.md'))) {
+    const rel = `admin/content/articles/${name}`;
+    const t = fs.readFileSync(path.join(ART, name), 'utf8');
+    const fm = t.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+    if (!fm) { errors.push(`${rel}: no front matter`); continue; }
+    const meta = {};
+    for (const line of fm[1].split('\n')) {
+      const i = line.indexOf(':');
+      if (i > 0) meta[line.slice(0, i).trim()] = line.slice(i + 1).trim();
+    }
+    for (const f of FIELDS) if (!meta[f]) errors.push(`${rel}: front matter has no ${f}`);
+    if (meta.date && !/^\d{4}-\d{2}-\d{2}$/.test(meta.date)) errors.push(`${rel}: date is not YYYY-MM-DD`);
+    if (meta.tags && !/\barticle\]$/.test(meta.tags)) errors.push(`${rel}: the last tag must be "article"`);
+    const words = (meta.summary || '').split(/\s+/).filter(Boolean).length;
+    if (words < 220 || words > 360) errors.push(`${rel}: summary is ${words} words, not 220 to 360`);
+    for (const a of ['in-short', 'limits', 'sources']) {
+      if (!t.includes(`{#${a}}`)) errors.push(`${rel}: no {#${a}} section`);
+    }
+    const lead = fm[2].trimStart().match(/^!\[[^\]]+\]\(([^)\s]+)\)/);
+    if (!lead) errors.push(`${rel}: does not open with a lead figure`);
+    else if (!fs.existsSync(path.join(ROOT, lead[1].replace(/^\//, '')))) {
+      errors.push(`${rel}: lead figure ${lead[1]} does not exist`);
+    }
+    t.split('\n').forEach((line, n) => {
+      if (line.includes('\u2014')) errors.push(`${rel}:${n + 1}: em-dash`);
+    });
   }
 }
 

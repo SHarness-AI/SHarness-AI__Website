@@ -117,10 +117,14 @@ def md_to_html(md):
         m = re.match(r"^(#{1,4}) (.+)$", line)
         if m:                                                        # heading
             level, text = len(m.group(1)), m.group(2).strip()
+            anchor = re.search(r"\s*\{#([a-z0-9-]+)\}$", text)          # newsroom-style {#id}
+            if anchor:
+                text = text[:anchor.start()]
             if level == 1 and h1 is None:
                 h1 = inline(text)
             else:
-                out.append(f'<h{level} id="{slug(text)}">{inline(text)}</h{level}>')
+                hid = anchor.group(1) if anchor else slug(text)
+                out.append(f'<h{level} id="{hid}">{inline(text)}</h{level}>')
             i += 1
             continue
         if line.lstrip().startswith("|") and i + 1 < len(lines) and re.match(r"^\s*\|[\s:|-]+\|\s*$", lines[i + 1]):
@@ -154,8 +158,24 @@ def md_to_html(md):
                 i += 1
             out.append(f"<{tag}>\n" + "\n".join(f"<li>{inline(t)}</li>" for t in items) + f"\n</{tag}>")
             continue
+        m = re.match(r"^!\[([^\]]*)\]\(([^)\s]+)\)\s*$", line)
+        if m:                                                        # figure (+ caption line)
+            alt, src = m.group(1), _href(m.group(2))
+            i += 1
+            while i < len(lines) and not lines[i].strip():
+                i += 1
+            cap = ""
+            if i < len(lines) and re.match(r"^\*[^*].*\*$", lines[i].strip()):
+                cap = f"<figcaption>{inline(lines[i].strip()[1:-1])}</figcaption>"
+                i += 1
+            out.append(f'<figure class="lead"><img src="{src}" alt="{html.escape(alt)}">{cap}</figure>')
+            continue
+        if re.match(r"^-{3,}\s*$", line):                           # rule
+            out.append("<hr>")
+            i += 1
+            continue
         body = []                                                    # paragraph
-        while i < len(lines) and lines[i].strip() and not re.match(r"^(#{1,4} |```|>|\s*\||\s*(?:[-*]|\d+\.) )", lines[i]):
+        while i < len(lines) and lines[i].strip() and not re.match(r"^(#{1,4} |```|>|!\[|\s*\||\s*(?:[-*]|\d+\.) )", lines[i]):
             body.append(lines[i].strip())
             i += 1
         out.append(f"<p>{inline(' '.join(body))}</p>")

@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.2.0</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.3.0</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -41,6 +41,14 @@
       <a class="sl" href="../evidence/index.html">&#9679; Evidence</a>
       <a class="sl" href="../roadmap/index.html">Roadmap &amp; open decisions</a>
       <a class="sl" href="../shipped/index.html">What exists today</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../articles/index.html">Articles<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../articles/index.html">&#9679; All articles</a>
+      <a class="sl" href="../articles/secure-harness-for-agents.html">A secure harness for agents</a>
+      <a class="sl" href="../articles/what-shipped-on-day-one.html">What shipped on day one</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -246,7 +254,9 @@ audit: { emit: [connect, kms_unwrap, deny], secrets: never }</pre>
 </table></div>
 <h2 id="9-prior-art-reuse-don-t-rebuild">9. Prior art (reuse, don't rebuild)</h2>
 <p>AppArmor complain mode and <code>aa-genprof</code>, SELinux <code>audit2allow</code>, <code>systemd-analyze security</code>, nsjail, bubblewrap, Docker/OCI seccomp profiles, Kubernetes securityContext and NetworkPolicy, SPIFFE/SPIRE and service-mesh authorisation policies. What is new here is the ABP layer: a policy that describes rather than scores, a derived delta, intersection-composed layers that ship with the code, a hash the person controls, and business rules enforced by separate components.</p>
-<p>Source: <a href="../briefs/sharness-brief-pack/docs/03-process-behaviour-policy.md">03-process-behaviour-policy</a>.</p>
+<h2 id="10-next-file-and-network-behaviour-policies-proposed">10. Next: file and network behaviour policies (proposed)</h2>
+<p>Dinis Cruz's memo of 24 Oct 2026 extends the idea: alongside process behaviour policies, <b>file behaviour policies</b> (what we want to happen to the file system) and <b>network behaviour policies</b> (what we want to happen on the network). In the design, these are the policies of <code>sharness.fs</code> and <code>sharness.net</code> written as policies in their own right, so that they can be read, hashed and reused apart from any one process. Today they are names for a direction, not a specification: the schema above is the only one written down. See <a href="../articles/secure-harness-for-agents.md">A secure harness for agents</a>.</p>
+<p>Source: <a href="../briefs/sharness-brief-pack/docs/03-process-behaviour-policy.md">03-process-behaviour-policy</a>; for §10, <a href="../briefs/memos/2026-10-24-memo-01-secure-harness.md">voice memo 01</a>.</p>
 </main>
 
 <footer class="site"><div class="cols">
@@ -255,7 +265,7 @@ audit: { emit: [connect, kms_unwrap, deny], secrets: never }</pre>
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design. Nothing here is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.2.0</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.3.0</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>
@@ -276,6 +286,7 @@ audit: { emit: [connect, kms_unwrap, deny], secrets: never }</pre>
   </div>
   <div>
     <h4>Project</h4>
+    <a href="../articles/index.html">Articles</a>
     <a href="../about/index.html">About &amp; naming</a>
     <a href="../cli/index.html">The CLI</a>
     <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>

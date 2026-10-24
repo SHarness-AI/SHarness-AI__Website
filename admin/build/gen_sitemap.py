@@ -16,7 +16,7 @@ HOST      = (ROOT / "CNAME").read_text().strip()
 SKIP_DIRS = {".git", ".github", "node_modules", "assets"}
 ORDER     = ["index.html", "why/", "architecture/", "components/", "keys/", "policies/",
              "agents/", "process-tree/", "evidence/", "roadmap/", "shipped/", "about/",
-             "cli/", "documents/", "admin/"]                          # reading order
+             "articles/", "cli/", "documents/", "admin/"]                          # reading order
 
 
 def last_commit(rel):

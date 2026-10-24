@@ -4,7 +4,7 @@
 > the kernel and talking only over allowed, mutually authenticated connections, so a secret
 > lives in one place and a tricked process can only do its one job.
 
-Site version: v0.2.0. Status of the project: DESIGN. Nothing described on this site is built.
+Site version: v0.3.0. Status of the project: DESIGN. Nothing described on this site is built.
 By Dinis Cruz; design session written up with Claude, 24 October 2026. All content CC BY 4.0.
 SHarness is unrelated to Sharness, the shell testing library.
 
@@ -45,6 +45,17 @@ SHarness is unrelated to Sharness, the shell testing library.
   sharness.bash; the dual-LLM split
 - /process-tree/index.md — making every process go through sharness.bash; side doors;
   safety rules for testing in a live session. PROOF OF CONCEPT NOT YET RUN
+
+## Articles (newsroom format; /articles/<slug>.md beside each page)
+
+- /articles/index.md — every article, newest first, with its author
+- /articles/secure-harness-for-agents.md — by Dinis Cruz (his voice memo of 24 Oct 2026, written
+  up by sharness.build): SHarness as a secure harness, behaviour policies enforced from outside
+  the agent; small components built in isolation; first users his Claude sessions, then sgit and
+  the newsroom's agents; file and network behaviour policies; a hello-world acceptance test
+- /articles/what-shipped-on-day-one.md — by sharness.build, in its own voice: the CLI package and
+  pipeline, the site's four releases, and three mistakes, with commits
+- /briefs/memos/ — the memos, verbatim as transcribed
 
 ## Status and project
 
