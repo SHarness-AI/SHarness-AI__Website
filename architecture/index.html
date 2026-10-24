@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Architecture — SHarness</title>
+<meta name="description" content="SHarness components, the edges allowed between them, mutual TLS with a session CA whose key is destroyed after issuing, and the deployment topologies.">
+<link rel="canonical" href="https://sharness.ai/architecture/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/architecture/index.html">
+<meta property="og:title" content="Architecture — SHarness">
+<meta property="og:description" content="SHarness components, the edges allowed between them, mutual TLS with a session CA whose key is destroyed after issuing, and the deployment topologies.">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.2.0</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl here" href="../why/index.html">The design<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../why/index.html">Why: the last metre</a>
+      <a class="sl here" href="../architecture/index.html">&#9679; Architecture</a>
+      <a class="sl" href="../components/index.html">Components</a>
+      <a class="sl" href="../keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../process-tree/index.html">Enforcing the process tree</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../evidence/index.html">Evidence &amp; status<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../evidence/index.html">&#9679; Evidence</a>
+      <a class="sl" href="../roadmap/index.html">Roadmap &amp; open decisions</a>
+      <a class="sl" href="../shipped/index.html">What exists today</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../about/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../about/index.html">About &amp; naming</a>
+      <a class="sl" href="../cli/index.html">The CLI</a>
+      <a class="sl" href="../documents/index.html">The source documents</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../admin/index.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__Website">★ GitHub</a>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+  <div class="crumb"><a href="../index.html">sharness.ai</a> / architecture · <a href="index.md">this page as markdown</a></div>
+  <h1>Architecture</h1>
+<div class="note"><b>Status: design.</b> Component behaviour, edges and topologies below are proposed. Figures marked <em>measured</em> were measured <span class="asof">as of 24 Oct 2026</span> in one Claude agent workspace; see <a href="../evidence/index.html">Evidence</a>.</div>
+<p>A launcher plus a small set of single-purpose components. Any process (sgit, a shell command, an agent loop) runs inside, each component under its own <a href="../policies/index.html">Process Behaviour Policy</a>, talking to the others only over allowed, mutually authenticated edges. Theme: <b>one role, one noun, one uid, one policy, one certificate.</b></p>
+<h2 id="the-picture">The picture</h2>
+<pre class="diagram">                      person: supplies manifest hash sha256:M, carries sealed QR codes
+                                                  │
+ ┌──────────────────────────── sharness.launcher (outside every domain) ──────────────────────────────┐
+ │                                                                                                      │
+ │   harnessed app / orchestrator  (no keys, no tools of its own, Landlock exec allowlist)              │
+ │        │               │                 │                 │                                         │
+ │        ▼               ▼                 ▼                 ▼                                         │
+ │   sharness.fs     sharness.net      sharness.bash     sharness.llm ──────► model API                 │
+ │   (writes)        (network) ──┐     (sandboxes)            │                                         │
+ │                               │                            │                                         │
+ │                               └──────► sharness.kms ◄──────┘  (vault keys, API keys, sealed secrets) │
+ │                                                                                                      │
+ │   every edge: mutual TLS, roles in certificates, schemas on the payload, both sides check            │
+ │   every component: own uid, own policy, kernel-enforced                                              │
+ └──────────────────────────────────────────────────────────────────────────────────────────────────────┘</pre>
+<p>The app-specific orchestrator (sgit's CLI, or an agent loop such as Claude Code) sits on top and routes. It holds nothing and runs nothing itself. What each component does is on <a href="../components/index.html">Components</a>.</p>
+<h2 id="edges-deny-by-default">Edges (deny by default)</h2>
+<pre class="diagram"> caller ↓  callee →   fs     net    bash   llm    kms
+ app/orchestrator     ✔      ✔      ✔      ✔      ✗
+ net                  ✗      —      ✗      ✗      ✔
+ llm                  ✗      ✗      ✗      —      ✔
+ bash (sandbox)       ✗      ✔*     —      ✗      ✗      * only if the profile allows network
+ fs, kms              ✗      ✗      ✗      ✗      —</pre>
+<p>The orchestrator never talks to the KMS. Only <code>sharness.net</code> and <code>sharness.llm</code> do, and the KMS never returns a clear key to either: it returns derived keys sealed to a one-time key (see <a href="../keys/index.html">Keys and the KMS</a>).</p>
+<h2 id="the-original-four-for-sgit">The original four, for sgit</h2>
+<p>The design began with four components for sgit. The early documents use sgit-specific names; the mapping is: sgit-kms → <code>sharness.kms</code>, sgit-net → <code>sharness.net</code>, sgit-fs → <code>sharness.fs</code>, sgit-cli → the harnessed app.</p>
+<pre class="diagram"> ┌───────────────────────────────── session (ephemeral VM / pod / host) ──────────────────────────────┐
+ │   agent (LLM)  ── runs ──►  sgit command (the harnessed app)                                        │
+ │        ▲  transcript sees only: commands, k1, m1, status output — never a clear key                 │
+ │  ┌─────┴──────────────┐   mTLS   ┌────────────────────┐                                             │
+ │  │  sgit (app)        │─────────►│  sharness.fs       │──► clone folder + .sg_vault/ (only writer)  │
+ │  │  orchestrates      │  edge 1  │  no keys, no net   │    paths, sealed formats only, no symlinks  │
+ │  │  NO keys           │          └────────────────────┘    out, no exec bits                        │
+ │  │  NO network        │   mTLS   ┌────────────────────┐  TLS client,   ┌──────────────────┐         │
+ │  │  NO disk writes    │─────────►│  sharness.net      │─ allowlisted ─►│ platform egress  │──► vault │
+ │  │  no fork           │  edge 2  │  DERIVED keys for  │  host names    │ proxy            │   server │
+ │  └────────────────────┘          │  one command       │                └──────────────────┘         │
+ │                                  └─────────┬──────────┘                                             │
+ │                                            │ mTLS edge 3                                            │
+ │                                  ┌─────────▼──────────┐   private key in a memfd_secret page        │
+ │                                  │  sharness.kms      │   frozen between calls (cgroup freezer)     │
+ │                                  │  no net, no disk   │   only op: open sealed → re-seal to E.pub   │
+ │                                  └────────────────────┘   (or remote: Lambda / KMS / HSM / platform)│
+ └─────────────────────────────────────────────────────────────────────────────────────────────────────┘</pre>
+<p><b>Measured</b> with a session CA and role certificates: app→fs, app→net and net→kms accepted; fs→kms, app→kms and fs→net refused, exactly per the matrix.</p>
+<h2 id="mutual-tls-with-a-session-ca">Mutual TLS with a session CA</h2>
+<pre class="diagram"> launcher                                    each component
+ ────────                                    ──────────────
+ 1. make CA key (P-256), CA cert (2h, pathlen 0)
+ 2. for each role:
+      make key, issue cert
+        SAN URI spiffe://&lt;session-id&gt;/&lt;role&gt;
+        SAN DNS localhost
+        validity = session
+ 3. DESTROY CA private key  ───────────────► set of identities is now closed
+ 4. CA cert hash → into policy manifest      5. on connect, BOTH sides:
+                                                 - verify chain to session CA
+                                                 - read peer role from SAN URI
+                                                 - check (caller, callee) ∈ edges
+                                                 - reject otherwise</pre>
+<p>Rules (proposed):</p>
+<ul>
+<li><b>TLS 1.3 only</b>, P-256 keys. Making the CA plus four role certificates took 24 ms (measured).</li>
+<li><b>Both sides check roles.</b> The callee checks the caller and the caller checks the callee, so a compromised component cannot pose as <code>sharness.net</code> to the app.</li>
+<li><b>SPIFFE IDs</b> (<code>spiffe://&lt;trust-domain&gt;/&lt;role&gt;</code>): the SPIFFE/SPIRE and service-mesh pattern, so on Kubernetes SPIRE or a mesh can issue the identities instead of the launcher.</li>
+<li><b>A component's TLS key is not its sealing identity.</b> <code>sharness.kms</code>'s TLS key and its RSA identity are separate keys.</li>
+<li><b>Set <code>TCP_NODELAY</code> on both ends.</b> Without it on the server the handshake measured 46 ms (a delayed-ACK stall) instead of 3.2 ms.</li>
+<li><b>Same protocol on any transport</b>: Unix sockets locally, TCP across machines. On Unix sockets, add <code>SO_PEERCRED</code> uid checks as an independent third layer.</li>
+<li><b>Wire format:</b> a small HTTP/1.1 (or length-prefixed JSON) API over the TLS connection; one connection per command; TLS session resumption between commands.</li>
+</ul>
+<h2 id="what-it-costs-measured">What it costs (measured)</h2>
+<p>Python <code>ssl</code>, TLS 1.3, P-256, server as a thread in the benchmark process, <span class="asof">as of 24 Oct 2026</span>.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Transport</th><th>Connect + handshake</th><th>600 B round trip</th><th>Bulk</th></tr></thead>
+<tbody>
+<tr><td>TCP plain</td><td>0.10 ms</td><td>15 µs</td><td>~300 MB/s</td></tr>
+<tr><td><b>TCP mutual TLS</b></td><td><b>3.2 ms</b></td><td><b>67 µs</b></td><td><b>~320 MB/s</b></td></tr>
+<tr><td>Unix plain</td><td>0.09 ms</td><td>56 µs</td><td>~320 MB/s</td></tr>
+<tr><td>Unix mutual TLS</td><td>3.4 ms</td><td>74 µs</td><td>~420 MB/s</td></tr>
+</tbody>
+</table></div>
+<p>Per sgit command: three handshakes ≈ 10 ms, against 146 ms of sgit imports and ~108 ms of key derivation already paid today. Round-trip and bulk figures varied by up to ~25% between runs; handshake times were stable. Method and caveats on <a href="../evidence/index.html#6-transport">Evidence</a>.</p>
+<h2 id="deployment-topologies">Deployment topologies</h2>
+<p>Same components, same protocol, same policies. Only the launcher changes. Only A was measured.</p>
+<pre class="diagram"> A. one VM, separate uids (what was measured)
+ ┌──────────────────────── VM ────────────────────────┐
+ │ app  fs  net  kms   (one uid each)                 │
+ │   └─ Unix sockets + mTLS + SO_PEERCRED + iptables  │
+ └────────────────────────────────────────────────────┘
+
+ B. Docker / compose: one container per component
+ ┌─app─┐  ┌─fs──┐  ┌─net─┐  ┌─kms─┐   network: internal only, except net
+ │     │──│     │  │     │──│     │   volumes: clone folder rw in fs, ro in app
+ └─────┘  └─────┘  └──┬──┘  └─────┘   kms: internal network only, read-only rootfs
+                      └──► egress
+
+ C. Kubernetes: one pod, one container per component (or kms as its own Deployment)
+   identities from SPIRE / mesh (spiffe://&lt;td&gt;/&lt;role&gt;); NetworkPolicy mirrors the edge matrix;
+   seccomp + readOnlyRootFilesystem + runAsNonRoot per container from the policy
+
+ D. remote KMS
+   net ──mTLS/HTTPS──► Lambda / Cloud Function ──► cloud KMS asymmetric key (HSM)
+   caller bound to the session's auth key; nonce store e.g. DynamoDB conditional put
+
+ E. platform-provided (proposed end state)
+   net ──► local platform endpoint (vsock / proxy) ──► platform KMS; session identity
+   = the platform's own knowledge of the session; no auth key in the container</pre>
+<p>Topology E is a proposal for what agent platforms should offer. No such service is known to exist today.</p>
+<p>Sources: <a href="../briefs/sharness-brief-pack/docs/05-sharness.md">05-sharness</a> §2, <a href="../briefs/sharness-brief-pack/docs/01-architecture.md">01-architecture</a> §1, §3 and §5.</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design. Nothing here is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.2.0</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The design</h4>
+    <a href="../why/index.html">Why: the last metre</a>
+    <a href="../architecture/index.html">Architecture</a>
+    <a href="../components/index.html">Components</a>
+    <a href="../keys/index.html">Keys and the KMS</a>
+    <a href="../policies/index.html">Process Behaviour Policies</a>
+    <a href="../agents/index.html">Agents and LLMs</a>
+    <a href="../process-tree/index.html">Enforcing the process tree</a>
+  </div>
+  <div>
+    <h4>Evidence &amp; status</h4>
+    <a href="../evidence/index.html">Evidence</a>
+    <a href="../roadmap/index.html">Roadmap &amp; open decisions</a>
+    <a href="../shipped/index.html">What exists today</a>
+    <a href="../documents/index.html">The source documents</a>
+  </div>
+  <div>
+    <h4>Project</h4>
+    <a href="../about/index.html">About &amp; naming</a>
+    <a href="../cli/index.html">The CLI</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI">GitHub: SHarness-AI</a>
+    <a href="../admin/comms.html">Comms &amp; release history</a>
+  </div>
+  <div>
+    <h4>For agents</h4>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="../llms-full.txt">llms-full.txt</a>
+    <a href="../index.md">index.md</a>
+    <a href="../sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

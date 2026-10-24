@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://sharness.ai/index.html</loc><lastmod>2026-10-24</lastmod></url>
-  <url><loc>https://sharness.ai/cli/index.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://sharness.ai/why/index.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://sharness.ai/architecture/index.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://sharness.ai/components/index.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://sharness.ai/keys/index.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://sharness.ai/policies/index.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://sharness.ai/agents/index.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://sharness.ai/process-tree/index.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://sharness.ai/evidence/index.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://sharness.ai/roadmap/index.html</loc><lastmod>2026-10-24</lastmod></url>
   <url><loc>https://sharness.ai/shipped/index.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://sharness.ai/about/index.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://sharness.ai/cli/index.html</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://sharness.ai/documents/index.html</loc><lastmod>2026-10-24</lastmod></url>
   <url><loc>https://sharness.ai/admin/comms.html</loc><lastmod>2026-10-24</lastmod></url>
   <url><loc>https://sharness.ai/admin/index.html</loc><lastmod>2026-10-24</lastmod></url>
   <url><loc>https://sharness.ai/admin/versions.html</loc><lastmod>2026-10-24</lastmod></url>

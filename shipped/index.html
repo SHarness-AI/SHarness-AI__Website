@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>What exists today — sharness.ai</title>
+<title>What exists today — SHarness</title>
 <meta name="description" content="What the SHarness-AI project has shipped, and what it has not, stated as a table rather than a tone.">
 <link rel="canonical" href="https://sharness.ai/shipped/index.html">
 <meta property="og:type" content="website">
@@ -18,22 +18,36 @@
 
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
-  <span class="stage-pill">first version</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.1</a>
+  <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.2.0</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
-      <a class="nl" href="../cli/index.html">The CLI<span class="caret">&#9662;</span></a>
+      <a class="nl" href="../why/index.html">The design<span class="caret">&#9662;</span></a>
       <div class="sub">
-      <a class="sl" href="../cli/index.html">&#9679; Install &amp; use</a>
-      <a class="sl" href="../cli/index.html#release">How it is released</a>
+      <a class="sl" href="../why/index.html">Why: the last metre</a>
+      <a class="sl" href="../architecture/index.html">&#9679; Architecture</a>
+      <a class="sl" href="../components/index.html">Components</a>
+      <a class="sl" href="../keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../process-tree/index.html">Enforcing the process tree</a>
       </div>
     </div>
     <div class="ni ni-has">
-      <a class="nl here" href="../shipped/index.html">The honest column<span class="caret">&#9662;</span></a>
+      <a class="nl here" href="../evidence/index.html">Evidence &amp; status<span class="caret">&#9662;</span></a>
       <div class="sub">
+      <a class="sl" href="../evidence/index.html">&#9679; Evidence</a>
+      <a class="sl" href="../roadmap/index.html">Roadmap &amp; open decisions</a>
       <a class="sl here" href="../shipped/index.html">What exists today</a>
-      <a class="sl" href="../shipped/index.html#not-yet">What is not here yet</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../about/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../about/index.html">About &amp; naming</a>
+      <a class="sl" href="../cli/index.html">The CLI</a>
+      <a class="sl" href="../documents/index.html">The source documents</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -51,7 +65,7 @@
 <main class="doc">
   <div class="crumb"><a href="../index.html">sharness.ai</a> / the honest column</div>
   <h1>What exists today, and what does not</h1>
-  <p class="lead">A first version that describes features nobody has built would be a stale page from its first day. This page keeps the two lists apart, so that a reader, human or agent, can tell what they can rely on.</p>
+  <p class="lead">SHarness is at the design stage. The design is published on this site for review; what exists as running code is listed here, and kept apart from it, so a reader, human or agent, can tell what they can rely on.</p>
 
   <h2 id="exists">Exists, and can be checked</h2>
   <div class="tablewrap"><table>
@@ -59,6 +73,8 @@
     <tbody>
       <tr><td><b>The <code>sharness-ai</code> package on PyPI</b></td><td><a href="https://pypi.org/project/sharness-ai/">pypi.org/project/sharness-ai</a></td></tr>
       <tr><td><b>The CLI source and its release pipeline</b></td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI">SHarness-AI/SHarness-AI__CLI</a></td></tr>
+      <tr><td><b>The design, published for review</b></td><td><a href="../architecture/index.html">the design pages</a> · <a href="../documents/index.html">the source documents, verbatim</a></td></tr>
+      <tr><td><b>Measurements behind the design</b></td><td><a href="../evidence/index.html">Evidence</a>: one Claude agent workspace, with method and date</td></tr>
       <tr><td><b>This site, its gate and its deploy pipeline</b></td><td><a href="https://github.com/SHarness-AI/SHarness-AI__Website">SHarness-AI/SHarness-AI__Website</a> · <a href="../admin/index.html">how it is built</a></td></tr>
     </tbody>
   </table></div>
@@ -67,35 +83,48 @@
   <div class="tablewrap"><table>
     <thead><tr><th>Missing</th><th>Status</th></tr></thead>
     <tbody>
-      <tr><td><b>A statement of what SHarness is and who it is for</b></td><td><a href="../admin/comms.html#r1">R1</a>: open. The front page says so instead of guessing.</td></tr>
+      <tr><td><b>Any SHarness component</b> (launcher, kms, net, fs, bash, llm)</td><td>Not built. Designed on <a href="../components/index.html">Components</a>.</td></tr>
       <tr><td><b>Any CLI command beyond <code>--version</code></b></td><td>Not built. The first release is the skeleton and the pipeline.</td></tr>
-      <tr><td><b>Documentation pages and markdown twins for every page</b></td><td>Only the front page has a twin (<a href="../index.md">index.md</a>). More arrive with content.</td></tr>
+      <tr><td><b>The process-tree proof of concept</b></td><td>Started, not completed, not run. See <a href="../process-tree/index.html">Enforcing the process tree</a>.</td></tr>
+      <tr><td><b>Markdown twins for the hand-written pages</b></td><td>The design pages and the front page have twins (<code>…/index.md</code>); the CLI, status and admin pages do not yet.</td></tr>
     </tbody>
   </table></div>
 
-  <div class="pagenav"><a href="../cli/index.html">← The CLI</a><a href="../admin/index.html">How this site is built →</a></div>
+  <div class="pagenav"><a href="../roadmap/index.html">← Roadmap</a><a href="../about/index.html">About and naming →</a></div>
 </main>
 
 <footer class="site"><div class="cols">
   <div>
     <div class="brandline">sharness<span>.ai</span></div>
-    <p>The home of the SHarness-AI project and its command line tool, <code>sharness</code>. All content CC BY 4.0.</p>
-    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — where this site's conventions come from · <a href="https://coding.sgit.ai">↗ coding.sgit.ai</a> — the coding conventions · <a href="https://nfrs.sgit.ai">↗ nfrs.sgit.ai</a> — the non-functional requirements</p>
-    <p class="partnote">⚠ First version: this site states what exists and marks what does not. You are on the page that says which is which.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.1</a> · <a href="../admin/index.html">engineering</a></p>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design. Nothing here is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.2.0</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
-    <h4>sharness</h4>
-    <a href="../cli/index.html">The CLI</a>
+    <h4>The design</h4>
+    <a href="../why/index.html">Why: the last metre</a>
+    <a href="../architecture/index.html">Architecture</a>
+    <a href="../components/index.html">Components</a>
+    <a href="../keys/index.html">Keys and the KMS</a>
+    <a href="../policies/index.html">Process Behaviour Policies</a>
+    <a href="../agents/index.html">Agents and LLMs</a>
+    <a href="../process-tree/index.html">Enforcing the process tree</a>
+  </div>
+  <div>
+    <h4>Evidence &amp; status</h4>
+    <a href="../evidence/index.html">Evidence</a>
+    <a href="../roadmap/index.html">Roadmap &amp; open decisions</a>
     <a href="../shipped/index.html">What exists today</a>
-    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
-    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: the CLI</a>
+    <a href="../documents/index.html">The source documents</a>
   </div>
   <div>
-    <h4>Site</h4>
-    <a href="../admin/index.html">Admin &amp; engineering</a>
-    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
-    <a href="../admin/versions.html">Release history</a>
+    <h4>Project</h4>
+    <a href="../about/index.html">About &amp; naming</a>
+    <a href="../cli/index.html">The CLI</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI">GitHub: SHarness-AI</a>
+    <a href="../admin/comms.html">Comms &amp; release history</a>
   </div>
   <div>
     <h4>For agents</h4>

@@ -20,20 +20,32 @@ from pathlib import Path
 ROOT    = Path(__file__).resolve().parents[2]
 VERSION = (ROOT / "admin/build/version.txt").read_text().strip()
 GH      = "https://github.com/SHarness-AI/SHarness-AI__Website"
+HOST    = (ROOT / "CNAME").read_text().strip()
 
 # The nav, two levels. Each entry is (label, own page, [(sub-label, href), ...], prefixes).
 #   · A group label is always a link to a real page, never a menu-only stub.
 #   · `prefixes` decides the "here" state, so a page not itself in the nav still
 #     lights up the group it belongs to.
 NAV = [
-    ("The CLI", "cli/index.html", [
-        ("&#9679; Install &amp; use", "cli/index.html"),
-        ("How it is released", "cli/index.html#release"),
-    ], ("cli/",)),
-    ("The honest column", "shipped/index.html", [
+    ("The design", "why/index.html", [
+        ("Why: the last metre", "why/index.html"),
+        ("&#9679; Architecture", "architecture/index.html"),
+        ("Components", "components/index.html"),
+        ("Keys and the KMS", "keys/index.html"),
+        ("Process Behaviour Policies", "policies/index.html"),
+        ("Agents and LLMs", "agents/index.html"),
+        ("Enforcing the process tree", "process-tree/index.html"),
+    ], ("why/", "architecture/", "components/", "keys/", "policies/", "agents/", "process-tree/")),
+    ("Evidence &amp; status", "evidence/index.html", [
+        ("&#9679; Evidence", "evidence/index.html"),
+        ("Roadmap &amp; open decisions", "roadmap/index.html"),
         ("What exists today", "shipped/index.html"),
-        ("What is not here yet", "shipped/index.html#not-yet"),
-    ], ("shipped/",)),
+    ], ("evidence/", "roadmap/", "shipped/")),
+    ("Project", "about/index.html", [
+        ("About &amp; naming", "about/index.html"),
+        ("The CLI", "cli/index.html"),
+        ("The source documents", "documents/index.html"),
+    ], ("about/", "cli/", "documents/")),
     ("Site", "admin/index.html", [
         ("Admin &amp; engineering", "admin/index.html"),
         ("Comms: tasks &amp; requests", "admin/comms.html"),
@@ -42,16 +54,27 @@ NAV = [
 ]
 
 FOOTER = [
-    ("sharness", [
-        ("The CLI", "cli/index.html"),
-        ("What exists today", "shipped/index.html"),
-        ("PyPI: sharness-ai", "https://pypi.org/project/sharness-ai/"),
-        ("GitHub: the CLI", "https://github.com/SHarness-AI/SHarness-AI__CLI"),
+    ("The design", [
+        ("Why: the last metre", "why/index.html"),
+        ("Architecture", "architecture/index.html"),
+        ("Components", "components/index.html"),
+        ("Keys and the KMS", "keys/index.html"),
+        ("Process Behaviour Policies", "policies/index.html"),
+        ("Agents and LLMs", "agents/index.html"),
+        ("Enforcing the process tree", "process-tree/index.html"),
     ]),
-    ("Site", [
-        ("Admin &amp; engineering", "admin/index.html"),
-        ("Comms: tasks &amp; requests", "admin/comms.html"),
-        ("Release history", "admin/versions.html"),
+    ("Evidence &amp; status", [
+        ("Evidence", "evidence/index.html"),
+        ("Roadmap &amp; open decisions", "roadmap/index.html"),
+        ("What exists today", "shipped/index.html"),
+        ("The source documents", "documents/index.html"),
+    ]),
+    ("Project", [
+        ("About &amp; naming", "about/index.html"),
+        ("The CLI", "cli/index.html"),
+        ("PyPI: sharness-ai", "https://pypi.org/project/sharness-ai/"),
+        ("GitHub: SHarness-AI", "https://github.com/SHarness-AI"),
+        ("Comms &amp; release history", "admin/comms.html"),
     ]),
     ("For agents", [
         ("llms.txt", "llms.txt"),
@@ -61,16 +84,17 @@ FOOTER = [
     ]),
 ]
 
-BLURB = ("The home of the SHarness-AI project and its command line tool, "
-         "<code>sharness</code>. All content CC BY 4.0.")
-PARTNOTE = ('⚠ First version: this site states what exists and marks what does not. '
-            '<a href="{up}shipped/index.html" style="display:inline;padding:0">What exists today, '
-            'and what is not here yet</a>.')
-PARTNOTE_SELF = ('⚠ First version: this site states what exists and marks what does not. '
-                 'You are on the page that says which is which.')
-NETLINE = ('<a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — where this site\'s conventions come from · '
-           '<a href="https://coding.sgit.ai">↗ coding.sgit.ai</a> — the coding conventions · '
-           '<a href="https://nfrs.sgit.ai">↗ nfrs.sgit.ai</a> — the non-functional requirements')
+BLURB = ("SHarness runs agents and their tools as small, single-purpose processes, each locked "
+         "down by the kernel and talking only over allowed, mutually authenticated connections. "
+         "By Dinis Cruz. All content CC BY 4.0.")
+PARTNOTE = ('⚠ Status: design. Nothing here is built; measured figures carry their date. '
+            '<a href="{up}evidence/index.html" style="display:inline;padding:0">What is measured, '
+            'what is proposed</a>.')
+PARTNOTE_SELF = ('⚠ Status: design. Nothing here is built. You are on the page that says what '
+                 'was measured and what is only proposed.')
+NETLINE = ('<a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · '
+           '<a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · '
+           '<a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies')
 
 
 def nav_html(rel, up):
@@ -89,7 +113,7 @@ def nav_html(rel, up):
     rows = "\n".join(groups)
     return (f'<nav class="site"><div class="row">\n'
             f'  <a class="brand" href="{up}index.html">sharness<span>.ai</span></a>\n'
-            f'  <span class="stage-pill">first version</span>\n'
+            f'  <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>\n'
             f'  <a class="ver" href="{up}admin/versions.html" title="Site release history">{VERSION}</a>\n'
             f'  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>\n'
             f'  <div class="nav-items">\n{rows}\n  </div>\n'
@@ -99,7 +123,7 @@ def nav_html(rel, up):
 
 
 def footer_html(rel, up):
-    partnote = PARTNOTE_SELF if rel == "shipped/index.html" else PARTNOTE.format(up=up)
+    partnote = PARTNOTE_SELF if rel == "evidence/index.html" else PARTNOTE.format(up=up)
     md_twin = f' · <a href="{up}index.md">this page as markdown</a>' if rel == "index.html" else ""
     cols = "\n".join(
         "  <div>\n"
@@ -120,7 +144,7 @@ def footer_html(rel, up):
 
 def stamp_text_twins():
     """The version also appears in llms.txt and index.md (llms-full.txt is generated
-    from both), and validate.js enforces that it agrees. Set it here so a release
+    from them), and validate.js enforces that it agrees. Set it here so a release
     never depends on remembering to hand-edit them."""
     out = []
     for name, pattern, repl in (

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The source documents — SHarness</title>
+<meta name="description" content="The SHarness design pack, published verbatim: the brief for this site and the eight design documents it was built from.">
+<link rel="canonical" href="https://sharness.ai/documents/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/documents/index.html">
+<meta property="og:title" content="The source documents — SHarness">
+<meta property="og:description" content="The SHarness design pack, published verbatim: the brief for this site and the eight design documents it was built from.">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.2.0</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../why/index.html">The design<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../why/index.html">Why: the last metre</a>
+      <a class="sl" href="../architecture/index.html">&#9679; Architecture</a>
+      <a class="sl" href="../components/index.html">Components</a>
+      <a class="sl" href="../keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../process-tree/index.html">Enforcing the process tree</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../evidence/index.html">Evidence &amp; status<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../evidence/index.html">&#9679; Evidence</a>
+      <a class="sl" href="../roadmap/index.html">Roadmap &amp; open decisions</a>
+      <a class="sl" href="../shipped/index.html">What exists today</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../about/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../about/index.html">About &amp; naming</a>
+      <a class="sl" href="../cli/index.html">The CLI</a>
+      <a class="sl here" href="../documents/index.html">The source documents</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../admin/index.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__Website">★ GitHub</a>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+  <div class="crumb"><a href="../index.html">sharness.ai</a> / the source documents · <a href="index.md">this page as markdown</a></div>
+  <h1>The source documents</h1>
+<div class="note"><b>Published verbatim for review.</b> These are the documents this site was built from, as received on 24 October 2026. The raw markdown is the source of truth; the site's pages port them with the naming rules applied.</div>
+<h2 id="the-brief-for-this-site">The brief for this site</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Document</th><th>What it is</th></tr></thead>
+<tbody>
+<tr><td><a href="../briefs/sharness-brief-pack/BRIEF-for-website-agent.md">BRIEF-for-website-agent.md</a></td><td>identity, seed text, page structure, claim rules, naming rules and open decisions for sharness.ai</td></tr>
+</tbody>
+</table></div>
+<h2 id="the-design-pack-read-in-order">The design pack (read in order)</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>#</th><th>Document</th><th>What it settles</th><th>Ported to</th></tr></thead>
+<tbody>
+<tr><td>00</td><td><a href="../briefs/sharness-brief-pack/docs/00-README.md">00-README.md</a></td><td>problem, goals, threat model, glossary, decisions, end state</td><td><a href="../why/index.html">Why</a>, <a href="../roadmap/index.html">Roadmap</a></td></tr>
+<tr><td>01</td><td><a href="../briefs/sharness-brief-pack/docs/01-architecture.md">01-architecture.md</a></td><td>the original four components, edges, mutual TLS with a session CA, command flows, deployment topologies, refactor path in sgit</td><td><a href="../architecture/index.html">Architecture</a>, <a href="../components/index.html">Components</a>, <a href="../roadmap/index.html">Roadmap</a></td></tr>
+<tr><td>02</td><td><a href="../briefs/sharness-brief-pack/docs/02-sealed-key-flow-and-kms.md">02-sealed-key-flow-and-kms.md</a></td><td>the sealed handover, the KMS protocol, where keys live and for how long</td><td><a href="../keys/index.html">Keys and the KMS</a></td></tr>
+<tr><td>03</td><td><a href="../briefs/sharness-brief-pack/docs/03-process-behaviour-policy.md">03-process-behaviour-policy.md</a></td><td>Process Behaviour Policies: schema, layers, hashing, enforcement map, learning from traces, prompt-injection walkthrough</td><td><a href="../policies/index.html">Process Behaviour Policies</a></td></tr>
+<tr><td>04</td><td><a href="../briefs/sharness-brief-pack/docs/04-environment-evidence.md">04-environment-evidence.md</a></td><td>every probe and measurement, with method and caveats</td><td><a href="../evidence/index.html">Evidence</a></td></tr>
+<tr><td>05</td><td><a href="../briefs/sharness-brief-pack/docs/05-sharness.md">05-sharness.md</a></td><td>the generalisation: naming, components, transparent vs harness-aware apps, minimal code</td><td><a href="../architecture/index.html">Architecture</a>, <a href="../components/index.html">Components</a>, <a href="../about/index.html">About</a></td></tr>
+<tr><td>06</td><td><a href="../briefs/sharness-brief-pack/docs/06-llm-and-the-agent-loop.md">06-llm-and-the-agent-loop.md</a></td><td>how an agent message flows (observed), <code>sharness.llm</code>, <code>sharness.bash</code>, the dual-LLM split</td><td><a href="../agents/index.html">Agents and LLMs</a></td></tr>
+<tr><td>07</td><td><a href="../briefs/sharness-brief-pack/docs/07-enforcing-the-process-tree.md">07-enforcing-the-process-tree.md</a></td><td>every process through <code>sharness.bash</code>; side doors; safe testing; proof of concept not yet run</td><td><a href="../process-tree/index.html">Enforcing the process tree</a></td></tr>
+</tbody>
+</table></div>
+<h2 id="known-issues-in-the-pack">Known issues in the pack</h2>
+<p>Published as received, so these remain in the raw files:</p>
+<ul>
+<li><code>00-README.md</code> links <code>05-the-sharness.md</code>; the file is <code>05-sharness.md</code>.</li>
+<li>Documents 01–04 use the sgit-specific component names (sgit-cli, sgit-fs, sgit-net, sgit-kms); document 05's diagram uses <code>harness.&lt;role&gt;</code> where the rest of the pack uses <code>sharness.&lt;role&gt;</code>. The site's pages use <code>sharness.&lt;role&gt;</code> throughout.</li>
+<li>The pack lists the command name as open; it was settled as <code>sharness-ai</code> the same day (see <a href="../roadmap/index.html">Roadmap</a>).</li>
+</ul>
+<p>All content CC BY 4.0.</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design. Nothing here is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.2.0</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The design</h4>
+    <a href="../why/index.html">Why: the last metre</a>
+    <a href="../architecture/index.html">Architecture</a>
+    <a href="../components/index.html">Components</a>
+    <a href="../keys/index.html">Keys and the KMS</a>
+    <a href="../policies/index.html">Process Behaviour Policies</a>
+    <a href="../agents/index.html">Agents and LLMs</a>
+    <a href="../process-tree/index.html">Enforcing the process tree</a>
+  </div>
+  <div>
+    <h4>Evidence &amp; status</h4>
+    <a href="../evidence/index.html">Evidence</a>
+    <a href="../roadmap/index.html">Roadmap &amp; open decisions</a>
+    <a href="../shipped/index.html">What exists today</a>
+    <a href="../documents/index.html">The source documents</a>
+  </div>
+  <div>
+    <h4>Project</h4>
+    <a href="../about/index.html">About &amp; naming</a>
+    <a href="../cli/index.html">The CLI</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI">GitHub: SHarness-AI</a>
+    <a href="../admin/comms.html">Comms &amp; release history</a>
+  </div>
+  <div>
+    <h4>For agents</h4>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="../llms-full.txt">llms-full.txt</a>
+    <a href="../index.md">index.md</a>
+    <a href="../sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

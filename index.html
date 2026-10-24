@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>sharness.ai — the SHarness-AI project</title>
-<meta name="description" content="The home of the SHarness-AI project and its command line tool, sharness. Install it with pip install sharness-ai.">
+<title>SHarness — agents and tools as small, locked-down processes</title>
+<meta name="description" content="SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections, so a secret lives in one place and a tricked process can only do its one job. Status: design.">
 <link rel="canonical" href="https://sharness.ai/index.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="sharness.ai">
 <meta property="og:url" content="https://sharness.ai/index.html">
-<meta property="og:title" content="sharness.ai — the SHarness-AI project">
-<meta property="og:description" content="The home of the SHarness-AI project and its command line tool, sharness. Install it with pip install sharness-ai.">
+<meta property="og:title" content="SHarness — agents and tools as small, locked-down processes">
+<meta property="og:description" content="SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections, so a secret lives in one place and a tricked process can only do its one job. Status: design.">
 <meta name="twitter:card" content="summary">
 <link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
 <link rel="stylesheet" href="assets/site.css">
@@ -19,22 +19,36 @@
 
 <nav class="site"><div class="row">
   <a class="brand" href="index.html">sharness<span>.ai</span></a>
-  <span class="stage-pill">first version</span>
-  <a class="ver" href="admin/versions.html" title="Site release history">v0.1.1</a>
+  <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
+  <a class="ver" href="admin/versions.html" title="Site release history">v0.2.0</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
-      <a class="nl" href="cli/index.html">The CLI<span class="caret">&#9662;</span></a>
+      <a class="nl" href="why/index.html">The design<span class="caret">&#9662;</span></a>
       <div class="sub">
-      <a class="sl" href="cli/index.html">&#9679; Install &amp; use</a>
-      <a class="sl" href="cli/index.html#release">How it is released</a>
+      <a class="sl" href="why/index.html">Why: the last metre</a>
+      <a class="sl" href="architecture/index.html">&#9679; Architecture</a>
+      <a class="sl" href="components/index.html">Components</a>
+      <a class="sl" href="keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="process-tree/index.html">Enforcing the process tree</a>
       </div>
     </div>
     <div class="ni ni-has">
-      <a class="nl" href="shipped/index.html">The honest column<span class="caret">&#9662;</span></a>
+      <a class="nl" href="evidence/index.html">Evidence &amp; status<span class="caret">&#9662;</span></a>
       <div class="sub">
+      <a class="sl" href="evidence/index.html">&#9679; Evidence</a>
+      <a class="sl" href="roadmap/index.html">Roadmap &amp; open decisions</a>
       <a class="sl" href="shipped/index.html">What exists today</a>
-      <a class="sl" href="shipped/index.html#not-yet">What is not here yet</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="about/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="about/index.html">About &amp; naming</a>
+      <a class="sl" href="cli/index.html">The CLI</a>
+      <a class="sl" href="documents/index.html">The source documents</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -49,66 +63,111 @@
   <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__Website">★ GitHub</a>
   <script src="assets/nav.js" defer></script>
 </div></nav>
+
 <header class="hero">
-  <div class="eyebrow">SHarness-AI · the project · the CLI</div>
-  <h1>sharness.ai</h1>
-  <p class="sub">The home of the <b>SHarness-AI</b> project and its command line tool, <code>sharness</code>. This is the first version of the site: it states what exists today, and it marks what does not exist yet rather than describing it.</p>
+  <div class="eyebrow">SHarness · status: design · nothing here is built yet</div>
+  <h1>A secret lives in one place.<br>A tricked process can only do its one job.</h1>
+  <p class="sub"><b>SHarness</b> runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. This site publishes the design for review: what is proposed, what was measured, and what is still open.</p>
   <div class="ctas">
-    <a class="cta1" href="cli/index.html">Install the CLI →</a>
-    <a class="cta2" href="shipped/index.html">What exists today →</a>
-    <a class="cta2" href="https://github.com/SHarness-AI/SHarness-AI__CLI">The source →</a>
+    <a class="cta1" href="architecture/index.html">The architecture →</a>
+    <a class="cta2" href="why/index.html">Why it exists →</a>
+    <a class="cta2" href="evidence/index.html">The evidence →</a>
   </div>
 </header>
 
-<section class="band alt" id="install">
-  <h2>Install</h2>
-  <p class="blurb">The CLI is published on PyPI as <a href="https://pypi.org/project/sharness-ai/"><code>sharness-ai</code></a>, released from the <code>main</code> branch of its repository by CI, with no API token stored anywhere.</p>
+<section class="band alt" id="problem">
+  <h2>It started with one gap</h2>
+  <p class="blurb">A vault key handed to an AI agent was sealed while it travelled and exposed the moment it arrived: on disk, on the command line and in the agent's transcript.</p>
   <div class="split">
-<pre class="shell"><span class="d">$</span> pip install sharness-ai
-<span class="d">$</span> sharness --version
-<span class="g">sharness-ai v0.1.0</span></pre>
-    <p class="cap">Two commands are installed: <code>sharness-ai</code> and the shorthand <code>sharness</code>. Python 3.11 or later. Output shown for the first release, <span class="asof">as of 24 Oct 2026</span>.</p>
+<pre class="diagram">   travel                          arrival (sgit 0.24.0 today)
+ ┌────────────────────┐   ┌──────────────────────────────────────────────────────┐
+ │ QR: sealed to the  │──►│ pki-agent open --save  → vault-key-&lt;id&gt;.txt   CLEAR │
+ │ receiving agent    │   │ sgit clone &lt;vault key&gt; → argv, shell history, CLEAR │
+ │ (person can't read)│   │                          the agent's transcript     │
+ └────────────────────┘   │ .sg_vault/local/vault_key            (0600)  CLEAR │
+                          │ .sg_vault/local/key-rnd-imm-*.pem    (PKCS#8) CLEAR │
+                          │ .sg_vault/local/token                         CLEAR │
+                          └──────────────────────────────────────────────────────┘</pre>
+    <p class="cap">For an agent the worst leak is the transcript: every command line it writes and everything a command prints lands in the model's context and in conversation logs. <a href="why/index.html">The last metre, in full →</a></p>
   </div>
 </section>
 
-<section class="band" id="today">
-  <h2>What is here today</h2>
-  <p class="blurb">Three things exist. Each card links the thing itself, not a description of it.</p>
-  <div class="cards">
-    <a class="card" href="cli/index.html"><span class="tag">Released</span><h3>The CLI</h3><p>The <code>sharness</code> package skeleton: the entry points, the version file, and the release pipeline that tags and publishes it. It does not do anything else yet, and says so.</p><span class="go">Read →</span></a>
-    <a class="card" href="https://pypi.org/project/sharness-ai/"><span class="tag">Published</span><h3>The PyPI package</h3><p><code>sharness-ai</code> on PyPI, published by GitHub Actions through Trusted Publishing (OIDC).</p><span class="go">Open →</span></a>
-    <a class="card" href="admin/index.html"><span class="tag">Engineering</span><h3>This site</h3><p>Static HTML, a pre-release gate, and validate → tag → deploy to GitHub Pages: the same pipeline the *.sgit.ai sites run.</p><span class="go">Read →</span></a>
+<section class="band" id="design">
+  <h2>The fix turned out to be general</h2>
+  <p class="blurb">A launcher starts a few components, each under its own Process Behaviour Policy, enforced by Linux (separate users, Landlock, seccomp, namespaces, cgroups) and by mutual TLS between components. The person supplies the hash of the policy, so a prompt-injected agent cannot widen it.</p>
+  <div class="split">
+<pre class="diagram">                 person: supplies the policy hash, carries sealed QR codes
+                                        │
+ ┌──────────────────────── sharness.launcher (outside every domain) ─────────────────────────┐
+ │  harnessed app / orchestrator  (no keys, no tools of its own)                              │
+ │       │               │                │                 │                                 │
+ │       ▼               ▼                ▼                 ▼                                 │
+ │  sharness.fs     sharness.net     sharness.bash     sharness.llm ──────► model API         │
+ │  (writes)        (network) ──┐    (sandboxes)            │                                 │
+ │                              └──────► sharness.kms ◄─────┘   (keys and sealed secrets)     │
+ │  every edge: mutual TLS, roles in certificates · every component: own uid, own policy      │
+ └────────────────────────────────────────────────────────────────────────────────────────────┘</pre>
+    <p class="cap">Designed, not built. sgit (<a href="https://cli.sgit.ai">sgit.ai's encrypted vault CLI</a>) is the first app designed to run inside it.</p>
+  </div>
+  <div class="cards" style="margin-top:1.6rem">
+    <a class="card" href="components/index.html#sharness-kms"><span class="tag">sharness.kms</span><h3>Holds the keys</h3><p>Opens sealed things and re-seals what the caller needs to a one-time key. Never returns a clear key. Frozen between calls.</p><span class="go">Read →</span></a>
+    <a class="card" href="components/index.html#sharness-net"><span class="tag">sharness.net</span><h3>The only network client</h3><p>Host, endpoint and id allowlists, enforced as the TLS client, where the name can actually be seen and verified.</p><span class="go">Read →</span></a>
+    <a class="card" href="components/index.html#sharness-fs"><span class="tag">sharness.fs</span><h3>The only writer</h3><p>Writes protected folders under rules, and refuses anything that parses as a clear key, a private key or a token.</p><span class="go">Read →</span></a>
+    <a class="card" href="components/index.html#sharness-bash"><span class="tag">sharness.bash</span><h3>The shell, sandboxed</h3><p>Each command in a fresh sandbox: own uid, no network by default, a workspace with no execute right.</p><span class="go">Read →</span></a>
+    <a class="card" href="agents/index.html#3-sharness-llm"><span class="tag">sharness.llm</span><h3>The only model client</h3><p>Speaks the Messages API unchanged, filters secrets out of every tool result, and holds the real API key via the KMS.</p><span class="go">Read →</span></a>
+    <a class="card" href="policies/index.html"><span class="tag">sharness.policy</span><h3>One hash, from the person</h3><p>Intersection-composed policies, hashed. The launcher refuses any manifest whose hash the person did not supply.</p><span class="go">Read →</span></a>
   </div>
 </section>
 
-<section class="band alt" id="not-yet">
-  <h2>What this site does not say yet</h2>
-  <p class="blurb">What SHarness <em>does</em> has not been written down here yet. Rather than fill the space with a guess, the gap is published as an open request.</p>
+<section class="band alt" id="claims">
+  <h2>What this site claims, and how</h2>
+  <p class="blurb">The same distinction runs through every page. Every number is labelled; nothing is presented as built.</p>
   <div class="split">
-    <p class="cap"><a href="admin/comms.html#r1">R1 on the comms board</a> asks for the one-paragraph statement of what SHarness is and who it is for. Until it lands, <a href="shipped/index.html">the honest column</a> is the accurate description of this project.</p>
+    <table>
+      <thead><tr><th>Label</th><th class="safe">Means</th></tr></thead>
+      <tbody>
+        <tr><td><b>Measured</b></td><td>Probed or timed in one Claude agent workspace, <span class="asof">as of 24 Oct 2026</span>, with the method on <a href="evidence/index.html">Evidence</a>. For example: a mutual TLS handshake between components ≈ 3.2 ms; a <code>memfd_secret</code> page unreadable even by root.</td></tr>
+        <tr><td><b>Designed / proposed</b></td><td>How SHarness would work: the components, the KMS protocol, the policies, <code>.llm</code>, <code>.bash</code>, the deployment topologies.</td></tr>
+        <tr><td><b>Not yet measured</b></td><td>seccomp filters, read-only bind mounts, the side doors in <a href="process-tree/index.html">the process tree</a>, AWS KMS compatibility.</td></tr>
+        <tr><td><b>Never claimed</b></td><td>That anything is built or released; protection against root or kernel compromise; anything about any platform's plans; that a schema bounds intent (it bounds shape).</td></tr>
+      </tbody>
+    </table>
+    <p class="cap"><a href="roadmap/index.html">The roadmap and open decisions →</a> · <a href="documents/index.html">the source documents, verbatim →</a> · <a href="about/index.html">about and naming →</a></p>
   </div>
 </section>
 
 <footer class="site"><div class="cols">
   <div>
     <div class="brandline">sharness<span>.ai</span></div>
-    <p>The home of the SHarness-AI project and its command line tool, <code>sharness</code>. All content CC BY 4.0.</p>
-    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — where this site's conventions come from · <a href="https://coding.sgit.ai">↗ coding.sgit.ai</a> — the coding conventions · <a href="https://nfrs.sgit.ai">↗ nfrs.sgit.ai</a> — the non-functional requirements</p>
-    <p class="partnote">⚠ First version: this site states what exists and marks what does not. <a href="shipped/index.html" style="display:inline;padding:0">What exists today, and what is not here yet</a>.</p>
-    <p class="verline">site <a href="admin/versions.html">v0.1.1</a> · <a href="admin/index.html">engineering</a> · <a href="index.md">this page as markdown</a></p>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design. Nothing here is built; measured figures carry their date. <a href="evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="admin/versions.html">v0.2.0</a> · <a href="admin/index.html">engineering</a> · <a href="index.md">this page as markdown</a></p>
   </div>
   <div>
-    <h4>sharness</h4>
-    <a href="cli/index.html">The CLI</a>
+    <h4>The design</h4>
+    <a href="why/index.html">Why: the last metre</a>
+    <a href="architecture/index.html">Architecture</a>
+    <a href="components/index.html">Components</a>
+    <a href="keys/index.html">Keys and the KMS</a>
+    <a href="policies/index.html">Process Behaviour Policies</a>
+    <a href="agents/index.html">Agents and LLMs</a>
+    <a href="process-tree/index.html">Enforcing the process tree</a>
+  </div>
+  <div>
+    <h4>Evidence &amp; status</h4>
+    <a href="evidence/index.html">Evidence</a>
+    <a href="roadmap/index.html">Roadmap &amp; open decisions</a>
     <a href="shipped/index.html">What exists today</a>
-    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
-    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: the CLI</a>
+    <a href="documents/index.html">The source documents</a>
   </div>
   <div>
-    <h4>Site</h4>
-    <a href="admin/index.html">Admin &amp; engineering</a>
-    <a href="admin/comms.html">Comms: tasks &amp; requests</a>
-    <a href="admin/versions.html">Release history</a>
+    <h4>Project</h4>
+    <a href="about/index.html">About &amp; naming</a>
+    <a href="cli/index.html">The CLI</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI">GitHub: SHarness-AI</a>
+    <a href="admin/comms.html">Comms &amp; release history</a>
   </div>
   <div>
     <h4>For agents</h4>

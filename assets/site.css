@@ -205,3 +205,15 @@ footer.site .verline a{display:inline;color:var(--accent-dk);padding:0}
       border:1px solid var(--line);border-radius:999px;padding:.05em .5em;
       white-space:nowrap;vertical-align:baseline}
 main.doc .warnbox .asof,main.doc .note .asof{background:#fff}
+
+/* ---------- ASCII diagrams (design pages) ----------
+   The design pack draws in ASCII and the markdown twins keep it that way, so the HTML
+   shows the same text in a scrollable block rather than a redraw that could drift from
+   the mechanism it depicts. Box-drawing characters need a font with them at a fixed
+   width; the mono stack provides that. */
+pre.diagram{background:var(--panel);border:1px solid var(--line);border-radius:10px;
+  padding:.9rem 1.1rem;font-size:.74rem;line-height:1.45;overflow-x:auto;margin:1.1rem 0;
+  color:#24343f;box-shadow:var(--shadow)}
+main.doc code{overflow-wrap:anywhere;background:var(--panel2);border:1px solid var(--line);
+  border-radius:4px;padding:.08em .35em;font-size:.84em;color:#24343f}
+main.doc pre code{background:none;border:0;padding:0}

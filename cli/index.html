@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>The CLI — sharness.ai</title>
+<title>The CLI — SHarness</title>
 <meta name="description" content="The sharness command line tool: install, commands, versioning, and the release pipeline that tags it and publishes it to PyPI.">
 <link rel="canonical" href="https://sharness.ai/cli/index.html">
 <meta property="og:type" content="website">
@@ -18,22 +18,36 @@
 
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
-  <span class="stage-pill">first version</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.1</a>
+  <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.2.0</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
-      <a class="nl here" href="../cli/index.html">The CLI<span class="caret">&#9662;</span></a>
+      <a class="nl" href="../why/index.html">The design<span class="caret">&#9662;</span></a>
       <div class="sub">
-      <a class="sl here" href="../cli/index.html">&#9679; Install &amp; use</a>
-      <a class="sl" href="../cli/index.html#release">How it is released</a>
+      <a class="sl" href="../why/index.html">Why: the last metre</a>
+      <a class="sl" href="../architecture/index.html">&#9679; Architecture</a>
+      <a class="sl" href="../components/index.html">Components</a>
+      <a class="sl" href="../keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../process-tree/index.html">Enforcing the process tree</a>
       </div>
     </div>
     <div class="ni ni-has">
-      <a class="nl" href="../shipped/index.html">The honest column<span class="caret">&#9662;</span></a>
+      <a class="nl" href="../evidence/index.html">Evidence &amp; status<span class="caret">&#9662;</span></a>
       <div class="sub">
+      <a class="sl" href="../evidence/index.html">&#9679; Evidence</a>
+      <a class="sl" href="../roadmap/index.html">Roadmap &amp; open decisions</a>
       <a class="sl" href="../shipped/index.html">What exists today</a>
-      <a class="sl" href="../shipped/index.html#not-yet">What is not here yet</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../about/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../about/index.html">About &amp; naming</a>
+      <a class="sl here" href="../cli/index.html">The CLI</a>
+      <a class="sl" href="../documents/index.html">The source documents</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -50,23 +64,26 @@
 </div></nav>
 <main class="doc">
   <div class="crumb"><a href="../index.html">sharness.ai</a> / the CLI</div>
-  <h1>The CLI: <code>sharness</code></h1>
-  <p class="lead">A Python package, <a href="https://pypi.org/project/sharness-ai/"><code>sharness-ai</code></a>, that installs two commands: <code>sharness-ai</code> and the shorthand <code>sharness</code>. Source: <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">SHarness-AI/SHarness-AI__CLI</a>.</p>
+  <h1>The CLI: <code>sharness-ai</code></h1>
+  <p class="lead">A Python package, <a href="https://pypi.org/project/sharness-ai/"><code>sharness-ai</code></a>, that will carry the SHarness launcher and components. Its command is <code>sharness-ai</code>. Source: <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">SHarness-AI/SHarness-AI__CLI</a>.</p>
 
   <h2 id="install">Install &amp; use</h2>
 <pre class="shell"><span class="d">$</span> pip install sharness-ai
-<span class="d">$</span> sharness --version
+<span class="d">$</span> sharness-ai --version
 <span class="g">sharness-ai v0.1.0</span>
-<span class="d">$</span> sharness
-<span class="d">usage: sharness [-h] [--version]</span></pre>
+<span class="d">$</span> sharness-ai
+<span class="d">usage: sharness-ai [-h] [--version]</span></pre>
   <p>Requires Python 3.11 or later. No runtime dependencies. The release shown is the first one, <span class="asof">as of 24 Oct 2026</span>.</p>
-  <div class="warnbox"><b>What it does today:</b> report its version and print its help. That is the whole surface of the first release. It exists to claim the name, prove the release pipeline end to end, and give the project a place to grow.</div>
+  <div class="warnbox"><b>What it does today:</b> report its version and print its help. That is the whole surface of the first release. It exists to claim the name, prove the release pipeline end to end, and give the <a href="../architecture/index.html">design</a> a place to be built.</div>
+
+  <h2 id="command">Why <code>sharness-ai</code>, not <code>sharness</code></h2>
+  <p>Plain <code>sharness</code> is the Debian, pkgsrc and OpenBSD package name of an unrelated shell test library, so SHarness does not use it as a command. <code>sharness-ai</code> matches the PyPI distribution. The first release, v0.1.0, also installed a <code>sharness</code> shorthand; it is removed on the CLI's <code>dev</code> branch and goes with the next release. Environment variables will use the prefix <code>SHARNESS_AI_</code> (proposed).</p>
 
   <h2 id="version">Where the version lives</h2>
-  <p>One file owns it: <code>sharness_ai/version</code>. <code>sharness --version</code> reads that file at import time; CI writes it, together with the version in <code>pyproject.toml</code>, on every release. The same convention as <a href="https://sgit.ai">sgit</a>.</p>
+  <p>One file owns it: <code>sharness_ai/version</code>. <code>sharness-ai --version</code> reads that file at import time; CI writes it, together with the version in <code>pyproject.toml</code>, on every release. The same convention as <a href="https://sgit.ai">sgit</a>.</p>
 
   <h2 id="release">How it is released</h2>
-  <p>Every push to <code>main</code> runs <code>.github/workflows/workflow.yml</code> in the CLI repository:</p>
+  <p>Day-to-day work lands on <code>dev</code>, the default branch. Merging <code>dev</code> into <code>main</code> cuts a release: every push to <code>main</code> runs <code>.github/workflows/workflow.yml</code> in the CLI repository:</p>
   <div class="tablewrap"><table>
     <thead><tr><th>Job</th><th>What it does</th></tr></thead>
     <tbody>
@@ -77,29 +94,41 @@
   </table></div>
   <div class="note"><b>Why one workflow file:</b> PyPI's trusted publisher for <code>sharness-ai</code> is bound to the repository <em>and</em> the workflow filename (<code>workflow.yml</code>). The publish job therefore lives in that file, not in a reusable workflow it calls. Renaming the file breaks publishing until the PyPI configuration is updated to match.</div>
 
-  <div class="pagenav"><a href="../index.html">← sharness.ai</a><a href="../shipped/index.html">What exists today →</a></div>
+  <div class="pagenav"><a href="../about/index.html">← About and naming</a><a href="../documents/index.html">The source documents →</a></div>
 </main>
 
 <footer class="site"><div class="cols">
   <div>
     <div class="brandline">sharness<span>.ai</span></div>
-    <p>The home of the SHarness-AI project and its command line tool, <code>sharness</code>. All content CC BY 4.0.</p>
-    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — where this site's conventions come from · <a href="https://coding.sgit.ai">↗ coding.sgit.ai</a> — the coding conventions · <a href="https://nfrs.sgit.ai">↗ nfrs.sgit.ai</a> — the non-functional requirements</p>
-    <p class="partnote">⚠ First version: this site states what exists and marks what does not. <a href="../shipped/index.html" style="display:inline;padding:0">What exists today, and what is not here yet</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.1</a> · <a href="../admin/index.html">engineering</a></p>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design. Nothing here is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.2.0</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
-    <h4>sharness</h4>
-    <a href="../cli/index.html">The CLI</a>
+    <h4>The design</h4>
+    <a href="../why/index.html">Why: the last metre</a>
+    <a href="../architecture/index.html">Architecture</a>
+    <a href="../components/index.html">Components</a>
+    <a href="../keys/index.html">Keys and the KMS</a>
+    <a href="../policies/index.html">Process Behaviour Policies</a>
+    <a href="../agents/index.html">Agents and LLMs</a>
+    <a href="../process-tree/index.html">Enforcing the process tree</a>
+  </div>
+  <div>
+    <h4>Evidence &amp; status</h4>
+    <a href="../evidence/index.html">Evidence</a>
+    <a href="../roadmap/index.html">Roadmap &amp; open decisions</a>
     <a href="../shipped/index.html">What exists today</a>
-    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
-    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: the CLI</a>
+    <a href="../documents/index.html">The source documents</a>
   </div>
   <div>
-    <h4>Site</h4>
-    <a href="../admin/index.html">Admin &amp; engineering</a>
-    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
-    <a href="../admin/versions.html">Release history</a>
+    <h4>Project</h4>
+    <a href="../about/index.html">About &amp; naming</a>
+    <a href="../cli/index.html">The CLI</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI">GitHub: SHarness-AI</a>
+    <a href="../admin/comms.html">Comms &amp; release history</a>
   </div>
   <div>
     <h4>For agents</h4>

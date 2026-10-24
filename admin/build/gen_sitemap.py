@@ -14,7 +14,9 @@ from pathlib import Path
 ROOT      = Path(__file__).resolve().parents[2]
 HOST      = (ROOT / "CNAME").read_text().strip()
 SKIP_DIRS = {".git", ".github", "node_modules", "assets"}
-ORDER     = ["index.html", "cli/", "shipped/", "admin/"]          # reading order
+ORDER     = ["index.html", "why/", "architecture/", "components/", "keys/", "policies/",
+             "agents/", "process-tree/", "evidence/", "roadmap/", "shipped/", "about/",
+             "cli/", "documents/", "admin/"]                          # reading order
 
 
 def last_commit(rel):

@@ -4,7 +4,7 @@
 #
 #   1. validate     — the pre-release gate (admin/build/validate.js: version agreement,
 #                     internal links, canonical/CNAME agreement, key-leak tripwire, dated
-#                     figures). A failure stops the release: no tag, no publish. Also runs
+#                     figures), plus gen_pages.py --check (HTML matches its markdown source). A failure stops the release: no tag, no publish. Also runs
 #                     on pull requests, so branch work is gated before it reaches dev.
 #   2. tag-release  — every push to dev is a release, tagged v{X}.{Y}.{Z}. The version is
 #                     owned by admin/build/version.txt (bumped exactly once per release)
@@ -37,6 +37,8 @@ jobs:
           persist-credentials: false
       - name: Validate the site (version, links, canonical, key-leak tripwire, dated figures)
         run: node admin/build/validate.js
+      - name: Design pages' HTML matches their markdown source
+        run: python3 admin/build/gen_pages.py --check
 
   tag-release:
     runs-on: ubuntu-latest
