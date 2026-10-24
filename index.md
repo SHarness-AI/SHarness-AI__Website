@@ -4,7 +4,7 @@
 > down by the kernel and talking only over allowed, mutually authenticated connections, so a
 > secret lives in one place and a tricked process can only do its one job.
 
-*Source: <https://sharness.ai/index.html> · site v0.4.0 · markdown twin of the front page.*
+*Source: <https://sharness.ai/index.html> · site v0.5.0 · markdown twin of the front page.*
 *Status: **design**, with the first experiments runnable. No SHarness component is built.*
 
 ---
@@ -34,14 +34,14 @@ widen it. sgit (sgit.ai's encrypted vault CLI) is the first app designed to run 
 
 ## Where it is going: mockups, experiments, storyboards
 
-The memo's method is to start with very simple examples. [Mockups and experiments](experiments/index.md) is the ladder: browser mockups ([the policy hash](mockups/policy-hash.html), [the edge matrix](mockups/edges.html)), then experiments any Claude session can run, then Linux experiments (E01 to E04 are runnable in the [CLI](cli/index.md): `probe`, `policy hash`, `run`, `hello`; E04 measured 24 Oct 2026), then components, then the launcher above the agent. Three [storyboards](storyboards/index.md) tell the design as short strips. A [research note](research/index.md) says what holds up and what to improve.
+The memo's method is to start with very simple examples. [Mockups and experiments](experiments/index.md) is the ladder: browser mockups ([the policy hash](mockups/policy-hash.html), [the edge matrix](mockups/edges.html)), then experiments any Claude session can run, then Linux experiments (E01 to E04 are runnable in the [CLI](cli/index.md): `probe`, `policy hash`, `run`, `hello`; E04 measured 24 Oct 2026), then components, then the launcher above the agent. Three [storyboards](storyboards/index.md) tell the design as short strips. A [research note](research/index.md) says what holds up and what to improve; a [market and competitive analysis](market/index.md) says what already exists and where SHarness sits.
 
 ## Pages (each also available as markdown at `<page>/index.md`)
 
 - [Why: the last metre](why/index.md) · [Architecture](architecture/index.md) · [Components](components/index.md)
 - [Keys and the KMS](keys/index.md) · [Process Behaviour Policies](policies/index.md) · [Agents and LLMs](agents/index.md)
 - [Enforcing the process tree](process-tree/index.md) · [Evidence](evidence/index.md) · [Roadmap and open decisions](roadmap/index.md)
-- [Mockups and experiments](experiments/index.md) · [Storyboards](storyboards/index.md) · [The CLI](cli/index.md) · [Research note](research/index.md)
+- [Mockups and experiments](experiments/index.md) · [Storyboards](storyboards/index.md) · [The CLI](cli/index.md) · [Research note](research/index.md) · [Market and competitors](market/index.md)
 - [About and naming](about/index.md) · [The source documents](documents/index.md)
 
 ## Articles

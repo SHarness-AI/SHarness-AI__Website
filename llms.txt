@@ -4,7 +4,7 @@
 > the kernel and talking only over allowed, mutually authenticated connections, so a secret
 > lives in one place and a tricked process can only do its one job.
 
-Site version: v0.4.0. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04
+Site version: v0.5.0. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04
 in the CLI). No SHarness component is built.
 By Dinis Cruz; design session written up with Claude, 24 October 2026. All content CC BY 4.0.
 SHarness is unrelated to Sharness, the shell testing library.
@@ -57,6 +57,9 @@ SHarness is unrelated to Sharness, the shell testing library.
   as proposed (experiments today, components tomorrow), the v0 policy and its hash, releases
 - /research/index.md — the published design read in full on 24 Oct 2026: what holds up, ten
   findings and what this release did about each, what is still open and in what order
+- /market/index.md — market and competitive analysis as of 24 Oct 2026: sandboxes and runtimes,
+  guardrails, MCP and tool security, LLM gateways, secrets and identity, enterprise platforms,
+  standards; every row sourced; where SHarness sits, what to reuse, threats to the thesis
 - /storyboards/index.md — three storyboards drawn from data by the storyboards.sgit.ai kit
   (the last metre, its one job, hello world inside), the cast, how they are made; each
   storyboard's script at /storyboards/<slug>/index.md, data at storyboard.json and bundle.json

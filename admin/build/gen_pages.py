@@ -56,6 +56,8 @@ PAGES = [
      "The sharness-ai package: what exists, the first version as proposed (experiments today, components tomorrow), the v0 policy, naming, versioning and the release pipeline."),
     ("research",     "Research note",
      "The published design read in full on 24 Oct 2026: what holds up, what to improve, what this release did about it, and what is still open."),
+    ("market",       "Market and competitive analysis",
+     "What exists in the market that does part of what SHarness is designed to do, as of 24 Oct 2026: sandboxes, guardrails, MCP gateways, LLM gateways, secrets and identity, enterprise platforms, standards; where SHarness sits and the threats to its thesis."),
     ("about",        "About and naming",
      "Who SHarness is by, the naming rules, the disambiguation from the Sharness shell test library, and the identifiers."),
     ("documents",    "The source documents",

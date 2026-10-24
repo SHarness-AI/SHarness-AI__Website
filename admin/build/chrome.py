@@ -41,7 +41,8 @@ NAV = [
         ("Roadmap &amp; open decisions", "roadmap/index.html"),
         ("What exists today", "shipped/index.html"),
         ("Research note", "research/index.html"),
-    ], ("evidence/", "roadmap/", "shipped/", "research/")),
+        ("Market &amp; competitors", "market/index.html"),
+    ], ("evidence/", "roadmap/", "shipped/", "research/", "market/")),
     ("Experiments", "experiments/index.html", [
         ("&#9679; Mockups &amp; experiments", "experiments/index.html"),
         ("Storyboards", "storyboards/index.html"),
@@ -81,6 +82,7 @@ FOOTER = [
         ("Roadmap &amp; open decisions", "roadmap/index.html"),
         ("What exists today", "shipped/index.html"),
         ("Research note", "research/index.html"),
+        ("Market &amp; competitors", "market/index.html"),
         ("The source documents", "documents/index.html"),
     ]),
     ("Experiments", [
