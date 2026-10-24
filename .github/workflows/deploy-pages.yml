@@ -1,0 +1,137 @@
+# Deploys sharness.ai (this repo's working tree) to GitHub Pages, with the same pipeline
+# order as the *.sgit.ai sites (adapted from SGit-AI/SGit-AI__Website__NFRs):
+# validate → tag → publish.
+#
+#   1. validate     — the pre-release gate (admin/build/validate.js: version agreement,
+#                     internal links, canonical/CNAME agreement, key-leak tripwire, dated
+#                     figures). A failure stops the release: no tag, no publish. Also runs
+#                     on pull requests, so branch work is gated before it reaches dev.
+#   2. tag-release  — every push to dev is a release, tagged v{X}.{Y}.{Z}. The version is
+#                     owned by admin/build/version.txt (bumped exactly once per release)
+#                     and must also appear in the release commit's subject
+#                     ("site vX.Y.Z: ..."). CI verifies the two agree and that the bump is
+#                     the next minor (or a deliberate major), then tags the release commit,
+#                     which is HEAD on a direct push and HEAD's parent when a pull request
+#                     lands as a merge commit.
+#   3. deploy       — publishes the tree. A push to main, or a manual run, deploys without
+#                     tagging. Never runs when validation failed, never from a pull request.
+name: deploy-pages
+on:
+  push:
+    branches: [dev, main]
+  pull_request:
+    branches: [dev, main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: pages
+  cancel-in-progress: false                  # never interrupt a half-done tag/publish
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Validate the site (version, links, canonical, key-leak tripwire, dated figures)
+        run: node admin/build/validate.js
+
+  tag-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: [validate]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+    permissions:
+      contents: write                        # pushes the release tag
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+      - name: Tag this release
+        run: |
+          set -euo pipefail
+          git fetch --tags --quiet
+
+          # Read the history ONCE, into a variable: piping `git log` into an early-exiting
+          # reader (grep -m1, head) kills git log with SIGPIPE, which under pipefail fails
+          # the job once the log outgrows the pipe buffer (seen on the sgit.ai sites).
+          LOG=$(git log --format='%H;%s')
+
+          # The version of THIS release, from the file that owns it.
+          VER=$(grep -oP '^v\K[0-9]+\.[0-9]+\.[0-9]+' admin/build/version.txt)
+          TAG="v$VER"
+          echo "version.txt says $TAG"
+
+          # The release commit is the newest one whose SUBJECT carries a version. Usually
+          # HEAD; when a pull request lands as a merge commit, it is HEAD's parent.
+          NEWEST=$(grep -oP '^[0-9a-f]+;site v\K[0-9]+\.[0-9]+\.[0-9]+(?=:)' <<< "$LOG" | head -1 || true)
+          if [ -z "$NEWEST" ]; then
+            echo "::error::no commit in this history carries a version in its subject (\"site vX.Y.Z: ...\")"
+            exit 1
+          fi
+          if [ "$NEWEST" != "$VER" ]; then
+            echo "::error::version.txt says $TAG but the newest release commit is v$NEWEST — the two disagree"
+            exit 1
+          fi
+          REL=$(grep -m1 -F ";site v$VER:" <<< "$LOG" | cut -d';' -f1)
+          echo "release commit is ${REL:0:9}"
+
+          # Already tagged: fine if on this very commit (a re-run), an error if the version
+          # was reused for a later commit instead of bumped.
+          if git rev-parse -q --verify "refs/tags/$TAG" >/dev/null; then
+            if [ "$(git rev-parse "refs/tags/$TAG^{commit}")" = "$REL" ]; then
+              echo "$TAG already tags ${REL:0:9}; nothing to do"
+              exit 0
+            fi
+            echo "::error::$TAG already exists on an earlier commit — version.txt was not bumped for this release"
+            exit 1
+          fi
+
+          # The new tag must be the next minor after the latest, or a deliberate major
+          # (.0). `|| true`: on the very first release there is no previous tag.
+          PREV=$(git tag --list 'v*' | sort -V | tail -1 || true)
+          if [ -n "$PREV" ]; then
+            NEXT_MINOR=$(echo "$PREV" | awk -F. '{printf "%s.%s.%d", $1, $2, $3+1}')
+            NEXT_MAJOR=$(echo "$PREV" | awk -F. '{split($1,a,"v"); printf "v%s.%d.0", a[2], $2+1}')
+            if [ "$TAG" != "$NEXT_MINOR" ] && [ "$TAG" != "$NEXT_MAJOR" ]; then
+              echo "::error::latest tag is $PREV; expected $NEXT_MINOR (minor) or $NEXT_MAJOR (major), got $TAG"
+              exit 1
+            fi
+          fi
+
+          git tag "$TAG" "$REL"
+          git push origin "refs/tags/$TAG"
+          echo "tagged ${REL:0:9} as $TAG"
+
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [validate, tag-release]
+    # Publish even when tag-release is skipped (push to main, manual run): never when
+    # validation failed or tagging failed, and never from a pull request.
+    if: always() && github.event_name != 'pull_request' && needs.validate.result == 'success' && (needs.tag-release.result == 'success' || needs.tag-release.result == 'skipped')
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Assemble site artifact
+        run: |
+          mkdir -p "$RUNNER_TEMP/site"
+          rsync -a ./ "$RUNNER_TEMP/site/" --exclude '.git' --exclude '.github' --exclude '.sg_vault'
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
+        with:
+          enablement: true
+      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
+        with:
+          path: ${{ runner.temp }}/site
+      - id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Admin & engineering — sharness.ai</title>
+<meta name="description" content="How sharness.ai is built: static HTML, one definition of the chrome, a pre-release gate, and validate, tag, deploy to GitHub Pages.">
+<link rel="canonical" href="https://sharness.ai/admin/index.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/admin/index.html">
+<meta property="og:title" content="Admin & engineering — sharness.ai">
+<meta property="og:description" content="How sharness.ai is built: static HTML, one definition of the chrome, a pre-release gate, and validate, tag, deploy to GitHub Pages.">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill">first version</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.0</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../cli/index.html">The CLI<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../cli/index.html">&#9679; Install &amp; use</a>
+      <a class="sl" href="../cli/index.html#release">How it is released</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../shipped/index.html">The honest column<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../shipped/index.html">What exists today</a>
+      <a class="sl" href="../shipped/index.html#not-yet">What is not here yet</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../admin/index.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl here" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__Website">★ GitHub</a>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+<main class="doc">
+  <div class="crumb"><a href="../index.html">sharness.ai</a> / admin</div>
+  <h1>How this site is built</h1>
+  <p class="lead">Hand-written static HTML with no framework and no build step, plus a handful of small tools that keep it consistent. Modelled on the *.sgit.ai sites (<a href="https://nfrs.sgit.ai/admin/index.html">nfrs.sgit.ai</a> in particular), using the same pipeline and gate. The conventions are documented at <a href="https://coding.sgit.ai">coding.sgit.ai</a>.</p>
+
+  <h2 id="tools">The tools</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>File</th><th>Job</th></tr></thead>
+    <tbody>
+      <tr><td><code>admin/build/version.txt</code></td><td>Owns the site version. Bumped exactly once per release.</td></tr>
+      <tr><td><code>admin/build/chrome.py</code></td><td>The single definition of the nav, the footer and the version badge, rewritten in place across every page. Also stamps the version into <code>llms.txt</code> and <code>index.md</code>.</td></tr>
+      <tr><td id="validate"><code>admin/build/validate.js</code></td><td>The pre-release gate: version agreement, internal links, canonical host against <code>CNAME</code>, a vault-key-shaped-string tripwire, and <em>generate or date every number</em>. Any failure stops the release.</td></tr>
+      <tr><td><code>admin/build/gen_sitemap.py</code></td><td>Writes <code>sitemap.xml</code> from the tree, with each page's last commit date.</td></tr>
+      <tr><td><code>admin/build/gen_llms_full.py</code></td><td>Writes <code>llms-full.txt</code>: the agent surface in one fetch.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2 id="pipeline">The pipeline</h2>
+  <p><code>.github/workflows/deploy-pages.yml</code>, in this order:</p>
+  <ol>
+    <li><b>validate</b>: runs the gate. It also runs on pull requests, so branch work is gated before it reaches the release branch.</li>
+    <li><b>tag-release</b>: every push to <code>dev</code> is a release. The version in <code>version.txt</code> must match the release commit's subject (<code>site vX.Y.Z: ...</code>), and must be the next minor or a deliberate major bump. CI then tags the release commit.</li>
+    <li><b>deploy</b>: publishes the tree to GitHub Pages. A push to <code>main</code>, or a manual run, deploys without tagging. Never runs when validation failed.</li>
+  </ol>
+
+  <h2 id="release">Cutting a release</h2>
+<pre class="shell"><span class="d"># 1. bump admin/build/version.txt, add a row to admin/versions.html</span>
+python3 admin/build/chrome.py
+python3 admin/build/gen_sitemap.py &amp;&amp; python3 admin/build/gen_llms_full.py
+node admin/build/validate.js
+git commit -am <span class="y">"site vX.Y.Z: ..."</span> &amp;&amp; git push origin dev</pre>
+
+  <div class="pagenav"><a href="../shipped/index.html">← What exists today</a><a href="comms.html">Comms →</a></div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>The home of the SHarness-AI project and its command line tool, <code>sharness</code>. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — where this site's conventions come from · <a href="https://coding.sgit.ai">↗ coding.sgit.ai</a> — the coding conventions · <a href="https://nfrs.sgit.ai">↗ nfrs.sgit.ai</a> — the non-functional requirements</p>
+    <p class="partnote">⚠ First version: this site states what exists and marks what does not. <a href="../shipped/index.html" style="display:inline;padding:0">What exists today, and what is not here yet</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.0</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>sharness</h4>
+    <a href="../cli/index.html">The CLI</a>
+    <a href="../shipped/index.html">What exists today</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: the CLI</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/index.html">Admin &amp; engineering</a>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+  </div>
+  <div>
+    <h4>For agents</h4>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="../llms-full.txt">llms-full.txt</a>
+    <a href="../index.md">index.md</a>
+    <a href="../sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+
+</body>
+</html>
