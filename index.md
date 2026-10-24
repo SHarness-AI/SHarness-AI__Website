@@ -4,7 +4,7 @@
 > the first version of the site: it states what exists today, and it marks what does not
 > exist yet rather than describing it.
 
-*Source: <https://sharness.ai/index.html> · site v0.1.0 · markdown twin of the front page.*
+*Source: <https://sharness.ai/index.html> · site v0.1.1 · markdown twin of the front page.*
 
 ---
 

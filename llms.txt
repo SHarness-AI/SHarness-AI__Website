@@ -4,7 +4,7 @@
 > (PyPI: `sharness-ai`). This is the first version of the site: it states what exists
 > today and marks what does not, rather than describing features nobody has built.
 
-Site version: v0.1.0. All content CC BY 4.0.
+Site version: v0.1.1. All content CC BY 4.0.
 
 ## Properties agents may rely on
 
