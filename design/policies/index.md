@@ -2,6 +2,8 @@
 
 > **Status: design.** The schema and the composition rules are proposed. Enforcement mechanisms marked *measured* were tested as of 24 Oct 2026, in one Claude agent workspace.
 
+The definition this page and every enforcer are checked against is [the PBP on one page](../pbp/index.md).
+
 A Process Behaviour Policy (PBP) is the [Agent Behaviour Policy](https://riskmandate.ai/abp.html) model applied to a process. It is defined once, hashed, supplied from outside the agent, and enforced by the runtime: **never by the process it constrains.**
 
 ## 1. From ABP to PBP

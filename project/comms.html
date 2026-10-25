@@ -19,7 +19,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.14</a>
+  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.15</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -42,6 +42,7 @@
       <a class="sl" href="../design/components/index.html">Components</a>
       <a class="sl" href="../design/keys/index.html">Keys and the KMS</a>
       <a class="sl" href="../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../design/pbp/index.html">The PBP on one page</a>
       <a class="sl" href="../design/agents/index.html">Agents and LLMs</a>
       <a class="sl" href="../design/process-tree/index.html">Enforcing the process tree</a>
       <a class="sl" href="../design/surface/index.html">What a process can do</a>
@@ -151,6 +152,7 @@
       <tr id="t11"><td><b>T11</b></td><td><b>Import the articles into newsroom.sgit.ai and list the storyboards on storyboards.sgit.ai.</b> The articles are in the newsroom's format already; the storyboards' listing is T5. The network is the first channel of the outreach plan. Opened by sherpa@sharness.<br><span class="dim small">opened 2026-10-25</span></td><td><a href="../admin/members/sherpa/index.html">sherpa</a></td><td><span class="tstat t-open">open</span></td></tr>
       <tr id="t12"><td><b>T12</b></td><td><b>The repository checklist from sgit.ai: a reality file, a corrections file and a review folder for both repositories.</b> <a href="https://sgit.ai/docs/guidance/repositories.html">Every sgit repository</a> says what each repository in the estate carries. SHarness has most of it: the brief published in full, one version per push, a gate, roles and a board (from v0.5.14), machine-readable twins, the licences. Missing on 25 Oct 2026: a reality file as such (<a href="../evidence/status/index.html">What exists today</a> plays the part on the site; the CLI has none), a corrections file (<code>BRIEF-CORRECTIONS.md</code>; the pack's known issues are listed on <a href="../project/sources/index.html">the source documents</a> instead), the <code>review/</code> folder the review brief asks for, and a participant disclosure page. One per release, smallest first.<br><span class="dim small">opened 2026-10-25</span></td><td><a href="../admin/members/conductor/index.html">conductor</a></td><td><span class="tstat t-open">open</span></td></tr>
       <tr id="t13"><td><b>T13</b></td><td><b>AGENTS.md in the CLI repository, pointing at the site's guidance and the board.</b> The CLI's <code>CLAUDE.md</code> carries the project rules; a short <code>AGENTS.md</code> beside it says where the board, the members and the updates live and how to talk in the commits (<code>Agent:</code> and <code>To-&lt;id&gt;:</code> trailers), so a session that starts in the CLI finds the same guidance as one that starts on the site.<br><span class="dim small">opened 2026-10-25</span></td><td><a href="../admin/members/conductor/index.html">conductor</a></td><td><span class="tstat t-open">in progress</span></td></tr>
+      <tr id="t14"><td><b>T14</b></td><td><b>The row shape in policy.py, so that policy check derives the barrier kind per row.</b> From <a href="../design/pbp/index.html">the PBP on one page</a> §4 and §5: a policy row is subject, resource, operation, predicate (<code>where</code>), <code>held_by</code> and a derived <code>kind</code>. <code>sharness-ai policy check</code> should compute, for every behaviour row, whether its preconditions hold (the capability rows close every other path to the resource; one edge to the keeper) and report the barrier kind: Boundary when they do, Expectation when they do not, never an error. The summary then counts rows held by the kernel, rows held by a keeper and rows unheld, beside <code>hello</code>'s probes held. Opened by sharness.pbp, who writes the shape; sharness.build or sharness.dev write the code. The first predicate to carry is <code>append_only</code>, because <code>sharness.fs</code> is its keeper in the design.<br><span class="dim small">opened 2026-10-25</span></td><td><a href="../admin/members/sharness.build/index.html">sharness.build</a></td><td><span class="tstat t-open">open</span></td></tr>
     </tbody>
   </table></div>
 <h2 id="done-and-decided">Done and decided</h2>
@@ -174,7 +176,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../project/releases.html">v0.5.14</a> · <a href="../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../project/releases.html">v0.5.15</a> · <a href="../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>
@@ -184,6 +186,7 @@
     <a href="../design/components/index.html">Components</a>
     <a href="../design/keys/index.html">Keys and the KMS</a>
     <a href="../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../design/pbp/index.html">The PBP on one page</a>
     <a href="../design/agents/index.html">Agents and LLMs</a>
     <a href="../design/process-tree/index.html">Enforcing the process tree</a>
     <a href="../design/surface/index.html">What a process can do</a>

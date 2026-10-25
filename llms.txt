@@ -4,7 +4,7 @@
 > the kernel and talking only over allowed, mutually authenticated connections, so a secret
 > lives in one place and a tricked process can only do its one job.
 
-Site version: v0.5.14. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04,
+Site version: v0.5.15. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04,
 E09 and E10 in the CLI; E09 is a real Linux kernel in a browser tab running hello, measured 25 Oct 2026).
 No SHarness component is built.
 By Dinis Cruz; design session written up with Claude, 24 October 2026. All content CC BY 4.0.
@@ -53,6 +53,10 @@ SHarness is unrelated to Sharness, the shell testing library.
 - /design/policies/index.md — Process Behaviour Policies: ABP (mandate, grant, delta, barrier)
   applied to processes; intersection-composed layers; the one hash the person supplies; the
   enforcement map; learning a policy from strace; prompt-injection walkthrough; the v0 shape
+- /design/pbp/index.md — THE PBP ON ONE PAGE: the definition every page and enforcer is checked against;
+  the four objects for a process; text + hash from outside + an enforcer the subject does not include;
+  capability rows (kernel) and behaviour rows (keeper) and the precondition rule that joins them; the
+  four parts of the spec (schema, hash, composition, conformance). PROPOSED, 25 Oct 2026
 - /design/agents/index.md — how an agent message flowed in the observed workspace; where SHarness
   plugs in (hooks documented; Claude Code's own sandbox); sharness.llm; sharness.bash; dual-LLM
 - /design/process-tree/index.md — making every process go through sharness.bash; side doors;
