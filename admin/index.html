@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.14</a>
+  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.15</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -120,14 +120,14 @@
 <main class="doc">
   <div class="crumb"><a href="../index.html">sharness.ai</a> / admin · <a href="index.md">this page as markdown</a></div>
   <h1>Admin: how the project is run</h1>
-<p><b><span class="asof">as of 25 Oct 2026</span>:</b> 5 members, 10 request(s) waiting on the editor, 11 open task(s), 1 update(s); the latest update is <a href="updates/2026-10-25T2345Z/index.html">The conductor joins: three agents, 23 releases in two days mapped, an admin section, and six decisions waiting on the editor</a>.</p>
+<p><b><span class="asof">as of 25 Oct 2026</span>:</b> 5 members, 10 request(s) waiting on the editor, 10 open task(s), 1 update(s); the latest update is <a href="updates/2026-10-25T2345Z/index.html">The conductor joins: three agents, 23 releases in two days mapped, an admin section, and six decisions waiting on the editor</a>.</p>
 <p>SHarness is built in the open by one person and a few agents, and this section is where that is run: who does what, what is open and whose it is, what moved, and what only the editor can decide. Everything here is public and CC BY 4.0, including the mistakes; the journey is part of the story, and anyone can read how the work is run and join it (<a href="guidance/index.html">how</a>). The pages are generated from files under <code>content/admin/</code>, one file per row, member and update, so two agents rarely touch the same lines, and each page has a markdown twin.</p>
 <h2 id="how-work-moves">How work moves</h2>
 <ol>
 <li><b>A request from the editor</b>, in an agent's session, or a brief published in full under <a href="../project/sources/index.html">the source documents</a>.</li>
 <li><b>A row on <a href="board/index.html">the board</a></b>: <code>R&lt;n&gt;</code> when it needs the editor, <code>T&lt;n&gt;</code> when a member can do it; one owner, one status, never renumbered.</li>
 <li><b>A branch</b>, pushed early and often; then <b>a release to <code>dev</code></b> by the member that did the work, with the version in the commit subject and a sentence in <a href="../project/releases.html">the release history</a>. CI validates, tags and deploys.</li>
-<li><b>An update</b> on <a href="updates/index.html">Updates</a> when something moved: what changed, what waits on whom, by number.</li>
+<li><b>A note in the commit</b> to whoever needs to know (<code>To-&lt;id&gt;:</code>), read by every agent when it takes in <code>dev</code> and published on <a href="notes/index.html">Commit notes</a>. An <b>update</b> on <a href="updates/index.html">Updates</a> when something moved: what changed, what waits on whom, by number.</li>
 <li><b>A debrief</b> at the end of every session in the member's own <code>status.json</code>, read on <a href="status/index.html">Status</a>.</li>
 </ol>
 <h2 id="the-pages">The pages</h2>
@@ -135,6 +135,7 @@
 <li><a href="board/index.html">The board</a>: every request and task, with owner and status.</li>
 <li><a href="members/index.html">The members</a>: one person and the agents, each with a role, a policy and a status of its own.</li>
 <li><a href="updates/index.html">Updates</a>: what is happening, dated, newest first.</li>
+<li><a href="notes/index.html">Commit notes</a>: what the agents tell each other in the commits they already write, from both repositories, newest first.</li>
 <li><a href="status/index.html">Status</a>: where every branch of both repositories is, and every member.</li>
 <li><a href="guidance/index.html">Guidance for agents</a>: <code>AGENTS.md</code>, the rules every agent works by.</li>
 <li>Kept elsewhere in the project section: <a href="../project/engineering.html">engineering</a> (how the site is built and released), <a href="../project/agents/index.html">the agents and their keys</a> (keys on pki.sgit.ai, the vault register), <a href="../project/telemetry/index.html">telemetry</a>, <a href="../project/outreach/index.html">outreach</a> and <a href="../project/adoption/index.html">getting users</a>, <a href="../project/releases.html">the release history</a>.</li>
@@ -144,7 +145,7 @@
   <div class="tablewrap"><table>
     <thead><tr><th>Member</th><th>Role</th><th>State</th><th>Last did</th><th>Waiting for</th></tr></thead>
     <tbody>
-      <tr><td><a href="members/conductor/index.html"><b>sharness.conductor</b></a><br><span class="dim small">agent, joined 2026-10-25</span></td><td>Conductor; for now also librarian, ontologist and project manager</td><td><span class="tstat t-open">working</span></td><td>Joined. Read the newsroom, the PHP story site and its team pages, sgit.ai's team section and repositories guidance, coding.sgit.ai and nfrs.sgit.ai; mapped both repositories; set up the admin section.</td><td>R12 (a comms vault for conductor@sharness, keys sealed), R13 (the editor to accept or change this role and the three hats it wears), R14 (which other sessions are running, so each gets a member folder); on: editor</td></tr>
+      <tr><td><a href="members/conductor/index.html"><b>sharness.conductor</b></a><br><span class="dim small">agent, joined 2026-10-25</span></td><td>Conductor; for now also librarian, ontologist and project manager</td><td><span class="tstat t-open">working</span></td><td>v0.5.14 (the admin section) and v0.5.15 (Commit-FS-lite as the whole protocol in AGENTS.md, tools/notes.py, the commit notes page); the CLI's AGENTS.md on dev (T13 done).</td><td>R12 (a comms vault for conductor@sharness, keys sealed), R13 (the editor to accept or change this role and the three hats it wears), R14 (which other sessions are running, so each gets a member folder); on: editor</td></tr>
       <tr><td><a href="members/editor/index.html"><b>Dinis Cruz</b></a><br><span class="dim small">person, joined 2026-10-24</span></td><td>Author of SHarness and editor of the site</td><td><span class="tstat t-open">deciding</span></td><td>Asked the conductor to join, set up the admin section, map the work and publish updates (25 Oct 2026).</td><td>nothing from the team; the R rows on the board wait on him</td></tr>
       <tr><td><a href="members/sharness.build/index.html"><b>sharness.build</b></a><br><span class="dim small">agent, joined 2026-10-24</span></td><td>The build agent of the site and the CLI</td><td><span class="tstat t-done">done</span></td><td>Site v0.5.9 (the front page for a user arriving cold, the animated explainers, the machines page, the adoption plan) and CLI 47b3402 (the README, the hello report template) on 25 Oct 2026, 23:10 UTC.</td><td>R7: the release of the CLI's dev to main, which the adoption plan calls the single change that matters most for users</td></tr>
       <tr><td><a href="members/sharness.dev/index.html"><b>sharness.dev</b></a><br><span class="dim small">agent, joined 2026-10-25</span></td><td>The developer agent, reference implementations in several languages</td><td><span class="tstat t-need">waiting</span></td><td>Site v0.5.10 (25 Oct 2026, 23:23 UTC): the article One standard, many languages, Languages extended, roadmap decision 11 extended, comms R8.</td><td>R8: the editor's decision on the languages, the repository layout and where the test vectors live; on: editor</td></tr>
@@ -160,7 +161,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../project/releases.html">v0.5.14</a> · <a href="../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../project/releases.html">v0.5.15</a> · <a href="../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>
@@ -212,6 +213,7 @@
     <a href="../admin/index.html">Admin: how the project is run</a>
     <a href="../admin/board/index.html">The board</a>
     <a href="../admin/updates/index.html">Updates</a>
+    <a href="../admin/notes/index.html">Commit notes</a>
     <a href="../admin/guidance/index.html">Guidance for agents (AGENTS.md)</a>
     <a href="../project/adoption/index.html">Getting users</a>
     <a href="../project/outreach/index.html">Outreach</a>

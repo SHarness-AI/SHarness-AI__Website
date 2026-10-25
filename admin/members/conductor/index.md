@@ -60,11 +60,11 @@ Articles in its own voice, if any, carry the byline `sharness.conductor` and fol
 
 | | |
 |---|---|
-| State | working (as of 25 Oct 2026) |
-| Last did | Joined. Read the newsroom, the PHP story site and its team pages, sgit.ai's team section and repositories guidance, coding.sgit.ai and nfrs.sgit.ai; mapped both repositories; set up the admin section. |
+| State | working (as of 26 Oct 2026) |
+| Last did | v0.5.14 (the admin section) and v0.5.15 (Commit-FS-lite as the whole protocol in AGENTS.md, tools/notes.py, the commit notes page); the CLI's AGENTS.md on dev (T13 done). |
 | Waiting for | R12 (a comms vault for conductor@sharness, keys sealed), R13 (the editor to accept or change this role and the three hats it wears), R14 (which other sessions are running, so each gets a member folder); on: editor |
 | Branch | `claude/wonderful-cray-4xpawa` |
-| Next | Release the admin section to dev; come back when the in-flight commits land and write the next update. |
+| Next | The check-in at 00:31 UTC: refresh the snapshot, write the next update if anything moved; then T12, one item per release. |
 
 ## The policy
 

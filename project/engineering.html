@@ -19,7 +19,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.14</a>
+  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.15</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -132,6 +132,7 @@
       <tr><td><code>tools/gen_storyboards.py</code></td><td>Generates <code>/storyboards/</code> from <code>content/storyboards/</code> (one JSON per storyboard, one cast): each storyboard's page, its markdown script, its <code>bundle.json</code>, and the index. The previews (<code>thumb.jpg</code>, <code>og.jpg</code>) are rendered with the storyboards kit's own renderer and committed; <code>--check</code> fails CI when anything is stale or a preview is missing.</td></tr>
       <tr><td><code>tools/gen_admin.py</code></td><td>Generates <code>/admin/</code>, how the project is run, from <code>content/admin/</code> and <code>AGENTS.md</code>: the board (one file per row, <code>board/&lt;ID&gt;.md</code>; also written to <code>project/comms.html</code> at its original address), the members (<code>members/&lt;id&gt;/ROLE.md</code>, <code>policy.json</code>, <code>status.json</code>), the updates (<code>updates/&lt;id&gt;.md</code>), the guidance and the status snapshot, each with a markdown twin. <code>--check</code> fails CI when a page is stale or a source is malformed (a row without an owner, a status outside the set, an author with no member folder).</td></tr>
       <tr><td><code>tools/admin_status.py</code></td><td>Writes <code>content/admin/status.json</code>, the snapshot of every branch of both repositories (head, last commit, ahead of and behind <code>dev</code>, latest tag), read from git. The one tool that holds a clock: the build stamps its as-of date on every admin page, so the pages stay deterministic.</td></tr>
+      <tr><td><code>tools/notes.py</code></td><td>Commit-FS-lite's read side: <code>python3 tools/notes.py &lt;member&gt;</code> prints the notes addressed to a member (<code>To-&lt;member&gt;:</code> and <code>To-all:</code> lines) from the commits on both repositories' <code>dev</code>, after fetching; the one parser of <code>Agent:</code> and <code>To-</code> lines, which <code>admin_status.py</code> reuses for <a href="../admin/notes/index.html">the notes page</a>.</td></tr>
       <tr><td><code>tools/validate_storyboards.cjs</code></td><td>Runs the kit's own validator (<code>StoryboardFormats.validate</code> from the pinned release, its sha256 checked) over every storyboard: an unknown character, pose, mood or prop stops the release.</td></tr>
       <tr><td><code>project/sources/</code></td><td>The source design pack, verbatim. Never edited: corrections go into the next revision of the pack.</td></tr>
       <tr><td><code>tools/gen_sitemap.py</code></td><td>Writes <code>sitemap.xml</code> from the tree, with each page's last commit date.</td></tr>
@@ -164,7 +165,7 @@ git commit -am <span class="y">"site vX.Y.Z: ..."</span> &amp;&amp; git push ori
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../project/releases.html">v0.5.14</a> · <a href="../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../project/releases.html">v0.5.15</a> · <a href="../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>
@@ -216,6 +217,7 @@ git commit -am <span class="y">"site vX.Y.Z: ..."</span> &amp;&amp; git push ori
     <a href="../admin/index.html">Admin: how the project is run</a>
     <a href="../admin/board/index.html">The board</a>
     <a href="../admin/updates/index.html">Updates</a>
+    <a href="../admin/notes/index.html">Commit notes</a>
     <a href="../admin/guidance/index.html">Guidance for agents (AGENTS.md)</a>
     <a href="../project/adoption/index.html">Getting users</a>
     <a href="../project/outreach/index.html">Outreach</a>
