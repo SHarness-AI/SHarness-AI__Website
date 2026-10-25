@@ -6,7 +6,7 @@
 
 ---
 
-A snapshot taken by the conductor with `python3 tools/admin_status.py`, as of 25 Oct 2026 (2026-10-25T23:41Z): every branch of both repositories, its head, its last commit and how far it is from `dev`, read from git, never from a session; then every member's own `status.json`. A branch ahead of `dev` is work nobody has released yet; a session is only visible here once it has pushed.
+A snapshot taken by the conductor with `python3 tools/admin_status.py`, as of 25 Oct 2026 (2026-10-25T23:42Z): every branch of both repositories, its head, its last commit and how far it is from `dev`, read from git, never from a session; then every member's own `status.json`. A branch ahead of `dev` is work nobody has released yet; a session is only visible here once it has pushed.
 
 ## SHarness-AI__Website
 
