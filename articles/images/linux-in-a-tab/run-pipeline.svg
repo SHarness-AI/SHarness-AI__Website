@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 470" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">What sharness-ai run does with a Process Behaviour Policy</title>
+  <desc id="d">Three rows. In the parent: the policy file is canonicalised, hashed with SHA-256, compared with the hash the person supplied (exit 125 and nothing runs if they differ), checked for shape, then the process forks. In the child, before exec: an empty network namespace, the memory and process caps as rlimits and cgroups, no_new_privs, then a Landlock ruleset built with syscalls 444 and 445 and made final with 446, then execve of the command with SHARNESS_AI_POLICY_HASH in its environment. From then on the kernel checks every open, write, execve and connect of the child and its descendants: a write outside the write list gets EACCES, a connect to port 80 gets EACCES, 200 MiB under a 64 MiB cap raises MemoryError, and an ELF interpreter outside the exec list stops execve with EACCES.</desc>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#8a8d94"/></marker></defs>
+  <rect width="960" height="470" fill="#faf9f5"/>
+  <text x="24" y="34" font-size="12" font-weight="700" letter-spacing="2" fill="#5c5f66">sharness-ai run --policy p.json [--expect-hash sha256:…] -- cmd</text>
+  <text x="24" y="70" font-size="12" font-weight="700" fill="#8a8d94">PARENT</text>
+  <g font-size="12">
+    <rect x="24" y="80" width="126" height="64" rx="10" fill="#ffffff" stroke="#d5d0c2" stroke-width="2"/>
+    <text x="38" y="104" font-weight="700" fill="#34363c">p.json</text><text x="38" y="124" fill="#6b6f76">files · network</text><text x="38" y="138" fill="#6b6f76">· process</text>
+    <rect x="172" y="80" width="150" height="64" rx="10" fill="#ffffff" stroke="#0f766e" stroke-width="2"/>
+    <text x="186" y="104" font-weight="700" fill="#115e59">canonical JSON</text><text x="186" y="124" fill="#6b6f76">sorted keys, no spaces,</text><text x="186" y="138" fill="#6b6f76">integers only</text>
+    <rect x="344" y="80" width="150" height="64" rx="10" fill="#0f766e"/>
+    <text x="358" y="104" font-weight="700" fill="#ffffff">SHA-256</text><text x="358" y="124" fill="#e6fffa" font-family="ui-monospace,Menlo,monospace" font-size="11">sha256:a6244d…</text><text x="358" y="138" fill="#e6fffa">the policy's name</text>
+    <rect x="516" y="80" width="190" height="64" rx="10" fill="#ffffff" stroke="#b45309" stroke-width="2"/>
+    <text x="530" y="104" font-weight="700" fill="#b45309">--expect-hash matches?</text><text x="530" y="124" fill="#6b6f76">no: exit 125, nothing runs</text><text x="530" y="138" fill="#6b6f76">the launcher's first check</text>
+    <rect x="728" y="80" width="208" height="64" rx="10" fill="#ffffff" stroke="#d5d0c2" stroke-width="2"/>
+    <text x="742" y="104" font-weight="700" fill="#34363c">check the shape, then fork()</text><text x="742" y="124" fill="#6b6f76">no kernel (Pyodide): exit 126</text><text x="742" y="138" fill="#6b6f76">no Landlock: exit 126</text>
+  </g>
+  <g stroke="#8a8d94" stroke-width="2" marker-end="url(#a)"><line x1="150" y1="112" x2="170" y2="112"/><line x1="322" y1="112" x2="342" y2="112"/><line x1="494" y1="112" x2="514" y2="112"/><line x1="706" y1="112" x2="726" y2="112"/><path d="M832 144 V170 H90 V190" fill="none"/></g>
+  <text x="24" y="186" font-size="12" font-weight="700" fill="#8a8d94">CHILD</text>
+  <g font-size="12">
+    <rect x="24" y="196" width="176" height="78" rx="10" fill="#ffffff" stroke="#6d28d9" stroke-width="2"/>
+    <text x="38" y="220" font-weight="700" fill="#5b21b6">network "none"</text><text x="38" y="240" font-size="11" fill="#6b6f76">unshare(CLONE_NEWNET):</text><text x="38" y="256" font-size="11" fill="#6b6f76">only a loopback, down</text>
+    <rect x="218" y="196" width="168" height="78" rx="10" fill="#ffffff" stroke="#6d28d9" stroke-width="2"/>
+    <text x="232" y="220" font-weight="700" fill="#5b21b6">caps</text><text x="232" y="240" font-size="11" fill="#6b6f76">RLIMIT_AS, RLIMIT_NPROC</text><text x="232" y="256" font-size="11" fill="#6b6f76">memory.max, pids.max</text>
+    <rect x="404" y="196" width="128" height="78" rx="10" fill="#ffffff" stroke="#6d28d9" stroke-width="2"/>
+    <text x="418" y="220" font-weight="700" fill="#5b21b6">no_new_privs</text><text x="418" y="240" font-size="11" fill="#6b6f76">prctl 38: no setuid</text><text x="418" y="256" font-size="11" fill="#6b6f76">gain, ever</text>
+    <rect x="550" y="196" width="220" height="78" rx="10" fill="#0f766e"/>
+    <text x="564" y="220" font-weight="700" fill="#ffffff">Landlock</text><text x="564" y="240" font-size="11" fill="#e6fffa">444 create_ruleset · 445 add_rule</text><text x="564" y="256" font-size="11" fill="#e6fffa">per path, per port · 446 restrict_self</text>
+    <rect x="788" y="196" width="148" height="78" rx="10" fill="#ffffff" stroke="#0f766e" stroke-width="2"/>
+    <text x="802" y="220" font-weight="700" fill="#115e59">execve(cmd)</text><text x="802" y="240" font-size="11" fill="#6b6f76">env SHARNESS_AI_</text><text x="802" y="256" font-size="11" fill="#6b6f76">POLICY_HASH set</text>
+  </g>
+  <g stroke="#8a8d94" stroke-width="2" marker-end="url(#a)"><line x1="200" y1="235" x2="216" y2="235"/><line x1="386" y1="235" x2="402" y2="235"/><line x1="532" y1="235" x2="548" y2="235"/><line x1="770" y1="235" x2="786" y2="235"/><line x1="862" y1="274" x2="862" y2="304"/></g>
+  <rect x="24" y="306" width="912" height="146" rx="12" fill="#0d1117"/>
+  <text x="44" y="334" font-size="12" font-weight="700" letter-spacing="1.5" fill="#8b949e">FROM HERE THE KERNEL CHECKS EVERY OPEN, WRITE, EXECVE AND CONNECT, FOR THE CHILD AND EVERY DESCENDANT</text>
+  <g font-family="ui-monospace,Menlo,monospace" font-size="12.5">
+    <text x="44" y="362" fill="#e6edf3">touch /work/x</text><text x="250" y="362" fill="#f85149">EACCES</text><text x="370" y="362" fill="#8b949e">P2 writes nothing: Landlock path rule</text>
+    <text x="44" y="384" fill="#e6edf3">connect 1.1.1.1:80</text><text x="250" y="384" fill="#f85149">EACCES</text><text x="370" y="384" fill="#8b949e">P1 allows TCP 443 only: Landlock port rule</text>
+    <text x="44" y="406" fill="#e6edf3">bytearray(200 &lt;&lt; 20)</text><text x="250" y="406" fill="#f85149">MemoryError</text><text x="370" y="406" fill="#8b949e">P0's 64 MiB: RLIMIT_AS fires before the cgroup would</text>
+    <text x="44" y="428" fill="#e6edf3">execve /usr/bin/python3</text><text x="250" y="428" fill="#f85149">EACCES</text><text x="370" y="428" fill="#8b949e">when /lib, the ELF interpreter's home, is not executable</text>
+  </g>
+</svg>

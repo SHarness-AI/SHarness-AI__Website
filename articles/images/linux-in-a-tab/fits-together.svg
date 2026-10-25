@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">How it fits together: from a mandate to a kernel</title>
+  <desc id="d">Left to right. An Agent Behaviour Policy, from riskmandate.ai, says what an agent in a role may do. A Process Behaviour Policy is its executable form for one process: files, network and process, named by one SHA-256 hash. Three kinds of enforcer take that hash. sharness-ai run, with Landlock, is runnable and was measured this milestone in four kernels' worth of places. policy translate writes the same policy for bubblewrap, Docker, Claude Code's sandbox and Kubernetes, with the gap listed: written, not run. The launcher above the agent is designed, not built. Underneath, the barrier kind: applied by a process to its child, the policy is a Boundary for the child and a Setting for the process; only a launcher above the agent makes it a Boundary for the agent.</desc>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#8a8d94"/></marker></defs>
+  <rect width="960" height="420" fill="#faf9f5"/>
+  <text x="24" y="34" font-size="12" font-weight="700" letter-spacing="2" fill="#5c5f66">HOW IT FITS TOGETHER</text>
+  <g font-size="12">
+    <rect x="24" y="60" width="196" height="150" rx="12" fill="#ffffff" stroke="#6d28d9" stroke-width="2"/>
+    <text x="40" y="86" font-weight="700" fill="#5b21b6">Agent Behaviour Policy</text>
+    <text x="40" y="106" fill="#6b6f76">riskmandate.ai</text>
+    <text x="40" y="132" fill="#34363c">what an agent in a role</text><text x="40" y="150" fill="#34363c">may do: the mandate,</text><text x="40" y="168" fill="#34363c">written by people</text>
+    <text x="40" y="196" fill="#8a8d94" font-size="11">proposed</text>
+    <rect x="252" y="60" width="216" height="150" rx="12" fill="#0f766e"/>
+    <text x="268" y="86" font-weight="700" fill="#ffffff">Process Behaviour Policy</text>
+    <text x="268" y="106" fill="#e6fffa">its executable form, per process</text>
+    <text x="268" y="132" fill="#e6fffa">files: read · write · exec</text><text x="268" y="150" fill="#e6fffa">network: none, or TCP ports</text><text x="268" y="168" fill="#e6fffa">process: memory, pids, nnp</text>
+    <text x="268" y="196" fill="#ffffff" font-family="ui-monospace,Menlo,monospace" font-size="11">one hash: sha256:…</text>
+  </g>
+  <g stroke="#8a8d94" stroke-width="2" fill="none" marker-end="url(#a)"><line x1="220" y1="135" x2="250" y2="135"/><path d="M468 110 C500 110 500 76 528 76"/><line x1="468" y1="135" x2="528" y2="146"/><path d="M468 160 C500 160 500 214 528 214"/></g>
+  <g font-size="12">
+    <rect x="530" y="48" width="406" height="56" rx="10" fill="#ffffff" stroke="#0f766e" stroke-width="2.5"/>
+    <text x="546" y="71" font-weight="700" fill="#115e59">sharness-ai run: Landlock, netns, rlimits, cgroups</text>
+    <text x="546" y="91" fill="#34363c">runnable · measured this milestone: browser, Node, chroot</text>
+    <rect x="530" y="118" width="406" height="56" rx="10" fill="#ffffff" stroke="#b45309" stroke-width="2"/>
+    <text x="546" y="141" font-weight="700" fill="#b45309">policy translate: bwrap, docker, Claude Code, Kubernetes</text>
+    <text x="546" y="161" fill="#34363c">runnable: writes the form and lists the gap; not run here</text>
+    <rect x="530" y="188" width="406" height="56" rx="10" fill="#ffffff" stroke="#d5d0c2" stroke-width="2" stroke-dasharray="6 4"/>
+    <text x="546" y="211" font-weight="700" fill="#34363c">the launcher above the agent, and its components</text>
+    <text x="546" y="231" fill="#6b6f76">designed, not built: kms, net, fs, bash, llm</text>
+  </g>
+  <rect x="24" y="270" width="912" height="128" rx="12" fill="#ffffff" stroke="#d5d0c2" stroke-width="2"/>
+  <text x="44" y="296" font-size="12" font-weight="700" letter-spacing="1.5" fill="#5c5f66">WHO APPLIES IT DECIDES WHAT IT IS</text>
+  <g font-size="12.5">
+    <rect x="44" y="310" width="270" height="70" rx="10" fill="#ecfdf5"/>
+    <text x="58" y="334" font-weight="700" fill="#115e59">the child: a Boundary</text><text x="58" y="354" fill="#34363c">it cannot undo what the kernel</text><text x="58" y="370" fill="#34363c">was told before it started</text>
+    <rect x="334" y="310" width="270" height="70" rx="10" fill="#fffbeb"/>
+    <text x="348" y="334" font-weight="700" fill="#b45309">the process that applied it: a Setting</text><text x="348" y="354" fill="#34363c">the shell, the page's /init, a session:</text><text x="348" y="370" fill="#34363c">each could have skipped it</text>
+    <rect x="624" y="310" width="292" height="70" rx="10" fill="#f5f3ff"/>
+    <text x="638" y="334" font-weight="700" fill="#5b21b6">the agent: a Boundary only from above</text><text x="638" y="354" fill="#34363c">a launcher that starts the agent under</text><text x="638" y="370" fill="#34363c">the hash the person supplied: the design</text>
+  </g>
+</svg>

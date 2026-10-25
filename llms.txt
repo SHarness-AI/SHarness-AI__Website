@@ -4,7 +4,7 @@
 > the kernel and talking only over allowed, mutually authenticated connections, so a secret
 > lives in one place and a tricked process can only do its one job.
 
-Site version: v0.5.6. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04,
+Site version: v0.5.7. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04,
 E09 and E10 in the CLI; E09 is a real Linux kernel in a browser tab running hello, measured 25 Oct 2026).
 No SHarness component is built.
 By Dinis Cruz; design session written up with Claude, 24 October 2026. All content CC BY 4.0.
@@ -80,6 +80,10 @@ SHarness is unrelated to Sharness, the shell testing library.
 - /code/browser/index.md — Linux in the browser (E09, built and measured 25 Oct 2026): one Alpine x86 guest
   with Alpine's Landlock kernel runs hello 6 of 6 under v86 in Node, in a browser tab and through chroot on
   the host kernel; the page is /code/browser/demo/index.html; the research, the options, what a browser never shows
+- /code/playground/index.html — the playground (HTML only): sharness-ai in Pyodide (pip install, hash, check,
+  translate; run and hello refuse with no kernel) and in a shell on the Linux guest (enforced); one policy hashed three ways
+- /articles/linux-in-a-tab.md — the milestone: a real kernel enforcing a Process Behaviour Policy in Chrome,
+  what held where, what did not work (the ELF interpreter needs the execute right), how it fits together
 - /code/languages/index.md — Python first; Rust for the KMS and the bash client; JSON for policies
 
 ## Evidence and status

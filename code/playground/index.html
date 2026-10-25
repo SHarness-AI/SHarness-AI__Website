@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Playground: sharness-ai in Pyodide and in Linux — SHarness</title>
+<meta name="description" content="Type sharness-ai into two runtimes in your browser: Pyodide (Python in WebAssembly: pip install, hash, check, translate) and a shell on a real Linux kernel with Landlock (run and hello, enforced). One policy, hashed three ways.">
+<link rel="canonical" href="https://sharness.ai/code/playground/index.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/code/playground/index.html">
+<meta property="og:title" content="Playground: sharness-ai in Pyodide and in Linux — SHarness">
+<meta property="og:description" content="pip install sharness-ai in Pyodide; a shell on Linux with Landlock in v86; one policy, hashed three ways.">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../../assets/site.css">
+<style>main.doc.wide{max-width:min(96rem,100%)}</style>
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.7</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../design/index.html">The design<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../design/index.html">&#9679; The brief: in one read</a>
+      <a class="sl" href="../../design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="../../design/architecture/index.html">Architecture</a>
+      <a class="sl" href="../../design/components/index.html">Components</a>
+      <a class="sl" href="../../design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../../design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../../design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="../../design/surface/index.html">What a process can do</a>
+      <a class="sl" href="../../design/containment/index.html">Containment</a>
+      <a class="sl" href="../../design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../code/index.html">The code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/index.html">&#9679; Where the code is</a>
+      <a class="sl" href="../../code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl" href="../../code/flows/index.html">Flows through the code</a>
+      <a class="sl" href="../../code/examples/index.html">Examples</a>
+      <a class="sl" href="../../code/browser/index.html">Linux in the browser</a>
+      <a class="sl here" href="../../code/playground/index.html">Playground: run it in your browser</a>
+      <a class="sl" href="../../code/languages/index.html">Languages</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../evidence/index.html">&#9679; Measurements</a>
+      <a class="sl" href="../../evidence/status/index.html">What exists today</a>
+      <a class="sl" href="../../evidence/research/index.html">Research note</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../landscape/index.html">Landscape<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../landscape/index.html">&#9679; Policies at the centre</a>
+      <a class="sl" href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+      <a class="sl" href="../../landscape/integrations/index.html">Integration points</a>
+      <a class="sl" href="../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+      <a class="sl" href="../../landscape/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../explain/index.html">Explain<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../explain/index.html">&#9679; Storyboards &amp; mockups</a>
+      <a class="sl" href="../../explain/storyboards/index.html">Storyboards</a>
+      <a class="sl" href="../../explain/mockups/policy-hash.html">Mockup: policy hash</a>
+      <a class="sl" href="../../explain/mockups/edges.html">Mockup: edge matrix</a>
+      <a class="sl" href="../../articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../project/index.html">&#9679; Project</a>
+      <a class="sl" href="../../project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="../../project/sources/index.html">The source documents</a>
+      <a class="sl" href="../../project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="../../project/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../project/releases.html">Release history</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__CLI">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc wide">
+  <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">the code</a> / playground</div>
+  <h1>Playground: <code>sharness-ai</code> in Pyodide and in Linux</h1>
+  <p class="lead">Two runtimes, one page, nothing installed on your machine. On the left, <b>Pyodide</b>: Python compiled to WebAssembly, where <code>pip install sharness-ai</code> installs the CLI and you can hash, check and translate Process Behaviour Policies. Switch to <b>Linux</b>: Alpine with a Landlock kernel, booted by v86 in this tab, where every <code>sharness-ai run</code> is enforced by a real kernel. On the right, one policy, hashed by three implementations.</p>
+  <div class="note">What each tab can show. Pyodide has no kernel and no processes, so <code>run</code> and <code>hello</code> refuse there with exit 126: there is no child to confine, and the CLI says so rather than pretend. In Linux every policy is applied by the shell's <code>sharness-ai</code> to its child: a Boundary for the child, a Setting for the shell, which could have skipped it. The kernel is real; the CPU is emulated, so a command takes seconds. The wheel is the CLI's <code>dev</code> branch, versioned <code>+dev.&lt;commit&gt;</code>; PyPI carries only releases. Built and tested <span class="asof">as of 25 Oct 2026</span>. The milestone behind it: <a href="../../articles/linux-in-a-tab.html">Linux in a tab</a>.</div>
+
+  <div id="sharness-playground" data-assets="../browser/demo/"></div>
+  <script type="module" src="../browser/demo/playground.js"></script>
+
+  <h2 id="try">Things to try</h2>
+  <ul>
+    <li><b>Pyodide:</b> <code>pip install sharness-ai</code>, then <code>sharness-ai policy translate policies/p1-agent-session.json --to claude-code</code>: the same policy as Claude Code sandbox settings, followed by what that sandbox cannot enforce. Then <code>sharness-ai hello</code>, and read why it refuses.</li>
+    <li><b>Linux:</b> <code>sharness-ai hello</code> (six probes under a deny-all policy, 6 of 6 when the kernel holds), then the chips: a write refused under P2, port 80 refused under P1, 200 MiB refused under P0's 64 MiB cap, a wrong <code>--expect-hash</code> that runs nothing.</li>
+    <li><b>Your own policy:</b> edit the JSON on the right, press <i>Hash it in three places</i>, then <i>Use it</i>, and run something under <code>policies/my-policy.json</code> in Linux. Remove <code>/lib</code> from <code>exec</code> and watch every dynamic binary fail to start: the ELF interpreter needs the execute right too.</li>
+  </ul>
+
+  <h2 id="how">How it is put together</h2>
+  <table>
+    <thead><tr><th></th><th>Pyodide tab</th><th>Linux tab</th></tr></thead>
+    <tbody>
+      <tr><td>Runtime</td><td>Pyodide 314.0.7: CPython 3.14 in WebAssembly, from jsDelivr</td><td>v86 0.5.472 (x86 in WebAssembly) running Alpine 3.23 x86, <code>linux-virt</code> 6.18.58, Python 3.12</td></tr>
+      <tr><td>Install</td><td><code>micropip</code> installs <code>sharness_ai-…+dev.&lt;commit&gt;-py3-none-any.whl</code> from this site</td><td>baked into the initramfs by <code>build_guest.py</code></td></tr>
+      <tr><td>Terminal</td><td>a line-oriented terminal that calls <code>sharness_ai.cli.main</code> and captures its output</td><td>the guest's <code>/bin/sh</code> on the serial line (<code>sharness.mode=shell</code> on the kernel command line)</td></tr>
+      <tr><td>Enforces</td><td>nothing: no kernel</td><td>Landlock files, exec and TCP ports, an empty network namespace, rlimits and cgroups</td></tr>
+      <tr><td>Getting a file in</td><td>the Pyodide filesystem, directly</td><td>base64 over the serial line, in shell-sized chunks</td></tr>
+    </tbody>
+  </table>
+  <p>The code is one ES module, <a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/browser/playground.js"><code>playground.js</code></a>, in the CLI repository's <a href="https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/experiments/browser"><code>experiments/browser/</code></a>, with a headless test that drives both tabs (<code>test_playground.mjs</code>: Pyodide loads and installs, four commands give the expected output, the guest boots to a shell, <code>hello</code> holds 6 of 6, a write is refused, the three hashes agree). The scripted run of the same guest, without a shell, is the <a href="../browser/demo/index.html">E09 page</a>; what it shows and does not is on <a href="../browser/index.html">Linux in the browser</a>.</p>
+
+  <div class="pagenav"><a href="../browser/index.html">← Linux in the browser</a><a href="../experiments/index.html">Mockups and experiments →</a></div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.7</a> · <a href="../../project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The design</h4>
+    <a href="../../design/index.html">The brief: in one read</a>
+    <a href="../../design/why/index.html">Why: the last metre</a>
+    <a href="../../design/architecture/index.html">Architecture</a>
+    <a href="../../design/components/index.html">Components</a>
+    <a href="../../design/keys/index.html">Keys and the KMS</a>
+    <a href="../../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../../design/agents/index.html">Agents and LLMs</a>
+    <a href="../../design/process-tree/index.html">Enforcing the process tree</a>
+    <a href="../../design/surface/index.html">What a process can do</a>
+    <a href="../../design/containment/index.html">Containment</a>
+    <a href="../../design/spectrum/index.html">The spectrum</a>
+    <a href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+  </div>
+  <div>
+    <h4>The code</h4>
+    <a href="../../code/index.html">Where the code is</a>
+    <a href="../../code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../../code/flows/index.html">Flows through the code</a>
+    <a href="../../code/examples/index.html">Examples</a>
+    <a href="../../code/browser/index.html">Linux in the browser</a>
+    <a href="../../code/languages/index.html">Languages</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
+  </div>
+  <div>
+    <h4>Evidence, landscape, explain</h4>
+    <a href="../../evidence/index.html">Measurements</a>
+    <a href="../../evidence/status/index.html">What exists today</a>
+    <a href="../../evidence/research/index.html">Research note</a>
+    <a href="../../landscape/index.html">Landscape: policies at the centre</a>
+    <a href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+    <a href="../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+    <a href="../../landscape/market/index.html">Market &amp; competitors</a>
+    <a href="../../explain/storyboards/index.html">Storyboards</a>
+    <a href="../../explain/index.html">Mockups</a>
+    <a href="../../articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Project &amp; agents</h4>
+    <a href="../../project/about/index.html">About &amp; naming</a>
+    <a href="../../project/sources/index.html">The source documents</a>
+    <a href="../../project/engineering.html">Engineering</a>
+    <a href="../../project/comms.html">Comms &amp; release history</a>
+    <a href="../../llms.txt">llms.txt</a>
+    <a href="../../llms-full.txt">llms-full.txt</a>
+    <a href="../../index.md">index.md</a>
+    <a href="../../sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+</body>
+</html>

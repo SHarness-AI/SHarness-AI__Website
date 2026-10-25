@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 330" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">What did not work at first: the ELF interpreter needs the execute right too</title>
+  <desc id="d">The first guest run of allow-https-example failed. execve of /usr/bin/python3 passes Landlock's execute check, because /usr is in the exec list. The kernel then reads the program header PT_INTERP, which names /lib/ld-musl-i386.so.1, and checks execute on that file too. /lib is not in the exec list, so execve fails with EACCES before Python runs a single instruction. On Ubuntu this was hidden, because /lib64 is a link into /usr. The fix is in the policy, not the code: the profiles P0 to P4 list /lib and /lib64 as executable, and a test keeps it so.</desc>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#8a8d94"/></marker></defs>
+  <rect width="960" height="330" fill="#faf9f5"/>
+  <text x="24" y="34" font-size="12" font-weight="700" letter-spacing="2" fill="#5c5f66">WHAT DID NOT WORK AT FIRST · exec: ["/usr", "/bin"]</text>
+  <g font-size="12">
+    <rect x="24" y="56" width="200" height="88" rx="10" fill="#ffffff" stroke="#d5d0c2" stroke-width="2"/>
+    <text x="38" y="80" font-weight="700" fill="#34363c">execve("/usr/bin/python3")</text><text x="38" y="102" fill="#6b6f76">the child asks the kernel</text><text x="38" y="118" fill="#6b6f76">to run Python</text>
+    <rect x="252" y="56" width="200" height="88" rx="10" fill="#ffffff" stroke="#0f766e" stroke-width="2"/>
+    <text x="266" y="80" font-weight="700" fill="#0f766e">✔ EXECUTE on python3.12</text><text x="266" y="102" fill="#6b6f76">/usr is in the exec list</text><text x="266" y="118" fill="#6b6f76">Landlock allows it</text>
+    <rect x="480" y="56" width="200" height="88" rx="10" fill="#ffffff" stroke="#d5d0c2" stroke-width="2"/>
+    <text x="494" y="80" font-weight="700" fill="#34363c">read PT_INTERP</text><text x="494" y="102" fill="#6b6f76" font-family="ui-monospace,Menlo,monospace" font-size="11">/lib/ld-musl-i386.so.1</text><text x="494" y="118" fill="#6b6f76">the dynamic loader (musl)</text>
+    <rect x="708" y="56" width="228" height="88" rx="10" fill="#fef2f2" stroke="#b91c1c" stroke-width="2"/>
+    <text x="722" y="80" font-weight="700" fill="#b91c1c">✗ EXECUTE on the loader</text><text x="722" y="102" fill="#6b6f76">/lib is not in the exec list:</text><text x="722" y="118" fill="#b91c1c" font-weight="700">EACCES, nothing runs</text>
+  </g>
+  <g stroke="#8a8d94" stroke-width="2" marker-end="url(#a)"><line x1="224" y1="100" x2="250" y2="100"/><line x1="452" y1="100" x2="478" y2="100"/><line x1="680" y1="100" x2="706" y2="100"/></g>
+  <rect x="24" y="168" width="440" height="138" rx="12" fill="#0d1117"/>
+  <g font-family="ui-monospace,Menlo,monospace" font-size="11.5">
+    <text x="40" y="192" fill="#8b949e"># in the guest, first run of E03</text>
+    <text x="40" y="214" fill="#e6edf3">$ sharness-ai run --policy allow-https-example.json \</text>
+    <text x="40" y="232" fill="#e6edf3">    -- python3 -c "…"</text>
+    <text x="40" y="254" fill="#f85149">sharness-ai run: could not apply the policy or</text>
+    <text x="40" y="272" fill="#f85149">start the command: [Errno 13] Permission denied</text>
+    <text x="40" y="294" fill="#8b949e"># hello's own policy listed /lib, so hello held 6 of 6</text>
+  </g>
+  <g font-size="12.5" fill="#34363c">
+    <text x="490" y="190" font-weight="700" fill="#115e59">Why Ubuntu never showed it</text>
+    <text x="490" y="210">glibc's loader is /lib64/ld-linux-x86-64.so.2, and on a</text>
+    <text x="490" y="228">merged-/usr system /lib64 is a link into /usr, which was allowed.</text>
+    <text x="490" y="258" font-weight="700" fill="#115e59">The fix is in the policy, not the code</text>
+    <text x="490" y="278">P0 to P4 list /lib and /lib64 as executable; a test keeps it so.</text>
+    <text x="490" y="296">The two older examples keep their paths, and their pinned hashes.</text>
+  </g>
+</svg>

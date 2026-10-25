@@ -19,7 +19,7 @@ from pathlib import Path
 
 ROOT    = Path(__file__).resolve().parents[1]
 VERSION = (ROOT / "tools/version.txt").read_text().strip()
-GH      = "https://github.com/SHarness-AI/SHarness-AI__Website"
+GH      = "https://github.com/SHarness-AI/SHarness-AI__CLI"      # the header link: the code
 HOST    = (ROOT / "CNAME").read_text().strip()
 
 # The nav, two levels. Each entry is (label, own page, [(sub-label, href), ...], prefixes).
@@ -48,6 +48,7 @@ NAV = [
         ("Flows through the code", "code/flows/index.html"),
         ("Examples", "code/examples/index.html"),
         ("Linux in the browser", "code/browser/index.html"),
+        ("Playground: run it in your browser", "code/playground/index.html"),
         ("Languages", "code/languages/index.html"),
     ], ("code/",)),
     ("Evidence", "evidence/index.html", [

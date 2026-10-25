@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 470" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">What held, where</title>
+  <desc id="d">A grid of checks against five places, 25 October 2026. Columns: Dinis Cruz's Chrome on sharness.ai, headless Chromium 153, Node 22, chroot on the host kernel, and Pyodide. Landlock up with ABI 7: yes in the four Linux columns, no kernel in Pyodide. hello 6 of 6: held in all four Linux columns; in Pyodide hello refuses, as designed. P1 port 80 refused: held in the browser columns and Node. P1 port 443: allowed by the policy, failing with ENETUNREACH because the guest has no network backend. P2 write refused and P0 200 MiB refused under 64 MiB: held in the browser columns and Node. The seven policy hashes equal to the host's: yes in every column where they were computed. Cells not run are marked with a dash.</desc>
+  <rect width="960" height="470" fill="#faf9f5"/>
+  <text x="24" y="34" font-size="12" font-weight="700" letter-spacing="2" fill="#5c5f66">WHAT HELD, WHERE · 25 OCTOBER 2026</text>
+  <g font-size="12" font-weight="700" fill="#34363c" text-anchor="middle">
+    <text x="420" y="70">Dinis's Chrome</text><text x="420" y="86" font-weight="400" fill="#8a8d94" font-size="11">live, sharness.ai</text>
+    <text x="545" y="70">Chromium 153</text><text x="545" y="86" font-weight="400" fill="#8a8d94" font-size="11">headless, here</text>
+    <text x="660" y="70">Node 22</text><text x="660" y="86" font-weight="400" fill="#8a8d94" font-size="11">v86, no browser</text>
+    <text x="770" y="70">chroot</text><text x="770" y="86" font-weight="400" fill="#8a8d94" font-size="11">host kernel</text>
+    <text x="880" y="70">Pyodide</text><text x="880" y="86" font-weight="400" fill="#8a8d94" font-size="11">no kernel</text>
+  </g>
+  <line x1="24" y1="98" x2="936" y2="98" stroke="#d5d0c2" stroke-width="1.5"/>
+  <g font-size="12.5" fill="#34363c">
+    <text x="24" y="128">Landlock up, ABI 7</text>
+    <text x="24" y="168">hello: read, 2 writes, net, memory, hash</text>
+    <text x="24" y="208">P1: TCP to port 80 refused</text>
+    <text x="24" y="248">P1: TCP to 443 allowed by the policy</text>
+    <text x="24" y="288">P2: write to the workspace refused</text>
+    <text x="24" y="328">P0: 200 MiB refused under a 64 MiB cap</text>
+    <text x="24" y="368">seven policy hashes equal to the host's</text>
+    <text x="24" y="408">run and hello where there is no kernel</text>
+  </g>
+  <g font-size="12.5" font-weight="700" text-anchor="middle">
+    <g fill="#0f766e"><text x="420" y="128">✔ ABI 7</text><text x="545" y="128">✔ ABI 7</text><text x="660" y="128">✔ ABI 7</text><text x="770" y="128">✔ ABI 7</text></g><text x="880" y="128" fill="#8a8d94">no kernel</text>
+    <g fill="#0f766e"><text x="420" y="168">✔ 6 of 6</text><text x="545" y="168">✔ 6 of 6</text><text x="660" y="168">✔ 6 of 6</text><text x="770" y="168">✔ 6 of 6</text></g><text x="880" y="168" fill="#b45309">refuses, 126</text>
+    <g fill="#0f766e"><text x="420" y="208">✔ EACCES</text><text x="545" y="208">✔ EACCES</text><text x="660" y="208">✔ EACCES</text></g><text x="770" y="208" fill="#8a8d94">–</text><text x="880" y="208" fill="#8a8d94">–</text>
+    <g fill="#b45309"><text x="420" y="248">ENETUNREACH</text><text x="545" y="248">ENETUNREACH</text><text x="660" y="248">ENETUNREACH</text></g><text x="770" y="248" fill="#8a8d94">–</text><text x="880" y="248" fill="#8a8d94">–</text>
+    <g fill="#0f766e"><text x="420" y="288">✔ EACCES</text><text x="545" y="288">✔ EACCES</text><text x="660" y="288">✔ EACCES</text></g><text x="770" y="288" fill="#8a8d94">–</text><text x="880" y="288" fill="#8a8d94">–</text>
+    <g fill="#0f766e"><text x="420" y="328">✔ MemoryError</text><text x="545" y="328">✔ MemoryError</text><text x="660" y="328">✔ MemoryError</text></g><text x="770" y="328" fill="#8a8d94">–</text><text x="880" y="328" fill="#8a8d94">–</text>
+    <g fill="#0f766e"><text x="420" y="368">✔ 7 of 7</text><text x="545" y="368">✔ 7 of 7</text><text x="660" y="368">✔ 7 of 7</text></g><text x="770" y="368" fill="#8a8d94">–</text><text x="880" y="368" fill="#0f766e">✔ P0, P1</text>
+    <g fill="#8a8d94"><text x="420" y="408">–</text><text x="545" y="408">–</text><text x="660" y="408">–</text><text x="770" y="408">–</text></g><text x="880" y="408" fill="#0f766e">✔ clean refusal</text>
+  </g>
+  <g stroke="#ebe7dc" stroke-width="1"><line x1="24" y1="142" x2="936" y2="142"/><line x1="24" y1="182" x2="936" y2="182"/><line x1="24" y1="222" x2="936" y2="222"/><line x1="24" y1="262" x2="936" y2="262"/><line x1="24" y1="302" x2="936" y2="302"/><line x1="24" y1="342" x2="936" y2="342"/><line x1="24" y1="382" x2="936" y2="382"/></g>
+  <text x="24" y="440" font-size="11" fill="#8a8d94">Amber is not a failure: 443 was allowed by the policy and failed only because the guest has no network backend (the error is the network's, not Landlock's).</text>
+  <text x="24" y="458" font-size="11" fill="#8a8d94">In Pyodide, run and hello refusing is the correct answer: there is no child to confine. A dash: not run in that form.</text>
+</svg>

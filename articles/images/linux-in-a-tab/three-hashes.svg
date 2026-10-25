@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 330" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">One policy, three implementations, one hash</title>
+  <desc id="d">The policy p0-hello-world on the left feeds three lanes: the browser's WebCrypto in JavaScript, sharness-ai in Pyodide (Python 3.14 compiled to WebAssembly), and sharness-ai in the Linux guest (Python 3.12 on i686). All three produce sha256:a6244d346ea9d7955c04defba5e67f71ae9867af618fa21d11589c7ef8449032, checked by the playground's test. The same seven policy files also hashed identically on the host, in Python 3.13 on x86_64.</desc>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#8a8d94"/></marker></defs>
+  <rect width="960" height="330" fill="#faf9f5"/>
+  <text x="24" y="34" font-size="12" font-weight="700" letter-spacing="2" fill="#5c5f66">ONE POLICY, THREE IMPLEMENTATIONS, ONE HASH</text>
+  <rect x="24" y="64" width="190" height="220" rx="12" fill="#0d1117"/>
+  <g font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#e6edf3">
+    <text x="38" y="88">{"pbp": 1,</text><text x="51" y="106">"id": "p0-hello-world",</text><text x="51" y="124">"files": {</text><text x="64" y="142">"read": [...],</text><text x="64" y="160">"write": [],</text><text x="64" y="178">"exec": [...]},</text><text x="51" y="196">"network": "none",</text><text x="51" y="214">"process": {</text><text x="64" y="232">"max_memory_mb": 64,</text><text x="64" y="250">"max_pids": 8, ...}}</text>
+  </g>
+  <g stroke="#8a8d94" stroke-width="2" fill="none" marker-end="url(#a)">
+    <path d="M214 120 C250 120 250 92 284 92"/><path d="M214 174 L284 174"/><path d="M214 228 C250 228 250 256 284 256"/>
+    <path d="M594 92 C630 92 630 150 664 160"/><path d="M594 174 L664 174"/><path d="M594 256 C630 256 630 198 664 188"/>
+  </g>
+  <g font-size="12">
+    <rect x="286" y="64" width="308" height="56" rx="10" fill="#ffffff" stroke="#b45309" stroke-width="2"/>
+    <text x="300" y="87" font-weight="700" fill="#b45309">the browser's WebCrypto</text><text x="300" y="106" fill="#6b6f76">JavaScript: sort keys, stringify, SHA-256</text>
+    <rect x="286" y="146" width="308" height="56" rx="10" fill="#ffffff" stroke="#6d28d9" stroke-width="2"/>
+    <text x="300" y="169" font-weight="700" fill="#5b21b6">sharness-ai in Pyodide</text><text x="300" y="188" fill="#6b6f76">Python 3.14 in WebAssembly, pip-installed</text>
+    <rect x="286" y="228" width="308" height="56" rx="10" fill="#ffffff" stroke="#0f766e" stroke-width="2"/>
+    <text x="300" y="251" font-weight="700" fill="#115e59">sharness-ai in the Linux guest</text><text x="300" y="270" fill="#6b6f76">Python 3.12 on an emulated i686</text>
+  </g>
+  <rect x="666" y="128" width="270" height="92" rx="12" fill="#0f766e"/>
+  <text x="682" y="154" font-size="13" font-weight="700" fill="#ffffff">✔ the same 32 bytes, three times</text>
+  <g font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#e6fffa"><text x="682" y="178">sha256:a6244d346ea9d7955c04</text><text x="682" y="194">defba5e67f71ae9867af618fa21d</text><text x="682" y="210">11589c7ef8449032</text></g>
+  <text x="666" y="250" font-size="11.5" fill="#34363c">The value a person supplies out of band.</text>
+  <text x="666" y="267" font-size="11.5" fill="#34363c">A launcher compares; an injected agent</text>
+  <text x="666" y="284" font-size="11.5" fill="#34363c">cannot widen the policy without changing it.</text>
+  <text x="24" y="314" font-size="11" fill="#8a8d94">Also identical: the seven example files on the host (Python 3.13, x86_64) and in the guest. Checked by test_playground.mjs, 25 Oct 2026.</text>
+</svg>
