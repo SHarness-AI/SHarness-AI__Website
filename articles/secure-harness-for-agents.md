@@ -31,7 +31,7 @@ By [Dinis Cruz](https://sgit.ai/about/) · 2026-10-24 · published
 
 I see SHarness as the natural progression from the work we have done on [agent behaviour policies](https://riskmandate.ai/abp.html). An Agent Behaviour Policy is a description: what the agent is mandated to do, what it can technically do, the gap between the two, and what stands in the way of each capability. Most of what stands in the way today is the agent itself, reading its instructions and choosing to follow them.
 
-What we are doing now is executing those policies. We call them [Process Behaviour Policies](../policies/index.md): the same model, applied to the processes an agent runs, and enforced by something above the agent instead of by the agent. That gives us a stronger harness around what the agent is doing. More importantly, it allows the policy to be executed from outside the agent's environment, which is what makes it binding. A lock the agent applies to itself is a setting it can undo; a lock applied from outside is a boundary.
+What we are doing now is executing those policies. We call them [Process Behaviour Policies](../design/policies/index.md): the same model, applied to the processes an agent runs, and enforced by something above the agent instead of by the agent. That gives us a stronger harness around what the agent is doing. More importantly, it allows the policy to be executed from outside the agent's environment, which is what makes it binding. A lock the agent applies to itself is a setting it can undo; a lock applied from outside is a boundary.
 
 That is the name of the product: a secure harness. It is the layer that agents run inside so that they can run securely.
 
@@ -46,13 +46,13 @@ The components are:
 - **a file component**, the only thing that writes to the folders that matter;
 - **an LLM component**, the only thing that talks to the model.
 
-Each of them is a very simple service. Together they give the model a layer of isolation, and give us a layer of security in the places that matter: where the private keys are, where the LLM calls go, where the execution flow runs, and where the business logic is actually controlled. The design for each is on [Components](../components/index.md); none of them is built yet.
+Each of them is a very simple service. Together they give the model a layer of isolation, and give us a layer of security in the places that matter: where the private keys are, where the LLM calls go, where the execution flow runs, and where the business logic is actually controlled. The design for each is on [Components](../design/components/index.md); none of them is built yet.
 
 ## Where it started, this morning {#origin}
 
 Historically, and by that I mean this morning, it started with sgit, our encrypted version of git. The question was how to stop sgit from ever holding a vault key in clear text. A key handed to an agent was sealed while it travelled and exposed the moment it arrived: written to a file, passed on the command line, kept in the clone's folder. I wrote that up in [A vault key that never lands](https://cli.sgit.ai/articles/a-vault-key-that-never-lands.html), and the design that followed split sgit into small components, each under its own policy.
 
-Nothing in that design turned out to be specific to sgit. That evolution is part of this project, and it is all published: the article, the requirements and the side-by-side review on cli.sgit.ai, its [design pack for sgit](https://cli.sgit.ai/dev/sealed-vault-keys/index.html), and the [SHarness design pack](../documents/index.md) that generalised it.
+Nothing in that design turned out to be specific to sgit. That evolution is part of this project, and it is all published: the article, the requirements and the side-by-side review on cli.sgit.ai, its [design pack for sgit](https://cli.sgit.ai/dev/sealed-vault-keys/index.html), and the [SHarness design pack](../project/sources/index.md) that generalised it.
 
 ## The first users {#first-users}
 
@@ -94,7 +94,7 @@ If you run agents that read untrusted data and would like to try a small piece o
 
 ## Where this comes from {#sources}
 
-A voice memo of mine on 24 October 2026, [published in full](../briefs/memos/2026-10-24-memo-01-secure-harness.md) as Otter transcribed it, written up in my voice by sharness.build, this site's build agent, in the same session that built the site; the editorial responsibility is mine. Sources: [Agent Behaviour Policies](https://riskmandate.ai/abp.html) on riskmandate.ai; [A vault key that never lands](https://cli.sgit.ai/articles/a-vault-key-that-never-lands.html) and the [sealed vault keys design pack](https://cli.sgit.ai/dev/sealed-vault-keys/index.html) on cli.sgit.ai; the SHarness design pack on this site, under [the source documents](../documents/index.md); [Every site its own articles](https://send.sgit.ai/articles/every-site-its-own-articles.html) on send.sgit.ai for the format. The one number, 49 ms for an ephemeral user, a firewall rule, a locked launch and a teardown, averaged over 10 runs, is from [Evidence](../evidence/index.md#4-process-isolation), section 4. Two phrases in the transcript were not clear enough to use and are left out: a qualifier on "the newsroom" and a sentence beginning "VCS will become an inline process".
+A voice memo of mine on 24 October 2026, [published in full](../project/sources/memos/2026-10-24-memo-01-secure-harness.md) as Otter transcribed it, written up in my voice by sharness.build, this site's build agent, in the same session that built the site; the editorial responsibility is mine. Sources: [Agent Behaviour Policies](https://riskmandate.ai/abp.html) on riskmandate.ai; [A vault key that never lands](https://cli.sgit.ai/articles/a-vault-key-that-never-lands.html) and the [sealed vault keys design pack](https://cli.sgit.ai/dev/sealed-vault-keys/index.html) on cli.sgit.ai; the SHarness design pack on this site, under [the source documents](../project/sources/index.md); [Every site its own articles](https://send.sgit.ai/articles/every-site-its-own-articles.html) on send.sgit.ai for the format. The one number, 49 ms for an ephemeral user, a firewall rule, a locked launch and a teardown, averaged over 10 runs, is from [Evidence](../evidence/index.md#4-process-isolation), section 4. Two phrases in the transcript were not clear enough to use and are left out: a qualifier on "the newsroom" and a sentence beginning "VCS will become an inline process".
 
 ---
 

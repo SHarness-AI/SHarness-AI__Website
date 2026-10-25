@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Examples — SHarness</title>
+<meta name="description" content="Every runnable example: the policies, the commands, their output, the skill for a Claude session, and the sgit probe.">
+<link rel="canonical" href="https://sharness.ai/code/examples/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/code/examples/index.html">
+<meta property="og:title" content="Examples — SHarness">
+<meta property="og:description" content="Every runnable example: the policies, the commands, their output, the skill for a Claude session, and the sgit probe.">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.2</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../design/index.html">The design<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../design/index.html">&#9679; The brief: in one read</a>
+      <a class="sl" href="../../design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="../../design/architecture/index.html">Architecture</a>
+      <a class="sl" href="../../design/components/index.html">Components</a>
+      <a class="sl" href="../../design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../../design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../../design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="../../design/surface/index.html">What a process can do</a>
+      <a class="sl" href="../../design/containment/index.html">Containment</a>
+      <a class="sl" href="../../design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../code/index.html">The code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/index.html">&#9679; Where the code is</a>
+      <a class="sl" href="../../code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl" href="../../code/flows/index.html">Flows through the code</a>
+      <a class="sl here" href="../../code/examples/index.html">Examples</a>
+      <a class="sl" href="../../code/languages/index.html">Languages</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../evidence/index.html">&#9679; Measurements</a>
+      <a class="sl" href="../../evidence/status/index.html">What exists today</a>
+      <a class="sl" href="../../evidence/research/index.html">Research note</a>
+      <a class="sl" href="../../evidence/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../explain/index.html">Explain<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../explain/index.html">&#9679; Storyboards &amp; mockups</a>
+      <a class="sl" href="../../explain/storyboards/index.html">Storyboards</a>
+      <a class="sl" href="../../explain/mockups/policy-hash.html">Mockup: policy hash</a>
+      <a class="sl" href="../../explain/mockups/edges.html">Mockup: edge matrix</a>
+      <a class="sl" href="../../articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../project/index.html">&#9679; Project</a>
+      <a class="sl" href="../../project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="../../project/sources/index.html">The source documents</a>
+      <a class="sl" href="../../project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="../../project/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../project/releases.html">Release history</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__Website">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+  <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">the code</a> / examples · <a href="index.md">this page as markdown</a></div>
+  <h1>Examples</h1>
+<div class="note">Every runnable example, with its output <span class="asof">as of 25 Oct 2026</span> in one Claude agent workspace (Ubuntu 24.04, Linux 6.18, Landlock ABI 7, uid 0). Nothing here is a component; each is an experiment on the <a href="../experiments/index.html">ladder</a>.</div>
+<h2 id="install">Install</h2>
+<pre class="diagram">pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev     # the experiments (unreleased to PyPI)
+sharness-ai --version</pre>
+<h2 id="e01-the-grant">E01: the grant</h2>
+<pre class="diagram">$ sharness-ai probe
+sharness-ai probe   the grant: what a process here can do before any policy
+identity    uid 0 (root) · capabilities all (CapEff 000001fffeffffff, CapBnd 000001fffeffffff) · NoNewPrivs 0 · Seccomp 0
+kernel      linux 6.18.44-fc-v153 · Landlock ABI 7 · memfd_secret yes · cgroups hybrid (v1 + unified)
+namespaces  cgroup, ipc, mnt, net, pid, pid_for_children, time, time_for_children, user, uts
+config      CGROUP_FREEZER=y  USER_NS=y  SECCOMP=y  SECRETMEM=y  FUSE_FS=y  SECURITY_LANDLOCK=y  PKCS8_PRIVATE_KEY_PARSER=not set
+tools       unshare ✔  setpriv ✔  bwrap ✗  strace ✔  iptables ✔  nft ✔  useradd ✔  fusermount3 ✗  criu ✗
+egress      proxy variables set: HTTPS_PROXY, https_proxy, NO_PROXY, no_proxy (names only; values are never printed)
+reading     this process is root with every capability and no seccomp: the grant is everything. A policy applied from here binds its children, not itself.</pre>
+<p><code>--json</code> gives the same as a machine-readable object.</p>
+<h2 id="e02-a-policy-and-its-hash">E02: a policy and its hash</h2>
+<p>The deny-all example, <code>experiments/policies/deny-all-example.json</code>:</p>
+<pre class="diagram">{"pbp": 1, "id": "deny-all-example", "layer": "invocation",
+ "notes": "E02 example: read and exec the system, write nowhere, no network. ...",
+ "files": {"read": ["/usr", "/lib", "/lib64", "/bin", "/etc"], "write": [], "exec": ["/usr", "/bin"]},
+ "network": "none",
+ "process": {"no_new_privs": true}}</pre>
+<pre class="diagram">$ sharness-ai policy hash experiments/policies/deny-all-example.json
+sha256:ab1d3e4e779313274f7a1d3ef3e46f6eacef038d8cfaa6198151a45cd82dcc76
+$ sharness-ai policy check experiments/policies/deny-all-example.json
+experiments/policies/deny-all-example.json: well-formed v0 policy, id deny-all-example: read 5 path(s), write 0, exec 2; network none; sha256:ab1d…cc76</pre>
+<p>Paste the same file into <a href="../../explain/mockups/policy-hash.html">the browser mockup</a>: the hash is the same. The second example, <code>allow-https-example.json</code>, is the same policy with <code>"network": {"connect_tcp_ports": [443]}</code>.</p>
+<h2 id="e03-one-command-under-a-policy">E03: one command under a policy</h2>
+<pre class="diagram">$ sharness-ai run --policy experiments/policies/deny-all-example.json -- /bin/sh -c 'echo "$SHARNESS_AI_POLICY_ID $SHARNESS_AI_POLICY_HASH"; touch /x; grep NoNewPrivs /proc/self/status'
+deny-all-example sha256:ab1d3e4e779313274f7a1d3ef3e46f6eacef038d8cfaa6198151a45cd82dcc76
+touch: cannot touch '/x': Permission denied
+grep: /proc/self/status: Permission denied
+
+$ sharness-ai run --policy experiments/policies/allow-https-example.json -- python3 -I -c "import socket; print(socket.create_connection(('1.1.1.1', 443)).getpeername())"
+('1.1.1.1', 443)
+$ sharness-ai run --policy experiments/policies/allow-https-example.json -- python3 -I -c "import socket; socket.create_connection(('1.1.1.1', 80))"
+PermissionError: [Errno 13] Permission denied
+
+$ sharness-ai run --policy experiments/policies/deny-all-example.json --expect-hash sha256:0000…0000 -- /bin/true
+sharness-ai run: refused. The policy hashes to sha256:ab1d…cc76; the hash supplied was sha256:0000…0000. Nothing ran.</pre>
+<p><code>/proc</code> is unreadable under the deny-all policy because it is not in the read list: the policy means what it says. Port 443 allowed and port 80 refused is Landlock ABI 4's TCP rule.</p>
+<h2 id="e04-the-acceptance-test">E04: the acceptance test</h2>
+<pre class="diagram">$ sharness-ai hello
+sharness-ai hello   experiment E04: the memo's acceptance test, for one child process
+policy      hello  sha256:ad37e58bea6f4da65656687045b33ae9977caf90feef0ff5716a44db041b35af
+            read-only: /bin, /etc, /lib, /lib64, /opt, /sbin, &lt;the workspace&gt;, /usr, /usr/bin
+            write: none · exec: system and Python · network: none
+kernel      Landlock ABI 7 · empty network namespace: yes (uid 0)
+  ✔ read       expected allowed  got allowed
+  ✔ write-tmp  expected refused  got refused (PermissionError: [Errno 13] Permission denied: '/tmp/sharness-ai-hello.tmp')
+  ✔ write-cwd  expected refused  got refused (PermissionError: [Errno 13] Permission denied: 'sharness-ai-hello.tmp')
+  ✔ net        expected refused  got refused (PermissionError: [Errno 13] Permission denied)
+  ✔ hash       expected refused  got refused
+result      5/5 held
+caveat      applied by this process to its own children: a Boundary for them, a Setting for whoever ran this, who could have skipped it. ...</pre>
+<p>Exit 0 when every expectation held; <code>--json</code> for the Evidence page. The hash differs per machine because the policy lists the workspace.</p>
+<h2 id="sgit-under-a-policy">sgit under a policy</h2>
+<p>sgit 0.24.0, unchanged, under a v0 policy that allows the system and the key store read-only, no writes, no network (24 Oct 2026):</p>
+<pre class="diagram">$ sharness-ai run --policy p-sgit-ro.json -- sgit --version
+sgit-ai v0.24.0
+$ sharness-ai run --policy p-sgit-ro.json -- sgit pki list
+No key pairs found.</pre>
+<p>The commands that need no key and no network run as they are: transparent mode, for those. The map of what changes for the others is on <a href="../../design/spectrum/index.html#3-sgits-next-version-the-compatibility-map">the spectrum</a>.</p>
+<h2 id="in-a-claude-code-session">In a Claude Code session</h2>
+<p>The skill <code>sharness-hello</code> in the CLI repository runs E01 and E04 inside a session under the design's safety rules (never touch the orchestrator, never firewall uid 0, everything as a child subtree, leave nothing behind) and reports in the site's status words. Ask the session to "run the sharness hello".</p>
+<h2 id="not-examples">Not examples</h2>
+<p>The mockups compute; they enforce nothing. The storyboards draw the design. Nothing on this page binds the agent that runs it: each example confines a child process of the shell it was typed into.</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.2</a> · <a href="../../project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The design</h4>
+    <a href="../../design/index.html">The brief: in one read</a>
+    <a href="../../design/why/index.html">Why: the last metre</a>
+    <a href="../../design/architecture/index.html">Architecture</a>
+    <a href="../../design/components/index.html">Components</a>
+    <a href="../../design/keys/index.html">Keys and the KMS</a>
+    <a href="../../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../../design/agents/index.html">Agents and LLMs</a>
+    <a href="../../design/process-tree/index.html">Enforcing the process tree</a>
+    <a href="../../design/surface/index.html">What a process can do</a>
+    <a href="../../design/containment/index.html">Containment</a>
+    <a href="../../design/spectrum/index.html">The spectrum</a>
+    <a href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+  </div>
+  <div>
+    <h4>The code</h4>
+    <a href="../../code/index.html">Where the code is</a>
+    <a href="../../code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../../code/flows/index.html">Flows through the code</a>
+    <a href="../../code/examples/index.html">Examples</a>
+    <a href="../../code/languages/index.html">Languages</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
+  </div>
+  <div>
+    <h4>Evidence &amp; explain</h4>
+    <a href="../../evidence/index.html">Measurements</a>
+    <a href="../../evidence/status/index.html">What exists today</a>
+    <a href="../../evidence/research/index.html">Research note</a>
+    <a href="../../evidence/market/index.html">Market &amp; competitors</a>
+    <a href="../../explain/storyboards/index.html">Storyboards</a>
+    <a href="../../explain/index.html">Mockups</a>
+    <a href="../../articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Project &amp; agents</h4>
+    <a href="../../project/about/index.html">About &amp; naming</a>
+    <a href="../../project/sources/index.html">The source documents</a>
+    <a href="../../project/engineering.html">Engineering</a>
+    <a href="../../project/comms.html">Comms &amp; release history</a>
+    <a href="../../llms.txt">llms.txt</a>
+    <a href="../../llms-full.txt">llms-full.txt</a>
+    <a href="../../index.md">index.md</a>
+    <a href="../../sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

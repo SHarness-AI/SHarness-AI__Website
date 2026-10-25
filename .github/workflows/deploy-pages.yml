@@ -2,7 +2,7 @@
 # order as the *.sgit.ai sites (adapted from SGit-AI/SGit-AI__Website__NFRs):
 # validate → tag → publish.
 #
-#   1. validate     — the pre-release gate (admin/build/validate.js: version agreement,
+#   1. validate     — the pre-release gate (tools/validate.js: version agreement,
 #                     internal links, canonical/CNAME agreement, key-leak tripwire, dated
 #                     figures), plus the --check of each generator (HTML matches its markdown
 #                     source; storyboards match their data and pass the kit's validator). A failure
@@ -10,7 +10,7 @@
 #                     on pull requests, so branch work is gated before it reaches dev.
 #   2. tag-release  — every push to dev is a PATCH release (vX.Y.Z+1) and every push to
 #                     main is a MINOR release (vX.Y+1.0), tagged v{X}.{Y}.{Z}. The version is
-#                     owned by admin/build/version.txt (bumped exactly once per release)
+#                     owned by tools/version.txt (bumped exactly once per release)
 #                     and must also appear in the release commit's subject
 #                     ("site vX.Y.Z: ..."). CI verifies the two agree and that the bump is
 #                     the right one for the branch, then tags the release commit, which is
@@ -39,15 +39,15 @@ jobs:
         with:
           persist-credentials: false
       - name: Validate the site (version, links, canonical, key-leak tripwire, dated figures)
-        run: node admin/build/validate.js
+        run: node tools/validate.js
       - name: Design pages' HTML matches their markdown source
-        run: python3 admin/build/gen_pages.py --check
+        run: python3 tools/gen_pages.py --check
       - name: Articles match their sources
-        run: python3 admin/build/gen_articles.py --check
+        run: python3 tools/gen_articles.py --check
       - name: Storyboards match their sources and have their previews
-        run: python3 admin/build/gen_storyboards.py --check
+        run: python3 tools/gen_storyboards.py --check
       - name: Storyboards are valid for the pinned kit (the kit's own validator)
-        run: node admin/build/validate_storyboards.cjs
+        run: node tools/validate_storyboards.cjs
 
   tag-release:
     runs-on: ubuntu-latest
@@ -71,7 +71,7 @@ jobs:
           LOG=$(git log --format='%H;%s')
 
           # The version of THIS release, from the file that owns it.
-          VER=$(grep -oP '^v\K[0-9]+\.[0-9]+\.[0-9]+' admin/build/version.txt)
+          VER=$(grep -oP '^v\K[0-9]+\.[0-9]+\.[0-9]+' tools/version.txt)
           TAG="v$VER"
           echo "version.txt says $TAG"
 

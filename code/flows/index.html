@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Flows through the code — SHarness</title>
+<meta name="description" content="What happens, module by module, when sharness-ai run confines a command and when hello runs the acceptance test; and the flow the launcher will add.">
+<link rel="canonical" href="https://sharness.ai/code/flows/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/code/flows/index.html">
+<meta property="og:title" content="Flows through the code — SHarness">
+<meta property="og:description" content="What happens, module by module, when sharness-ai run confines a command and when hello runs the acceptance test; and the flow the launcher will add.">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.2</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../design/index.html">The design<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../design/index.html">&#9679; The brief: in one read</a>
+      <a class="sl" href="../../design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="../../design/architecture/index.html">Architecture</a>
+      <a class="sl" href="../../design/components/index.html">Components</a>
+      <a class="sl" href="../../design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../../design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../../design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="../../design/surface/index.html">What a process can do</a>
+      <a class="sl" href="../../design/containment/index.html">Containment</a>
+      <a class="sl" href="../../design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../code/index.html">The code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/index.html">&#9679; Where the code is</a>
+      <a class="sl" href="../../code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl here" href="../../code/flows/index.html">Flows through the code</a>
+      <a class="sl" href="../../code/examples/index.html">Examples</a>
+      <a class="sl" href="../../code/languages/index.html">Languages</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../evidence/index.html">&#9679; Measurements</a>
+      <a class="sl" href="../../evidence/status/index.html">What exists today</a>
+      <a class="sl" href="../../evidence/research/index.html">Research note</a>
+      <a class="sl" href="../../evidence/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../explain/index.html">Explain<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../explain/index.html">&#9679; Storyboards &amp; mockups</a>
+      <a class="sl" href="../../explain/storyboards/index.html">Storyboards</a>
+      <a class="sl" href="../../explain/mockups/policy-hash.html">Mockup: policy hash</a>
+      <a class="sl" href="../../explain/mockups/edges.html">Mockup: edge matrix</a>
+      <a class="sl" href="../../articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../project/index.html">&#9679; Project</a>
+      <a class="sl" href="../../project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="../../project/sources/index.html">The source documents</a>
+      <a class="sl" href="../../project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="../../project/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../project/releases.html">Release history</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__Website">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+  <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">the code</a> / flows through the code · <a href="index.md">this page as markdown</a></div>
+  <h1>Flows through the code</h1>
+<div class="note"><b>Status: runnable</b>, <span class="asof">as of 25 Oct 2026</span>, on the CLI's <code>dev</code> branch. What happens, module by module and syscall by syscall, when a command is confined and when the acceptance test runs; then the flow the launcher will add, which is designed and not built. Line numbers are from the files on that date and will drift; the function names will not.</div>
+<h2 id="1-sharness-ai-run-policy-p-json-expect-hash-sha256-m-cmd">1. <code>sharness-ai run --policy p.json --expect-hash sha256:M -- cmd</code></h2>
+<pre class="diagram"> cli.main                      parse: --policy, --expect-hash, --verbose, argv after "--"
+   │
+   ▼
+ policy.load(path)             JSON file → dict; refuses non-objects and non-JSON
+ policy.check(policy)          the v0 shape: pbp=1, id, files.read/write/exec (absolute paths),
+                               network "none" | {connect_tcp_ports}, process.no_new_privs: true
+ policy.policy_hash(policy)    canonical bytes (sorted keys, no whitespace, UTF-8, integers only)
+                               → "sha256:" + hex                                         ← E02
+   │
+   ├── expect_hash given and ≠ hash  →  print "refused … Nothing ran.", exit 125
+   ├── check found problems          →  exit 125
+   ├── landlock.abi() == 0           →  "Landlock is not available", exit 126
+   │
+   ▼
+ run.run: os.fork()
+   │
+   ├─ parent: waitpid(child) → the child's exit code
+   │
+   └─ child: run.apply(policy)
+        1. network "none"  → run._unshare_net():  unshare(CLONE_NEWNET)
+                               EPERM? → unshare(CLONE_NEWUSER | CLONE_NEWNET)
+                               still refused? → rely on Landlock TCP rules (UDP uncovered)
+        2. landlock.Ruleset(): landlock_create_ruleset(2) with every fs right the ABI knows,
+                               + bind/connect TCP (ABI 4+), + signal/abstract-socket scoping (ABI 6+)
+        3. for each path:     landlock_add_rule(2) PATH_BENEATH with O_PATH fd and the rights:
+                                 read  → READ_FILE | READ_DIR
+                                 exec  → EXECUTE | READ_FILE | READ_DIR
+                                 write → every right of the ABI
+                               a missing path is skipped and reported; a plain file gets file rights only
+           for each port:     landlock_add_rule(2) NET_PORT with CONNECT_TCP
+        4. ruleset.restrict_self(): prctl(PR_SET_NO_NEW_PRIVS, 1); landlock_restrict_self(2)
+                               → final for this process and every descendant, for ever
+        5. environ: SHARNESS_AI_POLICY_HASH, SHARNESS_AI_POLICY_ID
+        6. os.execvp(cmd)      the command runs under the policy; anything it starts inherits it
+           (any failure before exec → stderr, _exit(126))</pre>
+<p>Why fork then apply, and not apply then fork: <code>restrict_self</code> is irreversible for the calling process, so it is only ever called in a child. The shell you typed <code>run</code> into is never restricted. That is also why the result is a Boundary for the child and a Setting for the caller.</p>
+<h2 id="2-sharness-ai-hello">2. <code>sharness-ai hello</code></h2>
+<pre class="diagram"> hello.hello()
+   │
+   ▼
+ hello.hello_policy()          a deny-all for *this* interpreter: read and exec the system prefixes,
+                               sys.base_prefix and the interpreter's directory; read the workspace;
+                               write nothing; network "none"
+ policy.policy_hash()          printed, so the person can keep it
+   │
+   ▼
+ write the policy to a temporary file
+ for each probe (read, write-tmp, write-cwd, net):
+     subprocess: python -m sharness_ai run --policy &lt;tmp&gt; -- python -I -c &lt;probe&gt;     ← the flow above, end to end
+     hello._classify(): "allowed" if the probe printed ok; "refused (…)" on PermissionError / OSError
+ one more:  run … --expect-hash sha256:000… → must be refused with "Nothing ran" (exit 125)
+   │
+   ▼
+ compare against EXPECT; print the table, "N/5 held", and the caveat
+ delete the temporary policy; exit 0 if every expectation held</pre>
+<p><code>hello</code> deliberately goes through the CLI (<code>python -m sharness_ai run</code>) rather than calling <code>run.run</code> in-process, so the acceptance test exercises the same path a person types.</p>
+<h2 id="3-sharness-ai-probe">3. <code>sharness-ai probe</code></h2>
+<p><code>probe.probe()</code> reads <code>/proc/self/status</code> (uid, capability sets, <code>NoNewPrivs</code>, <code>Seccomp</code>), calls <code>landlock_create_ruleset(2)</code> with the version flag to get the ABI, tries <code>memfd_secret(2)</code> (syscall 447) and closes the fd, lists <code>/proc/self/ns</code>, looks at <code>/sys/fs/cgroup</code>, reads the relevant keys from <code>/proc/config.gz</code>, checks which tools are on the path, and lists the <em>names</em> of proxy variables that are set. <code>probe.render()</code> prints it as text; <code>--json</code> prints the dict. Nothing is written.</p>
+<h2 id="4-the-policy-hash-in-two-implementations">4. The policy hash, in two implementations</h2>
+<pre class="diagram"> Python (policy.canonical)                       Browser (explain/mockups/policy-hash.html)
+   refuse floats                                   refuse non-integers
+   json.dumps(obj, sort_keys=True,                 keys sorted by code point, recursively;
+     separators=(",", ":"),                        JSON.stringify for strings, integers, booleans, null
+     ensure_ascii=False)                           joined with "," and ":"
+   .encode("utf-8")                                TextEncoder (UTF-8)
+   hashlib.sha256                                  crypto.subtle.digest("SHA-256")
+   "sha256:" + hexdigest                           "sha256:" + hex</pre>
+<p>The test suite pins one vector; the deny-all example's hash appears on this site and in the tests, so a change to either implementation fails a build.</p>
+<h2 id="5-what-the-launcher-adds-designed">5. What the launcher adds (designed)</h2>
+<pre class="diagram"> sharness-ai launch --manifest m.json --expect-hash sha256:M -- claude …        (not built)
+   1. canonicalise the manifest, hash it, refuse unless it equals M (or carries the root key's signature)
+   2. for each component: useradd an ephemeral uid                                            ~49 ms, measured
+   3. make a P-256 session CA; issue one certificate per role (SAN URI spiffe://&lt;session&gt;/&lt;role&gt;);
+      destroy the CA key; put the CA certificate's hash in the manifest                       24 ms, measured
+   4. start sharness.kms under its policy; it makes the session identity, prints k1 only; freeze it
+   5. for the orchestrator: apply its Landlock domain (execute allowlist, state folder, two ports),
+      drop to its uid, no_new_privs, then exec it                                             E06
+   6. per command: start the other components under their policies (new namespaces ~4 ms), run, tear down
+   7. at session end: thaw and kill the KMS; delete users, firewall rules, sockets</pre>
+<p>Steps 2, 3, 4 and 6 reuse what <code>run.apply</code> already does per process. The new pieces are the session CA (a few dozen lines with <code>cryptography</code>) and the orchestrator's domain, which is the process-tree proof of concept, E06.</p>
+<p>Sources: the modules <code>cli.py</code>, <code>policy.py</code>, <code>landlock.py</code>, <code>run.py</code>, <code>hello.py</code> and <code>probe.py</code> on the CLI's <code>dev</code> branch, 25 Oct 2026; <a href="../../design/components/index.html#sharness-launcher">Components: sharness.launcher</a>; <a href="../../design/process-tree/index.html">Enforcing the process tree</a>.</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.2</a> · <a href="../../project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The design</h4>
+    <a href="../../design/index.html">The brief: in one read</a>
+    <a href="../../design/why/index.html">Why: the last metre</a>
+    <a href="../../design/architecture/index.html">Architecture</a>
+    <a href="../../design/components/index.html">Components</a>
+    <a href="../../design/keys/index.html">Keys and the KMS</a>
+    <a href="../../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../../design/agents/index.html">Agents and LLMs</a>
+    <a href="../../design/process-tree/index.html">Enforcing the process tree</a>
+    <a href="../../design/surface/index.html">What a process can do</a>
+    <a href="../../design/containment/index.html">Containment</a>
+    <a href="../../design/spectrum/index.html">The spectrum</a>
+    <a href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+  </div>
+  <div>
+    <h4>The code</h4>
+    <a href="../../code/index.html">Where the code is</a>
+    <a href="../../code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../../code/flows/index.html">Flows through the code</a>
+    <a href="../../code/examples/index.html">Examples</a>
+    <a href="../../code/languages/index.html">Languages</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
+  </div>
+  <div>
+    <h4>Evidence &amp; explain</h4>
+    <a href="../../evidence/index.html">Measurements</a>
+    <a href="../../evidence/status/index.html">What exists today</a>
+    <a href="../../evidence/research/index.html">Research note</a>
+    <a href="../../evidence/market/index.html">Market &amp; competitors</a>
+    <a href="../../explain/storyboards/index.html">Storyboards</a>
+    <a href="../../explain/index.html">Mockups</a>
+    <a href="../../articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Project &amp; agents</h4>
+    <a href="../../project/about/index.html">About &amp; naming</a>
+    <a href="../../project/sources/index.html">The source documents</a>
+    <a href="../../project/engineering.html">Engineering</a>
+    <a href="../../project/comms.html">Comms &amp; release history</a>
+    <a href="../../llms.txt">llms.txt</a>
+    <a href="../../llms-full.txt">llms-full.txt</a>
+    <a href="../../index.md">index.md</a>
+    <a href="../../sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

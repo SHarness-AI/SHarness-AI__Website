@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>What a process can do — SHarness</title>
+<meta name="description" content="The whole surface of a process, one row per interface: what bounds it in SHarness, whether that was measured, and what the bound does not cover. What is left is a virtual operating system for one process.">
+<link rel="canonical" href="https://sharness.ai/design/surface/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/design/surface/index.html">
+<meta property="og:title" content="What a process can do — SHarness">
+<meta property="og:description" content="The whole surface of a process, one row per interface: what bounds it in SHarness, whether that was measured, and what the bound does not cover. What is left is a virtual operating system for one process.">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.2</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl here" href="../../design/index.html">The design<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../design/index.html">&#9679; The brief: in one read</a>
+      <a class="sl" href="../../design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="../../design/architecture/index.html">Architecture</a>
+      <a class="sl" href="../../design/components/index.html">Components</a>
+      <a class="sl" href="../../design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../../design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../../design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl here" href="../../design/surface/index.html">What a process can do</a>
+      <a class="sl" href="../../design/containment/index.html">Containment</a>
+      <a class="sl" href="../../design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../code/index.html">The code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/index.html">&#9679; Where the code is</a>
+      <a class="sl" href="../../code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl" href="../../code/flows/index.html">Flows through the code</a>
+      <a class="sl" href="../../code/examples/index.html">Examples</a>
+      <a class="sl" href="../../code/languages/index.html">Languages</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../evidence/index.html">&#9679; Measurements</a>
+      <a class="sl" href="../../evidence/status/index.html">What exists today</a>
+      <a class="sl" href="../../evidence/research/index.html">Research note</a>
+      <a class="sl" href="../../evidence/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../explain/index.html">Explain<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../explain/index.html">&#9679; Storyboards &amp; mockups</a>
+      <a class="sl" href="../../explain/storyboards/index.html">Storyboards</a>
+      <a class="sl" href="../../explain/mockups/policy-hash.html">Mockup: policy hash</a>
+      <a class="sl" href="../../explain/mockups/edges.html">Mockup: edge matrix</a>
+      <a class="sl" href="../../articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../project/index.html">&#9679; Project</a>
+      <a class="sl" href="../../project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="../../project/sources/index.html">The source documents</a>
+      <a class="sl" href="../../project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="../../project/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../project/releases.html">Release history</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__Website">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+  <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">the design</a> / what a process can do · <a href="index.md">this page as markdown</a></div>
+  <h1>What a process can do: the whole surface</h1>
+<div class="note"><b>Status: design, with the measured rows dated.</b> The question behind this page is Dinis Cruz's: <em>if we limit everything else, what else can a process do?</em> The answer is a list, and it is short enough to write down. For each kind of thing a process can do, this page says what SHarness bounds it with, whether that bound was measured (<span class="asof">as of 24 Oct 2026</span>, in one Claude agent workspace), and what the bound does not cover.</div>
+<h2 id="1-a-process-touches-the-world-through-the-kernel-and-only-through-the-kernel">1. A process touches the world through the kernel, and only through the kernel</h2>
+<p>Everything a user-space process does outside its own memory is a system call. Linux has about 460 of them on x86-64; <code>sgit --version</code> uses 38 distinct ones (measured, <a href="../../evidence/index.html#5-footprint">Evidence §5</a>), a bare Python start 31. They group into a dozen kinds of interface. A process that is bounded on every kind is a process whose operating system is its policy: what the policy lists exists, and nothing else does. That is the idea the design calls a Process Behaviour Policy, read from the other side.</p>
+<figure class="lead"><img src="../../assets/images/design/surface.svg" alt="The whole surface of a process: twelve kinds of interface arranged around one process, each with what bounds it in SHarness."><figcaption>The whole surface. Green: bounded in the kernel. Purple: bounded by a separate component, because the kernel cannot see the thing being bounded (which host a TLS connection names, what a model is asked, what a secret is).</figcaption></figure>
+<h2 id="2-the-surface-one-row-per-interface">2. The surface, one row per interface</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Interface</th><th>What a process can do through it</th><th>Bounded by (kernel)</th><th>The allowed part goes through</th><th>Measured</th><th>Not covered by the bound</th></tr></thead>
+<tbody>
+<tr><td><b>files</b>: read, write, execute, create, delete, rename</td><td>read any file its uid can; write; exec a binary; make device nodes, sockets, symlinks</td><td>Landlock path rules per process (ABI 1+); exec allowlist; the workspace with no execute right; a mount namespace with read-only binds</td><td><code>sharness.fs</code>, the only writer of protected folders, with content rules (no clear keys)</td><td>read and write denial ✔ (E03, E04); exec allowlist and read-only binds: not yet</td><td>the content of what it may read: prompt injection travels inside allowed files</td></tr>
+<tr><td><b>network</b>: connect, listen, send, receive, resolve names</td><td>reach any host; listen on any port; UDP, raw sockets</td><td>an empty network namespace (nothing at all), or Landlock TCP port rules (ABI 4+); <code>iptables</code> per uid</td><td><code>sharness.net</code>, the only client, and the TLS client, so it sees and verifies the host name; endpoint and vault-id allowlists</td><td>namespace ✔, port rules ✔, per-uid rule ✔</td><td>UDP and ICMP under Landlock alone (the namespace covers them); what is sent on an allowed connection</td></tr>
+<tr><td><b>processes</b>: fork, exec, clone</td><td>start anything on the system; start itself again</td><td><code>RLIMIT_NPROC=0</code> or a <code>pids</code> cgroup; seccomp denying <code>execve</code> after start; Landlock execute rights</td><td><code>sharness.bash</code>: a server outside the domain runs each command in a fresh sandbox</td><td>no-fork ✔; the server design not yet run (E06)</td><td>a binary the policy lets it run (which is why <code>node</code> for the orchestrator is pinned by hash)</td></tr>
+<tr><td><b>signals and IPC</b>: kill, ptrace, pipes, Unix sockets, shared memory, abstract sockets</td><td>signal or trace another process; reach a socket by name</td><td>Landlock scoping of signals and abstract sockets (ABI 6+); a pid namespace (cannot even see the others); ptrace denied by seccomp</td><td>the mutual TLS edges: the only IPC that exists is the edge list, with roles in certificates and both sides checking</td><td>edges ✔ (exactly per the matrix); scoping and seccomp not yet</td><td>a message on an allowed edge: its schema bounds its shape, not its intent</td></tr>
+<tr><td><b>memory</b></td><td>use as much as it likes; keep secrets in ordinary pages root can read</td><td>a <code>memory</code> cgroup; <code>PR_SET_DUMPABLE=0</code>, <code>mlockall</code>, <code>RLIMIT_CORE=0</code></td><td>secrets in <code>memfd_secret</code> pages, scrubbed after copying</td><td><code>memfd_secret</code> unreadable even by root ✔; dumpable stops non-root only ✔</td><td>root reading ordinary memory (out of scope); OpenSSL's own copies during an operation</td></tr>
+<tr><td><b>time and limits</b></td><td>run for ever; spin the CPU</td><td><code>max_runtime_s</code>; a <code>cpu</code> cgroup; the freezer</td><td>the launcher freezes <code>sharness.kms</code> between calls</td><td>freeze 0.28 ms / thaw 0.13 ms ✔</td><td>timing as a covert channel</td></tr>
+<tr><td><b>devices and mounts</b></td><td>open device nodes; mount; ioctl</td><td>no device nodes in the namespace; a mount namespace; Landlock <code>IOCTL_DEV</code> (ABI 5+); <code>mount</code> denied by seccomp</td><td>nothing: components need no devices</td><td>namespaces ✔ (3.7 ms); read-only binds not yet</td><td></td></tr>
+<tr><td><b>identity and privilege</b></td><td>change uid; use capabilities; gain privilege through setuid binaries</td><td>one ephemeral uid per component, made for the session; bounding set empty; <code>no_new_privs</code></td><td>the launcher makes the uids and deletes them</td><td>✔ (49 ms per user, with a firewall rule and teardown)</td><td>root undoing it, when the agent is root and runs the launcher itself</td></tr>
+<tr><td><b>kernel services</b></td><td><code>keyctl</code>, <code>bpf</code>, <code>unshare</code>, <code>mount</code>, <code>ptrace</code>, <code>io_uring</code>, <code>userfaultfd</code> and the rest of the long tail</td><td>a seccomp-BPF allowlist of the 30 to 40 syscalls a component uses</td><td>nothing</td><td>available; no filter tested yet</td><td>a bug in an allowed syscall (the kernel is trusted)</td></tr>
+<tr><td><b>environment and arguments</b></td><td>read secrets from <code>argv</code> and <code>environ</code>; the transcript sees both</td><td>the launcher sets them; nothing secret is ever in either</td><td><code>SHARNESS_AI_POLICY_HASH</code> and the policy id, so a process can say what it runs under</td><td>E03 sets them ✔</td><td></td></tr>
+<tr><td><b>the model</b> (an agent's interface)</td><td>ask the model anything, with any tools, with any secret in the context</td><td>nothing in the kernel: the model API is an HTTPS host like any other</td><td><code>sharness.llm</code>: model allowlist, pinned tool list, token budget, a secret filter on every tool result and user message, the real key added last</td><td>designed (E07)</td><td>the model being talked into a bad tool call: enforced where the tool executes, not here</td></tr>
+<tr><td><b>secrets</b></td><td>hold a key, print it, write it, pass it on</td><td>nothing in the kernel; <code>memfd_secret</code> only hides the page</td><td><code>sharness.kms</code>: opens sealed things and returns derived keys sealed to a one-time key; never a clear key</td><td>the holding ✔ (§ memory); the protocol designed (E08)</td><td>expiry is KMS policy, not cryptography; a session identity dies with its session</td></tr>
+</tbody>
+</table></div>
+<p>Rows marked ✔ were measured on 24 Oct 2026, in one Claude agent workspace, with method on <a href="../../evidence/index.html">Evidence</a>; the rest is designed or planned. The policy fields behind each row are in the schema on <a href="../policies/index.html#4-schema">Policies §4</a> and the enforcement map on <a href="../policies/index.html#5-enforcement-map">Policies §5</a>.</p>
+<h2 id="3-what-is-left-a-virtual-operating-system-for-one-process">3. What is left: a virtual operating system for one process</h2>
+<p>Read the table from the right. Take away every interface that is bounded to nothing, and what remains for a component is:</p>
+<ul>
+<li>its own memory, under a limit;</li>
+<li>the files its policy lists, with the rights it lists, and nothing else on the filesystem;</li>
+<li>the one or two TCP ports its policy lists, on loopback or on a Unix socket, each answered by a process that checks its certificate;</li>
+<li>the syscalls on its allowlist;</li>
+<li>its standard streams to the launcher;</li>
+<li>and, for an agent, one door to the model and one door to the secrets, each a component with its own policy.</li>
+</ul>
+<p>That is a complete description of the process's world. It is small enough to hash, to read in one sitting, to learn from a trace, and to ship with the code it binds. Nothing in it is new: it is what a kernel already offers, used all at once for one process, with the parts the kernel cannot see (host names, model requests, secrets) each given to one small process that can. The design calls the whole thing a harness; it could as well be called a virtual operating system whose system call table is the policy.</p>
+<h2 id="4-what-this-does-not-bound">4. What this does not bound</h2>
+<ul>
+<li><b>Intent on an allowed channel.</b> A schema bounds the shape of a request, not what it means. A web page that tells the agent to push to an allowed host, with an allowed key, within the allowed count, is not stopped by any bound above; it is stopped by narrowing the mandate (one host, one vault id, <code>op=read</code>) and by the dual-LLM split on <a href="../agents/index.html#5-untrusted-text-two-models-two-components">Agents §5</a>.</li>
+<li><b>Covert channels.</b> Timing, CPU load, cache effects, the size of allowed messages. Out of scope for a design that trusts the kernel.</li>
+<li><b>Root and the kernel.</b> Anything with root can read ordinary memory and undo locks it applied itself; a kernel bug in an allowed syscall is not caught by any of this. The threat model says so (<a href="../why/index.html#threat-model">Why</a>).</li>
+<li><b>The platform.</b> Where the launcher runs, and whether the platform's own proxy and VM behave as documented, is outside the policy.</li>
+</ul>
+<h2 id="5-where-each-bound-is-today">5. Where each bound is, today</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>In the CLI today (v0 policy)</th><th>Designed, not built</th></tr></thead>
+<tbody>
+<tr><td>files (Landlock read, write, exec); network (<code>none</code>, or TCP ports); <code>no_new_privs</code>; the environment carrying the hash</td><td>per-component uids, seccomp allowlists, cgroups, scoping, read-only binds, the launcher, <code>sharness.fs</code>, <code>.net</code>, <code>.bash</code>, <code>.llm</code>, <code>.kms</code></td></tr>
+</tbody>
+</table></div>
+<p>The v0 policy covers the two interfaces that leak most (files and network) for one process; each further row is one experiment on the <a href="../../code/experiments/index.html">ladder</a>.</p>
+<p>Sources: <a href="../policies/index.html">Policies</a> §4 and §5; <a href="../components/index.html">Components</a>; <a href="../../evidence/index.html">Evidence</a> §3 to §6 and §9; the Landlock documentation at <a href="https://docs.kernel.org/userspace-api/landlock.html">docs.kernel.org</a>; <code>sgit --version</code> under <code>strace -c</code> on 24 Oct 2026 (36 distinct syscalls by that method, 38 by the design's).</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.2</a> · <a href="../../project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The design</h4>
+    <a href="../../design/index.html">The brief: in one read</a>
+    <a href="../../design/why/index.html">Why: the last metre</a>
+    <a href="../../design/architecture/index.html">Architecture</a>
+    <a href="../../design/components/index.html">Components</a>
+    <a href="../../design/keys/index.html">Keys and the KMS</a>
+    <a href="../../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../../design/agents/index.html">Agents and LLMs</a>
+    <a href="../../design/process-tree/index.html">Enforcing the process tree</a>
+    <a href="../../design/surface/index.html">What a process can do</a>
+    <a href="../../design/containment/index.html">Containment</a>
+    <a href="../../design/spectrum/index.html">The spectrum</a>
+    <a href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+  </div>
+  <div>
+    <h4>The code</h4>
+    <a href="../../code/index.html">Where the code is</a>
+    <a href="../../code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../../code/flows/index.html">Flows through the code</a>
+    <a href="../../code/examples/index.html">Examples</a>
+    <a href="../../code/languages/index.html">Languages</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
+  </div>
+  <div>
+    <h4>Evidence &amp; explain</h4>
+    <a href="../../evidence/index.html">Measurements</a>
+    <a href="../../evidence/status/index.html">What exists today</a>
+    <a href="../../evidence/research/index.html">Research note</a>
+    <a href="../../evidence/market/index.html">Market &amp; competitors</a>
+    <a href="../../explain/storyboards/index.html">Storyboards</a>
+    <a href="../../explain/index.html">Mockups</a>
+    <a href="../../articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Project &amp; agents</h4>
+    <a href="../../project/about/index.html">About &amp; naming</a>
+    <a href="../../project/sources/index.html">The source documents</a>
+    <a href="../../project/engineering.html">Engineering</a>
+    <a href="../../project/comms.html">Comms &amp; release history</a>
+    <a href="../../llms.txt">llms.txt</a>
+    <a href="../../llms-full.txt">llms-full.txt</a>
+    <a href="../../index.md">index.md</a>
+    <a href="../../sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

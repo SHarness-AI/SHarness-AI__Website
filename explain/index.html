@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Explain — SHarness</title>
+<meta name="description" content="The design told other ways: three storyboards drawn from data, and two browser mockups that compute what the design describes.">
+<link rel="canonical" href="https://sharness.ai/explain/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/explain/index.html">
+<meta property="og:title" content="Explain — SHarness">
+<meta property="og:description" content="The design told other ways: three storyboards drawn from data, and two browser mockups that compute what the design describes.">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
+  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.2</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../design/index.html">The design<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../design/index.html">&#9679; The brief: in one read</a>
+      <a class="sl" href="../design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="../design/architecture/index.html">Architecture</a>
+      <a class="sl" href="../design/components/index.html">Components</a>
+      <a class="sl" href="../design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="../design/surface/index.html">What a process can do</a>
+      <a class="sl" href="../design/containment/index.html">Containment</a>
+      <a class="sl" href="../design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../code/index.html">The code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../code/index.html">&#9679; Where the code is</a>
+      <a class="sl" href="../code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="../code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl" href="../code/flows/index.html">Flows through the code</a>
+      <a class="sl" href="../code/examples/index.html">Examples</a>
+      <a class="sl" href="../code/languages/index.html">Languages</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../evidence/index.html">&#9679; Measurements</a>
+      <a class="sl" href="../evidence/status/index.html">What exists today</a>
+      <a class="sl" href="../evidence/research/index.html">Research note</a>
+      <a class="sl" href="../evidence/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../explain/index.html">Explain<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl here" href="../explain/index.html">&#9679; Storyboards &amp; mockups</a>
+      <a class="sl" href="../explain/storyboards/index.html">Storyboards</a>
+      <a class="sl" href="../explain/mockups/policy-hash.html">Mockup: policy hash</a>
+      <a class="sl" href="../explain/mockups/edges.html">Mockup: edge matrix</a>
+      <a class="sl" href="../articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../project/index.html">&#9679; Project</a>
+      <a class="sl" href="../project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="../project/sources/index.html">The source documents</a>
+      <a class="sl" href="../project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="../project/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../project/releases.html">Release history</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__Website">★ GitHub</a>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+  <div class="crumb"><a href="../index.html">sharness.ai</a> / explain · <a href="index.md">this page as markdown</a></div>
+  <h1>Explain: the design told other ways</h1>
+<div class="note">The design pages are the reference. This section tells the same design in forms a reader with ten minutes can use: short comic strips drawn from data, and two browser mockups that compute what the design describes. Nothing here enforces anything, and nothing drawn here is built.</div>
+<h2 id="storyboards">Storyboards</h2>
+<p>Three strips in the <a href="https://storyboards.sgit.ai">storyboards.sgit.ai</a> kit, with a cast of four (Ada the person, Pip the agent, Rook the page, the Launcher). Each is one JSON file drawn in your browser at a pinned release; each has a markdown script beside it.</p>
+<ul>
+<li><a href="storyboards/the-last-metre/index.html">The last metre</a>: a vault key sealed while it travels and exposed when it arrives; then the KMS holds it instead. 9 panels.</li>
+<li><a href="storyboards/its-one-job/index.html">Its one job</a>: a page tells the agent to show the key, push elsewhere, ask the KMS, then edit the policy; each stop is a different process. 10 panels.</li>
+<li><a href="storyboards/hello-world-inside/index.html">Hello world, inside</a>: the memo's acceptance test for one child process, as it ran on 24 Oct 2026. 8 panels.</li>
+</ul>
+<p><a href="storyboards/index.html">All storyboards, the cast and how they are made</a>.</p>
+<h2 id="mockups">Mockups</h2>
+<ul>
+<li><a href="mockups/policy-hash.html">The policy hash</a>: paste a v0 policy, get the hash the person supplies, the same one <code>sharness-ai policy hash</code> prints; then watch an added host change it.</li>
+<li><a href="mockups/edges.html">The edge matrix</a>: click caller and callee; see which layer refuses first. The app never talks to the KMS.</li>
+</ul>
+<h2 id="articles">Articles</h2>
+<p>Arguments about the design in the newsroom's format, by Dinis Cruz through an agent or by the build agent in its own voice: <a href="../articles/index.html">Articles</a>.</p>
+<h2 id="where-the-detail-is">Where the detail is</h2>
+<p>Every strip and mockup points back to the page it draws from: <a href="../design/index.html">the brief</a> first, then the <a href="../design/index.html#8-reading-order-after-this-page">design pages</a>.</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../project/releases.html">v0.5.2</a> · <a href="../project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The design</h4>
+    <a href="../design/index.html">The brief: in one read</a>
+    <a href="../design/why/index.html">Why: the last metre</a>
+    <a href="../design/architecture/index.html">Architecture</a>
+    <a href="../design/components/index.html">Components</a>
+    <a href="../design/keys/index.html">Keys and the KMS</a>
+    <a href="../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../design/agents/index.html">Agents and LLMs</a>
+    <a href="../design/process-tree/index.html">Enforcing the process tree</a>
+    <a href="../design/surface/index.html">What a process can do</a>
+    <a href="../design/containment/index.html">Containment</a>
+    <a href="../design/spectrum/index.html">The spectrum</a>
+    <a href="../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+  </div>
+  <div>
+    <h4>The code</h4>
+    <a href="../code/index.html">Where the code is</a>
+    <a href="../code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="../code/experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../code/flows/index.html">Flows through the code</a>
+    <a href="../code/examples/index.html">Examples</a>
+    <a href="../code/languages/index.html">Languages</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
+  </div>
+  <div>
+    <h4>Evidence &amp; explain</h4>
+    <a href="../evidence/index.html">Measurements</a>
+    <a href="../evidence/status/index.html">What exists today</a>
+    <a href="../evidence/research/index.html">Research note</a>
+    <a href="../evidence/market/index.html">Market &amp; competitors</a>
+    <a href="../explain/storyboards/index.html">Storyboards</a>
+    <a href="../explain/index.html">Mockups</a>
+    <a href="../articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Project &amp; agents</h4>
+    <a href="../project/about/index.html">About &amp; naming</a>
+    <a href="../project/sources/index.html">The source documents</a>
+    <a href="../project/engineering.html">Engineering</a>
+    <a href="../project/comms.html">Comms &amp; release history</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="../llms-full.txt">llms-full.txt</a>
+    <a href="../index.md">index.md</a>
+    <a href="../sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

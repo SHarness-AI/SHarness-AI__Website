@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moved — SHarness</title>
+<meta name="description" content="This address moved when sharness.ai was restructured on 25 Oct 2026; the page sends you to the new one.">
+<link rel="canonical" href="https://sharness.ai/404.html">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/assets/site.css">
+<script>
+// sharness.ai was restructured on 25 Oct 2026 (v0.5.2): sections design/, code/, evidence/, explain/, project/.
+// GitHub Pages serves this file for any missing path; old addresses are mapped here, once, so no
+// stub folders are needed at the root. Anything unmapped falls through to the list below.
+(function () {
+  var MAP = [
+    ['/brief/images/', '/assets/images/design/'], ['/brief/', '/design/'],
+    ['/why/', '/design/why/'], ['/architecture/', '/design/architecture/'], ['/components/', '/design/components/'],
+    ['/keys/', '/design/keys/'], ['/policies/', '/design/policies/'], ['/agents/', '/design/agents/'],
+    ['/process-tree/', '/design/process-tree/'], ['/surface/', '/design/surface/'], ['/spectrum/', '/design/spectrum/'],
+    ['/roadmap/', '/design/roadmap/'],
+    ['/cli/', '/code/cli/'], ['/experiments/', '/code/experiments/'],
+    ['/research/', '/evidence/research/'], ['/market/', '/evidence/market/'], ['/shipped/', '/evidence/status/'],
+    ['/storyboards/', '/explain/storyboards/'], ['/mockups/', '/explain/mockups/'],
+    ['/about/', '/project/about/'], ['/documents/', '/project/sources/'], ['/briefs/', '/project/sources/'],
+    ['/admin/index.html', '/project/engineering.html'], ['/admin/comms.html', '/project/comms.html'],
+    ['/admin/versions.html', '/project/releases.html'], ['/admin/build/', '/tools/'], ['/admin/content/', '/content/']
+  ];
+  var p = location.pathname;
+  for (var i = 0; i < MAP.length; i++) {
+    if (p === MAP[i][0] || p.indexOf(MAP[i][0]) === 0) {
+      location.replace(MAP[i][1] + p.slice(MAP[i][0].length) + location.hash);
+      return;
+    }
+  }
+}());
+</script>
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
+  <a class="ver" href="project/releases.html" title="Site release history">v0.5.2</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="design/index.html">The design<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="design/index.html">&#9679; The brief: in one read</a>
+      <a class="sl" href="design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="design/architecture/index.html">Architecture</a>
+      <a class="sl" href="design/components/index.html">Components</a>
+      <a class="sl" href="design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="design/surface/index.html">What a process can do</a>
+      <a class="sl" href="design/containment/index.html">Containment</a>
+      <a class="sl" href="design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="code/index.html">The code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="code/index.html">&#9679; Where the code is</a>
+      <a class="sl" href="code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl" href="code/flows/index.html">Flows through the code</a>
+      <a class="sl" href="code/examples/index.html">Examples</a>
+      <a class="sl" href="code/languages/index.html">Languages</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="evidence/index.html">&#9679; Measurements</a>
+      <a class="sl" href="evidence/status/index.html">What exists today</a>
+      <a class="sl" href="evidence/research/index.html">Research note</a>
+      <a class="sl" href="evidence/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="explain/index.html">Explain<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="explain/index.html">&#9679; Storyboards &amp; mockups</a>
+      <a class="sl" href="explain/storyboards/index.html">Storyboards</a>
+      <a class="sl" href="explain/mockups/policy-hash.html">Mockup: policy hash</a>
+      <a class="sl" href="explain/mockups/edges.html">Mockup: edge matrix</a>
+      <a class="sl" href="articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="project/index.html">&#9679; Project</a>
+      <a class="sl" href="project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="project/sources/index.html">The source documents</a>
+      <a class="sl" href="project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="project/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="project/releases.html">Release history</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__Website">★ GitHub</a>
+  <script src="assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+  <div class="crumb"><a href="/index.html">sharness.ai</a> / not found</div>
+  <h1>That address moved</h1>
+  <p class="lead">sharness.ai was restructured into five sections on 25 October 2026. Old addresses are sent to their new homes by this page; if you can read this, the address was not one of them.</p>
+  <ul>
+    <li><a href="/design/index.html">The design</a>: the brief, why, architecture, components, keys, policies, agents, the process tree, what a process can do, containment, the spectrum, the roadmap</li>
+    <li><a href="/code/index.html">The code</a>: where it is, the CLI, experiments, flows, examples, languages</li>
+    <li><a href="/evidence/index.html">Evidence</a>: measurements, what exists today, the research note, the market</li>
+    <li><a href="/explain/index.html">Explain</a>: storyboards and mockups; <a href="/articles/index.html">articles</a></li>
+    <li><a href="/project/about/index.html">Project</a>: about, the source documents, engineering, comms, releases</li>
+    <li>For agents: <a href="/llms.txt">llms.txt</a></li>
+  </ul>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="project/releases.html">v0.5.2</a> · <a href="project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The design</h4>
+    <a href="design/index.html">The brief: in one read</a>
+    <a href="design/why/index.html">Why: the last metre</a>
+    <a href="design/architecture/index.html">Architecture</a>
+    <a href="design/components/index.html">Components</a>
+    <a href="design/keys/index.html">Keys and the KMS</a>
+    <a href="design/policies/index.html">Process Behaviour Policies</a>
+    <a href="design/agents/index.html">Agents and LLMs</a>
+    <a href="design/process-tree/index.html">Enforcing the process tree</a>
+    <a href="design/surface/index.html">What a process can do</a>
+    <a href="design/containment/index.html">Containment</a>
+    <a href="design/spectrum/index.html">The spectrum</a>
+    <a href="design/roadmap/index.html">Roadmap &amp; open decisions</a>
+  </div>
+  <div>
+    <h4>The code</h4>
+    <a href="code/index.html">Where the code is</a>
+    <a href="code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="code/experiments/index.html">Mockups &amp; experiments</a>
+    <a href="code/flows/index.html">Flows through the code</a>
+    <a href="code/examples/index.html">Examples</a>
+    <a href="code/languages/index.html">Languages</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
+  </div>
+  <div>
+    <h4>Evidence &amp; explain</h4>
+    <a href="evidence/index.html">Measurements</a>
+    <a href="evidence/status/index.html">What exists today</a>
+    <a href="evidence/research/index.html">Research note</a>
+    <a href="evidence/market/index.html">Market &amp; competitors</a>
+    <a href="explain/storyboards/index.html">Storyboards</a>
+    <a href="explain/index.html">Mockups</a>
+    <a href="articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Project &amp; agents</h4>
+    <a href="project/about/index.html">About &amp; naming</a>
+    <a href="project/sources/index.html">The source documents</a>
+    <a href="project/engineering.html">Engineering</a>
+    <a href="project/comms.html">Comms &amp; release history</a>
+    <a href="llms.txt">llms.txt</a>
+    <a href="llms-full.txt">llms-full.txt</a>
+    <a href="index.md">index.md</a>
+    <a href="sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

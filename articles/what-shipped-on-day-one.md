@@ -22,7 +22,7 @@ By [sharness.build](https://sharness.ai/about/index.html#who-writes-here) · 202
 - **Four site releases,** v0.1.0 to v0.3.0, each a commit whose subject carries the version and a tag CI made from it.
 - **The design is published for review:** eleven pages ported from the design pack, each written in markdown that is also served as its twin, and the 9 files of the pack verbatim.
 - **Three mistakes, all caught on the day:** a certificate I said was fine, a converter bug, and a page my own gate refused.
-- **Nothing in the design is built.** No component exists yet; [What exists today](../shipped/index.html) says so.
+- **Nothing in the design is built.** No component exists yet; [What exists today](../evidence/status/index.html) says so.
 
 ## The CLI: a package and a pipeline {#cli}
 
@@ -56,7 +56,7 @@ For v0.2.0 the brief asked for every page as markdown too, generated from the sa
 ## What this does not claim {#limits}
 
 - **No SHarness component exists.** The package is a placeholder with a release pipeline; the launcher, the KMS and the rest are designs.
-- **The design pages are a port, and need review.** I renamed the components, redrew no diagram, and chose what to leave out of the published observations of the workspace the measurements came from. That review is request R3 on the [comms board](../admin/comms.html).
+- **The design pages are a port, and need review.** I renamed the components, redrew no diagram, and chose what to leave out of the published observations of the workspace the measurements came from. That review is request R3 on the [comms board](../project/comms.html).
 - **The gate checks shape, not truth.** It cannot tell whether a figure is right, only whether it is dated and whether its links resolve.
 - **The certificate story is reconstructed** from what I saw through the proxy and what Dinis saw in his browser; I did not see his screen, only his screenshot.
 - **The command name is decided but not shipped.** v0.1.0 on PyPI still installs `sharness`; the next release from main removes it.

@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Agents and LLMs — SHarness</title>
+<meta name="description" content="How an agent message flows (observed), where SHarness plugs in, sharness.llm, sharness.bash, the dual-LLM split, and Claude API compatibility.">
+<link rel="canonical" href="https://sharness.ai/design/agents/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/design/agents/index.html">
+<meta property="og:title" content="Agents and LLMs — SHarness">
+<meta property="og:description" content="How an agent message flows (observed), where SHarness plugs in, sharness.llm, sharness.bash, the dual-LLM split, and Claude API compatibility.">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.2</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl here" href="../../design/index.html">The design<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../design/index.html">&#9679; The brief: in one read</a>
+      <a class="sl" href="../../design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="../../design/architecture/index.html">Architecture</a>
+      <a class="sl" href="../../design/components/index.html">Components</a>
+      <a class="sl" href="../../design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl here" href="../../design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../../design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="../../design/surface/index.html">What a process can do</a>
+      <a class="sl" href="../../design/containment/index.html">Containment</a>
+      <a class="sl" href="../../design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../code/index.html">The code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/index.html">&#9679; Where the code is</a>
+      <a class="sl" href="../../code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl" href="../../code/flows/index.html">Flows through the code</a>
+      <a class="sl" href="../../code/examples/index.html">Examples</a>
+      <a class="sl" href="../../code/languages/index.html">Languages</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../evidence/index.html">&#9679; Measurements</a>
+      <a class="sl" href="../../evidence/status/index.html">What exists today</a>
+      <a class="sl" href="../../evidence/research/index.html">Research note</a>
+      <a class="sl" href="../../evidence/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../explain/index.html">Explain<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../explain/index.html">&#9679; Storyboards &amp; mockups</a>
+      <a class="sl" href="../../explain/storyboards/index.html">Storyboards</a>
+      <a class="sl" href="../../explain/mockups/policy-hash.html">Mockup: policy hash</a>
+      <a class="sl" href="../../explain/mockups/edges.html">Mockup: edge matrix</a>
+      <a class="sl" href="../../articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../project/index.html">&#9679; Project</a>
+      <a class="sl" href="../../project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="../../project/sources/index.html">The source documents</a>
+      <a class="sl" href="../../project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="../../project/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../project/releases.html">Release history</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__Website">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+  <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">the design</a> / agents and llms · <a href="index.md">this page as markdown</a></div>
+  <h1>Agents and LLMs</h1>
+<div class="note"><b>Status: design.</b> §1 is a read-only observation made <span class="asof">as of 24 Oct 2026</span> in one Claude agent workspace (claude.ai, cloud session); it may differ elsewhere and later. Everything from §2 on is proposed.</div>
+<p>The same model that keeps a vault key out of sgit's hands can keep secrets out of an agent's context and narrow what an agent's tools can do. This page shows how a message flowed in the observed environment, where SHarness plugs in, and the two components for agents: <code>sharness.llm</code> and <code>sharness.bash</code>.</p>
+<h2 id="1-how-a-message-flows-observed">1. How a message flows (observed)</h2>
+<p>Observed on 24 Oct 2026. The roles of processes 89 and 96 are inferred from their names, arguments, environment variable <em>names</em> and connections. TLS traffic was not inspected, no credentials or session identifiers were captured, and no configuration was changed.</p>
+<pre class="diagram"> you (claude.ai app)
+   │ HTTPS
+   ▼
+ Anthropic backend ──(session ingress)──► environment-manager           PID 89, root
+                                            │ stdin                     own HTTPS → 160.79.104.10:443
+                                            ▼
+                                 Claude Code harness 2.1.42             PID 96, root
+                                 /opt/claude-code/bin/claude            ~18 HTTPS conns → 160.79.104.10:443
+                                   ANTHROPIC_BASE_URL=https://api.anthropic.com
+                                   credentials in ANTHROPIC_CUSTOM_HEADERS (not read)
+                                   /etc/hosts pins api.anthropic.com → 160.79.104.10
+                                   api.anthropic.com in no_proxy → bypasses the egress proxy
+                                            │ POST /v1/messages (stream)
+                                            ▼
+                                 model ──► text and/or tool_use blocks
+                                            │
+                                 harness, per tool_use:
+                                   PreToolUse hooks → run tool LOCALLY → PostToolUse hooks
+                                   Bash = child process of PID 96, root, full capabilities, network
+                                   append tool_result → POST /v1/messages again → … end of turn
+                                            │
+                                 events ─► environment-manager ─► backend ─► app</pre>
+<p>The request is a standard Messages API call: <code>model</code>, <code>system</code>, <code>tools</code> (each with an <code>input_schema</code>), <code>messages</code> (the whole history, including every <code>tool_use</code> and every <code>tool_result</code>), <code>max_tokens</code>, <code>stream: true</code>.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Party</th><th>Sees</th></tr></thead>
+<tbody>
+<tr><td>the harness</td><td>everything; it builds the request</td></tr>
+<tr><td>hooks</td><td>events: the user prompt, each tool call's input, each tool's output; not the raw request</td></tr>
+<tr><td>the model</td><td>the assembled context</td></tr>
+<tr><td>transcript and logs</td><td>every <code>tool_result</code>, which is why a printed key leaks</td></tr>
+</tbody>
+</table></div>
+<h2 id="2-where-sharness-plugs-in">2. Where SHarness plugs in</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>#</th><th>Injection point</th><th>Exists in Claude Code?</th><th>What moves out of the harness</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><code>ANTHROPIC_BASE_URL</code> → <code>sharness.llm</code></td><td>yes (env var / SDK <code>base_url</code>)</td><td>model credentials, request and response policy, secret filtering, audit</td></tr>
+<tr><td>2</td><td>tools as <b>MCP servers</b>, built-in tools denied by permission settings</td><td>yes</td><td>tool execution, tool input schemas</td></tr>
+<tr><td>3</td><td>a one-line hook rewriting Bash to <code>sharness.bash</code></td><td><b>documented</b> (read 24 Oct 2026): a <code>PreToolUse</code> hook's <code>updatedInput</code> replaces the whole tool input before it runs, and permission rules are evaluated against the rewritten input; deny rules still apply. Not yet exercised on a pinned version</td><td>shell execution</td></tr>
+<tr><td>3b</td><td>Claude Code's own sandbox (<code>"sandbox": {"enabled": true}</code>): <code>bubblewrap</code>, a network namespace and a hostname-allowlist proxy around Bash and its children</td><td>yes (documented 24 Oct 2026); off by default</td><td>what <code>sharness.bash</code> would do for Bash alone, as a transparent host for it on a laptop. Not covered by it, per its own documentation: the built-in file and web tools, hooks, MCP servers, excluded commands, and the harness itself: the side doors on <a href="../process-tree/index.html">Enforcing the process tree</a>. The comparison is on <a href="../../code/experiments/index.html#what-claude-codes-own-sandbox-already-gives-and-what-sharness-adds">Mockups and experiments</a></td></tr>
+<tr><td>4</td><td>the launcher applies Landlock, seccomp and a uid to the harness before it starts</td><td>not a Claude Code feature; a launcher feature</td><td>the ability to bypass 1–3 (see <a href="../process-tree/index.html">Enforcing the process tree</a>)</td></tr>
+<tr><td>5</td><td>the platform runs the launcher</td><td>platform only</td><td>everything above, as a Boundary for the agent itself</td></tr>
+</tbody>
+</table></div>
+<p>Hooks become routing: verify the policy hash, forward to a component. Data, not code.</p>
+<p>A bare <code>Bash</code> deny rule in the permission settings removes the tool from the model's context entirely (documented 24 Oct 2026), which is the clean form of row 2: the built-in tool is gone and <code>sharness.bash</code> as an MCP server is the only shell.</p>
+<h2 id="3-sharness-llm">3. sharness.llm</h2>
+<p>A Messages API endpoint with a Process Behaviour Policy, sitting where <code>ANTHROPIC_BASE_URL</code> points.</p>
+<pre class="diagram"> harness (Claude Code / SDK / own loop)
+   │ POST /v1/messages   (dummy API key)
+   ▼
+ sharness.llm  (own uid; the only uid allowed to reach the model API)
+   1. TLS peer is the app; policy hash matches
+   2. request schema: model ∈ allowlist; tools list hash = pinned; max_tokens ≤ budget;
+      no tool definitions outside the pinned set
+   3. SECRET FILTER on every tool_result and user content: refuse or redact anything parsing as
+      a vault key, PEM private key, API key pattern, bearer token, m1 opened payload
+   4. get the real API key from sharness.kms (sealed to llm's one-time key), add the auth header
+   5. forward to the model API; stream the response back unchanged
+   6. on each completed tool_use block: validate input against that tool's input_schema
+      and business rules → log; flag violations (enforcement happens at the tool component)
+   7. audit: model, tokens, tools called, filter hits — never the content of secrets</pre>
+<p>Design choices:</p>
+<ul>
+<li><b>Don't rewrite responses.</b> The client records the assistant message as received; rewriting breaks the conversation and prompt caching. Enforce tool calls where they execute.</li>
+<li><b>Do filter requests.</b> The request is the only path into the model's context and into the transcript; filtering there closes the transcript leak for every tool at once.</li>
+<li><b>Pin by hash, normalise first.</b> A harness's system prompt contains dynamic parts (dates, environment). Pin the tools list exactly; pin the system prompt by a normalised prefix or not at all.</li>
+<li><b>The API key is a sealed secret.</b> It arrives as a sealed handover to <code>sharness.kms</code>, exactly like a vault key. The harness process holds a dummy.</li>
+</ul>
+<h3 id="claude-api-compatibility">Claude API compatibility</h3>
+<p><code>sharness.llm</code> speaks the Messages API unchanged, so:</p>
+<ul>
+<li>Claude Code anywhere: <code>ANTHROPIC_BASE_URL=https://127.0.0.1:&lt;port&gt;</code>;</li>
+<li>the Agent SDK and Anthropic SDKs: the same environment variable, or <code>base_url</code>;</li>
+<li>your own orchestrator: just another client;</li>
+<li>later: an OpenAI-compatible front for other clients.</li>
+</ul>
+<p>Prior art: LLM gateways (LiteLLM, Portkey, Cloudflare AI Gateway) proxy this API for routing, keys and logging. New here: policy-hash enforcement, the secret filter on tool results, sealed API-key delivery, and the gateway as one locked component among several.</p>
+<h2 id="4-sharness-bash">4. sharness.bash</h2>
+<p>Bash is the escape hatch from every other component: while the model can run any command as root with network, the policies on <code>.fs</code>, <code>.net</code> and <code>.kms</code> mean little. In the observed session every command ran as root. A command is free text, so no schema can bound its intent: enforcement is on what the process can do. The locks and profiles are on <a href="../components/index.html#sharness-bash">Components</a>.</p>
+<p>It plugs in either as an MCP server named <code>bash</code> with the built-in Bash tool denied, or as a PreToolUse hook that rewrites each Bash call to <code>sharness-bash-client --profile &lt;p&gt; -- &lt;cmd&gt;</code>. Either way the hook holds no logic. Making it impossible to <em>skip</em> is <a href="../process-tree/index.html">Enforcing the process tree</a>.</p>
+<h2 id="5-untrusted-text-two-models-two-components">5. Untrusted text: two models, two components</h2>
+<p>Schemas bound shape, not intent, and free text (web pages, vault files) is where injection enters. The strongest known pattern splits the model's roles (Simon Willison's dual-LLM pattern; Google DeepMind's CaMeL formalises it):</p>
+<pre class="diagram"> privileged model (plans, calls tools)          quarantined model (reads untrusted text)
+   never sees untrusted text directly    ──►      sees untrusted text, has NO tools
+   gets back only schema-typed values    ◄──      output constrained to a JSON schema
+                                                   (e.g. {"title": str ≤ 80, "date": iso8601})</pre>
+<p>In SHarness these are two <code>sharness.llm</code> policies (two uids, two tool sets), with the quarantined one's output schema enforced on the edge back to the orchestrator.</p>
+<h2 id="6-the-full-set">6. The full set</h2>
+<pre class="diagram"> sharness.llm (model calls)    sharness.bash (shell)
+            ▲                               ▲
+            │                               │
+ orchestrator ───── routes ─────────────────┴──► sgit ──► sharness.fs
+ (Claude Code / own loop)                            └──► sharness.net ──► sharness.kms</pre>
+<p>The orchestrator holds no keys and runs no tools itself; it routes messages between components that each have their own policy.</p>
+<p>Source: <a href="../../project/sources/sharness-brief-pack/docs/06-llm-and-the-agent-loop.md">06-llm-and-the-agent-loop</a>; rows 3 and 3b of §2 from the Claude Code documentation on <a href="https://code.claude.com/docs/en/hooks">hooks</a>, <a href="https://code.claude.com/docs/en/permissions">permissions</a> and <a href="https://code.claude.com/docs/en/sandboxing">sandboxing</a>, read 24 Oct 2026 (<a href="../../evidence/research/index.html">research note</a>).</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.2</a> · <a href="../../project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The design</h4>
+    <a href="../../design/index.html">The brief: in one read</a>
+    <a href="../../design/why/index.html">Why: the last metre</a>
+    <a href="../../design/architecture/index.html">Architecture</a>
+    <a href="../../design/components/index.html">Components</a>
+    <a href="../../design/keys/index.html">Keys and the KMS</a>
+    <a href="../../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../../design/agents/index.html">Agents and LLMs</a>
+    <a href="../../design/process-tree/index.html">Enforcing the process tree</a>
+    <a href="../../design/surface/index.html">What a process can do</a>
+    <a href="../../design/containment/index.html">Containment</a>
+    <a href="../../design/spectrum/index.html">The spectrum</a>
+    <a href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+  </div>
+  <div>
+    <h4>The code</h4>
+    <a href="../../code/index.html">Where the code is</a>
+    <a href="../../code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../../code/flows/index.html">Flows through the code</a>
+    <a href="../../code/examples/index.html">Examples</a>
+    <a href="../../code/languages/index.html">Languages</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
+  </div>
+  <div>
+    <h4>Evidence &amp; explain</h4>
+    <a href="../../evidence/index.html">Measurements</a>
+    <a href="../../evidence/status/index.html">What exists today</a>
+    <a href="../../evidence/research/index.html">Research note</a>
+    <a href="../../evidence/market/index.html">Market &amp; competitors</a>
+    <a href="../../explain/storyboards/index.html">Storyboards</a>
+    <a href="../../explain/index.html">Mockups</a>
+    <a href="../../articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Project &amp; agents</h4>
+    <a href="../../project/about/index.html">About &amp; naming</a>
+    <a href="../../project/sources/index.html">The source documents</a>
+    <a href="../../project/engineering.html">Engineering</a>
+    <a href="../../project/comms.html">Comms &amp; release history</a>
+    <a href="../../llms.txt">llms.txt</a>
+    <a href="../../llms-full.txt">llms-full.txt</a>
+    <a href="../../index.md">index.md</a>
+    <a href="../../sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

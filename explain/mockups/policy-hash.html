@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Policy hash mockup — SHarness</title>
+<meta name="description" content="A browser mockup of the one value the person supplies: a v0 Process Behaviour Policy, canonicalised and hashed with SHA-256 in your browser, so it can be checked against sharness-ai policy hash.">
+<link rel="canonical" href="https://sharness.ai/mockups/policy-hash.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/mockups/policy-hash.html">
+<meta property="og:title" content="Policy hash mockup — SHarness">
+<meta property="og:description" content="A v0 Process Behaviour Policy, canonicalised and hashed with SHA-256 in your browser; the same hash sharness-ai policy hash prints.">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../../assets/site.css">
+<style>
+.mock{display:grid;gap:1rem;grid-template-columns:1fr;margin:1.2rem 0}
+@media(min-width:860px){.mock{grid-template-columns:1fr 1fr}}
+.mock textarea{width:100%;min-height:260px;font:.84rem/1.45 var(--mono);padding:.8rem;border:1px solid var(--line2);border-radius:10px;background:var(--panel);color:var(--fg);resize:vertical}
+.mock .out{background:var(--term-bg);color:#e6edf3;border-radius:10px;padding:.9rem 1.1rem;font:.84rem/1.5 var(--mono);overflow-wrap:anywhere;min-height:260px}
+.mock .out .g{color:var(--term-green)} .mock .out .r{color:var(--term-red)} .mock .out .d{color:var(--term-dim)} .mock .out .y{color:var(--term-yellow)}
+.hash{font:600 .95rem/1.4 var(--mono);overflow-wrap:anywhere;padding:.6rem .8rem;border-radius:8px;border:1px solid var(--line);background:var(--panel)}
+.hash.ok{border-color:var(--accent);color:var(--accent-dk)} .hash.bad{border-color:var(--red);color:var(--red)}
+.btns{display:flex;gap:.6rem;flex-wrap:wrap;margin:.6rem 0}
+.btns button{background:var(--panel);border:1px solid var(--line2);border-radius:6px;padding:.4rem .8rem;font:600 .8rem var(--sans);color:var(--fg);cursor:pointer}
+.btns button:hover{border-color:var(--accent)}
+.btns button.primary{background:var(--accent-dk);color:#fff;border-color:var(--accent-dk)}
+label.small{display:block;margin:.3rem 0 .2rem}
+</style>
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.2</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../design/index.html">The design<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../design/index.html">&#9679; The brief: in one read</a>
+      <a class="sl" href="../../design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="../../design/architecture/index.html">Architecture</a>
+      <a class="sl" href="../../design/components/index.html">Components</a>
+      <a class="sl" href="../../design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../../design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../../design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="../../design/surface/index.html">What a process can do</a>
+      <a class="sl" href="../../design/containment/index.html">Containment</a>
+      <a class="sl" href="../../design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../code/index.html">The code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/index.html">&#9679; Where the code is</a>
+      <a class="sl" href="../../code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl" href="../../code/flows/index.html">Flows through the code</a>
+      <a class="sl" href="../../code/examples/index.html">Examples</a>
+      <a class="sl" href="../../code/languages/index.html">Languages</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../evidence/index.html">&#9679; Measurements</a>
+      <a class="sl" href="../../evidence/status/index.html">What exists today</a>
+      <a class="sl" href="../../evidence/research/index.html">Research note</a>
+      <a class="sl" href="../../evidence/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../explain/index.html">Explain<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../explain/index.html">&#9679; Storyboards &amp; mockups</a>
+      <a class="sl" href="../../explain/storyboards/index.html">Storyboards</a>
+      <a class="sl here" href="../../explain/mockups/policy-hash.html">Mockup: policy hash</a>
+      <a class="sl" href="../../explain/mockups/edges.html">Mockup: edge matrix</a>
+      <a class="sl" href="../../articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../project/index.html">&#9679; Project</a>
+      <a class="sl" href="../../project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="../../project/sources/index.html">The source documents</a>
+      <a class="sl" href="../../project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="../../project/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../project/releases.html">Release history</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__Website">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+  <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../../code/experiments/index.html">mockups and experiments</a> / policy hash</div>
+  <h1>Policy hash: the one value the person supplies</h1>
+  <p class="lead">A mockup of experiment E02, in your browser. Paste a v0 Process Behaviour Policy; it is canonicalised (keys sorted, no whitespace, UTF-8, integers only) and hashed with SHA-256 by your browser's WebCrypto. The result must equal what <code>sharness-ai policy hash</code> prints for the same file. Nothing leaves the page.</p>
+  <div class="note">Why this matters: the hash is what the person gives the launcher from outside the agent, so a prompt-injected agent cannot widen a policy without the hash changing. For that to work, two unrelated implementations must agree on the bytes they hash. This page and the CLI are those two. Status: a mockup of a computation, <span class="asof">as of 24 Oct 2026</span>; it enforces nothing. The design is on <a href="../../design/policies/index.html#6-hashing-signing-distribution">Policies §6</a>.</div>
+
+  <div class="btns">
+    <button type="button" id="ex1" class="primary">Load the deny-all example</button>
+    <button type="button" id="ex2">Load the allow-https example</button>
+    <button type="button" id="widen">What an injected agent would do: add a host</button>
+  </div>
+  <div class="mock">
+    <div>
+      <label class="small dim" for="policy">The policy (JSON)</label>
+      <textarea id="policy" spellcheck="false"></textarea>
+      <label class="small dim" for="expect">The hash the person supplied (optional): paste <code>sha256:…</code> to compare, the launcher's check</label>
+      <input id="expect" type="text" placeholder="sha256:…" style="width:100%;font:.84rem var(--mono);padding:.5rem .7rem;border:1px solid var(--line2);border-radius:8px">
+    </div>
+    <div>
+      <label class="small dim">Canonical JSON (what is hashed)</label>
+      <div class="out" id="canon"></div>
+      <label class="small dim" style="margin-top:.6rem">SHA-256</label>
+      <div class="hash" id="hash">…</div>
+      <p class="small dim" id="verdict"></p>
+    </div>
+  </div>
+
+  <h2 id="check">Check it against the CLI</h2>
+  <pre class="shell">$ pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev
+$ sharness-ai policy hash experiments/policies/deny-all-example.json
+<span class="g">sha256:ab1d3e4e779313274f7a1d3ef3e46f6eacef038d8cfaa6198151a45cd82dcc76</span></pre>
+  <p>Load the deny-all example above: the hash must be the same. Change one character in the policy and it is not. The CLI's test suite pins this vector, so a change to either side fails a build.</p>
+
+  <h2 id="rules">The canonical form</h2>
+  <ul>
+    <li>Object keys sorted by code point, recursively. No whitespace. Separators <code>,</code> and <code>:</code>.</li>
+    <li>Strings as JSON with the short escapes (<code>\n</code>, <code>\"</code>, …) and non-ASCII kept as UTF-8, which is what both <code>JSON.stringify</code> and Python's <code>json.dumps(ensure_ascii=False)</code> do.</li>
+    <li>Integers, booleans and null only. <b>Floats are refused</b>, because that is the one place the two languages' number formatting differs. RFC 8785 (JCS) is the target; v0 sidesteps its hardest clause by not needing it.</li>
+    <li>The hash is <code>sha256:</code> followed by 64 lower-case hex characters.</li>
+  </ul>
+
+  <h2 id="v0">The v0 shape</h2>
+  <p>Six keys: <code>pbp</code> (1), <code>id</code>, an optional <code>layer</code> and <code>notes</code>, <code>files</code> with <code>read</code>, <code>write</code> and <code>exec</code> lists of absolute paths, <code>network</code> as <code>"none"</code> or <code>{"connect_tcp_ports": […]}</code>, and <code>process</code> with <code>no_new_privs: true</code>. It is what <code>sharness-ai run</code> enforces with Landlock. The full schema it grows towards is on <a href="../../design/policies/index.html#4-schema">Policies §4</a>.</p>
+
+  <div class="pagenav"><a href="../../code/experiments/index.html">← Mockups and experiments</a><a href="edges.html">The edge matrix mockup →</a></div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.2</a> · <a href="../../project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The design</h4>
+    <a href="../../design/index.html">The brief: in one read</a>
+    <a href="../../design/why/index.html">Why: the last metre</a>
+    <a href="../../design/architecture/index.html">Architecture</a>
+    <a href="../../design/components/index.html">Components</a>
+    <a href="../../design/keys/index.html">Keys and the KMS</a>
+    <a href="../../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../../design/agents/index.html">Agents and LLMs</a>
+    <a href="../../design/process-tree/index.html">Enforcing the process tree</a>
+    <a href="../../design/surface/index.html">What a process can do</a>
+    <a href="../../design/containment/index.html">Containment</a>
+    <a href="../../design/spectrum/index.html">The spectrum</a>
+    <a href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+  </div>
+  <div>
+    <h4>The code</h4>
+    <a href="../../code/index.html">Where the code is</a>
+    <a href="../../code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../../code/flows/index.html">Flows through the code</a>
+    <a href="../../code/examples/index.html">Examples</a>
+    <a href="../../code/languages/index.html">Languages</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
+  </div>
+  <div>
+    <h4>Evidence &amp; explain</h4>
+    <a href="../../evidence/index.html">Measurements</a>
+    <a href="../../evidence/status/index.html">What exists today</a>
+    <a href="../../evidence/research/index.html">Research note</a>
+    <a href="../../evidence/market/index.html">Market &amp; competitors</a>
+    <a href="../../explain/storyboards/index.html">Storyboards</a>
+    <a href="../../explain/index.html">Mockups</a>
+    <a href="../../articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Project &amp; agents</h4>
+    <a href="../../project/about/index.html">About &amp; naming</a>
+    <a href="../../project/sources/index.html">The source documents</a>
+    <a href="../../project/engineering.html">Engineering</a>
+    <a href="../../project/comms.html">Comms &amp; release history</a>
+    <a href="../../llms.txt">llms.txt</a>
+    <a href="../../llms-full.txt">llms-full.txt</a>
+    <a href="../../index.md">index.md</a>
+    <a href="../../sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+
+<script>
+(function () {
+  'use strict';
+  const EX1 = {"pbp": 1, "id": "deny-all-example", "layer": "invocation",
+    "notes": "E02 example: read and exec the system, write nowhere, no network. Hash it with `sharness-ai policy hash` and in the browser at https://sharness.ai/mockups/policy-hash.html; the two must agree.",
+    "files": {"read": ["/usr", "/lib", "/lib64", "/bin", "/etc"], "write": [], "exec": ["/usr", "/bin"]},
+    "network": "none", "process": {"no_new_privs": true}};
+  const EX2 = {"pbp": 1, "id": "allow-https-example", "layer": "invocation",
+    "notes": "E03 example: as deny-all, plus TCP connect to port 443 only (Landlock ABI 4+). DNS is UDP and is not covered by Landlock: name resolution needs a network namespace policy or sharness.net.",
+    "files": {"read": ["/usr", "/lib", "/lib64", "/bin", "/etc"], "write": [], "exec": ["/usr", "/bin"]},
+    "network": {"connect_tcp_ports": [443]}, "process": {"no_new_privs": true}};
+  const $ = (id) => document.getElementById(id);
+
+  // the same rule as sharness_ai/policy.py: sorted keys, no whitespace, integers only
+  function canonical(v, path) {
+    if (v === null || typeof v === 'boolean' || typeof v === 'string') return JSON.stringify(v);
+    if (typeof v === 'number') {
+      if (!Number.isInteger(v)) throw new Error(path + ': floats are not allowed in a policy (integers only)');
+      return JSON.stringify(v);
+    }
+    if (Array.isArray(v)) return '[' + v.map((x, i) => canonical(x, path + '[' + i + ']')).join(',') + ']';
+    if (typeof v === 'object') {
+      return '{' + Object.keys(v).sort().map((k) => JSON.stringify(k) + ':' + canonical(v[k], path + '.' + k)).join(',') + '}';
+    }
+    throw new Error(path + ': unsupported value');
+  }
+  async function sha256(text) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+    return 'sha256:' + Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
+  }
+  let last = '';
+  async function update() {
+    const src = $('policy').value;
+    const expect = $('expect').value.trim();
+    let obj;
+    try { obj = JSON.parse(src); } catch (e) {
+      $('canon').innerHTML = '<span class="r">not JSON: ' + String(e.message).replace(/</g, '&lt;') + '</span>';
+      $('hash').textContent = '…'; $('hash').className = 'hash'; $('verdict').textContent = ''; return;
+    }
+    let c;
+    try { c = canonical(obj, '$'); } catch (e) {
+      $('canon').innerHTML = '<span class="r">' + String(e.message).replace(/</g, '&lt;') + '</span>';
+      $('hash').textContent = '…'; $('hash').className = 'hash'; $('verdict').textContent = ''; return;
+    }
+    const h = await sha256(c);
+    $('canon').textContent = c;
+    $('hash').textContent = h;
+    if (expect) {
+      const ok = expect === h;
+      $('hash').className = 'hash ' + (ok ? 'ok' : 'bad');
+      $('verdict').textContent = ok ? 'The hash matches what the person supplied: the launcher would start.'
+                                    : 'Mismatch: the launcher refuses, nothing starts. ' + (last && last !== h ? 'The policy changed since the hash was taken.' : '');
+    } else {
+      $('hash').className = 'hash';
+      $('verdict').textContent = 'Paste this hash into the field on the left, then change the policy: the launcher\'s check, in one line.';
+    }
+    last = h;
+  }
+  function load(obj) { $('policy').value = JSON.stringify(obj, null, 1); update(); }
+  $('ex1').addEventListener('click', () => load(EX1));
+  $('ex2').addEventListener('click', () => load(EX2));
+  $('widen').addEventListener('click', async () => {
+    // the person took the hash of the policy as it stands, then the agent "helpfully" adds a host
+    const current = $('policy').value;
+    let obj; try { obj = JSON.parse(current); } catch (e) { obj = JSON.parse(JSON.stringify(EX1)); }
+    try { $('expect').value = await sha256(canonical(obj, '$')); } catch (e) { return; }
+    obj.network = {"connect_tcp_ports": [443, 8443]};
+    obj.notes = (obj.notes || '') + ' (an injected agent added port 8443)';
+    load(obj);
+  });
+  $('policy').addEventListener('input', update);
+  $('expect').addEventListener('input', update);
+  load(EX1);
+}());
+</script>
+</body>
+</html>

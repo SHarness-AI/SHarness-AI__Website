@@ -8,7 +8,7 @@ Three labels are used across the site, and this page is where they are earned:
 |---|---|
 | **measured** | probed or timed in the environment below, with the method stated |
 | **designed / proposed** | a description of how SHarness would work; nothing is built |
-| **not yet measured** | named in the design, not tested: seccomp filters, read-only bind mounts, every side door on [Enforcing the process tree](../process-tree/index.md), and AWS KMS compatibility |
+| **not yet measured** | named in the design, not tested: seccomp filters, read-only bind mounts, every side door on [Enforcing the process tree](../design/process-tree/index.md), and AWS KMS compatibility |
 
 ## 1. The environment
 
@@ -158,7 +158,7 @@ The probes left users `sgit-dec` and `sgit-run`, a folder of probe scripts (`/op
 
 ## 9. The first experiments, run by the CLI
 
-Run on 24 October 2026 in a second Claude Code cloud session (as of 24 Oct 2026). The commands are experiments E01 to E04 in the CLI repository, [experiments/README.md](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md); the map is [Mockups and experiments](../experiments/index.md). Method: `sharness-ai probe` for the environment (read-only; it prints the names of proxy variables, never values), `sharness-ai hello --json` for the result; each probe is `python3 -I -c …` run as a child under the policy by `sharness-ai run`.
+Run on 24 October 2026 in a second Claude Code cloud session (as of 24 Oct 2026). The commands are experiments E01 to E04 in the CLI repository, [experiments/README.md](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md); the map is [Mockups and experiments](../code/experiments/index.md). Method: `sharness-ai probe` for the environment (read-only; it prints the names of proxy variables, never values), `sharness-ai hello --json` for the result; each probe is `python3 -I -c …` run as a child under the policy by `sharness-ai run`.
 
 | Fact | Observed (E01, probe) |
 |---|---|
@@ -182,14 +182,14 @@ Policy hash `sha256:ad37e58bea6f4da65656687045b33ae9977caf90feef0ff5716a44db041b
 
 ## Documented, not yet exercised
 
-- A Claude Code `PreToolUse` hook can replace a tool's input before it runs (`updatedInput`, documented 24 Oct 2026), which answers [Agents §2](../agents/index.md#2-where-sharness-plugs-in) row 3. Not yet exercised on a pinned version.
+- A Claude Code `PreToolUse` hook can replace a tool's input before it runs (`updatedInput`, documented 24 Oct 2026), which answers [Agents §2](../design/agents/index.md#2-where-sharness-plugs-in) row 3. Not yet exercised on a pinned version.
 
 ## Not yet measured
 
 - seccomp filters (available in the kernel; no filter tested)
 - read-only bind mounts (namespaces tested; read-only binds not separately)
-- every side door on [Enforcing the process tree](../process-tree/index.md): the proof of concept has not been run
+- every side door on [Enforcing the process tree](../design/process-tree/index.md): the proof of concept has not been run
 - AWS KMS asymmetric RSA-4096 with OAEP-SHA-256 matching sgit's envelope
 - the experiments E01 to E04 on a laptop (no root; on Ubuntu 24.04 an unprivileged user namespace may be refused, so `network: "none"` falls back to Landlock's TCP rules, which do not cover UDP)
 
-Source: [04-environment-evidence](../briefs/sharness-brief-pack/docs/04-environment-evidence.md); §9 from the CLI's experiments, run 24 Oct 2026.
+Source: [04-environment-evidence](../project/sources/sharness-brief-pack/docs/04-environment-evidence.md); §9 from the CLI's experiments, run 24 Oct 2026.

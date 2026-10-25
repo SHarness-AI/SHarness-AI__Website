@@ -4,7 +4,7 @@
 > down by the kernel and talking only over allowed, mutually authenticated connections, so a
 > secret lives in one place and a tricked process can only do its one job.
 
-*Source: <https://sharness.ai/index.html> · site v0.5.1 · markdown twin of the front page.*
+*Source: <https://sharness.ai/index.html> · site v0.5.2 · markdown twin of the front page.*
 *Status: **design**, with the first experiments runnable. No SHarness component is built.*
 
 ---
@@ -13,7 +13,7 @@
 
 A vault key handed to an AI agent was sealed while it travelled and exposed the moment it
 arrived: on disk, on the command line and in the agent's transcript. For an agent the worst
-leak is the transcript. See [Why: the last metre](why/index.md).
+leak is the transcript. See [Why: the last metre](design/why/index.md).
 
 ## The fix turned out to be general
 
@@ -34,16 +34,15 @@ widen it. sgit (sgit.ai's encrypted vault CLI) is the first app designed to run 
 
 ## Where it is going: mockups, experiments, storyboards
 
-The memo's method is to start with very simple examples. [Mockups and experiments](experiments/index.md) is the ladder: browser mockups ([the policy hash](mockups/policy-hash.html), [the edge matrix](mockups/edges.html)), then experiments any Claude session can run, then Linux experiments (E01 to E04 are runnable in the [CLI](cli/index.md): `probe`, `policy hash`, `run`, `hello`; E04 measured 24 Oct 2026), then components, then the launcher above the agent. Three [storyboards](storyboards/index.md) tell the design as short strips. A [research note](research/index.md) says what holds up and what to improve; a [market and competitive analysis](market/index.md) says what already exists and where SHarness sits.
+The memo's method is to start with very simple examples. [Mockups and experiments](code/experiments/index.md) is the ladder: browser mockups ([the policy hash](explain/mockups/policy-hash.html), [the edge matrix](explain/mockups/edges.html)), then experiments any Claude session can run, then Linux experiments (E01 to E04 are runnable in the [CLI](code/cli/index.md): `probe`, `policy hash`, `run`, `hello`; E04 measured 24 Oct 2026), then components, then the launcher above the agent. Three [storyboards](explain/storyboards/index.md) tell the design as short strips. A [research note](evidence/research/index.md) says what holds up and what to improve; a [market and competitive analysis](evidence/market/index.md) says what already exists and where SHarness sits.
 
-## Pages (each also available as markdown at `<page>/index.md`)
+## The site, in five sections (every page also as markdown at `<page>/index.md`)
 
-- **Read first:** [The brief: SHarness in one read](brief/index.md), with the diagrams · [What a process can do](surface/index.md) · [The spectrum: hello world to sgit](spectrum/index.md)
-- [Why: the last metre](why/index.md) · [Architecture](architecture/index.md) · [Components](components/index.md)
-- [Keys and the KMS](keys/index.md) · [Process Behaviour Policies](policies/index.md) · [Agents and LLMs](agents/index.md)
-- [Enforcing the process tree](process-tree/index.md) · [Evidence](evidence/index.md) · [Roadmap and open decisions](roadmap/index.md)
-- [Mockups and experiments](experiments/index.md) · [Storyboards](storyboards/index.md) · [The CLI](cli/index.md) · [Research note](research/index.md) · [Market and competitors](market/index.md)
-- [About and naming](about/index.md) · [The source documents](documents/index.md)
+- **The design:** [the brief, read first](design/index.md) · [Why](design/why/index.md) · [Architecture](design/architecture/index.md) · [Components](design/components/index.md) · [Keys and the KMS](design/keys/index.md) · [Policies](design/policies/index.md) · [Agents and LLMs](design/agents/index.md) · [The process tree](design/process-tree/index.md) · [What a process can do](design/surface/index.md) · [Containment](design/containment/index.md) · [The spectrum](design/spectrum/index.md) · [Roadmap](design/roadmap/index.md)
+- **The code:** [where it is](code/index.md) · [The CLI](code/cli/index.md) · [Mockups and experiments](code/experiments/index.md) · [Flows](code/flows/index.md) · [Examples](code/examples/index.md) · [Languages](code/languages/index.md)
+- **Evidence:** [Measurements](evidence/index.md) · [What exists today](evidence/status/index.md) · [Research note](evidence/research/index.md) · [Market and competitors](evidence/market/index.md)
+- **Explain:** [Storyboards and mockups](explain/index.md) · [Storyboards](explain/storyboards/index.md) · [Articles](articles/index.md)
+- **Project:** [About and naming](project/about/index.md) · [The source documents](project/sources/index.md) · [Comms](project/comms.html) · [Releases](project/releases.html)
 
 ## Articles
 

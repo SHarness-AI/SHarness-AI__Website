@@ -12,29 +12,31 @@ static HTML, no framework, no build step, a pre-release gate, and validate → t
 
 ## Structure
 
-- `index.html` / `index.md` — the front page and its markdown twin
-- `<page>/index.md` — the design pages, the CLI page, the experiments map and the research note: markdown is the source, `gen_pages.py` writes the HTML
-- `experiments/` — the ladder of mockups and experiments; `mockups/` — the browser mockups (hand-written HTML)
-- `storyboards/` — generated from `admin/content/storyboards/` by `gen_storyboards.py`; previews rendered by the kit (see the script's docstring)
-- `shipped/` — what exists today, and what is not here yet
-- `admin/` — engineering, comms (tasks & requests), release history
-- `admin/build/version.txt` — owns the site version
-- `admin/build/chrome.py` — the single definition of nav, footer and the version badge
-- `admin/build/validate.js` — the pre-release gate
-- `admin/build/gen_sitemap.py` — generates `sitemap.xml` from the tree and git dates
-- `admin/build/gen_llms_full.py` — generates `llms-full.txt`
-- `assets/site.css`, `assets/nav.js` — the sgit.ai design language and nav component
-- `llms.txt`, `llms-full.txt`, `sitemap.xml`, `robots.txt`, `CNAME`
+Five sections, each with an `index.md` hub, plus the articles and the files agents read. Markdown
+is the source of every page that has a twin; the HTML beside it is generated and never edited.
+
+| Folder | What | Source of truth |
+|---|---|---|
+| `design/` | the brief (the section's index) and the design pages: why, architecture, components, keys, policies, agents, process-tree, surface, containment, spectrum, roadmap | `index.md` in each, rendered by `tools/gen_pages.py` |
+| `code/` | where the code is, the CLI, experiments, flows, examples, languages | same |
+| `evidence/` | measurements (the index), status, the research note, the market analysis | same |
+| `explain/` | the hub, `storyboards/` (generated from `content/storyboards/`), `mockups/` (hand-written HTML) | `content/storyboards/` and the mockups' HTML |
+| `articles/` | the articles in the newsroom's format, generated from `content/articles/`, and their lead figures | `content/articles/` |
+| `project/` | about, `sources/` (the design pack and memos, verbatim), `engineering.html`, `comms.html`, `releases.html` | hand-written; the pack is never edited |
+| `assets/` | `site.css`, `nav.js`, `images/` | |
+| `content/` | the sources the generators read: `articles/`, `storyboards/` | |
+| `tools/` | `version.txt` (owns the version), `chrome.py` (nav, footer, badge), the generators, `validate.js` and `validate_storyboards.cjs` (the gate) | |
+| root | `index.html` and `index.md`, `404.html` (maps the pre-v0.5.2 addresses to the new ones), `llms.txt`, `llms-full.txt`, `sitemap.xml`, `robots.txt`, `CNAME` | |
 
 ## Release process
 
-1. Bump `admin/build/version.txt` (vX.Y.Z, exactly once per release) and add a row to
-   `admin/versions.html`; update `admin/comms.html` if the state of play changed.
-2. `python3 admin/build/chrome.py` — propagates the version badge and any nav/footer change
+1. Bump `tools/version.txt` (vX.Y.Z, exactly once per release) and add a row to
+   `project/releases.html`; update `project/comms.html` if the state of play changed.
+2. `python3 tools/chrome.py` — propagates the version badge and any nav/footer change
    to every page, and stamps the version into `llms.txt` and `index.md`.
-3. `python3 admin/build/gen_pages.py && python3 admin/build/gen_articles.py && python3 admin/build/gen_storyboards.py`
-4. `python3 admin/build/gen_sitemap.py && python3 admin/build/gen_llms_full.py`
-5. `node admin/build/validate.js && node admin/build/validate_storyboards.cjs`
+3. `python3 tools/gen_pages.py && python3 tools/gen_articles.py && python3 tools/gen_storyboards.py`
+4. `python3 tools/gen_sitemap.py && python3 tools/gen_llms_full.py`
+5. `node tools/validate.js && node tools/validate_storyboards.cjs`
 6. `git commit -am "site vX.Y.Z: ..." && git push origin dev`
 
 Every push to `dev` runs `.github/workflows/deploy-pages.yml`: validate → auto-tag → deploy to

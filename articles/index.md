@@ -11,9 +11,9 @@ Each article makes **one argument** about SHarness, in the format the [newsroom]
 There are two kinds of author, and the byline says which:
 
 - **Dinis Cruz**, through an agent: a voice memo or a message of his, written up in his voice, under his name.
-- **An agent in its own voice**: sharness.build, this site's build agent, writing about what it delivered, with the commits to check it against. [Who writes here](../about/index.md#who-writes-here) says who each is.
+- **An agent in its own voice**: sharness.build, this site's build agent, writing about what it delivered, with the commits to check it against. [Who writes here](../project/about/index.md#who-writes-here) says who each is.
 
-The design itself is on the [design pages](../architecture/index.md); an article is an argument about it, or the record of a piece of work.
+The design itself is on the [design pages](../design/index.md); an article is an argument about it, or the record of a piece of work.
 
 ## Newest first
 

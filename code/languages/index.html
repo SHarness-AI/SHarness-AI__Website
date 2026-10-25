@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Languages — SHarness</title>
+<meta name="description" content="What each part of SHarness is written in and why: Python for the experiments and the launcher, a static binary for the bash client, the case for Rust in the KMS, JavaScript only in the browser.">
+<link rel="canonical" href="https://sharness.ai/code/languages/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/code/languages/index.html">
+<meta property="og:title" content="Languages — SHarness">
+<meta property="og:description" content="What each part of SHarness is written in and why: Python for the experiments and the launcher, a static binary for the bash client, the case for Rust in the KMS, JavaScript only in the browser.">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.2</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../design/index.html">The design<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../design/index.html">&#9679; The brief: in one read</a>
+      <a class="sl" href="../../design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="../../design/architecture/index.html">Architecture</a>
+      <a class="sl" href="../../design/components/index.html">Components</a>
+      <a class="sl" href="../../design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../../design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../../design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="../../design/surface/index.html">What a process can do</a>
+      <a class="sl" href="../../design/containment/index.html">Containment</a>
+      <a class="sl" href="../../design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../code/index.html">The code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/index.html">&#9679; Where the code is</a>
+      <a class="sl" href="../../code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl" href="../../code/flows/index.html">Flows through the code</a>
+      <a class="sl" href="../../code/examples/index.html">Examples</a>
+      <a class="sl here" href="../../code/languages/index.html">Languages</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../evidence/index.html">&#9679; Measurements</a>
+      <a class="sl" href="../../evidence/status/index.html">What exists today</a>
+      <a class="sl" href="../../evidence/research/index.html">Research note</a>
+      <a class="sl" href="../../evidence/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../explain/index.html">Explain<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../explain/index.html">&#9679; Storyboards &amp; mockups</a>
+      <a class="sl" href="../../explain/storyboards/index.html">Storyboards</a>
+      <a class="sl" href="../../explain/mockups/policy-hash.html">Mockup: policy hash</a>
+      <a class="sl" href="../../explain/mockups/edges.html">Mockup: edge matrix</a>
+      <a class="sl" href="../../articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../project/index.html">&#9679; Project</a>
+      <a class="sl" href="../../project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="../../project/sources/index.html">The source documents</a>
+      <a class="sl" href="../../project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="../../project/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../project/releases.html">Release history</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__Website">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+  <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">the code</a> / languages · <a href="index.md">this page as markdown</a></div>
+  <h1>Languages</h1>
+<div class="note"><b>Status: a recommendation, <span class="asof">as of 25 Oct 2026</span></b>, for <a href="../../design/roadmap/index.html#open-decisions">roadmap decision 11</a>. What each part of SHarness is written in, what it should be written in, and why. The rule behind every row: reuse what Linux and the standard library already have before writing anything, and keep each piece small enough to read in one sitting.</div>
+<h2 id="what-is-written-and-in-what">What is written, and in what</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Part</th><th>Language today</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td>the CLI and experiments E01 to E04</td><td>Python 3.11+, standard library only</td><td>fast to iterate; <code>ctypes</code> reaches Landlock, <code>unshare</code> and <code>memfd_secret</code> without a C extension; sgit, the first harnessed app, is Python, so the same team reads both; the design's measurements were taken in Python</td></tr>
+<tr><td>the browser mockups</td><td>JavaScript in the page, no framework; WebCrypto for SHA-256</td><td>the only language a browser runs; the point of the policy-hash mockup is a second implementation that must agree with the Python one</td></tr>
+<tr><td>the storyboards</td><td>JSON data, drawn by the storyboards.sgit.ai kit (JavaScript, pinned release)</td><td>data, not code</td></tr>
+<tr><td>this site's tools</td><td>Python standard library (generators) and Node (the gate, the kit's validator)</td><td>no build dependencies; the same pattern as the other sites in the network</td></tr>
+</tbody>
+</table></div>
+<h2 id="what-each-component-should-be-written-in">What each component should be written in</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Component</th><th>Recommendation</th><th>Reason</th><th>When</th></tr></thead>
+<tbody>
+<tr><td><code>sharness.launcher</code></td><td><b>Python</b> first, a static binary later if a platform needs one</td><td>it is configuration of things the kernel already does (uids, namespaces, cgroups, certificates); the design's target is ≤ 400 lines; Python's <code>ssl</code> and the <code>cryptography</code> package make the session CA a few dozen lines</td><td>E06 onwards</td></tr>
+<tr><td><code>sharness.net</code>, <code>sharness.fs</code>, <code>sharness.llm</code></td><td><b>Python</b>, standard library plus <code>cryptography</code> where sealing is needed</td><td>each is a small server over mutual TLS with a JSON schema; Python's <code>ssl</code> module does TLS 1.3 with client certificates; the measured handshake (3.2 ms) was Python's</td><td>E05, E07</td></tr>
+<tr><td><code>sharness.kms</code></td><td><b>Python v0 (E08), then Rust</b></td><td>the KMS is the one place where memory hygiene decides the security: the design already notes that Python cannot guarantee erasure, that OpenSSL copies the key into its own heap, and that scrubbing <code>bytes</code> is best effort. A Rust KMS with zeroising types and <code>memfd_secret</code> through a thin syscall layer removes a class of caveats. v0 in Python first, to settle the protocol</td><td>after E08</td></tr>
+<tr><td><code>sharness.bash</code> (the server)</td><td><b>Python</b></td><td>it is a launcher for one command at a time: cgroup, namespaces, uid, Landlock, exec, filter</td><td>E06</td></tr>
+<tr><td><code>sharness-bash-client</code></td><td><b>a small static binary: Rust or Go</b></td><td>the design requires it: the orchestrator's execute allowlist must not include an interpreter, and a static binary needs none. Rust for size and no runtime; Go if the team prefers it</td><td>E06</td></tr>
+<tr><td>the seccomp filters</td><td><b>data</b> (a syscall list per component in the policy), compiled to BPF by a few lines of Python; libseccomp if available, raw BPF through <code>ctypes</code> if not</td><td>the filter is part of the policy and hashed with it</td><td>the next rows of <a href="../../design/containment/index.html">Containment</a></td></tr>
+<tr><td>the policy language</td><td><b>JSON</b> (canonical, hashed); YAML only for reading on the site</td><td>two implementations already agree on the bytes; a policy language is explicitly not wanted (<a href="../../design/components/index.html#as-little-code-as-possible">Components</a>)</td><td>now</td></tr>
+<tr><td>the Messages API front of <code>sharness.llm</code></td><td>Python, then whatever the platform wants when it runs the component as a service</td><td>the API is HTTP and JSON; nothing language-specific</td><td>E07</td></tr>
+<tr><td>the browser experiments (a Linux kernel in a tab)</td><td>JavaScript and WebAssembly around an existing emulator; the kernel and rootfs built with the normal Linux toolchain</td><td>a page on this is being researched</td><td>planned</td></tr>
+</tbody>
+</table></div>
+<h2 id="two-rules-that-follow">Two rules that follow</h2>
+<ol>
+<li><b>Python until a caveat says otherwise.</b> Every component starts in Python because the experiments do and because the design's own figures were measured there. A component moves to Rust only for a stated reason (memory hygiene in the KMS; a static binary for the bash client), recorded on the roadmap.</li>
+<li><b>No runtime dependencies in the CLI</b> beyond <code>cryptography</code> for the components that seal and sign. The experiments stay standard-library only so a Claude session can install and run them anywhere Python is.</li>
+</ol>
+<h2 id="what-this-does-not-decide">What this does not decide</h2>
+<p>Whether the platform-provided versions of the components (topology E) share any code with these; the design says only that the protocol is the same. And nothing here is a commitment of sgit's maintainers about sgit's own language, which is Python today.</p>
+<p>Sources: <a href="../../design/components/index.html#as-little-code-as-possible">Components: as little code as possible</a>; <a href="../../design/keys/index.html#7-where-the-private-key-lives-and-for-how-long">Keys §7, memory hygiene</a>; <a href="../../design/process-tree/index.html#2-design">Enforcing the process tree §2</a> (the client as a static binary); the CLI's <code>CLAUDE.md</code>.</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.2</a> · <a href="../../project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The design</h4>
+    <a href="../../design/index.html">The brief: in one read</a>
+    <a href="../../design/why/index.html">Why: the last metre</a>
+    <a href="../../design/architecture/index.html">Architecture</a>
+    <a href="../../design/components/index.html">Components</a>
+    <a href="../../design/keys/index.html">Keys and the KMS</a>
+    <a href="../../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../../design/agents/index.html">Agents and LLMs</a>
+    <a href="../../design/process-tree/index.html">Enforcing the process tree</a>
+    <a href="../../design/surface/index.html">What a process can do</a>
+    <a href="../../design/containment/index.html">Containment</a>
+    <a href="../../design/spectrum/index.html">The spectrum</a>
+    <a href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+  </div>
+  <div>
+    <h4>The code</h4>
+    <a href="../../code/index.html">Where the code is</a>
+    <a href="../../code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../../code/flows/index.html">Flows through the code</a>
+    <a href="../../code/examples/index.html">Examples</a>
+    <a href="../../code/languages/index.html">Languages</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
+  </div>
+  <div>
+    <h4>Evidence &amp; explain</h4>
+    <a href="../../evidence/index.html">Measurements</a>
+    <a href="../../evidence/status/index.html">What exists today</a>
+    <a href="../../evidence/research/index.html">Research note</a>
+    <a href="../../evidence/market/index.html">Market &amp; competitors</a>
+    <a href="../../explain/storyboards/index.html">Storyboards</a>
+    <a href="../../explain/index.html">Mockups</a>
+    <a href="../../articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Project &amp; agents</h4>
+    <a href="../../project/about/index.html">About &amp; naming</a>
+    <a href="../../project/sources/index.html">The source documents</a>
+    <a href="../../project/engineering.html">Engineering</a>
+    <a href="../../project/comms.html">Comms &amp; release history</a>
+    <a href="../../llms.txt">llms.txt</a>
+    <a href="../../llms-full.txt">llms-full.txt</a>
+    <a href="../../index.md">index.md</a>
+    <a href="../../sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+
+</body>
+</html>
