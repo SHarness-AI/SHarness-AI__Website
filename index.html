@@ -24,7 +24,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="project/releases.html" title="Site release history">v0.5.15</a>
+  <a class="ver" href="project/releases.html" title="Site release history">v0.5.16</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -39,6 +39,19 @@
       </div>
     </div>
     <div class="ni ni-has">
+      <a class="nl" href="components/index.html">Components<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="components/index.html">&#9679; The OS a process sees</a>
+      <a class="sl" href="components/bash/index.html">sharness.bash: the shell, as a service</a>
+      <a class="sl" href="components/net/index.html">sharness.net: the only network client</a>
+      <a class="sl" href="components/kms/index.html">sharness.kms: where a secret lives</a>
+      <a class="sl" href="components/fs/index.html">sharness.fs: the only writer</a>
+      <a class="sl" href="components/llm/index.html">sharness.llm: the only model client</a>
+      <a class="sl" href="components/launcher/index.html">sharness.launcher: the bootstrap</a>
+      <a class="sl" href="components/policy/index.html">sharness.policy: the manifest</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
       <a class="nl" href="design/index.html">The design<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="design/index.html">&#9679; The brief: in one read</a>
@@ -47,13 +60,14 @@
       <a class="sl" href="design/components/index.html">Components</a>
       <a class="sl" href="design/keys/index.html">Keys and the KMS</a>
       <a class="sl" href="design/policies/index.html">Process Behaviour Policies</a>
-      <a class="sl" href="design/pbp/index.html">The PBP on one page</a>
       <a class="sl" href="design/agents/index.html">Agents and LLMs</a>
       <a class="sl" href="design/process-tree/index.html">Enforcing the process tree</a>
       <a class="sl" href="design/surface/index.html">What a process can do</a>
       <a class="sl" href="design/containment/index.html">Containment</a>
       <a class="sl" href="design/spectrum/index.html">The spectrum: hello world to sgit</a>
       <a class="sl" href="design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      <a class="sl" href="explain/index.html">Storyboards &amp; mockups</a>
+      <a class="sl" href="articles/index.html">Articles</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -86,16 +100,6 @@
       <a class="sl" href="landscape/integrations/index.html">Integration points</a>
       <a class="sl" href="landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
       <a class="sl" href="landscape/market/index.html">Market &amp; competitors</a>
-      </div>
-    </div>
-    <div class="ni ni-has">
-      <a class="nl" href="explain/index.html">Explain<span class="caret">&#9662;</span></a>
-      <div class="sub">
-      <a class="sl" href="explain/index.html">&#9679; Storyboards &amp; mockups</a>
-      <a class="sl" href="explain/storyboards/index.html">Storyboards</a>
-      <a class="sl" href="explain/mockups/policy-hash.html">Mockup: policy hash</a>
-      <a class="sl" href="explain/mockups/edges.html">Mockup: edge matrix</a>
-      <a class="sl" href="articles/index.html">Articles</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -210,15 +214,21 @@ caveat: a Boundary for the child, a Setting for this session</span></pre><a clas
 <span class="g">$</span> sharness-ai hello --json</pre>then open <a href="https://github.com/SHarness-AI/SHarness-AI__CLI/issues/new?template=hello-report.yml">a hello report</a> on GitHub (two fields: the JSON, and anything odd). Every report goes on <a href="evidence/machines/index.html">the machines page</a> with its kernel, Landlock ABI and result, including the ones that did not hold: a refusal that did not happen is the most useful thing you can send. Nothing in the JSON identifies you; <code>probe</code> prints the names of proxy variables, never their values.</div></div>
 </section>
 
-<section class="band alt" id="design">
-  <h2>Where it is going: the design</h2>
-  <p class="blurb">The CLI confines one process. The design confines the whole agent: a launcher starts a few components, each under its own policy, enforced by Linux and by mutual TLS between them, so a secret lives in one place and a tricked process can only do its one job. It started with <a href="design/why/index.html">one gap</a>: a vault key handed to an agent was sealed while it travelled and exposed the moment it arrived, on disk, on the command line and in the transcript.</p>
-  <div class="cards">
-    <a class="card" href="design/index.html"><span class="tag">Read first</span><h3>The brief, in one read</h3><p>The moving parts, drawn, and one request end to end. What is proposed, what was measured, what is open.</p><span class="go">Read →</span></a>
-    <a class="card" href="design/components/index.html"><span class="tag">Designed, not built</span><h3>Six components, one job each</h3><p><code>kms</code> holds the keys and never returns one in clear; <code>net</code> is the only network client; <code>fs</code> the only writer; <code>bash</code> sandboxes each command; <code>llm</code> the only model client; <code>launcher</code> starts them under one hash.</p><span class="go">Components →</span></a>
-    <a class="card" href="design/containment/index.html"><span class="tag">How far it holds</span><h3>Containment</h3><p>Can every process be constrained, and how comfortable to be with hostile code inside, by threat class. The kernel is trusted; root and kernel compromise are out of scope, and the site says so.</p><span class="go">Read →</span></a>
-    <a class="card" href="landscape/index.html"><span class="tag">The landscape</span><h3>Policies at the centre</h3><p>SHarness as the reference implementation of Process Behaviour Policies; sandboxes, containers and platforms as integration points and translation targets; the market, every row sourced.</p><span class="go">Read →</span></a>
+<section class="band alt" id="components">
+  <h2>The operating system a process sees</h2>
+  <p class="blurb">Bound everything a process can do and what is left is its policy: no filesystem of its own to write, no network stack, no key, no shell, no model API. In their place, five doors, each a small REST service on loopback with its own uid and policy, and the bootstrap that started them. Designed, not built; the locks under them run today.</p>
+  <div class="anim">
+    <img src="assets/anim/os-of-one-process.svg" alt="Animated: the process in the middle with its kernel locks; around it the doors sharness.fs, sharness.net, sharness.llm and sharness.bash, with sharness.kms behind net and llm; the launcher below. Requests appear one at a time with their verdicts: a write allowed, a clear key refused, an allowed host served over TLS, another host refused, the model call with the key added and a result filtered, the KMS answering with a key sealed to a one-time key, and a direct connect refused by the kernel.">
   </div>
+  <div class="cards" style="margin-top:1.2rem">
+    <a class="card" href="components/bash/index.html"><span class="tag">start here</span><h3>sharness.bash: the shell, as a service</h3><p>Each command in a fresh sandbox under a profile, output filtered. Where every lock is applied at once, and the first to build: once a command can only run through this door, the other doors are the only ways out.</p><span class="go">Read →</span></a>
+    <a class="card" href="components/net/index.html"><span class="tag">pick one: worth it alone</span><h3>sharness.net: the only network client</h3><p>The TLS client, so the hostname is seen and verified; host, endpoint and id allowlists; no redirects elsewhere, no IP literals; a log of every request. Its allowlist already runs in the playground, outside a guest.</p><span class="go">Read →</span></a>
+    <a class="card" href="components/kms/index.html"><span class="tag">secrets</span><h3>sharness.kms: where a secret lives</h3><p>Opens sealed things, derives what the caller needs, re-seals it to a one-time key. Never returns a clear key; frozen between calls; its page unreadable even by root.</p><span class="go">Read →</span></a>
+    <a class="card" href="components/fs/index.html"><span class="tag">files</span><h3>sharness.fs: the only writer</h3><p>Writes under the root it owns, inside the rules, and refuses anything that parses as a clear key, a private key or a token.</p><span class="go">Read →</span></a>
+    <a class="card" href="components/llm/index.html"><span class="tag">the model</span><h3>sharness.llm: the only model client</h3><p>The Messages API, unchanged, with the key out of the agent's process, the tool list pinned, and a secret filter on every tool result.</p><span class="go">Read →</span></a>
+    <a class="card" href="components/launcher/index.html"><span class="tag">the bootstrap</span><h3>sharness.launcher and the manifest</h3><p>Refuses unless the manifest hashes to what the person supplied; one uid per component; a session CA. Who runs it decides what the locks are.</p><span class="go">Read →</span></a>
+  </div>
+  <p class="blurb" style="margin-top:1.4rem">Every door speaks HTTP over loopback under mutual TLS, so any language can call it and every request has a verdict and a log line; a handshake costs about 3 ms. <a href="components/index.html">The components, as an operating system →</a> · <a href="design/index.html">how they work together: the brief →</a> · <a href="explain/mockups/edges.html">which layer refuses a call between two roles →</a></p>
 </section>
 
 <section class="band" id="articles">
@@ -256,7 +266,18 @@ caveat: a Boundary for the child, a Setting for this session</span></pre><a clas
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="project/releases.html">v0.5.15</a> · <a href="project/engineering.html">engineering</a> · <a href="index.md">this page as markdown</a></p>
+    <p class="verline">site <a href="project/releases.html">v0.5.16</a> · <a href="project/engineering.html">engineering</a> · <a href="index.md">this page as markdown</a></p>
+  </div>
+  <div>
+    <h4>Components</h4>
+    <a href="components/index.html">The OS a process sees</a>
+    <a href="components/bash/index.html">sharness.bash</a>
+    <a href="components/net/index.html">sharness.net</a>
+    <a href="components/kms/index.html">sharness.kms</a>
+    <a href="components/fs/index.html">sharness.fs</a>
+    <a href="components/llm/index.html">sharness.llm</a>
+    <a href="components/launcher/index.html">sharness.launcher</a>
+    <a href="components/policy/index.html">sharness.policy</a>
   </div>
   <div>
     <h4>The design</h4>
@@ -266,7 +287,6 @@ caveat: a Boundary for the child, a Setting for this session</span></pre><a clas
     <a href="design/components/index.html">Components</a>
     <a href="design/keys/index.html">Keys and the KMS</a>
     <a href="design/policies/index.html">Process Behaviour Policies</a>
-    <a href="design/pbp/index.html">The PBP on one page</a>
     <a href="design/agents/index.html">Agents and LLMs</a>
     <a href="design/process-tree/index.html">Enforcing the process tree</a>
     <a href="design/surface/index.html">What a process can do</a>
@@ -309,6 +329,7 @@ caveat: a Boundary for the child, a Setting for this session</span></pre><a clas
     <a href="admin/index.html">Admin: how the project is run</a>
     <a href="admin/board/index.html">The board</a>
     <a href="admin/updates/index.html">Updates</a>
+    <a href="admin/notes/index.html">Commit notes</a>
     <a href="admin/guidance/index.html">Guidance for agents (AGENTS.md)</a>
     <a href="project/adoption/index.html">Getting users</a>
     <a href="project/outreach/index.html">Outreach</a>

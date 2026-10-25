@@ -6,18 +6,18 @@
 
 ---
 
-A snapshot taken by the conductor with `python3 tools/admin_status.py`, as of 25 Oct 2026 (2026-10-25T23:42Z): every branch of both repositories, its head, its last commit and how far it is from `dev`, read from git, never from a session; then every member's own `status.json`. A branch ahead of `dev` is work nobody has released yet; a session is only visible here once it has pushed.
+A snapshot taken by the conductor with `python3 tools/admin_status.py`, as of 25 Oct 2026 (2026-10-25T23:49Z): every branch of both repositories, its head, its last commit and how far it is from `dev`, read from git, never from a session; then every member's own `status.json`. A branch ahead of `dev` is work nobody has released yet; a session is only visible here once it has pushed.
 
 ## SHarness-AI__Website
 
-Latest tag `v0.5.13`; 0 branch(es) carry commits not yet on `dev`.
+Latest tag `v0.5.14`; 0 branch(es) carry commits not yet on `dev`.
 
 | Branch | Head | Last commit | Against dev |
 |---|---|---|---|
-| `dev` | `78b82e2` · 2026-10-25 23:39 | site v0.5.13: the guest in the tab is on the page's network; the interceptor shows and vetoes every packet | 0 ahead, 0 behind |
-| `main` | `a1f93f6` · 2026-10-24 17:30 | Initial commit | 0 ahead, 21 behind |
-| `claude/blissful-johnson-yk1c4p` | `e9a9679` · 2026-10-24 17:55 | site v0.3.1: completeness pass against the sgit design pack 00-04 | 0 ahead, 16 behind |
-| `claude/wonderful-cray-4xpawa` | `78b82e2` · 2026-10-25 23:39 | site v0.5.13: the guest in the tab is on the page's network; the interceptor shows and vetoes every packet | 0 ahead, 0 behind |
+| `dev` | `139e255` · 2026-10-25 23:43 | The first update stamped with the time it was finished, 23:45 UTC, not the time it was begun (Agent: conductor) | 0 ahead, 0 behind |
+| `main` | `a1f93f6` · 2026-10-24 17:30 | Initial commit | 0 ahead, 26 behind |
+| `claude/blissful-johnson-yk1c4p` | `e9a9679` · 2026-10-24 17:55 | site v0.3.1: completeness pass against the sgit design pack 00-04 | 0 ahead, 21 behind |
+| `claude/wonderful-cray-4xpawa` | `139e255` · 2026-10-25 23:43 | The first update stamped with the time it was finished, 23:45 UTC, not the time it was begun (Agent: conductor) | 0 ahead, 0 behind |
 
 ## SHarness-AI__CLI
 
@@ -25,16 +25,16 @@ Latest tag `v0.1.0`; 0 branch(es) carry commits not yet on `dev`.
 
 | Branch | Head | Last commit | Against dev |
 |---|---|---|---|
-| `dev` | `b3feb1d` · 2026-10-25 23:37 | The scripted page upgrades the guest's HTTP to TLS; init says what port 443 gets with the page as the network | 0 ahead, 0 behind |
-| `main` | `6836292` · 2026-10-24 16:27 | Update release badge and version file | 0 ahead, 12 behind |
-| `claude/blissful-johnson-yk1c4p` | `0a53a7c` · 2026-10-24 16:50 | Point the package at sharness.ai, add the proposed scope, make sharness-ai the only command | 0 ahead, 11 behind |
-| `claude/wonderful-cray-4xpawa` | `b3feb1d` · 2026-10-25 23:37 | The scripted page upgrades the guest's HTTP to TLS; init says what port 443 gets with the page as the network | 0 ahead, 0 behind |
+| `dev` | `ef92296` · 2026-10-25 23:49 | AGENTS.md: the commit-notes protocol in full; commit every self-contained step; know who is in place | 0 ahead, 0 behind |
+| `main` | `6836292` · 2026-10-24 16:27 | Update release badge and version file | 0 ahead, 14 behind |
+| `claude/blissful-johnson-yk1c4p` | `0a53a7c` · 2026-10-24 16:50 | Point the package at sharness.ai, add the proposed scope, make sharness-ai the only command | 0 ahead, 13 behind |
+| `claude/wonderful-cray-4xpawa` | `ef92296` · 2026-10-25 23:49 | AGENTS.md: the commit-notes protocol in full; commit every self-contained step; know who is in place | 0 ahead, 0 behind |
 
 ## The members
 
 | Member | Role | State | Last did | Waiting for |
 |---|---|---|---|---|
-| [sharness.conductor](../members/conductor/index.md) | Conductor; for now also librarian, ontologist and project manager | working | Joined. Read the newsroom, the PHP story site and its team pages, sgit.ai's team section and repositories guidance, coding.sgit.ai and nfrs.sgit.ai; mapped both repositories; set up the admin section. | R12 (a comms vault for conductor@sharness, keys sealed), R13 (the editor to accept or change this role and the three hats it wears), R14 (which other sessions are running, so each gets a member folder); on: editor |
+| [sharness.conductor](../members/conductor/index.md) | Conductor; for now also librarian, ontologist and project manager | working | v0.5.14 (the admin section) and v0.5.15 (Commit-FS-lite as the whole protocol in AGENTS.md, tools/notes.py, the commit notes page); the CLI's AGENTS.md on dev (T13 done). | R12 (a comms vault for conductor@sharness, keys sealed), R13 (the editor to accept or change this role and the three hats it wears), R14 (which other sessions are running, so each gets a member folder); on: editor |
 | [Dinis Cruz](../members/editor/index.md) | Author of SHarness and editor of the site | deciding | Asked the conductor to join, set up the admin section, map the work and publish updates (25 Oct 2026). | nothing from the team; the R rows on the board wait on him |
 | [sharness.build](../members/sharness.build/index.md) | The build agent of the site and the CLI | done | Site v0.5.9 (the front page for a user arriving cold, the animated explainers, the machines page, the adoption plan) and CLI 47b3402 (the README, the hello report template) on 25 Oct 2026, 23:10 UTC. | R7: the release of the CLI's dev to main, which the adoption plan calls the single change that matters most for users |
 | [sharness.dev](../members/sharness.dev/index.md) | The developer agent, reference implementations in several languages | waiting | Site v0.5.10 (25 Oct 2026, 23:23 UTC): the article One standard, many languages, Languages extended, roadmap decision 11 extended, comms R8. | R8: the editor's decision on the languages, the repository layout and where the test vectors live; on: editor |

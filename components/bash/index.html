@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>sharness.bash — SHarness</title>
+<meta name="description" content="the shell as a service: each command in a fresh sandbox under a profile; the API, the verdicts, the locks; why it is the centre">
+<link rel="canonical" href="https://sharness.ai/components/bash/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/components/bash/index.html">
+<meta property="og:title" content="sharness.bash — SHarness">
+<meta property="og:description" content="the shell as a service: each command in a fresh sandbox under a profile; the API, the verdicts, the locks; why it is the centre">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.16</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../code/playground/index.html">Try it<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/playground/index.html">&#9679; The playground: type sharness-ai in your browser</a>
+      <a class="sl" href="../../code/browser/demo/index.html">A Linux kernel in a tab, running hello</a>
+      <a class="sl" href="../../index.html#start">Start in 60 seconds</a>
+      <a class="sl" href="../../evidence/machines/index.html">Help us measure it: report your machine</a>
+      <a class="sl" href="../../explain/mockups/policy-hash.html">Mockup: the policy hash</a>
+      <a class="sl" href="../../explain/mockups/edges.html">Mockup: the edge matrix</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../components/index.html">Components<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../components/index.html">&#9679; The OS a process sees</a>
+      <a class="sl here" href="../../components/bash/index.html">sharness.bash: the shell, as a service</a>
+      <a class="sl" href="../../components/net/index.html">sharness.net: the only network client</a>
+      <a class="sl" href="../../components/kms/index.html">sharness.kms: where a secret lives</a>
+      <a class="sl" href="../../components/fs/index.html">sharness.fs: the only writer</a>
+      <a class="sl" href="../../components/llm/index.html">sharness.llm: the only model client</a>
+      <a class="sl" href="../../components/launcher/index.html">sharness.launcher: the bootstrap</a>
+      <a class="sl" href="../../components/policy/index.html">sharness.policy: the manifest</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../design/index.html">The design<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../design/index.html">&#9679; The brief: in one read</a>
+      <a class="sl" href="../../design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="../../design/architecture/index.html">Architecture</a>
+      <a class="sl" href="../../design/components/index.html">Components</a>
+      <a class="sl" href="../../design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../../design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../../design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="../../design/surface/index.html">What a process can do</a>
+      <a class="sl" href="../../design/containment/index.html">Containment</a>
+      <a class="sl" href="../../design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      <a class="sl" href="../../explain/index.html">Storyboards &amp; mockups</a>
+      <a class="sl" href="../../articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../code/index.html">The code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/index.html">&#9679; Where the code is</a>
+      <a class="sl" href="../../code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl" href="../../code/flows/index.html">Flows through the code</a>
+      <a class="sl" href="../../code/examples/index.html">Examples</a>
+      <a class="sl" href="../../code/browser/index.html">Linux in the browser</a>
+      <a class="sl" href="../../code/playground/index.html">Playground: run it in your browser</a>
+      <a class="sl" href="../../code/languages/index.html">Languages</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../evidence/index.html">&#9679; Measurements</a>
+      <a class="sl" href="../../evidence/status/index.html">What exists today</a>
+      <a class="sl" href="../../evidence/research/index.html">Research note</a>
+      <a class="sl" href="../../evidence/machines/index.html">hello on your machine: reported runs</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../landscape/index.html">Landscape<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../landscape/index.html">&#9679; Policies at the centre</a>
+      <a class="sl" href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+      <a class="sl" href="../../landscape/integrations/index.html">Integration points</a>
+      <a class="sl" href="../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+      <a class="sl" href="../../landscape/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../project/index.html">&#9679; Project</a>
+      <a class="sl" href="../../project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="../../project/sources/index.html">The source documents</a>
+      <a class="sl" href="../../project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="../../project/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../project/releases.html">Release history</a>
+      <a class="sl" href="../../project/adoption/index.html">Getting users: the review and the plan</a>
+      <a class="sl" href="../../admin/index.html">Admin: how the project is run</a>
+      <a class="sl" href="../../admin/board/index.html">The board: tasks &amp; requests</a>
+      <a class="sl" href="../../admin/updates/index.html">Updates: what is happening</a>
+      <a class="sl" href="../../project/outreach/index.html">Outreach: finding the people it is for</a>
+      <a class="sl" href="../../project/agents/index.html">The agents and their keys</a>
+      <a class="sl" href="../../project/telemetry/index.html">Telemetry: who reads this site</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__CLI">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+  <script src="../../assets/telemetry.js" data-root="../../" defer></script>
+</div></nav>
+
+<main class="doc">
+  <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">components</a> / sharness.bash · <a href="index.md">this page as markdown</a></div>
+  <h1>sharness.bash: the shell, as a service</h1>
+<div class="note"><b>Status: designed; the sandbox half is runnable.</b> <code>sharness-ai run</code> applies the locks below to one command today, measured on three kernels. The server that applies them from outside the agent's domain, so the agent cannot skip it, is designed and its proof of concept not yet run. Written <span class="asof">as of 25 Oct 2026</span>.</div>
+<h2 id="its-one-job">Its one job</h2>
+<p>Run one shell command in a fresh sandbox under a named profile, and return its output with secrets filtered. Nothing else: no state between commands, no key, no network of its own.</p>
+<h2 id="why-it-is-the-centre">Why it is the centre</h2>
+<p>A shell command is free text. No schema can bound what <code>bash -c</code> means, so the only enforcement there is on what the process can do. That makes <code>sharness.bash</code> the place where every lock the harness has is applied at once, and the first component to build: once a command can only run through this door, <code>.fs</code>, <code>.net</code>, <code>.kms</code> and <code>.llm</code> are the only ways out of the sandbox, and their policies mean something. Without it, the model can run any command as root with the network, and the policies on the other doors mean little.</p>
+<h2 id="the-api-proposed">The API (proposed)</h2>
+<p>A loopback TCP port, mutual TLS, the caller's certificate role must be <code>app</code> or <code>orchestrator</code>.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Request</th><th>Body</th><th>Response</th></tr></thead>
+<tbody>
+<tr><td><code>POST /v0/run</code></td><td><code>{"profile": "analyse", "cmd": "grep -rn TODO src", "cwd": "/work", "timeout_s": 60}</code></td><td><code>{"exit": 0, "stdout": "…", "stderr": "…", "filtered": 0, "ms": 412}</code></td></tr>
+<tr><td><code>GET /v0/profiles</code></td><td></td><td>the profiles this server offers, each with its policy hash</td></tr>
+<tr><td><code>GET /v0/policy</code></td><td></td><td>this component's own policy and its hash</td></tr>
+</tbody>
+</table></div>
+<p>Transparent mode: the same server as an MCP tool (<code>run_command</code>), or a one-line hook that rewrites the agent's own shell tool to the client. The client is a messenger: a small static binary that cannot run anything itself.</p>
+<h2 id="requests-and-their-verdicts-designed">Requests, and their verdicts (designed)</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>The agent asks</th><th>Profile</th><th>Verdict</th><th>By</th></tr></thead>
+<tbody>
+<tr><td><code>grep -rn TODO src</code></td><td>analyse</td><td>runs; output returned</td><td>the sandbox</td></tr>
+<tr><td><code>cat ~/.aws/credentials</code></td><td>analyse</td><td><code>cat: No such file</code>: the home directory is not in the sandbox's Landlock domain</td><td>the kernel</td></tr>
+<tr><td><code>curl https://pypi.org/simple/</code></td><td>analyse</td><td><code>connect: Permission denied</code>: no network in this profile</td><td>the kernel (empty network namespace)</td></tr>
+<tr><td><code>curl https://pypi.org/simple/</code></td><td>build</td><td>served, through <code>sharness.net</code>, if <code>pypi.org</code> is on its allowlist</td><td><code>.net</code></td></tr>
+<tr><td><code>echo $ANTHROPIC_API_KEY</code></td><td>any</td><td>empty: the sandbox's environment holds no secret</td><td>the server</td></tr>
+<tr><td><code>./work/payload</code></td><td>any</td><td><code>Permission denied</code>: the workspace has no execute right</td><td>the kernel</td></tr>
+<tr><td><code>python3 -c "import os; os.setuid(0)"</code></td><td>any</td><td><code>EPERM</code>: no capabilities, <code>no_new_privs</code></td><td>the kernel</td></tr>
+<tr><td>a command whose output contains a vault key</td><td>any</td><td>the key replaced by <code>[filtered: vault key]</code>, <code>filtered: 1</code> in the response</td><td>the server</td></tr>
+<tr><td><code>sudo rm -rf /</code></td><td>admin</td><td>held for a fresh approval from the person, then refused anyway: no capabilities</td><td>policy, then the kernel</td></tr>
+</tbody>
+</table></div>
+<h2 id="what-it-enforces-with-what">What it enforces, with what</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Lock</th><th>Setting (proposed)</th><th>Today</th></tr></thead>
+<tbody>
+<tr><td>uid</td><td>one ephemeral uid per session, never root</td><td>measured: a user, a firewall rule, a locked launch and teardown ≈ 49 ms (24 Oct 2026)</td></tr>
+<tr><td>pid namespace</td><td>cannot see or signal the harness or any component</td><td><code>unshare</code> ≈ 4 ms, measured</td></tr>
+<tr><td>process count</td><td>a <code>pids</code> cgroup limit (64), since a shell must fork</td><td><code>max_pids</code>, measured 25 Oct 2026</td></tr>
+<tr><td>files</td><td>Landlock: the workspace per profile, <code>/usr</code> read-only, no other component's folders or sockets; the workspace has no execute right</td><td><code>sharness-ai run</code>, measured in five places</td></tr>
+<tr><td>network</td><td>none by default; when a profile allows it, only via <code>sharness.net</code></td><td><code>network: "none"</code> as an empty namespace, measured</td></tr>
+<tr><td>seccomp</td><td>deny <code>ptrace</code>, <code>mount</code>, <code>keyctl</code>, <code>bpf</code>, <code>unshare</code>, <code>execveat</code>, …</td><td>not yet measured</td></tr>
+<tr><td>output</td><td>stdout and stderr pass the secret filter before becoming a tool result</td><td>designed</td></tr>
+</tbody>
+</table></div>
+<p>The three profiles: <code>analyse</code> (workspace read-only, no network), <code>build</code> (read-write, package registries and GitHub via <code>.net</code>), <code>admin</code> (a fresh approval from the person each time). A profile is a Process Behaviour Policy; its hash is in the manifest.</p>
+<h2 id="on-its-own">On its own</h2>
+<p>Adopt only this component and every command the agent runs is confined and logged, with secrets filtered from its output, without changing the agent: as an MCP tool, or a hook. What it does not do alone: bind the agent's own process, which can still <code>execve("/bin/sh")</code> unless the launcher above it removed that right (<a href="../../design/process-tree/index.html">Enforcing the process tree</a>).</p>
+<h2 id="what-it-does-not-do">What it does not do</h2>
+<p>It cannot judge a command's intent. It cannot stop an allowed interpreter from doing file or network work in-process; that is the sandbox's Landlock policy. It is a Boundary for the command and a Setting for whoever started the server, until a launcher above the agent starts it.</p>
+<p>Sources: <a href="../../design/components/index.html#sharnessbash">Components</a>, <a href="../../design/agents/index.html#4-sharnessbash">Agents and LLMs §4</a>, <a href="../../design/process-tree/index.html">Enforcing the process tree</a>. Measurements: <a href="../../evidence/index.html">Evidence</a>.</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.16</a> · <a href="../../project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>Components</h4>
+    <a href="../../components/index.html">The OS a process sees</a>
+    <a href="../../components/bash/index.html">sharness.bash</a>
+    <a href="../../components/net/index.html">sharness.net</a>
+    <a href="../../components/kms/index.html">sharness.kms</a>
+    <a href="../../components/fs/index.html">sharness.fs</a>
+    <a href="../../components/llm/index.html">sharness.llm</a>
+    <a href="../../components/launcher/index.html">sharness.launcher</a>
+    <a href="../../components/policy/index.html">sharness.policy</a>
+  </div>
+  <div>
+    <h4>The design</h4>
+    <a href="../../design/index.html">The brief: in one read</a>
+    <a href="../../design/why/index.html">Why: the last metre</a>
+    <a href="../../design/architecture/index.html">Architecture</a>
+    <a href="../../design/components/index.html">Components</a>
+    <a href="../../design/keys/index.html">Keys and the KMS</a>
+    <a href="../../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../../design/agents/index.html">Agents and LLMs</a>
+    <a href="../../design/process-tree/index.html">Enforcing the process tree</a>
+    <a href="../../design/surface/index.html">What a process can do</a>
+    <a href="../../design/containment/index.html">Containment</a>
+    <a href="../../design/spectrum/index.html">The spectrum</a>
+    <a href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+  </div>
+  <div>
+    <h4>The code</h4>
+    <a href="../../code/index.html">Where the code is</a>
+    <a href="../../code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../../code/flows/index.html">Flows through the code</a>
+    <a href="../../code/examples/index.html">Examples</a>
+    <a href="../../code/browser/index.html">Linux in the browser</a>
+    <a href="../../code/languages/index.html">Languages</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
+  </div>
+  <div>
+    <h4>Evidence, landscape, explain</h4>
+    <a href="../../evidence/index.html">Measurements</a>
+    <a href="../../evidence/status/index.html">What exists today</a>
+    <a href="../../evidence/research/index.html">Research note</a>
+    <a href="../../evidence/machines/index.html">hello on your machine</a>
+    <a href="../../landscape/index.html">Landscape: policies at the centre</a>
+    <a href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+    <a href="../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+    <a href="../../landscape/market/index.html">Market &amp; competitors</a>
+    <a href="../../explain/storyboards/index.html">Storyboards</a>
+    <a href="../../explain/index.html">Mockups</a>
+    <a href="../../articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Project &amp; agents</h4>
+    <a href="../../project/about/index.html">About &amp; naming</a>
+    <a href="../../project/sources/index.html">The source documents</a>
+    <a href="../../project/engineering.html">Engineering</a>
+    <a href="../../project/comms.html">Comms &amp; release history</a>
+    <a href="../../admin/index.html">Admin: how the project is run</a>
+    <a href="../../admin/board/index.html">The board</a>
+    <a href="../../admin/updates/index.html">Updates</a>
+    <a href="../../admin/notes/index.html">Commit notes</a>
+    <a href="../../admin/guidance/index.html">Guidance for agents (AGENTS.md)</a>
+    <a href="../../project/adoption/index.html">Getting users</a>
+    <a href="../../project/outreach/index.html">Outreach</a>
+    <a href="../../project/agents/index.html">The agents and their keys</a>
+    <a href="../../project/telemetry/index.html">Telemetry</a>
+    <a href="../../llms.txt">llms.txt</a>
+    <a href="../../llms-full.txt">llms-full.txt</a>
+    <a href="../../index.md">index.md</a>
+    <a href="../../sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

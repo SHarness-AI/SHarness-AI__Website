@@ -4,7 +4,7 @@
 > the kernel and talking only over allowed, mutually authenticated connections, so a secret
 > lives in one place and a tricked process can only do its one job.
 
-Site version: v0.5.15. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04,
+Site version: v0.5.16. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04,
 E09 and E10 in the CLI; E09 is a real Linux kernel in a browser tab running hello, measured 25 Oct 2026).
 No SHarness component is built.
 By Dinis Cruz; design session written up with Claude, 24 October 2026. All content CC BY 4.0.
@@ -53,10 +53,6 @@ SHarness is unrelated to Sharness, the shell testing library.
 - /design/policies/index.md — Process Behaviour Policies: ABP (mandate, grant, delta, barrier)
   applied to processes; intersection-composed layers; the one hash the person supplies; the
   enforcement map; learning a policy from strace; prompt-injection walkthrough; the v0 shape
-- /design/pbp/index.md — THE PBP ON ONE PAGE: the definition every page and enforcer is checked against;
-  the four objects for a process; text + hash from outside + an enforcer the subject does not include;
-  capability rows (kernel) and behaviour rows (keeper) and the precondition rule that joins them; the
-  four parts of the spec (schema, hash, composition, conformance). PROPOSED, 25 Oct 2026
 - /design/agents/index.md — how an agent message flowed in the observed workspace; where SHarness
   plugs in (hooks documented; Claude Code's own sandbox); sharness.llm; sharness.bash; dual-LLM
 - /design/process-tree/index.md — making every process go through sharness.bash; side doors;
@@ -72,6 +68,11 @@ SHarness is unrelated to Sharness, the shell testing library.
 
 ## The code (RUNNABLE: experiments E01 to E04 in the CLI; no component is built)
 
+- /components/index.md — the components as the operating system a process sees: five doors (fs, net, kms, bash, llm) and
+  the bootstrap, each a small REST service on loopback with mutual TLS; everything is a request with a verdict;
+  pick one (each is worth adopting alone); start with bash. One page per component: /components/<name>/index.md
+  (bash, net, kms, fs, llm, launcher, policy), each with the API (proposed), the requests and their verdicts, what
+  it enforces with what, what it does not do
 - /code/index.md — where everything is: the package module by module (with line counts), the
   commands, what on this site has code behind it and what does not, next in order
 - /code/cli/index.md — the sharness-ai package: what exists (PyPI v0.1.0 vs dev), the first version
@@ -168,6 +169,8 @@ SHarness is unrelated to Sharness, the shell testing library.
 - /admin/members/index.md — who does what: one person and the agents, each with a role, a behaviour policy and a status
   of its own at /admin/members/<id>/index.md (conductor, editor, sharness.build, sharness.dev, sherpa)
 - /admin/updates/index.md — UPDATES: what is happening, dated, newest first; each at /admin/updates/<id>/index.md
+- /admin/notes/index.md — COMMIT NOTES (Commit-FS-lite): every commit on both repositories' dev since 24 Oct 2026
+  with its Agent: line and its To-<member>: notes, newest first; the agents' conversation, in the open
 - /admin/status/index.md — where every branch of both repositories is, and every member; a snapshot from git
 - /admin/guidance/index.md — AGENTS.md: the rules every agent works by, on both repositories; how to join
 

@@ -6,7 +6,7 @@
 
 ---
 
-**as of 25 Oct 2026:** 6 members, 10 request(s) waiting on the editor, 12 open task(s), 1 update(s); the latest update is [The conductor joins: three agents, 23 releases in two days mapped, an admin section, and six decisions waiting on the editor](updates/2026-10-25T2345Z/index.md).
+**as of 25 Oct 2026:** 5 members, 10 request(s) waiting on the editor, 10 open task(s), 1 update(s); the latest update is [The conductor joins: three agents, 23 releases in two days mapped, an admin section, and six decisions waiting on the editor](updates/2026-10-25T2345Z/index.md).
 
 SHarness is built in the open by one person and a few agents, and this section is where that is run: who does what, what is open and whose it is, what moved, and what only the editor can decide. Everything here is public and CC BY 4.0, including the mistakes; the journey is part of the story, and anyone can read how the work is run and join it ([how](guidance/index.md)). The pages are generated from files under `content/admin/`, one file per row, member and update, so two agents rarely touch the same lines, and each page has a markdown twin.
 
@@ -15,7 +15,7 @@ SHarness is built in the open by one person and a few agents, and this section i
 1. **A request from the editor**, in an agent's session, or a brief published in full under [the source documents](../project/sources/index.md).
 2. **A row on [the board](board/index.md)**: `R<n>` when it needs the editor, `T<n>` when a member can do it; one owner, one status, never renumbered.
 3. **A branch**, pushed early and often; then **a release to `dev`** by the member that did the work, with the version in the commit subject and a sentence in [the release history](../project/releases.html). CI validates, tags and deploys.
-4. **An update** on [Updates](updates/index.md) when something moved: what changed, what waits on whom, by number.
+4. **A note in the commit** to whoever needs to know (`To-<id>:`), read by every agent when it takes in `dev` and published on [Commit notes](notes/index.md). An **update** on [Updates](updates/index.md) when something moved: what changed, what waits on whom, by number.
 5. **A debrief** at the end of every session in the member's own `status.json`, read on [Status](status/index.md).
 
 ## The pages
@@ -23,6 +23,7 @@ SHarness is built in the open by one person and a few agents, and this section i
 - [The board](board/index.md): every request and task, with owner and status.
 - [The members](members/index.md): one person and the agents, each with a role, a policy and a status of its own.
 - [Updates](updates/index.md): what is happening, dated, newest first.
+- [Commit notes](notes/index.md): what the agents tell each other in the commits they already write, from both repositories, newest first.
 - [Status](status/index.md): where every branch of both repositories is, and every member.
 - [Guidance for agents](guidance/index.md): `AGENTS.md`, the rules every agent works by.
 - Kept elsewhere in the project section: [engineering](../project/engineering.html) (how the site is built and released), [the agents and their keys](../project/agents/index.md) (keys on pki.sgit.ai, the vault register), [telemetry](../project/telemetry/index.md), [outreach](../project/outreach/index.md) and [getting users](../project/adoption/index.md), [the release history](../project/releases.html).
@@ -33,9 +34,8 @@ The way the sgit.ai network runs its sites, read on 25 October 2026 and taken as
 
 | Member | Role | State | Last did | Waiting for |
 |---|---|---|---|---|
-| [sharness.conductor](members/conductor/index.md) | Conductor; for now also librarian, ontologist and project manager | working | Joined. Read the newsroom, the PHP story site and its team pages, sgit.ai's team section and repositories guidance, coding.sgit.ai and nfrs.sgit.ai; mapped both repositories; set up the admin section. | R12 (a comms vault for conductor@sharness, keys sealed), R13 (the editor to accept or change this role and the three hats it wears), R14 (which other sessions are running, so each gets a member folder); on: editor |
+| [sharness.conductor](members/conductor/index.md) | Conductor; for now also librarian, ontologist and project manager | working | v0.5.14 (the admin section) and v0.5.15 (Commit-FS-lite as the whole protocol in AGENTS.md, tools/notes.py, the commit notes page); the CLI's AGENTS.md on dev (T13 done). | R12 (a comms vault for conductor@sharness, keys sealed), R13 (the editor to accept or change this role and the three hats it wears), R14 (which other sessions are running, so each gets a member folder); on: editor |
 | [Dinis Cruz](members/editor/index.md) | Author of SHarness and editor of the site | deciding | Asked the conductor to join, set up the admin section, map the work and publish updates (25 Oct 2026). | nothing from the team; the R rows on the board wait on him |
 | [sharness.build](members/sharness.build/index.md) | The build agent of the site and the CLI | done | Site v0.5.9 (the front page for a user arriving cold, the animated explainers, the machines page, the adoption plan) and CLI 47b3402 (the README, the hello report template) on 25 Oct 2026, 23:10 UTC. | R7: the release of the CLI's dev to main, which the adoption plan calls the single change that matters most for users |
 | [sharness.dev](members/sharness.dev/index.md) | The developer agent, reference implementations in several languages | waiting | Site v0.5.10 (25 Oct 2026, 23:23 UTC): the article One standard, many languages, Languages extended, roadmap decision 11 extended, comms R8. | R8: the editor's decision on the languages, the repository layout and where the test vectors live; on: editor |
-| [sharness.pbp](members/sharness.pbp/index.md) | The policy agent; holds the definition of the Process Behaviour Policy | done | Site v0.5.15 (25 Oct 2026): joined; the PBP on one page (design/pbp), wired into the nav, llms.txt, the design hub and the Policies page; T14 opened. | the editor's read of design/pbp; on: editor |
 | [sherpa@sharness](members/sherpa/index.md) | The Sherpa; also outreach and telemetry | done | Site v0.5.11 and v0.5.12 (25 Oct 2026, 23:27 and 23:30 UTC): joined, the outreach plan, telemetry on every page, the lane opened and the first drain (T7 done, R10 done). | R9 (its key confirmed on pki.sgit.ai and the two environment secrets stored), R11 (a go per outreach channel); on: editor |

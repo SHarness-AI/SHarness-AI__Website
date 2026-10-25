@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">The operating system a process sees: five doors, one bootstrap, every request a verdict</title>
+  <desc id="d">In the middle, the process: an agent's tool, or bash in its sandbox, with its own uid, Landlock, seccomp, namespaces and cgroup. Around it its only doors, each a REST service on a loopback port with mutual TLS: sharness.fs for writes, sharness.net for the network, sharness.llm for the model, sharness.bash for commands; sharness.kms behind net and llm, never reachable by the process. Below, the launcher that bootstrapped them all: one uid per component, a session CA, the manifest hash from the person. Requests animate in turn: a write under the workspace, allowed by fs; a write of a clear key, refused by fs; a fetch of an allowed host, served by net over TLS; a fetch of another host, refused by net; the model API with the real key added by llm and a tool result filtered; net asking kms, which answers with a key sealed to a one-time key, never in clear; and a direct connect from the process to the internet, refused by the kernel. Designed, not built; the verdicts are the design's.</desc>
+  <style>
+    .q{opacity:0;animation:q 24s infinite}
+    .q1{animation-delay:1s}.q2{animation-delay:4s}.q3{animation-delay:7s}.q4{animation-delay:10s}.q5{animation-delay:13s}.q6{animation-delay:16s}.q7{animation-delay:19s}
+    @keyframes q{0%{opacity:0}3%{opacity:1}11%{opacity:1}14%{opacity:0}100%{opacity:0}}
+    @media(prefers-reduced-motion:reduce){.q{animation:none;opacity:1}}
+    .m{font-family:ui-monospace,Menlo,Consolas,monospace}.t{font-size:11.5px;fill:#34363c}.h{font-weight:700}.d{fill:#8a8d94}
+  </style>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#8a8d94"/></marker></defs>
+  <rect width="960" height="560" fill="#faf9f5"/>
+  <text x="24" y="32" font-size="11.5" font-weight="700" letter-spacing="2" fill="#5c5f66">THE OPERATING SYSTEM A PROCESS SEES · DESIGNED, NOT BUILT</text>
+  <!-- the process -->
+  <rect x="340" y="190" width="280" height="150" rx="14" fill="#0f766e"/>
+  <text x="480" y="218" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">the process</text>
+  <text x="480" y="236" font-size="11" fill="#e6fffa" text-anchor="middle">an agent's tool · bash in its sandbox · sgit</text>
+  <g font-size="10.5" fill="#e6fffa" text-anchor="middle">
+    <text x="480" y="262">own uid · no capabilities · no_new_privs</text>
+    <text x="480" y="278">Landlock · seccomp · namespaces · cgroup</text>
+    <text x="480" y="300" font-weight="700" fill="#ffffff">no filesystem to write · no network stack</text>
+    <text x="480" y="316" font-weight="700" fill="#ffffff">no key · no shell · no model API of its own</text>
+  </g>
+  <!-- doors -->
+  <g font-size="12">
+    <rect x="40" y="110" width="200" height="86" rx="12" fill="#ffffff" stroke="#6d28d9" stroke-width="2"/>
+    <text x="56" y="134" class="h" fill="#5b21b6">sharness.fs</text><text x="56" y="152" class="t">the only writer: path and</text><text x="56" y="167" class="t">content rules; refuses clear keys</text><text x="56" y="186" class="m" font-size="10" fill="#8a8d94">PUT /v0/files/… · :7101</text>
+    <rect x="40" y="310" width="200" height="86" rx="12" fill="#ffffff" stroke="#6d28d9" stroke-width="2"/>
+    <text x="56" y="334" class="h" fill="#5b21b6">sharness.bash</text><text x="56" y="352" class="t">each command in a fresh</text><text x="56" y="367" class="t">sandbox, under a profile</text><text x="56" y="386" class="m" font-size="10" fill="#8a8d94">POST /v0/run · :7104</text>
+    <rect x="720" y="110" width="200" height="86" rx="12" fill="#ffffff" stroke="#6d28d9" stroke-width="2"/>
+    <text x="736" y="134" class="h" fill="#5b21b6">sharness.net</text><text x="736" y="152" class="t">the only network client and</text><text x="736" y="167" class="t">the TLS client; host allowlist</text><text x="736" y="186" class="m" font-size="10" fill="#8a8d94">CONNECT · POST /v0/fetch · :7102</text>
+    <rect x="720" y="310" width="200" height="86" rx="12" fill="#ffffff" stroke="#6d28d9" stroke-width="2"/>
+    <text x="736" y="334" class="h" fill="#5b21b6">sharness.llm</text><text x="736" y="352" class="t">the only model client: the key,</text><text x="736" y="367" class="t">a pinned tool list, a secret filter</text><text x="736" y="386" class="m" font-size="10" fill="#8a8d94">POST /v1/messages · :7105</text>
+    <rect x="720" y="30" width="200" height="60" rx="12" fill="#fffbeb" stroke="#b45309" stroke-width="2"/>
+    <text x="736" y="52" class="h" fill="#b45309">sharness.kms</text><text x="736" y="68" class="t" font-size="10.5">answers net and llm only; never</text><text x="736" y="82" class="t" font-size="10.5">a clear key · POST /v0/unwrap</text>
+    <!-- launcher -->
+    <rect x="40" y="430" width="880" height="56" rx="12" fill="#ffffff" stroke="#0f766e" stroke-width="2"/>
+    <text x="56" y="452" class="h" fill="#115e59">sharness.launcher: the bootstrap, run above the agent</text>
+    <text x="56" y="470" class="t">refuses unless the manifest hashes to what the person supplied · one uid per component · a session CA, one certificate per role · starts, freezes, stops</text>
+    <text x="24" y="522" class="t h">every edge: loopback TCP · mutual TLS · the roles in the certificates · deny by default. Every door: a small REST service worth adopting on its own.</text>
+    <text x="24" y="540" class="t d" font-size="10.5">sharness.ai/components · verdicts are the design's; the kernel half (the process's locks) is measured today · CC BY 4.0</text>
+  </g>
+  <!-- edges -->
+  <g stroke="#d5d0c2" stroke-width="2" fill="none">
+    <path d="M240 153 L340 215"/><path d="M240 353 L340 315"/><path d="M620 215 L720 153"/><path d="M620 315 L720 353"/>
+    <path d="M820 110 L820 90"/><path d="M920 350 L946 350 L946 60 L920 60" stroke-dasharray="4 3"/>
+  </g>
+  <!-- requests, one at a time -->
+  <g font-size="11" class="m">
+    <g class="q q1"><rect x="150" y="214" width="190" height="40" rx="8" fill="#0d1117"/><text x="160" y="230" fill="#e6edf3">PUT files/src/main.py</text><text x="160" y="246" fill="#3fb950">201 · fs: under the root</text></g>
+    <g class="q q2"><rect x="150" y="214" width="190" height="40" rx="8" fill="#0d1117"/><text x="160" y="230" fill="#e6edf3">PUT files/.sg_vault/key</text><text x="160" y="246" fill="#f85149">403 · fs: a clear key</text></g>
+    <g class="q q3"><rect x="620" y="214" width="190" height="40" rx="8" fill="#0d1117"/><text x="630" y="230" fill="#e6edf3">GET api.github.com/…</text><text x="630" y="246" fill="#3fb950">200 · net: allowed, TLS</text></g>
+    <g class="q q4"><rect x="620" y="214" width="190" height="40" rx="8" fill="#0d1117"/><text x="630" y="230" fill="#e6edf3">GET pastebin.com/raw/…</text><text x="630" y="246" fill="#f85149">403 · net: host not allowed</text></g>
+    <g class="q q5"><rect x="620" y="276" width="190" height="40" rx="8" fill="#0d1117"/><text x="630" y="292" fill="#e6edf3">POST /v1/messages</text><text x="630" y="308" fill="#3fb950">200 · llm: key added, 1 filtered</text></g>
+    <g class="q q6"><rect x="520" y="40" width="190" height="40" rx="8" fill="#0d1117"/><text x="530" y="56" fill="#e6edf3">net → kms: unwrap(op=read)</text><text x="530" y="72" fill="#d29922">sealed to a one-time key</text></g>
+    <g class="q q7"><rect x="150" y="276" width="190" height="40" rx="8" fill="#0d1117"/><text x="160" y="292" fill="#e6edf3">connect(1.1.1.1:443) direct</text><text x="160" y="308" fill="#f85149">EACCES · kernel: not a door</text></g>
+  </g>
+</svg>

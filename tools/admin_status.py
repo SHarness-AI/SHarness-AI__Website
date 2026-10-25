@@ -10,6 +10,9 @@ and is deterministic because this tool, not the build, holds the clock: the snap
 its own as-of time and is committed like any other source. Nothing here reaches the network
 beyond `git fetch`; nothing secret is read or written.
 
+Also every commit on each dev since the project's first day, with its Agent: line and its To-<member>:
+notes (Commit-FS-lite, AGENTS.md section 6), so /admin/notes/ can show what the agents told each other.
+
 The CLI repository is found beside this one (../SHarness-AI__CLI) unless --cli says where;
 when it is absent the snapshot says so rather than guessing.
 """
@@ -22,6 +25,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT  = ROOT / "content/admin/status.json"
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from notes import commits                                        # noqa: E402  (the one parser of Agent: and To-: lines)
+SINCE = "2026-10-24T00:00:00Z"                                   # the project's first day; every commit on dev since then
 REPOS = [("SHarness-AI__Website", ROOT), ("SHarness-AI__CLI", ROOT.parent / "SHarness-AI__CLI")]
 
 
@@ -47,8 +53,10 @@ def snapshot(name, repo):
                     "ahead_of_dev": int(ahead or 0), "behind_dev": int(behind or 0)})
     tags = [t for t in git(repo, "tag", "--list", "v*").split("\n") if t]
     tags.sort(key=lambda t: [int(x) for x in re.findall(r"\d+", t)])
+    log = commits(repo, f"--since={SINCE}", "origin/dev")
     return {"name": name, "present": True, "url": f"https://github.com/SHarness-AI/{name}",
-            "latest_tag": tags[-1] if tags else None, "branches": out}
+            "latest_tag": tags[-1] if tags else None, "branches": out,
+            "commits": [{k: c[k] for k in ("hash", "date", "subject", "agent", "to")} | {"body": c["body"][:1500]} for c in reversed(log)]}
 
 
 def main():
@@ -60,8 +68,9 @@ def main():
             "by": "conductor", "repositories": [snapshot(n, p) for n, p in repos]}
     OUT.write_text(json.dumps(data, indent=1) + "\n")
     for r in data["repositories"]:
-        n = len(r.get("branches", []))
-        print(f"  · {r['name']}: {'%d branch(es), latest tag %s' % (n, r.get('latest_tag')) if r.get('present') else r['note']}")
+        n, c = len(r.get("branches", [])), len(r.get("commits", []))
+        notes = sum(len(x["to"]) for x in r.get("commits", []))
+        print(f"  · {r['name']}: {'%d branch(es), %d commit(s) on dev since %s, %d note(s), latest tag %s' % (n, c, SINCE[:10], notes, r.get('latest_tag')) if r.get('present') else r['note']}")
     print(f"admin_status: {OUT.relative_to(ROOT)} as of {data['as_of']}")
 
 
