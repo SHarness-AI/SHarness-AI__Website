@@ -10,7 +10,7 @@
 | the experiments, numbered | [`experiments/README.md`](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md) | E01 to E04 runnable; E05 to E08 planned |
 | the example policies | [`experiments/policies/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/experiments/policies) | runnable |
 | the skill for a Claude Code session | [`.claude/skills/sharness-hello/SKILL.md`](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/.claude/skills/sharness-hello/SKILL.md) | runnable |
-| the tests | [`tests/unit/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/tests/unit), 34 tests; Landlock tests skip where it is absent | green on 25 Oct 2026 |
+| the tests | [`tests/unit/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/tests/unit), 40 tests; Landlock tests skip where it is absent | green on 25 Oct 2026 |
 | the ground rules for agents working in the repository | [`CLAUDE.md`](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/CLAUDE.md) | |
 | the release pipeline | [`.github/workflows/workflow.yml`](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/.github/workflows/workflow.yml): tests, version bump, tag, PyPI by Trusted Publishing | runs on a push to `main` |
 | the browser mockups | this site, [`explain/mockups/`](https://github.com/SHarness-AI/SHarness-AI__Website/tree/dev/explain/mockups): hand-written HTML, no build | published |
@@ -25,7 +25,8 @@ Standard library only. Each module is meant to be read in one sitting; the desig
 |---|---|---|---|
 | `cli.py` | 98 | the argument parser and the dispatch: `probe`, `policy hash`, `policy check`, `run`, `hello` | |
 | `probe.py` | 138 | the grant: reads `/proc/self/status`, the Landlock ABI, `memfd_secret`, the namespaces, cgroups, the kernel config, the tools present, the names of proxy variables | E01 |
-| `policy.py` | 116 | a v0 policy: load, check the shape, canonicalise (sorted keys, no whitespace, integers only), hash | E02 |
+| `policy.py` | 126 | a v0 policy: load, check the shape (including the caps), canonicalise (sorted keys, no whitespace, integers only), hash | E02 |
+| `translate.py` | 176 | the policy as bubblewrap, `docker run`, a Claude Code sandbox `settings.json`, a Kubernetes Pod and NetworkPolicy; each with what it does not enforce | E10 |
 | `landlock.py` | 157 | Landlock through `ctypes`: the ABI, a ruleset, path rules, port rules, `restrict_self` | E03 |
 | `run.py` | 133 | fork, apply the policy in the child (network namespace, caps, `no_new_privs`, Landlock), exec; `--expect-hash` | E03 |
 | `limits.py` | 95 | the caps: `RLIMIT_AS` and `RLIMIT_NPROC`, and a memory and pids cgroup (v1 or v2) where `/sys/fs/cgroup` is writable | E03 |
@@ -39,6 +40,7 @@ Counts from `wc -l` on 25 Oct 2026. How a command moves through these modules is
 ```
 sharness-ai probe [--json]                                E01  the grant
 sharness-ai policy hash|check FILE                        E02  the one value the person supplies
+sharness-ai policy translate FILE --to T [-- CMD…]        E10  the policy in another enforcer's form, and the gap
 sharness-ai run --policy FILE [--expect-hash H] -- CMD…   E03  one command under a policy
 sharness-ai hello [--json]                                E04  the acceptance test, one child process
 ```

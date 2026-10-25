@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Linux in the browser — SHarness</title>
+<meta name="description" content="How much of the harness can run in a browser tab: a real kernel in a tab (v86) can run Landlock, seccomp, namespaces and cgroups; syscall-emulation runtimes cannot. The options, the recommended build, and what a browser can never show.">
+<link rel="canonical" href="https://sharness.ai/code/browser/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/code/browser/index.html">
+<meta property="og:title" content="Linux in the browser — SHarness">
+<meta property="og:description" content="How much of the harness can run in a browser tab: a real kernel in a tab (v86) can run Landlock, seccomp, namespaces and cgroups; syscall-emulation runtimes cannot. The options, the recommended build, and what a browser can never show.">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.4</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../design/index.html">The design<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../design/index.html">&#9679; The brief: in one read</a>
+      <a class="sl" href="../../design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="../../design/architecture/index.html">Architecture</a>
+      <a class="sl" href="../../design/components/index.html">Components</a>
+      <a class="sl" href="../../design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../../design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../../design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="../../design/surface/index.html">What a process can do</a>
+      <a class="sl" href="../../design/containment/index.html">Containment</a>
+      <a class="sl" href="../../design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../code/index.html">The code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/index.html">&#9679; Where the code is</a>
+      <a class="sl" href="../../code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl" href="../../code/flows/index.html">Flows through the code</a>
+      <a class="sl" href="../../code/examples/index.html">Examples</a>
+      <a class="sl here" href="../../code/browser/index.html">Linux in the browser</a>
+      <a class="sl" href="../../code/languages/index.html">Languages</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../evidence/index.html">&#9679; Measurements</a>
+      <a class="sl" href="../../evidence/status/index.html">What exists today</a>
+      <a class="sl" href="../../evidence/research/index.html">Research note</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../landscape/index.html">Landscape<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../landscape/index.html">&#9679; Policies at the centre</a>
+      <a class="sl" href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+      <a class="sl" href="../../landscape/integrations/index.html">Integration points</a>
+      <a class="sl" href="../../landscape/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../explain/index.html">Explain<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../explain/index.html">&#9679; Storyboards &amp; mockups</a>
+      <a class="sl" href="../../explain/storyboards/index.html">Storyboards</a>
+      <a class="sl" href="../../explain/mockups/policy-hash.html">Mockup: policy hash</a>
+      <a class="sl" href="../../explain/mockups/edges.html">Mockup: edge matrix</a>
+      <a class="sl" href="../../articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../project/index.html">&#9679; Project</a>
+      <a class="sl" href="../../project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="../../project/sources/index.html">The source documents</a>
+      <a class="sl" href="../../project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="../../project/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../project/releases.html">Release history</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__Website">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+  <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">the code</a> / linux in the browser · <a href="index.md">this page as markdown</a></div>
+  <h1>Linux in the browser: how much of the harness can run in a tab?</h1>
+<div class="note"><b>Status: researched, not yet built.</b> Dinis Cruz's question of 25 October 2026: is there a way to run Linux in a browser and use it to verify and demonstrate this, and how much of the harness could run there? The answer, from the primary sources read that day (<span class="asof">as of 25 Oct 2026</span>): a real Linux kernel runs in a tab today, Landlock has no architecture dependency, and Alpine's 32-bit kernel ships with it enabled, so <code>sharness-ai hello</code> in a browser is a build, not a research problem. The rest of the harness (uids, cgroups, mutual TLS on loopback) runs in the same guest; what a browser can never show is listed at the end. This is experiment E09 on the <a href="../experiments/index.html">ladder</a>.</div>
+<h2 id="1-what-the-guest-has-to-offer">1. What the guest has to offer</h2>
+<p><code>hello</code> and <code>run</code> call Landlock through syscalls 444, 445 and 446, probe <code>memfd_secret</code> as 447, and use <code>unshare</code> for the empty network namespace. So the guest needs a real Linux kernel of 6.7 or later (TCP rules, ABI 4), ideally 6.15 or later (ABI 7, the same as the measured environment), built with <code>CONFIG_SECURITY_LANDLOCK=y</code> and <code>landlock</code> in its LSM list, user and network namespaces, cgroups, and Python 3.11 or later with <code>ctypes</code>.</p>
+<p>Three kernel facts decide the rest, all from the kernel's own sources:</p>
+<ul>
+<li><b>Landlock is architecture-independent.</b> <code>security/landlock/Kconfig</code> depends only on <code>SECURITY</code>; the three syscalls are in every syscall table, including the 32-bit x86 one (<code>444 i386 landlock_create_ruleset</code>). The numbers the CLI uses are the same on i386 and x86_64.</li>
+<li><b>The ABI follows the kernel version:</b> 1 = 5.13, 2 = 5.19, 3 = 6.2, 4 = 6.7, 5 = 6.10, 6 = 6.12, 7 = 6.15, 8 = 7.0, 9 = 7.1 (<code>landlock(7)</code>).</li>
+<li><b><code>memfd_secret</code> is available on i386 in principle</b> (<code>SECRETMEM</code> depends on <code>ARCH_HAS_SET_DIRECT_MAP</code>, selected by x86, arm64, riscv, s390 and loongarch), with one caveat: a July 2026 kernel thread reports a crash with highmem folios on 32-bit x86, and Alpine's x86 kernel uses PAE. Not verified whether the fix is merged.</li>
+</ul>
+<h2 id="2-the-options">2. The options</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Option</th><th>Real kernel?</th><th>Arch</th><th>Kernel shipped</th><th>Landlock</th><th>seccomp, namespaces, cgroups</th><th>Python</th><th>Licence</th><th>Cost to embed on this site</th></tr></thead>
+<tbody>
+<tr><td><b>v86 + Alpine 3.23 x86</b> (own image)</td><td>yes</td><td>i386 only</td><td>Alpine <code>linux-virt</code> 6.18.58</td><td><b>yes</b>: <code>CONFIG_SECURITY_LANDLOCK=y</code>, <code>landlock</code> first in <code>CONFIG_LSM</code>; ABI 7 expected</td><td>yes (<code>USER_NS</code>, memcg, pids, freezer)</td><td>3.12.15 (an 8.3 MB apk)</td><td>BSD-2 (v86), distro licences</td><td>2.4 MB runtime, no special headers, 30 to 60 MB of kernel and rootfs fetched lazily over 9p; fits GitHub Pages</td></tr>
+<tr><td>v86 with the copy.sh Buildroot image</td><td>yes</td><td>i386</td><td>6.8.12</td><td><b>no</b> (no Landlock string in the kernel)</td><td>partly</td><td>no</td><td>BSD-2</td><td>same; a useful negative control</td></tr>
+<tr><td>v86 + Debian bookworm i386</td><td>yes</td><td>i386</td><td>6.1.190</td><td>ABI 2 only: no TCP rules</td><td>yes</td><td>3.11.2</td><td>BSD-2</td><td>larger image</td></tr>
+<tr><td>JSLinux (TinyEMU) x86_64</td><td>yes</td><td>x86_64</td><td>6.19.3, Bellard's build</td><td><b>no</b> (<code>CONFIG_SECURITY</code> appears off)</td><td>seccomp yes</td><td>not shown</td><td>TinyEMU MIT; the web build's terms unstated</td><td>not redistributable with confidence</td></tr>
+<tr><td>WebVM / CheerpX 1.2.8</td><td><b>no</b>: syscall emulation, no kernel</td><td>32-bit user mode</td><td>none</td><td>no</td><td>no</td><td>3.7 (Debian buster)</td><td>engine free only for individuals and FOSS; no self-hosting</td><td>COOP/COEP headers, 600 MB streamed disk</td></tr>
+<tr><td>container2wasm 0.8.4 (default)</td><td>yes (Bochs or TinyEMU)</td><td>x86_64, riscv64</td><td>6.1</td><td><b>no</b> (<code>CONFIG_SECURITY</code> unset in its config)</td><td>yes</td><td>any OCI image</td><td>Apache-2.0 plus LGPL Bochs</td><td>150 to 200 MB per visitor; needs a service worker for the headers on GitHub Pages</td></tr>
+<tr><td>container2wasm with a forked kernel ≥ 6.15</td><td>yes</td><td>x86_64</td><td>custom</td><td>yes (expected)</td><td>yes</td><td>any</td><td>as above</td><td>same, plus a kernel rebuild</td></tr>
+<tr><td>qemu-wasm (QEMU 8.2)</td><td>yes</td><td>x86_64, aarch64, riscv64</td><td>yours</td><td>depends on your kernel</td><td>yes</td><td>yours</td><td>GPL/LGPL</td><td>pthreads, SharedArrayBuffer, experimental</td></tr>
+<tr><td>Pyodide 314</td><td>no</td><td>Wasm</td><td>none</td><td>no</td><td>no</td><td>3.14.2</td><td>MPL-2.0</td><td>one script tag; no <code>ctypes</code> syscalls at all</td></tr>
+<tr><td>Wasmer SDK 0.19 (WASIX)</td><td>no</td><td>Wasm</td><td>none</td><td>no</td><td>no</td><td>3.13.20</td><td>modified MIT</td><td>COOP/COEP</td></tr>
+<tr><td>browser_wasi_shim, jco</td><td>no</td><td>Wasm</td><td>none</td><td>capabilities instead</td><td>no</td><td>a CPython-wasi build</td><td>MIT/Apache</td><td>tiny</td></tr>
+</tbody>
+</table></div>
+<p>The split is clean. Anything without a kernel (WebVM, Pyodide, Wasmer, WASI) cannot run Landlock, seccomp, namespaces or cgroups: there is no process in the Linux sense to confine. Anything with a kernel can, if the kernel was built with them, and of those only v86 with Alpine's kernel has Landlock on by default, runs without special response headers, and has a licence that allows self-hosting on a static site.</p>
+<h2 id="3-the-recommended-build-hello-in-a-tab-on-sharness-ai">3. The recommended build: <code>hello</code> in a tab on sharness.ai</h2>
+<ol>
+<li><b>Build the guest</b> with v86's own <code>tools/docker/alpine</code>, moving the base image from <code>i386/alpine:3.21.0</code> to <code>i386/alpine:3.23</code> (kernel 6.18.58, Landlock ABI 7, the same as the measured workspace) and adding <code>python3</code> and the <code>sharness_ai</code> package (no dependencies) to the rootfs. Keep the 9p initramfs. Snapshot the booted state with <code>build-state.js</code> so the page opens in seconds, not after a full boot.</li>
+<li><b>Check inside the guest:</b> <code>dmesg | grep landlock</code> must say "Up and running"; <code>sharness-ai probe</code> must report Landlock ABI 7, user namespaces, cgroups. Add a non-root user so the network probe exercises Landlock's TCP rule (as root, <code>hello</code> takes the network-namespace path instead).</li>
+<li><b>Make the network probe honest.</b> With no network backend in v86, a connect fails anyway. Either turn on the <code>fetch</code> or <code>wisp</code> backend and show the probe succeed without a policy and fail with <code>EACCES</code> under one, or print the errno so the refusal is attributable to Landlock. Run the same page against the copy.sh Buildroot kernel as a negative control: no Landlock, <code>landlock_restrict_self</code> returns <code>ENOSYS</code>.</li>
+<li><b>The page:</b> <code>libv86.mjs</code> and <code>v86.wasm</code> from the <code>v86</code> npm package, pinned (0.5.472 <span class="asof">as of 25 Oct 2026</span>, 2.4 MB, self-hosted), the BIOS files, Alpine's kernel and initramfs, the 9p filesystem index and files, and the state snapshot; an xterm.js console; <code>sharness-ai hello</code> run on the serial line at boot. Static files only; the large ones can sit on a CORS-enabled CDN, as copy.sh's do.</li>
+<li><b>Label the result</b> on Evidence as measured in "v86 0.5.472, Alpine 3.23 x86, Linux 6.18.58, browser and date", and say what it is: the same kernel code paths, on an emulated 32-bit CPU, applied by a process to its child. A Boundary for the child, a Setting for the page's guest.</li>
+</ol>
+<p>A 64-bit route for later: fork container2wasm, raise its kernel to 6.15 or later with <code>CONFIG_SECURITY=y</code> and <code>CONFIG_SECURITY_LANDLOCK=y</code>, convert <code>python:3.12-alpine</code> plus <code>sharness-ai</code>, host with a service worker for the headers. It costs 150 to 200 MB per visitor and runs slower, but it is x86_64 and keeps <code>memfd_secret</code> clear of the 32-bit caveat.</p>
+<h2 id="4-how-much-of-the-harness-can-run-there">4. How much of the harness can run there</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Part</th><th>In the v86 guest</th><th>Honest label</th></tr></thead>
+<tbody>
+<tr><td>E01 <code>probe</code>, E02 <code>policy hash</code></td><td>yes</td><td>the same code</td></tr>
+<tr><td>E03 <code>run</code>, E04 <code>hello</code>: Landlock files and ports, <code>no_new_privs</code>, the caps, the network namespace</td><td>yes, on the guest kernel</td><td>the same syscalls, emulated CPU</td></tr>
+<tr><td>separate uids per component, cgroups, the freezer</td><td>yes, inside the guest</td><td>real inside the guest; says nothing about the host</td></tr>
+<tr><td>mutual TLS over loopback between components (E05), the KMS protocol (E08), the process-tree proof of concept (E06)</td><td>yes: all of it is processes and loopback sockets</td><td>a full harness in a tab is possible</td></tr>
+<tr><td><code>memfd_secret</code></td><td>kernel logic runs; the physical property it provides is meaningless against a real host</td><td>demonstrate, do not claim</td></tr>
+<tr><td>timing figures (3.2 ms handshakes, 0.6 s <code>hello</code>)</td><td>no: single emulated core</td><td>never quote browser timings as measurements</td></tr>
+<tr><td>real egress, hardware keys, TPM, x86_64-only behaviour, anything about the host</td><td>no</td><td>out of scope</td></tr>
+</tbody>
+</table></div>
+<h2 id="5-the-wasi-variant-for-what-it-can-show">5. The WASI variant, for what it can show</h2>
+<p>Pyodide or a WASI build can show the policy pipeline without the kernel: hashing (the <a href="../../explain/mockups/policy-hash.html">mockup</a> does this already), validation, and a simulator of "what this policy would allow". With a WASI runtime, <code>files.read</code> maps to read-only preopened directories, <code>files.write</code> to writable ones, <code>network: "none"</code> to no sockets at all; <code>exec</code>, <code>no_new_privs</code> and scoping have no equivalent. It demonstrates deny-by-default at the host layer and the shape of the policy, with the JavaScript host as the enforcer: a Boundary for the guest, a Setting for the page. It is a different thing from the kernel demo and must be labelled as one.</p>
+<h2 id="6-not-verified">6. Not verified</h2>
+<ul>
+<li>That Alpine 3.23's i386 kernel reports ABI 7 under v86: the config says Landlock is on and 6.18 implies ABI 7, but nothing was booted for this page.</li>
+<li>Boot time and speed of v86 with Alpine and Python; no published figures.</li>
+<li><code>memfd_secret</code> on 32-bit with PAE: the status of the July 2026 fix.</li>
+<li>Whether v86 needs SharedArrayBuffer: inferred from its package and build instructions, not stated by the project.</li>
+<li>How CheerpX answers an unknown syscall.</li>
+<li>The licence of the current JSLinux x86_64 web build; the JSLinux kernel inspection relies on the absence of strings in the image, not on a config file.</li>
+</ul>
+<p>Sources (all read 25 Oct 2026): the kernel's <a href="https://docs.kernel.org/userspace-api/landlock.html">Landlock documentation</a>, <a href="https://man7.org/linux/man-pages/man7/landlock.7.html"><code>landlock(7)</code></a>, <a href="https://man7.org/linux/man-pages/man2/memfd_secret.2.html"><code>memfd_secret(2)</code></a>, <code>security/landlock/Kconfig</code>, the x86 and generic syscall tables and <code>mm/Kconfig</code> in <a href="https://github.com/torvalds/linux">torvalds/linux</a>; <a href="https://github.com/copy/v86">v86</a> (README, <code>docs/linux-9p-image.md</code>, <code>docs/networking.md</code>, <code>tools/docker/alpine</code>), the <code>v86</code> npm package 0.5.472; Alpine aports <code>main/linux-lts/virt.x86.config</code> and <code>main/python3/APKBUILD</code> for 3.21 to 3.23; Debian's 6.1.190 kernel config; <a href="https://bellard.org/jslinux/">JSLinux</a> and <a href="https://bellard.org/tinyemu/">TinyEMU</a>; <a href="https://cheerpx.io/docs/licensing">CheerpX</a> and <a href="https://github.com/leaningtech/webvm">WebVM</a>; <a href="https://github.com/ktock/container2wasm">container2wasm</a> and its kernel configs; <a href="https://github.com/ktock/qemu-wasm">qemu-wasm</a>; <a href="https://pyodide.org/en/stable/usage/wasm-constraints.html">Pyodide</a>; the <a href="https://docs.wasmer.io/sdk/wasmer-js">Wasmer JS SDK</a>; <a href="https://github.com/bjorn3/browser_wasi_shim">browser_wasi_shim</a>; <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits">GitHub Pages limits</a>.</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.4</a> · <a href="../../project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The design</h4>
+    <a href="../../design/index.html">The brief: in one read</a>
+    <a href="../../design/why/index.html">Why: the last metre</a>
+    <a href="../../design/architecture/index.html">Architecture</a>
+    <a href="../../design/components/index.html">Components</a>
+    <a href="../../design/keys/index.html">Keys and the KMS</a>
+    <a href="../../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../../design/agents/index.html">Agents and LLMs</a>
+    <a href="../../design/process-tree/index.html">Enforcing the process tree</a>
+    <a href="../../design/surface/index.html">What a process can do</a>
+    <a href="../../design/containment/index.html">Containment</a>
+    <a href="../../design/spectrum/index.html">The spectrum</a>
+    <a href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+  </div>
+  <div>
+    <h4>The code</h4>
+    <a href="../../code/index.html">Where the code is</a>
+    <a href="../../code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../../code/flows/index.html">Flows through the code</a>
+    <a href="../../code/examples/index.html">Examples</a>
+    <a href="../../code/browser/index.html">Linux in the browser</a>
+    <a href="../../code/languages/index.html">Languages</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
+  </div>
+  <div>
+    <h4>Evidence, landscape, explain</h4>
+    <a href="../../evidence/index.html">Measurements</a>
+    <a href="../../evidence/status/index.html">What exists today</a>
+    <a href="../../evidence/research/index.html">Research note</a>
+    <a href="../../landscape/index.html">Landscape: policies at the centre</a>
+    <a href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+    <a href="../../landscape/market/index.html">Market &amp; competitors</a>
+    <a href="../../explain/storyboards/index.html">Storyboards</a>
+    <a href="../../explain/index.html">Mockups</a>
+    <a href="../../articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Project &amp; agents</h4>
+    <a href="../../project/about/index.html">About &amp; naming</a>
+    <a href="../../project/sources/index.html">The source documents</a>
+    <a href="../../project/engineering.html">Engineering</a>
+    <a href="../../project/comms.html">Comms &amp; release history</a>
+    <a href="../../llms.txt">llms.txt</a>
+    <a href="../../llms-full.txt">llms-full.txt</a>
+    <a href="../../index.md">index.md</a>
+    <a href="../../sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

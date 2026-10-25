@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The landscape — SHarness</title>
+<meta name="description" content="Policies at the centre: SHarness as the reference implementation of Process Behaviour Policies, other products as integration points and translation targets, and the three questions to ask of any environment.">
+<link rel="canonical" href="https://sharness.ai/landscape/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/landscape/index.html">
+<meta property="og:title" content="The landscape — SHarness">
+<meta property="og:description" content="Policies at the centre: SHarness as the reference implementation of Process Behaviour Policies, other products as integration points and translation targets, and the three questions to ask of any environment.">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
+  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.4</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../design/index.html">The design<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../design/index.html">&#9679; The brief: in one read</a>
+      <a class="sl" href="../design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="../design/architecture/index.html">Architecture</a>
+      <a class="sl" href="../design/components/index.html">Components</a>
+      <a class="sl" href="../design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="../design/surface/index.html">What a process can do</a>
+      <a class="sl" href="../design/containment/index.html">Containment</a>
+      <a class="sl" href="../design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../code/index.html">The code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../code/index.html">&#9679; Where the code is</a>
+      <a class="sl" href="../code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="../code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl" href="../code/flows/index.html">Flows through the code</a>
+      <a class="sl" href="../code/examples/index.html">Examples</a>
+      <a class="sl" href="../code/browser/index.html">Linux in the browser</a>
+      <a class="sl" href="../code/languages/index.html">Languages</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../evidence/index.html">&#9679; Measurements</a>
+      <a class="sl" href="../evidence/status/index.html">What exists today</a>
+      <a class="sl" href="../evidence/research/index.html">Research note</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../landscape/index.html">Landscape<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl here" href="../landscape/index.html">&#9679; Policies at the centre</a>
+      <a class="sl" href="../landscape/enforceability/index.html">Enforceability matrix</a>
+      <a class="sl" href="../landscape/integrations/index.html">Integration points</a>
+      <a class="sl" href="../landscape/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../explain/index.html">Explain<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../explain/index.html">&#9679; Storyboards &amp; mockups</a>
+      <a class="sl" href="../explain/storyboards/index.html">Storyboards</a>
+      <a class="sl" href="../explain/mockups/policy-hash.html">Mockup: policy hash</a>
+      <a class="sl" href="../explain/mockups/edges.html">Mockup: edge matrix</a>
+      <a class="sl" href="../articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../project/index.html">&#9679; Project</a>
+      <a class="sl" href="../project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="../project/sources/index.html">The source documents</a>
+      <a class="sl" href="../project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="../project/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../project/releases.html">Release history</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__Website">★ GitHub</a>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+  <div class="crumb"><a href="../index.html">sharness.ai</a> / the landscape · <a href="index.md">this page as markdown</a></div>
+  <h1>The landscape: policies at the centre</h1>
+<div class="note"><b>Status: a position, <span class="asof">as of 25 Oct 2026</span>.</b> This section is where SHarness meets everything else: the products and projects that do part of the same job, the ones it should plug into, and the ones it should translate its policies into. It starts from the point Dinis Cruz made on 25 October 2026: at the heart of all of this are the behaviour policies. SHarness is a <b>reference implementation</b> of Process Behaviour Policies; the other products are less competitors than integration points.</div>
+<h2 id="1-the-thesis-in-four-steps">1. The thesis, in four steps</h2>
+<ol>
+<li><b>A policy says what a process may do.</b> An <a href="https://riskmandate.ai/abp.html">Agent Behaviour Policy</a> (riskmandate.ai) describes an agent's mandate, its grant, the delta between them, and the barrier on each capability. A <a href="../design/policies/index.html">Process Behaviour Policy</a> is the same model applied to a process: files, network, processes, IPC, memory, time, identity, syscalls, the model, secrets (<a href="../design/surface/index.html">the whole surface</a>), hashed, supplied from outside the agent.</li>
+<li><b>SHarness is one way to enforce it, built to be read.</b> Every component on the design pages is a policy enforced by something the subject does not include: the kernel, or a separate process. That is the reference implementation: small enough to read in one sitting, every rule traceable to a line of a policy, every claim labelled measured or designed.</li>
+<li><b>Any environment that can enforce the same rules is a valid enforcer.</b> The design is distributed by construction: the components talk over mutual TLS and the same protocol works on one laptop, in containers, on Kubernetes, with a remote KMS, or with the platform providing the components (<a href="../design/architecture/index.html#deployment-topologies">topologies A to E</a>). So the parts can be mixed and matched: a microVM vendor's boundary around the outside, a cloud provider's KMS, a sandbox product's bash, SHarness's own <code>net</code> and <code>fs</code>, all under one policy hash.</li>
+<li><b>Therefore the question to ask of every product is not "is it a competitor" but "which rows of a policy can it enforce, natively, and how do I translate the policy into its form?"</b> That question has an answer per product and per policy row, and the answer is a matrix: <a href="enforceability/index.html">Enforceability</a>. The translation is a command: <code>sharness-ai policy translate</code> (<a href="../code/experiments/index.html">E10</a>).</li>
+</ol>
+<h2 id="2-what-that-changes-about-the-competitive-analysis">2. What that changes about the competitive analysis</h2>
+<p>The <a href="market/index.html">market and competitive analysis</a> surveyed sandboxes, guardrails, MCP and tool security, LLM gateways, secrets and identity, enterprise platforms and standards, and placed SHarness among them as a process architecture rather than a product. Read through the thesis above, the same survey sorts differently:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Kind</th><th>Examples</th><th>In SHarness terms</th><th>What to do with it</th></tr></thead>
+<tbody>
+<tr><td><b>outer boundaries</b></td><td>Firecracker, Docker Sandboxes, E2B, Fly Sprites, Cloudflare Sandboxes, gVisor, Kata, Agent Sandbox</td><td>topology B or C: the ring around the whole harness; the answer to a kernel escape</td><td>run inside them; translate the policy's resource and network rows into their configuration</td></tr>
+<tr><td><b>shell sandboxes</b></td><td>Claude Code's sandbox, Codex's, Antigravity's, Cursor's, bubblewrap, nsjail, landrun, OpenShell</td><td><code>sharness.bash</code> for one agent</td><td>generate their settings from the policy; keep them as the transparent stand-in until <code>sharness.bash</code> exists</td></tr>
+<tr><td><b>tool and MCP gateways</b></td><td>ToolHive, Docker MCP Gateway, Wassette</td><td>a harnessed app per tool, with <code>fs</code> and <code>net</code></td><td>run their servers as harnessed apps; translate the policy into their permission profiles (ToolHive's JSON, Wassette's capabilities)</td></tr>
+<tr><td><b>LLM gateways and key holders</b></td><td>LiteLLM, Portkey, Cloudflare AI Gateway, OpenRouter</td><td><code>sharness.llm</code> without the lock</td><td>put them behind <code>sharness.llm</code>, or treat <code>sharness.llm</code> as a policy-aware front for them</td></tr>
+<tr><td><b>secrets and identity</b></td><td>1Password's broker, Infisical, Vault, AgentCore Identity, SPIFFE/SPIRE, Okta, Entra Agent ID</td><td>the upstream of <code>sharness.kms</code>; the identity format of the session CA</td><td><code>sharness.kms</code> fetches from them and never hands the clear key on; SPIFFE IDs are already the certificate format</td></tr>
+<tr><td><b>guardrails and authorisation engines</b></td><td>NeMo Guardrails, Lakera, Invariant, Cedar, OPA, OpenFGA, Permit, Oso</td><td>decisions about intent on an allowed channel: the one thing a kernel bound cannot do</td><td>consume their decisions at <code>sharness.llm</code> and at the tool components; express the policy's business rules in Cedar where a product already speaks it</td></tr>
+<tr><td><b>enterprise platforms</b></td><td>Zenity, Obsidian, HiddenLayer, Prisma AIRS, Cisco AI Defense</td><td>monitoring and API-hook enforcement with nothing kernel-level to point at</td><td>emit the policy hash, the audit lines and the barrier kinds as OpenTelemetry or OCSF traces (OWASP's Agent Control Standard), so they can show a <em>boundary</em> instead of an <em>expectation</em></td></tr>
+<tr><td><b>standards</b></td><td>OWASP ASI Top 10 and Agent Control Standard, NIST CAISI, CSA MAESTRO, Five Eyes guidance, ABP</td><td>the vocabulary the policy should be expressible in</td><td>map each policy row to the ASI mitigation it implements; keep ABP as the model</td></tr>
+</tbody>
+</table></div>
+<p>Direct competitors remain, for the one thing none of them does: per-component, kernel-enforced least privilege with the secret in a process the agent can never reach. But even there the right posture is to be their enforcement layer, not their replacement.</p>
+<h2 id="3-the-three-questions-for-any-policy-and-any-environment">3. The three questions for any policy and any environment</h2>
+<p>For a policy P and an environment or tool E, the landscape work reduces to three questions, and the answers are what the enforceability matrix records:</p>
+<ol>
+<li><b>Can P be expressed in E's terms?</b> (a translation exists, lossless or lossy, and the loss is listed)</li>
+<li><b>Can E enforce it, and as what barrier kind?</b> (a Boundary enforced above the subject, a Setting the subject can flip, an Expectation in prose, or nothing)</li>
+<li><b>Can the enforcement be verified from outside?</b> (a hash, an attestation, an audit line, a test like <code>hello</code>)</li>
+</ol>
+<p>Where all three are yes, the policy runs natively in E. Where the second is "Setting", a launcher above E is needed to make it a Boundary. Where the first is no, that row is SHarness's own component to supply. The matrix is a map of exactly those gaps.</p>
+<h2 id="4-what-is-in-this-section">4. What is in this section</h2>
+<ul>
+<li><a href="enforceability/index.html">Enforceability</a>: the matrix of policy rows against enforcers, with the barrier kind for each cell, and the command that produces each translation.</li>
+<li><a href="integrations/index.html">Integration points</a>: product by product, what it stands in for, what to translate, what to keep.</li>
+<li><a href="market/index.html">Market and competitive analysis</a>: the survey of 24 Oct 2026, every row sourced.</li>
+<li>RUV's projects (claude-flow, agentic-flow, ruv-swarm) and the sgit.ai network's integration with ruflow: in preparation; a page here when the research lands.</li>
+</ul>
+<h2 id="5-what-this-does-not-claim">5. What this does not claim</h2>
+<ul>
+<li>No translation on these pages has been run against its target in this project; <code>policy translate</code> writes the target's form and lists the gap, and the enforcement by the target is as documented by that target, as of the date read.</li>
+<li>"Integration point" describes a possible relationship, not an existing one; no vendor has agreed to anything.</li>
+<li>The policy is v0: six keys. The matrix will grow with the schema.</li>
+</ul>
+<p>Sources: <a href="https://riskmandate.ai/abp.html">Agent Behaviour Policies</a>; <a href="../design/policies/index.html">Process Behaviour Policies</a>; <a href="../design/architecture/index.html#deployment-topologies">Architecture: deployment topologies</a>; the <a href="market/index.html">market analysis</a> and its sources; Dinis Cruz's message of 25 Oct 2026.</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../project/releases.html">v0.5.4</a> · <a href="../project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The design</h4>
+    <a href="../design/index.html">The brief: in one read</a>
+    <a href="../design/why/index.html">Why: the last metre</a>
+    <a href="../design/architecture/index.html">Architecture</a>
+    <a href="../design/components/index.html">Components</a>
+    <a href="../design/keys/index.html">Keys and the KMS</a>
+    <a href="../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../design/agents/index.html">Agents and LLMs</a>
+    <a href="../design/process-tree/index.html">Enforcing the process tree</a>
+    <a href="../design/surface/index.html">What a process can do</a>
+    <a href="../design/containment/index.html">Containment</a>
+    <a href="../design/spectrum/index.html">The spectrum</a>
+    <a href="../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+  </div>
+  <div>
+    <h4>The code</h4>
+    <a href="../code/index.html">Where the code is</a>
+    <a href="../code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="../code/experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../code/flows/index.html">Flows through the code</a>
+    <a href="../code/examples/index.html">Examples</a>
+    <a href="../code/browser/index.html">Linux in the browser</a>
+    <a href="../code/languages/index.html">Languages</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
+  </div>
+  <div>
+    <h4>Evidence, landscape, explain</h4>
+    <a href="../evidence/index.html">Measurements</a>
+    <a href="../evidence/status/index.html">What exists today</a>
+    <a href="../evidence/research/index.html">Research note</a>
+    <a href="../landscape/index.html">Landscape: policies at the centre</a>
+    <a href="../landscape/enforceability/index.html">Enforceability matrix</a>
+    <a href="../landscape/market/index.html">Market &amp; competitors</a>
+    <a href="../explain/storyboards/index.html">Storyboards</a>
+    <a href="../explain/index.html">Mockups</a>
+    <a href="../articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Project &amp; agents</h4>
+    <a href="../project/about/index.html">About &amp; naming</a>
+    <a href="../project/sources/index.html">The source documents</a>
+    <a href="../project/engineering.html">Engineering</a>
+    <a href="../project/comms.html">Comms &amp; release history</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="../llms-full.txt">llms-full.txt</a>
+    <a href="../index.md">index.md</a>
+    <a href="../sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

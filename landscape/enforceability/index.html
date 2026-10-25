@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Enforceability — SHarness</title>
+<meta name="description" content="Which rows of a policy can run where: the matrix of policy rows against enforcers (SHarness, bubblewrap, Docker, Claude Code&#x27;s sandbox, Kubernetes, microVMs, ToolHive, OpenShell), with the barrier kind per cell.">
+<link rel="canonical" href="https://sharness.ai/landscape/enforceability/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/landscape/enforceability/index.html">
+<meta property="og:title" content="Enforceability — SHarness">
+<meta property="og:description" content="Which rows of a policy can run where: the matrix of policy rows against enforcers (SHarness, bubblewrap, Docker, Claude Code&#x27;s sandbox, Kubernetes, microVMs, ToolHive, OpenShell), with the barrier kind per cell.">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.4</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../design/index.html">The design<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../design/index.html">&#9679; The brief: in one read</a>
+      <a class="sl" href="../../design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="../../design/architecture/index.html">Architecture</a>
+      <a class="sl" href="../../design/components/index.html">Components</a>
+      <a class="sl" href="../../design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../../design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../../design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="../../design/surface/index.html">What a process can do</a>
+      <a class="sl" href="../../design/containment/index.html">Containment</a>
+      <a class="sl" href="../../design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../code/index.html">The code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/index.html">&#9679; Where the code is</a>
+      <a class="sl" href="../../code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl" href="../../code/flows/index.html">Flows through the code</a>
+      <a class="sl" href="../../code/examples/index.html">Examples</a>
+      <a class="sl" href="../../code/browser/index.html">Linux in the browser</a>
+      <a class="sl" href="../../code/languages/index.html">Languages</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../evidence/index.html">&#9679; Measurements</a>
+      <a class="sl" href="../../evidence/status/index.html">What exists today</a>
+      <a class="sl" href="../../evidence/research/index.html">Research note</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../landscape/index.html">Landscape<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../landscape/index.html">&#9679; Policies at the centre</a>
+      <a class="sl here" href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+      <a class="sl" href="../../landscape/integrations/index.html">Integration points</a>
+      <a class="sl" href="../../landscape/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../explain/index.html">Explain<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../explain/index.html">&#9679; Storyboards &amp; mockups</a>
+      <a class="sl" href="../../explain/storyboards/index.html">Storyboards</a>
+      <a class="sl" href="../../explain/mockups/policy-hash.html">Mockup: policy hash</a>
+      <a class="sl" href="../../explain/mockups/edges.html">Mockup: edge matrix</a>
+      <a class="sl" href="../../articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../project/index.html">&#9679; Project</a>
+      <a class="sl" href="../../project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="../../project/sources/index.html">The source documents</a>
+      <a class="sl" href="../../project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="../../project/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../project/releases.html">Release history</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__Website">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+  <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">the landscape</a> / enforceability · <a href="index.md">this page as markdown</a></div>
+  <h1>Enforceability: which rows of a policy can run where</h1>
+<div class="note"><b>Status: a map, <span class="asof">as of 25 Oct 2026</span></b>, from each target's documentation as read for the <a href="../market/index.html">market analysis</a> and from the CLI's own code; no translation has been run against its target in this project. Each cell answers the three questions of the <a href="../index.html#3-the-three-questions-for-any-policy-and-any-environment">landscape</a>: can the row be expressed, can the target enforce it, and as what kind of barrier. The command <code>sharness-ai policy translate FILE --to TARGET</code> writes the translation and prints the gap for the first four columns (<a href="../../code/experiments/index.html">E10</a>).</div>
+<h2 id="1-the-matrix">1. The matrix</h2>
+<p>Barrier kinds are ABP's: <b>B</b> a Boundary (enforced above the subject, by the kernel or a separate process); <b>S</b> a Setting (the subject's own process reads and could change it); <b>E</b> an Expectation (prose, or a check the subject performs on itself); <b>–</b> nothing.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Policy row (v0 and the designed schema)</th><th>SHarness (<code>run</code> today)</th><th>bubblewrap</th><th>Docker (<code>run</code>)</th><th>Claude Code sandbox</th><th>Kubernetes Pod + NetworkPolicy</th><th>microVM providers (E2B, Fly, Docker Sandboxes)</th><th>ToolHive (MCP servers)</th><th>OpenShell (NemoClaw)</th></tr></thead>
+<tbody>
+<tr><td><code>files.read</code> as an allowlist</td><td><b>B</b> Landlock</td><td><b>B</b> ro-binds (the rest absent)</td><td><b>B</b> the image, read-only</td><td><b>–</b> reads most of the machine; <code>denyRead</code> is a deny list</td><td><b>B</b> the image; host paths as volumes</td><td><b>B</b> the guest's own disk</td><td><b>B</b> container with profile paths</td><td><b>B</b> "filesystem controls" (not detailed)</td></tr>
+<tr><td><code>files.write</code></td><td><b>B</b> Landlock</td><td><b>B</b> binds</td><td><b>B</b> volumes</td><td><b>B</b> <code>allowWrite</code></td><td><b>B</b> volumes</td><td><b>B</b></td><td><b>B</b></td><td><b>B</b></td></tr>
+<tr><td><code>files.exec</code> allowlist</td><td><b>B</b> Landlock</td><td><b>–</b> read implies exec</td><td><b>–</b></td><td><b>–</b></td><td><b>–</b></td><td><b>–</b></td><td><b>–</b></td><td>not stated</td></tr>
+<tr><td><code>network: none</code></td><td><b>B</b> empty namespace (+ Landlock)</td><td><b>B</b> <code>--unshare-net</code></td><td><b>B</b> <code>--network none</code></td><td><b>B</b> proxy with an empty allowlist (UDP cannot leave)</td><td><b>B</b> NetworkPolicy egress []</td><td><b>B</b></td><td><b>B</b> <code>--isolate-network</code></td><td><b>B</b> "blocks unapproved destinations"</td></tr>
+<tr><td><code>network.connect_tcp_ports</code></td><td><b>B</b> Landlock ports</td><td><b>–</b></td><td><b>–</b> (needs iptables)</td><td><b>–</b> domains, not ports</td><td><b>B</b> NetworkPolicy ports</td><td>varies</td><td>partial (hosts and ports in the profile)</td><td>not stated</td></tr>
+<tr><td>host names</td><td>designed: <code>sharness.net</code> as the TLS client</td><td><b>–</b></td><td><b>–</b></td><td><b>S/B</b> hostname proxy (not TLS-terminating; managed settings make it B for the user)</td><td><b>–</b> without a mesh</td><td><b>B</b> at the provider's egress (Cloudflare, Docker Sandboxes)</td><td><b>B</b> egress proxy</td><td><b>B</b> operator-approved destinations</td></tr>
+<tr><td><code>process.max_memory_mb</code></td><td><b>B</b> rlimit + cgroup</td><td><b>–</b></td><td><b>B</b> <code>--memory</code></td><td><b>–</b></td><td><b>B</b> <code>resources.limits</code></td><td><b>B</b> the VM size</td><td><b>B</b> container limits</td><td>not stated</td></tr>
+<tr><td><code>process.max_pids</code></td><td><b>B</b> rlimit + cgroup</td><td><b>–</b></td><td><b>B</b> <code>--pids-limit</code></td><td><b>–</b></td><td><b>–</b> per pod</td><td><b>B</b></td><td><b>B</b></td><td>not stated</td></tr>
+<tr><td><code>no_new_privs</code>, no capabilities</td><td><b>B</b></td><td><b>B</b></td><td><b>B</b> <code>--cap-drop ALL</code>, <code>no-new-privileges</code></td><td><b>B</b> (bubblewrap underneath)</td><td><b>B</b> securityContext</td><td><b>B</b></td><td><b>B</b></td><td><b>B</b></td></tr>
+<tr><td>a separate uid per component</td><td>designed (launcher)</td><td><b>B</b> user namespace</td><td><b>B</b> <code>--user</code></td><td><b>–</b> one uid</td><td><b>B</b> <code>runAsUser</code></td><td><b>B</b></td><td><b>B</b> per container</td><td>not stated</td></tr>
+<tr><td>seccomp allowlist from the policy</td><td>designed</td><td><b>B</b> (<code>--seccomp</code> takes a filter)</td><td><b>B</b> <code>--security-opt seccomp=</code></td><td><b>–</b> (optional Unix-socket filter only)</td><td><b>S</b> RuntimeDefault, or a Localhost profile (<b>B</b>)</td><td>provider's</td><td><b>B</b> container runtime default</td><td>"process controls"</td></tr>
+<tr><td>IPC edges (who may talk to whom)</td><td>designed: mutual TLS, both sides check</td><td><b>–</b></td><td><b>–</b> (networks, not roles)</td><td><b>–</b></td><td>partial: NetworkPolicy between pods</td><td><b>–</b></td><td><b>–</b></td><td><b>–</b></td></tr>
+<tr><td>the model (<code>sharness.llm</code>: pinned tools, secret filter)</td><td>designed</td><td><b>–</b></td><td><b>–</b></td><td><b>S</b> <code>allowedMcpServers</code>, permissions (the agent's own settings)</td><td><b>–</b></td><td><b>–</b></td><td><b>–</b></td><td><b>B</b> managed inference through <code>inference.local</code></td></tr>
+<tr><td>secrets never in the agent's process</td><td>designed (<code>sharness.kms</code>)</td><td><b>–</b></td><td><b>–</b></td><td><b>S</b> credential masks at the proxy (the clear key is in the proxy)</td><td><b>–</b> (a Secret is mounted into the pod)</td><td><b>B</b> credentials injected outside the VM (Docker Sandboxes, Cloudflare)</td><td><b>B</b> secrets into the container process only</td><td><b>B</b> "credentials remain outside the sandbox"</td></tr>
+<tr><td>the policy hash supplied from outside</td><td><b>B</b> <code>--expect-hash</code> (for a child)</td><td><b>–</b></td><td><b>–</b></td><td><b>–</b> (settings are the subject's own; managed settings are <b>B</b> for the user)</td><td><b>–</b> (an admission controller could)</td><td><b>–</b></td><td><b>–</b></td><td><b>–</b></td></tr>
+<tr><td>who enforces</td><td>the process itself today (<b>S</b> for itself); the launcher, designed</td><td>the caller</td><td>the daemon</td><td>the agent's process; managed settings</td><td>the kubelet and the CNI</td><td>the provider</td><td>the gateway</td><td>the OpenShell host</td></tr>
+</tbody>
+</table></div>
+<p>Legend for "not stated": the product's documentation read for the market analysis does not say; "varies": differs by provider.</p>
+<h2 id="2-reading-the-matrix">2. Reading the matrix</h2>
+<ul>
+<li><b>The rows every target can do</b> (writes, no network, no new privileges, memory) are the rows the market has settled; a policy with only those rows runs natively almost anywhere, and <code>policy translate</code> writes it for four of them.</li>
+<li><b>The rows only SHarness does</b> are the ones the design was written for: an execute allowlist, TCP port rules without a proxy, IPC edges with roles, the secret in a process the agent cannot reach, and a hash checked above the subject. These are the gaps the components fill, and the reason the reference implementation exists.</li>
+<li><b>The column no product fills</b> is "who enforces": in every shell sandbox the agent's own process reads the settings. The launcher above the agent is the one piece that turns a column of <b>S</b> into <b>B</b>, which is why it is first on the <a href="../../evidence/research/index.html#4-what-is-still-open-in-the-order-to-take-it">order of work</a> after the process tree.</li>
+</ul>
+<h2 id="3-the-command">3. The command</h2>
+<pre class="diagram">$ sharness-ai policy translate experiments/policies/allow-https-example.json --to bwrap -- python3 -c "print(1)"
+bwrap --unshare-all --die-with-parent --new-session --cap-drop ALL --share-net --ro-bind /bin /bin --ro-bind /etc /etc \
+  --ro-bind /lib /lib --ro-bind /lib64 /lib64 --ro-bind /usr /usr -- python3 -c 'print(1)'
+
+# bwrap: not enforced from policy allow-https-example (sha256:2944751573bb…):
+#   - no_new_privs: bwrap sets it (PR_SET_NO_NEW_PRIVS) for the sandboxed process
+#   - network.connect_tcp_ports [443]: not enforced; bwrap shares or unshares the whole network, it has no port allowlist
+#   - files.exec: not distinct from files.read; a read-only bind is also executable in bwrap (use noexec mounts or Landlock inside)</pre>
+<p>The same for <code>--to docker</code>, <code>--to claude-code</code> (a <code>settings.json</code> fragment) and <code>--to kubernetes</code> (a Pod and a NetworkPolicy). Every output ends with the list of what the target does not enforce, which is the matrix row by row, made executable. <code>--to landlock</code> prints what <code>run</code> itself does, for completeness.</p>
+<h2 id="4-what-the-matrix-does-not-say">4. What the matrix does not say</h2>
+<ul>
+<li>Nothing here was run against its target in this project; a cell is what the target's documentation says it does, as of the date the market analysis read it. A row that reads <b>B</b> can still be misconfigured.</li>
+<li>Barrier kinds are about <em>who</em> enforces, not about strength: a <b>B</b> at a hostname proxy that does not terminate TLS is a Boundary with a documented hole (domain fronting).</li>
+<li>The policy is v0 plus the designed rows. Layers composed by intersection, signing, business rules and the audit format are not yet in the matrix.</li>
+</ul>
+<p>Sources: the <a href="../market/index.html">market analysis</a> and each product's documentation it cites; <a href="../../design/policies/index.html#5-enforcement-map">Policies §5, the enforcement map</a>; <code>sharness_ai/translate.py</code> on the CLI's <code>dev</code> branch; <a href="https://riskmandate.ai/abp.html">riskmandate.ai/abp</a> for the barrier kinds.</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.4</a> · <a href="../../project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The design</h4>
+    <a href="../../design/index.html">The brief: in one read</a>
+    <a href="../../design/why/index.html">Why: the last metre</a>
+    <a href="../../design/architecture/index.html">Architecture</a>
+    <a href="../../design/components/index.html">Components</a>
+    <a href="../../design/keys/index.html">Keys and the KMS</a>
+    <a href="../../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../../design/agents/index.html">Agents and LLMs</a>
+    <a href="../../design/process-tree/index.html">Enforcing the process tree</a>
+    <a href="../../design/surface/index.html">What a process can do</a>
+    <a href="../../design/containment/index.html">Containment</a>
+    <a href="../../design/spectrum/index.html">The spectrum</a>
+    <a href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+  </div>
+  <div>
+    <h4>The code</h4>
+    <a href="../../code/index.html">Where the code is</a>
+    <a href="../../code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../../code/flows/index.html">Flows through the code</a>
+    <a href="../../code/examples/index.html">Examples</a>
+    <a href="../../code/browser/index.html">Linux in the browser</a>
+    <a href="../../code/languages/index.html">Languages</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
+  </div>
+  <div>
+    <h4>Evidence, landscape, explain</h4>
+    <a href="../../evidence/index.html">Measurements</a>
+    <a href="../../evidence/status/index.html">What exists today</a>
+    <a href="../../evidence/research/index.html">Research note</a>
+    <a href="../../landscape/index.html">Landscape: policies at the centre</a>
+    <a href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+    <a href="../../landscape/market/index.html">Market &amp; competitors</a>
+    <a href="../../explain/storyboards/index.html">Storyboards</a>
+    <a href="../../explain/index.html">Mockups</a>
+    <a href="../../articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Project &amp; agents</h4>
+    <a href="../../project/about/index.html">About &amp; naming</a>
+    <a href="../../project/sources/index.html">The source documents</a>
+    <a href="../../project/engineering.html">Engineering</a>
+    <a href="../../project/comms.html">Comms &amp; release history</a>
+    <a href="../../llms.txt">llms.txt</a>
+    <a href="../../llms-full.txt">llms-full.txt</a>
+    <a href="../../index.md">index.md</a>
+    <a href="../../sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

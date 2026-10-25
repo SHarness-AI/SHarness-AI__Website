@@ -69,6 +69,8 @@ PAGES = [
      "What happens, module by module, when sharness-ai run confines a command and when hello runs the acceptance test; and the flow the launcher will add."),
     ("code/examples",       "Examples",
      "Every runnable example: the policies, the commands, their output, the skill for a Claude session, and the sgit probe."),
+    ("code/browser",        "Linux in the browser",
+     "How much of the harness can run in a browser tab: a real kernel in a tab (v86) can run Landlock, seccomp, namespaces and cgroups; syscall-emulation runtimes cannot. The options, the recommended build, and what a browser can never show."),
     ("code/languages",      "Languages",
      "What each part of SHarness is written in and why: Python for the experiments and the launcher, a static binary for the bash client, the case for Rust in the KMS, JavaScript only in the browser."),
     # evidence and status
@@ -78,7 +80,14 @@ PAGES = [
      "The honest column: what exists as running code and can be checked, and what is not here yet."),
     ("evidence/research",   "Research note",
      "The published design read in full on 24 Oct 2026: what holds up, what to improve, what this release did about it, and what is still open."),
-    ("evidence/market",     "Market and competitive analysis",
+    # the landscape
+    ("landscape",           "The landscape",
+     "Policies at the centre: SHarness as the reference implementation of Process Behaviour Policies, other products as integration points and translation targets, and the three questions to ask of any environment."),
+    ("landscape/enforceability", "Enforceability",
+     "Which rows of a policy can run where: the matrix of policy rows against enforcers (SHarness, bubblewrap, Docker, Claude Code's sandbox, Kubernetes, microVMs, ToolHive, OpenShell), with the barrier kind per cell."),
+    ("landscape/integrations", "Integration points",
+     "Product by product: what it stands in for in SHarness's terms, what a policy translates into on it, what SHarness adds, and what to keep."),
+    ("landscape/market",    "Market and competitive analysis",
      "What exists in the market that does part of what SHarness is designed to do, as of 24 Oct 2026: sandboxes, guardrails, MCP gateways, LLM gateways, secrets and identity, enterprise platforms, standards; where SHarness sits and the threats to its thesis."),
     # explain
     ("explain",             "Explain",
@@ -220,7 +229,7 @@ def md_to_html(md):
     return h1, "\n".join(out)
 
 
-SECTIONS = {"design": "the design", "code": "the code", "evidence": "evidence", "explain": "explain", "project": "project"}
+SECTIONS = {"design": "the design", "code": "the code", "evidence": "evidence", "landscape": "the landscape", "explain": "explain", "project": "project"}
 
 
 def crumb(dir_, title):

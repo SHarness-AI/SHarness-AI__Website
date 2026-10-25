@@ -8,8 +8,8 @@ Dinis Cruz's memo of 24 October 2026 sets the method: *start with very simple ex
 
 | Rung | Where it runs | What is on it | Status as of 24 Oct 2026 |
 |---|---|---|---|
-| 0 | **the browser**, nothing installed | the [policy hash mockup](../../explain/mockups/policy-hash.html) and the [edge matrix mockup](../../explain/mockups/edges.html); the [storyboards](../../explain/storyboards/index.md) | published |
-| 1 | **any Claude session, any laptop** (Python 3.11+) | E01 `sharness-ai probe`, E02 `sharness-ai policy hash` | runnable |
+| 0 | **the browser**, nothing installed | the [policy hash mockup](../../explain/mockups/policy-hash.html) and the [edge matrix mockup](../../explain/mockups/edges.html); the [storyboards](../../explain/storyboards/index.md); E09, a real kernel in a tab running `hello` ([researched](../browser/index.md)) | published; E09 not built |
+| 1 | **any Claude session, any laptop** (Python 3.11+) | E01 `sharness-ai probe`, E02 `sharness-ai policy hash`, E10 `sharness-ai policy translate` | runnable |
 | 2 | **Linux** (Landlock, 5.13+; TCP rules 6.7+); a Claude Code session via the skill | E03 `sharness-ai run`, E04 `sharness-ai hello` | runnable; E04 measured 24 Oct 2026 |
 | 3 | Linux, a checkout, `cryptography` | E05 session CA and the edge matrix over mutual TLS; E06 the process-tree proof of concept; E07 `sharness.llm` v0; E08 `sharness.kms` v0 | planned |
 | 4 | a launcher **above** the agent: a script on a laptop, then a platform | the components as `sharness.<role>` processes under one manifest hash | designed |
@@ -30,6 +30,8 @@ Numbered in the CLI repository, [experiments/README.md](https://github.com/SHarn
 | E06 | the process-tree proof of concept: a mini orchestrator that cannot exec a shell, and a bash server outside its domain | every side door on [Enforcing the process tree](../../design/process-tree/index.md) closed or not | runs only under the [safety rules](../../design/process-tree/index.md#4-safety-rules-for-testing-inside-a-live-agent-session) |
 | E07 | `sharness.llm` v0: a Messages API pass-through at `ANTHROPIC_BASE_URL` with a secret filter on every tool result and user message | the transcript leak closed for every tool at once | the real API key via the KMS; that is E08 |
 | E08 | `sharness.kms` v0: an identity made in-process, a sealed `m1` opened, derived keys re-sealed to a one-time key, never a clear key printed | the KMS protocol's `unwrap`, end to end, locally | remote binding; hardware keys |
+| E09 | the harness in a browser tab: a real 32-bit Linux kernel in v86 (Alpine's `linux-virt`, Landlock on) running `hello`, and a kernel without Landlock as the negative control ([Linux in the browser](../browser/index.md)) | the same syscalls on an emulated CPU, for anyone with a browser | timings; anything about the host; `memfd_secret`'s physical property. Researched, not built |
+| E10 | `sharness-ai policy translate FILE --to bwrap\|docker\|claude-code\|kubernetes`: the same policy in another enforcer's form, followed by what that target does not enforce | the policy as the centre and every enforcer as a target; the [enforceability matrix](../../landscape/enforceability/index.md) made executable | enforcement by the target: nothing is run against it here. Runnable |
 
 ## E04, measured
 

@@ -19,7 +19,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.3</a>
+  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.4</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -47,6 +47,7 @@
       <a class="sl" href="../code/experiments/index.html">Mockups &amp; experiments</a>
       <a class="sl" href="../code/flows/index.html">Flows through the code</a>
       <a class="sl" href="../code/examples/index.html">Examples</a>
+      <a class="sl" href="../code/browser/index.html">Linux in the browser</a>
       <a class="sl" href="../code/languages/index.html">Languages</a>
       </div>
     </div>
@@ -56,7 +57,15 @@
       <a class="sl" href="../evidence/index.html">&#9679; Measurements</a>
       <a class="sl" href="../evidence/status/index.html">What exists today</a>
       <a class="sl" href="../evidence/research/index.html">Research note</a>
-      <a class="sl" href="../evidence/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../landscape/index.html">Landscape<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../landscape/index.html">&#9679; Policies at the centre</a>
+      <a class="sl" href="../landscape/enforceability/index.html">Enforceability matrix</a>
+      <a class="sl" href="../landscape/integrations/index.html">Integration points</a>
+      <a class="sl" href="../landscape/market/index.html">Market &amp; competitors</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -95,8 +104,8 @@
       <tr id="r2"><td><b>R2</b></td><td>Repository settings for the deploy: Pages served by <b>GitHub Actions</b>, custom domain <code>sharness.ai</code> over HTTPS, and the <code>github-pages</code> environment allowing deploys from <code>dev</code>. Confirmed by the first release, v0.1.0, which deployed from <code>dev</code> and serves at https://sharness.ai.</td><td><span class="tstat t-done">done</span></td></tr>
       <tr id="r3"><td><b>R3</b></td><td><b>Review the design pages</b> against the source pack before they are used to brief the building agents. Especially: the claim labels (measured / designed / not yet measured), the renaming of sgit-* components to <code>sharness.*</code>, and the published observations of the Claude workspace on <a href="../evidence/index.html#7-the-agent-loop-in-this-environment-read-only-observation">Evidence §7</a>.</td><td><span class="tstat t-need">needs review</span></td></tr>
       <tr id="r4"><td><b>R4</b></td><td>Command name: <code>sharness-ai</code>, decided 24 Oct 2026. Applied on the CLI's <code>dev</code> branch (the <code>sharness</code> shorthand removed); ships with the next CLI release.</td><td><span class="tstat t-done">decided</span></td></tr>
-      <tr id="r5"><td><b>R5</b></td><td><b>Read the two articles.</b> <a href="../articles/secure-harness-for-agents.html">A secure harness for agents</a> is written in Dinis's voice from voice memo 01 and he has not read it yet; two phrases of the transcript were left out as unclear. <a href="../articles/what-shipped-on-day-one.html">What shipped on day one</a> is the build agent's own. Added in v0.5.0: the <a href="../evidence/market/index.html">market and competitive analysis</a>, a survey on one day with secondary-source figures marked as such. Added in v0.5.2: <a href="../design/containment/index.html">Containment</a> and <a href="../code/languages/index.html">Languages</a> (decision 11).</td><td><span class="tstat t-need">needs review</span></td></tr>
-      <tr id="r6"><td><b>R6</b></td><td><b>Review the research note, the experiments and the storyboards' cast.</b> The <a href="../evidence/research/index.html">research note</a> lists ten findings and an order for E05 to E08; the <a href="../explain/storyboards/index.html#cast">cast</a> (Ada, Pip, Rook, the Launcher) is proposed for Dinis to accept, change or replace; the article <a href="../articles/the-first-experiments.html">The first experiments</a> is the build agent's own. Added in v0.5.0: the <a href="../evidence/market/index.html">market and competitive analysis</a>, a survey on one day with secondary-source figures marked as such. Added in v0.5.2: <a href="../design/containment/index.html">Containment</a> and <a href="../code/languages/index.html">Languages</a> (decision 11).</td><td><span class="tstat t-need">needs review</span></td></tr>
+      <tr id="r5"><td><b>R5</b></td><td><b>Read the two articles.</b> <a href="../articles/secure-harness-for-agents.html">A secure harness for agents</a> is written in Dinis's voice from voice memo 01 and he has not read it yet; two phrases of the transcript were left out as unclear. <a href="../articles/what-shipped-on-day-one.html">What shipped on day one</a> is the build agent's own. Added in v0.5.0: the <a href="../landscape/market/index.html">market and competitive analysis</a>, a survey on one day with secondary-source figures marked as such. Added in v0.5.2: <a href="../design/containment/index.html">Containment</a> and <a href="../code/languages/index.html">Languages</a> (decision 11).</td><td><span class="tstat t-need">needs review</span></td></tr>
+      <tr id="r6"><td><b>R6</b></td><td><b>Review the research note, the experiments and the storyboards' cast.</b> The <a href="../evidence/research/index.html">research note</a> lists ten findings and an order for E05 to E08; the <a href="../explain/storyboards/index.html#cast">cast</a> (Ada, Pip, Rook, the Launcher) is proposed for Dinis to accept, change or replace; the article <a href="../articles/the-first-experiments.html">The first experiments</a> is the build agent's own. Added in v0.5.0: the <a href="../landscape/market/index.html">market and competitive analysis</a>, a survey on one day with secondary-source figures marked as such. Added in v0.5.2: <a href="../design/containment/index.html">Containment</a> and <a href="../code/languages/index.html">Languages</a> (decision 11).</td><td><span class="tstat t-need">needs review</span></td></tr>
       <tr id="r7"><td><b>R7</b></td><td><b>Release the CLI's <code>dev</code> to <code>main</code></b> when ready: the next release would carry <code>sharness-ai</code> as the only command and experiments E01 to E04; until then the experiments install from the repository.</td><td><span class="tstat t-need">decision</span></td></tr>
       <tr id="t4"><td><b>T4</b></td><td>The memo's acceptance test as a runnable example: a hello world with Claude inside SHarness, showing no internet and no file-system writes. <b>Done for one child process</b> (E04, <code>sharness-ai hello</code>, measured 24 Oct 2026, Evidence §9); for the agent itself it waits on the launcher above the agent.</td><td><span class="tstat t-done">done for one process</span></td></tr>
       <tr id="t5"><td><b>T5</b></td><td>List the SHarness storyboards as a series on storyboards.sgit.ai (its importer takes <code>admin/content/storyboards/</code> as it is).</td><td><span class="tstat t-open">open</span></td></tr>
@@ -115,7 +124,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../project/releases.html">v0.5.3</a> · <a href="../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../project/releases.html">v0.5.4</a> · <a href="../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>
@@ -139,16 +148,19 @@
     <a href="../code/experiments/index.html">Mockups &amp; experiments</a>
     <a href="../code/flows/index.html">Flows through the code</a>
     <a href="../code/examples/index.html">Examples</a>
+    <a href="../code/browser/index.html">Linux in the browser</a>
     <a href="../code/languages/index.html">Languages</a>
     <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
     <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
   </div>
   <div>
-    <h4>Evidence &amp; explain</h4>
+    <h4>Evidence, landscape, explain</h4>
     <a href="../evidence/index.html">Measurements</a>
     <a href="../evidence/status/index.html">What exists today</a>
     <a href="../evidence/research/index.html">Research note</a>
-    <a href="../evidence/market/index.html">Market &amp; competitors</a>
+    <a href="../landscape/index.html">Landscape: policies at the centre</a>
+    <a href="../landscape/enforceability/index.html">Enforceability matrix</a>
+    <a href="../landscape/market/index.html">Market &amp; competitors</a>
     <a href="../explain/storyboards/index.html">Storyboards</a>
     <a href="../explain/index.html">Mockups</a>
     <a href="../articles/index.html">Articles</a>

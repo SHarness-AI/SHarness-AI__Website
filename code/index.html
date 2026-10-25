@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.3</a>
+  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.4</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -48,6 +48,7 @@
       <a class="sl" href="../code/experiments/index.html">Mockups &amp; experiments</a>
       <a class="sl" href="../code/flows/index.html">Flows through the code</a>
       <a class="sl" href="../code/examples/index.html">Examples</a>
+      <a class="sl" href="../code/browser/index.html">Linux in the browser</a>
       <a class="sl" href="../code/languages/index.html">Languages</a>
       </div>
     </div>
@@ -57,7 +58,15 @@
       <a class="sl" href="../evidence/index.html">&#9679; Measurements</a>
       <a class="sl" href="../evidence/status/index.html">What exists today</a>
       <a class="sl" href="../evidence/research/index.html">Research note</a>
-      <a class="sl" href="../evidence/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../landscape/index.html">Landscape<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../landscape/index.html">&#9679; Policies at the centre</a>
+      <a class="sl" href="../landscape/enforceability/index.html">Enforceability matrix</a>
+      <a class="sl" href="../landscape/integrations/index.html">Integration points</a>
+      <a class="sl" href="../landscape/market/index.html">Market &amp; competitors</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -98,7 +107,7 @@
 <tr><td>the experiments, numbered</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md"><code>experiments/README.md</code></a></td><td>E01 to E04 runnable; E05 to E08 planned</td></tr>
 <tr><td>the example policies</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/experiments/policies"><code>experiments/policies/</code></a></td><td>runnable</td></tr>
 <tr><td>the skill for a Claude Code session</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/.claude/skills/sharness-hello/SKILL.md"><code>.claude/skills/sharness-hello/SKILL.md</code></a></td><td>runnable</td></tr>
-<tr><td>the tests</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/tests/unit"><code>tests/unit/</code></a>, 34 tests; Landlock tests skip where it is absent</td><td>green on 25 Oct 2026</td></tr>
+<tr><td>the tests</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/tests/unit"><code>tests/unit/</code></a>, 40 tests; Landlock tests skip where it is absent</td><td>green on 25 Oct 2026</td></tr>
 <tr><td>the ground rules for agents working in the repository</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/CLAUDE.md"><code>CLAUDE.md</code></a></td><td></td></tr>
 <tr><td>the release pipeline</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/.github/workflows/workflow.yml"><code>.github/workflows/workflow.yml</code></a>: tests, version bump, tag, PyPI by Trusted Publishing</td><td>runs on a push to <code>main</code></td></tr>
 <tr><td>the browser mockups</td><td>this site, <a href="https://github.com/SHarness-AI/SHarness-AI__Website/tree/dev/explain/mockups"><code>explain/mockups/</code></a>: hand-written HTML, no build</td><td>published</td></tr>
@@ -113,7 +122,8 @@
 <tbody>
 <tr><td><code>cli.py</code></td><td>98</td><td>the argument parser and the dispatch: <code>probe</code>, <code>policy hash</code>, <code>policy check</code>, <code>run</code>, <code>hello</code></td><td></td></tr>
 <tr><td><code>probe.py</code></td><td>138</td><td>the grant: reads <code>/proc/self/status</code>, the Landlock ABI, <code>memfd_secret</code>, the namespaces, cgroups, the kernel config, the tools present, the names of proxy variables</td><td>E01</td></tr>
-<tr><td><code>policy.py</code></td><td>116</td><td>a v0 policy: load, check the shape, canonicalise (sorted keys, no whitespace, integers only), hash</td><td>E02</td></tr>
+<tr><td><code>policy.py</code></td><td>126</td><td>a v0 policy: load, check the shape (including the caps), canonicalise (sorted keys, no whitespace, integers only), hash</td><td>E02</td></tr>
+<tr><td><code>translate.py</code></td><td>176</td><td>the policy as bubblewrap, <code>docker run</code>, a Claude Code sandbox <code>settings.json</code>, a Kubernetes Pod and NetworkPolicy; each with what it does not enforce</td><td>E10</td></tr>
 <tr><td><code>landlock.py</code></td><td>157</td><td>Landlock through <code>ctypes</code>: the ABI, a ruleset, path rules, port rules, <code>restrict_self</code></td><td>E03</td></tr>
 <tr><td><code>run.py</code></td><td>133</td><td>fork, apply the policy in the child (network namespace, caps, <code>no_new_privs</code>, Landlock), exec; <code>--expect-hash</code></td><td>E03</td></tr>
 <tr><td><code>limits.py</code></td><td>95</td><td>the caps: <code>RLIMIT_AS</code> and <code>RLIMIT_NPROC</code>, and a memory and pids cgroup (v1 or v2) where <code>/sys/fs/cgroup</code> is writable</td><td>E03</td></tr>
@@ -125,6 +135,7 @@
 <h2 id="the-commands">The commands</h2>
 <pre class="diagram">sharness-ai probe [--json]                                E01  the grant
 sharness-ai policy hash|check FILE                        E02  the one value the person supplies
+sharness-ai policy translate FILE --to T [-- CMD…]        E10  the policy in another enforcer's form, and the gap
 sharness-ai run --policy FILE [--expect-hash H] -- CMD…   E03  one command under a policy
 sharness-ai hello [--json]                                E04  the acceptance test, one child process</pre>
 <p>Install and use: <a href="cli/index.html">The CLI</a>. Each command's output and caveats: <a href="examples/index.html">Examples</a>. What each shows and does not show: <a href="experiments/index.html">Mockups and experiments</a>.</p>
@@ -152,7 +163,7 @@ sharness-ai hello [--json]                                E04  the acceptance te
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../project/releases.html">v0.5.3</a> · <a href="../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../project/releases.html">v0.5.4</a> · <a href="../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>
@@ -176,16 +187,19 @@ sharness-ai hello [--json]                                E04  the acceptance te
     <a href="../code/experiments/index.html">Mockups &amp; experiments</a>
     <a href="../code/flows/index.html">Flows through the code</a>
     <a href="../code/examples/index.html">Examples</a>
+    <a href="../code/browser/index.html">Linux in the browser</a>
     <a href="../code/languages/index.html">Languages</a>
     <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
     <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
   </div>
   <div>
-    <h4>Evidence &amp; explain</h4>
+    <h4>Evidence, landscape, explain</h4>
     <a href="../evidence/index.html">Measurements</a>
     <a href="../evidence/status/index.html">What exists today</a>
     <a href="../evidence/research/index.html">Research note</a>
-    <a href="../evidence/market/index.html">Market &amp; competitors</a>
+    <a href="../landscape/index.html">Landscape: policies at the centre</a>
+    <a href="../landscape/enforceability/index.html">Enforceability matrix</a>
+    <a href="../landscape/market/index.html">Market &amp; competitors</a>
     <a href="../explain/storyboards/index.html">Storyboards</a>
     <a href="../explain/index.html">Mockups</a>
     <a href="../articles/index.html">Articles</a>

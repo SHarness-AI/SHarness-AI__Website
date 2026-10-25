@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.3</a>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.4</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -48,6 +48,7 @@
       <a class="sl" href="../../code/experiments/index.html">Mockups &amp; experiments</a>
       <a class="sl" href="../../code/flows/index.html">Flows through the code</a>
       <a class="sl" href="../../code/examples/index.html">Examples</a>
+      <a class="sl" href="../../code/browser/index.html">Linux in the browser</a>
       <a class="sl" href="../../code/languages/index.html">Languages</a>
       </div>
     </div>
@@ -57,7 +58,15 @@
       <a class="sl" href="../../evidence/index.html">&#9679; Measurements</a>
       <a class="sl" href="../../evidence/status/index.html">What exists today</a>
       <a class="sl" href="../../evidence/research/index.html">Research note</a>
-      <a class="sl" href="../../evidence/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../landscape/index.html">Landscape<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../landscape/index.html">&#9679; Policies at the centre</a>
+      <a class="sl" href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+      <a class="sl" href="../../landscape/integrations/index.html">Integration points</a>
+      <a class="sl" href="../../landscape/market/index.html">Market &amp; competitors</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -131,7 +140,7 @@
                        └ the process, doing its one job
 
  and across all of them: the secret is in a different process (the KMS), so there is nothing here to steal</pre>
-<p>Each layer is enforced by something the layer inside it does not include. A failure of one layer leaves the next. The market analysis says why this is a complement to microVM products and not a competitor: they draw the outer ring; SHarness draws the inner ones (<a href="../../evidence/market/index.html#9-where-sharness-sits">Market §9</a>).</p>
+<p>Each layer is enforced by something the layer inside it does not include. A failure of one layer leaves the next. The market analysis says why this is a complement to microVM products and not a competitor: they draw the outer ring; SHarness draws the inner ones (<a href="../../landscape/market/index.html#9-where-sharness-sits">Market §9</a>).</p>
 <h2 id="4-two-caveats-that-matter-more-than-the-kernel">4. Two caveats that matter more than the kernel</h2>
 <ol>
 <li><b>Harsh settings are only harsh if a launcher above the process applied them.</b> A process that confines its own children can skip the step. Every <code>hello</code> run prints this. Until E06 and the launcher on a laptop, every measured row is a Boundary for a child and a Setting for the one that applied it (<a href="../policies/index.html#2-who-enforces-decides-the-barrier-kind">Policies §2</a>).</li>
@@ -152,7 +161,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../../project/releases.html">v0.5.3</a> · <a href="../../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.4</a> · <a href="../../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>
@@ -176,16 +185,19 @@
     <a href="../../code/experiments/index.html">Mockups &amp; experiments</a>
     <a href="../../code/flows/index.html">Flows through the code</a>
     <a href="../../code/examples/index.html">Examples</a>
+    <a href="../../code/browser/index.html">Linux in the browser</a>
     <a href="../../code/languages/index.html">Languages</a>
     <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
     <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
   </div>
   <div>
-    <h4>Evidence &amp; explain</h4>
+    <h4>Evidence, landscape, explain</h4>
     <a href="../../evidence/index.html">Measurements</a>
     <a href="../../evidence/status/index.html">What exists today</a>
     <a href="../../evidence/research/index.html">Research note</a>
-    <a href="../../evidence/market/index.html">Market &amp; competitors</a>
+    <a href="../../landscape/index.html">Landscape: policies at the centre</a>
+    <a href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+    <a href="../../landscape/market/index.html">Market &amp; competitors</a>
     <a href="../../explain/storyboards/index.html">Storyboards</a>
     <a href="../../explain/index.html">Mockups</a>
     <a href="../../articles/index.html">Articles</a>

@@ -47,7 +47,7 @@ Measured so far: Landlock files and ports, the empty network namespace, uid and 
  and across all of them: the secret is in a different process (the KMS), so there is nothing here to steal
 ```
 
-Each layer is enforced by something the layer inside it does not include. A failure of one layer leaves the next. The market analysis says why this is a complement to microVM products and not a competitor: they draw the outer ring; SHarness draws the inner ones ([Market §9](../../evidence/market/index.md#9-where-sharness-sits)).
+Each layer is enforced by something the layer inside it does not include. A failure of one layer leaves the next. The market analysis says why this is a complement to microVM products and not a competitor: they draw the outer ring; SHarness draws the inner ones ([Market §9](../../landscape/market/index.md#9-where-sharness-sits)).
 
 ## 4. Two caveats that matter more than the kernel
 

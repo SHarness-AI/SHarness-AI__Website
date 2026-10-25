@@ -4,7 +4,7 @@
 > the kernel and talking only over allowed, mutually authenticated connections, so a secret
 > lives in one place and a tricked process can only do its one job.
 
-Site version: v0.5.3. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04
+Site version: v0.5.4. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04
 in the CLI). No SHarness component is built.
 By Dinis Cruz; design session written up with Claude, 24 October 2026. All content CC BY 4.0.
 SHarness is unrelated to Sharness, the shell testing library.
@@ -30,7 +30,8 @@ SHarness is unrelated to Sharness, the shell testing library.
 
 - /design/ — the design: the brief and the design pages
 - /code/ — where the code is, the CLI, experiments, flows, examples, languages
-- /evidence/ — measurements, what exists today, the research note, the market analysis
+- /evidence/ — measurements, what exists today, the research note
+- /landscape/ — policies at the centre: the thesis, the enforceability matrix, integration points, the market
 - /explain/ — storyboards and mockups; /articles/ — the articles
 - /project/ — about, the source documents (verbatim), engineering, comms, releases
 
@@ -74,6 +75,8 @@ SHarness is unrelated to Sharness, the shell testing library.
 - /code/flows/index.md — what happens, module by module, when run confines a command and when
   hello runs; the hash in two implementations; what the launcher adds (designed)
 - /code/examples/index.md — every command with its output; sgit under a policy; the skill
+- /code/browser/index.md — Linux in the browser: a real kernel in a tab (v86 + Alpine's kernel,
+  Landlock on) can run hello; syscall-emulation runtimes cannot; the build; what a browser never shows (E09)
 - /code/languages/index.md — Python first; Rust for the KMS and the bash client; JSON for policies
 
 ## Evidence and status
@@ -83,7 +86,19 @@ SHarness is unrelated to Sharness, the shell testing library.
 - /evidence/status/index.md — what exists today and what does not (the honest column)
 - /evidence/research/index.md — the published design read in full on 24 Oct 2026: ten findings
   and what was done about each; what is still open and in what order
-- /evidence/market/index.md — market and competitive analysis as of 24 Oct 2026: sandboxes and
+
+## The landscape (SHarness as the reference implementation of Process Behaviour Policies)
+
+- /landscape/index.md — the thesis in four steps: a policy says what a process may do (ABP → PBP);
+  SHarness is one enforcer, built to be read; any environment that enforces the same rows is
+  valid, so enforcers mix and match under one hash; every product is an integration point or a
+  translation target; the three questions (express, enforce as what barrier kind, verify)
+- /landscape/enforceability/index.md — the matrix: policy rows × enforcers (SHarness, bubblewrap,
+  Docker, Claude Code's sandbox, Kubernetes, microVMs, ToolHive, OpenShell) with the barrier kind
+  per cell; `sharness-ai policy translate` writes four of the columns and prints the gap (E10)
+- /landscape/integrations/index.md — product by product: what it stands in for, what a policy
+  translates into, what SHarness adds, what to keep
+- /landscape/market/index.md — market and competitive analysis as of 24 Oct 2026: sandboxes and
   runtimes, guardrails, MCP and tool security, LLM gateways, secrets and identity, enterprise
   platforms, standards; every row sourced; where SHarness sits; threats to the thesis
 

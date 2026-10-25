@@ -7,7 +7,7 @@
 | Thing | Where to check it |
 |---|---|
 | **The `sharness-ai` package on PyPI**, v0.1.0: reports its version and prints its help | [pypi.org/project/sharness-ai](https://pypi.org/project/sharness-ai/) |
-| **Experiments E01 to E04** (`probe`, `policy hash`, `run`, `hello`), with 34 tests, on the CLI's `dev` branch; unreleased to PyPI | [the code](../../code/index.md) · [experiments/README.md](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md) · E04 measured on [Evidence §9](../index.md#9-the-first-experiments-run-by-the-cli) |
+| **Experiments E01 to E04 and E10** (`probe`, `policy hash`, `run`, `hello`, `policy translate`), with 40 tests, on the CLI's `dev` branch; unreleased to PyPI | [the code](../../code/index.md) · [experiments/README.md](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md) · E04 measured on [Evidence §9](../index.md#9-the-first-experiments-run-by-the-cli) |
 | **Two example policies and a skill** for Claude Code sessions | [Examples](../../code/examples/index.md) |
 | **Two browser mockups** that compute and enforce nothing | [the policy hash](../../explain/mockups/policy-hash.html) (the same hash as the CLI) · [the edge matrix](../../explain/mockups/edges.html) |
 | **Three storyboards**, data drawn by the storyboards.sgit.ai kit | [Storyboards](../../explain/storyboards/index.md); what they show is the design, not something built |
