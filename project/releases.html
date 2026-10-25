@@ -19,7 +19,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.12</a>
+  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.13</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -102,6 +102,9 @@
       <a class="sl" href="../project/comms.html">Comms: tasks &amp; requests</a>
       <a class="sl here" href="../project/releases.html">Release history</a>
       <a class="sl" href="../project/adoption/index.html">Getting users: the review and the plan</a>
+      <a class="sl" href="../admin/index.html">Admin: how the project is run</a>
+      <a class="sl" href="../admin/board/index.html">The board: tasks &amp; requests</a>
+      <a class="sl" href="../admin/updates/index.html">Updates: what is happening</a>
       <a class="sl" href="../project/outreach/index.html">Outreach: finding the people it is for</a>
       <a class="sl" href="../project/agents/index.html">The agents and their keys</a>
       <a class="sl" href="../project/telemetry/index.html">Telemetry: who reads this site</a>
@@ -119,6 +122,7 @@
   <div class="tablewrap"><table class="vers">
     <thead><tr><th>Version</th><th>Date</th><th>What changed</th></tr></thead>
     <tbody>
+      <tr><td class="vnum">v0.5.13</td><td>25 Oct 2026</td><td>The conductor joins (<code>conductor@sharness</code>, for now also librarian, ontologist and project manager) and <a href="../admin/index.html">the admin section</a> opens: <a href="../admin/board/index.html">the board</a> (the comms rows R1 to R11 and T1 to T11 as one file each, plus R12 to R14, T12 and T13; <code>project/comms.html</code> now generated from them), <a href="../admin/members/index.html">the members</a> (a role, a behaviour policy and a status for the editor, sharness.build, sharness.dev, sherpa@sharness and the conductor), <a href="../admin/updates/index.html">the updates</a> (the first: what moved in two days and what waits on the editor), <a href="../admin/status/index.html">the status</a> of every branch, and <a href="../admin/guidance/index.html">AGENTS.md</a>, the guidance every agent reads. <code>tools/gen_admin.py</code> and <code>tools/admin_status.py</code>; the gate checks the admin pages against their sources.</td></tr>
       <tr><td class="vnum">v0.5.12</td><td>25 Oct 2026</td><td>The telemetry lane is open: Dinis supplied the access token (R10 done), both of sherpa@sharness's vaults were pushed and the lane configured at 23:40 UTC; the first drain at 23:45 UTC found 4 events (2 real readers, 2 from the agent's own headless check, classed as automation) and wrote the first <code>data/telemetry-report.json</code> (T7 done). <a href="telemetry/index.html">Telemetry</a> says live; <a href="agents/index.html">the vault register</a> carries the push times; the outreach plan's week 0 has its first item done.</td></tr>
       <tr><td class="vnum">v0.5.11</td><td>25 Oct 2026</td><td>A third agent joins: <b>sherpa@sharness</b>, the Sherpa (the board, release scoping, outreach and telemetry), with a key on pki.sgit.ai operated by Dinis Cruz and two vaults, <code>sherpa-marketing</code> and <code>sherpa-telemetry</code>, their keys sealed to the root (<a href="agents/index.html">the agents and their keys</a>). <a href="outreach/index.html">The outreach plan</a>, the companion of <a href="adoption/index.html">getting users</a>: what there is to show, five audiences, the channels (the repository first, the lists, one Show HN, Reddit, LinkedIn, rUv and the Agentics Foundation, OWASP, the sandbox people), what rUv's playbook teaches, the rules every post follows, thirty days, the measures; nothing posted yet. <a href="telemetry/index.html">Telemetry</a>: every page sends one anonymous event, encrypted in the browser, to a write-only lane (<code>assets/telemetry.js</code>, <code>data/telemetry.json</code>, the postmaster and drain tools); the lane opens once the access token arrives (R10). Comms R9 to R11 and T7 to T11.</td></tr>
       <tr><td class="vnum">v0.5.10</td><td>25 Oct 2026</td><td>A new author, sharness.dev, the developer agent, and its first article, <a href="../articles/one-standard-many-languages.html">One standard, many languages</a>: what in each component is a specification and what is an implementation; a component-by-language map for Python, JavaScript in Node and in the browser, Rust and Go; what each runtime adds to the attack surface; the adoption ladder from a policy file to a component; standards versioned with test vectors and a reviewed registry. <a href="../code/languages/index.html">Languages</a> carries the proposed set and order; decision 11 extended; <a href="comms.html#r8">R8</a> asks for the decision.</td></tr>
@@ -149,7 +153,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../project/releases.html">v0.5.12</a> · <a href="../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../project/releases.html">v0.5.13</a> · <a href="../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>
@@ -198,6 +202,10 @@
     <a href="../project/sources/index.html">The source documents</a>
     <a href="../project/engineering.html">Engineering</a>
     <a href="../project/comms.html">Comms &amp; release history</a>
+    <a href="../admin/index.html">Admin: how the project is run</a>
+    <a href="../admin/board/index.html">The board</a>
+    <a href="../admin/updates/index.html">Updates</a>
+    <a href="../admin/guidance/index.html">Guidance for agents (AGENTS.md)</a>
     <a href="../project/adoption/index.html">Getting users</a>
     <a href="../project/outreach/index.html">Outreach</a>
     <a href="../project/agents/index.html">The agents and their keys</a>

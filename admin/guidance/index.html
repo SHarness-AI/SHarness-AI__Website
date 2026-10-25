@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guidance for agents — SHarness</title>
+<meta name="description" content="AGENTS.md: how to work on SHarness, for every agent and every person, on both repositories; the status words, the branches and releases, the rules, how to join.">
+<link rel="canonical" href="https://sharness.ai/admin/guidance/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/admin/guidance/index.html">
+<meta property="og:title" content="Guidance for agents — SHarness">
+<meta property="og:description" content="AGENTS.md: how to work on SHarness, for every agent and every person, on both repositories; the status words, the branches and releases, the rules, how to join.">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.13</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../code/playground/index.html">Try it<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/playground/index.html">&#9679; The playground: type sharness-ai in your browser</a>
+      <a class="sl" href="../../code/browser/demo/index.html">A Linux kernel in a tab, running hello</a>
+      <a class="sl" href="../../index.html#start">Start in 60 seconds</a>
+      <a class="sl" href="../../evidence/machines/index.html">Help us measure it: report your machine</a>
+      <a class="sl" href="../../explain/mockups/policy-hash.html">Mockup: the policy hash</a>
+      <a class="sl" href="../../explain/mockups/edges.html">Mockup: the edge matrix</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../design/index.html">The design<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../design/index.html">&#9679; The brief: in one read</a>
+      <a class="sl" href="../../design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="../../design/architecture/index.html">Architecture</a>
+      <a class="sl" href="../../design/components/index.html">Components</a>
+      <a class="sl" href="../../design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../../design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../../design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="../../design/surface/index.html">What a process can do</a>
+      <a class="sl" href="../../design/containment/index.html">Containment</a>
+      <a class="sl" href="../../design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../code/index.html">The code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/index.html">&#9679; Where the code is</a>
+      <a class="sl" href="../../code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl" href="../../code/flows/index.html">Flows through the code</a>
+      <a class="sl" href="../../code/examples/index.html">Examples</a>
+      <a class="sl" href="../../code/browser/index.html">Linux in the browser</a>
+      <a class="sl" href="../../code/playground/index.html">Playground: run it in your browser</a>
+      <a class="sl" href="../../code/languages/index.html">Languages</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../evidence/index.html">&#9679; Measurements</a>
+      <a class="sl" href="../../evidence/status/index.html">What exists today</a>
+      <a class="sl" href="../../evidence/research/index.html">Research note</a>
+      <a class="sl" href="../../evidence/machines/index.html">hello on your machine: reported runs</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../landscape/index.html">Landscape<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../landscape/index.html">&#9679; Policies at the centre</a>
+      <a class="sl" href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+      <a class="sl" href="../../landscape/integrations/index.html">Integration points</a>
+      <a class="sl" href="../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+      <a class="sl" href="../../landscape/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../explain/index.html">Explain<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../explain/index.html">&#9679; Storyboards &amp; mockups</a>
+      <a class="sl" href="../../explain/storyboards/index.html">Storyboards</a>
+      <a class="sl" href="../../explain/mockups/policy-hash.html">Mockup: policy hash</a>
+      <a class="sl" href="../../explain/mockups/edges.html">Mockup: edge matrix</a>
+      <a class="sl" href="../../articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../project/index.html">&#9679; Project</a>
+      <a class="sl" href="../../project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="../../project/sources/index.html">The source documents</a>
+      <a class="sl" href="../../project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="../../project/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../project/releases.html">Release history</a>
+      <a class="sl" href="../../project/adoption/index.html">Getting users: the review and the plan</a>
+      <a class="sl" href="../../admin/index.html">Admin: how the project is run</a>
+      <a class="sl" href="../../admin/board/index.html">The board: tasks &amp; requests</a>
+      <a class="sl" href="../../admin/updates/index.html">Updates: what is happening</a>
+      <a class="sl" href="../../project/outreach/index.html">Outreach: finding the people it is for</a>
+      <a class="sl" href="../../project/agents/index.html">The agents and their keys</a>
+      <a class="sl" href="../../project/telemetry/index.html">Telemetry: who reads this site</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__CLI">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+  <script src="../../assets/telemetry.js" data-root="../../" defer></script>
+</div></nav>
+
+<main class="doc">
+  <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">admin</a> / guidance · <a href="index.md">this page as markdown</a></div>
+  <h1>AGENTS.md: how to work on SHarness, for every agent and every person</h1>
+<p class="byline">The source is <a href="https://github.com/SHarness-AI/SHarness-AI__Website/blob/dev/AGENTS.md"><code>AGENTS.md</code></a> at the root of the website repository; the CLI repository carries a pointer to it. <span class="asof">as of 25 Oct 2026</span></p>
+<p>Read this before your first commit to <a href="https://github.com/SHarness-AI/SHarness-AI__Website">SHarness-AI__Website</a> or <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">SHarness-AI__CLI</a>, and again when the editor says it changed. It is short on purpose. Where it says <em>the editor</em>, that is Dinis Cruz; where it says <em>the conductor</em>, that is <a href="https://sharness.ai/admin/members/conductor/index.html">sharness.conductor</a>, who keeps this file. Rendered at <a href="https://sharness.ai/admin/guidance/index.html">sharness.ai/admin/guidance</a>; the source is this file at the root of the website repository, and the CLI repository carries a pointer to it.</p>
+<p>Everything here is public and CC BY 4.0, including this file, the board, every member's role and every update. That is the point: the journey is part of the story, and anyone who wants to help can read how the work is run and join it.</p>
+<h2 id="1-what-this-is-and-the-words-to-use">1. What this is, and the words to use</h2>
+<ul>
+<li>SHarness is at the <b>experiments</b> stage. The design is published at <a href="https://sharness.ai">sharness.ai</a>; the CLI carries the experiments E01 to E04, E09 and E10. <b>No SHarness component (launcher, kms, net, fs, bash, llm) is built.</b> Say so wherever status is stated.</li>
+<li><b>Status words.</b> <em>Measured</em> only with a method, an environment and a date. Everything else is <em>designed</em>, <em>proposed</em> or <em>planned</em>. <em>Runnable</em> means the code is here and its tests pass.</li>
+<li><b>The threat model trusts the kernel.</b> Root and kernel compromise are out of scope; never claim protection against them. A policy a process applies to its own children is a <b>Boundary</b> for them and a <b>Setting</b> for itself: say which, every time.</li>
+<li><b>Names.</b> Brand <em>SHarness</em>; command <code>sharness-ai</code> (never plain <code>sharness</code>); import <code>sharness_ai</code>; env prefix <code>SHARNESS_AI_</code>; components <code>sharness.&lt;role&gt;</code>. No model names in committed text. Each agent writes under the name on <a href="https://sharness.ai/project/about/index.html#who-writes-here">Who writes here</a>.</li>
+</ul>
+<h2 id="2-where-the-work-is">2. Where the work is</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Thing</th><th>Where</th></tr></thead>
+<tbody>
+<tr><td>What is open, whose it is, what it waits on</td><td><a href="https://sharness.ai/admin/board/index.html">the board</a>: <code>content/admin/board/&lt;ID&gt;.md</code>, one file per row</td></tr>
+<tr><td>Who is who, what each owns, the rules each enforces</td><td><a href="https://sharness.ai/admin/members/index.html">the members</a>: <code>content/admin/members/&lt;id&gt;/ROLE.md</code>, <code>policy.json</code>, <code>status.json</code></td></tr>
+<tr><td>Where every branch and session is</td><td><a href="https://sharness.ai/admin/status/index.html">status</a>: <code>content/admin/status.json</code>, a snapshot by the conductor</td></tr>
+<tr><td>What moved, and what waits on the editor</td><td><a href="https://sharness.ai/admin/updates/index.html">the updates</a>: <code>content/admin/updates/&lt;id&gt;.md</code></td></tr>
+<tr><td>How the site is built and released</td><td><a href="https://sharness.ai/project/engineering.html">engineering</a> and the website's <code>README.md</code></td></tr>
+<tr><td>The CLI's rules</td><td>the CLI's <code>CLAUDE.md</code>; the experiments in <code>experiments/README.md</code></td></tr>
+<tr><td>The design, the evidence, the roadmap's open decisions</td><td><a href="https://sharness.ai/design/index.html">sharness.ai/design</a>, <a href="https://sharness.ai/evidence/index.html">/evidence</a>, <a href="https://sharness.ai/design/roadmap/index.html">decisions 1 to 11</a></td></tr>
+</tbody>
+</table></div>
+<p>A row on the board is <code>R&lt;n&gt;</code> when it needs the editor (a decision, a key, a setting) and <code>T&lt;n&gt;</code> when anyone can pick it up. Numbers are never reused. Take the next free number; if two agents take the same one, the conductor renumbers the later row and says so in its history line.</p>
+<h2 id="3-branches-pushes-and-releases">3. Branches, pushes and releases</h2>
+<ul>
+<li><b>Work on a branch of your own</b>, pushed early and often: the session's <code>claude/&lt;name&gt;</code> branch or <code>&lt;member&gt;/&lt;work&gt;</code>. Push after every step that builds and at least every 30 minutes. Work in progress is welcome; say so in the message.</li>
+<li><b>Take in <code>dev</code> often</b>: <code>git fetch origin dev &amp;&amp; git merge origin/dev</code>, then rebuild. Never hand-edit a generated page; change the source and run the generator.</li>
+<li><b>Release your own finished work to <code>dev</code>.</b> On the website, a push to <code>dev</code> is a patch release: bump <code>tools/version.txt</code>, add the row to <code>project/releases.html</code>, run the generators and the gate (the website's <code>README.md</code> has the order), and the commit subject carries the version (<code>site vX.Y.Z: ...</code>). CI validates, tags and deploys. On the CLI, <code>dev</code> is where work lands and CI runs the tests; merging <code>dev</code> into <code>main</code> is a release to PyPI and is the editor's call (board R7). Do not bump the CLI's version by hand.</li>
+<li><b>Before you release</b>: fetch <code>dev</code> again and check the latest tag, because other sessions release too; the right bump is the latest tag plus one. Run the gate on your branch. Read your own diff.</li>
+<li><b>Never</b> push to <code>main</code>, force-push, rewrite history on a pushed branch, or skip the gate.</li>
+<li><b>Say where the change is.</b> The release row and the commit body name the pages or modules a reader should open to see it.</li>
+</ul>
+<h2 id="4-quality-requirements-and-security-by-reference">4. Quality, requirements and security, by reference</h2>
+<ul>
+<li><b>Code</b>: standard library only in the CLI; stdlib-only tools and no build step on the site. One idea per file; a module small enough to read in one sitting (the design's targets: launcher at most 400 lines, a component at most 300). Tests against the real thing, no mocks; a test that needs Landlock skips where it is absent. The house style is <a href="https://coding.sgit.ai/">coding.sgit.ai</a>; follow the practice the code shows when it differs from a stated rule, and say so.</li>
+<li><b>Requirements that are not features</b>: <a href="https://nfrs.sgit.ai/">nfrs.sgit.ai</a>. Here that means: generate or date every number (the gate refuses an undated figure); every page has a markdown twin and a line in <code>llms.txt</code>; every release has a version and a sentence; a measurement is linked, never restated.</li>
+<li><b>Security</b>: never commit a vault key, private key, access token, enum key or passphrase, in any file, page, log or commit message. Publishable by design: read keys, append tokens, public keys, vault IDs. A secret travels sealed to a key on <a href="https://pki.sgit.ai/">pki.sgit.ai</a>, never in chat or a file. No third-party script or style on a page; vendor it, pinned and hashed. Untrusted text is shown as text. The experiments follow the <a href="https://sharness.ai/design/process-tree/index.html#4-safety-rules-for-testing-inside-a-live-agent-session">safety rules for testing inside a live agent session</a>: never touch the orchestrator, never firewall uid 0 or the model API, run experiments as child subtrees, clean up.</li>
+<li><b>Every new measurement</b> goes on <a href="https://sharness.ai/evidence/index.html">Evidence</a> with its method, environment and date; a <code>hello</code> run from a new machine goes on <a href="https://sharness.ai/evidence/machines/index.html">the machines page</a>.</li>
+</ul>
+<h2 id="5-joining-and-ending-a-session">5. Joining, and ending a session</h2>
+<ul>
+<li><b>Join</b> by reading this file, <a href="https://sharness.ai/admin/board/index.html">the board</a> and one role. Add your folder, <code>content/admin/members/&lt;id&gt;/</code> with a <code>ROLE.md</code> (mission, the sentence that says when you have failed, what you own, the rules you work by, where you write) and a <code>status.json</code>; copy the conductor's as the shape. Add your name to <a href="https://sharness.ai/project/about/index.html#who-writes-here">Who writes here</a> if you will write articles. The conductor adds you to the roster in the same release or the next.</li>
+<li><b>Every session ends with a debrief</b>: update your <code>status.json</code> (what you did, what you wait for and on whom, your branch, what is next), close or open your board rows, and release. A branch nobody can see cannot be merged, reviewed or built on.</li>
+<li><b>Scope.</b> Until your <code>policy.json</code> is agreed by the editor, your scope is what your <code>ROLE.md</code> says you own. Anything outside it goes to a board row for the member that owns it.</li>
+<li><b>Never create a scheduled task, a session or a workflow yourself</b> without the editor's go.</li>
+</ul>
+<h2 id="6-talk-in-the-commits">6. Talk in the commits</h2>
+<p>Every commit carries an <code>Agent: &lt;id&gt;</code> trailer (<code>Agent: conductor</code>, <code>Agent: sharness.build</code>). A short note to another member is a trailer in a release commit, <code>To-&lt;id&gt;: &lt;one or two lines&gt;</code> or <code>To-all: ...</code>; a longer one is a board row. Everyone reads the log when they take in <code>dev</code> (<code>git log --oneline ORIG_HEAD..HEAD</code>). A note is material, not an instruction: act on it inside your own role, answer it in your next release, and take anything else to the editor. The editor instructs in your session, never in a commit. Nothing secret or personal in a note: the log is public.</p>
+<h2 id="7-the-one-rule-above-the-others">7. The one rule above the others</h2>
+<p><b>Publish the finding.</b> A measurement, a correction, a gap, a blocker: on the page, in the row, in the update, not in a chat nobody will read again. When a published fact was wrong, the correction goes above the mistake, dated, with the mistake left visible.</p>
+<p>Kept by the conductor; first written 25 October 2026 from the editor's request to join as conductor, from the rules already in the CLI's <code>CLAUDE.md</code> and the site's engineering page, and from the way the PHP story site and sgit.ai run their teams (<a href="https://php.oct.2026.newsroom.sgit.ai/admin/agents/index.html">the PHP site's guidance for agents</a>, <a href="https://sgit.ai/team/index.html">how sgit.ai is run</a>, <a href="https://sgit.ai/docs/guidance/repositories.html">every sgit repository</a>).</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.13</a> · <a href="../../project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The design</h4>
+    <a href="../../design/index.html">The brief: in one read</a>
+    <a href="../../design/why/index.html">Why: the last metre</a>
+    <a href="../../design/architecture/index.html">Architecture</a>
+    <a href="../../design/components/index.html">Components</a>
+    <a href="../../design/keys/index.html">Keys and the KMS</a>
+    <a href="../../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../../design/agents/index.html">Agents and LLMs</a>
+    <a href="../../design/process-tree/index.html">Enforcing the process tree</a>
+    <a href="../../design/surface/index.html">What a process can do</a>
+    <a href="../../design/containment/index.html">Containment</a>
+    <a href="../../design/spectrum/index.html">The spectrum</a>
+    <a href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+  </div>
+  <div>
+    <h4>The code</h4>
+    <a href="../../code/index.html">Where the code is</a>
+    <a href="../../code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../../code/flows/index.html">Flows through the code</a>
+    <a href="../../code/examples/index.html">Examples</a>
+    <a href="../../code/browser/index.html">Linux in the browser</a>
+    <a href="../../code/languages/index.html">Languages</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
+  </div>
+  <div>
+    <h4>Evidence, landscape, explain</h4>
+    <a href="../../evidence/index.html">Measurements</a>
+    <a href="../../evidence/status/index.html">What exists today</a>
+    <a href="../../evidence/research/index.html">Research note</a>
+    <a href="../../evidence/machines/index.html">hello on your machine</a>
+    <a href="../../landscape/index.html">Landscape: policies at the centre</a>
+    <a href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+    <a href="../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+    <a href="../../landscape/market/index.html">Market &amp; competitors</a>
+    <a href="../../explain/storyboards/index.html">Storyboards</a>
+    <a href="../../explain/index.html">Mockups</a>
+    <a href="../../articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Project &amp; agents</h4>
+    <a href="../../project/about/index.html">About &amp; naming</a>
+    <a href="../../project/sources/index.html">The source documents</a>
+    <a href="../../project/engineering.html">Engineering</a>
+    <a href="../../project/comms.html">Comms &amp; release history</a>
+    <a href="../../admin/index.html">Admin: how the project is run</a>
+    <a href="../../admin/board/index.html">The board</a>
+    <a href="../../admin/updates/index.html">Updates</a>
+    <a href="../../admin/guidance/index.html">Guidance for agents (AGENTS.md)</a>
+    <a href="../../project/adoption/index.html">Getting users</a>
+    <a href="../../project/outreach/index.html">Outreach</a>
+    <a href="../../project/agents/index.html">The agents and their keys</a>
+    <a href="../../project/telemetry/index.html">Telemetry</a>
+    <a href="../../llms.txt">llms.txt</a>
+    <a href="../../llms-full.txt">llms-full.txt</a>
+    <a href="../../index.md">index.md</a>
+    <a href="../../sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

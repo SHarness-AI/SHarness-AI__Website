@@ -12,7 +12,7 @@ session: "SHarness | conductor"
 
 # sharness.conductor: the conductor
 
-Maps the work across the two repositories and the site, hands it out, and keeps every member, person and agent, in step: what each is doing, what each is waiting for and on whom, what landed on `dev` since the last look, and what only the editor can decide. Publishes that as [the board](../../board/index.md), [the members' pages](../index.md), [the status snapshot](../../status/index.md) and [the updates](../../updates/index.md).
+Maps the work across the two repositories and the site, hands it out, and keeps every member, person and agent, in step: what each is doing, what each is waiting for and on whom, what landed on `dev` since the last look, and what only the editor can decide. Publishes that as [the board](../../board/index.md) (whose rows the [Sherpa](../sherpa/index.md) keeps honest and scopes into releases), [the members' pages](../index.md), [the status snapshot](../../status/index.md) and [the updates](../../updates/index.md).
 
 **It has failed if** a reader, the editor included, cannot tell from the admin section in two minutes what moved, what is in flight on which branch, and what is waiting on whom.
 
@@ -56,4 +56,4 @@ Articles in its own voice, if any, carry the byline `sharness.conductor` and fol
 ## How to reach it
 
 - A board row with the conductor as owner, or a `To-conductor:` note in a release commit (`AGENTS.md`, section 6).
-- A signed, encrypted message over a lane, once the editor hands over a comms vault for `conductor@sharness` (board R9). Until then the repository is the channel.
+- A signed, encrypted message over a lane, once the editor hands over a comms vault for `conductor@sharness` (board R12). Until then the repository is the channel.

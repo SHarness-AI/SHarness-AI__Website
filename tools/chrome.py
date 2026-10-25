@@ -87,10 +87,13 @@ NAV = [
         ("Comms: tasks &amp; requests", "project/comms.html"),
         ("Release history", "project/releases.html"),
         ("Getting users: the review and the plan", "project/adoption/index.html"),
+        ("Admin: how the project is run", "admin/index.html"),
+        ("The board: tasks &amp; requests", "admin/board/index.html"),
+        ("Updates: what is happening", "admin/updates/index.html"),
         ("Outreach: finding the people it is for", "project/outreach/index.html"),
         ("The agents and their keys", "project/agents/index.html"),
         ("Telemetry: who reads this site", "project/telemetry/index.html"),
-    ], ("project/",)),
+    ], ("project/", "admin/")),
 ]
 
 FOOTER = [
@@ -137,6 +140,10 @@ FOOTER = [
         ("The source documents", "project/sources/index.html"),
         ("Engineering", "project/engineering.html"),
         ("Comms &amp; release history", "project/comms.html"),
+        ("Admin: how the project is run", "admin/index.html"),
+        ("The board", "admin/board/index.html"),
+        ("Updates", "admin/updates/index.html"),
+        ("Guidance for agents (AGENTS.md)", "admin/guidance/index.html"),
         ("Getting users", "project/adoption/index.html"),
         ("Outreach", "project/outreach/index.html"),
         ("The agents and their keys", "project/agents/index.html"),

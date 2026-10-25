@@ -6,7 +6,7 @@
 > process started. Today: a CLI that enforces a policy on one process, a kernel that boots in your
 > browser to prove it, and a design for the launcher that binds the agent itself.
 
-*Source: <https://sharness.ai/index.html> · site v0.5.12 · markdown twin of the front page.*
+*Source: <https://sharness.ai/index.html> · site v0.5.13 · markdown twin of the front page.*
 *Status: **experiments**. No SHarness component is built; every measured figure carries its date.*
 
 ## Start in 60 seconds
@@ -66,6 +66,7 @@ The memo's method is to start with very simple examples. [Mockups and experiment
 - **The landscape:** [Policies at the centre](landscape/index.md) · [Enforceability](landscape/enforceability/index.md) · [Integration points](landscape/integrations/index.md) · [Ruflo and ruv.sgit](landscape/ruflo/index.md) · [Market and competitors](landscape/market/index.md)
 - **Explain:** [Storyboards and mockups](explain/index.md) · [Storyboards](explain/storyboards/index.md) · [Articles](articles/index.md)
 - **Project:** [About and naming](project/about/index.md) · [Getting users: the review and the plan](project/adoption/index.md) · [The source documents](project/sources/index.md) · [Comms](project/comms.html) · [Releases](project/releases.html)
+- **Admin:** [How the project is run](admin/index.md) · [The board](admin/board/index.md) · [Updates: what is happening](admin/updates/index.md) · [The members](admin/members/index.md) · [Guidance for agents](admin/guidance/index.md)
 
 ## Articles
 
