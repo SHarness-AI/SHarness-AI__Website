@@ -1,6 +1,6 @@
 # Telemetry: who reads this site
 
-> **Status: built, waiting for the lane to be opened, as of 25 Oct 2026.** Every page of sharness.ai carries `assets/telemetry.js` since v0.5.11. It sends one anonymous event per page per session to a write-only lane on a private vault, encrypted in your browser before it leaves. The lane accepts events once its sender token is registered with the server, which needs an access token only Dinis Cruz holds ([comms R10](../comms.html#r10)); until then every event is refused and nothing is kept anywhere. No counts have been published yet.
+> **Status: live, as of 25 Oct 2026, 23:45 UTC.** Every page of sharness.ai carries `assets/telemetry.js` since v0.5.11. It sends one anonymous event per page per session to a write-only lane on a private vault, encrypted in your browser before it leaves. The lane was opened on 25 Oct 2026 at 23:40 UTC, once Dinis Cruz supplied the access token ([comms R10](../comms.html#r10), done); the first drain ran at 23:45 UTC and found 4 events from 2 sessions: 2 reader views, 2 from the agent's own headless check (classed `webdriver`, as designed), 1 declared team. Counts over readers only are published from the next drain on, once there are enough of them that no single reader can be picked out.
 
 ## What every page sends
 
@@ -30,7 +30,7 @@ Not everyone who opens a page is a reader. Each session is put in one of three g
 
 ## What will be published
 
-Counts only, by day and by hour at the finest, over readers: pages, referrer hosts, countries, devices, languages, versions. No row, no session id, no city, no region. The drain ([`tools/telemetry_drain.py`](../../tools/telemetry_drain.py)), run by whoever holds the vault key, writes the report into the vault and its public part to `data/telemetry-report.json`, which this page will carry once there is one. The first thing the counts are for is the [outreach plan](../outreach/index.md): which channel brought readers, and whether they read past the front page.
+Counts only, by day and by hour at the finest, over readers: pages, referrer hosts, countries, devices, languages, versions. No row, no session id, no city, no region. The drain ([`tools/telemetry_drain.py`](../../tools/telemetry_drain.py)), run by whoever holds the vault key, writes the report into the vault and its public part to [`data/telemetry-report.json`](../../data/telemetry-report.json) (the first one is there, dated); this page will render it once the counts are more than a handful. The first thing the counts are for is the [outreach plan](../outreach/index.md): which channel brought readers, and whether they read past the front page.
 
 ## Not applied yet
 

@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.11</a>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.12</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -117,7 +117,7 @@
 <main class="doc">
   <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">project</a> / telemetry · <a href="index.md">this page as markdown</a></div>
   <h1>Telemetry: who reads this site</h1>
-<div class="note"><b>Status: built, waiting for the lane to be opened, <span class="asof">as of 25 Oct 2026</span>.</b> Every page of sharness.ai carries <code>assets/telemetry.js</code> since v0.5.11. It sends one anonymous event per page per session to a write-only lane on a private vault, encrypted in your browser before it leaves. The lane accepts events once its sender token is registered with the server, which needs an access token only Dinis Cruz holds (<a href="../comms.html#r10">comms R10</a>); until then every event is refused and nothing is kept anywhere. No counts have been published yet.</div>
+<div class="note"><b>Status: live, <span class="asof">as of 25 Oct 2026</span>, 23:45 UTC.</b> Every page of sharness.ai carries <code>assets/telemetry.js</code> since v0.5.11. It sends one anonymous event per page per session to a write-only lane on a private vault, encrypted in your browser before it leaves. The lane was opened on 25 Oct 2026 at 23:40 UTC, once Dinis Cruz supplied the access token (<a href="../comms.html#r10">comms R10</a>, done); the first drain ran at 23:45 UTC and found 4 events from 2 sessions: 2 reader views, 2 from the agent's own headless check (classed <code>webdriver</code>, as designed), 1 declared team. Counts over readers only are published from the next drain on, once there are enough of them that no single reader can be picked out.</div>
 <h2 id="what-every-page-sends">What every page sends</h2>
 <p>One event, encrypted in your browser to the key below, written to a lane that can only be appended to:</p>
 <div class="tablewrap"><table>
@@ -139,7 +139,7 @@
 <h2 id="who-is-who">Who is who</h2>
 <p>Not everyone who opens a page is a reader. Each session is put in one of three groups when the counts are made: <b>readers</b>; <b>the editor and the team</b>; <b>automation</b> (crawlers, the site's own headless checks). Automation declares itself by class; the team declares itself by opening any page of this site with <code>#who=editor</code> or <code>#who=team</code> once in a browser (kept in that browser only; <code>#who=reader</code> undoes it). Everything else is a reader. Every event is an untrusted claim: the token and the key are public, so rows can be forged or flooded (1000 pending per token, then the lane returns 507); readers with blockers do not appear. The counts are a floor.</p>
 <h2 id="what-will-be-published">What will be published</h2>
-<p>Counts only, by day and by hour at the finest, over readers: pages, referrer hosts, countries, devices, languages, versions. No row, no session id, no city, no region. The drain (<a href="../../tools/telemetry_drain.py"><code>tools/telemetry_drain.py</code></a>), run by whoever holds the vault key, writes the report into the vault and its public part to <code>data/telemetry-report.json</code>, which this page will carry once there is one. The first thing the counts are for is the <a href="../outreach/index.html">outreach plan</a>: which channel brought readers, and whether they read past the front page.</p>
+<p>Counts only, by day and by hour at the finest, over readers: pages, referrer hosts, countries, devices, languages, versions. No row, no session id, no city, no region. The drain (<a href="../../tools/telemetry_drain.py"><code>tools/telemetry_drain.py</code></a>), run by whoever holds the vault key, writes the report into the vault and its public part to <a href="../../data/telemetry-report.json"><code>data/telemetry-report.json</code></a> (the first one is there, dated); this page will render it once the counts are more than a handful. The first thing the counts are for is the <a href="../outreach/index.html">outreach plan</a>: which channel brought readers, and whether they read past the front page.</p>
 <h2 id="not-applied-yet">Not applied yet</h2>
 <ul>
 <li>A Content-Security-Policy on every page allowing exactly the two location services and the vault server, as the newsroom has. The playground and the Linux-in-a-browser demo load from their own folders and would need their own policy; proposed, not done.</li>
@@ -155,7 +155,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../../project/releases.html">v0.5.11</a> · <a href="../../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.12</a> · <a href="../../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>

@@ -25,10 +25,10 @@ Vault ids only. A vault key is the whole boundary: whoever holds it can read, wr
 
 | Vault | Made by | For | Key sealed to the root | Pushed |
 |---|---|---|---|---|
-| `feulxk1k` **sherpa-marketing** | sherpa@sharness, 25 Oct 2026 | the outreach plan's private half: the people to reach and how, the drafts awaiting Dinis's go, the calendar, the metrics log; the public half is [Outreach](../outreach/index.md) | 25 Oct 2026, 14-day link | not yet: a push needs the SG/Send access token (R10); the clone lives in the agent's session until then |
-| `l3wltj3z` **sherpa-telemetry** | sherpa@sharness, 25 Oct 2026 | the telemetry lane and its drain: the front-door key pair (`sha256:7d3b264abdeadb20`) inside the vault, `lane.json`, the drained events, the reports | 25 Oct 2026, 14-day link | not yet (R10); the lane is configured with the same token (T7) |
+| `feulxk1k` **sherpa-marketing** | sherpa@sharness, 25 Oct 2026 | the outreach plan's private half: the people to reach and how, the drafts awaiting Dinis's go, the calendar, the metrics log; the public half is [Outreach](../outreach/index.md) | 25 Oct 2026, 14-day link | 25 Oct 2026, 23:40 UTC |
+| `l3wltj3z` **sherpa-telemetry** | sherpa@sharness, 25 Oct 2026 | the telemetry lane and its drain: the front-door key pair (`sha256:7d3b264abdeadb20`) inside the vault, `lane.json`, the drained events, the reports | 25 Oct 2026, 14-day link | 25 Oct 2026, 23:40 UTC; the lane configured the same minute, first drain 23:45 UTC |
 
-Keys held by sherpa@sharness: the two vault keys above (its own), nothing else. It holds no access token, no key of Dinis's, no key of another agent's.
+Keys held by sherpa@sharness: the two vault keys above (its own), and the SG/Send access token Dinis gave it in session on 25 Oct 2026 (kept in the clones' local, uncommitted token file; never in a vault or a page). No key of Dinis's, no key of another agent's.
 
 ## What the agents need from Dinis
 
@@ -37,7 +37,7 @@ The board is [comms](../comms.html); the Sherpa's rule is that anything only the
 | # | Need | Unblocks |
 |---|---|---|
 | [R9](../comms.html#r9) | confirm sherpa@sharness: compare the fingerprint above with the one in the session, confirm it in the vault's Agents tab (a month suggested, the key being a lasting one), add the submission to the register | other agents trusting its signatures; sealing to it |
-| [R10](../comms.html#r10) | an SG/Send access token, sealed to `sha256:d45cb071877e6897`; and the two environment secrets stored for its next sessions | pushing both vaults; configuring the telemetry lane (T7); every later drain |
+| [R10](../comms.html#r10) | ~~an SG/Send access token~~ done 25 Oct 2026; still open: the two environment secrets (`PKI_AGENT_KEY`, `SG_SEND_PASSPHRASE`) stored for its next sessions, and the token with them | the same identity and the same vaults in the next session without a new handover |
 | [R11](../comms.html#r11) | a go per channel on the [outreach plan](../outreach/index.md), and who posts | the first posts |
 
 ## Rules the agents work by

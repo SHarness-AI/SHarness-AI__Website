@@ -131,7 +131,7 @@ Read from Ruflo's repository, ruv.io, the Agentics Foundation's pages and the pr
 
 | When | What | Depends on |
 |---|---|---|
-| **Week 0** (now) | **the CLI's `dev` released to `main` (R7)**, so `pip install sharness-ai` gives `hello`, not a version string; the repository ready (T8); the skill submitted (T9); the telemetry lane open so every later step is measured (T7); the sherpa key confirmed and the drafts in the vault read (R9, R10, R11) | Dinis: R7, R9, R10, R11 |
+| **Week 0** (now) | **the CLI's `dev` released to `main` (R7)**, so `pip install sharness-ai` gives `hello`, not a version string; the repository ready (T8); the skill submitted (T9); the telemetry lane open so every later step is measured (T7, **done 25 Oct 2026**); the sherpa key confirmed and the drafts in the vault read (R9, R10, R11) | Dinis: R7, R9, R10, R11 |
 | **Week 1** | home ground: Dinis's LinkedIn post on Linux in a tab; the articles imported into the newsroom (T11); the Ruflo Discussion; the playground once in the Agentics Discord | the go on 3.5, 3.6 |
 | **Week 2** | the Show HN of the playground (a weekday morning, US time); r/ClaudeAI three days later; the pull requests to the four lists | the repository ready; the lane open |
 | **Week 3** | the specialists: the Landlock people, the sandbox authors, Simon Willison, the newsletters, the sandbox-runtime issue, the OWASP ASI channel | the matrix checked once more |

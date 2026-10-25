@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.11</a>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.12</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -140,18 +140,18 @@
 <div class="tablewrap"><table>
 <thead><tr><th>Vault</th><th>Made by</th><th>For</th><th>Key sealed to the root</th><th>Pushed</th></tr></thead>
 <tbody>
-<tr><td><code>feulxk1k</code> <b>sherpa-marketing</b></td><td>sherpa@sharness, 25 Oct 2026</td><td>the outreach plan's private half: the people to reach and how, the drafts awaiting Dinis's go, the calendar, the metrics log; the public half is <a href="../outreach/index.html">Outreach</a></td><td>25 Oct 2026, 14-day link</td><td>not yet: a push needs the SG/Send access token (R10); the clone lives in the agent's session until then</td></tr>
-<tr><td><code>l3wltj3z</code> <b>sherpa-telemetry</b></td><td>sherpa@sharness, 25 Oct 2026</td><td>the telemetry lane and its drain: the front-door key pair (<code>sha256:7d3b264abdeadb20</code>) inside the vault, <code>lane.json</code>, the drained events, the reports</td><td>25 Oct 2026, 14-day link</td><td>not yet (R10); the lane is configured with the same token (T7)</td></tr>
+<tr><td><code>feulxk1k</code> <b>sherpa-marketing</b></td><td>sherpa@sharness, 25 Oct 2026</td><td>the outreach plan's private half: the people to reach and how, the drafts awaiting Dinis's go, the calendar, the metrics log; the public half is <a href="../outreach/index.html">Outreach</a></td><td>25 Oct 2026, 14-day link</td><td>25 Oct 2026, 23:40 UTC</td></tr>
+<tr><td><code>l3wltj3z</code> <b>sherpa-telemetry</b></td><td>sherpa@sharness, 25 Oct 2026</td><td>the telemetry lane and its drain: the front-door key pair (<code>sha256:7d3b264abdeadb20</code>) inside the vault, <code>lane.json</code>, the drained events, the reports</td><td>25 Oct 2026, 14-day link</td><td>25 Oct 2026, 23:40 UTC; the lane configured the same minute, first drain 23:45 UTC</td></tr>
 </tbody>
 </table></div>
-<p>Keys held by sherpa@sharness: the two vault keys above (its own), nothing else. It holds no access token, no key of Dinis's, no key of another agent's.</p>
+<p>Keys held by sherpa@sharness: the two vault keys above (its own), and the SG/Send access token Dinis gave it in session on 25 Oct 2026 (kept in the clones' local, uncommitted token file; never in a vault or a page). No key of Dinis's, no key of another agent's.</p>
 <h2 id="what-the-agents-need-from-dinis">What the agents need from Dinis</h2>
 <p>The board is <a href="../comms.html">comms</a>; the Sherpa's rule is that anything only the author can supply goes there at once, with what it unblocks.</p>
 <div class="tablewrap"><table>
 <thead><tr><th>#</th><th>Need</th><th>Unblocks</th></tr></thead>
 <tbody>
 <tr><td><a href="../comms.html#r9">R9</a></td><td>confirm sherpa@sharness: compare the fingerprint above with the one in the session, confirm it in the vault's Agents tab (a month suggested, the key being a lasting one), add the submission to the register</td><td>other agents trusting its signatures; sealing to it</td></tr>
-<tr><td><a href="../comms.html#r10">R10</a></td><td>an SG/Send access token, sealed to <code>sha256:d45cb071877e6897</code>; and the two environment secrets stored for its next sessions</td><td>pushing both vaults; configuring the telemetry lane (T7); every later drain</td></tr>
+<tr><td><a href="../comms.html#r10">R10</a></td><td>~~an SG/Send access token~~ done 25 Oct 2026; still open: the two environment secrets (<code>PKI_AGENT_KEY</code>, <code>SG_SEND_PASSPHRASE</code>) stored for its next sessions, and the token with them</td><td>the same identity and the same vaults in the next session without a new handover</td></tr>
 <tr><td><a href="../comms.html#r11">R11</a></td><td>a go per channel on the <a href="../outreach/index.html">outreach plan</a>, and who posts</td><td>the first posts</td></tr>
 </tbody>
 </table></div>
@@ -165,7 +165,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../../project/releases.html">v0.5.11</a> · <a href="../../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.12</a> · <a href="../../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>
