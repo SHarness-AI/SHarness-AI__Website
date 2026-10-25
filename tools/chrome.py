@@ -87,6 +87,9 @@ NAV = [
         ("Comms: tasks &amp; requests", "project/comms.html"),
         ("Release history", "project/releases.html"),
         ("Getting users: the review and the plan", "project/adoption/index.html"),
+        ("Outreach: finding the people it is for", "project/outreach/index.html"),
+        ("The agents and their keys", "project/agents/index.html"),
+        ("Telemetry: who reads this site", "project/telemetry/index.html"),
     ], ("project/",)),
 ]
 
@@ -134,6 +137,10 @@ FOOTER = [
         ("The source documents", "project/sources/index.html"),
         ("Engineering", "project/engineering.html"),
         ("Comms &amp; release history", "project/comms.html"),
+        ("Getting users", "project/adoption/index.html"),
+        ("Outreach", "project/outreach/index.html"),
+        ("The agents and their keys", "project/agents/index.html"),
+        ("Telemetry", "project/telemetry/index.html"),
         ("llms.txt", "llms.txt"),
         ("llms-full.txt", "llms-full.txt"),
         ("index.md", "index.md"),
@@ -176,6 +183,7 @@ def nav_html(rel, up):
             f'  <div class="nav-items">\n{rows}\n  </div>\n'
             f'  <a class="gh" href="{GH}">★ GitHub</a>\n'
             f'  <script src="{up}assets/nav.js" defer></script>\n'
+            f'  <script src="{up}assets/telemetry.js" data-root="{up}" defer></script>\n'
             f'</div></nav>')
 
 

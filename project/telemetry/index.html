@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Telemetry — SHarness</title>
+<meta name="description" content="Who reads this site: one anonymous event per page per session, encrypted in the browser to a key only the telemetry vault holds and written to a write-only lane; what is sent, what is never sent, what the counts are worth.">
+<link rel="canonical" href="https://sharness.ai/project/telemetry/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/project/telemetry/index.html">
+<meta property="og:title" content="Telemetry — SHarness">
+<meta property="og:description" content="Who reads this site: one anonymous event per page per session, encrypted in the browser to a key only the telemetry vault holds and written to a write-only lane; what is sent, what is never sent, what the counts are worth.">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.11</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../code/playground/index.html">Try it<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/playground/index.html">&#9679; The playground: type sharness-ai in your browser</a>
+      <a class="sl" href="../../code/browser/demo/index.html">A Linux kernel in a tab, running hello</a>
+      <a class="sl" href="../../index.html#start">Start in 60 seconds</a>
+      <a class="sl" href="../../evidence/machines/index.html">Help us measure it: report your machine</a>
+      <a class="sl" href="../../explain/mockups/policy-hash.html">Mockup: the policy hash</a>
+      <a class="sl" href="../../explain/mockups/edges.html">Mockup: the edge matrix</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../design/index.html">The design<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../design/index.html">&#9679; The brief: in one read</a>
+      <a class="sl" href="../../design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="../../design/architecture/index.html">Architecture</a>
+      <a class="sl" href="../../design/components/index.html">Components</a>
+      <a class="sl" href="../../design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../../design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../../design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="../../design/surface/index.html">What a process can do</a>
+      <a class="sl" href="../../design/containment/index.html">Containment</a>
+      <a class="sl" href="../../design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../code/index.html">The code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/index.html">&#9679; Where the code is</a>
+      <a class="sl" href="../../code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl" href="../../code/flows/index.html">Flows through the code</a>
+      <a class="sl" href="../../code/examples/index.html">Examples</a>
+      <a class="sl" href="../../code/browser/index.html">Linux in the browser</a>
+      <a class="sl" href="../../code/playground/index.html">Playground: run it in your browser</a>
+      <a class="sl" href="../../code/languages/index.html">Languages</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../evidence/index.html">&#9679; Measurements</a>
+      <a class="sl" href="../../evidence/status/index.html">What exists today</a>
+      <a class="sl" href="../../evidence/research/index.html">Research note</a>
+      <a class="sl" href="../../evidence/machines/index.html">hello on your machine: reported runs</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../landscape/index.html">Landscape<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../landscape/index.html">&#9679; Policies at the centre</a>
+      <a class="sl" href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+      <a class="sl" href="../../landscape/integrations/index.html">Integration points</a>
+      <a class="sl" href="../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+      <a class="sl" href="../../landscape/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../explain/index.html">Explain<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../explain/index.html">&#9679; Storyboards &amp; mockups</a>
+      <a class="sl" href="../../explain/storyboards/index.html">Storyboards</a>
+      <a class="sl" href="../../explain/mockups/policy-hash.html">Mockup: policy hash</a>
+      <a class="sl" href="../../explain/mockups/edges.html">Mockup: edge matrix</a>
+      <a class="sl" href="../../articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../project/index.html">&#9679; Project</a>
+      <a class="sl" href="../../project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="../../project/sources/index.html">The source documents</a>
+      <a class="sl" href="../../project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="../../project/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../project/releases.html">Release history</a>
+      <a class="sl" href="../../project/adoption/index.html">Getting users: the review and the plan</a>
+      <a class="sl" href="../../project/outreach/index.html">Outreach: finding the people it is for</a>
+      <a class="sl" href="../../project/agents/index.html">The agents and their keys</a>
+      <a class="sl here" href="../../project/telemetry/index.html">Telemetry: who reads this site</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__CLI">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+  <script src="../../assets/telemetry.js" data-root="../../" defer></script>
+</div></nav>
+
+<main class="doc">
+  <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">project</a> / telemetry · <a href="index.md">this page as markdown</a></div>
+  <h1>Telemetry: who reads this site</h1>
+<div class="note"><b>Status: built, waiting for the lane to be opened, <span class="asof">as of 25 Oct 2026</span>.</b> Every page of sharness.ai carries <code>assets/telemetry.js</code> since v0.5.11. It sends one anonymous event per page per session to a write-only lane on a private vault, encrypted in your browser before it leaves. The lane accepts events once its sender token is registered with the server, which needs an access token only Dinis Cruz holds (<a href="../comms.html#r10">comms R10</a>); until then every event is refused and nothing is kept anywhere. No counts have been published yet.</div>
+<h2 id="what-every-page-sends">What every page sends</h2>
+<p>One event, encrypted in your browser to the key below, written to a lane that can only be appended to:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Field</th><th>What</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td><code>path</code>, <code>ref</code></td><td>the page, and the referrer's host (never the full referrer)</td><td>which pages are read; where readers come from (a Show HN, a LinkedIn post, a newsletter)</td></tr>
+<tr><td><code>country</code>, <code>region</code>, <code>city</code></td><td>from a geolocation lookup your browser makes itself</td><td>where the readers are; the city and the region stay in the private vault</td></tr>
+<tr><td><code>lang</code>, <code>screen</code>, <code>tz</code></td><td>language, phone or tablet or desktop, time zone</td><td>which devices, and a hint for telling automated browsers from people</td></tr>
+<tr><td><code>sid</code></td><td>a random id made in the tab, kept in session storage</td><td>one event per page per session; sessions, not visitors</td></tr>
+<tr><td><code>ver</code>, <code>ts</code></td><td>the site version and the minute</td><td>which release was read, when</td></tr>
+<tr><td><code>agent</code></td><td>automation, by class only: a crawler's name, <code>webdriver</code>, <code>headless</code></td><td>so crawlers and the site's own checks are counted apart from readers</td></tr>
+<tr><td><code>who</code></td><td><code>editor</code> or <code>team</code>, if this browser set it for itself (below)</td><td>so the team's own reading is counted apart from readers</td></tr>
+</tbody>
+</table></div>
+<p><b>Never sent, never stored by this site:</b> an IP address, a cookie, a name, a user-agent string, the page's full referrer URL. This site has no server of its own: there are no web server logs. The one party that sees your IP address is the geolocation service your browser asks (<code>ipapi.co</code>, then <code>ipwho.is</code> if the first does not answer), as with any request your browser makes; the event keeps three place names and nothing else. The vault server sees that a lane received something, its size and the time, and the requesting IP, as any server does.</p>
+<p><b>Do Not Track and Global Privacy Control are honoured:</b> with either set, your browser sends nothing, not even the location request. The script never blocks the page and fails silently.</p>
+<h2 id="the-credential-published-on-purpose">The credential, published on purpose</h2>
+<p>The write-only credential and the public key the event is encrypted to are in <a href="../../data/telemetry.json"><code>data/telemetry.json</code></a>: the lane is vault <code>l3wltj3z</code> on <code>https://dev.send.sgraph.ai</code>; the recipient key is <code>sha256:7d3b264abdeadb20</code>. A write-only token can add rows and nothing else: it cannot list, read or delete. Only the holder of the telemetry vault's key can list the lane and decrypt what arrived; the enum key and the key pair's passphrase are derived from the vault key and never stored (<a href="../../tools/telemetry_postmaster.py"><code>tools/telemetry_postmaster.py</code></a>, the newsroom's convention).</p>
+<h2 id="who-is-who">Who is who</h2>
+<p>Not everyone who opens a page is a reader. Each session is put in one of three groups when the counts are made: <b>readers</b>; <b>the editor and the team</b>; <b>automation</b> (crawlers, the site's own headless checks). Automation declares itself by class; the team declares itself by opening any page of this site with <code>#who=editor</code> or <code>#who=team</code> once in a browser (kept in that browser only; <code>#who=reader</code> undoes it). Everything else is a reader. Every event is an untrusted claim: the token and the key are public, so rows can be forged or flooded (1000 pending per token, then the lane returns 507); readers with blockers do not appear. The counts are a floor.</p>
+<h2 id="what-will-be-published">What will be published</h2>
+<p>Counts only, by day and by hour at the finest, over readers: pages, referrer hosts, countries, devices, languages, versions. No row, no session id, no city, no region. The drain (<a href="../../tools/telemetry_drain.py"><code>tools/telemetry_drain.py</code></a>), run by whoever holds the vault key, writes the report into the vault and its public part to <code>data/telemetry-report.json</code>, which this page will carry once there is one. The first thing the counts are for is the <a href="../outreach/index.html">outreach plan</a>: which channel brought readers, and whether they read past the front page.</p>
+<h2 id="not-applied-yet">Not applied yet</h2>
+<ul>
+<li>A Content-Security-Policy on every page allowing exactly the two location services and the vault server, as the newsroom has. The playground and the Linux-in-a-browser demo load from their own folders and would need their own policy; proposed, not done.</li>
+<li>The report rendered on this page from <code>data/telemetry-report.json</code>; the first drain will show what shape it should take.</li>
+<li>Playground events (a run finished, how many checks passed), which would make the <a href="../../code/playground/index.html">playground</a> measurable; proposed.</li>
+</ul>
+<p>Decided by sherpa@sharness, 25 Oct 2026, following the newsroom's <a href="https://php.oct.2026.newsroom.sgit.ai/admin/telemetry/index.html">telemetry page</a> and the brief <a href="https://sgit.ai/docs/briefs/vault-telemetry-append-lanes.html">Vault telemetry over append lanes</a>; for Dinis Cruz to confirm or change (<a href="../comms.html#r11">comms R11</a>).</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.11</a> · <a href="../../project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The design</h4>
+    <a href="../../design/index.html">The brief: in one read</a>
+    <a href="../../design/why/index.html">Why: the last metre</a>
+    <a href="../../design/architecture/index.html">Architecture</a>
+    <a href="../../design/components/index.html">Components</a>
+    <a href="../../design/keys/index.html">Keys and the KMS</a>
+    <a href="../../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../../design/agents/index.html">Agents and LLMs</a>
+    <a href="../../design/process-tree/index.html">Enforcing the process tree</a>
+    <a href="../../design/surface/index.html">What a process can do</a>
+    <a href="../../design/containment/index.html">Containment</a>
+    <a href="../../design/spectrum/index.html">The spectrum</a>
+    <a href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+  </div>
+  <div>
+    <h4>The code</h4>
+    <a href="../../code/index.html">Where the code is</a>
+    <a href="../../code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../../code/flows/index.html">Flows through the code</a>
+    <a href="../../code/examples/index.html">Examples</a>
+    <a href="../../code/browser/index.html">Linux in the browser</a>
+    <a href="../../code/languages/index.html">Languages</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
+  </div>
+  <div>
+    <h4>Evidence, landscape, explain</h4>
+    <a href="../../evidence/index.html">Measurements</a>
+    <a href="../../evidence/status/index.html">What exists today</a>
+    <a href="../../evidence/research/index.html">Research note</a>
+    <a href="../../evidence/machines/index.html">hello on your machine</a>
+    <a href="../../landscape/index.html">Landscape: policies at the centre</a>
+    <a href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+    <a href="../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+    <a href="../../landscape/market/index.html">Market &amp; competitors</a>
+    <a href="../../explain/storyboards/index.html">Storyboards</a>
+    <a href="../../explain/index.html">Mockups</a>
+    <a href="../../articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Project &amp; agents</h4>
+    <a href="../../project/about/index.html">About &amp; naming</a>
+    <a href="../../project/sources/index.html">The source documents</a>
+    <a href="../../project/engineering.html">Engineering</a>
+    <a href="../../project/comms.html">Comms &amp; release history</a>
+    <a href="../../project/adoption/index.html">Getting users</a>
+    <a href="../../project/outreach/index.html">Outreach</a>
+    <a href="../../project/agents/index.html">The agents and their keys</a>
+    <a href="../../project/telemetry/index.html">Telemetry</a>
+    <a href="../../llms.txt">llms.txt</a>
+    <a href="../../llms-full.txt">llms-full.txt</a>
+    <a href="../../index.md">index.md</a>
+    <a href="../../sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

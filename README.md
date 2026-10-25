@@ -22,8 +22,9 @@ is the source of every page that has a twin; the HTML beside it is generated and
 | `evidence/` | measurements (the index), status, the research note, the market analysis | same |
 | `explain/` | the hub, `storyboards/` (generated from `content/storyboards/`), `mockups/` (hand-written HTML) | `content/storyboards/` and the mockups' HTML |
 | `articles/` | the articles in the newsroom's format, generated from `content/articles/`, and their lead figures | `content/articles/` |
-| `project/` | about, `sources/` (the design pack and memos, verbatim), `engineering.html`, `comms.html`, `releases.html` | hand-written; the pack is never edited |
-| `assets/` | `site.css`, `nav.js`, `images/` | |
+| `project/` | about, `sources/` (the design pack and memos, verbatim), `agents/`, `outreach/`, `telemetry/`, `engineering.html`, `comms.html`, `releases.html` | markdown pages rendered by `tools/gen_pages.py`; the three HTML pages hand-written; the pack is never edited |
+| `data/` | `telemetry.json`: the telemetry lane's write-only credential and public key (publishable by design); `telemetry-report.json` once the first drain runs | written by `tools/telemetry_postmaster.py` and `tools/telemetry_drain.py` |
+| `assets/` | `site.css`, `nav.js`, `telemetry.js` (one anonymous event per page, see `/project/telemetry/`), `images/` | |
 | `content/` | the sources the generators read: `articles/`, `storyboards/` | |
 | `tools/` | `version.txt` (owns the version), `chrome.py` (nav, footer, badge), the generators, `validate.js` and `validate_storyboards.cjs` (the gate) | |
 | root | `index.html` and `index.md`, `404.html` (maps the pre-v0.5.2 addresses to the new ones), `llms.txt`, `llms-full.txt`, `sitemap.xml`, `robots.txt`, `CNAME` | |
