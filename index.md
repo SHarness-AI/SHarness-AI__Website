@@ -6,7 +6,7 @@
 > process started. Today: a CLI that enforces a policy on one process, a kernel that boots in your
 > browser to prove it, and a design for the launcher that binds the agent itself.
 
-*Source: <https://sharness.ai/index.html> · site v0.5.16 · markdown twin of the front page.*
+*Source: <https://sharness.ai/index.html> · site v0.5.17 · markdown twin of the front page.*
 *Status: **experiments**. No SHarness component is built; every measured figure carries its date.*
 
 ## Start in 60 seconds
@@ -64,7 +64,7 @@ The memo's method is to start with very simple examples. [Mockups and experiment
 
 ## The site, in five sections (every page also as markdown at `<page>/index.md`)
 
-- **The design:** [the brief, read first](design/index.md) · [Why](design/why/index.md) · [Architecture](design/architecture/index.md) · [Components](design/components/index.md) · [Keys and the KMS](design/keys/index.md) · [Policies](design/policies/index.md) · [Agents and LLMs](design/agents/index.md) · [The process tree](design/process-tree/index.md) · [What a process can do](design/surface/index.md) · [Containment](design/containment/index.md) · [The spectrum](design/spectrum/index.md) · [Roadmap](design/roadmap/index.md)
+- **The design:** [the brief, read first](design/index.md) · [Why](design/why/index.md) · [Architecture](design/architecture/index.md) · [Components](design/components/index.md) · [Keys and the KMS](design/keys/index.md) · [Policies](design/policies/index.md) · [The PBP on one page](design/pbp/index.md) · [Agents and LLMs](design/agents/index.md) · [The process tree](design/process-tree/index.md) · [What a process can do](design/surface/index.md) · [Containment](design/containment/index.md) · [The spectrum](design/spectrum/index.md) · [Roadmap](design/roadmap/index.md)
 - **The code:** [where it is](code/index.md) · [The CLI](code/cli/index.md) · [Mockups and experiments](code/experiments/index.md) · [Flows](code/flows/index.md) · [Examples](code/examples/index.md) · [Linux in the browser](code/browser/index.md) · [Languages](code/languages/index.md)
 - **Evidence:** [Measurements](evidence/index.md) · [What exists today](evidence/status/index.md) · [Research note](evidence/research/index.md) · [hello on your machine](evidence/machines/index.md)
 - **The landscape:** [Policies at the centre](landscape/index.md) · [Enforceability](landscape/enforceability/index.md) · [Integration points](landscape/integrations/index.md) · [Ruflo and ruv.sgit](landscape/ruflo/index.md) · [Market and competitors](landscape/market/index.md)

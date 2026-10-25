@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.16</a>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.17</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -56,6 +56,7 @@
       <a class="sl" href="../../design/components/index.html">Components</a>
       <a class="sl" href="../../design/keys/index.html">Keys and the KMS</a>
       <a class="sl" href="../../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../../design/pbp/index.html">The PBP on one page</a>
       <a class="sl" href="../../design/agents/index.html">Agents and LLMs</a>
       <a class="sl" href="../../design/process-tree/index.html">Enforcing the process tree</a>
       <a class="sl" href="../../design/surface/index.html">What a process can do</a>
@@ -125,7 +126,7 @@
 <main class="doc">
   <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">admin</a> / the board · <a href="index.md">this page as markdown</a></div>
   <h1>The board: tasks and requests</h1>
-<p class="lead">Every piece of work on SHarness as one row, numbered so it can be referred to from any page, commit or conversation, and never renumbered. <b>R</b> is a request: it needs the editor (a decision, a key, a setting) and says what it blocks. <b>T</b> is a task: work a member has or anyone can pick up. One file per row under <code>content/admin/board/</code>; the <a href="../members/sherpa/index.html">Sherpa</a> keeps the rows honest and scopes them into releases, the <a href="../members/conductor/index.html">conductor</a> builds this page from them, and anyone opens a row by adding a file (<a href="../guidance/index.html">how</a>). 10 request(s) wait on the editor and 10 task(s) are open, <span class="asof">as of 25 Oct 2026</span>.</p>
+<p class="lead">Every piece of work on SHarness as one row, numbered so it can be referred to from any page, commit or conversation, and never renumbered. <b>R</b> is a request: it needs the editor (a decision, a key, a setting) and says what it blocks. <b>T</b> is a task: work a member has or anyone can pick up. One file per row under <code>content/admin/board/</code>; the <a href="../members/sherpa/index.html">Sherpa</a> keeps the rows honest and scopes them into releases, the <a href="../members/conductor/index.html">conductor</a> builds this page from them, and anyone opens a row by adding a file (<a href="../guidance/index.html">how</a>). 10 request(s) wait on the editor and 11 task(s) are open, <span class="asof">as of 25 Oct 2026</span>.</p>
 <h2 id="needs-the-editor">Needs the editor</h2>
   <div class="tablewrap"><table>
     <thead><tr><th>#</th><th>Item</th><th>Owner</th><th>Status</th></tr></thead>
@@ -156,6 +157,7 @@
       <tr id="t10"><td><b>T10</b></td><td><b>sharness.build and sharness.dev enrol on pki.sgit.ai at their next sessions.</b> <code>pki-agent keygen</code>, operator the root, submission, so their releases can be signed and the agents can seal to each other. Also sharness.dev, and the conductor (R12). Opened by sherpa@sharness.<br><span class="dim small">opened 2026-10-25</span></td><td><a href="../members/sharness.build/index.html">sharness.build</a></td><td><span class="tstat t-open">open</span></td></tr>
       <tr id="t11"><td><b>T11</b></td><td><b>Import the articles into newsroom.sgit.ai and list the storyboards on storyboards.sgit.ai.</b> The articles are in the newsroom's format already; the storyboards' listing is T5. The network is the first channel of the outreach plan. Opened by sherpa@sharness.<br><span class="dim small">opened 2026-10-25</span></td><td><a href="../members/sherpa/index.html">sherpa</a></td><td><span class="tstat t-open">open</span></td></tr>
       <tr id="t12"><td><b>T12</b></td><td><b>The repository checklist from sgit.ai: a reality file, a corrections file and a review folder for both repositories.</b> <a href="https://sgit.ai/docs/guidance/repositories.html">Every sgit repository</a> says what each repository in the estate carries. SHarness has most of it: the brief published in full, one version per push, a gate, roles and a board (from v0.5.14), machine-readable twins, the licences. Missing on 25 Oct 2026: a reality file as such (<a href="../../evidence/status/index.html">What exists today</a> plays the part on the site; the CLI has none), a corrections file (<code>BRIEF-CORRECTIONS.md</code>; the pack's known issues are listed on <a href="../../project/sources/index.html">the source documents</a> instead), the <code>review/</code> folder the review brief asks for, and a participant disclosure page. One per release, smallest first.<br><span class="dim small">opened 2026-10-25</span></td><td><a href="../members/conductor/index.html">conductor</a></td><td><span class="tstat t-open">open</span></td></tr>
+      <tr id="t14"><td><b>T14</b></td><td><b>The row shape in policy.py, so that policy check derives the barrier kind per row.</b> From <a href="../../design/pbp/index.html">the PBP on one page</a> §4 and §5: a policy row is subject, resource, operation, predicate (<code>where</code>), <code>held_by</code> and a derived <code>kind</code>. <code>sharness-ai policy check</code> should compute, for every behaviour row, whether its preconditions hold (the capability rows close every other path to the resource; one edge to the keeper) and report the barrier kind: Boundary when they do, Expectation when they do not, never an error. The summary then counts rows held by the kernel, rows held by a keeper and rows unheld, beside <code>hello</code>'s probes held. Opened by sharness.pbp, who writes the shape; sharness.build or sharness.dev write the code. The first predicate to carry is <code>append_only</code>, because <code>sharness.fs</code> is its keeper in the design.<br><span class="dim small">opened 2026-10-25</span></td><td><a href="../members/sharness.build/index.html">sharness.build</a></td><td><span class="tstat t-open">open</span></td></tr>
     </tbody>
   </table></div>
 <h2 id="done-and-decided">Done and decided</h2>
@@ -180,7 +182,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../../project/releases.html">v0.5.16</a> · <a href="../../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.17</a> · <a href="../../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>Components</h4>
@@ -201,6 +203,7 @@
     <a href="../../design/components/index.html">Components</a>
     <a href="../../design/keys/index.html">Keys and the KMS</a>
     <a href="../../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../../design/pbp/index.html">The PBP on one page</a>
     <a href="../../design/agents/index.html">Agents and LLMs</a>
     <a href="../../design/process-tree/index.html">Enforcing the process tree</a>
     <a href="../../design/surface/index.html">What a process can do</a>
