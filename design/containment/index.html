@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.2</a>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.3</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -107,7 +107,7 @@
 <tr><td>syscalls</td><td>a seccomp-BPF allowlist of the 30 to 40 it actually uses; <code>ptrace</code>, <code>mount</code>, <code>bpf</code>, <code>keyctl</code>, <code>unshare</code>, <code>io_uring</code>, <code>userfaultfd</code> denied</td><td>the kernel's attack surface, shrunk to what the job needs</td></tr>
 </tbody>
 </table></div>
-<p>Measured so far: Landlock files and ports, the empty network namespace, <code>RLIMIT_NPROC</code>, uid and capability dropping, <code>no_new_privs</code>, the freezer, <code>memfd_secret</code> against root. Not yet: the memory and pids cgroups applied by the CLI, seccomp, Landlock scoping, the execute allowlist. The memory cap is the next row to move from designed to measured; it is a few lines in <code>sharness-ai run</code> (an <code>RLIMIT_AS</code>, and a cgroup for the child before <code>exec</code>).</p>
+<p>Measured so far: Landlock files and ports, the empty network namespace, uid and capability dropping, <code>no_new_privs</code>, the freezer, <code>memfd_secret</code> against root, and, since 25 Oct 2026, the memory and process-count caps applied by <code>sharness-ai run</code> (<code>RLIMIT_AS</code>, <code>RLIMIT_NPROC</code>, a memory and a pids cgroup; a 400 MiB allocation under a 128 MiB cap raises <code>MemoryError</code>, the fifth fork under <code>max_pids: 4</code> fails; <a href="../../evidence/index.html#9-the-first-experiments-run-by-the-cli">Evidence §9</a>). Not yet: the <code>cpu</code> cgroup, seccomp, Landlock scoping, the execute allowlist.</p>
 <h2 id="2-with-malicious-code-inside-by-threat-class">2. With malicious code inside, by threat class</h2>
 <div class="tablewrap"><table>
 <thead><tr><th>The code inside tries to</th><th>Comfort</th><th>Why</th></tr></thead>
@@ -152,7 +152,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../../project/releases.html">v0.5.2</a> · <a href="../../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.3</a> · <a href="../../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>

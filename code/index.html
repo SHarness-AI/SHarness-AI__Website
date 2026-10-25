@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.2</a>
+  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.3</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -98,7 +98,7 @@
 <tr><td>the experiments, numbered</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md"><code>experiments/README.md</code></a></td><td>E01 to E04 runnable; E05 to E08 planned</td></tr>
 <tr><td>the example policies</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/experiments/policies"><code>experiments/policies/</code></a></td><td>runnable</td></tr>
 <tr><td>the skill for a Claude Code session</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/.claude/skills/sharness-hello/SKILL.md"><code>.claude/skills/sharness-hello/SKILL.md</code></a></td><td>runnable</td></tr>
-<tr><td>the tests</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/tests/unit"><code>tests/unit/</code></a>, 29 tests; Landlock tests skip where it is absent</td><td>green on 25 Oct 2026</td></tr>
+<tr><td>the tests</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/tests/unit"><code>tests/unit/</code></a>, 34 tests; Landlock tests skip where it is absent</td><td>green on 25 Oct 2026</td></tr>
 <tr><td>the ground rules for agents working in the repository</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/CLAUDE.md"><code>CLAUDE.md</code></a></td><td></td></tr>
 <tr><td>the release pipeline</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/.github/workflows/workflow.yml"><code>.github/workflows/workflow.yml</code></a>: tests, version bump, tag, PyPI by Trusted Publishing</td><td>runs on a push to <code>main</code></td></tr>
 <tr><td>the browser mockups</td><td>this site, <a href="https://github.com/SHarness-AI/SHarness-AI__Website/tree/dev/explain/mockups"><code>explain/mockups/</code></a>: hand-written HTML, no build</td><td>published</td></tr>
@@ -115,8 +115,9 @@
 <tr><td><code>probe.py</code></td><td>138</td><td>the grant: reads <code>/proc/self/status</code>, the Landlock ABI, <code>memfd_secret</code>, the namespaces, cgroups, the kernel config, the tools present, the names of proxy variables</td><td>E01</td></tr>
 <tr><td><code>policy.py</code></td><td>116</td><td>a v0 policy: load, check the shape, canonicalise (sorted keys, no whitespace, integers only), hash</td><td>E02</td></tr>
 <tr><td><code>landlock.py</code></td><td>157</td><td>Landlock through <code>ctypes</code>: the ABI, a ruleset, path rules, port rules, <code>restrict_self</code></td><td>E03</td></tr>
-<tr><td><code>run.py</code></td><td>133</td><td>fork, apply the policy in the child (network namespace, <code>no_new_privs</code>, Landlock), exec; <code>--expect-hash</code></td><td>E03</td></tr>
-<tr><td><code>hello.py</code></td><td>118</td><td>the acceptance test: a deny-all policy for the running interpreter, five probes, the caveat</td><td>E04</td></tr>
+<tr><td><code>run.py</code></td><td>133</td><td>fork, apply the policy in the child (network namespace, caps, <code>no_new_privs</code>, Landlock), exec; <code>--expect-hash</code></td><td>E03</td></tr>
+<tr><td><code>limits.py</code></td><td>95</td><td>the caps: <code>RLIMIT_AS</code> and <code>RLIMIT_NPROC</code>, and a memory and pids cgroup (v1 or v2) where <code>/sys/fs/cgroup</code> is writable</td><td>E03</td></tr>
+<tr><td><code>hello.py</code></td><td>124</td><td>the acceptance test: a deny-all policy for the running interpreter with a 128 MiB cap, six probes, the caveat</td><td>E04</td></tr>
 <tr><td><code>_version.py</code></td><td>17</td><td>the version, read from the file CI maintains</td><td></td></tr>
 </tbody>
 </table></div>
@@ -137,11 +138,12 @@ sharness-ai hello [--json]                                E04  the acceptance te
 <tr><td>the memo's acceptance test</td><td>yes, for one child process</td><td><code>hello.py</code></td></tr>
 <tr><td>the launcher, <code>sharness.kms</code>, <code>.net</code>, <code>.fs</code>, <code>.bash</code>, <code>.llm</code></td><td><b>no</b></td><td>designed on <a href="../design/components/index.html">Components</a>; E05 to E08 are the next pieces</td></tr>
 <tr><td>mutual TLS with a session CA; the edge matrix</td><td>measured by hand, not yet a command</td><td>E05</td></tr>
-<tr><td>seccomp, cgroups, scoping, the execute allowlist</td><td><b>no</b></td><td><a href="../design/containment/index.html">Containment</a> says which rows are designed</td></tr>
+<tr><td>memory and process-count caps (rlimits and cgroups)</td><td>yes</td><td><code>limits.py</code>, measured 25 Oct 2026</td></tr>
+<tr><td>seccomp, the <code>cpu</code> cgroup, scoping, the execute allowlist</td><td><b>no</b></td><td><a href="../design/containment/index.html">Containment</a> says which rows are designed</td></tr>
 </tbody>
 </table></div>
 <h2 id="next-in-the-code-in-order">Next in the code, in order</h2>
-<p>The <a href="../evidence/research/index.html#4-what-is-still-open-in-the-order-to-take-it">research note</a> sets the order: the memory and pids caps in <code>run</code> (one row of <a href="../design/containment/index.html">Containment</a> moves to measured), then E06 (the process tree), E05 (the edges as a script), E08 (<code>sharness.kms</code> v0) before E07 (<code>sharness.llm</code> v0), then the launcher as a script above the agent on a laptop. The languages for each are on <a href="languages/index.html">Languages</a>.</p>
+<p>The <a href="../evidence/research/index.html#4-what-is-still-open-in-the-order-to-take-it">research note</a> sets the order: E06 (the process tree), E05 (the edges as a script), E08 (<code>sharness.kms</code> v0) before E07 (<code>sharness.llm</code> v0), then the launcher as a script above the agent on a laptop. The languages for each are on <a href="languages/index.html">Languages</a>.</p>
 </main>
 
 <footer class="site"><div class="cols">
@@ -150,7 +152,7 @@ sharness-ai hello [--json]                                E04  the acceptance te
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../project/releases.html">v0.5.2</a> · <a href="../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../project/releases.html">v0.5.3</a> · <a href="../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>

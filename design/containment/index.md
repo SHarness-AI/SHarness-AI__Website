@@ -19,7 +19,7 @@ Yes. Every component is an ordinary Linux process, and Linux already has a bound
 | devices and mounts | no device nodes; a mount namespace; `mount` denied | |
 | syscalls | a seccomp-BPF allowlist of the 30 to 40 it actually uses; `ptrace`, `mount`, `bpf`, `keyctl`, `unshare`, `io_uring`, `userfaultfd` denied | the kernel's attack surface, shrunk to what the job needs |
 
-Measured so far: Landlock files and ports, the empty network namespace, `RLIMIT_NPROC`, uid and capability dropping, `no_new_privs`, the freezer, `memfd_secret` against root. Not yet: the memory and pids cgroups applied by the CLI, seccomp, Landlock scoping, the execute allowlist. The memory cap is the next row to move from designed to measured; it is a few lines in `sharness-ai run` (an `RLIMIT_AS`, and a cgroup for the child before `exec`).
+Measured so far: Landlock files and ports, the empty network namespace, uid and capability dropping, `no_new_privs`, the freezer, `memfd_secret` against root, and, since 25 Oct 2026, the memory and process-count caps applied by `sharness-ai run` (`RLIMIT_AS`, `RLIMIT_NPROC`, a memory and a pids cgroup; a 400 MiB allocation under a 128 MiB cap raises `MemoryError`, the fifth fork under `max_pids: 4` fails; [Evidence §9](../../evidence/index.md#9-the-first-experiments-run-by-the-cli)). Not yet: the `cpu` cgroup, seccomp, Landlock scoping, the execute allowlist.
 
 ## 2. With malicious code inside, by threat class
 

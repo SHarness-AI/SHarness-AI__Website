@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.2</a>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.3</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -107,12 +107,14 @@
    ▼
  run.run: os.fork()
    │
-   ├─ parent: waitpid(child) → the child's exit code
+   ├─ parent: waitpid(child) → the child's exit code; removes the child's cgroup
    │
    └─ child: run.apply(policy)
         1. network "none"  → run._unshare_net():  unshare(CLONE_NEWNET)
                                EPERM? → unshare(CLONE_NEWUSER | CLONE_NEWNET)
                                still refused? → rely on Landlock TCP rules (UDP uncovered)
+        1b. caps (process.max_memory_mb, max_pids): limits.cgroup() makes a memory and pids cgroup
+                               for this pid where /sys/fs/cgroup is writable; limits.rlimits() sets RLIMIT_AS, RLIMIT_NPROC
         2. landlock.Ruleset(): landlock_create_ruleset(2) with every fs right the ABI knows,
                                + bind/connect TCP (ABI 4+), + signal/abstract-socket scoping (ABI 6+)
         3. for each path:     landlock_add_rule(2) PATH_BENEATH with O_PATH fd and the rights:
@@ -138,7 +140,7 @@
    │
    ▼
  write the policy to a temporary file
- for each probe (read, write-tmp, write-cwd, net):
+ for each probe (read, write-tmp, write-cwd, net, memory):
      subprocess: python -m sharness_ai run --policy &lt;tmp&gt; -- python -I -c &lt;probe&gt;     ← the flow above, end to end
      hello._classify(): "allowed" if the probe printed ok; "refused (…)" on PermissionError / OSError
  one more:  run … --expect-hash sha256:000… → must be refused with "Nothing ran" (exit 125)
@@ -180,7 +182,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../../project/releases.html">v0.5.2</a> · <a href="../../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.3</a> · <a href="../../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>

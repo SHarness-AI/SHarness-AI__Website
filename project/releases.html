@@ -19,7 +19,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.2</a>
+  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.3</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -91,6 +91,7 @@
   <div class="tablewrap"><table class="vers">
     <thead><tr><th>Version</th><th>Date</th><th>What changed</th></tr></thead>
     <tbody>
+      <tr><td class="vnum">v0.5.3</td><td>25 Oct 2026</td><td>Memory and process-count caps measured: <code>sharness-ai run</code> applies <code>process.max_memory_mb</code> and <code>max_pids</code> as rlimits and cgroups, <code>hello</code> runs a sixth probe under a 128 MiB cap (6 of 6 held); the rows move from designed to measured on <a href="../design/containment/index.html">Containment</a>, <a href="../evidence/index.html#9-the-first-experiments-run-by-the-cli">Evidence §9</a>, <a href="../code/index.html">The code</a>, <a href="../code/flows/index.html">Flows</a> and <a href="../code/examples/index.html">Examples</a>. The 404 page's links made absolute.</td></tr>
       <tr><td class="vnum">v0.5.2</td><td>25 Oct 2026</td><td>The site restructured into five sections, each with a hub: <a href="../design/index.html">design</a> (the brief is its index), <a href="../code/index.html">code</a>, <a href="../evidence/index.html">evidence</a>, <a href="../explain/index.html">explain</a> and <a href="../project/about/index.html">project</a>; sources under <code>content/</code>, tools under <code>tools/</code>, nine folders at the root instead of twenty-four; <code>404.html</code> sends every old address to its new one. New pages: <a href="../design/containment/index.html">Containment</a> (can every process be constrained, how far hostile code is held, by threat class), <a href="../code/index.html">The code</a> (where everything is, module by module), <a href="../code/flows/index.html">Flows</a> (what happens when <code>run</code> and <code>hello</code> run, and what the launcher adds), <a href="../code/examples/index.html">Examples</a> (every command with its output), <a href="../code/languages/index.html">Languages</a> (Python first; Rust for the KMS and the bash client; roadmap decision 11), <a href="../explain/index.html">Explain</a>; the status page as markdown.</td></tr>
       <tr><td class="vnum">v0.5.1</td><td>24 Oct 2026</td><td><a href="../design/index.html">The brief</a>: SHarness in one read, with four drawn diagrams (the moving parts, one request end to end, the whole surface of a process, the spectrum). <a href="../design/surface/index.html">What a process can do</a>: the whole surface, one row per interface, what bounds it, what was measured, what is not covered: a virtual operating system for one process. <a href="../design/spectrum/index.html">The spectrum</a>: five profiles from a hello world to sgit and the compatibility map for sgit's next version, with two sgit commands measured under a v0 policy. The versioning rule: a push to <code>dev</code> is a patch release, a merge to <code>main</code> a minor one, enforced by CI.</td></tr>
       <tr><td class="vnum">v0.5.0</td><td>24 Oct 2026</td><td><a href="../evidence/market/index.html">Market and competitive analysis</a>: what exists that does part of what SHarness is designed to do (sandboxes and runtimes, guardrails, MCP and tool security, LLM gateways, secrets and identity, enterprise platforms, standards), every row sourced and dated, five rows re-checked on their primary pages; where SHarness sits, what to reuse, direct competitors and complements, honest gaps, market signals with numbers, and the threats to the thesis.</td></tr>
@@ -111,7 +112,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../project/releases.html">v0.5.2</a> · <a href="../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../project/releases.html">v0.5.3</a> · <a href="../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>

@@ -202,6 +202,8 @@ def main():
             continue
         rel = path.relative_to(ROOT).as_posix()
         up = "../" * (len(path.relative_to(ROOT).parts) - 1)
+        if rel == "404.html":
+            up = "/"                     # served at any missing address, so its links must be absolute
         text = path.read_text()
         before = text
         text, n_nav = re.subn(r'<nav class="site">.*?</nav>', lambda _: nav_html(rel, up),

@@ -178,6 +178,17 @@ Run on 24 October 2026 in a second Claude Code cloud session (as of 24 Oct 2026)
 
 Policy hash `sha256:ad37e58bea6f4da65656687045b33ae9977caf90feef0ff5716a44db041b35af` (the `hello` policy generated for that interpreter; the paths include the workspace, so the hash differs per machine). 5 of 5 held; the whole run took 0.6 s. Under E03 with the `allow-https-example` policy, a connect to `1.1.1.1:443` succeeded and one to port 80 was refused.
 
+**Caps, measured 25 Oct 2026** (as of 25 Oct 2026, the same kind of session; cgroups v1 with a unified mount). `process.max_memory_mb` and `process.max_pids` in a v0 policy are applied by `sharness-ai run` as `RLIMIT_AS` and `RLIMIT_NPROC` on the child plus a memory and a pids cgroup under `/sys/fs/cgroup/memory/sharness-ai/<pid>` and `/sys/fs/cgroup/pids/sharness-ai/<pid>`, removed by the parent afterwards:
+
+| Probe | Policy says | Result |
+|---|---|---|
+| `bytearray(400 << 20)` under `max_memory_mb: 128` (E04, `hello`, now 6 probes) | refused | `MemoryError` (the rlimit fires first; the cgroup would OOM-kill) |
+| `bytearray(8 << 20)` under the same cap | allowed | allowed |
+| the fifth background process under `max_pids: 4` | refused | `Cannot fork` from the shell |
+| cgroup left behind after the run | none | none (the per-pid directories and the empty parent are removed) |
+
+`hello` with the memory probe: 6 of 6 held. Not yet: the `cpu` cgroup, `max_runtime_s`, seccomp.
+
 **What this does not show.** The policy was applied by the session to its own children. It is a Boundary for them and a Setting for the session (the same root process that could have skipped it). It says nothing about seccomp, uids, cgroups, mutual TLS or the process tree, none of which the experiments touch yet.
 
 ## Documented, not yet exercised

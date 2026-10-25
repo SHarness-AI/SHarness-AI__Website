@@ -21,12 +21,14 @@
    ▼
  run.run: os.fork()
    │
-   ├─ parent: waitpid(child) → the child's exit code
+   ├─ parent: waitpid(child) → the child's exit code; removes the child's cgroup
    │
    └─ child: run.apply(policy)
         1. network "none"  → run._unshare_net():  unshare(CLONE_NEWNET)
                                EPERM? → unshare(CLONE_NEWUSER | CLONE_NEWNET)
                                still refused? → rely on Landlock TCP rules (UDP uncovered)
+        1b. caps (process.max_memory_mb, max_pids): limits.cgroup() makes a memory and pids cgroup
+                               for this pid where /sys/fs/cgroup is writable; limits.rlimits() sets RLIMIT_AS, RLIMIT_NPROC
         2. landlock.Ruleset(): landlock_create_ruleset(2) with every fs right the ABI knows,
                                + bind/connect TCP (ABI 4+), + signal/abstract-socket scoping (ABI 6+)
         3. for each path:     landlock_add_rule(2) PATH_BENEATH with O_PATH fd and the rights:
@@ -57,7 +59,7 @@ Why fork then apply, and not apply then fork: `restrict_self` is irreversible fo
    │
    ▼
  write the policy to a temporary file
- for each probe (read, write-tmp, write-cwd, net):
+ for each probe (read, write-tmp, write-cwd, net, memory):
      subprocess: python -m sharness_ai run --policy <tmp> -- python -I -c <probe>     ← the flow above, end to end
      hello._classify(): "allowed" if the probe printed ok; "refused (…)" on PermissionError / OSError
  one more:  run … --expect-hash sha256:000… → must be refused with "Nothing ran" (exit 125)

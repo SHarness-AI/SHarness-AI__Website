@@ -65,6 +65,14 @@ sharness-ai run: refused. The policy hashes to sha256:ab1d…cc76; the hash supp
 
 `/proc` is unreadable under the deny-all policy because it is not in the read list: the policy means what it says. Port 443 allowed and port 80 refused is Landlock ABI 4's TCP rule.
 
+With caps (`"process": {"no_new_privs": true, "max_memory_mb": 64, "max_pids": 4}`), `--verbose` reports what was applied, and the fifth background process cannot be started:
+
+```
+sharness-ai run: applied {'netns': 'netns', 'landlock_abi': 7, 'paths': 7, 'missing': [], 'ports': [],
+  'limits': ['cgroup1 memory.limit_in_bytes=64MiB', 'cgroup1 pids.max=4', 'RLIMIT_AS=64MiB', 'RLIMIT_NPROC=4']}
+/bin/sh: 0: Cannot fork
+```
+
 ## E04: the acceptance test
 
 ```
@@ -72,14 +80,15 @@ $ sharness-ai hello
 sharness-ai hello   experiment E04: the memo's acceptance test, for one child process
 policy      hello  sha256:ad37e58bea6f4da65656687045b33ae9977caf90feef0ff5716a44db041b35af
             read-only: /bin, /etc, /lib, /lib64, /opt, /sbin, <the workspace>, /usr, /usr/bin
-            write: none · exec: system and Python · network: none
+            write: none · exec: system and Python · network: none · memory: 128 MiB
 kernel      Landlock ABI 7 · empty network namespace: yes (uid 0)
   ✔ read       expected allowed  got allowed
   ✔ write-tmp  expected refused  got refused (PermissionError: [Errno 13] Permission denied: '/tmp/sharness-ai-hello.tmp')
   ✔ write-cwd  expected refused  got refused (PermissionError: [Errno 13] Permission denied: 'sharness-ai-hello.tmp')
   ✔ net        expected refused  got refused (PermissionError: [Errno 13] Permission denied)
+  ✔ memory     expected refused  got refused (MemoryError)
   ✔ hash       expected refused  got refused
-result      5/5 held
+result      6/6 held
 caveat      applied by this process to its own children: a Boundary for them, a Setting for whoever ran this, who could have skipped it. ...
 ```
 

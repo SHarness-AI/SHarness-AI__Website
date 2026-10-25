@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.2</a>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.3</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -130,19 +130,24 @@ PermissionError: [Errno 13] Permission denied
 $ sharness-ai run --policy experiments/policies/deny-all-example.json --expect-hash sha256:0000…0000 -- /bin/true
 sharness-ai run: refused. The policy hashes to sha256:ab1d…cc76; the hash supplied was sha256:0000…0000. Nothing ran.</pre>
 <p><code>/proc</code> is unreadable under the deny-all policy because it is not in the read list: the policy means what it says. Port 443 allowed and port 80 refused is Landlock ABI 4's TCP rule.</p>
+<p>With caps (<code>"process": {"no_new_privs": true, "max_memory_mb": 64, "max_pids": 4}</code>), <code>--verbose</code> reports what was applied, and the fifth background process cannot be started:</p>
+<pre class="diagram">sharness-ai run: applied {'netns': 'netns', 'landlock_abi': 7, 'paths': 7, 'missing': [], 'ports': [],
+  'limits': ['cgroup1 memory.limit_in_bytes=64MiB', 'cgroup1 pids.max=4', 'RLIMIT_AS=64MiB', 'RLIMIT_NPROC=4']}
+/bin/sh: 0: Cannot fork</pre>
 <h2 id="e04-the-acceptance-test">E04: the acceptance test</h2>
 <pre class="diagram">$ sharness-ai hello
 sharness-ai hello   experiment E04: the memo's acceptance test, for one child process
 policy      hello  sha256:ad37e58bea6f4da65656687045b33ae9977caf90feef0ff5716a44db041b35af
             read-only: /bin, /etc, /lib, /lib64, /opt, /sbin, &lt;the workspace&gt;, /usr, /usr/bin
-            write: none · exec: system and Python · network: none
+            write: none · exec: system and Python · network: none · memory: 128 MiB
 kernel      Landlock ABI 7 · empty network namespace: yes (uid 0)
   ✔ read       expected allowed  got allowed
   ✔ write-tmp  expected refused  got refused (PermissionError: [Errno 13] Permission denied: '/tmp/sharness-ai-hello.tmp')
   ✔ write-cwd  expected refused  got refused (PermissionError: [Errno 13] Permission denied: 'sharness-ai-hello.tmp')
   ✔ net        expected refused  got refused (PermissionError: [Errno 13] Permission denied)
+  ✔ memory     expected refused  got refused (MemoryError)
   ✔ hash       expected refused  got refused
-result      5/5 held
+result      6/6 held
 caveat      applied by this process to its own children: a Boundary for them, a Setting for whoever ran this, who could have skipped it. ...</pre>
 <p>Exit 0 when every expectation held; <code>--json</code> for the Evidence page. The hash differs per machine because the policy lists the workspace.</p>
 <h2 id="sgit-under-a-policy">sgit under a policy</h2>
@@ -164,7 +169,7 @@ No key pairs found.</pre>
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../../project/releases.html">v0.5.2</a> · <a href="../../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.3</a> · <a href="../../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>
