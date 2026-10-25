@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.10</a>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.12</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -103,11 +103,15 @@
       <a class="sl" href="../../project/comms.html">Comms: tasks &amp; requests</a>
       <a class="sl" href="../../project/releases.html">Release history</a>
       <a class="sl" href="../../project/adoption/index.html">Getting users: the review and the plan</a>
+      <a class="sl" href="../../project/outreach/index.html">Outreach: finding the people it is for</a>
+      <a class="sl" href="../../project/agents/index.html">The agents and their keys</a>
+      <a class="sl" href="../../project/telemetry/index.html">Telemetry: who reads this site</a>
       </div>
     </div>
   </div>
   <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__CLI">★ GitHub</a>
   <script src="../../assets/nav.js" defer></script>
+  <script src="../../assets/telemetry.js" data-root="../../" defer></script>
 </div></nav>
 
 <main class="doc">
@@ -150,6 +154,7 @@
 <tr><td><b>Dinis Cruz</b></td><td>the person: SHarness's author and the editor of this site</td><td>the briefs and memos, published in full; articles written up from his voice memos, in his voice and under his name, by an agent. <a href="https://sgit.ai/about/">About him</a></td></tr>
 <tr><td><b>sharness.build</b></td><td>the build agent of this site and of the CLI, one or more Claude Code sessions working from Dinis's requests (the first built the site and the CLI's first release; a second did the research, the experiments and the storyboards of v0.4.0)</td><td>the site itself, the release history, the <a href="../../evidence/research/index.html">research note</a>, the storyboards' cast and scripts, and articles in its own voice about what it delivered, with the commits to check them against</td></tr>
 <tr><td><b>sharness.dev</b></td><td>the developer agent, a Claude Code session that joined on 25 Oct 2026 with the brief to build reference implementations of SHarness in several languages, each starting from a scenario a developer has</td><td>the standards and their test vectors, the reference implementations and their registry, and articles in its own voice about that work, starting with <a href="../../articles/one-standard-many-languages.md">One standard, many languages</a></td></tr>
+<tr><td><b>sherpa@sharness</b></td><td>the Sherpa, from the sgit.ai team's role of that name: the board, release scoping, the order of work, hold or ship; at Dinis's request of 25 Oct 2026 also the outreach and the telemetry. Its key is on pki.sgit.ai, operated by Dinis (<a href="../agents/index.html">the agents and their keys</a>)</td><td><a href="../comms.html">comms</a>, the <a href="../outreach/index.html">outreach plan</a>, the <a href="../telemetry/index.html">telemetry page</a> and its tools, the <code>sherpa-marketing</code> and <code>sherpa-telemetry</code> vaults, and release notes for what it ships</td></tr>
 </tbody>
 </table></div>
 <h2 id="what-is-real-today">What is real today</h2>
@@ -163,7 +168,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../../project/releases.html">v0.5.10</a> · <a href="../../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.12</a> · <a href="../../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>
@@ -212,6 +217,10 @@
     <a href="../../project/sources/index.html">The source documents</a>
     <a href="../../project/engineering.html">Engineering</a>
     <a href="../../project/comms.html">Comms &amp; release history</a>
+    <a href="../../project/adoption/index.html">Getting users</a>
+    <a href="../../project/outreach/index.html">Outreach</a>
+    <a href="../../project/agents/index.html">The agents and their keys</a>
+    <a href="../../project/telemetry/index.html">Telemetry</a>
     <a href="../../llms.txt">llms.txt</a>
     <a href="../../llms-full.txt">llms-full.txt</a>
     <a href="../../index.md">index.md</a>

@@ -1,0 +1,15 @@
+{
+ "enabled": true,
+ "endpoint": "https://dev.send.sgraph.ai",
+ "vault_id": "l3wltj3z",
+ "append_token": "5fab121120d012d94f485ca934acdad15fe3c9f988f9fbf96cad83de0c88d7a5",
+ "recipient": {
+  "fingerprint": "sha256:7d3b264abdeadb20",
+  "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAqAjJpeeJrfgb8Jof6Blv\nw5SZ7eAVFR08GTuQa364MKSv7eSYD8HDNb+93FXwYYd5TVMqFjY3izXonV5Bsnbn\n6HGgeI3mGFibU4HszlXSHSbUcsZzalCdT77mRe6iXs4JPjxO1f8mSAWphHOiQ0Ll\nndHdblp0LZBNVIX7Xnvk5dFdWQvFsc8/e+wrtCSNfn71FqwEunfjaQoI9J2EB+Ve\nRrwP5V/8kpzWFLq1mYILbntegkLkzonT41cTqHpojLcBHXKWrMU4JEWtplQOzmhE\n0Z+qiQqrtpLhj3b9nh+lQct4gJnmIDJ3XsNgLY97okdyK5fukklTrTaNKRhPWA2b\nG5o6l3UO6w56O1vGtJa47a0ISw7r9nm7rT1xM/BorPyFU6+cb/z7UXo4zdaZ3idh\nKPuARwXoDV8PLu7+zwgAbmn62rAZlMkQNstQPySxEczEk9jlAlz8ONUh9Hiamm4F\naNPLPOYxtDrBfHEgeGt+wyFF1hyPk8TGqOVmkf7zj7D84B9fWjpCd4W6e7pt6CCG\ntaoAfaKcmCe+Zs+dLlhjNq7eAW32hb+PTi7Mm/4KVbZSdt8wXeDdzE4B3OXXiPVs\nc5sZIaAcOSz2sgYg6Mpd2J8p2KwKBjDkPbX2YVg+BO/5H2XuGIF3lPnRSVMltuWB\nu3XoK2Ne6zb7WH7nWMUolcMCAwEAAQ==\n-----END PUBLIC KEY-----"
+ },
+ "geo": [
+  "https://ipapi.co/json/",
+  "https://ipwho.is/"
+ ],
+ "note": "One anonymous event per page per session, encrypted in the browser to this key, written to a write-only lane. See /project/telemetry/."
+}

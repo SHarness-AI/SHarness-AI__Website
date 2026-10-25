@@ -4,7 +4,7 @@
 > the kernel and talking only over allowed, mutually authenticated connections, so a secret
 > lives in one place and a tricked process can only do its one job.
 
-Site version: v0.5.10. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04,
+Site version: v0.5.12. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04,
 E09 and E10 in the CLI; E09 is a real Linux kernel in a browser tab running hello, measured 25 Oct 2026).
 No SHarness component is built.
 By Dinis Cruz; design session written up with Claude, 24 October 2026. All content CC BY 4.0.
@@ -144,7 +144,16 @@ SHarness is unrelated to Sharness, the shell testing library.
   /project/sources/sharness-brief-pack/ and the memos at /project/sources/memos/
 - /project/engineering.html — how the site is built; /project/comms.html — open requests (R3 the
   design pages need review; R6 the research note, experiments, cast, market analysis, containment;
-  R7 releasing the CLI's dev to main); /project/releases.html — the release history
+  R7 releasing the CLI's dev to main; R8 the languages decision; R9 to R11 the sherpa agent's key, access
+  token and the go on outreach); /project/releases.html — the release history
+- /project/agents/index.md — the agents and their keys: sharness.build, sharness.dev and sherpa@sharness, their
+  keys on pki.sgit.ai, the vault register (ids, never keys), how a secret reaches an agent and a key reaches Dinis
+- /project/outreach/index.md — the outreach plan (a PLAN, nothing posted yet), the companion of
+  /project/adoption/: what there is to show, five audiences and their sentence, the channels (repository,
+  lists, Show HN, Reddit, LinkedIn, rUv and the Agentics Foundation, OWASP, the sandbox people,
+  directories, the network), rUv's playbook, the rules, thirty days, the measures
+- /project/telemetry/index.md — who reads this site: one anonymous event per page per session over an
+  append lane, encrypted in the browser; what is sent, never sent; the lane waits on an access token (R10)
 
 ## Related
 

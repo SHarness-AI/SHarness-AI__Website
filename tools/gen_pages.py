@@ -105,6 +105,12 @@ PAGES = [
      "The SHarness design pack, published verbatim: the brief for this site and the eight design documents it was built from."),
     ("project/adoption",    "Getting users: the review and the plan",
      "what was wrong for a user and what changed, who the users are, where to find them, how to tell whether it is working"),
+    ("project/agents",       "The agents and their keys",
+     "Who writes here besides Dinis Cruz: each agent's name, role, key on pki.sgit.ai and vaults (ids, never keys); how a secret reaches an agent and how a vault key reaches Dinis; what the agents need from him."),
+    ("project/outreach",     "Outreach",
+     "Finding the people SHarness is for: what there is to show, who it is for, where they are, what rUv's playbook teaches, a 30-day plan, the rules every post follows, and how the result is measured. A plan by sherpa@sharness, for Dinis Cruz's go."),
+    ("project/telemetry",    "Telemetry",
+     "Who reads this site: one anonymous event per page per session, encrypted in the browser to a key only the telemetry vault holds and written to a write-only lane; what is sent, what is never sent, what the counts are worth."),
 ]
 
 ASOF = re.compile(r"\bas of (\d{1,2} [A-Z][a-z]{2} \d{4})")
