@@ -59,6 +59,7 @@ NAV = [
         ("&#9679; Policies at the centre", "landscape/index.html"),
         ("Enforceability matrix", "landscape/enforceability/index.html"),
         ("Integration points", "landscape/integrations/index.html"),
+        ("Ruflo and ruv.sgit", "landscape/ruflo/index.html"),
         ("Market &amp; competitors", "landscape/market/index.html"),
     ], ("landscape/",)),
     ("Explain", "explain/index.html", [
@@ -110,6 +111,7 @@ FOOTER = [
         ("Research note", "evidence/research/index.html"),
         ("Landscape: policies at the centre", "landscape/index.html"),
         ("Enforceability matrix", "landscape/enforceability/index.html"),
+        ("Ruflo and ruv.sgit", "landscape/ruflo/index.html"),
         ("Market &amp; competitors", "landscape/market/index.html"),
         ("Storyboards", "explain/storyboards/index.html"),
         ("Mockups", "explain/index.html"),

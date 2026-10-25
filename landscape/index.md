@@ -41,7 +41,7 @@ Where all three are yes, the policy runs natively in E. Where the second is "Set
 - [Enforceability](enforceability/index.md): the matrix of policy rows against enforcers, with the barrier kind for each cell, and the command that produces each translation.
 - [Integration points](integrations/index.md): product by product, what it stands in for, what to translate, what to keep.
 - [Market and competitive analysis](market/index.md): the survey of 24 Oct 2026, every row sourced.
-- RUV's projects (claude-flow, agentic-flow, ruv-swarm) and the sgit.ai network's integration with ruflow: in preparation; a page here when the research lands.
+- [Ruflo and ruv.sgit](ruflo/index.md): rUv's stack in SHarness's terms, what ruv.sgit integrated (a mandate per agent compiled into Ruflo's policy engine; memory in sgit vaults), where the two halves meet, a swarm under the harness, what to do first.
 
 ## 5. What this does not claim
 

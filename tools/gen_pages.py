@@ -87,6 +87,8 @@ PAGES = [
      "Which rows of a policy can run where: the matrix of policy rows against enforcers (SHarness, bubblewrap, Docker, Claude Code's sandbox, Kubernetes, microVMs, ToolHive, OpenShell), with the barrier kind per cell."),
     ("landscape/integrations", "Integration points",
      "Product by product: what it stands in for in SHarness's terms, what a policy translates into on it, what SHarness adds, and what to keep."),
+    ("landscape/ruflo",     "Ruflo and ruv.sgit",
+     "rUv's stack (Ruflo, agentic-flow, RuVector, MetaHarness, RVM) in SHarness's terms; what ruv.sgit integrated (a mandate per agent compiled into Ruflo's policy engine, memory in sgit vaults); where the two halves meet, point by point; a swarm under the harness; what to do first."),
     ("landscape/market",    "Market and competitive analysis",
      "What exists in the market that does part of what SHarness is designed to do, as of 24 Oct 2026: sandboxes, guardrails, MCP gateways, LLM gateways, secrets and identity, enterprise platforms, standards; where SHarness sits and the threats to its thesis."),
     # explain

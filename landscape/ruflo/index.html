@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ruflo and ruv.sgit — SHarness</title>
+<meta name="description" content="rUv&#x27;s stack (Ruflo, agentic-flow, RuVector, MetaHarness, RVM) in SHarness&#x27;s terms; what ruv.sgit integrated (a mandate per agent compiled into Ruflo&#x27;s policy engine, memory in sgit vaults); where the two halves meet, point by point; a swarm under the harness; what to do first.">
+<link rel="canonical" href="https://sharness.ai/landscape/ruflo/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/landscape/ruflo/index.html">
+<meta property="og:title" content="Ruflo and ruv.sgit — SHarness">
+<meta property="og:description" content="rUv&#x27;s stack (Ruflo, agentic-flow, RuVector, MetaHarness, RVM) in SHarness&#x27;s terms; what ruv.sgit integrated (a mandate per agent compiled into Ruflo&#x27;s policy engine, memory in sgit vaults); where the two halves meet, point by point; a swarm under the harness; what to do first.">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.5</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../design/index.html">The design<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../design/index.html">&#9679; The brief: in one read</a>
+      <a class="sl" href="../../design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="../../design/architecture/index.html">Architecture</a>
+      <a class="sl" href="../../design/components/index.html">Components</a>
+      <a class="sl" href="../../design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../../design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../../design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="../../design/surface/index.html">What a process can do</a>
+      <a class="sl" href="../../design/containment/index.html">Containment</a>
+      <a class="sl" href="../../design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../code/index.html">The code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/index.html">&#9679; Where the code is</a>
+      <a class="sl" href="../../code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl" href="../../code/flows/index.html">Flows through the code</a>
+      <a class="sl" href="../../code/examples/index.html">Examples</a>
+      <a class="sl" href="../../code/browser/index.html">Linux in the browser</a>
+      <a class="sl" href="../../code/languages/index.html">Languages</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../evidence/index.html">&#9679; Measurements</a>
+      <a class="sl" href="../../evidence/status/index.html">What exists today</a>
+      <a class="sl" href="../../evidence/research/index.html">Research note</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../landscape/index.html">Landscape<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../landscape/index.html">&#9679; Policies at the centre</a>
+      <a class="sl" href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+      <a class="sl" href="../../landscape/integrations/index.html">Integration points</a>
+      <a class="sl here" href="../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+      <a class="sl" href="../../landscape/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../explain/index.html">Explain<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../explain/index.html">&#9679; Storyboards &amp; mockups</a>
+      <a class="sl" href="../../explain/storyboards/index.html">Storyboards</a>
+      <a class="sl" href="../../explain/mockups/policy-hash.html">Mockup: policy hash</a>
+      <a class="sl" href="../../explain/mockups/edges.html">Mockup: edge matrix</a>
+      <a class="sl" href="../../articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../project/index.html">&#9679; Project</a>
+      <a class="sl" href="../../project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="../../project/sources/index.html">The source documents</a>
+      <a class="sl" href="../../project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="../../project/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../project/releases.html">Release history</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__Website">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+  <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">the landscape</a> / ruflo and ruv.sgit · <a href="index.md">this page as markdown</a></div>
+  <h1>Ruflo, rUv's stack, and ruv.sgit: where a swarm meets the harness</h1>
+<div class="note"><b>Status: a map, <span class="asof">as of 25 Oct 2026</span></b>, from Ruflo's own documentation and npm registry entries and from <a href="https://ruv.sgit.ai">ruv.sgit.ai</a>'s pages, all read that day. Dinis Cruz asked how what Reuven Cohen (rUv, GitHub ruvnet) publishes, and the integration the sgit.ai network did with it, could be leveraged here. The short answer: ruv.sgit already does the top half of the thesis (a written mandate per agent, compiled into Ruflo's policy engine, with memory in sgit vaults); SHarness is the bottom half (the same mandate enforced below the agent, by the kernel and by separate processes). Nothing here is integrated yet.</div>
+<h2 id="1-the-names">1. The names</h2>
+<p>"Ruflow" and "RuFlow" are third-party spellings. The upstream project is <b>Ruflo</b>, formerly <b>Claude Flow</b>, by Reuven Cohen: npm <code>ruflo</code> (also <code>claude-flow</code> and <code>@claude-flow/cli</code>), 3.62.0 published 24 Oct 2026, MIT. The sgit.ai network's integration is <b>ruv.sgit.ai</b>: "a Ruflo hive + sgit vaults + Agent Behaviour Policies", built 14 to 15 October 2026 for <em>Agentic Engineering Live: rUv in London</em> and since 21 October also the site of the ruv.sgit service, with two founding providers, Dinis Cruz and Mondweep Chakravorty. It says of itself: "This is not rUv's offer, and it does not speak for him."</p>
+<h2 id="2-ruv-s-projects-in-sharness-terms">2. rUv's projects, in SHarness terms</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Project</th><th>What it is (as published)</th><th>Version, date, licence</th><th>What matters here</th></tr></thead>
+<tbody>
+<tr><td><b>Ruflo</b></td><td>"agent meta-harness for Claude Code and Codex": swarms and a hive-mind (a queen and workers, Raft, Byzantine or gossip consensus), memory, federation, guardrails; 98 agents, 314 MCP tools, 26 CLI commands</td><td>3.62.0, 24 Oct 2026, MIT</td><td>the orchestrator the design calls "the harnessed app": it routes, spawns and remembers. Its policy engine (ADR-324) has modes legacy (allow all, the default), observe and enforce, allow/deny/approval rules, budgets and hash-chained receipts; its hooks (<code>tool:pre-call</code>, <code>agent:pre-spawn</code>, <code>file:pre-write</code>, Claude Code <code>PreToolUse</code> and <code>SessionStart</code>) are the plug-in points; its plugins "run with your account's permissions and are not sandboxed" (its README); its hive bootstrap secret is, per its docs, "a speed bump, not a boundary"</td></tr>
+<tr><td><b>agentic-flow</b></td><td>a cost-optimal model router, self-learning hooks (<code>pre-command</code> assesses a command's risk before Bash), 213 MCP tools</td><td>2.1.4, 9 Oct 2026, MIT</td><td>hooks as routing: the same shape as <a href="../../design/agents/index.html#2-where-sharness-plugs-in">Agents §2</a></td></tr>
+<tr><td><b>ruv-swarm</b></td><td>Rust and WASM neural swarm orchestration with an MCP server</td><td>1.0.20, 10 Sep 2025, MIT or Apache-2.0</td><td>the ancestor of Ruflo's swarm commands</td></tr>
+<tr><td><b>RuVector</b></td><td>Rust vector and graph memory with a hash-linked witness log, WASM build, MCP server</td><td>0.3.3, 23 Sep 2026, MIT</td><td>its README says filters "are not a complete authorization boundary" and recommends treating retrieved context as untrusted: exactly the case for <code>sharness.fs</code> as the sole writer and for the dual-LLM split</td></tr>
+<tr><td><b>MetaHarness</b></td><td>mints a harness (CLI, agents, skills, scoped memory, <code>.claude/settings.json</code> permissions) from a repository, with a signed witness manifest</td><td>0.4.17, 26 Sep 2026, MIT</td><td>a generator of the agent's own settings: a Setting, in ABP's terms, that a PBP could be compiled into and a launcher could make a Boundary</td></tr>
+<tr><td><b>RVM</b></td><td>a bare-metal Rust microhypervisor for agents: capability tokens with seven rights (READ, WRITE, GRANT, REVOKE, EXECUTE, PROVE, GRANT_ONCE) and monotonic attenuation</td><td>no release stated; Apache-2.0 or MIT</td><td>the closest thing in rUv's stack to a kernel-enforced boundary; ruv.sgit's POC3 maps ABP rows to its rights and finds them "coarser than ABP primitives"</td></tr>
+<tr><td><b>flow-nexus</b></td><td>a hosted platform: cloud sandboxes, swarms, credits</td><td>0.1.128, 18 Sep 2025; npm says proprietary</td><td>a provider in the <a href="../integrations/index.html#1-outer-boundaries-microvms-and-isolates">outer-boundary</a> row, not verified further</td></tr>
+<tr><td><b>SPARC</b>, the ADRs</td><td>a method (specification, pseudocode, architecture, refinement, completion) and numbered architecture decision records</td><td></td><td>method, not a control; ADR-346, a "multi-layer agent security stack", is proposed, not shipped</td></tr>
+</tbody>
+</table></div>
+<p>Nothing rUv publishes is a kernel-enforced sandbox for the agent process itself, except RVM (bare metal, not used by Ruflo at runtime) and a WASM runtime for untrusted guest agents. That is the gap SHarness fills, and the reason the two stacks fit rather than compete.</p>
+<h2 id="3-what-ruv-sgit-integrated-from-its-own-pages">3. What ruv.sgit integrated, from its own pages</h2>
+<p>Two things were added to rUv's stack: <b>a written mandate per agent</b> (an Agent Behaviour Policy, six roles, 36 rows, a vocabulary of 23 <code>verb.object.reach</code> primitives) compiled into Ruflo's policy engine, and <b>agent memory with history</b>, encrypted client-side in sgit vaults, one ephemeral vault per run with a branch per worker, measured at close and then deleted, with a public ledger of runs. Seven proofs of concept:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>POC</th><th>What it showed</th><th>Result, as published</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>the ABP compiled into Ruflo's engine (36 rules and a budget) and run against 11 traced actions</td><td>legacy mode allowed all 11 (<code>legacy-default-allow</code>); enforce mode stopped 6: 4 denied (<code>email.send</code>, <code>network.fetch.world</code>, a tester's <code>file.write</code>, a researcher's <code>credential.read</code> of <code>~/.aws/credentials</code>), 2 sent for approval (<code>repo.push</code>, <code>deploy</code>); receipts valid, 14 Oct 2026</td></tr>
+<tr><td>2</td><td>Ruflo's memory database per role on a branch per role in a vault, restored on a fresh runner</td><td>identical memory list; run locally</td></tr>
+<tr><td>3</td><td>the ABP mapped to RVM capability rights</td><td>rights coarser than the primitives: "the argument for compiling tokens from a mandate"</td></tr>
+<tr><td>4</td><td>a browser app on RuVector's WASM build answering "can the coder send email?" offline</td><td>published</td></tr>
+<tr><td>5</td><td>MetaHarness's generated <code>settings.json</code> rendered as ABP rows and diffed</td><td>8 of 10 coder rows not covered by the harness</td></tr>
+<tr><td>6</td><td>a runbook for a real Ruflo MCP session in observe mode</td><td>written, not run (needs a terminal)</td></tr>
+<tr><td>7</td><td>the studio: a hierarchical-mesh hive with Byzantine consensus, eight specialists, seven tasks</td><td>31 Ruflo calls in 15.3 s; the workers were Claude Code subagents, not <code>hive-mind work</code>; Ruflo's tamper check fired when a folder was recreated and was not bypassed</td></tr>
+</tbody>
+</table></div>
+<p>Its own rule for agents working on it is the same as this site's: "Do not weaken a security control to make a demo work." Its runs "were not policy-gated. Enforcement was shown separately, in POC1." And its planned next steps are Ruflo's claims as the allowed-primitives list, compiling CLAUDE.md guidance into a policy bundle, and RuVector allow and deny lists. It does not mention SHarness or Process Behaviour Policies anywhere.</p>
+<h2 id="4-where-the-two-halves-meet">4. Where the two halves meet</h2>
+<p>Read with ABP's barrier kinds: everything ruv.sgit enforces is enforced by Ruflo, in the agent's own process, under the agent's own uid, with the ledger anchored in the agent's home directory. That is a <b>Setting</b> for the agent (POC1's enforce mode is real, and the same uid could edit the state file). SHarness's job is to make the same 36 rows a <b>Boundary</b>, enforced below the agent, without changing the mandate.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Point in Ruflo</th><th>Today (its documentation; "inferred" where so)</th><th>What SHarness adds</th><th>How the mandate maps</th></tr></thead>
+<tbody>
+<tr><td>the hooks <code>ruflo init</code> writes into Claude Code's settings, and <code>ruflo-mods</code>' in-process function hooks</td><td>routing and learning inside the harness process, unsandboxed</td><td>one <code>PreToolUse</code> hook rewriting Bash to <code>sharness-bash-client --profile &lt;p&gt;</code> and checking the policy hash; the launcher, not the hook, stops bypass</td><td><code>execute.process.self</code> with its instances becomes a <code>sharness.bash</code> profile; <code>write.file.project</code> instances become Landlock paths</td></tr>
+<tr><td>the policy engine (ADR-324): rules on caller-emitted strings, receipts, legacy/observe/enforce</td><td>the ABP compiled into it (POC1); a Setting by ABP's own test</td><td>a PBP manifest hashed in canonical JSON, supplied out of band, checked by the launcher and by each component; Ruflo's receipts stay as the application audit, SHarness's audit lines carry the hash</td><td>the same rows: the ABP is the mandate; Ruflo's rules are layers L4 and L5; kernel and component locks are L1 to L3; the effective policy is the intersection</td></tr>
+<tr><td>the MCP registry (314 tools, one server process as the harness user)</td><td>every MCP server runs with the account's permissions</td><td>each MCP server as a harnessed app with its own uid, Landlock, seccomp and certificate; the built-in Bash denied so <code>sharness.bash</code> is the only shell</td><td>the pinned tools list, hashed, in the <code>sharness.llm</code> policy; per-tool edges in the manifest</td></tr>
+<tr><td>the spawn path (<code>Task</code> subagents; <code>hive-mind spawn</code>, <code>spawn --claude</code>, <code>hive-mind work</code>, which skip permission prompts by default; nesting to depth 5)</td><td>children inherit the parent's uid, environment and keys (inferred)</td><td><code>agent:pre-spawn</code> becomes a request to the launcher: each worker a harnessed process under its own PBP, uid and certificate</td><td>one ABP role (queen, coder, tester, reviewer, researcher, documenter) is one PBP; the queen's PBP may request launches and never grant more than its own layer</td></tr>
+<tr><td>API keys (<code>ANTHROPIC_API_KEY</code> in the environment or settings)</td><td>visible to the harness, every hook, every MCP server, every subagent (inferred from inheritance)</td><td><code>ANTHROPIC_BASE_URL</code> to <code>sharness.llm</code>, the real key sealed in <code>sharness.kms</code>, a dummy in the agent, the secret filter on tool results, model allowlist, token budget</td><td>the ABP's <code>read.credential.host: no</code>, with its barrier "secrets only via the supervisor", becomes a Boundary; <code>write.budget.tenant</code> becomes the llm budget</td></tr>
+<tr><td>memory (<code>.swarm/memory.db</code>, RuVector; a vault per run in ruv.sgit)</td><td>SQLite files writable by the agent; RuVector's own README on filters not being a boundary</td><td><code>sharness.fs</code> as the sole writer of the memory folder; vault keys only in <code>sharness.kms</code>, re-sealed to <code>sharness.net</code></td><td><code>memory:pre-store</code> becomes data; the memory folder is a <code>write.file.project</code> instance; vault ids go in the <code>net</code> policy</td></tr>
+<tr><td>networking between agents (federation: Ed25519 identities, a trust ladder, optional WireGuard; the hive over stdio or WebSocket)</td><td>application-level trust; "network connectivity is the integrator's problem"</td><td><code>sharness.net</code> as the only client, allowlisted hosts and vault ids, an empty namespace for everything else, mutual TLS between components</td><td><code>send.endpoint.allowed</code> instances (npm, PyPI) become the net allowlist; <code>send.endpoint.world: no</code> becomes default-deny egress</td></tr>
+<tr><td>the policy's anchor (Ruflo's ledger under <code>~/.config</code>; MetaHarness's signed witness manifest)</td><td>anchored where the agent can reach</td><td>one manifest hash from the person, out of band, or signed by the root key; the launcher refuses mismatches</td><td>the ABP's owner and <code>valid_until</code> ride along; the hash covers the session CA</td></tr>
+</tbody>
+</table></div>
+<h2 id="5-a-swarm-under-the-harness">5. A swarm under the harness</h2>
+<p>A Ruflo hive is already the shape the design assumes: many agents with distinct roles, each a candidate for its own process and policy. Today they share one uid, one key and one filesystem. Under the harness, the launcher sits above the queen: the platform starts the launcher; the launcher starts the queen's harness under the queen's PBP; every <code>agent:pre-spawn</code> or <code>Task</code> call becomes a request to the launcher for a worker under the worker's PBP. The orchestrator keeps routing, consensus and memory; it loses the ability to widen any worker's grant, because each layer only narrows the one above it.</p>
+<p>A worker's policy, taken from ruv.sgit's coder role, would say: read and write <code>src/</code> and <code>tests/</code> through <code>sharness.fs</code>; run <code>build</code>-profile commands through <code>sharness.bash</code>; reach <code>registry.npmjs.org</code> and <code>pypi.org</code> only, through <code>sharness.net</code>; call the model through <code>sharness.llm</code> under a daily budget with the tool list pinned; no credential in its environment; push and deploy need a person, enforced outside the worker. Federation across machines is topology C with mutual TLS between <code>net</code> components and Ruflo's trust ladder as the application layer above it. The vault-per-run and branch-per-worker pattern gives the audit record a place the worker cannot alter.</p>
+<p>This is the <a href="../../design/spectrum/index.html">spectrum's</a> profile P3, the newsroom agent, with a concrete mandate already written: ruv.sgit's <code>abp.json</code> is the first real policy file for it, and compiling it to a PBP is the first thing to try.</p>
+<h2 id="6-what-to-do-first">6. What to do first</h2>
+<ol>
+<li><b>Compile ruv.sgit's ABP (36 rows) to v0 PBPs</b>, one per role, and run each role's commands under <code>sharness-ai run</code> in a child subtree: the rows that are files and network become Boundaries today; the rows that are tools and approvals stay in Ruflo's engine until <code>sharness.llm</code> and <code>sharness.bash</code> exist.</li>
+<li><b>Translate the same policy to Claude Code's sandbox settings</b> (<code>policy translate --to claude-code</code>) and compare with what POC5 found in MetaHarness's settings: which of the 36 rows each covers.</li>
+<li><b>Propose the <code>agent:pre-spawn</code> hook as a launcher call</b> to Ruflo, as data (a policy per role), not code.</li>
+<li><b>Ask ruv.sgit's providers whether a run under the harness is an offer</b>: "no internet from the run" is already in their task-run offer; the harness is how that becomes a Boundary.</li>
+</ol>
+<h2 id="7-not-verified">7. Not verified</h2>
+<ul>
+<li>Star counts and performance claims (self-reported, varying between pages).</li>
+<li>Whether Ruflo's enforce mode intercepts Claude Code's built-in tools or only MCP calls and <code>claude-code.*</code> actions through <code>ruflo-mods</code>: inferred from its issue tracker and plugin README, not from the ADR text.</li>
+<li>Whether <code>hive-mind work</code> spawns children with the inherited environment and keys: inferred from "skip permission prompts by default".</li>
+<li>RVM's runtime behaviour and whether anything in Ruflo calls it.</li>
+<li>The ruv.sgit repository's tree was read through the site's published data files; the GitHub API was refused from the research session.</li>
+</ul>
+<p>Sources (all read 25 Oct 2026): <a href="https://ruv.sgit.ai/llms.txt">ruv.sgit.ai/llms.txt</a>, <a href="https://ruv.sgit.ai/pocs.html">the POCs</a>, <a href="https://ruv.sgit.ai/architecture.html">architecture</a>, <a href="https://ruv.sgit.ai/ruv-stack.html">the rUv stack</a>, <a href="https://ruv.sgit.ai/articles/next-phase.md">Article No. 9</a>, <a href="https://ruv.sgit.ai/data/abp.json">data/abp.json</a>, <a href="https://ruv.sgit.ai/data/report.json">data/report.json</a>, <a href="https://ruv.sgit.ai/data/rvm-caps.md">data/rvm-caps.md</a>, <a href="https://ruv.sgit.ai/data/notes.md">data/notes.md</a>; <a href="https://github.com/ruvnet/ruflo">ruvnet/ruflo</a> (README 3.62.0, <code>docs/USERGUIDE.md</code>, <code>docs/federation/README.md</code>, the plugin READMEs for ruflo-mods, ruflo-agent, ruflo-aidefence and ruflo-sparc, <code>SECURITY.md</code>, the ADR index, ADR-444, issue 3164); <a href="https://github.com/ruvnet/agentic-flow">agentic-flow</a>, <a href="https://github.com/ruvnet/ruv-FANN">ruv-FANN</a>, <a href="https://github.com/ruvnet/ruvector">ruvector</a>, <a href="https://github.com/ruvnet/flow-nexus">flow-nexus</a>, <a href="https://github.com/ruvnet/rvm">rvm</a>, the <code>metaharness</code> README; the npm registry for every version and date; <a href="https://riskmandate.ai/abp.html">riskmandate.ai/abp</a>.</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.5</a> · <a href="../../project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The design</h4>
+    <a href="../../design/index.html">The brief: in one read</a>
+    <a href="../../design/why/index.html">Why: the last metre</a>
+    <a href="../../design/architecture/index.html">Architecture</a>
+    <a href="../../design/components/index.html">Components</a>
+    <a href="../../design/keys/index.html">Keys and the KMS</a>
+    <a href="../../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../../design/agents/index.html">Agents and LLMs</a>
+    <a href="../../design/process-tree/index.html">Enforcing the process tree</a>
+    <a href="../../design/surface/index.html">What a process can do</a>
+    <a href="../../design/containment/index.html">Containment</a>
+    <a href="../../design/spectrum/index.html">The spectrum</a>
+    <a href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+  </div>
+  <div>
+    <h4>The code</h4>
+    <a href="../../code/index.html">Where the code is</a>
+    <a href="../../code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../../code/flows/index.html">Flows through the code</a>
+    <a href="../../code/examples/index.html">Examples</a>
+    <a href="../../code/browser/index.html">Linux in the browser</a>
+    <a href="../../code/languages/index.html">Languages</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
+  </div>
+  <div>
+    <h4>Evidence, landscape, explain</h4>
+    <a href="../../evidence/index.html">Measurements</a>
+    <a href="../../evidence/status/index.html">What exists today</a>
+    <a href="../../evidence/research/index.html">Research note</a>
+    <a href="../../landscape/index.html">Landscape: policies at the centre</a>
+    <a href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+    <a href="../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+    <a href="../../landscape/market/index.html">Market &amp; competitors</a>
+    <a href="../../explain/storyboards/index.html">Storyboards</a>
+    <a href="../../explain/index.html">Mockups</a>
+    <a href="../../articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Project &amp; agents</h4>
+    <a href="../../project/about/index.html">About &amp; naming</a>
+    <a href="../../project/sources/index.html">The source documents</a>
+    <a href="../../project/engineering.html">Engineering</a>
+    <a href="../../project/comms.html">Comms &amp; release history</a>
+    <a href="../../llms.txt">llms.txt</a>
+    <a href="../../llms-full.txt">llms-full.txt</a>
+    <a href="../../index.md">index.md</a>
+    <a href="../../sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

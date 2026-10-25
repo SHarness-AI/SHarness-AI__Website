@@ -53,9 +53,9 @@
 | Cedar, OPA, OpenFGA, Permit, Oso | the business rules of `fs`, `net` and `kms` (ops, vault ids, approvals) | the policy's `business` section as Cedar or Rego, where a product already evaluates it | the enforcement in a separate process | them as the decision point |
 | Zenity, Obsidian, HiddenLayer, Prisma AIRS, Cisco AI Defense | monitoring, and blocking at API hooks | the audit lines, the policy hash and the barrier kinds as OpenTelemetry or OCSF traces (OWASP's Agent Control Standard) | a kernel-level *boundary* for their dashboards to point at | them as the consumer of the traces |
 
-## 7. The RUV projects and ruflow
+## 7. Ruflo and ruv.sgit
 
-claude-flow, agentic-flow, ruv-swarm and the sgit.ai network's integration with ruflow are being researched as of 25 Oct 2026; the page will say where a swarm's agents, hooks, MCP registry and key handling meet `sharness.bash`, `.llm`, `.kms` and a policy per worker.
+rUv's stack and the sgit.ai network's integration with it have their own page: [Ruflo and ruv.sgit](../ruflo/index.md). In one line: ruv.sgit compiles a written mandate per agent into Ruflo's policy engine (a Setting, in the agent's process); SHarness would enforce the same mandate below the agent (a Boundary), with each hive worker a harnessed process under its own policy.
 
 ## 8. What this page does not claim
 

@@ -4,7 +4,7 @@
 > the kernel and talking only over allowed, mutually authenticated connections, so a secret
 > lives in one place and a tricked process can only do its one job.
 
-Site version: v0.5.4. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04
+Site version: v0.5.5. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04
 in the CLI). No SHarness component is built.
 By Dinis Cruz; design session written up with Claude, 24 October 2026. All content CC BY 4.0.
 SHarness is unrelated to Sharness, the shell testing library.
@@ -98,6 +98,9 @@ SHarness is unrelated to Sharness, the shell testing library.
   per cell; `sharness-ai policy translate` writes four of the columns and prints the gap (E10)
 - /landscape/integrations/index.md — product by product: what it stands in for, what a policy
   translates into, what SHarness adds, what to keep
+- /landscape/ruflo/index.md — Ruflo (formerly Claude Flow) and rUv's stack in SHarness's terms;
+  what ruv.sgit.ai integrated (an ABP per agent compiled into Ruflo's policy engine, memory in
+  sgit vaults); the integration points table; a swarm under the harness; what to do first
 - /landscape/market/index.md — market and competitive analysis as of 24 Oct 2026: sandboxes and
   runtimes, guardrails, MCP and tool security, LLM gateways, secrets and identity, enterprise
   platforms, standards; every row sourced; where SHarness sits; threats to the thesis
