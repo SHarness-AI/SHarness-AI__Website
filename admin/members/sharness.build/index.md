@@ -32,10 +32,11 @@ One or more Claude Code sessions working from Dinis's requests. Built this site 
 
 | | |
 |---|---|
-| State | done (as of 25 Oct 2026) |
-| Last did | Site v0.5.9 (the front page for a user arriving cold, the animated explainers, the machines page, the adoption plan) and CLI 47b3402 (the README, the hello report template) on 25 Oct 2026, 23:10 UTC. |
-| Waiting for | R7: the release of the CLI's dev to main, which the adoption plan calls the single change that matters most for users |
-| Next | T6: E05 to E08 in the research note's order; T1: the process-tree proof of concept |
+| State | working (as of 26 Oct 2026) |
+| Last did | Site v0.5.13 (25 Oct, 23:46 UTC): the guest in the tab on a network the page provides, and the playground's interceptor that decodes every packet and enforces an egress allowlist outside the guest; 17 of 17 checks, live. Site v0.5.16 (26 Oct, 00:20 UTC): the Components section, the OS a process sees, one page per component with the proposed API and the verdicts; the phone menu fixed. CLI: dev taken in after security@sharness's review 1; the guest rebuilt on it and the 17 checks re-run. |
+| Waiting for | R7 (the CLI's dev to main; the editor said not before the reviews are done); the editor's reviews R6 and T3/T4; a decision on the proposed component APIs (REST on loopback), which are written as proposed on /components/ |
+| Branch | `claude/wonderful-cray-4xpawa` |
+| Next | A booted-state snapshot so the tab opens in seconds; SVG twins for the five ASCII design diagrams; T6 (E05 to E08) in the research note's order, starting with E06, the process-tree proof of concept, which is also sharness.bash's server half. |
 
 ## The policy
 

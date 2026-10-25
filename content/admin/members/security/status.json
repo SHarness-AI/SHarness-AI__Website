@@ -4,6 +4,6 @@
   "state": "working",
   "last_did": "Review 1 of the CLI, the policies, the bench, both pipelines and the site (25 findings; 5 High, all fixed on the CLI's dev at 997459a with 32 tests); the security section (threat model, register, reviews, hardening, supply chain); security.yml, codeql.yml, dependabot.yml, SECURITY.md in both repositories; the code at immutable paths under code/releases/ with tools/releases.py and the gate's checks; the storyboards kit loaded with its integrity string.",
   "waiting_for": "R15 (the repository and account settings on the lock-down list) and R16 (the process.env row); the first run of the rewritten release pipeline on the CLI's next push to main (SR-05 reads fixed, untested until then); on: editor",
-  "branch": "security/join",
+  "branch": "security/join (merged to dev as site v0.5.20)",
   "next": "Confirm the settings the editor sets (R15) and mark SR-24 fixed; implement process.env when R16 is decided; review 2 when the launcher exists as a script (E06); cut code/releases/v0/v0.2/v0.2.0/ the day the CLI tags v0.2.0."
 }

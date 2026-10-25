@@ -1,1 +1,8 @@
-{"member": "sherpa", "as_of": "2026-10-25T23:50Z", "state": "done", "last_did": "Site v0.5.11 and v0.5.12 (25 Oct 2026, 23:27 and 23:30 UTC): joined, the outreach plan, telemetry on every page, the lane opened and the first drain (T7 done, R10 done).", "waiting_for": "R9 (its key confirmed on pki.sgit.ai and the two environment secrets stored), R11 (a go per outreach channel); on: editor", "next": "T8 (the CLI repository ready for visitors), T9, T11; render the telemetry counts once there are enough"}
+{
+  "member": "sherpa",
+  "as_of": "2026-10-26T00:00Z",
+  "state": "waiting",
+  "last_did": "Site v0.5.11 and v0.5.12 (25 Oct, 23:27 and 23:30 UTC). Its session 'sharness.ai | sherpa@' idle since 23:32 UTC.",
+  "waiting_for": "R9 (its key confirmed, the two environment secrets stored), R11 (a go per outreach channel); on: editor",
+  "next": "T8 (the CLI repository ready for visitors), T9, T11; render the telemetry counts once there are enough"
+}

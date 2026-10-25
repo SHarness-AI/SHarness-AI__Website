@@ -32,9 +32,9 @@ A Claude Code session that joined on 25 October 2026 with the brief to build ref
 
 | | |
 |---|---|
-| State | waiting (as of 25 Oct 2026) |
-| Last did | Site v0.5.10 (25 Oct 2026, 23:23 UTC): the article One standard, many languages, Languages extended, roadmap decision 11 extended, comms R8. |
-| Waiting for | R8: the editor's decision on the languages, the repository layout and where the test vectors live; on: editor |
+| State | blocked (as of 26 Oct 2026) |
+| Last did | Site v0.5.10 (25 Oct, 23:23 UTC). Its session 'sharness.ai | dev@' has been idle since 23:25 UTC, blocked on R8. |
+| Waiting for | R8: the language set and order (it recommends JavaScript, then Go, then Rust; C as the floor), the repository layout, where the test vectors live; on: editor |
 | Next | The policy standard's test vectors on this site, once R8 is decided |
 
 ## The policy
