@@ -19,7 +19,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.10</a>
+  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.13</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -102,11 +102,15 @@
       <a class="sl" href="../project/comms.html">Comms: tasks &amp; requests</a>
       <a class="sl here" href="../project/releases.html">Release history</a>
       <a class="sl" href="../project/adoption/index.html">Getting users: the review and the plan</a>
+      <a class="sl" href="../project/outreach/index.html">Outreach: finding the people it is for</a>
+      <a class="sl" href="../project/agents/index.html">The agents and their keys</a>
+      <a class="sl" href="../project/telemetry/index.html">Telemetry: who reads this site</a>
       </div>
     </div>
   </div>
   <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__CLI">★ GitHub</a>
   <script src="../assets/nav.js" defer></script>
+  <script src="../assets/telemetry.js" data-root="../" defer></script>
 </div></nav>
 <main class="doc">
   <div class="crumb"><a href="../index.html">sharness.ai</a> / <a href="engineering.html">admin</a> / release history</div>
@@ -115,7 +119,10 @@
   <div class="tablewrap"><table class="vers">
     <thead><tr><th>Version</th><th>Date</th><th>What changed</th></tr></thead>
     <tbody>
-      <tr><td class="vnum">v0.5.10</td><td>25 Oct 2026</td><td>The guest in the tab is on a network the page provides (virtio-net to v86's fetch backend: the page is router, DHCP, DNS and the TLS client for every HTTP request on port 80), and <a href="../code/playground/index.html#network">the playground's interceptor</a> decodes every packet into a table with a detail pane and enforces an egress allowlist outside the guest. Three verdicts in one session: allowed by the page, blocked by the page (403), refused by the kernel before any packet left the process, with the DNS query Landlock does not see still visible. P5, a web-fetch profile. 17 checks held; <a href="../evidence/index.html#9-the-first-experiments-run-by-the-cli">Evidence §9</a>; an update on <a href="../articles/linux-in-a-tab.html#network">Linux in a tab</a>.</td></tr>
+      <tr><td class="vnum">v0.5.13</td><td>26 Oct 2026</td><td>The guest in the tab is on a network the page provides (virtio-net to v86's fetch backend: the page is router, DHCP, DNS and the TLS client for every HTTP request on port 80), and <a href="../code/playground/index.html#network">the playground's interceptor</a> decodes every packet into a table with a detail pane and enforces an egress allowlist outside the guest. Three verdicts in one session: allowed by the page, blocked by the page (403), refused by the kernel before any packet left the process, with the DNS query Landlock does not see still visible. P5, a web-fetch profile. 17 checks held; <a href="../evidence/index.html#9-the-first-experiments-run-by-the-cli">Evidence §9</a>; an update on <a href="../articles/linux-in-a-tab.html#network">Linux in a tab</a>. Merged over v0.5.10 to v0.5.12 from the other agents' sessions.</td></tr>
+      <tr><td class="vnum">v0.5.12</td><td>25 Oct 2026</td><td>The telemetry lane is open: Dinis supplied the access token (R10 done), both of sherpa@sharness's vaults were pushed and the lane configured at 23:40 UTC; the first drain at 23:45 UTC found 4 events (2 real readers, 2 from the agent's own headless check, classed as automation) and wrote the first <code>data/telemetry-report.json</code> (T7 done). <a href="telemetry/index.html">Telemetry</a> says live; <a href="agents/index.html">the vault register</a> carries the push times; the outreach plan's week 0 has its first item done.</td></tr>
+      <tr><td class="vnum">v0.5.11</td><td>25 Oct 2026</td><td>A third agent joins: <b>sherpa@sharness</b>, the Sherpa (the board, release scoping, outreach and telemetry), with a key on pki.sgit.ai operated by Dinis Cruz and two vaults, <code>sherpa-marketing</code> and <code>sherpa-telemetry</code>, their keys sealed to the root (<a href="agents/index.html">the agents and their keys</a>). <a href="outreach/index.html">The outreach plan</a>, the companion of <a href="adoption/index.html">getting users</a>: what there is to show, five audiences, the channels (the repository first, the lists, one Show HN, Reddit, LinkedIn, rUv and the Agentics Foundation, OWASP, the sandbox people), what rUv's playbook teaches, the rules every post follows, thirty days, the measures; nothing posted yet. <a href="telemetry/index.html">Telemetry</a>: every page sends one anonymous event, encrypted in the browser, to a write-only lane (<code>assets/telemetry.js</code>, <code>data/telemetry.json</code>, the postmaster and drain tools); the lane opens once the access token arrives (R10). Comms R9 to R11 and T7 to T11.</td></tr>
+      <tr><td class="vnum">v0.5.10</td><td>25 Oct 2026</td><td>A new author, sharness.dev, the developer agent, and its first article, <a href="../articles/one-standard-many-languages.html">One standard, many languages</a>: what in each component is a specification and what is an implementation; a component-by-language map for Python, JavaScript in Node and in the browser, Rust and Go; what each runtime adds to the attack surface; the adoption ladder from a policy file to a component; standards versioned with test vectors and a reviewed registry. <a href="../code/languages/index.html">Languages</a> carries the proposed set and order; decision 11 extended; <a href="comms.html#r8">R8</a> asks for the decision.</td></tr>
       <tr><td class="vnum">v0.5.9</td><td>25 Oct 2026</td><td>The front page rebuilt for a user arriving cold: what the kernel enforces today, three ways to start in 60 seconds, three animated explainers (the one idea, <code>hello</code> replayed, a kernel in a tab; SVG, no script, also in the GitHub README), who it is for, and the ask: run <code>hello --json</code> and report your machine. A "Try it" group first in the nav; a share card. New pages: <a href="../evidence/machines/index.html">hello on your machine</a> (every reported run, failures first) and <a href="../project/adoption/index.html">getting users: the review and the plan</a>. In the CLI: a two-field hello report template, the report line in <code>hello</code>, the README rewritten.</td></tr>
       <tr><td class="vnum">v0.5.8</td><td>25 Oct 2026</td><td>The playground fixed: on the live site a Pyodide command could run before the example policies were in place (<code>policy hash policies/…</code> found no file); every command now waits for the whole start-up, and the test slows the policy files to prove it (11 of 11 against sharness.ai). The guest and the wheel rebuilt from the CLI with three fixes its new CI found (Python 3.11 support, <code>translate -- CMD</code> on 3.11, <code>hello</code> in a virtualenv); <a href="../articles/linux-in-a-tab.html">the article</a> lists them under what did not work.</td></tr>
       <tr><td class="vnum">v0.5.7</td><td>25 Oct 2026</td><td>A milestone article, <a href="../articles/linux-in-a-tab.html">Linux in a tab</a>: Dinis's screenshots of a real kernel enforcing a Process Behaviour Policy in Chrome (6 of 6 at 28.5 s), with six infographics: the stack in the tab, what <code>run</code> does syscall by syscall, what held where, the ELF interpreter finding, one policy hashed three ways, how it fits together. <a href="../code/playground/index.html">The playground</a>: <code>pip install sharness-ai</code> in Pyodide, a shell on the Linux guest, one policy hashed by WebCrypto, Pyodide and Linux (11 of 11 checks in headless Chromium). The header's GitHub link now goes to the CLI repository.</td></tr>
@@ -143,7 +150,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../project/releases.html">v0.5.10</a> · <a href="../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../project/releases.html">v0.5.13</a> · <a href="../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>
@@ -192,6 +199,10 @@
     <a href="../project/sources/index.html">The source documents</a>
     <a href="../project/engineering.html">Engineering</a>
     <a href="../project/comms.html">Comms &amp; release history</a>
+    <a href="../project/adoption/index.html">Getting users</a>
+    <a href="../project/outreach/index.html">Outreach</a>
+    <a href="../project/agents/index.html">The agents and their keys</a>
+    <a href="../project/telemetry/index.html">Telemetry</a>
     <a href="../llms.txt">llms.txt</a>
     <a href="../llms-full.txt">llms-full.txt</a>
     <a href="../index.md">index.md</a>

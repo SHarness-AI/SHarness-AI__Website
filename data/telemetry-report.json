@@ -1,0 +1,63 @@
+{
+ "as_of": "2026-10-25",
+ "drained_now": 4,
+ "events": 4,
+ "test_or_undecryptable": 0,
+ "sessions": 2,
+ "groups": {
+  "readers": 2,
+  "editor_and_team": 1,
+  "automation": 2
+ },
+ "by_day": [
+  [
+   "2026-10-25",
+   4
+  ]
+ ],
+ "by_path": [
+  [
+   "/evidence/index.html",
+   1
+  ],
+  [
+   "/landscape/index.html",
+   1
+  ]
+ ],
+ "by_country": [
+  [
+   "GB",
+   2
+  ]
+ ],
+ "by_referrer": [
+  [
+   "sharness.ai",
+   2
+  ]
+ ],
+ "by_screen": [
+  [
+   "desktop",
+   2
+  ]
+ ],
+ "by_version": [
+  [
+   "v0.5.11",
+   2
+  ]
+ ],
+ "by_agent": [
+  [
+   "(none)",
+   2
+  ],
+  [
+   "webdriver",
+   2
+  ]
+ ],
+ "note": "Counts over events received in the lane; by_* over readers (no automation, no declared role). Every event is an untrusted claim: the token and the public key are published, so rows can be forged or flooded. Visitors with blockers do not appear. No row leaves the vault."
+}

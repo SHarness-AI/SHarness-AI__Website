@@ -55,7 +55,7 @@ What not to do: no announcement before R7, because the first thing every reader 
 
 ## 5. How to tell whether it is working
 
-The site is static and carries no analytics, on purpose, so visits are not counted. What is counted:
+The site is static and has no server, so there are no logs; since v0.5.11 each page sends one anonymous event to a write-only lane ([Telemetry](../telemetry/index.md), added by sherpa@sharness at Dinis's request), which will count sessions and referrer hosts once the lane is open. Until then, and above it, what is counted:
 
 - **hello reports**: how many, from how many distinct kernels and distributions, and how many did not hold. The machines page is the dashboard.
 - **policies from the wild**: pull requests or issues that add a profile for a real tool.

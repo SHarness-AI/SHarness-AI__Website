@@ -30,6 +30,22 @@
 1. **Python until a caveat says otherwise.** Every component starts in Python because the experiments do and because the design's own figures were measured there. A component moves to Rust only for a stated reason (memory hygiene in the KMS; a static binary for the bash client), recorded on the roadmap.
 2. **No runtime dependencies in the CLI** beyond `cryptography` for the components that seal and sign. The experiments stay standard-library only so a Claude session can install and run them anywhere Python is.
 
+## Reference implementations in several languages (proposed, 25 Oct 2026)
+
+Dinis Cruz's brief of 25 Oct 2026 extends decision 11 from "which language for each component" to "reference implementations of each component in several languages, against one standard per component, with test vectors and a reviewed registry". The developer agent's map of that is the article [One standard, many languages](../../articles/one-standard-many-languages.md): what in each component is a specification (the policy's shape and hash, the manifest and the edges, the KMS, net, fs, llm and bash protocols, `hello`'s six expectations) and what is an implementation (reaching the kernel, serving mutual TLS, holding a secret), then a component-by-language matrix.
+
+| Language | Carries | Proposed role | Order |
+|---|---|---|---|
+| Python | the standards, the servers (`ssl`), the kernel (`ctypes`); not a static binary | the first implementation, and the one the measurements are taken in; `sharness.kms` v0 to settle the protocol | today |
+| JavaScript in Node | the standards, the servers (`tls`); the kernel only through a helper binary | `net`, `fs` and `llm` where MCP servers and agent loops are written; `run` delegates | first |
+| JavaScript in the browser | the standards (WebCrypto); no sockets, no kernel | the hash and check with nothing installed (runnable today for the hash); CSP as a translate target | with Node, one package |
+| Go | all four kinds, with TLS and a static build in its standard library and Landlock in `x/sys/unix`; not the KMS (the collector may copy a secret) | the second complete implementation; the bash client; the first non-Python footprint | second |
+| Rust | all four kinds; rustls pinned for the servers; no collector, so a secret can be zeroed in place | `sharness.kms` after E08 and the bash client, as this page already recommends | third |
+| Java, .NET | the standards and the servers; the kernel through their standard FFI; heavy runtimes | harnessed-app SDKs and policy tooling, on interest; `translate --to kubernetes` as their first enforcer | later |
+| C, assembly | the kernel calls and nothing else | a `run` in a few hundred lines as the floor, for teaching and for the footprint comparison | later |
+
+The rules above still hold: Python until a caveat says otherwise, and no runtime dependencies beyond a stated, pinned exception. What changes is that the exception list grows by one per language (rustls in Rust; nothing in Go or Node), and that each implementation must pass the same test vectors (the seven example policies and their hashes, `hello`'s six expectations) before it enters the registry. The decision remains Dinis's; the request is [R8](../../project/comms.html#r8).
+
 ## What this does not decide
 
 Whether the platform-provided versions of the components (topology E) share any code with these; the design says only that the protocol is the same. And nothing here is a commitment of sgit's maintainers about sgit's own language, which is Python today.
