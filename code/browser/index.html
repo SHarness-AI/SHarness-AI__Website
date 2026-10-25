@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.9</a>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.10</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -141,7 +141,7 @@
 <li><b>The console is bytes.</b> The serial line hands over one byte at a time; <code>hello</code>'s <code>✔</code> is three of them. The runners decode with a streaming UTF-8 decoder, one byte per call.</li>
 </ul>
 <p><b>The playground</b> (25 Oct 2026): the same guest booted with <code>sharness.mode=shell</code> gives a shell on the serial line, next to Pyodide with <code>pip install sharness-ai</code>; <a href="../playground/index.html">try it</a>. Dinis's own run of the page in Chrome, the same day: <code>hello</code> held at 28.5 s and the guest was done at 32.2 s, by the page's clock; the story is the article <a href="../../articles/linux-in-a-tab.md">Linux in a tab</a>.</p>
-<p>The build (<a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/browser/build_guest.py"><code>build_guest.py</code></a>, standard library only) fetches the pinned Alpine packages, unpacks them with <code>tarfile</code>, adds the package and the policies, writes the initramfs with its own cpio writer and assembles the page; a rebuild from the cache takes seconds. v86 is the one dependency, pinned by version, and lives only under <code>experiments/browser/</code>. Not yet: a network backend (v86 can proxy over <code>fetch</code> or a WebSocket), so the 443 probe can connect without a policy and fail with <code>EACCES</code> under one; a booted-state snapshot so the page opens in seconds; a non-root user in the guest; a kernel without Landlock as the negative control.</p>
+<p>The build (<a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/browser/build_guest.py"><code>build_guest.py</code></a>, standard library only) fetches the pinned Alpine packages, unpacks them with <code>tarfile</code>, adds the package and the policies, writes the initramfs with its own cpio writer and assembles the page; a rebuild from the cache takes seconds. v86 is the one dependency, pinned by version, and lives only under <code>experiments/browser/</code>. <b>Later the same day: the network.</b> The guest got a virtio-net card and v86's fetch backend: the page answers as router, DHCP and DNS, and turns each HTTP request on port 80 into the browser's <code>fetch()</code> over TLS. An interceptor on the playground decodes every frame and vetoes hosts outside an egress allowlist, outside the guest: allowed, blocked and kernel-refused can be told apart on screen, and the DNS query that Landlock does not see is visible under a ports-only policy. Measured on <a href="../../evidence/index.html#9-the-first-experiments-run-by-the-cli">Evidence §9</a>; the story in <a href="../../articles/linux-in-a-tab.md#network">Linux in a tab</a>. Not yet: a booted-state snapshot so the page opens in seconds; a non-root user in the guest; a kernel without Landlock as the negative control; TLS from inside the guest.</p>
 <p>The rest of this page is the research of the same morning that chose this build, kept as written (<span class="asof">as of 25 Oct 2026</span>), with what it got right and the one inference it got wrong.</p>
 <h2 id="1-what-the-guest-has-to-offer">1. What the guest has to offer</h2>
 <p><code>hello</code> and <code>run</code> call Landlock through syscalls 444, 445 and 446, probe <code>memfd_secret</code> as 447, and use <code>unshare</code> for the empty network namespace. So the guest needs a real Linux kernel of 6.7 or later (TCP rules, ABI 4), ideally 6.15 or later (ABI 7, the same as the measured environment), built with <code>CONFIG_SECURITY_LANDLOCK=y</code> and <code>landlock</code> in its LSM list, user and network namespaces, cgroups, and Python 3.11 or later with <code>ctypes</code>.</p>
@@ -211,7 +211,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../../project/releases.html">v0.5.9</a> · <a href="../../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.10</a> · <a href="../../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>

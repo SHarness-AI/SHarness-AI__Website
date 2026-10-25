@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.9</a>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.10</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -132,7 +132,7 @@
 <tr><td>No share card</td><td>A link posted anywhere showed no image</td><td>An <code>og:image</code> for the front page</td></tr>
 <tr><td>The nav: six groups named for a reviewer (Evidence, Landscape, Explain)</td><td>A user looks for Try, Learn, Code</td><td>"Try it" added first. Open: fold Explain into Design and Evidence</td></tr>
 <tr><td>The design pages still draw in ASCII</td><td>Their markdown twins need the same text, and the agent-readable format was chosen on purpose</td><td>Open: an SVG twin for each of the five design diagrams, kept next to the ASCII, not instead of it</td></tr>
-<tr><td>The guest in the tab has no network</td><td>The port-443 probe shows "allowed but unreachable" instead of a connection that works without a policy and fails under one</td><td>Open: v86's <code>fetch</code> or WebSocket backend, which is also where an egress allowlist outside the guest would live</td></tr>
+<tr><td>The guest in the tab has no network</td><td>The port-443 probe shows "allowed but unreachable" instead of a connection that works without a policy and fails under one</td><td>Done the same day: v86's <code>fetch</code> backend, and an interceptor on the playground that shows every packet and enforces an egress allowlist outside the guest</td></tr>
 <tr><td>The tab takes 30 to 90 seconds to boot</td><td>Most visitors leave before <code>landlock: Up and running.</code></td><td>Open: a booted-state snapshot, which v86 supports, so the page opens in seconds</td></tr>
 </tbody>
 </table></div>
@@ -179,7 +179,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../../project/releases.html">v0.5.9</a> · <a href="../../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.10</a> · <a href="../../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>

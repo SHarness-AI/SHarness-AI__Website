@@ -23,7 +23,7 @@ Read as a visitor who runs agents and has ninety seconds. The site at v0.5.8 was
 | No share card | A link posted anywhere showed no image | An `og:image` for the front page |
 | The nav: six groups named for a reviewer (Evidence, Landscape, Explain) | A user looks for Try, Learn, Code | "Try it" added first. Open: fold Explain into Design and Evidence |
 | The design pages still draw in ASCII | Their markdown twins need the same text, and the agent-readable format was chosen on purpose | Open: an SVG twin for each of the five design diagrams, kept next to the ASCII, not instead of it |
-| The guest in the tab has no network | The port-443 probe shows "allowed but unreachable" instead of a connection that works without a policy and fails under one | Open: v86's `fetch` or WebSocket backend, which is also where an egress allowlist outside the guest would live |
+| The guest in the tab has no network | The port-443 probe shows "allowed but unreachable" instead of a connection that works without a policy and fails under one | Done the same day: v86's `fetch` backend, and an interceptor on the playground that shows every packet and enforces an egress allowlist outside the guest |
 | The tab takes 30 to 90 seconds to boot | Most visitors leave before `landlock: Up and running.` | Open: a booted-state snapshot, which v86 supports, so the page opens in seconds |
 
 What the review did not find wrong, and kept: the honesty rules (measured only with method, environment and date; the caveat printed with every result), the markdown twin of every page, the sourced landscape, and the articles. Those are what a user who stays will trust.

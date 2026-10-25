@@ -88,7 +88,7 @@ The spread is the CPU underneath, not the harness: Dinis's machine runs the emul
 The first boot ran `hello` fine and then failed both `run` checks with `[Errno 13] Permission denied`. `hello` builds its own policy, which lists `/lib`; the older example lists only `/usr` and `/bin`. When the kernel executes a dynamic binary it also maps the program's interpreter, named in its `PT_INTERP` header, and Landlock checks the execute right on that file too. Every profile now lists `/lib` and `/lib64` as executable, and a test keeps them so; `translate` will have to carry the same rule to every target. The rest, smaller:
 
 - **The serial line is bytes.** The `✔` in `hello`'s output is three of them, and the first page printed them as three Latin-1 characters. The runners now decode a byte at a time with a streaming UTF-8 decoder.
-- **The guest has no network.** So port 443 shows `ENETUNREACH`: the policy allowed the connection and there was nowhere to go. A connection that succeeds without a policy and fails with `EACCES` under one needs v86's `fetch` or WebSocket backend. Not built.
+- **The guest had no network, at first.** So port 443 showed `ENETUNREACH`: the policy allowed the connection and there was nowhere to go. Later the same day the guest got a network card and the page became its network; see the update below.
 - **"Power off not available: System halted instead."** v86 has no ACPI power-off; the guest halts, which is the same thing for a page.
 - **The playground's shell.** Alpine's busybox has no `cttyhack`, so the shell gets its controlling terminal by `setsid` and opening `ttyS0`; `ash` also asks the terminal for its cursor position and wraps at 80 columns, so the page strips escape sequences and the guest sets 160 columns.
 - **Pyodide crashed where it should refuse.** `run` imported `resource` and `hello` started a subprocess, and WebAssembly has neither. Both now refuse with exit 126 and a sentence saying there is no kernel to enforce anything.
@@ -123,6 +123,20 @@ Dinis's next question was whether the CLI could be installed and run in the brow
 
 Edit the policy on the right, hash it again, and one changed character changes all three. "Use it" copies your policy into both runtimes (into the guest as base64 over the serial line, the only way in), so `sharness-ai run --policy policies/my-policy.json -- …` runs under it. Take `/lib` out of `exec` and watch the interpreter lesson happen to you. A headless test drives both tabs end to end, eleven checks, all held.
 
+## Update, later the same day: the page is the network, and it shows every packet {#network}
+
+![The playground's network panel under the Linux terminal: a table of flows with time, protocol, destination, what, verdict and result: DNS queries for sharness.ai, a TCP connect to port 80, an HTTP GET to sharness.ai allowed with 200; below it the detail pane with the request and response headers.](/articles/images/linux-in-a-tab/interceptor.webp)
+
+*Every frame the guest sends is decoded by the page. The HTTP row is a request the page allowed and made with its own `fetch()`; the detail pane shows both sets of headers.*
+
+Dinis asked for two more things: a network for the guest that runs in the browser, and an interceptor that shows all the traffic, in the spirit of the proxies developers put between a program and the world to watch what it says. Both exist now, and they turned out to be one mechanism. v86 can present the guest with a network card whose packets go to the page, and the page can answer them: it is the router, the DHCP server and the DNS of a small fake subnet, and it turns each HTTP request on port 80 into the browser's own `fetch()`, over TLS, so the page is the TLS client, where the name is seen. The guest's `wget http://sharness.ai/llms.txt` returns the file.
+
+Because every packet passes through JavaScript on the page, the page can decode it (ARP, DHCP, DNS with record types, ICMP, TCP with its flags, HTTP request and status lines) into a table of flows, and it can refuse: an egress allowlist of hostnames, enforced outside the guest by code the guest cannot reach, root included. A host not on the list gets a 403 before any `fetch()` happens. That is a Boundary for everything inside the guest, and it is the shape of `sharness.net` in the design, played by the page.
+
+Three verdicts show up in one session, and the test checks each. No policy, `sharness.ai`: allowed by the page, 200. No policy, `example.com`: blocked by the page, 403, before any request left the browser. Under P1, which allows TCP 443 only: refused by the kernel, `Permission denied` on the connect, and no TCP or HTTP row appears at all, because nothing left the process. Under P5, a new profile for a tool that fetches pages (80 and 443): the flow, with its 200. One more thing the panel shows that a page of text could only assert: under P1 the DNS query still appears. Landlock does not see UDP, and a policy with ports and no namespace lets the name resolution out. That gap is in the design pages; now it is on screen.
+
+Limits: only HTTP on port 80 is served, since there is no TLS passthrough; a host that sends no CORS header fails in the browser and the guest sees a 502; the guest's DNS answers are the page's fake addresses, mapped back to names. Seventeen checks held in headless Chromium, <span class="asof">as of 25 Oct 2026</span>. Try it in [the playground](../code/playground/index.html#network).
+
 ## How it fits together {#fits}
 
 ![From a mandate to a kernel. An Agent Behaviour Policy (riskmandate.ai) is written by people for a role. A Process Behaviour Policy is its executable form for one process, named by one hash. Enforcers take the hash: sharness-ai run with Landlock (runnable, measured this milestone), policy translate for bubblewrap, Docker, Claude Code and Kubernetes (runnable, writes the form, not run here), and the launcher above the agent (designed). Underneath: applied to a child it is a Boundary for the child and a Setting for the process that applied it; only a launcher above the agent makes it a Boundary for the agent.](/articles/images/linux-in-a-tab/fits-together.svg)
@@ -138,7 +152,7 @@ What it does not change is who applies the policy. On the page, `/init` applies 
 - **No SHarness component exists.** The guest runs experiments E01 to E04 and the example policies. The launcher, the KMS and the rest are designs.
 - **The tab proves the kernel code paths, not the host.** The confined process is the guest's. Nothing in a browser says anything about the machine running it, and the policy is applied by a process to its child: a Boundary for the child, a Setting for that process.
 - **The CPU is emulated.** Timings in the browser and in Node describe the page, not the harness. The 0.6-second figure on real hardware is the one to compare.
-- **Port 443 was never reached.** The guest has no network backend; the policy's allowance is shown by the absence of `EACCES`, not by a connection.
+- **Port 443 is never reached from inside the guest.** The page serves port 80 by `fetch()` and resets other ports; on the scripted page the policy's allowance of 443 is shown by the absence of `EACCES`, not by a connection. Port 80 connections do succeed, through the page.
 - **Dinis's timings are one run** on Dinis's own machine, read off the page's clock in the screenshots; the browser and machine were not otherwise recorded. The other runs were in one Claude Code cloud session on the same day.
 - **The kernel is trusted.** Root and kernel compromise are out of scope, as everywhere on this site.
 
