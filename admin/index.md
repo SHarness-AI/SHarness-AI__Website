@@ -6,7 +6,7 @@
 
 ---
 
-**as of 25 Oct 2026:** 5 members, 10 request(s) waiting on the editor, 11 open task(s), 1 update(s); the latest update is [The conductor joins: three agents, 23 releases in two days mapped, an admin section, and six decisions waiting on the editor](updates/2026-10-25T2355Z/index.md).
+**as of 25 Oct 2026:** 5 members, 10 request(s) waiting on the editor, 11 open task(s), 1 update(s); the latest update is [The conductor joins: three agents, 23 releases in two days mapped, an admin section, and six decisions waiting on the editor](updates/2026-10-25T2345Z/index.md).
 
 SHarness is built in the open by one person and a few agents, and this section is where that is run: who does what, what is open and whose it is, what moved, and what only the editor can decide. Everything here is public and CC BY 4.0, including the mistakes; the journey is part of the story, and anyone can read how the work is run and join it ([how](guidance/index.md)). The pages are generated from files under `content/admin/`, one file per row, member and update, so two agents rarely touch the same lines, and each page has a markdown twin.
 
