@@ -1,16 +1,17 @@
 # The code: where it is and what it does
 
-> **Status: experiments, as of 25 Oct 2026.** The site publishes the design; the code lives in one repository, [SHarness-AI/SHarness-AI__CLI](https://github.com/SHarness-AI/SHarness-AI__CLI), and today it carries the first four experiments, not a component. This page is the map: the package, its modules, the commands, and where each thing on this site has code behind it.
+> **Status: experiments, as of 25 Oct 2026.** The site publishes the design; the code lives in one repository, [SHarness-AI/SHarness-AI__CLI](https://github.com/SHarness-AI/SHarness-AI__CLI), and today it carries experiments, not a component. This page is the map: the package, its modules, the commands, and where each thing on this site has code behind it.
 
 ## Where everything is
 
 | What | Where | Status |
 |---|---|---|
 | the `sharness-ai` package | [`sharness_ai/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/sharness_ai) on the `dev` branch; v0.1.0 on [PyPI](https://pypi.org/project/sharness-ai/) carries only `--version` | runnable from the repository; unreleased |
-| the experiments, numbered | [`experiments/README.md`](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md) | E01 to E04 runnable; E05 to E08 planned |
-| the example policies | [`experiments/policies/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/experiments/policies) | runnable |
+| the experiments, numbered | [`experiments/README.md`](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md) | E01 to E04, E09 and E10 runnable; E05 to E08 planned |
+| the example policies: two minimal, five profiles P0 to P4 | [`experiments/policies/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/experiments/policies) | runnable; run natively 25 Oct 2026 |
+| E09, the harness under a second kernel: the guest build, the Node and browser runners, the chroot form | [`experiments/browser/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/experiments/browser): `build_guest.py` (standard library), `init.sh`, `page.html`, `boot_node.mjs`, `boot_browser.mjs`, `chroot_native.sh`; v86 pinned in its own `package.json` | runnable; measured 25 Oct 2026 ([Linux in the browser](browser/index.md)) |
 | the skill for a Claude Code session | [`.claude/skills/sharness-hello/SKILL.md`](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/.claude/skills/sharness-hello/SKILL.md) | runnable |
-| the tests | [`tests/unit/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/tests/unit), 40 tests; Landlock tests skip where it is absent | green on 25 Oct 2026 |
+| the tests | [`tests/unit/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/tests/unit), 53 tests; Landlock tests skip where it is absent | green on 25 Oct 2026 |
 | the ground rules for agents working in the repository | [`CLAUDE.md`](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/CLAUDE.md) | |
 | the release pipeline | [`.github/workflows/workflow.yml`](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/.github/workflows/workflow.yml): tests, version bump, tag, PyPI by Trusted Publishing | runs on a push to `main` |
 | the browser mockups | this site, [`explain/mockups/`](https://github.com/SHarness-AI/SHarness-AI__Website/tree/dev/explain/mockups): hand-written HTML, no build | published |
@@ -43,6 +44,7 @@ sharness-ai policy hash|check FILE                        E02  the one value the
 sharness-ai policy translate FILE --to T [-- CMD…]        E10  the policy in another enforcer's form, and the gap
 sharness-ai run --policy FILE [--expect-hash H] -- CMD…   E03  one command under a policy
 sharness-ai hello [--json]                                E04  the acceptance test, one child process
+cd experiments/browser && npm run node|browser|native     E09  the same, under a second kernel (v86) or through chroot
 ```
 
 Install and use: [The CLI](cli/index.md). Each command's output and caveats: [Examples](examples/index.md). What each shows and does not show: [Mockups and experiments](experiments/index.md).
@@ -54,7 +56,7 @@ Install and use: [The CLI](cli/index.md). Each command's output and caveats: [Ex
 | the v0 Process Behaviour Policy and its hash | yes | `policy.py`; the [browser mockup](../explain/mockups/policy-hash.html) reproduces it |
 | Landlock file, exec and port rules; `network: "none"` | yes | `landlock.py`, `run.py` |
 | the grant and the delta | yes | `probe.py` |
-| the memo's acceptance test | yes, for one child process | `hello.py` |
+| the memo's acceptance test | yes, for one child process | `hello.py`; also under a second kernel in Node and in a tab, [E09](browser/index.md) |
 | the launcher, `sharness.kms`, `.net`, `.fs`, `.bash`, `.llm` | **no** | designed on [Components](../design/components/index.md); E05 to E08 are the next pieces |
 | mutual TLS with a session CA; the edge matrix | measured by hand, not yet a command | E05 |
 | memory and process-count caps (rlimits and cgroups) | yes | `limits.py`, measured 25 Oct 2026 |

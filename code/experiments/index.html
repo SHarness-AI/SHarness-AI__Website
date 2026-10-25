@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.5</a>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.6</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -103,11 +103,11 @@
 <p>Dinis Cruz's memo of 24 October 2026 sets the method: <em>start with very simple examples, each component done in isolation, as simple, as fast and as slim as possible; then harden; then test</em>. This page is that method as a ladder. Each rung is something a person can run, in the browser, in any Claude session, or on a Linux box, and each says what it shows and what it does not.</p>
 <h2 id="the-ladder">The ladder</h2>
 <div class="tablewrap"><table>
-<thead><tr><th>Rung</th><th>Where it runs</th><th>What is on it</th><th>Status <span class="asof">as of 24 Oct 2026</span></th></tr></thead>
+<thead><tr><th>Rung</th><th>Where it runs</th><th>What is on it</th><th>Status <span class="asof">as of 25 Oct 2026</span></th></tr></thead>
 <tbody>
-<tr><td>0</td><td><b>the browser</b>, nothing installed</td><td>the <a href="../../explain/mockups/policy-hash.html">policy hash mockup</a> and the <a href="../../explain/mockups/edges.html">edge matrix mockup</a>; the <a href="../../explain/storyboards/index.html">storyboards</a>; E09, a real kernel in a tab running <code>hello</code> (<a href="../browser/index.html">researched</a>)</td><td>published; E09 not built</td></tr>
-<tr><td>1</td><td><b>any Claude session, any laptop</b> (Python 3.11+)</td><td>E01 <code>sharness-ai probe</code>, E02 <code>sharness-ai policy hash</code>, E10 <code>sharness-ai policy translate</code></td><td>runnable</td></tr>
-<tr><td>2</td><td><b>Linux</b> (Landlock, 5.13+; TCP rules 6.7+); a Claude Code session via the skill</td><td>E03 <code>sharness-ai run</code>, E04 <code>sharness-ai hello</code></td><td>runnable; E04 measured 24 Oct 2026</td></tr>
+<tr><td>0</td><td><b>the browser</b>, nothing installed</td><td>the <a href="../../explain/mockups/policy-hash.html">policy hash mockup</a> and the <a href="../../explain/mockups/edges.html">edge matrix mockup</a>; the <a href="../../explain/storyboards/index.html">storyboards</a>; E09, a real kernel in a tab running <code>probe</code>, <code>hello</code> and <code>run</code> (<a href="../browser/demo/index.html">the page</a>, <a href="../browser/index.html">the write-up</a>)</td><td>published; E09 measured 25 Oct 2026</td></tr>
+<tr><td>1</td><td><b>any Claude session, any laptop</b> (Python 3.11+; Node for E09)</td><td>E01 <code>sharness-ai probe</code>, E02 <code>sharness-ai policy hash</code>, E10 <code>sharness-ai policy translate</code>; E09 in Node, the second kernel without a browser</td><td>runnable; E09 measured 25 Oct 2026</td></tr>
+<tr><td>2</td><td><b>Linux</b> (Landlock, 5.13+; TCP rules 6.7+); a Claude Code session via the skill</td><td>E03 <code>sharness-ai run</code>, E04 <code>sharness-ai hello</code>; the <a href="#the-example-policies">example policies</a> P0 to P4; E09's chroot form</td><td>runnable; E04 measured 24 and 25 Oct 2026, P0 to P4 and the chroot 25 Oct 2026</td></tr>
 <tr><td>3</td><td>Linux, a checkout, <code>cryptography</code></td><td>E05 session CA and the edge matrix over mutual TLS; E06 the process-tree proof of concept; E07 <code>sharness.llm</code> v0; E08 <code>sharness.kms</code> v0</td><td>planned</td></tr>
 <tr><td>4</td><td>a launcher <b>above</b> the agent: a script on a laptop, then a platform</td><td>the components as <code>sharness.&lt;role&gt;</code> processes under one manifest hash</td><td>designed</td></tr>
 </tbody>
@@ -126,10 +126,24 @@
 <tr><td>E06</td><td>the process-tree proof of concept: a mini orchestrator that cannot exec a shell, and a bash server outside its domain</td><td>every side door on <a href="../../design/process-tree/index.html">Enforcing the process tree</a> closed or not</td><td>runs only under the <a href="../../design/process-tree/index.html#4-safety-rules-for-testing-inside-a-live-agent-session">safety rules</a></td></tr>
 <tr><td>E07</td><td><code>sharness.llm</code> v0: a Messages API pass-through at <code>ANTHROPIC_BASE_URL</code> with a secret filter on every tool result and user message</td><td>the transcript leak closed for every tool at once</td><td>the real API key via the KMS; that is E08</td></tr>
 <tr><td>E08</td><td><code>sharness.kms</code> v0: an identity made in-process, a sealed <code>m1</code> opened, derived keys re-sealed to a one-time key, never a clear key printed</td><td>the KMS protocol's <code>unwrap</code>, end to end, locally</td><td>remote binding; hardware keys</td></tr>
-<tr><td>E09</td><td>the harness in a browser tab: a real 32-bit Linux kernel in v86 (Alpine's <code>linux-virt</code>, Landlock on) running <code>hello</code>, and a kernel without Landlock as the negative control (<a href="../browser/index.html">Linux in the browser</a>)</td><td>the same syscalls on an emulated CPU, for anyone with a browser</td><td>timings; anything about the host; <code>memfd_secret</code>'s physical property. Researched, not built</td></tr>
+<tr><td>E09</td><td>the harness under a second kernel: Alpine 3.23 x86 with Alpine's <code>linux-virt</code> (Landlock on) booted by v86 in Node and in a browser tab, running <code>probe</code>, <code>hello</code>, <code>run</code> and the example policies; the same i386 binaries through chroot on the host kernel (<a href="../browser/index.html">Linux in the browser</a>)</td><td>the same syscalls on a second kernel, for anyone with a browser; the guest's hashes equal the host's</td><td>timings as a measurement of anything; anything about the host; <code>memfd_secret</code>'s physical property; a connection (the guest has no network backend). Measured 25 Oct 2026</td></tr>
 <tr><td>E10</td><td><code>sharness-ai policy translate FILE --to bwrap|docker|claude-code|kubernetes</code>: the same policy in another enforcer's form, followed by what that target does not enforce</td><td>the policy as the centre and every enforcer as a target; the <a href="../../landscape/enforceability/index.html">enforceability matrix</a> made executable</td><td>enforcement by the target: nothing is run against it here. Runnable</td></tr>
 </tbody>
 </table></div>
+<h2 id="the-example-policies">The example policies</h2>
+<p><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/policies/README.md"><code>experiments/policies/</code></a> carries two minimal examples and five profiles, P0 to P4, with <code>/work</code> as the workspace. They are the Process Behaviour Policies the ladder is climbing towards, written in the v0 shape so they can be hashed, enforced and translated today:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Profile</th><th>Who it is for</th><th>Writes</th><th>Network</th><th>Caps</th></tr></thead>
+<tbody>
+<tr><td>P0 <code>p0-hello-world</code></td><td>a hello world</td><td>none</td><td>none</td><td>64 MiB, 8 processes</td></tr>
+<tr><td>P1 <code>p1-agent-session</code></td><td>a coding agent's session (a Claude Code session, an orchestrator)</td><td><code>/work</code>, <code>/tmp</code></td><td>TCP 443</td><td>4 GiB, 512</td></tr>
+<tr><td>P2 <code>p2-tool-server</code></td><td>a tool or MCP server on stdio</td><td>none</td><td>none</td><td>512 MiB, 16</td></tr>
+<tr><td>P3 <code>p3-newsroom-agent</code></td><td>the sgit.ai newsroom agent: a vault checkout in, articles out</td><td><code>/work/out</code></td><td>TCP 443</td><td>1 GiB, 64</td></tr>
+<tr><td>P4 <code>p4-sgit</code></td><td>the sgit CLI: the vault checkout and <code>/tmp</code></td><td><code>/work/vault</code>, <code>/tmp</code></td><td>TCP 443</td><td>512 MiB, 16</td></tr>
+</tbody>
+</table></div>
+<p>How they compose: a launcher applies P1 to the agent's session; the session applies P2 to each tool it starts, a Boundary for the tool and a Setting for the session. P3 and P4 are two processes of one workflow with different writes: the agent writes articles, sgit writes the vault, neither can do the other's job. What v0 cannot say yet, in roadmap order: hosts (ports only; the hosts are <code>sharness.net</code>'s allowlist), UDP, uids and seccomp, signing, layers composed by intersection.</p>
+<p>Run natively on 25 Oct 2026 (the same session as <a href="../../evidence/index.html#9-the-first-experiments-run-by-the-cli">Evidence §9</a>, uid 0, against a stand-in workspace), &lt;span class="asof"&gt;<span class="asof">as of 25 Oct 2026</span>&lt;/span&gt;: P0 refused a 200 MiB allocation under its 64 MiB cap; P1 connected on 443, was refused on 80 and wrote the workspace; P2 was refused every write and the connect; P3 wrote <code>out/</code> and was refused <code>vault/</code>; P4 ran <code>sgit 0.24.0</code> (<code>--version</code>, <code>pki list</code>), wrote <code>vault/</code>, was refused <code>out/</code>, connected on 443 and saw its own hash in <code>SHARNESS_AI_POLICY_HASH</code>. In the E09 guest the seven files check and hash to the same values, and P0, P1 and P2 held the same way. One rule they all carry: the ELF interpreter (<code>/lib/ld-musl-*.so.1</code> on Alpine) must be executable, or nothing dynamic starts.</p>
 <h2 id="e04-measured">E04, measured</h2>
 <p>Run on 24 October 2026 in one Claude Code cloud session (Ubuntu 24.04, Linux 6.18, Landlock ABI 7, uid 0, Python 3.13), <span class="asof">as of 24 Oct 2026</span>. Method and the JSON are on <a href="../../evidence/index.html#9-the-first-experiments-run-by-the-cli">Evidence §9</a>.</p>
 <pre class="diagram">$ sharness-ai hello
@@ -169,7 +183,7 @@ caveat      applied by this process to its own children: a Boundary for them, a 
 <ul>
 <li><b>No component.</b> Every experiment is a probe or a one-process enforcement; <code>sharness.launcher</code>, <code>.kms</code>, <code>.net</code>, <code>.fs</code>, <code>.bash</code> and <code>.llm</code> are designs.</li>
 <li><b>One environment.</b> E04 was measured in one cloud session on one day. A laptop will differ: no root, and on Ubuntu 24.04 an unprivileged user namespace may be refused, so <code>network: "none"</code> falls back to Landlock's TCP rules, which do not cover UDP.</li>
-<li><b>The browser mockups compute, they do not enforce.</b> A hash in a browser proves two implementations agree; nothing in a browser can confine a process.</li>
+<li><b>The browser mockups compute, they do not enforce.</b> A hash in a browser proves two implementations agree. E09 is different in kind: a real kernel in the tab confines a real process, but the process is the guest's, and nothing in a tab says anything about the host.</li>
 </ul>
 <p>Sources: <a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md">experiments/README.md</a> in the CLI repository; <a href="../../articles/secure-harness-for-agents.md">A secure harness for agents</a>; the Claude Code documentation on <a href="https://code.claude.com/docs/en/sandboxing">sandboxing</a>, <a href="https://code.claude.com/docs/en/permissions">permissions</a> and <a href="https://code.claude.com/docs/en/hooks">hooks</a>, read 24 Oct 2026.</p>
 </main>
@@ -180,7 +194,7 @@ caveat      applied by this process to its own children: a Boundary for them, a 
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../../project/releases.html">v0.5.5</a> · <a href="../../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.6</a> · <a href="../../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Landlock kernel in a tab (E09) — SHarness</title>
+<meta name="description" content="Experiment E09: Alpine Linux with a Landlock kernel boots in this tab under v86 and runs sharness-ai probe, hello and run, with the example Process Behaviour Policies. Nothing is installed; the serial console is shown live.">
+<link rel="canonical" href="https://sharness.ai/code/browser/demo/index.html">
+<meta property="og:type" content="website"><meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/code/browser/demo/index.html">
+<meta property="og:title" content="A Landlock kernel in a tab (E09) — SHarness">
+<meta property="og:description" content="A real Linux kernel boots in this tab and runs sharness-ai hello under a Process Behaviour Policy. Experiment E09.">
+<meta name="twitter:card" content="summary">
+<style>
+body{font:14px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;background:#0d1117;color:#e6edf3;margin:0;padding:1rem;max-width:72rem}
+h1{font-size:1.1rem;margin:0 0 .5rem} p{margin:.25rem 0;color:#9da7b3} pre{white-space:pre-wrap;word-break:break-all;margin-top:1rem}
+#status{color:#3fb950} .ok{color:#3fb950} .bad{color:#f85149}
+</style></head>
+<body>
+<h1>SHarness experiment E09: <code>sharness-ai</code> under a real Linux kernel, in this tab</h1>
+<p><a href="../index.html" style="color:#58a6ff">What this is and what it is not</a> · <a href="https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/experiments/browser" style="color:#58a6ff">the code that built it</a> · <a href="NOTICE.md" style="color:#58a6ff">what is in this folder and its licences</a> · built <span class="asof">as of 25 Oct 2026</span>; about 25 MB to load, then a minute or two of boot on an emulated CPU.</p>
+<p>Alpine 3.23 x86 · Linux <code>linux-virt</code> 6.18 (Landlock on) · v86 (x86 in WebAssembly) · Python 3.12 · nothing is installed on your machine.</p>
+<p>What you see is the guest's serial console. A policy applied by a process to its child is a Boundary for the child and a Setting for the process: this page shows the kernel code paths, not a confined host.</p>
+<div id="status">booting …</div>
+<pre id="serial"></pre>
+<script type="module">
+import { V86 } from "./libv86.mjs";
+const t0 = performance.now();
+const pre = document.getElementById("serial"), status = document.getElementById("status");
+window.__done = false; window.__log = ""; window.__facts = { crossOriginIsolated: self.crossOriginIsolated, sharedArrayBuffer: typeof SharedArrayBuffer !== "undefined" };
+const emulator = new V86({
+  wasm_path: "./v86.wasm",
+  bios: { url: "./seabios.bin" }, vga_bios: { url: "./vgabios.bin" },
+  bzimage: { url: "./vmlinuz-virt" }, initrd: { url: "./initramfs.cpio.gz" },
+  cmdline: "console=ttyS0,115200 rdinit=/init panic=5 tsc=unstable",
+  memory_size: 512 * 1024 * 1024, vga_memory_size: 2 * 1024 * 1024,
+  autostart: true, disable_keyboard: true, disable_mouse: true, disable_speaker: true,
+});
+const dec = new TextDecoder();
+let line = "";
+emulator.add_listener("serial0-output-byte", (b) => {
+  const c = dec.decode(new Uint8Array([b]), { stream: true });   // one byte at a time: UTF-8 sequences complete across calls
+  if (!c) return;
+  if (c === "\n") {
+    const l = `[${((performance.now() - t0) / 1000).toFixed(1)}s] ${line}\n`;
+    window.__log += l; pre.textContent += l;
+    if (line.startsWith("SHARNESS-HELLO-EXIT")) { const ok = line.endsWith(" 0"); status.textContent = ok ? "hello: every expectation held" : "hello: " + line; status.className = ok ? "ok" : "bad"; }
+    if (line.includes("SHARNESS-DONE")) { window.__done = true; status.textContent += " · done, guest powered off"; }
+    line = "";
+  } else if (c !== "\r") line += c;
+});
+</script>
+</body></html>

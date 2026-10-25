@@ -189,6 +189,18 @@ Policy hash `sha256:ad37e58bea6f4da65656687045b33ae9977caf90feef0ff5716a44db041b
 
 `hello` with the memory probe: 6 of 6 held. Not yet: the `cpu` cgroup, `max_runtime_s`, seccomp.
 
+**E09, a second kernel, measured 25 Oct 2026** (as of 25 Oct 2026, the same session: Node 22.22; Chromium 153 headless through Playwright; v86 0.5.472; the guest Alpine 3.23 x86, `linux-virt` 6.18.58-0-virt, Python 3.12.15, built by `experiments/browser/build_guest.py`; each form run once, alone). Method: the guest's `/init` runs `dmesg | grep landlock`, `probe`, `hello`, `run` under the profiles P1, P2 and P0, and `policy check` and `hash` over the seven example files; the runners read the serial console and exit 0 only on `SHARNESS-HELLO-EXIT 0`. The chroot form mounts `/proc` in the built rootfs and runs `probe` and `hello` on the host kernel.
+
+| Form | Guest | Result | To `hello`'s exit / to power-off |
+|---|---|---|---|
+| v86 in Node | `landlock: Up and running.`; Landlock ABI 7; `memfd_secret` yes; cgroups v2 | `hello` 6 of 6; P1: 443 `ENETUNREACH` (allowed; no network backend), 80 `EACCES`; P2: write refused, read allowed; P0: 200 MiB refused under 64 MiB; seven hashes equal to the host's | 58.0 s / 74.6 s |
+| v86 in headless Chromium | the same | the same; `crossOriginIsolated false`, no `SharedArrayBuffer`, no page errors | 75.9 s / 95.9 s |
+| chroot on the host kernel | host 6.18.44, Landlock ABI 7; binaries ELF `e_machine 0x0003` (i386) | `hello` 6 of 6 | under 2 s |
+
+The timings are of a single emulated core and are not a measurement of the harness. Write-up and what it does not show: [Linux in the browser](../code/browser/index.md).
+
+**The example policies P0 to P4, run natively 25 Oct 2026** (as of 25 Oct 2026, uid 0, a stand-in workspace): P0 refused a 200 MiB allocation under its 64 MiB cap (`MemoryError`); P1 connected to `1.1.1.1:443`, was refused on port 80 (`EACCES`) and wrote the workspace; P2 was refused writes to the workspace and `/tmp` and the connect; P3 wrote `out/` and was refused `vault/`; P4 ran `sgit 0.24.0 --version` and `pki list`, wrote `vault/`, was refused `out/`, connected on 443 and read its own hash from `SHARNESS_AI_POLICY_HASH`. Files and the table: [Mockups and experiments](../code/experiments/index.md#the-example-policies).
+
 **What this does not show.** The policy was applied by the session to its own children. It is a Boundary for them and a Setting for the session (the same root process that could have skipped it). It says nothing about seccomp, uids, cgroups, mutual TLS or the process tree, none of which the experiments touch yet.
 
 ## Documented, not yet exercised

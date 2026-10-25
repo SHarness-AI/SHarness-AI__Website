@@ -19,7 +19,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.5</a>
+  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.6</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -101,6 +101,7 @@
   <div class="tablewrap"><table class="vers">
     <thead><tr><th>Version</th><th>Date</th><th>What changed</th></tr></thead>
     <tbody>
+      <tr><td class="vnum">v0.5.6</td><td>25 Oct 2026</td><td>E09 built and measured: one Alpine x86 guest with Alpine's Landlock kernel and the CLI, booted by v86 <a href="../code/browser/demo/index.html">in a browser tab</a> and in Node, and the same binaries through chroot on the host kernel; <code>hello</code> 6 of 6 in all three (<a href="../code/browser/index.html">Linux in the browser</a>, <a href="../evidence/index.html#9-the-first-experiments-run-by-the-cli">Evidence §9</a>). Five example Process Behaviour Policies, P0 a hello world to P4 sgit, run natively and in the guest (<a href="../code/experiments/index.html#the-example-policies">Mockups and experiments</a>). Found on the way: the ELF interpreter must be executable, and v86 needs no special headers.</td></tr>
       <tr><td class="vnum">v0.5.5</td><td>25 Oct 2026</td><td><a href="../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>: rUv's projects (Ruflo, formerly Claude Flow; agentic-flow; ruv-swarm; RuVector; MetaHarness; RVM; flow-nexus) in SHarness's terms, what <a href="https://ruv.sgit.ai">ruv.sgit.ai</a> integrated (a mandate per agent compiled into Ruflo's policy engine, with its POC1 numbers; memory in sgit vaults), where the two halves meet point by point (hooks, the policy engine, the MCP registry, the spawn path, API keys, memory, networking, the anchor), a swarm under the harness, and what to do first.</td></tr>
       <tr><td class="vnum">v0.5.4</td><td>25 Oct 2026</td><td>A new section, <a href="../landscape/index.html">the landscape</a>: policies at the centre (SHarness as the reference implementation of Process Behaviour Policies; products as integration points and translation targets; the three questions), the <a href="../landscape/enforceability/index.html">enforceability matrix</a> (policy rows × enforcers, with the barrier kind per cell), <a href="../landscape/integrations/index.html">integration points</a> product by product, and the market analysis moved here. <a href="../code/browser/index.html">Linux in the browser</a>: a real kernel in a tab can run Landlock; the options, the recommended v86 build, what a browser never shows (E09). In the CLI: <code>policy translate</code> to bwrap, docker, claude-code and kubernetes, with the gap listed (E10).</td></tr>
       <tr><td class="vnum">v0.5.3</td><td>25 Oct 2026</td><td>Memory and process-count caps measured: <code>sharness-ai run</code> applies <code>process.max_memory_mb</code> and <code>max_pids</code> as rlimits and cgroups, <code>hello</code> runs a sixth probe under a 128 MiB cap (6 of 6 held); the rows move from designed to measured on <a href="../design/containment/index.html">Containment</a>, <a href="../evidence/index.html#9-the-first-experiments-run-by-the-cli">Evidence §9</a>, <a href="../code/index.html">The code</a>, <a href="../code/flows/index.html">Flows</a> and <a href="../code/examples/index.html">Examples</a>. The 404 page's links made absolute.</td></tr>
@@ -124,7 +125,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../project/releases.html">v0.5.5</a> · <a href="../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../project/releases.html">v0.5.6</a> · <a href="../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>

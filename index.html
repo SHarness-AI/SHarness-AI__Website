@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="project/releases.html" title="Site release history">v0.5.5</a>
+  <a class="ver" href="project/releases.html" title="Site release history">v0.5.6</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -153,12 +153,13 @@
 
 <section class="band alt" id="experiments">
   <h2>Start small: mockups, experiments, storyboards</h2>
-  <p class="blurb">The memo's method: very simple examples first, each piece in isolation. The ladder runs from the browser to a launcher above the agent. Experiments E01 to E04 are runnable in the CLI; E04 was measured <span class="asof">as of 24 Oct 2026</span>. No component is built.</p>
+  <p class="blurb">The memo's method: very simple examples first, each piece in isolation. The ladder runs from the browser to a launcher above the agent. Experiments E01 to E04, E09 and E10 are runnable in the CLI; E04 was measured on 24 Oct 2026 and E09, a real Linux kernel in a browser tab running <code>hello</code>, <span class="asof">as of 25 Oct 2026</span>. No component is built.</p>
   <div class="cards">
-    <a class="card" href="code/experiments/index.html"><span class="tag">The ladder</span><h3>Mockups and experiments</h3><p>Eight numbered experiments, where each runs, what it shows and does not show; what Claude Code's own sandbox already gives and what SHarness adds.</p><span class="go">Open →</span></a>
+    <a class="card" href="code/experiments/index.html"><span class="tag">The ladder</span><h3>Mockups and experiments</h3><p>Ten numbered experiments, where each runs, what it shows and does not show; what Claude Code's own sandbox already gives and what SHarness adds.</p><span class="go">Open →</span></a>
     <a class="card" href="code/cli/index.html"><span class="tag">sharness-ai</span><h3>The CLI: probe, policy hash, run, hello</h3><p>The first version as proposed: experiments today, components tomorrow, one package. A hello world that cannot phone home, for one child process.</p><span class="go">Read →</span></a>
     <a class="card" href="explain/mockups/policy-hash.html"><span class="tag">In the browser</span><h3>The policy hash</h3><p>Paste a v0 policy, get the hash the person supplies; the same one the CLI prints. Then watch an added host change it.</p><span class="go">Try →</span></a>
     <a class="card" href="explain/mockups/edges.html"><span class="tag">In the browser</span><h3>The edge matrix</h3><p>Click caller and callee; see which layer refuses first. The app never talks to the KMS.</p><span class="go">Try →</span></a>
+    <a class="card" href="code/browser/demo/index.html"><span class="tag">A kernel in the tab</span><h3>Linux, Landlock and <code>hello</code> in your browser</h3><p>Alpine boots under v86 and runs <code>sharness-ai probe</code>, <code>hello</code> and <code>run</code> under the example policies, live on the serial console. Nothing installed. E09, measured.</p><span class="go">Boot →</span></a>
     <a class="card" href="explain/storyboards/index.html"><span class="tag">Three strips</span><h3>Storyboards</h3><p>The last metre, its one job, and hello world inside: the design drawn from data by the storyboards.sgit.ai kit, with a cast of four.</p><span class="go">Open →</span></a>
     <a class="card" href="evidence/research/index.html"><span class="tag">24 Oct 2026</span><h3>Research note</h3><p>The published design read in full: what holds up, ten things to improve, what this release did, and the order for what is still open.</p><span class="go">Read →</span></a>
     <a class="card" href="landscape/index.html"><span class="tag">The landscape</span><h3>Policies at the centre</h3><p>SHarness as the reference implementation of Process Behaviour Policies; every other product an integration point or a translation target; the enforceability matrix; the market, every row sourced.</p><span class="go">Read →</span></a>
@@ -199,7 +200,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="project/releases.html">v0.5.5</a> · <a href="project/engineering.html">engineering</a> · <a href="index.md">this page as markdown</a></p>
+    <p class="verline">site <a href="project/releases.html">v0.5.6</a> · <a href="project/engineering.html">engineering</a> · <a href="index.md">this page as markdown</a></p>
   </div>
   <div>
     <h4>The design</h4>

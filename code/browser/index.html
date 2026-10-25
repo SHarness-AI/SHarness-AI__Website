@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.5</a>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.6</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -98,8 +98,36 @@
 
 <main class="doc">
   <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">the code</a> / linux in the browser · <a href="index.md">this page as markdown</a></div>
-  <h1>Linux in the browser: how much of the harness can run in a tab?</h1>
-<div class="note"><b>Status: researched, not yet built.</b> Dinis Cruz's question of 25 October 2026: is there a way to run Linux in a browser and use it to verify and demonstrate this, and how much of the harness could run there? The answer, from the primary sources read that day (<span class="asof">as of 25 Oct 2026</span>): a real Linux kernel runs in a tab today, Landlock has no architecture dependency, and Alpine's 32-bit kernel ships with it enabled, so <code>sharness-ai hello</code> in a browser is a build, not a research problem. The rest of the harness (uids, cgroups, mutual TLS on loopback) runs in the same guest; what a browser can never show is listed at the end. This is experiment E09 on the <a href="../experiments/index.html">ladder</a>.</div>
+  <h1>Linux in the browser: the harness under a second kernel</h1>
+<div class="note"><b>Status: built and measured, 25 Oct 2026.</b> Dinis Cruz's question of 25 October 2026: can Linux run in a browser and verify this, how much of the harness runs there, and can the same Linux run in the agent's own environment, so there are two kinds of test? Yes to all three, <span class="asof">as of 25 Oct 2026</span>: one guest (Alpine 3.23 for 32-bit x86 with Alpine's <code>linux-virt</code> kernel, which ships Landlock, Python 3.12 and the <code>sharness-ai</code> package) boots under <a href="https://github.com/copy/v86">v86</a> in <b>Node</b> and in a <b>browser tab</b>, and the same binaries run on the <b>host kernel</b> through chroot. <code>sharness-ai hello</code> held 6 of 6 in all three. This is experiment E09 on the <a href="../experiments/index.html">ladder</a>; the code is <a href="https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/experiments/browser"><code>experiments/browser/</code></a> in the CLI repository, and the page itself is <a href="demo/index.html">here</a>.</div>
+<h2 id="0-what-was-built-and-what-it-showed">0. What was built and what it showed</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Form</th><th>Kernel</th><th>CPU</th><th>What it is for</th></tr></thead>
+<tbody>
+<tr><td><b>Node</b> (<code>npm run node</code>)</td><td>the guest's, Linux 6.18.58 i686</td><td>emulated by v86, x86 in WebAssembly</td><td>the second kernel in any agent session or CI job, no browser, no root</td></tr>
+<tr><td><b>browser</b> (<code>npm run browser</code>, or <a href="demo/index.html">open the page</a>)</td><td>the guest's</td><td>emulated by v86, in the tab</td><td>the same, for anyone with a browser and nothing installed</td></tr>
+<tr><td><b>chroot</b> (<code>sudo npm run native</code>)</td><td>the <b>host's</b>, through the i386 syscall table</td><td>the real one</td><td>the guest's 32-bit binaries driving the host's Landlock: same code, no emulator</td></tr>
+</tbody>
+</table></div>
+<p>Measured 25 Oct 2026 in one Claude Code cloud session (Ubuntu 24.04, Linux 6.18.44 x86_64, uid 0; Node 22.22; Chromium 153 headless through Playwright; v86 0.5.472; guest <code>linux-virt</code> 6.18.58-0-virt, Python 3.12.15), each form run once, alone, &lt;span class="asof"&gt;<span class="asof">as of 25 Oct 2026</span>&lt;/span&gt;:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Form</th><th>The guest reports</th><th><code>hello</code> (E04)</th><th><code>run</code> (E03)</th><th>Wall clock to <code>hello</code>'s exit / to power-off</th></tr></thead>
+<tbody>
+<tr><td>Node</td><td><code>landlock: Up and running.</code>; <code>probe</code>: Landlock ABI 7, <code>memfd_secret</code> yes, cgroups v2</td><td>6 of 6 held</td><td>under P1 (port 443 only): 443 <code>ENETUNREACH</code>, allowed by the policy and failing for want of a network backend; 80 <code>EACCES</code>. Under P2 (read-only): write refused, read allowed. Under P0: a 200 MiB allocation refused by the 64 MiB cap</td><td>58.0 s / 74.6 s</td></tr>
+<tr><td>browser</td><td>the same</td><td>6 of 6 held</td><td>the same</td><td>75.9 s / 95.9 s; <code>crossOriginIsolated false</code>, no <code>SharedArrayBuffer</code>, no page errors</td></tr>
+<tr><td>chroot</td><td>host kernel 6.18.44, Landlock ABI 7; the binaries' ELF <code>e_machine</code> is <code>0x0003</code>, i386</td><td>6 of 6 held</td><td>not run in this form</td><td>under 2 s</td></tr>
+</tbody>
+</table></div>
+<p>The seven <a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/policies/README.md">example policies</a> check and hash in the guest to the same values as on the host: the second kernel agrees with the first on the one value the person supplies.</p>
+<p>What this is and is not. The same syscalls (444 to 446 for Landlock, <code>unshare</code>, the rlimits, the cgroup files) on a second kernel, on an emulated CPU, applied by a process to its child: a Boundary for the child, a Setting for the page's guest. The timings are of a single emulated core and say nothing about the harness's cost on real hardware; they are here so a reader knows what the page will do. Nothing in a tab says anything about the host. And the guest has no network backend, so the port-443 probe shows <em>the policy allowed it</em> (the error is the network's, <code>ENETUNREACH</code>, not Landlock's <code>EACCES</code>) rather than a connection.</p>
+<p>Three things learned building it:</p>
+<ul>
+<li><b>The ELF interpreter must be executable.</b> Under <code>allow-https-example</code> (exec <code>/usr</code> and <code>/bin</code>) the guest could not start <code>python3</code> at all: <code>execve</code> failed with <code>Permission denied</code> because Alpine's loader is <code>/lib/ld-musl-i386.so.1</code>. On the host a merged <code>/usr</code> hides this (<code>/lib64</code> is a link into <code>/usr</code>). The profiles P0 to P4 list <code>/lib</code> and <code>/lib64</code> as executable; <code>translate</code> will have to carry the same rule to every target.</li>
+<li><b>No special headers.</b> v86 ran from a plain static server with no COOP or COEP headers, with <code>crossOriginIsolated false</code> and no <code>SharedArrayBuffer</code>; the earlier research note's inference that it might need them was wrong. The page is seven static files, 25 MB, and fits GitHub Pages.</li>
+<li><b>The console is bytes.</b> The serial line hands over one byte at a time; <code>hello</code>'s <code>✔</code> is three of them. The runners decode with a streaming UTF-8 decoder, one byte per call.</li>
+</ul>
+<p>The build (<a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/browser/build_guest.py"><code>build_guest.py</code></a>, standard library only) fetches the pinned Alpine packages, unpacks them with <code>tarfile</code>, adds the package and the policies, writes the initramfs with its own cpio writer and assembles the page; a rebuild from the cache takes seconds. v86 is the one dependency, pinned by version, and lives only under <code>experiments/browser/</code>. Not yet: a network backend (v86 can proxy over <code>fetch</code> or a WebSocket), so the 443 probe can connect without a policy and fail with <code>EACCES</code> under one; a booted-state snapshot so the page opens in seconds; a non-root user in the guest; a kernel without Landlock as the negative control.</p>
+<p>The rest of this page is the research of the same morning that chose this build, kept as written (<span class="asof">as of 25 Oct 2026</span>), with what it got right and the one inference it got wrong.</p>
 <h2 id="1-what-the-guest-has-to-offer">1. What the guest has to offer</h2>
 <p><code>hello</code> and <code>run</code> call Landlock through syscalls 444, 445 and 446, probe <code>memfd_secret</code> as 447, and use <code>unshare</code> for the empty network namespace. So the guest needs a real Linux kernel of 6.7 or later (TCP rules, ABI 4), ideally 6.15 or later (ABI 7, the same as the measured environment), built with <code>CONFIG_SECURITY_LANDLOCK=y</code> and <code>landlock</code> in its LSM list, user and network namespaces, cgroups, and Python 3.11 or later with <code>ctypes</code>.</p>
 <p>Three kernel facts decide the rest, all from the kernel's own sources:</p>
@@ -126,7 +154,7 @@
 </tbody>
 </table></div>
 <p>The split is clean. Anything without a kernel (WebVM, Pyodide, Wasmer, WASI) cannot run Landlock, seccomp, namespaces or cgroups: there is no process in the Linux sense to confine. Anything with a kernel can, if the kernel was built with them, and of those only v86 with Alpine's kernel has Landlock on by default, runs without special response headers, and has a licence that allows self-hosting on a static site.</p>
-<h2 id="3-the-recommended-build-hello-in-a-tab-on-sharness-ai">3. The recommended build: <code>hello</code> in a tab on sharness.ai</h2>
+<h2 id="3-the-recommended-build-hello-in-a-tab-on-sharness-ai-as-researched-0-is-what-was-built">3. The recommended build: <code>hello</code> in a tab on sharness.ai (as researched; §0 is what was built)</h2>
 <ol>
 <li><b>Build the guest</b> with v86's own <code>tools/docker/alpine</code>, moving the base image from <code>i386/alpine:3.21.0</code> to <code>i386/alpine:3.23</code> (kernel 6.18.58, Landlock ABI 7, the same as the measured workspace) and adding <code>python3</code> and the <code>sharness_ai</code> package (no dependencies) to the rootfs. Keep the 9p initramfs. Snapshot the booted state with <code>build-state.js</code> so the page opens in seconds, not after a full boot.</li>
 <li><b>Check inside the guest:</b> <code>dmesg | grep landlock</code> must say "Up and running"; <code>sharness-ai probe</code> must report Landlock ABI 7, user namespaces, cgroups. Add a non-root user so the network probe exercises Landlock's TCP rule (as root, <code>hello</code> takes the network-namespace path instead).</li>
@@ -150,12 +178,12 @@
 </table></div>
 <h2 id="5-the-wasi-variant-for-what-it-can-show">5. The WASI variant, for what it can show</h2>
 <p>Pyodide or a WASI build can show the policy pipeline without the kernel: hashing (the <a href="../../explain/mockups/policy-hash.html">mockup</a> does this already), validation, and a simulator of "what this policy would allow". With a WASI runtime, <code>files.read</code> maps to read-only preopened directories, <code>files.write</code> to writable ones, <code>network: "none"</code> to no sockets at all; <code>exec</code>, <code>no_new_privs</code> and scoping have no equivalent. It demonstrates deny-by-default at the host layer and the shape of the policy, with the JavaScript host as the enforcer: a Boundary for the guest, a Setting for the page. It is a different thing from the kernel demo and must be labelled as one.</p>
-<h2 id="6-not-verified">6. Not verified</h2>
+<h2 id="6-not-verified-when-the-research-was-written-and-since">6. Not verified when the research was written, and since</h2>
 <ul>
-<li>That Alpine 3.23's i386 kernel reports ABI 7 under v86: the config says Landlock is on and 6.18 implies ABI 7, but nothing was booted for this page.</li>
-<li>Boot time and speed of v86 with Alpine and Python; no published figures.</li>
+<li>~~That Alpine 3.23's i386 kernel reports ABI 7 under v86~~: <b>verified 25 Oct 2026</b>, ABI 7, <code>landlock: Up and running.</code> in the guest's <code>dmesg</code> (§0).</li>
+<li>~~Boot time and speed of v86 with Alpine and Python~~: <b>measured 25 Oct 2026</b> (§0).</li>
 <li><code>memfd_secret</code> on 32-bit with PAE: the status of the July 2026 fix.</li>
-<li>Whether v86 needs SharedArrayBuffer: inferred from its package and build instructions, not stated by the project.</li>
+<li>~~Whether v86 needs SharedArrayBuffer~~: <b>it does not</b> (25 Oct 2026): the page ran with <code>crossOriginIsolated false</code> and no <code>SharedArrayBuffer</code>.</li>
 <li>How CheerpX answers an unknown syscall.</li>
 <li>The licence of the current JSLinux x86_64 web build; the JSLinux kernel inspection relies on the absence of strings in the image, not on a config file.</li>
 </ul>
@@ -168,7 +196,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../../project/releases.html">v0.5.5</a> · <a href="../../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.6</a> · <a href="../../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>

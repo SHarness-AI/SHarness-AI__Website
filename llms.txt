@@ -4,8 +4,9 @@
 > the kernel and talking only over allowed, mutually authenticated connections, so a secret
 > lives in one place and a tricked process can only do its one job.
 
-Site version: v0.5.5. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04
-in the CLI). No SHarness component is built.
+Site version: v0.5.6. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04,
+E09 and E10 in the CLI; E09 is a real Linux kernel in a browser tab running hello, measured 25 Oct 2026).
+No SHarness component is built.
 By Dinis Cruz; design session written up with Claude, 24 October 2026. All content CC BY 4.0.
 SHarness is unrelated to Sharness, the shell testing library.
 
@@ -71,12 +72,14 @@ SHarness is unrelated to Sharness, the shell testing library.
 - /code/cli/index.md — the sharness-ai package: what exists (PyPI v0.1.0 vs dev), the first version
   as proposed, the v0 policy and its hash, naming, versioning, releases
 - /code/experiments/index.md — the ladder: browser mockups, any Claude session, Linux, planned,
-  the launcher above the agent; E01 to E08; E04 measured; what Claude Code's own sandbox gives
+  the launcher above the agent; E01 to E10; E04 and E09 measured; the example policies P0 to P4
+  (a hello world, an agent session, a tool server, the newsroom agent, sgit); what Claude Code's own sandbox gives
 - /code/flows/index.md — what happens, module by module, when run confines a command and when
   hello runs; the hash in two implementations; what the launcher adds (designed)
 - /code/examples/index.md — every command with its output; sgit under a policy; the skill
-- /code/browser/index.md — Linux in the browser: a real kernel in a tab (v86 + Alpine's kernel,
-  Landlock on) can run hello; syscall-emulation runtimes cannot; the build; what a browser never shows (E09)
+- /code/browser/index.md — Linux in the browser (E09, built and measured 25 Oct 2026): one Alpine x86 guest
+  with Alpine's Landlock kernel runs hello 6 of 6 under v86 in Node, in a browser tab and through chroot on
+  the host kernel; the page is /code/browser/demo/index.html; the research, the options, what a browser never shows
 - /code/languages/index.md — Python first; Rust for the KMS and the bash client; JSON for policies
 
 ## Evidence and status

@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.5</a>
+  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.6</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -99,16 +99,17 @@
 <main class="doc">
   <div class="crumb"><a href="../index.html">sharness.ai</a> / the code · <a href="index.md">this page as markdown</a></div>
   <h1>The code: where it is and what it does</h1>
-<div class="note"><b>Status: experiments, <span class="asof">as of 25 Oct 2026</span>.</b> The site publishes the design; the code lives in one repository, <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">SHarness-AI/SHarness-AI__CLI</a>, and today it carries the first four experiments, not a component. This page is the map: the package, its modules, the commands, and where each thing on this site has code behind it.</div>
+<div class="note"><b>Status: experiments, <span class="asof">as of 25 Oct 2026</span>.</b> The site publishes the design; the code lives in one repository, <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">SHarness-AI/SHarness-AI__CLI</a>, and today it carries experiments, not a component. This page is the map: the package, its modules, the commands, and where each thing on this site has code behind it.</div>
 <h2 id="where-everything-is">Where everything is</h2>
 <div class="tablewrap"><table>
 <thead><tr><th>What</th><th>Where</th><th>Status</th></tr></thead>
 <tbody>
 <tr><td>the <code>sharness-ai</code> package</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/sharness_ai"><code>sharness_ai/</code></a> on the <code>dev</code> branch; v0.1.0 on <a href="https://pypi.org/project/sharness-ai/">PyPI</a> carries only <code>--version</code></td><td>runnable from the repository; unreleased</td></tr>
-<tr><td>the experiments, numbered</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md"><code>experiments/README.md</code></a></td><td>E01 to E04 runnable; E05 to E08 planned</td></tr>
-<tr><td>the example policies</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/experiments/policies"><code>experiments/policies/</code></a></td><td>runnable</td></tr>
+<tr><td>the experiments, numbered</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md"><code>experiments/README.md</code></a></td><td>E01 to E04, E09 and E10 runnable; E05 to E08 planned</td></tr>
+<tr><td>the example policies: two minimal, five profiles P0 to P4</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/experiments/policies"><code>experiments/policies/</code></a></td><td>runnable; run natively 25 Oct 2026</td></tr>
+<tr><td>E09, the harness under a second kernel: the guest build, the Node and browser runners, the chroot form</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/experiments/browser"><code>experiments/browser/</code></a>: <code>build_guest.py</code> (standard library), <code>init.sh</code>, <code>page.html</code>, <code>boot_node.mjs</code>, <code>boot_browser.mjs</code>, <code>chroot_native.sh</code>; v86 pinned in its own <code>package.json</code></td><td>runnable; measured 25 Oct 2026 (<a href="browser/index.html">Linux in the browser</a>)</td></tr>
 <tr><td>the skill for a Claude Code session</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/.claude/skills/sharness-hello/SKILL.md"><code>.claude/skills/sharness-hello/SKILL.md</code></a></td><td>runnable</td></tr>
-<tr><td>the tests</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/tests/unit"><code>tests/unit/</code></a>, 40 tests; Landlock tests skip where it is absent</td><td>green on 25 Oct 2026</td></tr>
+<tr><td>the tests</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/tests/unit"><code>tests/unit/</code></a>, 53 tests; Landlock tests skip where it is absent</td><td>green on 25 Oct 2026</td></tr>
 <tr><td>the ground rules for agents working in the repository</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/CLAUDE.md"><code>CLAUDE.md</code></a></td><td></td></tr>
 <tr><td>the release pipeline</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/.github/workflows/workflow.yml"><code>.github/workflows/workflow.yml</code></a>: tests, version bump, tag, PyPI by Trusted Publishing</td><td>runs on a push to <code>main</code></td></tr>
 <tr><td>the browser mockups</td><td>this site, <a href="https://github.com/SHarness-AI/SHarness-AI__Website/tree/dev/explain/mockups"><code>explain/mockups/</code></a>: hand-written HTML, no build</td><td>published</td></tr>
@@ -138,7 +139,8 @@
 sharness-ai policy hash|check FILE                        E02  the one value the person supplies
 sharness-ai policy translate FILE --to T [-- CMD…]        E10  the policy in another enforcer's form, and the gap
 sharness-ai run --policy FILE [--expect-hash H] -- CMD…   E03  one command under a policy
-sharness-ai hello [--json]                                E04  the acceptance test, one child process</pre>
+sharness-ai hello [--json]                                E04  the acceptance test, one child process
+cd experiments/browser &amp;&amp; npm run node|browser|native     E09  the same, under a second kernel (v86) or through chroot</pre>
 <p>Install and use: <a href="cli/index.html">The CLI</a>. Each command's output and caveats: <a href="examples/index.html">Examples</a>. What each shows and does not show: <a href="experiments/index.html">Mockups and experiments</a>.</p>
 <h2 id="what-has-code-behind-it-and-what-does-not">What has code behind it, and what does not</h2>
 <div class="tablewrap"><table>
@@ -147,7 +149,7 @@ sharness-ai hello [--json]                                E04  the acceptance te
 <tr><td>the v0 Process Behaviour Policy and its hash</td><td>yes</td><td><code>policy.py</code>; the <a href="../explain/mockups/policy-hash.html">browser mockup</a> reproduces it</td></tr>
 <tr><td>Landlock file, exec and port rules; <code>network: "none"</code></td><td>yes</td><td><code>landlock.py</code>, <code>run.py</code></td></tr>
 <tr><td>the grant and the delta</td><td>yes</td><td><code>probe.py</code></td></tr>
-<tr><td>the memo's acceptance test</td><td>yes, for one child process</td><td><code>hello.py</code></td></tr>
+<tr><td>the memo's acceptance test</td><td>yes, for one child process</td><td><code>hello.py</code>; also under a second kernel in Node and in a tab, <a href="browser/index.html">E09</a></td></tr>
 <tr><td>the launcher, <code>sharness.kms</code>, <code>.net</code>, <code>.fs</code>, <code>.bash</code>, <code>.llm</code></td><td><b>no</b></td><td>designed on <a href="../design/components/index.html">Components</a>; E05 to E08 are the next pieces</td></tr>
 <tr><td>mutual TLS with a session CA; the edge matrix</td><td>measured by hand, not yet a command</td><td>E05</td></tr>
 <tr><td>memory and process-count caps (rlimits and cgroups)</td><td>yes</td><td><code>limits.py</code>, measured 25 Oct 2026</td></tr>
@@ -164,7 +166,7 @@ sharness-ai hello [--json]                                E04  the acceptance te
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../project/releases.html">v0.5.5</a> · <a href="../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../project/releases.html">v0.5.6</a> · <a href="../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>

@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.5</a>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.6</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -105,8 +105,9 @@
 <thead><tr><th>Thing</th><th>Where to check it</th></tr></thead>
 <tbody>
 <tr><td><b>The <code>sharness-ai</code> package on PyPI</b>, v0.1.0: reports its version and prints its help</td><td><a href="https://pypi.org/project/sharness-ai/">pypi.org/project/sharness-ai</a></td></tr>
-<tr><td><b>Experiments E01 to E04 and E10</b> (<code>probe</code>, <code>policy hash</code>, <code>run</code>, <code>hello</code>, <code>policy translate</code>), with 40 tests, on the CLI's <code>dev</code> branch; unreleased to PyPI</td><td><a href="../../code/index.html">the code</a> · <a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md">experiments/README.md</a> · E04 measured on <a href="../index.html#9-the-first-experiments-run-by-the-cli">Evidence §9</a></td></tr>
-<tr><td><b>Two example policies and a skill</b> for Claude Code sessions</td><td><a href="../../code/examples/index.html">Examples</a></td></tr>
+<tr><td><b>Experiments E01 to E04, E09 and E10</b> (<code>probe</code>, <code>policy hash</code>, <code>run</code>, <code>hello</code>, the harness under a second kernel in Node, in a browser tab and through chroot, <code>policy translate</code>), with 53 tests, on the CLI's <code>dev</code> branch; unreleased to PyPI</td><td><a href="../../code/index.html">the code</a> · <a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md">experiments/README.md</a> · E04 and E09 measured on <a href="../index.html#9-the-first-experiments-run-by-the-cli">Evidence §9</a></td></tr>
+<tr><td><b>A real Linux kernel in a tab</b> running <code>probe</code>, <code>hello</code> and <code>run</code>: the E09 page</td><td><a href="../../code/browser/demo/index.html">open it</a> · <a href="../../code/browser/index.html">the write-up</a></td></tr>
+<tr><td><b>Seven example policies</b> (two minimal, five profiles P0 to P4 from a hello world to sgit) <b>and a skill</b> for Claude Code sessions</td><td><a href="../../code/experiments/index.html#the-example-policies">the policies</a> · <a href="../../code/examples/index.html">Examples</a></td></tr>
 <tr><td><b>Two browser mockups</b> that compute and enforce nothing</td><td><a href="../../explain/mockups/policy-hash.html">the policy hash</a> (the same hash as the CLI) · <a href="../../explain/mockups/edges.html">the edge matrix</a></td></tr>
 <tr><td><b>Three storyboards</b>, data drawn by the storyboards.sgit.ai kit</td><td><a href="../../explain/storyboards/index.html">Storyboards</a>; what they show is the design, not something built</td></tr>
 <tr><td><b>The design, published for review</b>, with the brief and four drawn diagrams</td><td><a href="../../design/index.html">The brief</a> · <a href="../../project/sources/index.html">the source documents, verbatim</a></td></tr>
@@ -123,7 +124,7 @@
 <tr><td><b>The launcher above the agent</b></td><td>Not built. Every experiment applies a policy to a child process; nothing yet binds the agent itself.</td></tr>
 <tr><td><b>The process-tree proof of concept</b> (E06)</td><td>Started, not completed, not run. See <a href="../../design/process-tree/index.html">Enforcing the process tree</a>.</td></tr>
 <tr><td><b>seccomp, the <code>cpu</code> cgroup, read-only binds</b></td><td>Available in the measured kernel; not yet applied by the CLI or measured (memory and pids caps are, since 25 Oct 2026). See <a href="../../design/containment/index.html">Containment</a>.</td></tr>
-<tr><td><b>The newsroom's agents' policies</b></td><td>The second user in the memo; their file and network behaviour policies are not written.</td></tr>
+<tr><td><b>The newsroom's agents' policies</b></td><td>The second user in the memo. First drafts exist in the v0 shape (P3 the newsroom agent, P4 sgit, <a href="../../code/experiments/index.html#the-example-policies">here</a>); hosts, uids and signing are not in v0.</td></tr>
 <tr><td><b>Markdown twins for the hand-written pages</b></td><td>Every page has a twin except the front page's sections, the mockups and the three project pages (engineering, comms, releases).</td></tr>
 </tbody>
 </table></div>
@@ -135,7 +136,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../../project/releases.html">v0.5.5</a> · <a href="../../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.6</a> · <a href="../../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>
