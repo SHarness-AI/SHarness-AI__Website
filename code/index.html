@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.7</a>
+  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.8</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -111,7 +111,7 @@
 <tr><td>the playground: <code>sharness-ai</code> in Pyodide and in a shell on the Linux guest</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/browser/playground.js"><code>experiments/browser/playground.js</code></a>, one ES module; served on this site at <a href="playground/index.html">code/playground</a>; <code>test_playground.mjs</code> drives both tabs</td><td>runnable; 11 of 11 checks 25 Oct 2026</td></tr>
 <tr><td>E09, the harness under a second kernel: the guest build, the Node and browser runners, the chroot form</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/experiments/browser"><code>experiments/browser/</code></a>: <code>build_guest.py</code> (standard library), <code>init.sh</code>, <code>page.html</code>, <code>boot_node.mjs</code>, <code>boot_browser.mjs</code>, <code>chroot_native.sh</code>; v86 pinned in its own <code>package.json</code></td><td>runnable; measured 25 Oct 2026 (<a href="browser/index.html">Linux in the browser</a>)</td></tr>
 <tr><td>the skill for a Claude Code session</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/.claude/skills/sharness-hello/SKILL.md"><code>.claude/skills/sharness-hello/SKILL.md</code></a></td><td>runnable</td></tr>
-<tr><td>the tests</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/tests/unit"><code>tests/unit/</code></a>, 59 tests, run on every push to <code>dev</code> by <code>tests.yml</code>; Landlock tests skip where it is absent</td><td>green on 25 Oct 2026</td></tr>
+<tr><td>the tests</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/tests/unit"><code>tests/unit/</code></a>, 60 tests, run on every push to <code>dev</code> by <code>tests.yml</code> on Python 3.11, 3.12 and 3.13; Landlock tests skip where it is absent</td><td>green on 25 Oct 2026</td></tr>
 <tr><td>the ground rules for agents working in the repository</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/CLAUDE.md"><code>CLAUDE.md</code></a></td><td></td></tr>
 <tr><td>the release pipeline</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/.github/workflows/workflow.yml"><code>.github/workflows/workflow.yml</code></a>: tests, version bump, tag, PyPI by Trusted Publishing</td><td>runs on a push to <code>main</code></td></tr>
 <tr><td>the browser mockups</td><td>this site, <a href="https://github.com/SHarness-AI/SHarness-AI__Website/tree/dev/explain/mockups"><code>explain/mockups/</code></a>: hand-written HTML, no build</td><td>published</td></tr>
@@ -168,7 +168,7 @@ cd experiments/browser &amp;&amp; npm run node|browser|native     E09  the same,
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../project/releases.html">v0.5.7</a> · <a href="../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../project/releases.html">v0.5.8</a> · <a href="../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>

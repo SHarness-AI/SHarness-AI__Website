@@ -4,7 +4,7 @@
 > down by the kernel and talking only over allowed, mutually authenticated connections, so a
 > secret lives in one place and a tricked process can only do its one job.
 
-*Source: <https://sharness.ai/index.html> · site v0.5.7 · markdown twin of the front page.*
+*Source: <https://sharness.ai/index.html> · site v0.5.8 · markdown twin of the front page.*
 *Status: **design**, with the first experiments runnable. No SHarness component is built.*
 
 ---

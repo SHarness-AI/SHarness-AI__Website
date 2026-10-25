@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.7</a>
+  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.8</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -152,6 +152,8 @@
 <li><b>The playground's shell.</b> Alpine's busybox has no <code>cttyhack</code>, so the shell gets its controlling terminal by <code>setsid</code> and opening <code>ttyS0</code>; <code>ash</code> also asks the terminal for its cursor position and wraps at 80 columns, so the page strips escape sequences and the guest sets 160 columns.</li>
 <li><b>Pyodide crashed where it should refuse.</b> <code>run</code> imported <code>resource</code> and <code>hello</code> started a subprocess, and WebAssembly has neither. Both now refuse with exit 126 and a sentence saying there is no kernel to enforce anything.</li>
 <li><b>The research note guessed wrong once.</b> It inferred v86 might need <code>SharedArrayBuffer</code> and cross-origin isolation. It needs neither: the page runs from plain static files on GitHub Pages.</li>
+<li><b>The playground raced its own start-up.</b> On the live site a command could run before the example policies were written into Pyodide, and <code>policy hash policies/…</code> found no file. Every command now waits for the whole start-up, and the test slows the policy files down to prove it.</li>
+<li><b>The new CI found three more.</b> The first test runs on Python 3.11 and 3.12 failed, each for a real reason: <code>hello.py</code> used an f-string only 3.12 can parse; <code>argparse</code> before 3.12 rejected <code>-- CMD</code> after <code>--to</code>; and <code>hello</code> from a virtualenv could not read <code>pyvenv.cfg</code>. All fixed; 60 tests now pass on 3.11, 3.12 and 3.13.</li>
 <li><b>Still loose:</b> the profiles list <code>/etc</code> as executable, which nothing needs. The next revision of the profiles drops it; their hashes will change, which is the point of hashes.</li>
 </ul>
 <h2 id="tests">Two kinds of test, and a third</h2>
@@ -191,7 +193,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../project/releases.html">v0.5.7</a> · <a href="../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../project/releases.html">v0.5.8</a> · <a href="../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>

@@ -93,6 +93,8 @@ The first boot ran `hello` fine and then failed both `run` checks with `[Errno 1
 - **The playground's shell.** Alpine's busybox has no `cttyhack`, so the shell gets its controlling terminal by `setsid` and opening `ttyS0`; `ash` also asks the terminal for its cursor position and wraps at 80 columns, so the page strips escape sequences and the guest sets 160 columns.
 - **Pyodide crashed where it should refuse.** `run` imported `resource` and `hello` started a subprocess, and WebAssembly has neither. Both now refuse with exit 126 and a sentence saying there is no kernel to enforce anything.
 - **The research note guessed wrong once.** It inferred v86 might need `SharedArrayBuffer` and cross-origin isolation. It needs neither: the page runs from plain static files on GitHub Pages.
+- **The playground raced its own start-up.** On the live site a command could run before the example policies were written into Pyodide, and `policy hash policies/…` found no file. Every command now waits for the whole start-up, and the test slows the policy files down to prove it.
+- **The new CI found three more.** The first test runs on Python 3.11 and 3.12 failed, each for a real reason: `hello.py` used an f-string only 3.12 can parse; `argparse` before 3.12 rejected `-- CMD` after `--to`; and `hello` from a virtualenv could not read `pyvenv.cfg`. All fixed; 60 tests now pass on 3.11, 3.12 and 3.13.
 - **Still loose:** the profiles list `/etc` as executable, which nothing needs. The next revision of the profiles drops it; their hashes will change, which is the point of hashes.
 
 ## Two kinds of test, and a third {#tests}
