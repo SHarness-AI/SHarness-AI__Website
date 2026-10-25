@@ -3,15 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>SHarness — agents and tools as small, locked-down processes</title>
-<meta name="description" content="SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections, so a secret lives in one place and a tricked process can only do its one job. Status: design.">
+<title>SHarness: a policy the kernel enforces, for every process an AI agent starts</title>
+<meta name="description" content="SHarness gives every process an AI agent starts a Process Behaviour Policy: what it may read, write, run and connect to, named by one hash the person supplies and enforced by the Linux kernel. Open source. Try it in your browser: a real Linux kernel boots in the tab.">
 <link rel="canonical" href="https://sharness.ai/index.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="sharness.ai">
 <meta property="og:url" content="https://sharness.ai/index.html">
-<meta property="og:title" content="SHarness — agents and tools as small, locked-down processes">
-<meta property="og:description" content="SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections, so a secret lives in one place and a tricked process can only do its one job. Status: design.">
-<meta name="twitter:card" content="summary">
+<meta property="og:title" content="SHarness: a policy the kernel enforces, for every process an AI agent starts">
+<meta property="og:description" content="What an agent's tool may read, write, run and connect to, named by one hash and enforced by the kernel. Open source, Python standard library only. A real Linux kernel boots in your browser to show it.">
+<meta property="og:image" content="https://sharness.ai/assets/og/home.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sharness.ai/assets/og/home.png">
 <link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
 <link rel="stylesheet" href="assets/site.css">
 </head>
@@ -19,10 +23,21 @@
 
 <nav class="site"><div class="row">
   <a class="brand" href="index.html">sharness<span>.ai</span></a>
-  <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="project/releases.html" title="Site release history">v0.5.8</a>
+  <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
+  <a class="ver" href="project/releases.html" title="Site release history">v0.5.9</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="code/playground/index.html">Try it<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="code/playground/index.html">&#9679; The playground: type sharness-ai in your browser</a>
+      <a class="sl" href="code/browser/demo/index.html">A Linux kernel in a tab, running hello</a>
+      <a class="sl" href="index.html#start">Start in 60 seconds</a>
+      <a class="sl" href="evidence/machines/index.html">Help us measure it: report your machine</a>
+      <a class="sl" href="explain/mockups/policy-hash.html">Mockup: the policy hash</a>
+      <a class="sl" href="explain/mockups/edges.html">Mockup: the edge matrix</a>
+      </div>
+    </div>
     <div class="ni ni-has">
       <a class="nl" href="design/index.html">The design<span class="caret">&#9662;</span></a>
       <div class="sub">
@@ -59,6 +74,7 @@
       <a class="sl" href="evidence/index.html">&#9679; Measurements</a>
       <a class="sl" href="evidence/status/index.html">What exists today</a>
       <a class="sl" href="evidence/research/index.html">Research note</a>
+      <a class="sl" href="evidence/machines/index.html">hello on your machine: reported runs</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -90,6 +106,7 @@
       <a class="sl" href="project/engineering.html">Engineering: how the site is built</a>
       <a class="sl" href="project/comms.html">Comms: tasks &amp; requests</a>
       <a class="sl" href="project/releases.html">Release history</a>
+      <a class="sl" href="project/adoption/index.html">Getting users: the review and the plan</a>
       </div>
     </div>
   </div>
@@ -98,84 +115,112 @@
 </div></nav>
 
 <header class="hero">
-  <div class="eyebrow">SHarness · status: design · the first experiments are runnable · no component is built</div>
-  <h1>A secret lives in one place.<br>A tricked process can only do its one job.</h1>
-  <p class="sub"><b>SHarness</b> runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. This site publishes the design for review: what is proposed, what was measured, and what is still open.</p>
+  <div class="eyebrow">Open source · Python, standard library only · enforced by the Linux kernel</div>
+  <h1>Give every process an AI agent starts<br>a policy the kernel enforces.</h1>
+  <p class="sub"><b>SHarness</b> runs an agent's tools as small processes, each under a <b>Process Behaviour Policy</b>: what it may read, write, run and connect to, named by one hash the person supplies. A tricked agent cannot widen it, because the kernel was told before the process started. Today that is a CLI you can run on Linux, a kernel that boots in your browser to prove it, and a design for the launcher that binds the agent itself.</p>
   <div class="ctas">
-    <a class="cta1" href="design/index.html">The brief: in one read →</a>
-    <a class="cta2" href="design/architecture/index.html">The architecture →</a>
-    <a class="cta2" href="code/experiments/index.html">Mockups and experiments →</a>
+    <a class="cta1" href="code/playground/index.html">Try it in your browser →</a>
+    <a class="cta2" href="#start">Start in 60 seconds</a>
+    <a class="cta2" href="design/index.html">Read the design →</a>
   </div>
+  <div class="status"><span class="stage-pill">status: experiments</span> No SHarness component is built; every measured figure carries its date. <a href="evidence/status/index.html">What exists today →</a></div>
 </header>
 
-<section class="band alt" id="problem">
-  <h2>It started with one gap</h2>
-  <p class="blurb">A vault key handed to an AI agent was sealed while it travelled and exposed the moment it arrived: on disk, on the command line and in the agent's transcript.</p>
-  <div class="split">
-<pre class="diagram">   travel                          arrival (sgit 0.24.0 today)
- ┌────────────────────┐   ┌──────────────────────────────────────────────────────┐
- │ QR: sealed to the  │──►│ pki-agent open --save  → vault-key-&lt;id&gt;.txt   CLEAR │
- │ receiving agent    │   │ sgit clone &lt;vault key&gt; → argv, shell history, CLEAR │
- │ (person can't read)│   │                          the agent's transcript     │
- └────────────────────┘   │ .sg_vault/local/vault_key            (0600)  CLEAR │
-                          │ .sg_vault/local/key-rnd-imm-*.pem    (PKCS#8) CLEAR │
-                          │ .sg_vault/local/token                         CLEAR │
-                          └──────────────────────────────────────────────────────┘</pre>
-    <p class="cap">For an agent the worst leak is the transcript: every command line it writes and everything a command prints lands in the model's context and in conversation logs. <a href="design/why/index.html">The last metre, in full →</a></p>
+<section class="band alt" id="idea">
+  <h2>The one idea</h2>
+  <p class="blurb">A policy you can hash, a kernel that enforces it on the process, and a launcher above the agent that starts only what the hash names. The first two run today; the third is the design.</p>
+  <div class="anim">
+    <img src="assets/anim/one-idea.svg" alt="Animated: a Process Behaviour Policy is written, hashed to one SHA-256 name, and handed to the kernel before the agent's tool starts; the tool's reads and workspace writes are allowed, its connect to port 80 and its 200 MiB allocation are refused.">
+    <div class="beats">
+      <div><b><span>1</span>Write what one process may do</b>Files it may read, write and run; ports it may connect to; how much memory and how many processes. A few lines of JSON. Nothing else is allowed.</div>
+      <div><b><span>2</span>Hash it: that is its name</b>Canonical JSON, SHA-256. The person supplies the hash from outside the agent, so a prompt-injected agent cannot widen the policy without changing the name.</div>
+      <div><b><span>3</span>The kernel enforces it</b>Landlock rules per path and port, a network namespace, rlimits and cgroups, applied before <code>execve</code>. The process and everything it starts can only lose rights.</div>
+      <div><b><span>4</span>The caveat, every time</b>Applied by a process to its own child it is a Boundary for the child and only a Setting for the process. The launcher above the agent, which makes it a Boundary for the agent too, is the design.</div>
+    </div>
   </div>
 </section>
 
-<section class="band" id="design">
-  <h2>The fix turned out to be general</h2>
-  <p class="blurb">A launcher starts a few components, each under its own Process Behaviour Policy, enforced by Linux (separate users, Landlock, seccomp, namespaces, cgroups) and by mutual TLS between components. The person supplies the hash of the policy, so a prompt-injected agent cannot widen it.</p>
-  <div class="split">
-<pre class="diagram">                 person: supplies the policy hash, carries sealed QR codes
-                                        │
- ┌──────────────────────── sharness.launcher (outside every domain) ─────────────────────────┐
- │  harnessed app / orchestrator  (no keys, no tools of its own)                              │
- │       │               │                │                 │                                 │
- │       ▼               ▼                ▼                 ▼                                 │
- │  sharness.fs     sharness.net     sharness.bash     sharness.llm ──────► model API         │
- │  (writes)        (network) ──┐    (sandboxes)            │                                 │
- │                              └──────► sharness.kms ◄─────┘   (keys and sealed secrets)     │
- │  every edge: mutual TLS, roles in certificates · every component: own uid, own policy      │
- └────────────────────────────────────────────────────────────────────────────────────────────┘</pre>
-    <p class="cap">Designed, not built. sgit (<a href="https://cli.sgit.ai">sgit.ai's encrypted vault CLI</a>) is the first app designed to run inside it. The moving parts, drawn, and one request end to end: <a href="design/index.html">the brief</a>. What else a process can do when everything is bounded: <a href="design/surface/index.html">the whole surface</a>. From a hello world to sgit: <a href="design/spectrum/index.html">the spectrum</a>.</p>
-  </div>
-  <div class="cards" style="margin-top:1.6rem">
-    <a class="card" href="design/components/index.html#sharness-kms"><span class="tag">sharness.kms</span><h3>Holds the keys</h3><p>Opens sealed things and re-seals what the caller needs to a one-time key. Never returns a clear key. Frozen between calls.</p><span class="go">Read →</span></a>
-    <a class="card" href="design/components/index.html#sharness-net"><span class="tag">sharness.net</span><h3>The only network client</h3><p>Host, endpoint and id allowlists, enforced as the TLS client, where the name can actually be seen and verified.</p><span class="go">Read →</span></a>
-    <a class="card" href="design/components/index.html#sharness-fs"><span class="tag">sharness.fs</span><h3>The only writer</h3><p>Writes protected folders under rules, and refuses anything that parses as a clear key, a private key or a token.</p><span class="go">Read →</span></a>
-    <a class="card" href="design/components/index.html#sharness-bash"><span class="tag">sharness.bash</span><h3>The shell, sandboxed</h3><p>Each command in a fresh sandbox: own uid, no network by default, a workspace with no execute right.</p><span class="go">Read →</span></a>
-    <a class="card" href="design/agents/index.html#3-sharness-llm"><span class="tag">sharness.llm</span><h3>The only model client</h3><p>Speaks the Messages API unchanged, filters secrets out of every tool result, and holds the real API key via the KMS.</p><span class="go">Read →</span></a>
-    <a class="card" href="design/policies/index.html"><span class="tag">sharness.policy</span><h3>One hash, from the person</h3><p>Intersection-composed policies, hashed. The launcher refuses any manifest whose hash the person did not supply.</p><span class="go">Read →</span></a>
+<section class="band" id="proof">
+  <h2>See it hold</h2>
+  <p class="blurb"><code>sharness-ai hello</code> is the acceptance test: six probes under a deny-all policy, each expected to be allowed or refused. This is the run, replayed.</p>
+  <div class="two">
+    <div class="anim" style="padding:0"><img src="assets/anim/hello-replay.svg" alt="Animated terminal: sharness-ai hello runs six probes; read allowed; writes to /tmp and the workspace refused; a TCP connect refused; a 400 MiB allocation refused under a 128 MiB cap; a wrong hash runs nothing; result 6 of 6 held; then the caveat."></div>
+    <div class="proof">
+      <div><div class="n">6 of 6</div><p>held in five places: a cloud session, your browser, headless Chromium, Node and a chroot on the host kernel</p></div>
+      <div><div class="n alt">3 kernels</div><p>the host's, an emulated one in a browser tab, and an emulated one in Node: the same files, the same result</p></div>
+      <div><div class="n">7 policies</div><p>from a hello world to the sgit CLI, each hashing to the same value in Python, in the browser and in the Linux guest</p></div>
+      <div><div class="n alt">60 tests</div><p>on Python 3.11, 3.12 and 3.13, on every push; 0.6 s for the whole <code>hello</code> run on real hardware</p></div>
+      <div class="foot">Measured 24 and 25 October 2026, <span class="asof">as of 25 Oct 2026</span>, with method on <a href="evidence/index.html#9-the-first-experiments-run-by-the-cli">Evidence §9</a>. Your machine is the next row: <a href="#report">report what hello said there</a>.</div>
+    </div>
   </div>
 </section>
 
-<section class="band alt" id="experiments">
-  <h2>Start small: mockups, experiments, storyboards</h2>
-  <p class="blurb">The memo's method: very simple examples first, each piece in isolation. The ladder runs from the browser to a launcher above the agent. Experiments E01 to E04, E09 and E10 are runnable in the CLI; E04 was measured on 24 Oct 2026 and E09, a real Linux kernel in a browser tab running <code>hello</code>, <span class="asof">as of 25 Oct 2026</span>. No component is built.</p>
+<section class="band alt" id="start">
+  <h2>Start in 60 seconds</h2>
+  <p class="blurb">Three ways in. None needs a component that does not exist yet; each runs the experiments that do.</p>
+  <div class="steps">
+    <div class="step"><span class="tag">In your browser · nothing to install</span><h3>The playground</h3><p>Two terminals in one tab. <b>Pyodide</b>: Python in WebAssembly, where <code>pip install sharness-ai</code> gives you <code>policy hash</code>, <code>check</code> and <code>translate</code>. <b>Linux</b>: Alpine with a Landlock kernel, where every <code>sharness-ai run</code> is enforced. One policy, hashed three ways.</p><pre><span class="g">$</span> pip install sharness-ai
+<span class="g">sharness:/work#</span> sharness-ai hello
+<span class="d">result      6/6 held</span></pre><a class="go" href="code/playground/index.html">Open the playground →</a> &nbsp; <a class="go" href="code/browser/demo/index.html">Or just watch the kernel boot →</a></div>
+    <div class="step"><span class="tag">On Linux · 5.13 or later</span><h3>In a terminal</h3><p>Standard library only, so the install is one line. <code>probe</code> prints what a process here can do before any policy; <code>hello</code> checks that a policy holds; <code>run</code> puts any command under one.</p><pre><span class="g">$</span> pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev
+<span class="g">$</span> sharness-ai probe
+<span class="g">$</span> sharness-ai hello
+<span class="g">$</span> sharness-ai run --policy p2-tool-server.json -- my-tool
+<span class="d"># PyPI carries the skeleton (v0.1.0); the experiments ship with the next release</span></pre><a class="go" href="code/cli/index.html">The CLI →</a> &nbsp; <a class="go" href="code/examples/index.html">Every command with its output →</a></div>
+    <div class="step"><span class="tag">In a Claude Code session</span><h3>A skill that runs the experiments</h3><p>The CLI repository carries a skill that installs the package, runs <code>probe</code> and <code>hello</code> inside the session under the design's safety rules, and reports in the site's status words. It also says, every time, that a policy the session applies to its child does not bind the session.</p><pre><span class="g">&gt;</span> run the sharness hello
+<span class="d">sharness-ai hello … result 6/6 held
+caveat: a Boundary for the child, a Setting for this session</span></pre><a class="go" href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/.claude/skills/sharness-hello/SKILL.md">The skill →</a> &nbsp; <a class="go" href="code/experiments/index.html#what-claude-codes-own-sandbox-already-gives-and-what-sharness-adds">What Claude Code's sandbox gives, and what this adds →</a></div>
+  </div>
+</section>
+
+<section class="band" id="tab">
+  <h2>A real Linux kernel, in your browser tab</h2>
+  <p class="blurb">The claim "the kernel enforces it" should not need you to trust a screenshot. So the kernel boots in the tab: Alpine Linux with Landlock, under an x86 emulator in WebAssembly, running the same package and the same policies. Nothing installed, no account, 25 MB of static files.</p>
+  <div class="anim">
+    <img src="assets/anim/kernel-in-a-tab.svg" alt="Animated: a browser window opens sharness.ai, v86 starts, Linux 6.18 boots and prints landlock: Up and running, sharness-ai hello holds 6 of 6 at 28.5 seconds, and the example policies refuse a write, a port and an allocation. Beside it: 28.5 s, 3 kernels, 25 MB.">
+    <div class="beats">
+      <div><b><span>→</span>Watch it</b>The scripted run: <code>probe</code>, <code>hello</code>, <code>run</code> under the example policies, on the serial console. <a href="code/browser/demo/index.html">Boot it →</a></div>
+      <div><b><span>→</span>Type into it</b>The same guest with a shell on its serial line, next to Pyodide. <a href="code/playground/index.html">The playground →</a></div>
+      <div><b><span>→</span>Read how, and what it does not show</b>The research, the build, what held where, what did not work at first. <a href="articles/linux-in-a-tab.html">Linux in a tab →</a> · <a href="code/browser/index.html">the write-up →</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt who" id="who">
+  <h2>Who it is for</h2>
+  <p class="blurb">Three people, one policy format. The policy is the centre; every enforcer, ours included, is a target for it.</p>
   <div class="cards">
-    <a class="card" href="code/experiments/index.html"><span class="tag">The ladder</span><h3>Mockups and experiments</h3><p>Ten numbered experiments, where each runs, what it shows and does not show; what Claude Code's own sandbox already gives and what SHarness adds.</p><span class="go">Open →</span></a>
-    <a class="card" href="code/cli/index.html"><span class="tag">sharness-ai</span><h3>The CLI: probe, policy hash, run, hello</h3><p>The first version as proposed: experiments today, components tomorrow, one package. A hello world that cannot phone home, for one child process.</p><span class="go">Read →</span></a>
-    <a class="card" href="explain/mockups/policy-hash.html"><span class="tag">In the browser</span><h3>The policy hash</h3><p>Paste a v0 policy, get the hash the person supplies; the same one the CLI prints. Then watch an added host change it.</p><span class="go">Try →</span></a>
-    <a class="card" href="explain/mockups/edges.html"><span class="tag">In the browser</span><h3>The edge matrix</h3><p>Click caller and callee; see which layer refuses first. The app never talks to the KMS.</p><span class="go">Try →</span></a>
-    <a class="card" href="code/playground/index.html"><span class="tag">Type it yourself</span><h3>The playground</h3><p><code>pip install sharness-ai</code> in Pyodide, then a shell on Linux with Landlock: run any command under a policy, and hash one policy three ways.</p><span class="go">Play →</span></a>
-    <a class="card" href="code/browser/demo/index.html"><span class="tag">A kernel in the tab</span><h3>Linux, Landlock and <code>hello</code> in your browser</h3><p>Alpine boots under v86 and runs <code>sharness-ai probe</code>, <code>hello</code> and <code>run</code> under the example policies, live on the serial console. Nothing installed. E09, measured.</p><span class="go">Boot →</span></a>
-    <a class="card" href="explain/storyboards/index.html"><span class="tag">Three strips</span><h3>Storyboards</h3><p>The last metre, its one job, and hello world inside: the design drawn from data by the storyboards.sgit.ai kit, with a cast of four.</p><span class="go">Open →</span></a>
-    <a class="card" href="evidence/research/index.html"><span class="tag">24 Oct 2026</span><h3>Research note</h3><p>The published design read in full: what holds up, ten things to improve, what this release did, and the order for what is still open.</p><span class="go">Read →</span></a>
-    <a class="card" href="landscape/index.html"><span class="tag">The landscape</span><h3>Policies at the centre</h3><p>SHarness as the reference implementation of Process Behaviour Policies; every other product an integration point or a translation target; the enforceability matrix; the market, every row sourced.</p><span class="go">Read →</span></a>
+    <a class="card" href="code/experiments/index.html#the-example-policies"><span class="tag">You run coding agents</span><h3>Put the agent's tools under a policy today</h3><p>A Claude Code session, an orchestrator, a script that calls tools: start each tool with <code>sharness-ai run --policy …</code> and the kernel holds it to the file, port and memory limits you wrote. P1 and P2 are the profiles to start from. The caveat applies: the agent's own process is bound only by a launcher above it.</p><span class="go">The example policies →</span></a>
+    <a class="card" href="design/policies/index.html"><span class="tag">You ship a tool or an MCP server</span><h3>Ship the policy with the tool</h3><p>Write the policy your tool needs, hash it, and publish both. Whoever runs your tool runs it under that hash, and sees exactly what you asked for: a read-only workspace, one port, a memory cap. A tool that needs less is easier to trust.</p><span class="go">Process Behaviour Policies →</span></a>
+    <a class="card" href="landscape/enforceability/index.html"><span class="tag">You run a platform</span><h3>One policy, every enforcer</h3><p><code>sharness-ai policy translate</code> writes the same policy as a bubblewrap command, a <code>docker run</code>, a Claude Code sandbox setting or a Kubernetes Pod and NetworkPolicy, and lists what each of those cannot enforce. The enforceability matrix is that list, row by row.</p><span class="go">The enforceability matrix →</span></a>
+  </div>
+</section>
+
+<section class="band" id="report">
+  <h2>Help us measure it</h2>
+  <div class="ask"><div class="box">A claim that the kernel enforces a policy is only as good as the kernels it was checked on. So far that is one cloud session, one browser and one emulator. Your machine is the next row. Run the acceptance test and paste what it said:<pre><span class="g">$</span> pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev
+<span class="g">$</span> sharness-ai hello --json</pre>then open <a href="https://github.com/SHarness-AI/SHarness-AI__CLI/issues/new?template=hello-report.yml">a hello report</a> on GitHub (two fields: the JSON, and anything odd). Every report goes on <a href="evidence/machines/index.html">the machines page</a> with its kernel, Landlock ABI and result, including the ones that did not hold: a refusal that did not happen is the most useful thing you can send. Nothing in the JSON identifies you; <code>probe</code> prints the names of proxy variables, never their values.</div></div>
+</section>
+
+<section class="band alt" id="design">
+  <h2>Where it is going: the design</h2>
+  <p class="blurb">The CLI confines one process. The design confines the whole agent: a launcher starts a few components, each under its own policy, enforced by Linux and by mutual TLS between them, so a secret lives in one place and a tricked process can only do its one job. It started with <a href="design/why/index.html">one gap</a>: a vault key handed to an agent was sealed while it travelled and exposed the moment it arrived, on disk, on the command line and in the transcript.</p>
+  <div class="cards">
+    <a class="card" href="design/index.html"><span class="tag">Read first</span><h3>The brief, in one read</h3><p>The moving parts, drawn, and one request end to end. What is proposed, what was measured, what is open.</p><span class="go">Read →</span></a>
+    <a class="card" href="design/components/index.html"><span class="tag">Designed, not built</span><h3>Six components, one job each</h3><p><code>kms</code> holds the keys and never returns one in clear; <code>net</code> is the only network client; <code>fs</code> the only writer; <code>bash</code> sandboxes each command; <code>llm</code> the only model client; <code>launcher</code> starts them under one hash.</p><span class="go">Components →</span></a>
+    <a class="card" href="design/containment/index.html"><span class="tag">How far it holds</span><h3>Containment</h3><p>Can every process be constrained, and how comfortable to be with hostile code inside, by threat class. The kernel is trusted; root and kernel compromise are out of scope, and the site says so.</p><span class="go">Read →</span></a>
+    <a class="card" href="landscape/index.html"><span class="tag">The landscape</span><h3>Policies at the centre</h3><p>SHarness as the reference implementation of Process Behaviour Policies; sandboxes, containers and platforms as integration points and translation targets; the market, every row sourced.</p><span class="go">Read →</span></a>
   </div>
 </section>
 
 <section class="band" id="articles">
   <h2>Articles</h2>
-  <p class="blurb">Dinis Cruz's memos written up in his voice, and the build agent's record of what it delivered. In the newsroom's format, so each can be imported there unchanged.</p>
+  <p class="blurb">Dinis Cruz's memos in his voice, and the build agent's record of what it delivered, each with the commits to check it against.</p>
   <div class="cards">
+    <a class="card" href="articles/linux-in-a-tab.html"><span class="tag">sharness.build · 25 Oct 2026</span><h3>Linux in a tab</h3><p>A real kernel enforces a Process Behaviour Policy in Chrome: what is in the tab, what held where, what did not work at first, how it fits together.</p><span class="go">Read →</span></a>
     <a class="card" href="articles/secure-harness-for-agents.html"><span class="tag">Dinis Cruz · 24 Oct 2026</span><h3>A secure harness for agents</h3><p>Behaviour policies enforced from outside the agent, one small component at a time, starting with my own Claude sessions.</p><span class="go">Read →</span></a>
     <a class="card" href="articles/the-first-experiments.html"><span class="tag">sharness.build · 24 Oct 2026</span><h3>The first experiments</h3><p>Four commands, three storyboards, two mockups, and what a full read of the design found.</p><span class="go">Read →</span></a>
-    <a class="card" href="articles/what-shipped-on-day-one.html"><span class="tag">sharness.build · 24 Oct 2026</span><h3>What shipped on day one</h3><p>A package on PyPI, a site with a gate, the design published for review, and the three things the agent got wrong.</p><span class="go">Read →</span></a>
-    <a class="card" href="articles/index.html"><span class="tag">All</span><h3>Every article</h3><p>Newest first, with who wrote each and how.</p><span class="go">Open →</span></a>
+    <a class="card" href="articles/index.html"><span class="tag">All</span><h3>Every article</h3><p>Newest first, with who wrote each and how; each with a markdown twin.</p><span class="go">Open →</span></a>
   </div>
 </section>
 
@@ -186,13 +231,13 @@
     <table>
       <thead><tr><th>Label</th><th class="safe">Means</th></tr></thead>
       <tbody>
-        <tr><td><b>Measured</b></td><td>Probed or timed in one Claude agent workspace, <span class="asof">as of 24 Oct 2026</span>, with the method on <a href="evidence/index.html">Evidence</a>. For example: a mutual TLS handshake between components ≈ 3.2 ms; a <code>memfd_secret</code> page unreadable even by root.</td></tr>
-        <tr><td><b>Designed / proposed</b></td><td>How SHarness would work: the components, the KMS protocol, the policies, <code>.llm</code>, <code>.bash</code>, the deployment topologies.</td></tr>
-        <tr><td><b>Not yet measured</b></td><td>seccomp filters, read-only bind mounts, the side doors in <a href="design/process-tree/index.html">the process tree</a>, AWS KMS compatibility.</td></tr>
-        <tr><td><b>Never claimed</b></td><td>That anything is built or released; protection against root or kernel compromise; anything about any platform's plans; that a schema bounds intent (it bounds shape).</td></tr>
+        <tr><td><b>Measured</b></td><td>Probed or timed in a named environment on a named date, with the method on <a href="evidence/index.html">Evidence</a>. For example: <code>hello</code> 6 of 6 in five places; a mutual TLS handshake between components ≈ 3.2 ms; a <code>memfd_secret</code> page unreadable even by root.</td></tr>
+        <tr><td><b>Runnable</b></td><td>The code is in the repository and its tests pass: <code>probe</code>, <code>policy hash</code>, <code>check</code>, <code>translate</code>, <code>run</code>, <code>hello</code>, the browser bench, the playground.</td></tr>
+        <tr><td><b>Designed / proposed</b></td><td>How SHarness would work: the components, the KMS protocol, the policy layers, <code>.llm</code>, <code>.bash</code>, the deployment topologies.</td></tr>
+        <tr><td><b>Never claimed</b></td><td>That any component is built or released; protection against root or kernel compromise; anything about any platform's plans; that a schema bounds intent (it bounds shape).</td></tr>
       </tbody>
     </table>
-    <p class="cap"><a href="design/roadmap/index.html">The roadmap and open decisions →</a> · <a href="project/sources/index.html">the source documents, verbatim →</a> · <a href="project/about/index.html">about and naming →</a></p>
+    <p class="cap"><a href="design/roadmap/index.html">The roadmap and open decisions →</a> · <a href="project/sources/index.html">the source documents, verbatim →</a> · <a href="project/about/index.html">about and naming →</a> · <a href="project/adoption/index.html">getting users: the review and the plan →</a></p>
   </div>
 </section>
 
@@ -202,7 +247,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="project/releases.html">v0.5.8</a> · <a href="project/engineering.html">engineering</a> · <a href="index.md">this page as markdown</a></p>
+    <p class="verline">site <a href="project/releases.html">v0.5.9</a> · <a href="project/engineering.html">engineering</a> · <a href="index.md">this page as markdown</a></p>
   </div>
   <div>
     <h4>The design</h4>
@@ -236,6 +281,7 @@
     <a href="evidence/index.html">Measurements</a>
     <a href="evidence/status/index.html">What exists today</a>
     <a href="evidence/research/index.html">Research note</a>
+    <a href="evidence/machines/index.html">hello on your machine</a>
     <a href="landscape/index.html">Landscape: policies at the centre</a>
     <a href="landscape/enforceability/index.html">Enforceability matrix</a>
     <a href="landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
@@ -256,6 +302,5 @@
     <a href="sitemap.xml">sitemap.xml</a>
   </div>
 </div></footer>
-
 </body>
 </html>

@@ -4,7 +4,7 @@
 > the kernel and talking only over allowed, mutually authenticated connections, so a secret
 > lives in one place and a tricked process can only do its one job.
 
-Site version: v0.5.8. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04,
+Site version: v0.5.9. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04,
 E09 and E10 in the CLI; E09 is a real Linux kernel in a browser tab running hello, measured 25 Oct 2026).
 No SHarness component is built.
 By Dinis Cruz; design session written up with Claude, 24 October 2026. All content CC BY 4.0.
@@ -91,6 +91,8 @@ SHarness is unrelated to Sharness, the shell testing library.
 - /evidence/index.md — every measurement with method, date and caveats; §9 the first experiments
   run by the CLI; what is documented but not exercised; what is not measured
 - /evidence/status/index.md — what exists today and what does not (the honest column)
+- /evidence/machines/index.md — hello on your machine: every reported run of sharness-ai hello (kernel, Landlock
+  ABI, uid, Python, result), failures first; how to report yours with hello --json
 - /evidence/research/index.md — the published design read in full on 24 Oct 2026: ten findings
   and what was done about each; what is still open and in what order
 
@@ -130,6 +132,8 @@ SHarness is unrelated to Sharness, the shell testing library.
 
 ## Project
 
+- /project/adoption/index.md — getting users: the review of the site from a user's angle, what changed, who
+  the users are, where to find them, how to tell whether it is working
 - /project/about/index.md — identity and naming rules: brand SHarness; command sharness-ai (never
   plain sharness); env prefix SHARNESS_AI_; components sharness.<role>; who writes here
 - /project/sources/index.md — the source documents, verbatim, with known issues; the pack at

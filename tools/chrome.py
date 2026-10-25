@@ -27,6 +27,14 @@ HOST    = (ROOT / "CNAME").read_text().strip()
 #   · `prefixes` decides the "here" state, so a page not itself in the nav still
 #     lights up the group it belongs to.
 NAV = [
+    ("Try it", "code/playground/index.html", [
+        ("&#9679; The playground: type sharness-ai in your browser", "code/playground/index.html"),
+        ("A Linux kernel in a tab, running hello", "code/browser/demo/index.html"),
+        ("Start in 60 seconds", "index.html#start"),
+        ("Help us measure it: report your machine", "evidence/machines/index.html"),
+        ("Mockup: the policy hash", "explain/mockups/policy-hash.html"),
+        ("Mockup: the edge matrix", "explain/mockups/edges.html"),
+    ], ("code/playground/", "code/browser/demo/", "evidence/machines/")),
     ("The design", "design/index.html", [
         ("&#9679; The brief: in one read", "design/index.html"),
         ("Why: the last metre", "design/why/index.html"),
@@ -55,6 +63,7 @@ NAV = [
         ("&#9679; Measurements", "evidence/index.html"),
         ("What exists today", "evidence/status/index.html"),
         ("Research note", "evidence/research/index.html"),
+        ("hello on your machine: reported runs", "evidence/machines/index.html"),
     ], ("evidence/",)),
     ("Landscape", "landscape/index.html", [
         ("&#9679; Policies at the centre", "landscape/index.html"),
@@ -77,6 +86,7 @@ NAV = [
         ("Engineering: how the site is built", "project/engineering.html"),
         ("Comms: tasks &amp; requests", "project/comms.html"),
         ("Release history", "project/releases.html"),
+        ("Getting users: the review and the plan", "project/adoption/index.html"),
     ], ("project/",)),
 ]
 
@@ -110,6 +120,7 @@ FOOTER = [
         ("Measurements", "evidence/index.html"),
         ("What exists today", "evidence/status/index.html"),
         ("Research note", "evidence/research/index.html"),
+        ("hello on your machine", "evidence/machines/index.html"),
         ("Landscape: policies at the centre", "landscape/index.html"),
         ("Enforceability matrix", "landscape/enforceability/index.html"),
         ("Ruflo and ruv.sgit", "landscape/ruflo/index.html"),
@@ -159,7 +170,7 @@ def nav_html(rel, up):
     rows = "\n".join(groups)
     return (f'<nav class="site"><div class="row">\n'
             f'  <a class="brand" href="{up}index.html">sharness<span>.ai</span></a>\n'
-            f'  <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>\n'
+            f'  <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>\n'
             f'  <a class="ver" href="{up}project/releases.html" title="Site release history">{VERSION}</a>\n'
             f'  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>\n'
             f'  <div class="nav-items">\n{rows}\n  </div>\n'

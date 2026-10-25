@@ -10,6 +10,8 @@ Three labels are used across the site, and this page is where they are earned:
 | **designed / proposed** | a description of how SHarness would work; nothing is built |
 | **not yet measured** | named in the design, not tested: seccomp filters, read-only bind mounts, every side door on [Enforcing the process tree](../design/process-tree/index.md), and AWS KMS compatibility |
 
+Every reported `hello` run, ours and yours, is on [hello on your machine](machines/index.md).
+
 ## 1. The environment
 
 | Fact | Observed |

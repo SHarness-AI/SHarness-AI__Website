@@ -78,6 +78,8 @@ PAGES = [
      "Every measurement behind the SHarness design, with method, date and caveats, and the list of what has not been measured."),
     ("evidence/status",     "What exists today",
      "The honest column: what exists as running code and can be checked, and what is not here yet."),
+    ("evidence/machines",   "hello on your machine",
+     "every reported run of sharness-ai hello, with the kernel, the Landlock ABI and the result; how to report yours"),
     ("evidence/research",   "Research note",
      "The published design read in full on 24 Oct 2026: what holds up, what to improve, what this release did about it, and what is still open."),
     # the landscape
@@ -101,6 +103,8 @@ PAGES = [
      "Who SHarness is by, the naming rules, the disambiguation from the Sharness shell test library, and the identifiers."),
     ("project/sources",     "The source documents",
      "The SHarness design pack, published verbatim: the brief for this site and the eight design documents it was built from."),
+    ("project/adoption",    "Getting users: the review and the plan",
+     "what was wrong for a user and what changed, who the users are, where to find them, how to tell whether it is working"),
 ]
 
 ASOF = re.compile(r"\bas of (\d{1,2} [A-Z][a-z]{2} \d{4})")

@@ -1,11 +1,33 @@
-# SHarness — a secret lives in one place; a tricked process can only do its one job
+# SHarness: a policy the kernel enforces, for every process an AI agent starts
 
-> **SHarness** runs agents and their tools as small, single-purpose processes, each locked
-> down by the kernel and talking only over allowed, mutually authenticated connections, so a
-> secret lives in one place and a tricked process can only do its one job.
+> **SHarness** runs an agent's tools as small processes, each under a Process Behaviour Policy:
+> what it may read, write, run and connect to, named by one hash the person supplies and enforced
+> by the Linux kernel. A tricked agent cannot widen it, because the kernel was told before the
+> process started. Today: a CLI that enforces a policy on one process, a kernel that boots in your
+> browser to prove it, and a design for the launcher that binds the agent itself.
 
-*Source: <https://sharness.ai/index.html> · site v0.5.8 · markdown twin of the front page.*
-*Status: **design**, with the first experiments runnable. No SHarness component is built.*
+*Source: <https://sharness.ai/index.html> · site v0.5.9 · markdown twin of the front page.*
+*Status: **experiments**. No SHarness component is built; every measured figure carries its date.*
+
+## Start in 60 seconds
+
+- **In your browser, nothing installed:** [the playground](code/playground/index.html), `pip install sharness-ai` in Pyodide next to a shell on a Linux kernel with Landlock; or [watch the kernel boot](code/browser/demo/index.html).
+- **On Linux:** `pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev`, then `sharness-ai probe`, `sharness-ai hello`, `sharness-ai run --policy p2-tool-server.json -- my-tool`. PyPI carries the skeleton (v0.1.0); the experiments ship with the next release.
+- **In a Claude Code session:** the [skill](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/.claude/skills/sharness-hello/SKILL.md) runs `probe` and `hello` inside the session, with the caveat that the session itself is not bound.
+
+## The one idea
+
+A policy you can hash, a kernel that enforces it on the process, and a launcher above the agent that starts only what the hash names. The first two run today (`sharness-ai run`, measured on three kernels); the third is the design. Applied by a process to its own child, a policy is a Boundary for the child and only a Setting for the process. The animated version: [assets/anim/one-idea.svg](assets/anim/one-idea.svg).
+
+## See it hold
+
+`sharness-ai hello`: six probes under a deny-all policy, 6 of 6 held in five places (a cloud session, Dinis Cruz's browser, headless Chromium, Node, a chroot on the host kernel), as of 25 Oct 2026; 60 tests on Python 3.11 to 3.13; seven example policies hashing identically in Python, the browser and the Linux guest. Method on [Evidence §9](evidence/index.md#9-the-first-experiments-run-by-the-cli). Your machine is the next row: run `sharness-ai hello --json` and [report it](https://github.com/SHarness-AI/SHarness-AI__CLI/issues/new?template=hello-report.yml); every report is on [hello on your machine](evidence/machines/index.md).
+
+## Who it is for
+
+- **People who run coding agents:** start each tool under a policy, `sharness-ai run --policy …`; [the example policies](code/experiments/index.md#the-example-policies).
+- **Authors of tools and MCP servers:** ship the policy and its hash with the tool; [Process Behaviour Policies](design/policies/index.md).
+- **Platform and security teams:** `sharness-ai policy translate` writes the same policy for bubblewrap, Docker, Kubernetes or Claude Code's sandbox, with what each cannot enforce; [the enforceability matrix](landscape/enforceability/index.md).
 
 ---
 
@@ -40,13 +62,14 @@ The memo's method is to start with very simple examples. [Mockups and experiment
 
 - **The design:** [the brief, read first](design/index.md) · [Why](design/why/index.md) · [Architecture](design/architecture/index.md) · [Components](design/components/index.md) · [Keys and the KMS](design/keys/index.md) · [Policies](design/policies/index.md) · [Agents and LLMs](design/agents/index.md) · [The process tree](design/process-tree/index.md) · [What a process can do](design/surface/index.md) · [Containment](design/containment/index.md) · [The spectrum](design/spectrum/index.md) · [Roadmap](design/roadmap/index.md)
 - **The code:** [where it is](code/index.md) · [The CLI](code/cli/index.md) · [Mockups and experiments](code/experiments/index.md) · [Flows](code/flows/index.md) · [Examples](code/examples/index.md) · [Linux in the browser](code/browser/index.md) · [Languages](code/languages/index.md)
-- **Evidence:** [Measurements](evidence/index.md) · [What exists today](evidence/status/index.md) · [Research note](evidence/research/index.md)
+- **Evidence:** [Measurements](evidence/index.md) · [What exists today](evidence/status/index.md) · [Research note](evidence/research/index.md) · [hello on your machine](evidence/machines/index.md)
 - **The landscape:** [Policies at the centre](landscape/index.md) · [Enforceability](landscape/enforceability/index.md) · [Integration points](landscape/integrations/index.md) · [Ruflo and ruv.sgit](landscape/ruflo/index.md) · [Market and competitors](landscape/market/index.md)
 - **Explain:** [Storyboards and mockups](explain/index.md) · [Storyboards](explain/storyboards/index.md) · [Articles](articles/index.md)
-- **Project:** [About and naming](project/about/index.md) · [The source documents](project/sources/index.md) · [Comms](project/comms.html) · [Releases](project/releases.html)
+- **Project:** [About and naming](project/about/index.md) · [Getting users: the review and the plan](project/adoption/index.md) · [The source documents](project/sources/index.md) · [Comms](project/comms.html) · [Releases](project/releases.html)
 
 ## Articles
 
+- [Linux in a tab](articles/linux-in-a-tab.md), by sharness.build, 25 Oct 2026
 - [A secure harness for agents](articles/secure-harness-for-agents.md), by Dinis Cruz, 24 Oct 2026
 - [The first experiments](articles/the-first-experiments.md), by sharness.build, 24 Oct 2026
 - [What shipped on day one](articles/what-shipped-on-day-one.md), by sharness.build, 24 Oct 2026
@@ -54,8 +77,7 @@ The memo's method is to start with very simple examples. [Mockups and experiment
 
 ## What this site claims
 
-Measured figures come from one Claude agent workspace, as of 24 Oct 2026, with method on the
-Evidence page. Everything else is designed or proposed. The site never claims anything is
+Measured figures carry their environment and date, with method on the Evidence page. Everything else is designed or proposed. The site never claims anything is
 built, never claims protection against root or kernel compromise, and says nothing about any
 platform's plans.
 

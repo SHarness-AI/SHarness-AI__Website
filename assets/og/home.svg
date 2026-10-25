@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
+  <rect width="1200" height="630" fill="#faf9f5"/>
+  <rect x="0" y="0" width="1200" height="8" fill="#0f766e"/>
+  <text x="72" y="92" font-size="26" font-weight="800" fill="#1c1d21">sharness<tspan fill="#0f766e">.ai</tspan></text>
+  <text x="72" y="190" font-family="ui-serif,Georgia,serif" font-size="58" font-weight="700" fill="#101114">Give every process an AI agent starts</text>
+  <text x="72" y="258" font-family="ui-serif,Georgia,serif" font-size="58" font-weight="700" fill="#101114">a policy the kernel enforces.</text>
+  <text x="72" y="318" font-size="24" fill="#5c5f66">What it may read, write, run and connect to, named by one hash, enforced by Linux.</text>
+  <text x="72" y="352" font-size="24" fill="#5c5f66">Open source, Python standard library only. A real kernel boots in your browser to show it.</text>
+  <rect x="72" y="410" width="1056" height="150" rx="14" fill="#0d1117"/>
+  <g font-family="ui-monospace,Menlo,Consolas,monospace" font-size="21">
+    <text x="100" y="452" fill="#3fb950">$ <tspan fill="#e6edf3">sharness-ai hello</tspan></text>
+    <text x="100" y="486" fill="#3fb950">  ✔ read  ✔ write-tmp  ✔ write-cwd  ✔ net  ✔ memory  ✔ hash</text>
+    <text x="100" y="520" fill="#8b949e">result      <tspan fill="#3fb950" font-weight="700">6/6 held</tspan>   · on your laptop, in a cloud session, and in a browser tab</text>
+  </g>
+  <text x="72" y="598" font-size="18" fill="#8a8d94">status: experiments · no component is built · every measured figure carries its date</text>
+</svg>

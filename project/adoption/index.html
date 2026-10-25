@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Getting users: the review and the plan — SHarness</title>
+<meta name="description" content="what was wrong for a user and what changed, who the users are, where to find them, how to tell whether it is working">
+<link rel="canonical" href="https://sharness.ai/project/adoption/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/project/adoption/index.html">
+<meta property="og:title" content="Getting users: the review and the plan — SHarness">
+<meta property="og:description" content="what was wrong for a user and what changed, who the users are, where to find them, how to tell whether it is working">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.9</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../code/playground/index.html">Try it<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/playground/index.html">&#9679; The playground: type sharness-ai in your browser</a>
+      <a class="sl" href="../../code/browser/demo/index.html">A Linux kernel in a tab, running hello</a>
+      <a class="sl" href="../../index.html#start">Start in 60 seconds</a>
+      <a class="sl" href="../../evidence/machines/index.html">Help us measure it: report your machine</a>
+      <a class="sl" href="../../explain/mockups/policy-hash.html">Mockup: the policy hash</a>
+      <a class="sl" href="../../explain/mockups/edges.html">Mockup: the edge matrix</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../design/index.html">The design<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../design/index.html">&#9679; The brief: in one read</a>
+      <a class="sl" href="../../design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="../../design/architecture/index.html">Architecture</a>
+      <a class="sl" href="../../design/components/index.html">Components</a>
+      <a class="sl" href="../../design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../../design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../../design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="../../design/surface/index.html">What a process can do</a>
+      <a class="sl" href="../../design/containment/index.html">Containment</a>
+      <a class="sl" href="../../design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../code/index.html">The code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/index.html">&#9679; Where the code is</a>
+      <a class="sl" href="../../code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl" href="../../code/flows/index.html">Flows through the code</a>
+      <a class="sl" href="../../code/examples/index.html">Examples</a>
+      <a class="sl" href="../../code/browser/index.html">Linux in the browser</a>
+      <a class="sl" href="../../code/playground/index.html">Playground: run it in your browser</a>
+      <a class="sl" href="../../code/languages/index.html">Languages</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../evidence/index.html">&#9679; Measurements</a>
+      <a class="sl" href="../../evidence/status/index.html">What exists today</a>
+      <a class="sl" href="../../evidence/research/index.html">Research note</a>
+      <a class="sl" href="../../evidence/machines/index.html">hello on your machine: reported runs</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../landscape/index.html">Landscape<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../landscape/index.html">&#9679; Policies at the centre</a>
+      <a class="sl" href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+      <a class="sl" href="../../landscape/integrations/index.html">Integration points</a>
+      <a class="sl" href="../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+      <a class="sl" href="../../landscape/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../explain/index.html">Explain<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../explain/index.html">&#9679; Storyboards &amp; mockups</a>
+      <a class="sl" href="../../explain/storyboards/index.html">Storyboards</a>
+      <a class="sl" href="../../explain/mockups/policy-hash.html">Mockup: policy hash</a>
+      <a class="sl" href="../../explain/mockups/edges.html">Mockup: edge matrix</a>
+      <a class="sl" href="../../articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../project/index.html">&#9679; Project</a>
+      <a class="sl" href="../../project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="../../project/sources/index.html">The source documents</a>
+      <a class="sl" href="../../project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="../../project/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../project/releases.html">Release history</a>
+      <a class="sl here" href="../../project/adoption/index.html">Getting users: the review and the plan</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__CLI">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+  <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">project</a> / getting users: the review and the plan · <a href="index.md">this page as markdown</a></div>
+  <h1>Getting users: the review and the plan</h1>
+<div class="note"><b>Status: a plan, <span class="asof">as of 25 Oct 2026</span>.</b> This page is the build agent's review of the site and the code from one angle: a person who could use this, arriving cold. It says what was wrong for that person, what changed in this release because of it, what is still open, who the users are, where to find them, and how to tell whether it is working. It is published because the project is built in the open and because the plan only works if the people it names can read it.</div>
+<h2 id="1-what-the-project-needs-from-users">1. What the project needs from users</h2>
+<p>SHarness makes one claim that can be checked by anyone with a Linux machine: a Process Behaviour Policy, named by its hash, is enforced by the kernel on the process it is applied to. The claim is only as strong as the set of kernels, distributions, container runtimes and agent harnesses it was checked on. Today that set is one cloud session, one browser and one emulator. So the first thing users give is not stars or opinions: it is <b>rows on <a href="../../evidence/machines/index.html">the machines page</a></b>, each a <code>hello --json</code> from somewhere we have not run. The second is <b>policies</b>: what a real tool, a real MCP server, a real agent session actually needs, in the v0 shape. The third is the hard questions, which the design pages exist to receive.</p>
+<h2 id="2-the-review-what-was-wrong-for-a-user-and-what-changed">2. The review: what was wrong for a user, and what changed</h2>
+<p>Read as a visitor who runs agents and has ninety seconds. The site at v0.5.8 was written for a reviewer of a design, and it showed.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>What a visitor met</th><th>Why it cost users</th><th>v0.5.9</th></tr></thead>
+<tbody>
+<tr><td>A headline about a secret in one place, under a banner saying no component is built</td><td>The first thing read was what does not exist; what exists, and what they could do with it, came three screens later</td><td>The front page leads with what the kernel enforces today, three ways to start in 60 seconds, and the status as a chip, not a headline</td></tr>
+<tr><td>Nothing moved; two ASCII diagrams carried the whole explanation, and they overflow on a phone</td><td>The one idea (policy, hash, kernel, launcher) is simple and was never shown, only described</td><td>Three animated explainers in SVG with no script: the one idea, the <code>hello</code> run replayed, the kernel booting in a tab. They run on this site and in the GitHub README</td></tr>
+<tr><td>"Try it" was the fifth card in the third section</td><td>The strongest thing the project has, a kernel in the tab, was below the fold and unlabelled as a demo</td><td>The first call to action; a "Try it" group first in the nav</td></tr>
+<tr><td><code>pip install sharness-ai</code> installs a skeleton that prints its version</td><td>The one line every developer tries first does nothing useful; every install line on the site carries a git URL instead</td><td><b>Open: decision R7.</b> Merging <code>dev</code> into <code>main</code> releases v0.2.0 with every experiment. This is the single change that matters most for users, and it is the project lead's to make</td></tr>
+<tr><td>No way to give feedback that fits the project's own rules</td><td>The site measures only with a method, an environment and a date; it gave users no way to add a measurement</td><td><code>hello --json</code>, <a href="https://github.com/SHarness-AI/SHarness-AI__CLI/issues/new?template=hello-report.yml">a two-field issue template</a>, and the machines page that publishes every report, failures first</td></tr>
+<tr><td>No audience named</td><td>A tool author, an agent operator and a platform team each need a different first command, and none was offered</td><td>"Who it is for": three people, each with the one thing to run</td></tr>
+<tr><td>Project jargon on the front page: the memo, E04, rungs, the grant, R6</td><td>Internal words tell a visitor the page is not for them</td><td>Gone from the front page; kept on the experiments and project pages where each is defined</td></tr>
+<tr><td>The README on GitHub: a wall of text, no picture, a badge for the release that prints its version</td><td>GitHub is where most people will first meet this, and it looked unfinished</td><td>The README leads with the animated explainers and the 60-second start; status second, still honest</td></tr>
+<tr><td>No share card</td><td>A link posted anywhere showed no image</td><td>An <code>og:image</code> for the front page</td></tr>
+<tr><td>The nav: six groups named for a reviewer (Evidence, Landscape, Explain)</td><td>A user looks for Try, Learn, Code</td><td>"Try it" added first. Open: fold Explain into Design and Evidence</td></tr>
+<tr><td>The design pages still draw in ASCII</td><td>Their markdown twins need the same text, and the agent-readable format was chosen on purpose</td><td>Open: an SVG twin for each of the five design diagrams, kept next to the ASCII, not instead of it</td></tr>
+<tr><td>The guest in the tab has no network</td><td>The port-443 probe shows "allowed but unreachable" instead of a connection that works without a policy and fails under one</td><td>Open: v86's <code>fetch</code> or WebSocket backend, which is also where an egress allowlist outside the guest would live</td></tr>
+<tr><td>The tab takes 30 to 90 seconds to boot</td><td>Most visitors leave before <code>landlock: Up and running.</code></td><td>Open: a booted-state snapshot, which v86 supports, so the page opens in seconds</td></tr>
+</tbody>
+</table></div>
+<p>What the review did not find wrong, and kept: the honesty rules (measured only with method, environment and date; the caveat printed with every result), the markdown twin of every page, the sourced landscape, and the articles. Those are what a user who stays will trust.</p>
+<h2 id="3-who-the-users-are">3. Who the users are</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>User</th><th>What they do with it today</th><th>The first command</th><th>What they give back</th></tr></thead>
+<tbody>
+<tr><td><b>People who run coding agents</b> (a Claude Code session, an orchestrator, a script that calls tools)</td><td>start each tool under a policy; translate a policy into their agent's own sandbox settings</td><td><code>sharness-ai run --policy p2-tool-server.json -- my-tool</code></td><td>hello reports from real laptops and containers; the policies their tools actually need</td></tr>
+<tr><td><b>Authors of tools and MCP servers</b></td><td>ship a policy with the tool, so whoever runs it runs it under that hash</td><td><code>sharness-ai policy hash policy.json</code></td><td>policies in the wild; the shape v0 lacks (hosts, UDP, uids)</td></tr>
+<tr><td><b>Platform and security teams</b></td><td>one policy, written once, enforced by bubblewrap, Docker, Kubernetes or Claude Code's sandbox, with the gap listed</td><td><code>sharness-ai policy translate policy.json --to kubernetes</code></td><td>the enforceability matrix corrected from use; the hard questions on the containment page</td></tr>
+</tbody>
+</table></div>
+<p>A fourth group reads but does not run: people deciding whether Process Behaviour Policies, and the Agent Behaviour Policies they come from, are the right shape. They are reached by the design pages and the articles, and they give back arguments.</p>
+<h2 id="4-where-to-find-them">4. Where to find them</h2>
+<p>Each channel below comes with the one link to carry and the one ask to make. The link is always the front page or the tab demo; the ask is always a hello report.</p>
+<ul>
+<li><b>The Landlock community.</b> The kernel's Landlock project keeps a public list of software that uses it, and its maintainers read reports from real kernels. Ask to be listed; send the machines page. This is the one audience that will check the claims line by line, which is what the project wants.</li>
+<li><b>The Claude Code ecosystem.</b> The skill in the CLI repository runs the experiments inside a session, and <code>translate --to claude-code</code> writes the sandbox settings a session can use today. List the skill where Claude Code skills and plugins are listed; write the one-page guide "a policy for your Claude Code tools".</li>
+<li><b>Authors of MCP servers.</b> Offer the smallest thing: a <code>policy.json</code> next to a server, and the hash in its README. The MCP community's own discussion channels are where server authors are.</li>
+<li><b>Python developers.</b> Release to PyPI (R7). A package that does what its README says is the channel.</li>
+<li><b>Technical news and forums.</b> The tab demo is the hook: a real kernel boots in the browser and refuses what the policy refuses. Post it where people run things before they read: the "show" threads of the technical forums, and the Linux and security communities.</li>
+<li><b>The security communities the project lead already works in.</b> The OWASP projects on application and AI security are the natural place to ask for review of the containment page and the threat model, which is where the design most needs adversarial readers.</li>
+<li><b>The sandbox and container communities.</b> bubblewrap, Docker and Kubernetes are translation targets, not competitors. A policy that produces a correct <code>docker run</code> or a correct NetworkPolicy is a reason for their users to look.</li>
+<li><b>The newsroom and the project lead's own channels.</b> Every article here is already in the newsroom's format, so each can be republished there unchanged; the long-read articles are what to share with people who read.</li>
+</ul>
+<p>What not to do: no announcement before R7, because the first thing every reader will type is <code>pip install sharness-ai</code>.</p>
+<h2 id="5-how-to-tell-whether-it-is-working">5. How to tell whether it is working</h2>
+<p>The site is static and carries no analytics, on purpose, so visits are not counted. What is counted:</p>
+<ul>
+<li><b>hello reports</b>: how many, from how many distinct kernels and distributions, and how many did not hold. The machines page is the dashboard.</li>
+<li><b>policies from the wild</b>: pull requests or issues that add a profile for a real tool.</li>
+<li><b>issues on the design pages</b>: a hard question is worth more than a star.</li>
+<li>GitHub stars and PyPI downloads, as a weak signal, last.</li>
+</ul>
+<p>The first target is modest and concrete: ten machines on the machines page that are not ours, and one policy for a tool the project did not write.</p>
+<h2 id="6-the-sixty-second-test">6. The sixty-second test</h2>
+<p>Every change to the front page is held to this: a visitor who runs agents should, within sixty seconds of arriving, know what the kernel will enforce for them, have one command to type or one button to press that does it, and know what is not built. If the page cannot pass that test, it goes back.</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.9</a> · <a href="../../project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The design</h4>
+    <a href="../../design/index.html">The brief: in one read</a>
+    <a href="../../design/why/index.html">Why: the last metre</a>
+    <a href="../../design/architecture/index.html">Architecture</a>
+    <a href="../../design/components/index.html">Components</a>
+    <a href="../../design/keys/index.html">Keys and the KMS</a>
+    <a href="../../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../../design/agents/index.html">Agents and LLMs</a>
+    <a href="../../design/process-tree/index.html">Enforcing the process tree</a>
+    <a href="../../design/surface/index.html">What a process can do</a>
+    <a href="../../design/containment/index.html">Containment</a>
+    <a href="../../design/spectrum/index.html">The spectrum</a>
+    <a href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+  </div>
+  <div>
+    <h4>The code</h4>
+    <a href="../../code/index.html">Where the code is</a>
+    <a href="../../code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../../code/flows/index.html">Flows through the code</a>
+    <a href="../../code/examples/index.html">Examples</a>
+    <a href="../../code/browser/index.html">Linux in the browser</a>
+    <a href="../../code/languages/index.html">Languages</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
+  </div>
+  <div>
+    <h4>Evidence, landscape, explain</h4>
+    <a href="../../evidence/index.html">Measurements</a>
+    <a href="../../evidence/status/index.html">What exists today</a>
+    <a href="../../evidence/research/index.html">Research note</a>
+    <a href="../../evidence/machines/index.html">hello on your machine</a>
+    <a href="../../landscape/index.html">Landscape: policies at the centre</a>
+    <a href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+    <a href="../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+    <a href="../../landscape/market/index.html">Market &amp; competitors</a>
+    <a href="../../explain/storyboards/index.html">Storyboards</a>
+    <a href="../../explain/index.html">Mockups</a>
+    <a href="../../articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Project &amp; agents</h4>
+    <a href="../../project/about/index.html">About &amp; naming</a>
+    <a href="../../project/sources/index.html">The source documents</a>
+    <a href="../../project/engineering.html">Engineering</a>
+    <a href="../../project/comms.html">Comms &amp; release history</a>
+    <a href="../../llms.txt">llms.txt</a>
+    <a href="../../llms-full.txt">llms-full.txt</a>
+    <a href="../../index.md">index.md</a>
+    <a href="../../sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

@@ -226,3 +226,38 @@ figure.lead{margin:1.6rem 0;padding:0}
 figure.lead img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
 figure.lead figcaption{font-size:.84rem;color:var(--dim);line-height:1.6;margin-top:.6rem}
 main.doc hr{border:none;border-top:1px solid var(--line);margin:2rem 0}
+
+/* ---------- front page: the user's path (v0.5.9) ---------- */
+header.hero .status{display:inline-flex;gap:.5rem;align-items:center;flex-wrap:wrap;justify-content:center;margin-top:1.4rem;font-size:.78rem;color:var(--dim)}
+header.hero .status a{color:var(--accent-dk);font-weight:600}
+.anim{max-width:1000px;margin:0 auto;padding:0 1.1rem}
+.anim{overflow-x:auto}
+.anim img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:14px;background:var(--panel);box-shadow:var(--shadow)}
+.two .anim{margin:0;max-width:none;width:100%;min-width:0}
+@media(max-width:640px){.anim img{min-width:640px}}   /* a phone scrolls the drawing sideways rather than shrinking its text past reading */
+.anim .beats{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:1rem}
+.anim .beats div{font-size:.84rem;color:var(--dim);line-height:1.55;padding:.2rem .4rem}
+.anim .beats b{display:block;color:#101114;font-size:.86rem;margin-bottom:.15rem}
+.anim .beats b span{display:inline-block;width:1.35rem;height:1.35rem;border-radius:50%;background:var(--accent-dk);color:#fff;font-size:.7rem;text-align:center;line-height:1.35rem;margin-right:.4rem}
+.two{max-width:1160px;margin:0 auto;padding:0 1.1rem;display:grid;gap:1.2rem;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);align-items:start}
+@media(max-width:900px){.two{grid-template-columns:1fr}}
+.proof{display:grid;gap:.7rem;grid-template-columns:1fr 1fr}
+.proof div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.85rem 1rem;box-shadow:var(--shadow)}
+.proof .n{font-family:var(--serif);font-size:1.9rem;color:var(--accent-dk);line-height:1.1;letter-spacing:-.02em}
+.proof .n.alt{color:#5b21b6}
+.proof p{margin:.25rem 0 0;font-size:.78rem;color:var(--dim);line-height:1.5}
+.proof .foot{grid-column:1/-1;background:none;border:0;box-shadow:none;padding:.2rem .2rem 0;font-size:.78rem;color:var(--dim)}
+.steps{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));max-width:1160px;margin:0 auto;padding:0 1.1rem}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem;box-shadow:var(--shadow)}
+.step .tag{font-size:.64rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--warm)}
+.step h3{margin:.3rem 0 .4rem;font-size:1rem;color:#101114}
+.step p{margin:0 0 .5rem;font-size:.82rem;color:var(--dim);line-height:1.55}
+.step pre{background:var(--term-bg);color:#c9d1d9;border-radius:8px;padding:.7rem .8rem;font-size:.76rem;line-height:1.6;overflow-x:auto;margin:.5rem 0}
+.step pre .g{color:var(--term-green)}.step pre .d{color:var(--term-dim)}.step pre .y{color:var(--term-yellow)}
+.step .go{display:inline-block;font-size:.8rem;color:var(--accent-dk);font-weight:600;margin-top:.2rem}
+.ask{max-width:860px;margin:0 auto;padding:0 1.1rem}
+.ask .box{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--warm);border-radius:0 12px 12px 0;padding:1rem 1.2rem;box-shadow:var(--shadow);font-size:.92rem;color:#34363c;line-height:1.65}
+.ask .box pre{background:var(--term-bg);color:#c9d1d9;border-radius:8px;padding:.7rem .9rem;font-size:.8rem;line-height:1.6;overflow-x:auto;margin:.7rem 0}
+.ask .box .g{color:var(--term-green)}
+.who .card h3{font-size:1.02rem}
+.who .card code{font-size:.78em}

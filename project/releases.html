@@ -18,10 +18,21 @@
 
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
-  <span class="stage-pill" title="Nothing described on this site is built yet">status: design</span>
-  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.8</a>
+  <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
+  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.9</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../code/playground/index.html">Try it<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../code/playground/index.html">&#9679; The playground: type sharness-ai in your browser</a>
+      <a class="sl" href="../code/browser/demo/index.html">A Linux kernel in a tab, running hello</a>
+      <a class="sl" href="../index.html#start">Start in 60 seconds</a>
+      <a class="sl" href="../evidence/machines/index.html">Help us measure it: report your machine</a>
+      <a class="sl" href="../explain/mockups/policy-hash.html">Mockup: the policy hash</a>
+      <a class="sl" href="../explain/mockups/edges.html">Mockup: the edge matrix</a>
+      </div>
+    </div>
     <div class="ni ni-has">
       <a class="nl" href="../design/index.html">The design<span class="caret">&#9662;</span></a>
       <div class="sub">
@@ -58,6 +69,7 @@
       <a class="sl" href="../evidence/index.html">&#9679; Measurements</a>
       <a class="sl" href="../evidence/status/index.html">What exists today</a>
       <a class="sl" href="../evidence/research/index.html">Research note</a>
+      <a class="sl" href="../evidence/machines/index.html">hello on your machine: reported runs</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -89,6 +101,7 @@
       <a class="sl" href="../project/engineering.html">Engineering: how the site is built</a>
       <a class="sl" href="../project/comms.html">Comms: tasks &amp; requests</a>
       <a class="sl here" href="../project/releases.html">Release history</a>
+      <a class="sl" href="../project/adoption/index.html">Getting users: the review and the plan</a>
       </div>
     </div>
   </div>
@@ -102,6 +115,7 @@
   <div class="tablewrap"><table class="vers">
     <thead><tr><th>Version</th><th>Date</th><th>What changed</th></tr></thead>
     <tbody>
+      <tr><td class="vnum">v0.5.9</td><td>25 Oct 2026</td><td>The front page rebuilt for a user arriving cold: what the kernel enforces today, three ways to start in 60 seconds, three animated explainers (the one idea, <code>hello</code> replayed, a kernel in a tab; SVG, no script, also in the GitHub README), who it is for, and the ask: run <code>hello --json</code> and report your machine. A "Try it" group first in the nav; a share card. New pages: <a href="../evidence/machines/index.html">hello on your machine</a> (every reported run, failures first) and <a href="../project/adoption/index.html">getting users: the review and the plan</a>. In the CLI: a two-field hello report template, the report line in <code>hello</code>, the README rewritten.</td></tr>
       <tr><td class="vnum">v0.5.8</td><td>25 Oct 2026</td><td>The playground fixed: on the live site a Pyodide command could run before the example policies were in place (<code>policy hash policies/…</code> found no file); every command now waits for the whole start-up, and the test slows the policy files to prove it (11 of 11 against sharness.ai). The guest and the wheel rebuilt from the CLI with three fixes its new CI found (Python 3.11 support, <code>translate -- CMD</code> on 3.11, <code>hello</code> in a virtualenv); <a href="../articles/linux-in-a-tab.html">the article</a> lists them under what did not work.</td></tr>
       <tr><td class="vnum">v0.5.7</td><td>25 Oct 2026</td><td>A milestone article, <a href="../articles/linux-in-a-tab.html">Linux in a tab</a>: Dinis's screenshots of a real kernel enforcing a Process Behaviour Policy in Chrome (6 of 6 at 28.5 s), with six infographics: the stack in the tab, what <code>run</code> does syscall by syscall, what held where, the ELF interpreter finding, one policy hashed three ways, how it fits together. <a href="../code/playground/index.html">The playground</a>: <code>pip install sharness-ai</code> in Pyodide, a shell on the Linux guest, one policy hashed by WebCrypto, Pyodide and Linux (11 of 11 checks in headless Chromium). The header's GitHub link now goes to the CLI repository.</td></tr>
       <tr><td class="vnum">v0.5.6</td><td>25 Oct 2026</td><td>E09 built and measured: one Alpine x86 guest with Alpine's Landlock kernel and the CLI, booted by v86 <a href="../code/browser/demo/index.html">in a browser tab</a> and in Node, and the same binaries through chroot on the host kernel; <code>hello</code> 6 of 6 in all three (<a href="../code/browser/index.html">Linux in the browser</a>, <a href="../evidence/index.html#9-the-first-experiments-run-by-the-cli">Evidence §9</a>). Five example Process Behaviour Policies, P0 a hello world to P4 sgit, run natively and in the guest (<a href="../code/experiments/index.html#the-example-policies">Mockups and experiments</a>). Found on the way: the ELF interpreter must be executable, and v86 needs no special headers.</td></tr>
@@ -128,7 +142,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../project/releases.html">v0.5.8</a> · <a href="../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../project/releases.html">v0.5.9</a> · <a href="../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>
@@ -162,6 +176,7 @@
     <a href="../evidence/index.html">Measurements</a>
     <a href="../evidence/status/index.html">What exists today</a>
     <a href="../evidence/research/index.html">Research note</a>
+    <a href="../evidence/machines/index.html">hello on your machine</a>
     <a href="../landscape/index.html">Landscape: policies at the centre</a>
     <a href="../landscape/enforceability/index.html">Enforceability matrix</a>
     <a href="../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
