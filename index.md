@@ -6,7 +6,7 @@
 > process started. Today: a CLI that enforces a policy on one process, a kernel that boots in your
 > browser to prove it, and a design for the launcher that binds the agent itself.
 
-*Source: <https://sharness.ai/index.html> · site v0.5.13 · markdown twin of the front page.*
+*Source: <https://sharness.ai/index.html> · site v0.5.14 · markdown twin of the front page.*
 *Status: **experiments**. No SHarness component is built; every measured figure carries its date.*
 
 ## Start in 60 seconds
@@ -22,6 +22,10 @@ A policy you can hash, a kernel that enforces it on the process, and a launcher 
 ## See it hold
 
 `sharness-ai hello`: six probes under a deny-all policy, 6 of 6 held in five places (a cloud session, Dinis Cruz's browser, headless Chromium, Node, a chroot on the host kernel), as of 25 Oct 2026; 60 tests on Python 3.11 to 3.13; seven example policies hashing identically in Python, the browser and the Linux guest. Method on [Evidence §9](evidence/index.md#9-the-first-experiments-run-by-the-cli). Your machine is the next row: run `sharness-ai hello --json` and [report it](https://github.com/SHarness-AI/SHarness-AI__CLI/issues/new?template=hello-report.yml); every report is on [hello on your machine](evidence/machines/index.md).
+
+## The operating system a process sees
+
+Bound everything a process can do and what is left is its policy: no filesystem of its own to write, no network stack, no key, no shell, no model API. In their place, five doors, each a small REST service on loopback with its own uid and policy, and the bootstrap that started them: [sharness.bash](components/bash/index.md) (the shell as a service; start here), [sharness.net](components/net/index.md) (the only network client; worth adopting alone), [sharness.kms](components/kms/index.md), [sharness.fs](components/fs/index.md), [sharness.llm](components/llm/index.md), [sharness.launcher](components/launcher/index.md), [sharness.policy](components/policy/index.md). Each page: the API (proposed), the requests and their verdicts, what it enforces with what, what you get from this one alone. The hub: [the components](components/index.md).
 
 ## Who it is for
 

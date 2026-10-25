@@ -4,7 +4,7 @@
 > the kernel and talking only over allowed, mutually authenticated connections, so a secret
 > lives in one place and a tricked process can only do its one job.
 
-Site version: v0.5.13. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04,
+Site version: v0.5.14. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04,
 E09 and E10 in the CLI; E09 is a real Linux kernel in a browser tab running hello, measured 25 Oct 2026).
 No SHarness component is built.
 By Dinis Cruz; design session written up with Claude, 24 October 2026. All content CC BY 4.0.
@@ -67,6 +67,11 @@ SHarness is unrelated to Sharness, the shell testing library.
 
 ## The code (RUNNABLE: experiments E01 to E04 in the CLI; no component is built)
 
+- /components/index.md — the components as the operating system a process sees: five doors (fs, net, kms, bash, llm) and
+  the bootstrap, each a small REST service on loopback with mutual TLS; everything is a request with a verdict;
+  pick one (each is worth adopting alone); start with bash. One page per component: /components/<name>/index.md
+  (bash, net, kms, fs, llm, launcher, policy), each with the API (proposed), the requests and their verdicts, what
+  it enforces with what, what it does not do
 - /code/index.md — where everything is: the package module by module (with line counts), the
   commands, what on this site has code behind it and what does not, next in order
 - /code/cli/index.md — the sharness-ai package: what exists (PyPI v0.1.0 vs dev), the first version

@@ -70,8 +70,14 @@ nav.site .sub a.sl.here{color:var(--accent-dk);font-weight:600}
   .nav-toggle:hover{border-color:var(--accent)}
   nav.site .parent{order:2}
   nav.site .gh{order:4;margin-left:0}
+  /* The open menu is taller than a phone's screen, and the bar it lives in is sticky: a sticky
+     element taller than the viewport only reveals its lower part when the page is scrolled to its
+     end, which is exactly the bug readers hit (the menu "did not scroll"). So the list scrolls
+     inside the bar, within the height the screen has left under the bar. */
   .nav-items{display:none;order:5;width:100%;flex-direction:column;gap:.1rem;
-    padding:.5rem 0 .3rem;border-top:1px solid var(--line);margin-top:.4rem}
+    padding:.5rem 0 .3rem;border-top:1px solid var(--line);margin-top:.4rem;
+    max-height:calc(100vh - 7rem);max-height:calc(100dvh - 7rem);overflow-y:auto;
+    -webkit-overflow-scrolling:touch;overscroll-behavior:contain}
   nav.site.open .nav-items{display:flex}
   nav.site .ni{width:100%}
   nav.site .ni > .nl{display:block;padding:.42rem .2rem;font-size:.95rem}
@@ -163,8 +169,8 @@ table.vers td.vnum{font-family:var(--mono);font-weight:700;color:var(--accent-dk
 
 /* ---------- footer ---------- */
 footer.site{border-top:1px solid var(--line);margin-top:3.5rem;padding:2.2rem 0 3rem;background:var(--panel2)}
-footer.site .cols{max-width:var(--wide);margin:0 auto;padding:0 1.1rem;display:grid;gap:1.6rem;grid-template-columns:1.8fr 1fr 1fr 1fr 1fr}
-@media (max-width:1080px){footer.site .cols{grid-template-columns:2fr 1fr 1fr 1fr}}
+footer.site .cols{max-width:var(--wide);margin:0 auto;padding:0 1.1rem;display:grid;gap:1.4rem;grid-template-columns:1.6fr 1fr 1fr 1fr 1fr 1fr}
+@media (max-width:1080px){footer.site .cols{grid-template-columns:1fr 1fr 1fr}}
 @media (max-width:940px){footer.site .cols{grid-template-columns:1fr 1fr}}
 footer.site h4{font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;color:var(--dim);margin:0 0 .6rem}
 footer.site a{display:block;color:var(--dim);font-size:.82rem;padding:.15rem 0}

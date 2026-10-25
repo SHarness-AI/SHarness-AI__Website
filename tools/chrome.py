@@ -35,6 +35,16 @@ NAV = [
         ("Mockup: the policy hash", "explain/mockups/policy-hash.html"),
         ("Mockup: the edge matrix", "explain/mockups/edges.html"),
     ], ("code/playground/", "code/browser/demo/", "evidence/machines/")),
+    ("Components", "components/index.html", [
+        ("&#9679; The OS a process sees", "components/index.html"),
+        ("sharness.bash: the shell, as a service", "components/bash/index.html"),
+        ("sharness.net: the only network client", "components/net/index.html"),
+        ("sharness.kms: where a secret lives", "components/kms/index.html"),
+        ("sharness.fs: the only writer", "components/fs/index.html"),
+        ("sharness.llm: the only model client", "components/llm/index.html"),
+        ("sharness.launcher: the bootstrap", "components/launcher/index.html"),
+        ("sharness.policy: the manifest", "components/policy/index.html"),
+    ], ("components/",)),
     ("The design", "design/index.html", [
         ("&#9679; The brief: in one read", "design/index.html"),
         ("Why: the last metre", "design/why/index.html"),
@@ -48,7 +58,9 @@ NAV = [
         ("Containment", "design/containment/index.html"),
         ("The spectrum: hello world to sgit", "design/spectrum/index.html"),
         ("Roadmap &amp; open decisions", "design/roadmap/index.html"),
-    ], ("design/",)),
+        ("Storyboards &amp; mockups", "explain/index.html"),
+        ("Articles", "articles/index.html"),
+    ], ("design/", "explain/", "articles/")),
     ("The code", "code/index.html", [
         ("&#9679; Where the code is", "code/index.html"),
         ("The CLI: sharness-ai", "code/cli/index.html"),
@@ -72,13 +84,6 @@ NAV = [
         ("Ruflo and ruv.sgit", "landscape/ruflo/index.html"),
         ("Market &amp; competitors", "landscape/market/index.html"),
     ], ("landscape/",)),
-    ("Explain", "explain/index.html", [
-        ("&#9679; Storyboards &amp; mockups", "explain/index.html"),
-        ("Storyboards", "explain/storyboards/index.html"),
-        ("Mockup: policy hash", "explain/mockups/policy-hash.html"),
-        ("Mockup: edge matrix", "explain/mockups/edges.html"),
-        ("Articles", "articles/index.html"),
-    ], ("explain/", "articles/")),
     ("Project", "project/index.html", [
         ("&#9679; Project", "project/index.html"),
         ("About &amp; naming", "project/about/index.html"),
@@ -94,6 +99,16 @@ NAV = [
 ]
 
 FOOTER = [
+    ("Components", [
+        ("The OS a process sees", "components/index.html"),
+        ("sharness.bash", "components/bash/index.html"),
+        ("sharness.net", "components/net/index.html"),
+        ("sharness.kms", "components/kms/index.html"),
+        ("sharness.fs", "components/fs/index.html"),
+        ("sharness.llm", "components/llm/index.html"),
+        ("sharness.launcher", "components/launcher/index.html"),
+        ("sharness.policy", "components/policy/index.html"),
+    ]),
     ("The design", [
         ("The brief: in one read", "design/index.html"),
         ("Why: the last metre", "design/why/index.html"),
