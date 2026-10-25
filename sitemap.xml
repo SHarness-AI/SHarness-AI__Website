@@ -60,6 +60,7 @@
   <url><loc>https://sharness.ai/admin/members/conductor/index.html</loc><lastmod>2026-10-25</lastmod></url>
   <url><loc>https://sharness.ai/admin/members/editor/index.html</loc><lastmod>2026-10-25</lastmod></url>
   <url><loc>https://sharness.ai/admin/members/index.html</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://sharness.ai/admin/members/security/index.html</loc><lastmod>2026-10-25</lastmod></url>
   <url><loc>https://sharness.ai/admin/members/sharness.build/index.html</loc><lastmod>2026-10-25</lastmod></url>
   <url><loc>https://sharness.ai/admin/members/sharness.dev/index.html</loc><lastmod>2026-10-25</lastmod></url>
   <url><loc>https://sharness.ai/admin/members/sherpa/index.html</loc><lastmod>2026-10-25</lastmod></url>
@@ -76,4 +77,10 @@
   <url><loc>https://sharness.ai/components/llm/index.html</loc><lastmod>2026-10-25</lastmod></url>
   <url><loc>https://sharness.ai/components/net/index.html</loc><lastmod>2026-10-25</lastmod></url>
   <url><loc>https://sharness.ai/components/policy/index.html</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://sharness.ai/security/hardening/index.html</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://sharness.ai/security/index.html</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://sharness.ai/security/reviews/index.html</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://sharness.ai/security/risks/index.html</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://sharness.ai/security/supply-chain/index.html</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://sharness.ai/security/threat-model/index.html</loc><lastmod>2026-10-25</lastmod></url>
 </urlset>

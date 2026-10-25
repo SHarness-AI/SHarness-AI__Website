@@ -4,7 +4,7 @@
 > the kernel and talking only over allowed, mutually authenticated connections, so a secret
 > lives in one place and a tricked process can only do its one job.
 
-Site version: v0.5.16. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04,
+Site version: v0.5.17. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04,
 E09 and E10 in the CLI; E09 is a real Linux kernel in a browser tab running hello, measured 25 Oct 2026).
 No SHarness component is built.
 By Dinis Cruz; design session written up with Claude, 24 October 2026. All content CC BY 4.0.
@@ -32,6 +32,7 @@ SHarness is unrelated to Sharness, the shell testing library.
 - /design/ — the design: the brief and the design pages
 - /code/ — where the code is, the CLI, experiments, flows, examples, languages
 - /evidence/ — measurements, what exists today, the research note
+- /security/ — the project's own account of its security: threat model, known risks, reviews, hardening, supply chain
 - /landscape/ — policies at the centre: the thesis, the enforceability matrix, integration points, the market
 - /explain/ — storyboards and mockups; /articles/ — the articles
 - /project/ — about, the source documents (verbatim), engineering, comms, releases, the agents and their keys, outreach, telemetry
@@ -90,11 +91,32 @@ SHarness is unrelated to Sharness, the shell testing library.
   translate; run and hello refuse with no kernel) and in a shell on the Linux guest (enforced); one policy hashed three ways
 - /articles/linux-in-a-tab.md — the milestone: a real kernel enforcing a Process Behaviour Policy in Chrome,
   what held where, what did not work (the ELF interpreter needs the execute right), how it fits together
+- /code/releases/index.md — the code at immutable paths: /code/releases/releases.json (every release),
+  /code/releases/latest.json and latest/ (the newest), /code/releases/vN/vN.M/vN.M.P/manifest.json (sha256 and
+  sha384 integrity for every file; the source commit), /code/releases/dev/ (a snapshot, no promise)
 - /code/languages/index.md — Python first; Rust for the KMS and the bash client; JSON for policies; the
   proposed set of reference implementations (JavaScript in Node and the browser, Go, Rust; Java, .NET, C later)
 - /articles/one-standard-many-languages.md — by sharness.dev: what in each component is a standard and what is
   an implementation; the component-by-language map; what each runtime adds to the attack surface; the
   adoption ladder from a policy file to a component; standards versioned with vectors and a reviewed registry
+
+## Security (the register; nothing reviewing SHarness should find what it does not already say)
+
+- /security/index.md — the hub: the five pages, where the first review stands (25 findings on 25 Oct 2026:
+  5 High, 7 Medium, 11 Low, 2 Info; all High fixed), how to report, what the section does not do
+- /security/threat-model/index.md — assets, actors, the two trust boundaries (the person's hash; the kernel),
+  surface by surface what the code of today holds, what the designed launcher adds, what nothing covers
+- /security/risks/index.md — the register, SR-01 to SR-25 and the design's SD rows: weight, state (fixed /
+  accepted / open / designed), the reason and the test. Accepted: Unix-domain sockets by path (Landlock has
+  no rule), Pyodide from a CDN without integrity. Open: the environment row (SR-11), the repository settings (SR-24)
+- /security/reviews/index.md — review 1, 25 Oct 2026: scope, method, environment, SF-01 to SF-25 with the fix
+  and the test, what was examined and found clean, what was not examined
+- /security/hardening/index.md — how to run sharness-ai so it holds as much as it can; the lock-down list
+  for the organisation, both repositories, PyPI, Pages and the agents (settings only a person can change)
+- /security/supply-chain/index.md — no dependencies; every action pinned by commit; the release path (build
+  and publish separated, Trusted Publishing, PEP 740 attestations); what the site loads from elsewhere;
+  the code published at immutable paths under /code/releases/ with manifests, a latest and a dev snapshot
+- /.well-known/security.txt — the contact (GitHub private vulnerability reporting)
 
 ## Evidence and status
 

@@ -42,6 +42,8 @@ SRC   = ROOT / "content/storyboards"
 OUT   = ROOT / "explain/storyboards"
 HOST  = chrome.HOST
 KIT   = "https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/"
+# embed.js's sha384 from the kit's manifest.json at that release (checked 25 Oct 2026): a release is immutable, so this never moves unless KIT does
+KIT_INTEGRITY = "sha384-MJYywdRM1gslaDV4AypUBYskTgX6Tc46P6B5aakMDBi/xb2hytOzWCsT6G09oc2q"
 PACKS = ["security"]
 ASOF  = "24 Oct 2026"                                             # the date the data was last checked against the design
 
@@ -128,7 +130,7 @@ def page(rel, title, desc, main, md_href, up):
 <meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" type="text/markdown" href="{md_href}" title="This page as markdown">
 <link rel="stylesheet" href="{up}assets/site.css">
-<script src="{KIT}embed.js" defer></script>
+<script src="{KIT}embed.js" integrity="{KIT_INTEGRITY}" crossorigin="anonymous" defer></script>
 </head>
 <body>
 

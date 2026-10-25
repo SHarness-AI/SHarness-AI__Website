@@ -1,0 +1,8 @@
+# sharness.ai security contact (RFC 9116)
+Contact: https://github.com/SHarness-AI/SHarness-AI__CLI/security/advisories/new
+Contact: https://github.com/SHarness-AI/SHarness-AI__Website/security/advisories/new
+Expires: 2027-10-25T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://sharness.ai/.well-known/security.txt
+Policy: https://sharness.ai/security/index.html
+Acknowledgments: https://sharness.ai/security/reviews/index.html

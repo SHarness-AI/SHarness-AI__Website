@@ -1,7 +1,7 @@
 {
- "wheel": "sharness_ai-0.1.0+dev.47b3402-py3-none-any.whl",
- "version": "0.1.0+dev.47b3402",
- "size": 22356,
- "sha256": "sha256:a36d276fad7332ceca83bb1687f3b7581d110441706127b65dbf18e3843953a2",
+ "wheel": "sharness_ai-0.1.0+dev.997459a-py3-none-any.whl",
+ "version": "0.1.0+dev.997459a",
+ "size": 28024,
+ "sha256": "sha256:ecfab40386e71d12a532ca587bf0f1adcf397cfe055d2ce8d6fc3214f2fd73c1",
  "built": "2026-10-25"
 }

@@ -1,0 +1,186 @@
+{
+ "what": "SNAPSHOT of the sharness-ai dev branch: rebuilt on every site release, no immutability promise. Pin a release under code/releases/vN/ when the bytes must not move.",
+ "kind": "snapshot",
+ "release": "v0.1.0+dev.997459a",
+ "date": "2026-10-25",
+ "source": {
+  "repository": "https://github.com/SHarness-AI/SHarness-AI__CLI",
+  "ref": "HEAD",
+  "commit": "997459a9e0c63425274976936ca694d926cb3ec0"
+ },
+ "base": "https://sharness.ai/code/releases/dev/",
+ "counts": {
+  "files": 28,
+  "bytes": 162712
+ },
+ "files": [
+  {
+   "path": "LICENSE",
+   "bytes": 11357,
+   "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+   "integrity": "sha384-FpFtzV8m58dpDyvTpZ8htCgBPTjkNp1plYQuZckY7SU0rnDgCYZJgZrAs69bWKU+"
+  },
+  {
+   "path": "README.md",
+   "bytes": 13775,
+   "sha256": "c1380ec0ce4c48381075eb819950fe660205e255d8e2edb67df34bfcbbc0a3d4",
+   "integrity": "sha384-6AxKpktLeRaDqSns1kfPdvvD+doQlPEJmkPiWkXujbVEftKelKp5Gx2aXj197lY5"
+  },
+  {
+   "path": "experiments/browser/page.html",
+   "bytes": 3658,
+   "sha256": "097c5c17e51050238c2aa5670b271c45ca34f9741a00b1f5abca36e11d6d286b",
+   "integrity": "sha384-k+bIlaB60XHhTwLBMii0cYuWWosrg32RCviYQi3o6h3FNy1baffjrlUfHnp70aVG"
+  },
+  {
+   "path": "experiments/browser/playground.html",
+   "bytes": 970,
+   "sha256": "2042be9536f27a435ac480f868c3c54e6373076c469dd5a04bd0c81f60d1b4d6",
+   "integrity": "sha384-5uqdQeE1zu2Xpqb0V2lrcpIg/f+RKbaRgkTNNrqT/gYhuipeoE5+HcHKFnetHpH0"
+  },
+  {
+   "path": "experiments/browser/playground.js",
+   "bytes": 27753,
+   "sha256": "94733c8f98db3593be614e27a93df9dbba11e2ac3e86bb0f22267f2e17ab6725",
+   "integrity": "sha384-dYMO+QMeWhknNTBGMXk9ATR+0yiCYuESJgbz2bVf/Mzbue/30CBfUpQ5LXjoAekg"
+  },
+  {
+   "path": "experiments/policies/README.md",
+   "bytes": 3526,
+   "sha256": "7c6b2725c520a14eb7671f50e01c1b66ba2abce5d36101ebb0a69d62106ecf79",
+   "integrity": "sha384-IQAmTp0HuKixaolxjC67xL5l3pMf0WahMQb7wB8ckOKdSobpJYy+F8KcnaGsiQK6"
+  },
+  {
+   "path": "experiments/policies/allow-https-example.json",
+   "bytes": 450,
+   "sha256": "b64d93c9fec64edb71a70070ac691b12c0673286e1b543bd9f0f0e664bc496ff",
+   "integrity": "sha384-sLbWq+dgObL/5sIvHlELJO0XV76F6JioVf/G0d5qNy0Y+jQf6Zx2pUqXbFhmRu1G"
+  },
+  {
+   "path": "experiments/policies/deny-all-example.json",
+   "bytes": 430,
+   "sha256": "3a540d18dfb62483400798886ee397c997a058a51eaa4296c1859c638b05a3a2",
+   "integrity": "sha384-Q+AuWWPGYI43rOoOlR0bVLFm+CxYs4oUaY1k2BemvO32CKkvrCAjacTw0kS8RAK/"
+  },
+  {
+   "path": "experiments/policies/p0-hello-world.json",
+   "bytes": 531,
+   "sha256": "505721af055ae06066517a958b4fce58a519f0f05f4e6467dc76fab5b5e9f586",
+   "integrity": "sha384-QM4ouU4w1HkEWlhjLVNmKyOUc5ilprLyg365O28x9LXqtBMOoE24zVzS/+S/2SMx"
+  },
+  {
+   "path": "experiments/policies/p1-agent-session.json",
+   "bytes": 815,
+   "sha256": "537ed78b7e5df73e76b3346324e873310edc81ca8b1fcc9205b33a9e9bbf3bdc",
+   "integrity": "sha384-H53PhhNiiTKZQcPsG+9K1aq/J0JdmogYPvN9kkdseNZIx7/430cSnsP2HZdtl0SL"
+  },
+  {
+   "path": "experiments/policies/p2-tool-server.json",
+   "bytes": 702,
+   "sha256": "5848fa6bb21655afabb6038d32258b7b7b0943fea75aa6f73b38f5285d83c172",
+   "integrity": "sha384-DVcHiDUnYNU/Cl5nAfS0YkD5mzWDURgYliswuPzdx0y+LoeXoKfk5HJzoAPsSY2j"
+  },
+  {
+   "path": "experiments/policies/p3-newsroom-agent.json",
+   "bytes": 751,
+   "sha256": "a1030117b5b0514dbfd1ed5a823b785de5468eed5992892fd7dd3e2277963730",
+   "integrity": "sha384-tfpKE6oZCBYeCGw6kcKi3ieLUDfsdZ3xgTSQBTxJm41Ibgb/a1LuSXd9cm03TYgH"
+  },
+  {
+   "path": "experiments/policies/p4-sgit.json",
+   "bytes": 890,
+   "sha256": "bfed37151348d721188ccce0119d663445c631a58aa1e08710fbf4934a9bb832",
+   "integrity": "sha384-XE3/HQuEBuZj2ZjZvlGG0JociU57YWLNSydiqeCwSOlvLMdIbolVZuDQ4dECSLkg"
+  },
+  {
+   "path": "experiments/policies/p5-web-fetch.json",
+   "bytes": 717,
+   "sha256": "3eeb0ffae5713fba84c8467a4a1994ccf898508f078b0c65c91942765990b90c",
+   "integrity": "sha384-+/micRl1F02dihyTwXYN6RDj6O1pQyTVak5LBs8Fo++W/X2BgNNEo1u0hiNQnREX"
+  },
+  {
+   "path": "sharness_ai/__init__.py",
+   "bytes": 41,
+   "sha256": "351d0833ee7129d278559398cb0656d768991960db90fa5ca17ba44a3fc5c338",
+   "integrity": "sha384-pTRj58Yuwaq6mkfM5qCVasbsQTigzUiMVsMXIxziMntaehXiFwIk04XgLCovuR37"
+  },
+  {
+   "path": "sharness_ai/__main__.py",
+   "bytes": 63,
+   "sha256": "fcaecefdbe82fc853e41531922b6182b76f2220478e411328dac720a5eaf372e",
+   "integrity": "sha384-VXE3Z3P9Kmj6JdMi4aCFi9NrDQzVg/yVW+HUHbdiqpm0zOv0ayn/RL2JsGewm0Qt"
+  },
+  {
+   "path": "sharness_ai/_version.py",
+   "bytes": 510,
+   "sha256": "c2be16630643f99db5ae3a465b844284c8c9d4bd637dc695eaa882444203ad62",
+   "integrity": "sha384-8/jZzpQ7EtwJfpFR9UVkKG1udIhosc86yYvrAjyRXBjGUdwk4aZ/PlVN0jOFVs0h"
+  },
+  {
+   "path": "sharness_ai/cli.py",
+   "bytes": 6397,
+   "sha256": "5d06b2d08212f1b7cea11776ede7e9af227128ab9021d80e7eadaab3d213ba4e",
+   "integrity": "sha384-NbG5U9GVkLlP0btf9psHivblcPHwzqpMFnYn6jzphWU3MLGM9weDoKOpQ5YwTuXc"
+  },
+  {
+   "path": "sharness_ai/hello.py",
+   "bytes": 9684,
+   "sha256": "cb6cb4536060a857820e3dc9615646a37db325bf13769c75e3755d61822883ea",
+   "integrity": "sha384-bpDkgNsjCtYX45m3l99TyuPZssEKTlXWKTF11vD+qbEHg+VIL5gXaLdMhwY14+pq"
+  },
+  {
+   "path": "sharness_ai/landlock.py",
+   "bytes": 7261,
+   "sha256": "7811aa951893210fc2622dbc50472c6baa3f26c717c08706b45207f77de6aacf",
+   "integrity": "sha384-ZhLVEIbkRi0UvDAwRX7aylvAADFJNSlpfLxREXAveC6II+a/o8n2aeUKQ81gOjHS"
+  },
+  {
+   "path": "sharness_ai/limits.py",
+   "bytes": 4931,
+   "sha256": "9da39f678777fe487744b0390174a5b269fbbdfdce4c566707adba981665fd20",
+   "integrity": "sha384-yJf3pU93n6iZxM57XbXdDFP65IeHozNxaM5NFexShKa/9cli/sSeJfXWRC9B4YO5"
+  },
+  {
+   "path": "sharness_ai/policy.py",
+   "bytes": 10956,
+   "sha256": "23ba5069cb3a9c5a49d49dafd459428b770aa8e269307bf9786785f4ca84e413",
+   "integrity": "sha384-VnuZ2594HUihlejBBH1A5XAPRtrnUQEpEO/qA5qJXQKRWDzZg13NZBXuJxpxaI6I"
+  },
+  {
+   "path": "sharness_ai/probe.py",
+   "bytes": 6124,
+   "sha256": "863f55b61210c02eafe9b271aa082fe49ff2a3192aec44e1c5f1ddf6948e1b6b",
+   "integrity": "sha384-A2wZCLseDHEzQth1CZXhejD6wyxvvjmoYEVFtL3bPVLUyNdufg3lv5gg9Ay3A7t2"
+  },
+  {
+   "path": "sharness_ai/run.py",
+   "bytes": 12282,
+   "sha256": "487c0f916b817ba53396f56014182479d86b5a318a0df63f9a29195a80adcf3d",
+   "integrity": "sha384-KosHvkTAHQSj6/5DaHO8J+H7Qp/a9rQ0LTszZ+SuPZYeaUPCt8I2BUR70egxIHAn"
+  },
+  {
+   "path": "sharness_ai/translate.py",
+   "bytes": 9873,
+   "sha256": "4c219896e6bd17b229ec9e9f90d515aa4cc75a78af4559461241b5c2450e451e",
+   "integrity": "sha384-zRBBSEHfEz6AFFwZsrs0F76c10ccVYpExOSDpYH4Pwk/SEmI9eBJGWbLQ6JYKvOd"
+  },
+  {
+   "path": "sharness_ai/version",
+   "bytes": 19,
+   "sha256": "464897ec093ed7f509903f3c9906aebd1d7b86a3cfe459f3cc14f0a387dd612a",
+   "integrity": "sha384-KE3DNrS9SQD6o05Rs6yG947nGvRWLl6Bw2wVYJZo4sF6rn7dw+wU2efIWkPk5Wun"
+  },
+  {
+   "path": "sharness_ai-0.1.0+dev.997459a-py3-none-any.whl",
+   "bytes": 28024,
+   "sha256": "ecfab40386e71d12a532ca587bf0f1adcf397cfe055d2ce8d6fc3214f2fd73c1",
+   "integrity": "sha384-7T2zn6/xl8VSVHz28yQQe19ijQ3HJQfQqhSgNcjuQCjLUg8aPtIL0YRDN+MRorGq"
+  },
+  {
+   "path": "wheel.json",
+   "bytes": 222,
+   "sha256": "39dfac780ac62f5ceb856df51dd5de1dd3c1925ad8bdf0dbfcd43de0c2b2c464",
+   "integrity": "sha384-gOuyflEkE1+fWE4NGaAnaKWnXYaOoHknfdFv8winwJPBhUS/jmO6VLh4bzhW+tXU"
+  }
+ ]
+}

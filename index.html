@@ -24,7 +24,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="project/releases.html" title="Site release history">v0.5.16</a>
+  <a class="ver" href="project/releases.html" title="Site release history">v0.5.17</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -80,7 +80,19 @@
       <a class="sl" href="code/examples/index.html">Examples</a>
       <a class="sl" href="code/browser/index.html">Linux in the browser</a>
       <a class="sl" href="code/playground/index.html">Playground: run it in your browser</a>
+      <a class="sl" href="code/releases/index.html">Releases of the code: immutable paths</a>
       <a class="sl" href="code/languages/index.html">Languages</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="security/index.html">Security<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="security/index.html">&#9679; Security: the register</a>
+      <a class="sl" href="security/threat-model/index.html">Threat model</a>
+      <a class="sl" href="security/risks/index.html">Known risks</a>
+      <a class="sl" href="security/reviews/index.html">Reviews</a>
+      <a class="sl" href="security/hardening/index.html">Hardening</a>
+      <a class="sl" href="security/supply-chain/index.html">Supply chain</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -204,6 +216,7 @@ caveat: a Boundary for the child, a Setting for this session</span></pre><a clas
   <div class="cards">
     <a class="card" href="code/experiments/index.html#the-example-policies"><span class="tag">You run coding agents</span><h3>Put the agent's tools under a policy today</h3><p>A Claude Code session, an orchestrator, a script that calls tools: start each tool with <code>sharness-ai run --policy …</code> and the kernel holds it to the file, port and memory limits you wrote. P1 and P2 are the profiles to start from. The caveat applies: the agent's own process is bound only by a launcher above it.</p><span class="go">The example policies →</span></a>
     <a class="card" href="design/policies/index.html"><span class="tag">You ship a tool or an MCP server</span><h3>Ship the policy with the tool</h3><p>Write the policy your tool needs, hash it, and publish both. Whoever runs your tool runs it under that hash, and sees exactly what you asked for: a read-only workspace, one port, a memory cap. A tool that needs less is easier to trust.</p><span class="go">Process Behaviour Policies →</span></a>
+    <a class="card" href="security/index.html"><span class="tag">You review security products</span><h3>Start from the register</h3><p>The project's own account of its security: the threat model, every known risk and what was decided about it, the first review's findings and fixes, the lock-down list. Nobody reviewing SHarness should find something it does not already say about itself.</p><span class="go">Read →</span></a>
     <a class="card" href="landscape/enforceability/index.html"><span class="tag">You run a platform</span><h3>One policy, every enforcer</h3><p><code>sharness-ai policy translate</code> writes the same policy as a bubblewrap command, a <code>docker run</code>, a Claude Code sandbox setting or a Kubernetes Pod and NetworkPolicy, and lists what each of those cannot enforce. The enforceability matrix is that list, row by row.</p><span class="go">The enforceability matrix →</span></a>
   </div>
 </section>
@@ -266,7 +279,7 @@ caveat: a Boundary for the child, a Setting for this session</span></pre><a clas
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="project/releases.html">v0.5.16</a> · <a href="project/engineering.html">engineering</a> · <a href="index.md">this page as markdown</a></p>
+    <p class="verline">site <a href="project/releases.html">v0.5.17</a> · <a href="project/engineering.html">engineering</a> · <a href="index.md">this page as markdown</a></p>
   </div>
   <div>
     <h4>Components</h4>
@@ -302,12 +315,18 @@ caveat: a Boundary for the child, a Setting for this session</span></pre><a clas
     <a href="code/flows/index.html">Flows through the code</a>
     <a href="code/examples/index.html">Examples</a>
     <a href="code/browser/index.html">Linux in the browser</a>
+    <a href="code/releases/index.html">Releases of the code</a>
     <a href="code/languages/index.html">Languages</a>
     <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
     <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
   </div>
   <div>
-    <h4>Evidence, landscape, explain</h4>
+    <h4>Security, evidence, landscape</h4>
+    <a href="security/index.html">Security: the register</a>
+    <a href="security/threat-model/index.html">Threat model</a>
+    <a href="security/risks/index.html">Known risks</a>
+    <a href="security/hardening/index.html">Hardening</a>
+    <a href="security/supply-chain/index.html">Supply chain</a>
     <a href="evidence/index.html">Measurements</a>
     <a href="evidence/status/index.html">What exists today</a>
     <a href="evidence/research/index.html">Research note</a>
@@ -317,7 +336,6 @@ caveat: a Boundary for the child, a Setting for this session</span></pre><a clas
     <a href="landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
     <a href="landscape/market/index.html">Market &amp; competitors</a>
     <a href="explain/storyboards/index.html">Storyboards</a>
-    <a href="explain/index.html">Mockups</a>
     <a href="articles/index.html">Articles</a>
   </div>
   <div>
@@ -335,6 +353,7 @@ caveat: a Boundary for the child, a Setting for this session</span></pre><a clas
     <a href="project/outreach/index.html">Outreach</a>
     <a href="project/agents/index.html">The agents and their keys</a>
     <a href="project/telemetry/index.html">Telemetry</a>
+    <a href=".well-known/security.txt">security.txt</a>
     <a href="llms.txt">llms.txt</a>
     <a href="llms-full.txt">llms-full.txt</a>
     <a href="index.md">index.md</a>

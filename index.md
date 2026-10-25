@@ -6,7 +6,7 @@
 > process started. Today: a CLI that enforces a policy on one process, a kernel that boots in your
 > browser to prove it, and a design for the launcher that binds the agent itself.
 
-*Source: <https://sharness.ai/index.html> · site v0.5.16 · markdown twin of the front page.*
+*Source: <https://sharness.ai/index.html> · site v0.5.17 · markdown twin of the front page.*
 *Status: **experiments**. No SHarness component is built; every measured figure carries its date.*
 
 ## Start in 60 seconds
@@ -62,7 +62,7 @@ widen it. sgit (sgit.ai's encrypted vault CLI) is the first app designed to run 
 
 The memo's method is to start with very simple examples. [Mockups and experiments](code/experiments/index.md) is the ladder: browser mockups ([the policy hash](explain/mockups/policy-hash.html), [the edge matrix](explain/mockups/edges.html)), then experiments any Claude session can run, then Linux experiments (E01 to E04, E09 and E10 are runnable in the [CLI](code/cli/index.md): `probe`, `policy hash`, `run`, `hello`, `policy translate`; E04 measured 24 Oct 2026; E09, [a real Linux kernel in a browser tab](code/browser/demo/index.html) running `hello` under Landlock, measured 25 Oct 2026, with [five example policies](code/experiments/index.md#the-example-policies) from a hello world to sgit), then components, then the launcher above the agent. Three [storyboards](explain/storyboards/index.md) tell the design as short strips. A [research note](evidence/research/index.md) says what holds up and what to improve; a [market and competitive analysis](landscape/market/index.md) says what already exists and where SHarness sits.
 
-## The site, in five sections (every page also as markdown at `<page>/index.md`)
+## The site, in six sections (every page also as markdown at `<page>/index.md`)
 
 - **The design:** [the brief, read first](design/index.md) · [Why](design/why/index.md) · [Architecture](design/architecture/index.md) · [Components](design/components/index.md) · [Keys and the KMS](design/keys/index.md) · [Policies](design/policies/index.md) · [Agents and LLMs](design/agents/index.md) · [The process tree](design/process-tree/index.md) · [What a process can do](design/surface/index.md) · [Containment](design/containment/index.md) · [The spectrum](design/spectrum/index.md) · [Roadmap](design/roadmap/index.md)
 - **The code:** [where it is](code/index.md) · [The CLI](code/cli/index.md) · [Mockups and experiments](code/experiments/index.md) · [Flows](code/flows/index.md) · [Examples](code/examples/index.md) · [Linux in the browser](code/browser/index.md) · [Languages](code/languages/index.md)
@@ -70,6 +70,7 @@ The memo's method is to start with very simple examples. [Mockups and experiment
 - **The landscape:** [Policies at the centre](landscape/index.md) · [Enforceability](landscape/enforceability/index.md) · [Integration points](landscape/integrations/index.md) · [Ruflo and ruv.sgit](landscape/ruflo/index.md) · [Market and competitors](landscape/market/index.md)
 - **Explain:** [Storyboards and mockups](explain/index.md) · [Storyboards](explain/storyboards/index.md) · [Articles](articles/index.md)
 - **Project:** [About and naming](project/about/index.md) · [Getting users: the review and the plan](project/adoption/index.md) · [The source documents](project/sources/index.md) · [Comms](project/comms.html) · [Releases](project/releases.html)
+- **Security:** [the register](security/index.md) · [Threat model](security/threat-model/index.md) · [Known risks](security/risks/index.md) · [Reviews](security/reviews/index.md) · [Hardening](security/hardening/index.md) · [Supply chain](security/supply-chain/index.md)
 - **Admin:** [How the project is run](admin/index.md) · [The board](admin/board/index.md) · [Updates: what is happening](admin/updates/index.md) · [The members](admin/members/index.md) · [Guidance for agents](admin/guidance/index.md)
 
 ## Articles

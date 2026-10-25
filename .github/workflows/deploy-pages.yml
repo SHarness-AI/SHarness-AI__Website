@@ -38,8 +38,10 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           persist-credentials: false
-      - name: Validate the site (version, links, canonical, key-leak tripwire, dated figures)
+      - name: Validate the site (version, links, canonical, secret tripwire, SRI, pinned workflows, dated figures)
         run: node tools/validate.js
+      - name: The published releases of the code are intact (no byte at an immutable path has changed)
+        run: python3 tools/releases.py check
       - name: Design pages' HTML matches their markdown source
         run: python3 tools/gen_pages.py --check
       - name: Articles match their sources

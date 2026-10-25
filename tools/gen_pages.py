@@ -71,6 +71,8 @@ PAGES = [
      "Every runnable example: the policies, the commands, their output, the skill for a Claude session, and the sgit probe."),
     ("code/browser",        "Linux in the browser",
      "How much of the harness can run in a browser tab: a real kernel in a tab (v86) can run Landlock, seccomp, namespaces and cgroups; syscall-emulation runtimes cannot. The options, the recommended build, and what a browser can never show."),
+    ("code/releases",       "Releases of the code",
+     "Every release of the sharness-ai code published on this site at a path that never changes, complete, with a manifest of hashes; a latest that names the newest; the dev snapshot."),
     ("code/languages",      "Languages",
      "What each part of SHarness is written in and why: Python for the experiments and the launcher, a static binary for the bash client, the case for Rust in the KMS, JavaScript only in the browser."),
     # evidence and status
@@ -98,6 +100,19 @@ PAGES = [
      "every reported run of sharness-ai hello, with the kernel, the Landlock ABI and the result; how to report yours"),
     ("evidence/research",   "Research note",
      "The published design read in full on 24 Oct 2026: what holds up, what to improve, what this release did about it, and what is still open."),
+    # security
+    ("security",            "Security",
+     "The project's own account of its security: the threat model, the register of known and accepted risks, every review with its findings and fixes, how to run the code safely, and the supply chain."),
+    ("security/threat-model", "Threat model",
+     "What SHarness protects, from whom, the two trust boundaries (the person's hash; the kernel), and surface by surface what the code of today holds, what the designed launcher adds, and what nothing covers."),
+    ("security/risks",      "Known risks",
+     "The register: one row per known risk, with where it lives, its weight, whether it is fixed, accepted, open or designed, and the reason. Accepted risks listed with the same weight as fixed ones."),
+    ("security/reviews",    "Security reviews",
+     "Each security review, dated: scope, method, environment, the findings with the fix and the test that pins each, what was examined and found clean, and what was not examined."),
+    ("security/hardening",  "Hardening",
+     "How to run sharness-ai so it holds as much as it can today, and the lock-down list for the repositories, the accounts and the release path: what is in code, and what only a setting can change."),
+    ("security/supply-chain", "Supply chain",
+     "Everything that runs on a reader's machine or in CI and how it is pinned; how a release is built, attested and verified; what the site loads from elsewhere; the code published here at immutable paths."),
     # the landscape
     ("landscape",           "The landscape",
      "Policies at the centre: SHarness as the reference implementation of Process Behaviour Policies, other products as integration points and translation targets, and the three questions to ask of any environment."),
@@ -257,7 +272,7 @@ def md_to_html(md):
     return h1, "\n".join(out)
 
 
-SECTIONS = {"design": "the design", "code": "the code", "evidence": "evidence", "landscape": "the landscape", "explain": "explain", "project": "project", "admin": "admin"}
+SECTIONS = {"design": "the design", "code": "the code", "evidence": "evidence", "landscape": "the landscape", "explain": "explain", "project": "project", "admin": "admin", "security": "security"}
 
 
 def crumb(dir_, title):

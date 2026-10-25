@@ -1,0 +1,18 @@
+{
+ "what": "Every release of the sharness-ai code on this site, newest first. Each path is immutable; latest.json names the newest and latest/ is its copy; dev/ is a snapshot with no promise.",
+ "host": "https://sharness.ai",
+ "base": "https://sharness.ai/code/releases/",
+ "newest": "v0.1.0",
+ "releases": [
+  {
+   "release": "v0.1.0",
+   "path": "v0/v0.1/v0.1.0/",
+   "manifest": "v0/v0.1/v0.1.0/manifest.json",
+   "date": "2026-10-25",
+   "commit": "68362921eee67d3939dab89c8ec5b6cbba6b4e4a",
+   "files": 9,
+   "bytes": 16044
+  }
+ ],
+ "dev": "v0.1.0+dev.997459a"
+}

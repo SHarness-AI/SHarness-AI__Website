@@ -12,8 +12,9 @@
 | the playground: `sharness-ai` in Pyodide and in a shell on the Linux guest | [`experiments/browser/playground.js`](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/browser/playground.js), one ES module; served on this site at [code/playground](playground/index.html); `test_playground.mjs` drives both tabs | runnable; 11 of 11 checks 25 Oct 2026 |
 | E09, the harness under a second kernel: the guest build, the Node and browser runners, the chroot form | [`experiments/browser/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/experiments/browser): `build_guest.py` (standard library), `init.sh`, `page.html`, `boot_node.mjs`, `boot_browser.mjs`, `chroot_native.sh`; v86 pinned in its own `package.json` | runnable; measured 25 Oct 2026 ([Linux in the browser](browser/index.md)) |
 | the skill for a Claude Code session | [`.claude/skills/sharness-hello/SKILL.md`](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/.claude/skills/sharness-hello/SKILL.md) | runnable |
-| the tests | [`tests/unit/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/tests/unit), 60 tests, run on every push to `dev` by `tests.yml` on Python 3.11, 3.12 and 3.13; Landlock tests skip where it is absent | green on 25 Oct 2026 |
+| the tests | [`tests/unit/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/tests/unit), 92 tests (32 of them the security tests that pin each finding of the 25 Oct 2026 review), run on every push to `dev` by `tests.yml` on Python 3.11, 3.12 and 3.13; Landlock tests skip where it is absent | green on 25 Oct 2026 |
 | the ground rules for agents working in the repository | [`CLAUDE.md`](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/CLAUDE.md) | |
+| the code published on this site at immutable paths, with a manifest of hashes and a `latest` | [`code/releases/`](releases/index.md): `releases.json`, `latest.json`, `vN/vN.M/vN.M.P/`, `dev/`; `tools/releases.py` cuts and checks them | v0.1.0 and the dev snapshot, 25 Oct 2026 |
 | the release pipeline | [`.github/workflows/workflow.yml`](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/.github/workflows/workflow.yml): tests, version bump, tag, PyPI by Trusted Publishing | runs on a push to `main` |
 | the browser mockups | this site, [`explain/mockups/`](https://github.com/SHarness-AI/SHarness-AI__Website/tree/dev/explain/mockups): hand-written HTML, no build | published |
 | the storyboards' data | this site, [`content/storyboards/`](https://github.com/SHarness-AI/SHarness-AI__Website/tree/dev/content/storyboards) | published |
@@ -25,17 +26,17 @@ Standard library only. Each module is meant to be read in one sitting; the desig
 
 | Module | Lines | Does | Experiment |
 |---|---|---|---|
-| `cli.py` | 98 | the argument parser and the dispatch: `probe`, `policy hash`, `policy check`, `run`, `hello` | |
-| `probe.py` | 138 | the grant: reads `/proc/self/status`, the Landlock ABI, `memfd_secret`, the namespaces, cgroups, the kernel config, the tools present, the names of proxy variables | E01 |
-| `policy.py` | 126 | a v0 policy: load, check the shape (including the caps), canonicalise (sorted keys, no whitespace, integers only), hash | E02 |
-| `translate.py` | 176 | the policy as bubblewrap, `docker run`, a Claude Code sandbox `settings.json`, a Kubernetes Pod and NetworkPolicy; each with what it does not enforce | E10 |
-| `landlock.py` | 157 | Landlock through `ctypes`: the ABI, a ruleset, path rules, port rules, `restrict_self` | E03 |
-| `run.py` | 133 | fork, apply the policy in the child (network namespace, caps, `no_new_privs`, Landlock), exec; `--expect-hash` | E03 |
-| `limits.py` | 95 | the caps: `RLIMIT_AS` and `RLIMIT_NPROC`, and a memory and pids cgroup (v1 or v2) where `/sys/fs/cgroup` is writable | E03 |
-| `hello.py` | 124 | the acceptance test: a deny-all policy for the running interpreter with a 128 MiB cap, six probes, the caveat | E04 |
+| `cli.py` | 133 | the argument parser and the dispatch: `probe`, `policy hash`, `policy check`, `run`, `hello` | |
+| `probe.py` | 147 | the grant: reads `/proc/self/status`, the Landlock ABI, `memfd_secret`, the namespaces, cgroups, the kernel config, the tools present, the names of proxy variables | E01 |
+| `policy.py` | 234 | a v0 policy: load (no duplicate keys, no oversized file), check the shape (normalised printable paths, the caps, integers JavaScript keeps exact), canonicalise, hash, advise | E02 |
+| `translate.py` | 187 | the policy as bubblewrap, `docker run`, a Claude Code sandbox `settings.json`, a Kubernetes Pod and NetworkPolicy; each with what it does not enforce | E10 |
+| `landlock.py` | 174 | Landlock through `ctypes`: the ABI, a ruleset, path rules, port rules, `restrict_self` | E03 |
+| `run.py` | 251 | fork, close inherited descriptors, apply the policy in the child (network namespace, caps, `no_new_privs`, Landlock with write never executable), exec; `--expect-hash`; refuses a row it cannot enforce and a writable symlink; says what is not covered | E03 |
+| `limits.py` | 124 | the caps: `RLIMIT_AS` and `RLIMIT_NPROC`, and a memory and pids cgroup (v1 or v2) where `/sys/fs/cgroup` is writable | E03 |
+| `hello.py` | 170 | the acceptance test: a deny-all policy for the running interpreter with a 128 MiB cap, six probes with a control for ambiguous refusals, the not-covered line, the caveat | E04 |
 | `_version.py` | 17 | the version, read from the file CI maintains | |
 
-Counts from `wc -l` on 25 Oct 2026. How a command moves through these modules is on [Flows](flows/index.md).
+Counts from `wc -l` on 25 Oct 2026, after the security review's fixes. How a command moves through these modules is on [Flows](flows/index.md).
 
 ## The commands
 
