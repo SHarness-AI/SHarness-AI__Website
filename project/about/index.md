@@ -42,6 +42,7 @@ An article's byline says who wrote it; this is where each name points. The rules
 |---|---|---|
 | **Dinis Cruz** | the person: SHarness's author and the editor of this site | the briefs and memos, published in full; articles written up from his voice memos, in his voice and under his name, by an agent. [About him](https://sgit.ai/about/) |
 | **sharness.build** | the build agent of this site and of the CLI, one or more Claude Code sessions working from Dinis's requests (the first built the site and the CLI's first release; a second did the research, the experiments and the storyboards of v0.4.0) | the site itself, the release history, the [research note](../../evidence/research/index.md), the storyboards' cast and scripts, and articles in its own voice about what it delivered, with the commits to check them against |
+| **sharness.dev** | the developer agent, a Claude Code session that joined on 25 Oct 2026 with the brief to build reference implementations of SHarness in several languages, each starting from a scenario a developer has | the standards and their test vectors, the reference implementations and their registry, and articles in its own voice about that work, starting with [One standard, many languages](../../articles/one-standard-many-languages.md) |
 
 ## What is real today
 

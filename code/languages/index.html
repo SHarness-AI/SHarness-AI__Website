@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.9</a>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.10</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -144,6 +144,21 @@
 <li><b>Python until a caveat says otherwise.</b> Every component starts in Python because the experiments do and because the design's own figures were measured there. A component moves to Rust only for a stated reason (memory hygiene in the KMS; a static binary for the bash client), recorded on the roadmap.</li>
 <li><b>No runtime dependencies in the CLI</b> beyond <code>cryptography</code> for the components that seal and sign. The experiments stay standard-library only so a Claude session can install and run them anywhere Python is.</li>
 </ol>
+<h2 id="reference-implementations-in-several-languages-proposed-25-oct-2026">Reference implementations in several languages (proposed, 25 Oct 2026)</h2>
+<p>Dinis Cruz's brief of 25 Oct 2026 extends decision 11 from "which language for each component" to "reference implementations of each component in several languages, against one standard per component, with test vectors and a reviewed registry". The developer agent's map of that is the article <a href="../../articles/one-standard-many-languages.md">One standard, many languages</a>: what in each component is a specification (the policy's shape and hash, the manifest and the edges, the KMS, net, fs, llm and bash protocols, <code>hello</code>'s six expectations) and what is an implementation (reaching the kernel, serving mutual TLS, holding a secret), then a component-by-language matrix.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Language</th><th>Carries</th><th>Proposed role</th><th>Order</th></tr></thead>
+<tbody>
+<tr><td>Python</td><td>the standards, the servers (<code>ssl</code>), the kernel (<code>ctypes</code>); not a static binary</td><td>the first implementation, and the one the measurements are taken in; <code>sharness.kms</code> v0 to settle the protocol</td><td>today</td></tr>
+<tr><td>JavaScript in Node</td><td>the standards, the servers (<code>tls</code>); the kernel only through a helper binary</td><td><code>net</code>, <code>fs</code> and <code>llm</code> where MCP servers and agent loops are written; <code>run</code> delegates</td><td>first</td></tr>
+<tr><td>JavaScript in the browser</td><td>the standards (WebCrypto); no sockets, no kernel</td><td>the hash and check with nothing installed (runnable today for the hash); CSP as a translate target</td><td>with Node, one package</td></tr>
+<tr><td>Go</td><td>all four kinds, with TLS and a static build in its standard library and Landlock in <code>x/sys/unix</code>; not the KMS (the collector may copy a secret)</td><td>the second complete implementation; the bash client; the first non-Python footprint</td><td>second</td></tr>
+<tr><td>Rust</td><td>all four kinds; rustls pinned for the servers; no collector, so a secret can be zeroed in place</td><td><code>sharness.kms</code> after E08 and the bash client, as this page already recommends</td><td>third</td></tr>
+<tr><td>Java, .NET</td><td>the standards and the servers; the kernel through their standard FFI; heavy runtimes</td><td>harnessed-app SDKs and policy tooling, on interest; <code>translate --to kubernetes</code> as their first enforcer</td><td>later</td></tr>
+<tr><td>C, assembly</td><td>the kernel calls and nothing else</td><td>a <code>run</code> in a few hundred lines as the floor, for teaching and for the footprint comparison</td><td>later</td></tr>
+</tbody>
+</table></div>
+<p>The rules above still hold: Python until a caveat says otherwise, and no runtime dependencies beyond a stated, pinned exception. What changes is that the exception list grows by one per language (rustls in Rust; nothing in Go or Node), and that each implementation must pass the same test vectors (the seven example policies and their hashes, <code>hello</code>'s six expectations) before it enters the registry. The decision remains Dinis's; the request is <a href="../../project/comms.html#r8">R8</a>.</p>
 <h2 id="what-this-does-not-decide">What this does not decide</h2>
 <p>Whether the platform-provided versions of the components (topology E) share any code with these; the design says only that the protocol is the same. And nothing here is a commitment of sgit's maintainers about sgit's own language, which is Python today.</p>
 <p>Sources: <a href="../../design/components/index.html#as-little-code-as-possible">Components: as little code as possible</a>; <a href="../../design/keys/index.html#7-where-the-private-key-lives-and-for-how-long">Keys §7, memory hygiene</a>; <a href="../../design/process-tree/index.html#2-design">Enforcing the process tree §2</a> (the client as a static binary); the CLI's <code>CLAUDE.md</code>.</p>
@@ -155,7 +170,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../../project/releases.html">v0.5.9</a> · <a href="../../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.10</a> · <a href="../../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>The design</h4>

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 410" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">The adoption ladder: six rungs, each useful on its own</title>
+  <desc id="d">Six steps in two rows of three, each a thing a developer can do with SHarness without doing the others. The first row runs on any operating system with no kernel needed. Rung 0: write a policy for your tool, hash it, publish the hash with the release; no code, any language. Rung 1: check and hash policies in your own language, about sixty lines; the seven vectors must agree. Rung 2: read the contract: when SHARNESS_AI_POLICY_HASH is set, refuse secrets on the command line and say which policy you run under. The second row needs Linux, or a platform that provides the components. Rung 3: run under an enforcer: sharness-ai run, or translate the policy to the sandbox you already have. Rung 4: use a component client instead of a raw socket: talk to sharness.net or sharness.kms over mutual TLS. Rung 5: build or host a component in your language, against the standard and its vectors. Under the ladder, one line: the policy is the centre; a developer who stops at rung 0 has already made their tool's mandate reviewable.</desc>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#8a8d94"/></marker></defs>
+  <rect width="960" height="410" fill="#faf9f5"/>
+  <text x="24" y="34" font-size="12" font-weight="700" letter-spacing="2" fill="#5c5f66">THE ADOPTION LADDER · EACH RUNG USEFUL ON ITS OWN</text>
+
+  <text x="24" y="62" font-size="11.5" font-weight="700" fill="#115e59">ANY OPERATING SYSTEM, ANY LANGUAGE · NO KERNEL NEEDED</text>
+  <g font-size="12">
+    <rect x="24" y="72" width="290" height="104" rx="10" fill="#0f766e"/>
+    <text x="38" y="96" font-weight="700" fill="#ffffff">0 · write a policy for your tool</text>
+    <text x="38" y="116" fill="#e6fffa">Say what it reads, writes, runs and connects to.</text>
+    <text x="38" y="134" fill="#e6fffa">Hash it. Publish the hash with the release.</text>
+    <text x="38" y="152" fill="#e6fffa">No code; the mandate is now reviewable.</text>
+
+    <rect x="335" y="72" width="290" height="104" rx="10" fill="#ffffff" stroke="#0f766e" stroke-width="2.5"/>
+    <text x="349" y="96" font-weight="700" fill="#115e59">1 · hash and check in your language</text>
+    <text x="349" y="116" fill="#34363c">Canonical JSON, SHA-256, the shape check:</text>
+    <text x="349" y="134" fill="#34363c">about sixty lines. The seven vectors must</text>
+    <text x="349" y="152" fill="#34363c">hash to the same values.</text>
+
+    <rect x="646" y="72" width="290" height="104" rx="10" fill="#ffffff" stroke="#0f766e" stroke-width="2.5"/>
+    <text x="660" y="96" font-weight="700" fill="#115e59">2 · read the contract</text>
+    <text x="660" y="116" fill="#34363c" font-family="ui-monospace,Menlo,monospace" font-size="11">SHARNESS_AI_POLICY_HASH</text>
+    <text x="660" y="134" fill="#34363c">When it is set: refuse secrets on argv,</text>
+    <text x="660" y="152" fill="#34363c">say which policy you run under.</text>
+  </g>
+
+  <text x="936" y="218" text-anchor="end" font-size="11.5" font-weight="700" fill="#5b21b6">LINUX, OR A PLATFORM THAT PROVIDES THE COMPONENTS</text>
+  <g font-size="12">
+    <rect x="24" y="228" width="290" height="104" rx="10" fill="#ffffff" stroke="#6d28d9" stroke-width="2"/>
+    <text x="38" y="252" font-weight="700" fill="#5b21b6">3 · run enforced</text>
+    <text x="38" y="272" fill="#34363c">sharness-ai run, with the hash you published;</text>
+    <text x="38" y="290" fill="#34363c">or policy translate into the sandbox you</text>
+    <text x="38" y="308" fill="#34363c">already have, and read the gap it prints.</text>
+
+    <rect x="335" y="228" width="290" height="104" rx="10" fill="#ffffff" stroke="#6d28d9" stroke-width="2"/>
+    <text x="349" y="252" font-weight="700" fill="#5b21b6">4 · use a component</text>
+    <text x="349" y="272" fill="#34363c">A client for sharness.net or sharness.kms</text>
+    <text x="349" y="290" fill="#34363c">over mutual TLS, instead of a raw socket</text>
+    <text x="349" y="308" fill="#34363c">or a key file. Your process never sees the key.</text>
+
+    <rect x="646" y="228" width="290" height="104" rx="10" fill="#ffffff" stroke="#6d28d9" stroke-width="2"/>
+    <text x="660" y="252" font-weight="700" fill="#5b21b6">5 · build or host one</text>
+    <text x="660" y="272" fill="#34363c">A component in your language, against the</text>
+    <text x="660" y="290" fill="#34363c">standard and its vectors; a row in the</text>
+    <text x="660" y="308" fill="#34363c">registry once it passes and is reviewed.</text>
+  </g>
+
+  <g stroke="#8a8d94" stroke-width="2" fill="none" marker-end="url(#a)">
+    <line x1="314" y1="124" x2="333" y2="124"/>
+    <line x1="625" y1="124" x2="644" y2="124"/>
+    <path d="M791 176 C791 200 169 200 169 226"/>
+    <line x1="314" y1="280" x2="333" y2="280"/>
+    <line x1="625" y1="280" x2="644" y2="280"/>
+  </g>
+
+  <text x="24" y="366" font-size="11.5" fill="#34363c">Each rung is useful without the next. The policy is the centre: a developer who stops at rung 0 has already made their</text>
+  <text x="24" y="384" font-size="11.5" fill="#34363c">tool's mandate reviewable, in a form any enforcer on the matrix can take.</text>
+  <text x="24" y="402" font-size="11" fill="#8a8d94">Proposed, 25 Oct 2026. Rungs 1 and 2 are runnable in Python; rung 3 is sharness-ai run (E03) and policy translate (E10); rungs 4 and 5 are the design.</text>
+</svg>

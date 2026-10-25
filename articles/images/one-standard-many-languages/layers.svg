@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">One standard, many languages: three layers</title>
+  <desc id="d">Three horizontal bands. The top band, the standards, is language-neutral: the policy (its schema, canonical form, hash and the environment contract), the manifest and the edges (the matrix, certificate roles, the session CA), the protocols (the KMS operations, the net, fs and llm schemas, the bash profiles), and the conformance tests (hello's six expectations and the seven policy vectors). The middle band is the kernel: Landlock, seccomp, namespaces, cgroups, rlimits, memfd_secret and uids, one implementation shared by every language and reached only by system calls. The bottom band is five language columns, each saying which of the three kinds of work it can carry: Python (standards, servers and the kernel through ctypes; today), JavaScript in Node (standards and servers; the kernel through a helper), JavaScript in the browser (standards only; the browser is its own enforcer), Rust (all of it, as a static binary; the KMS and the bash client), Go (all of it, as a static binary, with TLS in its standard library). A footer names the future, on interest: Java and .NET as harnessed-app SDKs; C and assembly as the floor that shows the attack surface.</desc>
+  <rect width="960" height="560" fill="#faf9f5"/>
+  <text x="24" y="34" font-size="12" font-weight="700" letter-spacing="2" fill="#5c5f66">ONE STANDARD, MANY LANGUAGES</text>
+
+  <!-- band 1: the standards -->
+  <rect x="24" y="52" width="912" height="150" rx="12" fill="#ffffff" stroke="#6d28d9" stroke-width="2"/>
+  <text x="40" y="76" font-size="12" font-weight="700" fill="#5b21b6">THE STANDARDS · language-neutral · versioned, with test vectors</text>
+  <g font-size="11.5">
+    <rect x="40" y="90" width="206" height="96" rx="8" fill="#f5f3ff"/>
+    <text x="52" y="110" font-weight="700" fill="#5b21b6">the policy</text>
+    <text x="52" y="128" fill="#34363c">v0 schema · canonical JSON</text>
+    <text x="52" y="144" fill="#34363c">SHA-256 · the one hash</text>
+    <text x="52" y="160" fill="#34363c">SHARNESS_AI_POLICY_HASH</text>
+    <text x="52" y="178" fill="#0f766e" font-weight="700">runnable, two agree</text>
+
+    <rect x="262" y="90" width="206" height="96" rx="8" fill="#f5f3ff"/>
+    <text x="274" y="110" font-weight="700" fill="#5b21b6">the manifest and the edges</text>
+    <text x="274" y="128" fill="#34363c">who may talk to whom</text>
+    <text x="274" y="144" fill="#34363c">roles in certificates</text>
+    <text x="274" y="160" fill="#34363c">a session CA, key destroyed</text>
+    <text x="274" y="178" fill="#8a8d94" font-weight="700">designed, measured once</text>
+
+    <rect x="484" y="90" width="206" height="96" rx="8" fill="#f5f3ff"/>
+    <text x="496" y="110" font-weight="700" fill="#5b21b6">the protocols</text>
+    <text x="496" y="128" fill="#34363c">kms: init public unwrap seal_to</text>
+    <text x="496" y="144" fill="#34363c">net · fs · llm request schemas</text>
+    <text x="496" y="160" fill="#34363c">bash profiles and its client</text>
+    <text x="496" y="178" fill="#8a8d94" font-weight="700">designed</text>
+
+    <rect x="706" y="90" width="214" height="96" rx="8" fill="#f5f3ff"/>
+    <text x="718" y="110" font-weight="700" fill="#5b21b6">the conformance tests</text>
+    <text x="718" y="128" fill="#34363c">hello: six expectations</text>
+    <text x="718" y="144" fill="#34363c">seven policies, seven hashes</text>
+    <text x="718" y="160" fill="#34363c">the caveat line, word for word</text>
+    <text x="718" y="178" fill="#0f766e" font-weight="700">runnable in Python</text>
+  </g>
+
+  <!-- band 2: the kernel -->
+  <rect x="24" y="218" width="912" height="78" rx="12" fill="#0f766e"/>
+  <text x="40" y="242" font-size="12" font-weight="700" fill="#ffffff">THE KERNEL · one implementation, shared by every language · trusted · reached only by system calls</text>
+  <g font-size="11.5" fill="#e6fffa">
+    <text x="40" y="266">Landlock (444, 445, 446)</text>
+    <text x="214" y="266">seccomp</text>
+    <text x="292" y="266">namespaces</text>
+    <text x="392" y="266">cgroups</text>
+    <text x="466" y="266">rlimits</text>
+    <text x="532" y="266">memfd_secret</text>
+    <text x="646" y="266">one uid per component</text>
+    <text x="40" y="284" fill="#ffffff" font-family="ui-monospace,Menlo,monospace" font-size="11">a language does not add a barrier; it chooses how little stands between the policy and these calls</text>
+  </g>
+
+  <!-- band 3: the languages -->
+  <g font-size="11.5">
+    <!-- Python -->
+    <rect x="24" y="312" width="172" height="176" rx="10" fill="#ffffff" stroke="#0f766e" stroke-width="2.5"/>
+    <text x="36" y="334" font-weight="700" fill="#115e59">Python</text>
+    <text x="36" y="350" fill="#6b6f76">today: the CLI, E01 to E10</text>
+    <text x="36" y="374" fill="#34363c">standards ✔</text>
+    <text x="36" y="392" fill="#34363c">servers ✔ (ssl, stdlib)</text>
+    <text x="36" y="410" fill="#34363c">kernel ✔ (ctypes)</text>
+    <text x="36" y="428" fill="#b45309">static binary ✗</text>
+    <text x="36" y="452" fill="#6b6f76">an interpreter: never on</text>
+    <text x="36" y="468" fill="#6b6f76">an execute allowlist</text>
+
+    <!-- Node -->
+    <rect x="210" y="312" width="172" height="176" rx="10" fill="#ffffff" stroke="#b45309" stroke-width="2"/>
+    <text x="222" y="334" font-weight="700" fill="#b45309">JavaScript · Node</text>
+    <text x="222" y="350" fill="#6b6f76">proposed: npm sharness-ai</text>
+    <text x="222" y="374" fill="#34363c">standards ✔</text>
+    <text x="222" y="392" fill="#34363c">servers ✔ (tls, stdlib)</text>
+    <text x="222" y="410" fill="#b45309">kernel: via a helper binary</text>
+    <text x="222" y="428" fill="#b45309">static binary ✗</text>
+    <text x="222" y="452" fill="#6b6f76">where MCP servers and</text>
+    <text x="222" y="468" fill="#6b6f76">agent loops are written</text>
+
+    <!-- Browser -->
+    <rect x="396" y="312" width="172" height="176" rx="10" fill="#ffffff" stroke="#b45309" stroke-width="2"/>
+    <text x="408" y="334" font-weight="700" fill="#b45309">JavaScript · browser</text>
+    <text x="408" y="350" fill="#6b6f76">today: the hash mockup</text>
+    <text x="408" y="374" fill="#34363c">standards ✔ (WebCrypto)</text>
+    <text x="408" y="392" fill="#b45309">servers ✗ (no sockets)</text>
+    <text x="408" y="410" fill="#b45309">kernel ✗ (none to reach)</text>
+    <text x="408" y="428" fill="#8a8d94">static binary: n/a</text>
+    <text x="408" y="452" fill="#6b6f76">the browser is its own</text>
+    <text x="408" y="468" fill="#6b6f76">enforcer: CSP as a target</text>
+
+    <!-- Rust -->
+    <rect x="582" y="312" width="172" height="176" rx="10" fill="#ffffff" stroke="#6d28d9" stroke-width="2"/>
+    <text x="594" y="334" font-weight="700" fill="#5b21b6">Rust</text>
+    <text x="594" y="350" fill="#6b6f76">proposed: kms, bash client</text>
+    <text x="594" y="374" fill="#34363c">standards ✔</text>
+    <text x="594" y="392" fill="#34363c">servers ✔ (rustls, pinned)</text>
+    <text x="594" y="410" fill="#34363c">kernel ✔ (raw syscalls)</text>
+    <text x="594" y="428" fill="#34363c">static binary ✔ (musl)</text>
+    <text x="594" y="452" fill="#6b6f76">no GC: secrets can be</text>
+    <text x="594" y="468" fill="#6b6f76">zeroed where they lived</text>
+
+    <!-- Go -->
+    <rect x="768" y="312" width="168" height="176" rx="10" fill="#ffffff" stroke="#6d28d9" stroke-width="2"/>
+    <text x="780" y="334" font-weight="700" fill="#5b21b6">Go</text>
+    <text x="780" y="350" fill="#6b6f76">proposed: second full one</text>
+    <text x="780" y="374" fill="#34363c">standards ✔</text>
+    <text x="780" y="392" fill="#34363c">servers ✔ (crypto/tls, std)</text>
+    <text x="780" y="410" fill="#34363c">kernel ✔ (x/sys/unix)</text>
+    <text x="780" y="428" fill="#34363c">static binary ✔ (no cgo)</text>
+    <text x="780" y="452" fill="#6b6f76">GC may copy a secret:</text>
+    <text x="780" y="468" fill="#6b6f76">everything but the KMS</text>
+  </g>
+
+  <text x="24" y="514" font-size="11.5" fill="#6b6f76">Later, on interest: <tspan fill="#34363c">Java and .NET</tspan> as harnessed-app SDKs and policy tooling, where the applications are;</text>
+  <text x="24" y="530" font-size="11.5" fill="#6b6f76"><tspan fill="#34363c">C and assembly</tspan> as the floor: a run in a few hundred lines that shows the attack surface is the system calls.</text>
+  <text x="24" y="550" font-size="11" fill="#8a8d94">Runnable means the code is here and its tests pass; designed and proposed mean it is not. No SHarness component is built in any language. 25 Oct 2026.</text>
+</svg>
