@@ -158,6 +158,7 @@ FOOTER = [
         ("Admin: how the project is run", "admin/index.html"),
         ("The board", "admin/board/index.html"),
         ("Updates", "admin/updates/index.html"),
+        ("Commit notes", "admin/notes/index.html"),
         ("Guidance for agents (AGENTS.md)", "admin/guidance/index.html"),
         ("Getting users", "project/adoption/index.html"),
         ("Outreach", "project/outreach/index.html"),

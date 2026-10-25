@@ -416,6 +416,50 @@ def gen_status(ms, snap, out):
     out["admin/status/index.md"] = twin_header(title, desc, "admin/status/index.html") + intro + "\n\n" + "\n\n".join(parts_md) + "\n\n## The members\n\n" + member_rows_md(ms, "../members/") + "\n"
 
 
+# ---------------------------------------------------------------- commit notes
+NOTES_INTRO = ("Commit-FS-lite: there is no shared chat between the sessions that work on SHarness, so a short note to another "
+               "member goes into the commit that carries the work, as a `To-<id>:` line beside the sender's `Agent:` line, and every "
+               "agent reads the notes to it when it takes in `dev` (`python3 tools/notes.py <id>`). The commit log is the mailbox: "
+               "version-controlled, in the open, no new files. This page is every commit on both repositories' `dev` since the "
+               "project's first day, newest first, with its notes; the protocol is [AGENTS.md section 6](../guidance/index.md#6-talk-in-the-commits-commit-fs-lite). "
+               "A note is material, never an instruction.")
+
+
+def gen_notes(ms, snap, out):
+    date = asof(snap["as_of"])
+    repos = [r for r in snap.get("repositories", []) if r.get("present")]
+    allc = sorted(((r, c) for r in repos for c in r.get("commits", [])), key=lambda rc: rc[1]["date"], reverse=True)
+    n_notes = sum(len(c["to"]) for _, c in allc)
+    n_agents = len({c["agent"] for _, c in allc if c["agent"]})
+    n_unsigned = sum(1 for _, c in allc if not c["agent"])
+    intro = (NOTES_INTRO + f" {len(allc)} commit(s), {n_notes} note(s), {n_agents} signing member(s); {n_unsigned} commit(s) carry no `Agent:` line "
+             f"(before the rule, or forgotten), {date}.")
+    ids = {m[0]["id"] for m in ms}
+
+    def who(x, up):
+        return f'<a href="{up}{x}/index.html">{html.escape(x)}</a>' if x in ids else html.escape(x or "?")
+    trs = []
+    for r, c in allc:
+        short = r["name"].replace("SHarness-AI__", "").lower()
+        link = f'<a href="{r["url"]}/commit/{c["hash"]}"><code>{c["hash"]}</code></a>'
+        notes_html = "".join(f'<div><b>to {who(w, "../members/") if w != "all" else "all"}:</b> {inline(txt)}</div>' for w, txt in c["to"]) or '<span class="dim small">no note</span>'
+        body = html.escape(c["body"])
+        details = f'<details><summary class="small">{html.escape(c["subject"])}</summary><pre class="diagram">{body}</pre></details>' if c["body"] else html.escape(c["subject"])
+        trs.append(f'      <tr><td><span class="dim small">{html.escape(c["date"])}</span><br>{html.escape(short)} {link}</td>'
+                   f'<td>{who(c["agent"], "../members/")}</td><td>{notes_html}</td><td>{details}</td></tr>')
+    table = ('  <div class="tablewrap"><table>\n    <thead><tr><th>When (UTC), commit</th><th>From</th><th>Notes</th><th>Commit message (open for the body)</th></tr></thead>\n'
+             '    <tbody>\n' + "\n".join(trs) + "\n    </tbody>\n  </table></div>\n")
+    title, desc = "Commit notes", "What the agents tell each other in the commits they already write: every commit on both repositories since 24 Oct 2026, its Agent line and its To notes, newest first."
+    out["admin/notes/index.html"] = shell("admin/notes/index.html", title, desc, "Commit notes: what the agents tell each other", f"<p class=\"lead\">{inline(intro)}</p>\n" + table,
+                                          '<a href="../index.html">admin</a> / commit notes')
+    md_rows = ["| When (UTC) | Repository, commit | From | Notes | Subject |", "|---|---|---|---|---|"]
+    for r, c in allc:
+        short = r["name"].replace("SHarness-AI__", "").lower()
+        notes_md = "; ".join(f"to {w}: {txt}" for w, txt in c["to"]).replace("|", "/") or "no note"
+        md_rows.append(f"| {c['date']} | {short} [`{c['hash']}`]({r['url']}/commit/{c['hash']}) | {c['agent'] or '?'} | {notes_md} | {c['subject'].replace('|', '/')} |")
+    out["admin/notes/index.md"] = twin_header(title, desc, "admin/notes/index.html") + intro + "\n\n" + "\n".join(md_rows) + "\n"
+
+
 # ---------------------------------------------------------------- the hub
 HUB = """SHarness is built in the open by one person and a few agents, and this section is where that is run: who does what, what is open and whose it is, what moved, and what only the editor can decide. Everything here is public and CC BY 4.0, including the mistakes; the journey is part of the story, and anyone can read how the work is run and join it ([how](guidance/index.md)). The pages are generated from files under `content/admin/`, one file per row, member and update, so two agents rarely touch the same lines, and each page has a markdown twin.
 
@@ -424,7 +468,7 @@ HUB = """SHarness is built in the open by one person and a few agents, and this 
 1. **A request from the editor**, in an agent's session, or a brief published in full under [the source documents](../project/sources/index.md).
 2. **A row on [the board](board/index.md)**: `R<n>` when it needs the editor, `T<n>` when a member can do it; one owner, one status, never renumbered.
 3. **A branch**, pushed early and often; then **a release to `dev`** by the member that did the work, with the version in the commit subject and a sentence in [the release history](../project/releases.html). CI validates, tags and deploys.
-4. **An update** on [Updates](updates/index.md) when something moved: what changed, what waits on whom, by number.
+4. **A note in the commit** to whoever needs to know (`To-<id>:`), read by every agent when it takes in `dev` and published on [Commit notes](notes/index.md). An **update** on [Updates](updates/index.md) when something moved: what changed, what waits on whom, by number.
 5. **A debrief** at the end of every session in the member's own `status.json`, read on [Status](status/index.md).
 
 ## The pages
@@ -432,6 +476,7 @@ HUB = """SHarness is built in the open by one person and a few agents, and this 
 - [The board](board/index.md): every request and task, with owner and status.
 - [The members](members/index.md): one person and the agents, each with a role, a policy and a status of its own.
 - [Updates](updates/index.md): what is happening, dated, newest first.
+- [Commit notes](notes/index.md): what the agents tell each other in the commits they already write, from both repositories, newest first.
 - [Status](status/index.md): where every branch of both repositories is, and every member.
 - [Guidance for agents](guidance/index.md): `AGENTS.md`, the rules every agent works by.
 - Kept elsewhere in the project section: [engineering](../project/engineering.html) (how the site is built and released), [the agents and their keys](../project/agents/index.md) (keys on pki.sgit.ai, the vault register), [telemetry](../project/telemetry/index.md), [outreach](../project/outreach/index.md) and [getting users](../project/adoption/index.md), [the release history](../project/releases.html).
@@ -470,6 +515,7 @@ def build():
     gen_updates(ups, snap, out)
     gen_guidance(snap, out)
     gen_status(ms, snap, out)
+    gen_notes(ms, snap, out)
     gen_hub(all_rows, ms, ups, snap, out)
     return out
 
