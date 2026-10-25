@@ -1,0 +1,94 @@
+{
+ "as_of": "2026-10-25T23:34Z",
+ "by": "conductor",
+ "repositories": [
+  {
+   "name": "SHarness-AI__Website",
+   "present": true,
+   "url": "https://github.com/SHarness-AI/SHarness-AI__Website",
+   "latest_tag": "v0.5.12",
+   "branches": [
+    {
+     "branch": "dev",
+     "head": "ec01143",
+     "date": "2026-10-25T23:30:50+00:00",
+     "subject": "site v0.5.12: the telemetry lane is open; the first drain; R10 and T7 done",
+     "agent": "",
+     "ahead_of_dev": 0,
+     "behind_dev": 0
+    },
+    {
+     "branch": "main",
+     "head": "a1f93f6",
+     "date": "2026-10-24T17:30:24+01:00",
+     "subject": "Initial commit",
+     "agent": "",
+     "ahead_of_dev": 0,
+     "behind_dev": 19
+    },
+    {
+     "branch": "claude/blissful-johnson-yk1c4p",
+     "head": "e9a9679",
+     "date": "2026-10-24T17:55:46+00:00",
+     "subject": "site v0.3.1: completeness pass against the sgit design pack 00-04",
+     "agent": "",
+     "ahead_of_dev": 0,
+     "behind_dev": 14
+    },
+    {
+     "branch": "claude/wonderful-cray-4xpawa",
+     "head": "533dbb4",
+     "date": "2026-10-25T23:10:48+00:00",
+     "subject": "site v0.5.9: the front page rebuilt for a user arriving cold; animated explainers; the ask; getting users",
+     "agent": "",
+     "ahead_of_dev": 0,
+     "behind_dev": 3
+    }
+   ]
+  },
+  {
+   "name": "SHarness-AI__CLI",
+   "present": true,
+   "url": "https://github.com/SHarness-AI/SHarness-AI__CLI",
+   "latest_tag": "v0.1.0",
+   "branches": [
+    {
+     "branch": "dev",
+     "head": "ebd275a",
+     "date": "2026-10-25T23:29:05+00:00",
+     "subject": "The guest on a network the page provides, and an interceptor that sees and vetoes every packet",
+     "agent": "",
+     "ahead_of_dev": 0,
+     "behind_dev": 0
+    },
+    {
+     "branch": "main",
+     "head": "6836292",
+     "date": "2026-10-24T16:27:01+00:00",
+     "subject": "Update release badge and version file",
+     "agent": "",
+     "ahead_of_dev": 0,
+     "behind_dev": 11
+    },
+    {
+     "branch": "claude/blissful-johnson-yk1c4p",
+     "head": "0a53a7c",
+     "date": "2026-10-24T16:50:19+00:00",
+     "subject": "Point the package at sharness.ai, add the proposed scope, make sharness-ai the only command",
+     "agent": "",
+     "ahead_of_dev": 0,
+     "behind_dev": 10
+    },
+    {
+     "branch": "claude/wonderful-cray-4xpawa",
+     "head": "ebd275a",
+     "date": "2026-10-25T23:29:05+00:00",
+     "subject": "The guest on a network the page provides, and an interceptor that sees and vetoes every packet",
+     "agent": "",
+     "ahead_of_dev": 0,
+     "behind_dev": 0
+    }
+   ]
+  }
+ ]
+}
