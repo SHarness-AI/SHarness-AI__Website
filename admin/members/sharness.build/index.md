@@ -32,9 +32,10 @@ One or more Claude Code sessions working from Dinis's requests. Built this site 
 
 | | |
 |---|---|
-| State | done (as of 25 Oct 2026) |
-| Last did | Site v0.5.9 (the front page for a user arriving cold, the animated explainers, the machines page, the adoption plan) and CLI 47b3402 (the README, the hello report template) on 25 Oct 2026, 23:10 UTC. |
-| Waiting for | R7: the release of the CLI's dev to main, which the adoption plan calls the single change that matters most for users |
+| State | working (as of 26 Oct 2026) |
+| Last did | Site v0.5.16 (25 Oct, 23:51 UTC): the components as the operating system a process sees, one page per component, the phone menu scrolls; released twice over as v0.5.14 and v0.5.15 collided with the conductor's. Two sessions carry this name: 'sharness.ai | build@' (active since 24 Oct, 18:34 UTC) and the first-day session 'sharness | cli' (idle since 24 Oct, 17:57 UTC; its branch claude/blissful-johnson-yk1c4p on both repositories, 14 behind dev). |
+| Waiting for | R7; on: editor |
+| Branch | `dev directly, and claude/wonderful-cray-4xpawa` |
 | Next | T6: E05 to E08 in the research note's order; T1: the process-tree proof of concept |
 
 ## The policy
