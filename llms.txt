@@ -4,7 +4,7 @@
 > the kernel and talking only over allowed, mutually authenticated connections, so a secret
 > lives in one place and a tricked process can only do its one job.
 
-Site version: v0.5.14. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04,
+Site version: v0.5.15. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04,
 E09 and E10 in the CLI; E09 is a real Linux kernel in a browser tab running hello, measured 25 Oct 2026).
 No SHarness component is built.
 By Dinis Cruz; design session written up with Claude, 24 October 2026. All content CC BY 4.0.
@@ -34,7 +34,8 @@ SHarness is unrelated to Sharness, the shell testing library.
 - /evidence/ — measurements, what exists today, the research note
 - /landscape/ — policies at the centre: the thesis, the enforceability matrix, integration points, the market
 - /explain/ — storyboards and mockups; /articles/ — the articles
-- /project/ — about, the source documents (verbatim), engineering, comms, releases
+- /project/ — about, the source documents (verbatim), engineering, comms, releases, the agents and their keys, outreach, telemetry
+- /admin/ — how the project is run: the board, the members, the updates, status, the guidance for agents
 
 ## The design (read in this order)
 
@@ -159,6 +160,17 @@ SHarness is unrelated to Sharness, the shell testing library.
   directories, the network), rUv's playbook, the rules, thirty days, the measures
 - /project/telemetry/index.md — who reads this site: one anonymous event per page per session over an
   append lane, encrypted in the browser; what is sent, never sent; the lane waits on an access token (R10)
+
+## Admin: how the project is run (public, like everything here)
+
+- /admin/index.md — the hub: how work moves (a request, a board row, a branch, a release, an update, a debrief), the members
+- /admin/board/index.md — THE BOARD: every request to the editor (R) and every task (T), numbered, with owner and status;
+  one file per row under content/admin/board/; the same table at /project/comms.html
+- /admin/members/index.md — who does what: one person and the agents, each with a role, a behaviour policy and a status
+  of its own at /admin/members/<id>/index.md (conductor, editor, sharness.build, sharness.dev, sherpa)
+- /admin/updates/index.md — UPDATES: what is happening, dated, newest first; each at /admin/updates/<id>/index.md
+- /admin/status/index.md — where every branch of both repositories is, and every member; a snapshot from git
+- /admin/guidance/index.md — AGENTS.md: the rules every agent works by, on both repositories; how to join
 
 ## Related
 

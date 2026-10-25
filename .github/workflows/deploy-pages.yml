@@ -44,6 +44,8 @@ jobs:
         run: python3 tools/gen_pages.py --check
       - name: Articles match their sources
         run: python3 tools/gen_articles.py --check
+      - name: The admin section matches its sources (the board rows, the members, the updates, AGENTS.md, the snapshot)
+        run: python3 tools/gen_admin.py --check
       - name: Storyboards match their sources and have their previews
         run: python3 tools/gen_storyboards.py --check
       - name: Storyboards are valid for the pinned kit (the kit's own validator)

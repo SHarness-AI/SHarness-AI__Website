@@ -257,7 +257,7 @@ def md_to_html(md):
     return h1, "\n".join(out)
 
 
-SECTIONS = {"design": "the design", "code": "the code", "evidence": "evidence", "landscape": "the landscape", "explain": "explain", "project": "project"}
+SECTIONS = {"design": "the design", "code": "the code", "evidence": "evidence", "landscape": "the landscape", "explain": "explain", "project": "project", "admin": "admin"}
 
 
 def crumb(dir_, title):

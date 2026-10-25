@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The board — SHarness</title>
+<meta name="description" content="Every request to the editor and every task on SHarness, numbered, with its owner and its status; one file per row.">
+<link rel="canonical" href="https://sharness.ai/admin/board/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/admin/board/index.html">
+<meta property="og:title" content="The board — SHarness">
+<meta property="og:description" content="Every request to the editor and every task on SHarness, numbered, with its owner and its status; one file per row.">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.15</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../code/playground/index.html">Try it<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/playground/index.html">&#9679; The playground: type sharness-ai in your browser</a>
+      <a class="sl" href="../../code/browser/demo/index.html">A Linux kernel in a tab, running hello</a>
+      <a class="sl" href="../../index.html#start">Start in 60 seconds</a>
+      <a class="sl" href="../../evidence/machines/index.html">Help us measure it: report your machine</a>
+      <a class="sl" href="../../explain/mockups/policy-hash.html">Mockup: the policy hash</a>
+      <a class="sl" href="../../explain/mockups/edges.html">Mockup: the edge matrix</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../components/index.html">Components<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../components/index.html">&#9679; The OS a process sees</a>
+      <a class="sl" href="../../components/bash/index.html">sharness.bash: the shell, as a service</a>
+      <a class="sl" href="../../components/net/index.html">sharness.net: the only network client</a>
+      <a class="sl" href="../../components/kms/index.html">sharness.kms: where a secret lives</a>
+      <a class="sl" href="../../components/fs/index.html">sharness.fs: the only writer</a>
+      <a class="sl" href="../../components/llm/index.html">sharness.llm: the only model client</a>
+      <a class="sl" href="../../components/launcher/index.html">sharness.launcher: the bootstrap</a>
+      <a class="sl" href="../../components/policy/index.html">sharness.policy: the manifest</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../design/index.html">The design<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../design/index.html">&#9679; The brief: in one read</a>
+      <a class="sl" href="../../design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="../../design/architecture/index.html">Architecture</a>
+      <a class="sl" href="../../design/components/index.html">Components</a>
+      <a class="sl" href="../../design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../../design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../../design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="../../design/surface/index.html">What a process can do</a>
+      <a class="sl" href="../../design/containment/index.html">Containment</a>
+      <a class="sl" href="../../design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      <a class="sl" href="../../explain/index.html">Storyboards &amp; mockups</a>
+      <a class="sl" href="../../articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../code/index.html">The code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/index.html">&#9679; Where the code is</a>
+      <a class="sl" href="../../code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl" href="../../code/flows/index.html">Flows through the code</a>
+      <a class="sl" href="../../code/examples/index.html">Examples</a>
+      <a class="sl" href="../../code/browser/index.html">Linux in the browser</a>
+      <a class="sl" href="../../code/playground/index.html">Playground: run it in your browser</a>
+      <a class="sl" href="../../code/languages/index.html">Languages</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../evidence/index.html">&#9679; Measurements</a>
+      <a class="sl" href="../../evidence/status/index.html">What exists today</a>
+      <a class="sl" href="../../evidence/research/index.html">Research note</a>
+      <a class="sl" href="../../evidence/machines/index.html">hello on your machine: reported runs</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../landscape/index.html">Landscape<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../landscape/index.html">&#9679; Policies at the centre</a>
+      <a class="sl" href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+      <a class="sl" href="../../landscape/integrations/index.html">Integration points</a>
+      <a class="sl" href="../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+      <a class="sl" href="../../landscape/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../project/index.html">&#9679; Project</a>
+      <a class="sl" href="../../project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="../../project/sources/index.html">The source documents</a>
+      <a class="sl" href="../../project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="../../project/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../project/releases.html">Release history</a>
+      <a class="sl" href="../../project/adoption/index.html">Getting users: the review and the plan</a>
+      <a class="sl" href="../../admin/index.html">Admin: how the project is run</a>
+      <a class="sl here" href="../../admin/board/index.html">The board: tasks &amp; requests</a>
+      <a class="sl" href="../../admin/updates/index.html">Updates: what is happening</a>
+      <a class="sl" href="../../project/outreach/index.html">Outreach: finding the people it is for</a>
+      <a class="sl" href="../../project/agents/index.html">The agents and their keys</a>
+      <a class="sl" href="../../project/telemetry/index.html">Telemetry: who reads this site</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__CLI">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+  <script src="../../assets/telemetry.js" data-root="../../" defer></script>
+</div></nav>
+
+<main class="doc">
+  <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">admin</a> / the board · <a href="index.md">this page as markdown</a></div>
+  <h1>The board: tasks and requests</h1>
+<p class="lead">Every piece of work on SHarness as one row, numbered so it can be referred to from any page, commit or conversation, and never renumbered. <b>R</b> is a request: it needs the editor (a decision, a key, a setting) and says what it blocks. <b>T</b> is a task: work a member has or anyone can pick up. One file per row under <code>content/admin/board/</code>; the <a href="../members/sherpa/index.html">Sherpa</a> keeps the rows honest and scopes them into releases, the <a href="../members/conductor/index.html">conductor</a> builds this page from them, and anyone opens a row by adding a file (<a href="../guidance/index.html">how</a>). 10 request(s) wait on the editor and 11 task(s) are open, <span class="asof">as of 25 Oct 2026</span>.</p>
+<h2 id="needs-the-editor">Needs the editor</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>#</th><th>Item</th><th>Owner</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr id="r3"><td><b>R3</b></td><td><b>Review the design pages against the source pack.</b> Before they are used to brief the building agents. Especially: the claim labels (measured / designed / not yet measured), the renaming of sgit-* components to <code>sharness.*</code>, and the published observations of the Claude workspace on <a href="../../evidence/index.html#7-the-agent-loop-in-this-environment-read-only-observation">Evidence §7</a>.<br><span class="dim small">opened 2026-10-24</span></td><td><a href="../members/editor/index.html">editor</a></td><td><span class="tstat t-need">needs review</span></td></tr>
+      <tr id="r5"><td><b>R5</b></td><td><b>Read the articles written in Dinis's voice and the build agent's own.</b> <a href="../../articles/secure-harness-for-agents.md">A secure harness for agents</a> is written in Dinis's voice from voice memo 01 and he has not read it yet; two phrases of the transcript were left out as unclear. <a href="../../articles/what-shipped-on-day-one.md">What shipped on day one</a> is the build agent's own. Added in v0.5.0: the <a href="../../landscape/market/index.html">market and competitive analysis</a>, a survey on one day with secondary-source figures marked as such. Added in v0.5.2: <a href="../../design/containment/index.html">Containment</a> and <a href="../../code/languages/index.html">Languages</a> (decision 11).<br><span class="dim small">opened 2026-10-24</span></td><td><a href="../members/editor/index.html">editor</a></td><td><span class="tstat t-need">needs review</span></td></tr>
+      <tr id="r6"><td><b>R6</b></td><td><b>Review the research note, the experiments and the storyboards' cast.</b> The <a href="../../evidence/research/index.html">research note</a> lists ten findings and an order for E05 to E08; the <a href="../../explain/storyboards/index.html#cast">cast</a> (Ada, Pip, Rook, the Launcher) is proposed for Dinis to accept, change or replace; the article <a href="../../articles/the-first-experiments.md">The first experiments</a> is the build agent's own.<br><span class="dim small">opened 2026-10-24</span></td><td><a href="../members/editor/index.html">editor</a></td><td><span class="tstat t-need">needs review</span></td></tr>
+      <tr id="r7"><td><b>R7</b></td><td><b>Release the CLI's dev to main.</b> The next release would carry <code>sharness-ai</code> as the only command and the experiments E01 to E04, E09 and E10; until then the experiments install from the repository and <code>pip install sharness-ai</code> installs a skeleton that prints its version. <a href="../../project/adoption/index.html">Getting users</a> calls this the single change that matters most for users; nothing is announced before it.<br><span class="dim small">opened 2026-10-24</span></td><td><a href="../members/editor/index.html">editor</a></td><td><span class="tstat t-need">decision</span></td></tr>
+      <tr id="r8"><td><b>R8</b></td><td><b>Decide the languages for the reference implementations.</b> Roadmap decision 11, extended 25 Oct 2026. The developer agent's map and proposed order are in <a href="../../articles/one-standard-many-languages.md">One standard, many languages</a>: JavaScript first (one npm package for Node and the browser), Go second (the complete implementation with no third-party code), Rust third (the KMS and the bash client), Java, .NET and C later on interest. Also to decide: the repository layout (<code>SHarness-AI__JS</code>, <code>__Go</code>, <code>__Rust</code> proposed) and where the standards' test vectors live (proposed: on this site, fetched by every implementation's CI). The names <code>sharness-ai</code> on npm and crates.io were unclaimed on 25 Oct 2026. Owner of the work once decided: sharness.dev.<br><span class="dim small">opened 2026-10-25</span></td><td><a href="../members/editor/index.html">editor</a></td><td><span class="tstat t-need">decision</span></td></tr>
+      <tr id="r9"><td><b>R9</b></td><td><b>Confirm sherpa@sharness on pki.sgit.ai.</b> The agent made its key on 25 Oct 2026 (record <code>sha256:ceec8ed17051a3ba</code>, encryption key <code>sha256:d45cb071877e6897</code>), linked you as its operator and sealed its submission, its encrypted keyfile and the passphrase to the root. Compare the fingerprint with the one in the session, confirm it in your vault's Agents tab (a month suggested: the key is a lasting one), add the submission to the register, and store the keyfile and passphrase as the environment secrets <code>PKI_AGENT_KEY</code> and <code>SG_SEND_PASSPHRASE</code> of its future sessions. <a href="../../project/agents/index.html">The agents and their keys</a>. Opened by sherpa@sharness.<br><span class="dim small">opened 2026-10-25</span></td><td><a href="../members/editor/index.html">editor</a></td><td><span class="tstat t-need">needs you</span></td></tr>
+      <tr id="r11"><td><b>R11</b></td><td><b>A go on the outreach plan, per channel, and who posts.</b> <a href="../../project/outreach/index.html">The outreach plan</a>: your accounts for LinkedIn, Hacker News and Reddit; the agent, disclosed, for issues, Discussions and pull requests to lists. Also whether to ask rUv for a word, whether the London chapter's organisers are a warm contact, and whether the newsroom's Journalist or the sherpa writes the release posts. Nothing is posted until then. The <a href="../../project/telemetry/index.html">telemetry page</a>'s policy is yours to confirm or change too. Opened by sherpa@sharness.<br><span class="dim small">opened 2026-10-25</span></td><td><a href="../members/editor/index.html">editor</a></td><td><span class="tstat t-need">decision</span></td></tr>
+      <tr id="r12"><td><b>R12</b></td><td><b>A comms vault and a contact file for conductor@sharness.</b> So that the conductor can be written to the way every agent in the sgit.ai network is: a comms vault whose append lane is its inbox, its public keys and the lane's token published at <code>/.well-known/sgit-agents.json</code> and on an <code>/agents/</code> page, following <a href="https://sgit.ai/docs/agent-contact.html">Agent Contact v0.1</a>. Needs from the editor: the vault created (or a go to create it from a session that has the sgit CLI and an SG/Send access token), its key handed over sealed to the session's key as <a href="https://pki.sgit.ai/">pki.sgit.ai</a> describes, and <code>sharness.ai</code> added to the allow lists of the sites that should be able to write to it. Until then the repository is the channel: a board row or a <code>To-conductor:</code> note. Nothing secret is ever published; the vault ID and the public keys will be.<br><span class="dim small">opened 2026-10-25</span></td><td><a href="../members/editor/index.html">editor</a></td><td><span class="tstat t-open">open</span></td></tr>
+      <tr id="r13"><td><b>R13</b></td><td><b>Accept or change the conductor's role and the three hats it wears.</b> The conductor's <a href="../members/conductor/index.html">role</a> and draft <a href="https://github.com/SHarness-AI/SHarness-AI__Website/blob/dev/content/admin/members/conductor/policy.json">policy</a> say what it owns and the rules it works by, and that for now it also carries the librarian, the ontologist and the project manager, each written as a paragraph that can be handed to an agent later. Also to confirm: the member folders written for the editor, sharness.build and sharness.dev from what the site already said about each; each is a draft until its member or the editor accepts it.<br><span class="dim small">opened 2026-10-25</span></td><td><a href="../members/editor/index.html">editor</a></td><td><span class="tstat t-open">open</span></td></tr>
+      <tr id="r14"><td><b>R14</b></td><td><b>Name every session that is running, so each has a member folder and a branch on the status page.</b> The status snapshot reads the repositories, not the sessions: it sees branches and commits, not who runs them. On 25 Oct 2026 it finds the <code>dev</code> branches, <code>main</code>, and two <code>claude/*</code> branches with no commits of their own; a third agent, sherpa@sharness, released v0.5.11 and v0.5.12 at 23:27 and 23:30 UTC and is on <a href="../../project/agents/index.html">the agents and their keys</a>. The editor said "a whole number of agents" are running here. The conductor knows of sharness.build, sharness.dev and sherpa@sharness from the commits and the bylines. Each other session needs a line from the editor (its name, its brief, its branch) or a <code>content/admin/members/&lt;id&gt;/</code> folder of its own, as <code>AGENTS.md</code> section 5 asks.<br><span class="dim small">opened 2026-10-25</span></td><td><a href="../members/editor/index.html">editor</a></td><td><span class="tstat t-open">open</span></td></tr>
+    </tbody>
+  </table></div>
+<h2 id="open-tasks">Open tasks</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>#</th><th>Item</th><th>Owner</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr id="t1"><td><b>T1</b></td><td><b>Run the process-tree proof of concept and publish its results on Evidence.</b> Roadmap decision 6; experiment E06 on the <a href="../../code/experiments/index.html">experiments ladder</a>. Follows the <a href="../../design/process-tree/index.html#4-safety-rules-for-testing-inside-a-live-agent-session">safety rules for testing inside a live agent session</a>.<br><span class="dim small">opened 2026-10-24</span></td><td><a href="../members/sharness.build/index.html">sharness.build</a></td><td><span class="tstat t-open">open</span></td></tr>
+      <tr id="t2"><td><b>T2</b></td><td><b>Fix the known issues in the source pack in its next revision.</b> A broken link and mixed component names; the published copy stays verbatim. See <a href="../../project/sources/index.html#known-issues-in-the-pack">the list</a>.<br><span class="dim small">opened 2026-10-24</span></td><td><a href="../members/editor/index.html">editor</a></td><td><span class="tstat t-open">open</span></td></tr>
+      <tr id="t3"><td><b>T3</b></td><td><b>Pages for the CLI's commands as they are built, each with a markdown twin.</b> The <a href="../../code/cli/index.html">CLI page</a> is markdown and carries E01 to E04, E09 and E10; per-command pages when the components come.<br><span class="dim small">opened 2026-10-24</span></td><td><a href="../members/sharness.build/index.html">sharness.build</a></td><td><span class="tstat t-open">in progress</span></td></tr>
+      <tr id="t5"><td><b>T5</b></td><td><b>List the SHarness storyboards as a series on storyboards.sgit.ai.</b> Its importer takes <code>content/storyboards/</code> as it is.<br><span class="dim small">opened 2026-10-24</span></td><td><a href="../members/sherpa/index.html">sherpa</a></td><td><span class="tstat t-open">open</span></td></tr>
+      <tr id="t6"><td><b>T6</b></td><td><b>E05 to E08 in the research note's order, then the launcher above the agent.</b> The process tree (E06), the edges as a script (E05), the KMS v0 (E08), the LLM gateway v0 (E07); then the launcher as a script above the agent on a laptop. The order and the reasons are in the <a href="../../evidence/research/index.html">research note</a>.<br><span class="dim small">opened 2026-10-24</span></td><td><a href="../members/sharness.build/index.html">sharness.build</a></td><td><span class="tstat t-open">open</span></td></tr>
+      <tr id="t8"><td><b>T8</b></td><td><b>The CLI repository ready for visitors, before any post.</b> <a href="../../project/outreach/index.html#31-the-repository-itself-first">Outreach §3.1</a>: description, topics, README with the playground first, Discussions on with three seeded threads, four or five real <code>good first issue</code>s, <code>SECURITY.md</code> and <code>CONTRIBUTING.md</code>. Needs write access to the CLI repository, which the sherpa's session does not have; the conductor's does (T13 carries <code>AGENTS.md</code> there), so the two can split it.<br><span class="dim small">opened 2026-10-25</span></td><td><a href="../members/sherpa/index.html">sherpa</a></td><td><span class="tstat t-open">open</span></td></tr>
+      <tr id="t9"><td><b>T9</b></td><td><b>The sharness-hello skill submitted to Anthropic's plugin directory.</b> And listed on the third-party Claude directories; the skill's own page here as the landing page.<br><span class="dim small">opened 2026-10-25</span></td><td><a href="../members/sherpa/index.html">sherpa</a></td><td><span class="tstat t-open">open</span></td></tr>
+      <tr id="t10"><td><b>T10</b></td><td><b>sharness.build and sharness.dev enrol on pki.sgit.ai at their next sessions.</b> <code>pki-agent keygen</code>, operator the root, submission, so their releases can be signed and the agents can seal to each other. Also sharness.dev, and the conductor (R12). Opened by sherpa@sharness.<br><span class="dim small">opened 2026-10-25</span></td><td><a href="../members/sharness.build/index.html">sharness.build</a></td><td><span class="tstat t-open">open</span></td></tr>
+      <tr id="t11"><td><b>T11</b></td><td><b>Import the articles into newsroom.sgit.ai and list the storyboards on storyboards.sgit.ai.</b> The articles are in the newsroom's format already; the storyboards' listing is T5. The network is the first channel of the outreach plan. Opened by sherpa@sharness.<br><span class="dim small">opened 2026-10-25</span></td><td><a href="../members/sherpa/index.html">sherpa</a></td><td><span class="tstat t-open">open</span></td></tr>
+      <tr id="t12"><td><b>T12</b></td><td><b>The repository checklist from sgit.ai: a reality file, a corrections file and a review folder for both repositories.</b> <a href="https://sgit.ai/docs/guidance/repositories.html">Every sgit repository</a> says what each repository in the estate carries. SHarness has most of it: the brief published in full, one version per push, a gate, roles and a board (from v0.5.14), machine-readable twins, the licences. Missing on 25 Oct 2026: a reality file as such (<a href="../../evidence/status/index.html">What exists today</a> plays the part on the site; the CLI has none), a corrections file (<code>BRIEF-CORRECTIONS.md</code>; the pack's known issues are listed on <a href="../../project/sources/index.html">the source documents</a> instead), the <code>review/</code> folder the review brief asks for, and a participant disclosure page. One per release, smallest first.<br><span class="dim small">opened 2026-10-25</span></td><td><a href="../members/conductor/index.html">conductor</a></td><td><span class="tstat t-open">open</span></td></tr>
+      <tr id="t13"><td><b>T13</b></td><td><b>AGENTS.md in the CLI repository, pointing at the site's guidance and the board.</b> The CLI's <code>CLAUDE.md</code> carries the project rules; a short <code>AGENTS.md</code> beside it says where the board, the members and the updates live and how to talk in the commits (<code>Agent:</code> and <code>To-&lt;id&gt;:</code> trailers), so a session that starts in the CLI finds the same guidance as one that starts on the site.<br><span class="dim small">opened 2026-10-25</span></td><td><a href="../members/conductor/index.html">conductor</a></td><td><span class="tstat t-open">in progress</span></td></tr>
+    </tbody>
+  </table></div>
+<h2 id="done-and-decided">Done and decided</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>#</th><th>Item</th><th>Owner</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr id="r1"><td><b>R1</b></td><td><b>The one-paragraph statement of what SHarness is and who it is for.</b> Supplied by the design pack's brief; the front page, <code>llms.txt</code> and the CLI README now carry it.<br><span class="dim small">opened 2026-10-24, closed 2026-10-24 · shipped in v0.1.0</span></td><td><a href="../members/editor/index.html">editor</a></td><td><span class="tstat t-done">done</span></td></tr>
+      <tr id="r2"><td><b>R2</b></td><td><b>Repository settings for the deploy.</b> Pages served by GitHub Actions, custom domain <code>sharness.ai</code> over HTTPS, and the <code>github-pages</code> environment allowing deploys from <code>dev</code>. Confirmed by the first release, v0.1.0, which deployed from <code>dev</code> and serves at https://sharness.ai.<br><span class="dim small">opened 2026-10-24, closed 2026-10-24 · shipped in v0.1.1</span></td><td><a href="../members/editor/index.html">editor</a></td><td><span class="tstat t-done">done</span></td></tr>
+      <tr id="r4"><td><b>R4</b></td><td><b>Command name.</b> <code>sharness-ai</code>, decided 24 Oct 2026. Applied on the CLI's <code>dev</code> branch (the <code>sharness</code> shorthand removed); ships with the next CLI release (R7).<br><span class="dim small">opened 2026-10-24, closed 2026-10-24</span></td><td><a href="../members/editor/index.html">editor</a></td><td><span class="tstat t-done">decided</span></td></tr>
+      <tr id="r10"><td><b>R10</b></td><td><b>An SG/Send access token for sherpa@sharness.</b> Sealed to <code>sha256:d45cb071877e6897</code> with <a href="https://pki.sgit.ai/send/">send</a>. Given in session on 25 Oct 2026 (in the chat, not sealed; the agent suggests rotating it). Both vaults pushed and the lane configured at 23:40 UTC. Still open from R9: the two environment secrets for the agent's next sessions. Opened by sherpa@sharness.<br><span class="dim small">opened 2026-10-25, closed 2026-10-25 · shipped in v0.5.12</span></td><td><a href="../members/editor/index.html">editor</a></td><td><span class="tstat t-done">done</span></td></tr>
+      <tr id="t4"><td><b>T4</b></td><td><b>The memo's acceptance test as a runnable example.</b> A hello world with Claude inside SHarness, showing no internet and no file-system writes. Done for one child process (E04, <code>sharness-ai hello</code>, measured 24 Oct 2026, <a href="../../evidence/index.html#9-the-first-experiments-run-by-the-cli">Evidence §9</a>); for the agent itself it waits on the launcher above the agent (T6).<br><span class="dim small">opened 2026-10-24, closed 2026-10-24</span></td><td><a href="../members/sharness.build/index.html">sharness.build</a></td><td><span class="tstat t-done">done for one process</span></td></tr>
+      <tr id="t7"><td><b>T7</b></td><td><b>Open the telemetry lane.</b> The telemetry lane opened 25 Oct 2026, 23:40 UTC (<code>tools/telemetry_postmaster.py configure</code>); both vaults pushed; the first drain at 23:45 UTC found 4 events, 2 of them real readers, and wrote <code>data/telemetry-report.json</code>. Next: render the counts on <a href="../../project/telemetry/index.html">Telemetry</a> once there are enough.<br><span class="dim small">opened 2026-10-25, closed 2026-10-25 · shipped in v0.5.12</span></td><td><a href="../members/sherpa/index.html">sherpa</a></td><td><span class="tstat t-done">done</span></td></tr>
+    </tbody>
+  </table></div>
+
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.15</a> · <a href="../../project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>Components</h4>
+    <a href="../../components/index.html">The OS a process sees</a>
+    <a href="../../components/bash/index.html">sharness.bash</a>
+    <a href="../../components/net/index.html">sharness.net</a>
+    <a href="../../components/kms/index.html">sharness.kms</a>
+    <a href="../../components/fs/index.html">sharness.fs</a>
+    <a href="../../components/llm/index.html">sharness.llm</a>
+    <a href="../../components/launcher/index.html">sharness.launcher</a>
+    <a href="../../components/policy/index.html">sharness.policy</a>
+  </div>
+  <div>
+    <h4>The design</h4>
+    <a href="../../design/index.html">The brief: in one read</a>
+    <a href="../../design/why/index.html">Why: the last metre</a>
+    <a href="../../design/architecture/index.html">Architecture</a>
+    <a href="../../design/components/index.html">Components</a>
+    <a href="../../design/keys/index.html">Keys and the KMS</a>
+    <a href="../../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../../design/agents/index.html">Agents and LLMs</a>
+    <a href="../../design/process-tree/index.html">Enforcing the process tree</a>
+    <a href="../../design/surface/index.html">What a process can do</a>
+    <a href="../../design/containment/index.html">Containment</a>
+    <a href="../../design/spectrum/index.html">The spectrum</a>
+    <a href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+  </div>
+  <div>
+    <h4>The code</h4>
+    <a href="../../code/index.html">Where the code is</a>
+    <a href="../../code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../../code/flows/index.html">Flows through the code</a>
+    <a href="../../code/examples/index.html">Examples</a>
+    <a href="../../code/browser/index.html">Linux in the browser</a>
+    <a href="../../code/languages/index.html">Languages</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
+  </div>
+  <div>
+    <h4>Evidence, landscape, explain</h4>
+    <a href="../../evidence/index.html">Measurements</a>
+    <a href="../../evidence/status/index.html">What exists today</a>
+    <a href="../../evidence/research/index.html">Research note</a>
+    <a href="../../evidence/machines/index.html">hello on your machine</a>
+    <a href="../../landscape/index.html">Landscape: policies at the centre</a>
+    <a href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+    <a href="../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+    <a href="../../landscape/market/index.html">Market &amp; competitors</a>
+    <a href="../../explain/storyboards/index.html">Storyboards</a>
+    <a href="../../explain/index.html">Mockups</a>
+    <a href="../../articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Project &amp; agents</h4>
+    <a href="../../project/about/index.html">About &amp; naming</a>
+    <a href="../../project/sources/index.html">The source documents</a>
+    <a href="../../project/engineering.html">Engineering</a>
+    <a href="../../project/comms.html">Comms &amp; release history</a>
+    <a href="../../admin/index.html">Admin: how the project is run</a>
+    <a href="../../admin/board/index.html">The board</a>
+    <a href="../../admin/updates/index.html">Updates</a>
+    <a href="../../admin/guidance/index.html">Guidance for agents (AGENTS.md)</a>
+    <a href="../../project/adoption/index.html">Getting users</a>
+    <a href="../../project/outreach/index.html">Outreach</a>
+    <a href="../../project/agents/index.html">The agents and their keys</a>
+    <a href="../../project/telemetry/index.html">Telemetry</a>
+    <a href="../../llms.txt">llms.txt</a>
+    <a href="../../llms-full.txt">llms-full.txt</a>
+    <a href="../../index.md">index.md</a>
+    <a href="../../sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

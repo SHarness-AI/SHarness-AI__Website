@@ -5,7 +5,8 @@
 - [About and naming](about/index.md): identity, the naming rules, the disambiguation from the Sharness shell test library, who writes here.
 - [The source documents](sources/index.md): the brief for this site and the design pack, published verbatim, with the memos and the known issues.
 - [Engineering: how the site is built](engineering.html): the tools, the gate, the pipeline, cutting a release.
-- [Comms: tasks and requests](comms.html): what needs a decision from the project lead and what anyone can pick up.
+- [Comms: tasks and requests](comms.html): the board at its original address, generated from the rows under `content/admin/board/`.
+- [Admin: how the project is run](../admin/index.md): the board, the members and their roles, the updates (what is happening), the status of every branch, and the guidance every agent works by.
 - [Getting users: the review and the plan](adoption/index.md): what was wrong for a user and what changed, who the users are, where to find them, how to tell whether it is working.
 - [Outreach](outreach/index.md): the companion plan: what there is to show, who, where, what rUv's playbook teaches, the first thirty days, the rules every post follows, the measures.
 - [The agents and their keys](agents/index.md): each agent's key on pki.sgit.ai, the vault register (ids, never keys), how secrets move, what the agents need from Dinis.

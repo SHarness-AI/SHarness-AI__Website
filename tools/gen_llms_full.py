@@ -23,6 +23,8 @@ ORDER   = ([("llms.txt", "llms.txt — the annotated map"),
            + [("explain/storyboards/index.md", "explain/storyboards/index.md — the storyboards")]
            + [(f"explain/storyboards/{p.parent.name}/index.md", f"explain/storyboards/{p.parent.name}/index.md — a storyboard's script")
               for p in sorted((ROOT / "explain/storyboards").glob("*/index.md"))]
+           + [(p.relative_to(ROOT).as_posix(), f"{p.relative_to(ROOT).as_posix()} — admin")
+              for p in sorted((ROOT / "admin").rglob("index.md"))]
            + [("articles/index.md", "articles/index.md — the articles")]
            + [(f"articles/{p.stem}.md", f"articles/{p.stem}.md")
               for p in sorted((ROOT / "content/articles").glob("*.md"), reverse=True)])

@@ -1,0 +1,94 @@
+{
+ "as_of": "2026-10-25T23:42Z",
+ "by": "conductor",
+ "repositories": [
+  {
+   "name": "SHarness-AI__Website",
+   "present": true,
+   "url": "https://github.com/SHarness-AI/SHarness-AI__Website",
+   "latest_tag": "v0.5.13",
+   "branches": [
+    {
+     "branch": "dev",
+     "head": "78b82e2",
+     "date": "2026-10-25T23:39:03+00:00",
+     "subject": "site v0.5.13: the guest in the tab is on the page's network; the interceptor shows and vetoes every packet",
+     "agent": "",
+     "ahead_of_dev": 0,
+     "behind_dev": 0
+    },
+    {
+     "branch": "main",
+     "head": "a1f93f6",
+     "date": "2026-10-24T17:30:24+01:00",
+     "subject": "Initial commit",
+     "agent": "",
+     "ahead_of_dev": 0,
+     "behind_dev": 21
+    },
+    {
+     "branch": "claude/blissful-johnson-yk1c4p",
+     "head": "e9a9679",
+     "date": "2026-10-24T17:55:46+00:00",
+     "subject": "site v0.3.1: completeness pass against the sgit design pack 00-04",
+     "agent": "",
+     "ahead_of_dev": 0,
+     "behind_dev": 16
+    },
+    {
+     "branch": "claude/wonderful-cray-4xpawa",
+     "head": "78b82e2",
+     "date": "2026-10-25T23:39:03+00:00",
+     "subject": "site v0.5.13: the guest in the tab is on the page's network; the interceptor shows and vetoes every packet",
+     "agent": "",
+     "ahead_of_dev": 0,
+     "behind_dev": 0
+    }
+   ]
+  },
+  {
+   "name": "SHarness-AI__CLI",
+   "present": true,
+   "url": "https://github.com/SHarness-AI/SHarness-AI__CLI",
+   "latest_tag": "v0.1.0",
+   "branches": [
+    {
+     "branch": "dev",
+     "head": "b3feb1d",
+     "date": "2026-10-25T23:37:08+00:00",
+     "subject": "The scripted page upgrades the guest's HTTP to TLS; init says what port 443 gets with the page as the network",
+     "agent": "",
+     "ahead_of_dev": 0,
+     "behind_dev": 0
+    },
+    {
+     "branch": "main",
+     "head": "6836292",
+     "date": "2026-10-24T16:27:01+00:00",
+     "subject": "Update release badge and version file",
+     "agent": "",
+     "ahead_of_dev": 0,
+     "behind_dev": 12
+    },
+    {
+     "branch": "claude/blissful-johnson-yk1c4p",
+     "head": "0a53a7c",
+     "date": "2026-10-24T16:50:19+00:00",
+     "subject": "Point the package at sharness.ai, add the proposed scope, make sharness-ai the only command",
+     "agent": "",
+     "ahead_of_dev": 0,
+     "behind_dev": 11
+    },
+    {
+     "branch": "claude/wonderful-cray-4xpawa",
+     "head": "b3feb1d",
+     "date": "2026-10-25T23:37:08+00:00",
+     "subject": "The scripted page upgrades the guest's HTTP to TLS; init says what port 443 gets with the page as the network",
+     "agent": "",
+     "ahead_of_dev": 0,
+     "behind_dev": 0
+    }
+   ]
+  }
+ ]
+}
