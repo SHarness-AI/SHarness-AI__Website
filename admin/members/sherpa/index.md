@@ -34,9 +34,9 @@ This folder was written by the conductor from the Sherpa's own pages and release
 
 | | |
 |---|---|
-| State | done (as of 25 Oct 2026) |
-| Last did | Site v0.5.11 and v0.5.12 (25 Oct 2026, 23:27 and 23:30 UTC): joined, the outreach plan, telemetry on every page, the lane opened and the first drain (T7 done, R10 done). |
-| Waiting for | R9 (its key confirmed on pki.sgit.ai and the two environment secrets stored), R11 (a go per outreach channel); on: editor |
+| State | waiting (as of 26 Oct 2026) |
+| Last did | Site v0.5.11 and v0.5.12 (25 Oct, 23:27 and 23:30 UTC). Its session 'sharness.ai | sherpa@' idle since 23:32 UTC. |
+| Waiting for | R9 (its key confirmed, the two environment secrets stored), R11 (a go per outreach channel); on: editor |
 | Next | T8 (the CLI repository ready for visitors), T9, T11; render the telemetry counts once there are enough |
 
 ## The policy

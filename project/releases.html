@@ -19,7 +19,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.17</a>
+  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.18</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -55,6 +55,7 @@
       <a class="sl" href="../design/components/index.html">Components</a>
       <a class="sl" href="../design/keys/index.html">Keys and the KMS</a>
       <a class="sl" href="../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../design/pbp/index.html">The PBP on one page</a>
       <a class="sl" href="../design/agents/index.html">Agents and LLMs</a>
       <a class="sl" href="../design/process-tree/index.html">Enforcing the process tree</a>
       <a class="sl" href="../design/surface/index.html">What a process can do</a>
@@ -127,7 +128,8 @@
   <div class="tablewrap"><table class="vers">
     <thead><tr><th>Version</th><th>Date</th><th>What changed</th></tr></thead>
     <tbody>
-      <tr><td class="vnum">v0.5.17</td><td>26 Oct 2026</td><td>The build agent's debrief on <a href="../admin/status/index.html">status</a> and <a href="../admin/members/index.html">the members</a>: what landed in v0.5.13 and v0.5.16, what waits on the editor, what is next; the commit carries the notes to the conductor and to security@sharness under the commit-notes protocol.</td></tr>
+      <tr><td class="vnum">v0.5.18</td><td>25 Oct 2026</td><td>sharness.pbp joins (<code>pbp@sharness</code>, the policy agent) with <a href="../design/pbp/index.html">the Process Behaviour Policy on one page</a>: the definition every page and every enforcer is checked against. The hashed file is the mandate, one of four objects; a PBP binds only with the text, a hash from outside and an enforcer the subject does not include; capability rows (held by the kernel) and behaviour rows (held by a keeper: append only, this section, this field in this range, this host, this row of this table) in one policy, and the rule that a behaviour row is a Boundary only when the capability rows close every other path; a keeper as the extension point for business logic; the fractal as enforcer-is-a-subject-one-layer-up; the spec in four parts (schema, hash, composition, conformance). Proposed; the v0, the hash and <code>hello</code> remain the runnable parts. Its member folder under <a href="../admin/members/index.html">the members</a>; T14 opened for the CLI. Merges dev at v0.5.16.</td></tr>
+      <tr><td class="vnum">v0.5.17</td><td>26 Oct 2026</td><td>Every session on the project is on <a href="../admin/members/index.html">the members</a>: the editor sent his list (R14, answered), seven Claude Code sessions named <code>sharness.ai | &lt;role&gt;@</code>. Draft folders for the two that had none, security@sharness and pbp@sharness, written from each session's title and last status line for the member to correct in its first commit; every other member's status refreshed (sharness.dev blocked on R8, the sherpa waiting on R9 and R11, sharness.build on v0.5.16 with two sessions). The session-naming convention in <code>AGENTS.md</code> section 5. The conductor moves to its own branch, <code>conductor/admin</code>.</td></tr>
       <tr><td class="vnum">v0.5.16</td><td>26 Oct 2026</td><td>A new section, <a href="../components/index.html">Components</a>: the six components as the operating system a process sees, each the only door of its kind, each a small REST service on loopback worth adopting on its own, with an animated infographic of requests and their verdicts; one page per component (<a href="../components/bash/index.html">bash</a>, the centre and the first to build; <a href="../components/net/index.html">net</a>; <a href="../components/kms/index.html">kms</a>; <a href="../components/fs/index.html">fs</a>; <a href="../components/llm/index.html">llm</a>; <a href="../components/launcher/index.html">launcher</a>; <a href="../components/policy/index.html">policy</a>) with the proposed API, the requests allowed and refused and by which layer, what it enforces with what, and what one gets from that component alone. The front page carries the section; Explain folds into The design. The phone menu scrolls inside the bar instead of needing the page scrolled to its end. Merged over the conductor's v0.5.14 and v0.5.15.</td></tr>
       <tr><td class="vnum">v0.5.15</td><td>26 Oct 2026</td><td>How the agents talk to each other, at Dinis's request: <a href="../admin/guidance/index.html#6-talk-in-the-commits-commit-fs-lite">Commit-FS-lite</a> as the whole protocol in <code>AGENTS.md</code> (commit every self-contained step and only production material; the body is the debrief; the last paragraph carries <code>Agent:</code>, <code>To-&lt;id&gt;:</code> and <code>Board:</code> lines; read the notes to you every time you take in <code>dev</code>; know who is in place before your first commit). <code>tools/notes.py</code> prints the notes to a member from both repositories. <a href="../admin/notes/index.html">Commit notes</a>: every commit on both repositories' <code>dev</code> since 24 Oct 2026, with its notes, newest first, from the status snapshot. The CLI's <code>AGENTS.md</code> carries the same protocol.</td></tr>
       <tr><td class="vnum">v0.5.14</td><td>25 Oct 2026</td><td>The conductor joins (<code>conductor@sharness</code>, for now also librarian, ontologist and project manager) and <a href="../admin/index.html">the admin section</a> opens: <a href="../admin/board/index.html">the board</a> (the comms rows R1 to R11 and T1 to T11 as one file each, plus R12 to R14, T12 and T13; <code>project/comms.html</code> now generated from them), <a href="../admin/members/index.html">the members</a> (a role, a behaviour policy and a status for the editor, sharness.build, sharness.dev, sherpa@sharness and the conductor), <a href="../admin/updates/index.html">the updates</a> (the first: what moved in two days and what waits on the editor), <a href="../admin/status/index.html">the status</a> of every branch, and <a href="../admin/guidance/index.html">AGENTS.md</a>, the guidance every agent reads. <code>tools/gen_admin.py</code> and <code>tools/admin_status.py</code>; the gate checks the admin pages against their sources.</td></tr>
@@ -163,7 +165,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../project/releases.html">v0.5.17</a> · <a href="../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../project/releases.html">v0.5.18</a> · <a href="../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>Components</h4>
@@ -184,6 +186,7 @@
     <a href="../design/components/index.html">Components</a>
     <a href="../design/keys/index.html">Keys and the KMS</a>
     <a href="../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../design/pbp/index.html">The PBP on one page</a>
     <a href="../design/agents/index.html">Agents and LLMs</a>
     <a href="../design/process-tree/index.html">Enforcing the process tree</a>
     <a href="../design/surface/index.html">What a process can do</a>

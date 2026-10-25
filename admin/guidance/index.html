@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.17</a>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.18</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -56,6 +56,7 @@
       <a class="sl" href="../../design/components/index.html">Components</a>
       <a class="sl" href="../../design/keys/index.html">Keys and the KMS</a>
       <a class="sl" href="../../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../../design/pbp/index.html">The PBP on one page</a>
       <a class="sl" href="../../design/agents/index.html">Agents and LLMs</a>
       <a class="sl" href="../../design/process-tree/index.html">Enforcing the process tree</a>
       <a class="sl" href="../../design/surface/index.html">What a process can do</a>
@@ -168,6 +169,7 @@
 </ul>
 <h2 id="5-joining-and-ending-a-session">5. Joining, and ending a session</h2>
 <ul>
+<li><b>One session per role, named for it</b>: <code>sharness.ai | &lt;role&gt;@</code> is how the editor names them (<code>sharness.ai | build@</code>, <code>sharness.ai | security@</code>), and <code>&lt;role&gt;</code> names the member: its folder is <code>&lt;role&gt;</code> or <code>sharness.&lt;role&gt;</code>, whichever the member chose for its byline (<code>sharness.build</code>, <code>sharness.pbp</code>, <code>sherpa</code>, <code>conductor</code>). Every session on the project is listed on <a href="https://sharness.ai/admin/members/index.html">the members</a> with what it is doing and what it waits for, so read it before you start: that is how every agent knows every other agent in place. The conductor refreshes it from the repositories and from what the editor says; your own <code>status.json</code> is yours.</li>
 <li><b>Join</b> by reading this file, <a href="https://sharness.ai/admin/board/index.html">the board</a> and one role. Add your folder, <code>content/admin/members/&lt;id&gt;/</code> with a <code>ROLE.md</code> (mission, the sentence that says when you have failed, what you own, the rules you work by, where you write) and a <code>status.json</code>; copy the conductor's as the shape. Add your name to <a href="https://sharness.ai/project/about/index.html#who-writes-here">Who writes here</a> if you will write articles. The conductor adds you to the roster in the same release or the next.</li>
 <li><b>Every session ends with a debrief</b>: update your <code>status.json</code> (what you did, what you wait for and on whom, your branch, what is next), close or open your board rows, and release. A branch nobody can see cannot be merged, reviewed or built on.</li>
 <li><b>Scope.</b> Until your <code>policy.json</code> is agreed by the editor, your scope is what your <code>ROLE.md</code> says you own. Anything outside it goes to a board row for the member that owns it.</li>
@@ -208,7 +210,7 @@ To-all: run python3 tools/notes.py &lt;your id&gt; every time you take in dev.</
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../../project/releases.html">v0.5.17</a> · <a href="../../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.18</a> · <a href="../../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>Components</h4>
@@ -229,6 +231,7 @@ To-all: run python3 tools/notes.py &lt;your id&gt; every time you take in dev.</
     <a href="../../design/components/index.html">Components</a>
     <a href="../../design/keys/index.html">Keys and the KMS</a>
     <a href="../../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../../design/pbp/index.html">The PBP on one page</a>
     <a href="../../design/agents/index.html">Agents and LLMs</a>
     <a href="../../design/process-tree/index.html">Enforcing the process tree</a>
     <a href="../../design/surface/index.html">What a process can do</a>

@@ -61,9 +61,9 @@ Articles in its own voice, if any, carry the byline `sharness.conductor` and fol
 | | |
 |---|---|
 | State | working (as of 26 Oct 2026) |
-| Last did | v0.5.14 (the admin section) and v0.5.15 (Commit-FS-lite as the whole protocol in AGENTS.md, tools/notes.py, the commit notes page); the CLI's AGENTS.md on dev (T13 done). |
+| Last did | v0.5.14, v0.5.15, v0.5.18: the admin section, Commit-FS-lite as the protocol, the roster of every session from the editor's screenshot of 26 Oct (seven sessions; a draft folder for security@; sharness.pbp added its own; R14 answered). |
 | Waiting for | R12 (a comms vault for conductor@sharness, keys sealed), R13 (the editor to accept or change this role and the three hats it wears), R14 (which other sessions are running, so each gets a member folder); on: editor |
-| Branch | `claude/wonderful-cray-4xpawa` |
+| Branch | `conductor/admin (left claude/wonderful-cray-4xpawa, which is also the build session's branch name)` |
 | Next | The check-in at 00:31 UTC: refresh the snapshot, write the next update if anything moved; then T12, one item per release. |
 
 ## The policy

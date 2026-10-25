@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.17</a>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.18</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -56,6 +56,7 @@
       <a class="sl" href="../../design/components/index.html">Components</a>
       <a class="sl" href="../../design/keys/index.html">Keys and the KMS</a>
       <a class="sl" href="../../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../../design/pbp/index.html">The PBP on one page</a>
       <a class="sl" href="../../design/agents/index.html">Agents and LLMs</a>
       <a class="sl" href="../../design/process-tree/index.html">Enforcing the process tree</a>
       <a class="sl" href="../../design/surface/index.html">What a process can do</a>
@@ -125,32 +126,39 @@
 <main class="doc">
   <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">admin</a> / status · <a href="index.md">this page as markdown</a></div>
   <h1>Status: where every branch and member is</h1>
-<p class="lead">A snapshot taken by the conductor with <code>python3 tools/admin_status.py</code>, <span class="asof">as of 25 Oct 2026</span> (2026-10-25T23:49Z): every branch of both repositories, its head, its last commit and how far it is from <code>dev</code>, read from git, never from a session; then every member's own <code>status.json</code>. A branch ahead of <code>dev</code> is work nobody has released yet; a session is only visible here once it has pushed.</p>
-<h2 id="sharness-ai__website"><a href="https://github.com/SHarness-AI/SHarness-AI__Website">SHarness-AI__Website</a></h2><p>Latest tag <code>v0.5.14</code>; 0 branch(es) carry commits not yet on <code>dev</code>.</p><div class="tablewrap"><table>
+<p class="lead">A snapshot taken by the conductor with <code>python3 tools/admin_status.py</code>, <span class="asof">as of 25 Oct 2026</span> (2026-10-25T23:55Z): every branch of both repositories, its head, its last commit and how far it is from <code>dev</code>, read from git, never from a session; then every member's own <code>status.json</code>. A branch ahead of <code>dev</code> is work nobody has released yet; a session is only visible here once it has pushed.</p>
+<h2 id="sharness-ai__website"><a href="https://github.com/SHarness-AI/SHarness-AI__Website">SHarness-AI__Website</a></h2><p>Latest tag <code>v0.5.17</code>; 1 branch(es) carry commits not yet on <code>dev</code>.</p><div class="tablewrap"><table>
     <thead><tr><th>Branch</th><th>Head</th><th>Last commit</th><th>Against dev</th></tr></thead>
     <tbody>
-      <tr><td><code>dev</code></td><td><code>139e255</code> · 2026-10-25 23:43</td><td>The first update stamped with the time it was finished, 23:45 UTC, not the time it was begun <span class="dim small">(Agent: conductor)</span></td><td>0 ahead, 0 behind</td></tr>
-      <tr><td><code>main</code></td><td><code>a1f93f6</code> · 2026-10-24 17:30</td><td>Initial commit</td><td>0 ahead, 26 behind</td></tr>
-      <tr><td><code>claude/blissful-johnson-yk1c4p</code></td><td><code>e9a9679</code> · 2026-10-24 17:55</td><td>site v0.3.1: completeness pass against the sgit design pack 00-04</td><td>0 ahead, 21 behind</td></tr>
-      <tr><td><code>claude/wonderful-cray-4xpawa</code></td><td><code>139e255</code> · 2026-10-25 23:43</td><td>The first update stamped with the time it was finished, 23:45 UTC, not the time it was begun <span class="dim small">(Agent: conductor)</span></td><td>0 ahead, 0 behind</td></tr>
+      <tr><td><code>dev</code></td><td><code>c0cde85</code> · 2026-10-25 23:52</td><td>site v0.5.17: sharness.pbp joins; the Process Behaviour Policy on one page <span class="dim small">(Agent: sharness.pbp)</span></td><td>0 ahead, 0 behind</td></tr>
+      <tr><td><code>main</code></td><td><code>a1f93f6</code> · 2026-10-24 17:30</td><td>Initial commit</td><td>0 ahead, 33 behind</td></tr>
+      <tr><td><code>claude/blissful-johnson-yk1c4p</code></td><td><code>e9a9679</code> · 2026-10-24 17:55</td><td>site v0.3.1: completeness pass against the sgit design pack 00-04</td><td>0 ahead, 28 behind</td></tr>
+      <tr><td><code>claude/wonderful-cray-4xpawa</code></td><td><code>d0f0cf6</code> · 2026-10-25 23:54</td><td>site v0.5.17: the build agent&#x27;s debrief; notes to the conductor and to security <span class="dim small">(Agent: sharness.build)</span></td><td>1 ahead, 3 behind</td></tr>
+      <tr><td><code>conductor/admin</code></td><td><code>c0cde85</code> · 2026-10-25 23:52</td><td>site v0.5.17: sharness.pbp joins; the Process Behaviour Policy on one page <span class="dim small">(Agent: sharness.pbp)</span></td><td>0 ahead, 0 behind</td></tr>
+      <tr><td><code>pbp/join</code></td><td><code>c0cde85</code> · 2026-10-25 23:52</td><td>site v0.5.17: sharness.pbp joins; the Process Behaviour Policy on one page <span class="dim small">(Agent: sharness.pbp)</span></td><td>0 ahead, 0 behind</td></tr>
     </tbody></table></div>
-<h2 id="sharness-ai__cli"><a href="https://github.com/SHarness-AI/SHarness-AI__CLI">SHarness-AI__CLI</a></h2><p>Latest tag <code>v0.1.0</code>; 0 branch(es) carry commits not yet on <code>dev</code>.</p><div class="tablewrap"><table>
+<h2 id="sharness-ai__cli"><a href="https://github.com/SHarness-AI/SHarness-AI__CLI">SHarness-AI__CLI</a></h2><p>Latest tag <code>v0.1.0</code>; 3 branch(es) carry commits not yet on <code>dev</code>.</p><div class="tablewrap"><table>
     <thead><tr><th>Branch</th><th>Head</th><th>Last commit</th><th>Against dev</th></tr></thead>
     <tbody>
-      <tr><td><code>dev</code></td><td><code>ef92296</code> · 2026-10-25 23:49</td><td>AGENTS.md: the commit-notes protocol in full; commit every self-contained step; know who is in place</td><td>0 ahead, 0 behind</td></tr>
-      <tr><td><code>main</code></td><td><code>6836292</code> · 2026-10-24 16:27</td><td>Update release badge and version file</td><td>0 ahead, 14 behind</td></tr>
-      <tr><td><code>claude/blissful-johnson-yk1c4p</code></td><td><code>0a53a7c</code> · 2026-10-24 16:50</td><td>Point the package at sharness.ai, add the proposed scope, make sharness-ai the only command</td><td>0 ahead, 13 behind</td></tr>
-      <tr><td><code>claude/wonderful-cray-4xpawa</code></td><td><code>ef92296</code> · 2026-10-25 23:49</td><td>AGENTS.md: the commit-notes protocol in full; commit every self-contained step; know who is in place</td><td>0 ahead, 0 behind</td></tr>
+      <tr><td><code>dev</code></td><td><code>997459a</code> · 2026-10-25 23:48</td><td>Security review 1: fail-closed enforcement, pinned supply chain, a security test suite and CI</td><td>0 ahead, 0 behind</td></tr>
+      <tr><td><code>main</code></td><td><code>6836292</code> · 2026-10-24 16:27</td><td>Update release badge and version file</td><td>0 ahead, 15 behind</td></tr>
+      <tr><td><code>claude/blissful-johnson-yk1c4p</code></td><td><code>0a53a7c</code> · 2026-10-24 16:50</td><td>Point the package at sharness.ai, add the proposed scope, make sharness-ai the only command</td><td>0 ahead, 14 behind</td></tr>
+      <tr><td><code>claude/wonderful-cray-4xpawa</code></td><td><code>ef92296</code> · 2026-10-25 23:49</td><td>AGENTS.md: the commit-notes protocol in full; commit every self-contained step; know who is in place</td><td>0 ahead, 1 behind</td></tr>
+      <tr><td><code>dependabot/github_actions/actions-b6b218e832</code></td><td><code>7b39751</code> · 2026-10-25 23:54</td><td>Bump the actions group with 3 updates</td><td>1 ahead, 0 behind</td></tr>
+      <tr><td><code>dependabot/pip/pytest-cov-gte-7.1.0</code></td><td><code>aa31efd</code> · 2026-10-25 23:52</td><td>Update pytest-cov requirement from &gt;=5.0 to &gt;=7.1.0</td><td>1 ahead, 0 behind</td></tr>
+      <tr><td><code>dependabot/pip/pytest-gte-9.1.1</code></td><td><code>be65598</code> · 2026-10-25 23:52</td><td>Update pytest requirement from &gt;=8.0 to &gt;=9.1.1</td><td>1 ahead, 0 behind</td></tr>
     </tbody></table></div>
 <h2 id="the-members">The members</h2>
   <div class="tablewrap"><table>
     <thead><tr><th>Member</th><th>Role</th><th>State</th><th>Last did</th><th>Waiting for</th></tr></thead>
     <tbody>
-      <tr><td><a href="../members/conductor/index.html"><b>sharness.conductor</b></a><br><span class="dim small">agent, joined 2026-10-25</span></td><td>Conductor; for now also librarian, ontologist and project manager</td><td><span class="tstat t-open">working</span></td><td>v0.5.14 (the admin section) and v0.5.15 (Commit-FS-lite as the whole protocol in AGENTS.md, tools/notes.py, the commit notes page); the CLI's AGENTS.md on dev (T13 done).</td><td>R12 (a comms vault for conductor@sharness, keys sealed), R13 (the editor to accept or change this role and the three hats it wears), R14 (which other sessions are running, so each gets a member folder); on: editor</td></tr>
-      <tr><td><a href="../members/editor/index.html"><b>Dinis Cruz</b></a><br><span class="dim small">person, joined 2026-10-24</span></td><td>Author of SHarness and editor of the site</td><td><span class="tstat t-open">deciding</span></td><td>Asked the conductor to join, set up the admin section, map the work and publish updates (25 Oct 2026).</td><td>nothing from the team; the R rows on the board wait on him</td></tr>
+      <tr><td><a href="../members/conductor/index.html"><b>sharness.conductor</b></a><br><span class="dim small">agent, joined 2026-10-25</span></td><td>Conductor; for now also librarian, ontologist and project manager</td><td><span class="tstat t-open">working</span></td><td>v0.5.14, v0.5.15, v0.5.18: the admin section, Commit-FS-lite as the protocol, the roster of every session from the editor's screenshot of 26 Oct (seven sessions; a draft folder for security@; sharness.pbp added its own; R14 answered).</td><td>R12 (a comms vault for conductor@sharness, keys sealed), R13 (the editor to accept or change this role and the three hats it wears), R14 (which other sessions are running, so each gets a member folder); on: editor</td></tr>
+      <tr><td><a href="../members/editor/index.html"><b>Dinis Cruz</b></a><br><span class="dim small">person, joined 2026-10-24</span></td><td>Author of SHarness and editor of the site</td><td><span class="tstat t-open">deciding</span></td><td>Asked the conductor to join (25 Oct); asked for the commit-notes protocol and sent the list of running sessions (26 Oct).</td><td>nothing from the team; the R rows on the board wait on him</td></tr>
+      <tr><td><a href="../members/security/index.html"><b>security@sharness</b></a><br><span class="dim small">agent, joined 2026-10-25</span></td><td>Security; the site's and the CLI's own security pages, the gate's security checks</td><td><span class="tstat t-open">working</span></td><td>At the conductor's look: rewriting two security pages, then regenerating the site. Nothing pushed yet, no branch of its own visible.</td><td>nothing known; its first commit will say</td></tr>
       <tr><td><a href="../members/sharness.build/index.html"><b>sharness.build</b></a><br><span class="dim small">agent, joined 2026-10-24</span></td><td>The build agent of the site and the CLI</td><td><span class="tstat t-open">working</span></td><td>Site v0.5.13 (25 Oct, 23:46 UTC): the guest in the tab on a network the page provides, and the playground's interceptor that decodes every packet and enforces an egress allowlist outside the guest; 17 of 17 checks, live. Site v0.5.16 (26 Oct, 00:20 UTC): the Components section, the OS a process sees, one page per component with the proposed API and the verdicts; the phone menu fixed. CLI: dev taken in after security@sharness's review 1; the guest rebuilt on it and the 17 checks re-run.</td><td>R7 (the CLI's dev to main; the editor said not before the reviews are done); the editor's reviews R6 and T3/T4; a decision on the proposed component APIs (REST on loopback), which are written as proposed on /components/</td></tr>
-      <tr><td><a href="../members/sharness.dev/index.html"><b>sharness.dev</b></a><br><span class="dim small">agent, joined 2026-10-25</span></td><td>The developer agent, reference implementations in several languages</td><td><span class="tstat t-need">waiting</span></td><td>Site v0.5.10 (25 Oct 2026, 23:23 UTC): the article One standard, many languages, Languages extended, roadmap decision 11 extended, comms R8.</td><td>R8: the editor's decision on the languages, the repository layout and where the test vectors live; on: editor</td></tr>
-      <tr><td><a href="../members/sherpa/index.html"><b>sherpa@sharness</b></a><br><span class="dim small">agent, joined 2026-10-25</span></td><td>The Sherpa; also outreach and telemetry</td><td><span class="tstat t-done">done</span></td><td>Site v0.5.11 and v0.5.12 (25 Oct 2026, 23:27 and 23:30 UTC): joined, the outreach plan, telemetry on every page, the lane opened and the first drain (T7 done, R10 done).</td><td>R9 (its key confirmed on pki.sgit.ai and the two environment secrets stored), R11 (a go per outreach channel); on: editor</td></tr>
+      <tr><td><a href="../members/sharness.dev/index.html"><b>sharness.dev</b></a><br><span class="dim small">agent, joined 2026-10-25</span></td><td>The developer agent, reference implementations in several languages</td><td><span class="tstat t-need">blocked</span></td><td>Site v0.5.10 (25 Oct, 23:23 UTC). Its session 'sharness.ai | dev@' has been idle since 23:25 UTC, blocked on R8.</td><td>R8: the language set and order (it recommends JavaScript, then Go, then Rust; C as the floor), the repository layout, where the test vectors live; on: editor</td></tr>
+      <tr><td><a href="../members/sharness.pbp/index.html"><b>sharness.pbp</b></a><br><span class="dim small">agent, joined 2026-10-25</span></td><td>The policy agent; holds the definition of the Process Behaviour Policy</td><td><span class="tstat t-done">done</span></td><td>Site v0.5.15 (25 Oct 2026): joined; the PBP on one page (design/pbp), wired into the nav, llms.txt, the design hub and the Policies page; T14 opened.</td><td>the editor's read of design/pbp; on: editor</td></tr>
+      <tr><td><a href="../members/sherpa/index.html"><b>sherpa@sharness</b></a><br><span class="dim small">agent, joined 2026-10-25</span></td><td>The Sherpa; also outreach and telemetry</td><td><span class="tstat t-need">waiting</span></td><td>Site v0.5.11 and v0.5.12 (25 Oct, 23:27 and 23:30 UTC). Its session 'sharness.ai | sherpa@' idle since 23:32 UTC.</td><td>R9 (its key confirmed, the two environment secrets stored), R11 (a go per outreach channel); on: editor</td></tr>
     </tbody>
   </table></div>
 
@@ -162,7 +170,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../../project/releases.html">v0.5.17</a> · <a href="../../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.18</a> · <a href="../../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>Components</h4>
@@ -183,6 +191,7 @@
     <a href="../../design/components/index.html">Components</a>
     <a href="../../design/keys/index.html">Keys and the KMS</a>
     <a href="../../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../../design/pbp/index.html">The PBP on one page</a>
     <a href="../../design/agents/index.html">Agents and LLMs</a>
     <a href="../../design/process-tree/index.html">Enforcing the process tree</a>
     <a href="../../design/surface/index.html">What a process can do</a>

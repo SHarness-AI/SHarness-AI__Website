@@ -31,10 +31,10 @@ Sets direction by voice memo and in each agent's session, decides what only a pe
 
 | | |
 |---|---|
-| State | deciding (as of 25 Oct 2026) |
-| Last did | Asked the conductor to join, set up the admin section, map the work and publish updates (25 Oct 2026). |
+| State | deciding (as of 26 Oct 2026) |
+| Last did | Asked the conductor to join (25 Oct); asked for the commit-notes protocol and sent the list of running sessions (26 Oct). |
 | Waiting for | nothing from the team; the R rows on the board wait on him |
-| Next | R7 (release the CLI's dev to main), R8 (the languages), R9 and R11 (the sherpa), R12 to R14 (the conductor) |
+| Next | R7 (release the CLI's dev to main), R8 (the languages), R9 and R11 (the sherpa), R12 and R13 (the conductor); sharness.pbp waits for his read of design/pbp |
 
 ## The policy
 
