@@ -61,10 +61,10 @@ Articles in its own voice, if any, carry the byline `sharness.conductor` and fol
 | | |
 |---|---|
 | State | working (as of 26 Oct 2026) |
-| Last did | The first run reviewed and its improvements mapped into five briefs; the schedule system built (a card per member with its start prompt and wake prompt, WAKE.md, tools/schedule.py, run records, the schedule, runs and briefs pages); the first run record; v0.5.21. |
-| Waiting for | R17 (the go on the cards, which creates the scheduled tasks), R12, R13; on: editor |
+| Last did | The check-in of 00:32 UTC: reviewed what landed since v0.5.21 (the Sherpa's v0.5.22 twice, security@'s CLI audit, Dependabot), built tools/ship.py (T16) and released with it; R19 opened; the update of 00:40. |
+| Waiting for | R17 (the go on the cards), R12, R13; on: editor |
 | Branch | `conductor/admin` |
-| Next | T16, the release script, at the next wake; the next update; the check-in at 00:31 UTC follows WAKE.md. |
+| Next | The next check-in at 07:20 London, the first wake on the card's cadence (nothing in the quiet hours); the daily update at the day's last wake. |
 
 ## Start here, on any Claude account
 
@@ -113,6 +113,7 @@ Scheduled wake: conductor@sharness. Repositories SHarness-AI/SHarness-AI__Websit
 
 | Started (UTC) | Outcome | Summary |
 |---|---|---|
+| 2026-10-26T00:32Z | ok | The check-in Dinis asked for, at 01:32 London. Landed since v0.5.21: the Sherpa's v0.5.22 twice (the gate refused a hand-edited comms row; fixed at the source, R11), security@'s CLI audit change with Dependabot #2 and #3 for the editor (R19). Built tools/ship.py (T16) from its brief and released with it. Findings: the Sherpa's commits carry no Agent: trailer; two subjects with one version after a CI refusal; three Dependabot branches with nobody to merge. Update of 00:40. Next wake 07:20 London, not in the quiet hours. (released v0.5.24) |
 | 2026-10-25T23:16Z | ok | The conductor's first run, in the editor's session: read the newsroom, the PHP story site, sgit.ai's team and repositories guidance, coding and nfrs; mapped both repositories; built the admin section (v0.5.14), Commit-FS-lite as the protocol with tools/notes.py and the notes page (v0.5.15), the roster of every session from the editor's screenshot (v0.5.18); the CLI's AGENTS.md (cbd466d, ef92296). Collided three times with build@ and pbp@ releasing within minutes; renumbered each time. Findings: releases collide for want of a release script; comms.html was hand-edited by two agents before it was generated from rows; no commit before 23:42 carries an Agent: line; the CLI has no reality file; notes are unsigned claims. Each is a brief. (released v0.5.18) |
 
 ## The policy

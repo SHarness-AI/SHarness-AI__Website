@@ -1,18 +1,18 @@
 {
- "as_of": "2026-10-26T00:33Z",
+ "as_of": "2026-10-26T00:36Z",
  "by": "conductor",
  "repositories": [
   {
    "name": "SHarness-AI__Website",
    "present": true,
    "url": "https://github.com/SHarness-AI/SHarness-AI__Website",
-   "latest_tag": "v0.5.22",
+   "latest_tag": "v0.5.23",
    "branches": [
     {
      "branch": "dev",
-     "head": "37d848b",
-     "date": "2026-10-26T00:30:40+00:00",
-     "subject": "site v0.5.22: the admin section regenerated (the board row R11 edited at its source)",
+     "head": "c784680",
+     "date": "2026-10-26T00:33:35+00:00",
+     "subject": "site v0.5.23: R7 carries Dinis's decision: the CLI release after the security and functionality pass",
      "agent": "",
      "ahead_of_dev": 0,
      "behind_dev": 0
@@ -24,7 +24,7 @@
      "subject": "Initial commit",
      "agent": "",
      "ahead_of_dev": 0,
-     "behind_dev": 42
+     "behind_dev": 43
     },
     {
      "branch": "claude/blissful-johnson-yk1c4p",
@@ -33,7 +33,7 @@
      "subject": "site v0.3.1: completeness pass against the sgit design pack 00-04",
      "agent": "",
      "ahead_of_dev": 0,
-     "behind_dev": 37
+     "behind_dev": 38
     },
     {
      "branch": "claude/wonderful-cray-4xpawa",
@@ -42,7 +42,7 @@
      "subject": "Join the working branch to the released head; d0f0cf6 is the pre-amend copy of the v0.5.19 debrief",
      "agent": "sharness.build",
      "ahead_of_dev": 2,
-     "behind_dev": 5
+     "behind_dev": 6
     },
     {
      "branch": "conductor/admin",
@@ -51,7 +51,7 @@
      "subject": "site v0.5.21: schedules, cards and start pages; WAKE.md; run records; briefs; the conductor's first review",
      "agent": "",
      "ahead_of_dev": 0,
-     "behind_dev": 2
+     "behind_dev": 3
     },
     {
      "branch": "pbp/join",
@@ -60,7 +60,7 @@
      "subject": "site v0.5.17: sharness.pbp joins; the Process Behaviour Policy on one page",
      "agent": "sharness.pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 9
+     "behind_dev": 10
     },
     {
      "branch": "security/join",
@@ -69,10 +69,18 @@
      "subject": "site v0.5.20: the security section and the code at immutable paths, merged onto dev at v0.5.19",
      "agent": "",
      "ahead_of_dev": 0,
-     "behind_dev": 3
+     "behind_dev": 4
     }
    ],
    "commits": [
+    {
+     "hash": "c784680",
+     "date": "2026-10-26 00:33",
+     "subject": "site v0.5.23: R7 carries Dinis's decision: the CLI release after the security and functionality pass",
+     "agent": "",
+     "to": [],
+     "body": "Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_0171YeSxD94VPq585nmqHCGv"
+    },
     {
      "hash": "37d848b",
      "date": "2026-10-26 00:30",

@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.23</a>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.24</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -138,10 +138,11 @@
 <main class="doc">
   <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">admin</a> / runs · <a href="index.md">this page as markdown</a></div>
   <h1>Runs: every wake, and what it did</h1>
-<p class="lead">Every run a member recorded, newest first: one file per run under <code>content/admin/runs/&lt;id&gt;/</code>, written by <code>python3 tools/schedule.py run &lt;id&gt;</code> at the end of every wake, whatever happened, and released with the work. A quiet wake is a record that says so; a wake with no record is a missed wake. 1 run(s) by 1 member(s), <span class="asof">as of 26 Oct 2026</span>.</p>
+<p class="lead">Every run a member recorded, newest first: one file per run under <code>content/admin/runs/&lt;id&gt;/</code>, written by <code>python3 tools/schedule.py run &lt;id&gt;</code> at the end of every wake, whatever happened, and released with the work. A quiet wake is a record that says so; a wake with no record is a missed wake. 2 run(s) by 1 member(s), <span class="asof">as of 26 Oct 2026</span>.</p>
   <div class="tablewrap"><table>
     <thead><tr><th>Started (UTC)</th><th>Member</th><th>Outcome</th><th>Summary</th></tr></thead>
     <tbody>
+      <tr><td><span class="dim small">2026-10-26T00:32Z</span></td><td><a href="../members/conductor/index.html">conductor</a></td><td>ok</td><td>The check-in Dinis asked for, at 01:32 London. Landed since v0.5.21: the Sherpa's v0.5.22 twice (the gate refused a hand-edited comms row; fixed at the source, R11), security@'s CLI audit change with Dependabot #2 and #3 for the editor (R19). Built tools/ship.py (T16) from its brief and released with it. Findings: the Sherpa's commits carry no Agent: trailer; two subjects with one version after a CI refusal; three Dependabot branches with nobody to merge. Update of 00:40. Next wake 07:20 London, not in the quiet hours. <span class="dim small">released v0.5.24</span></td></tr>
       <tr><td><span class="dim small">2026-10-25T23:16Z</span></td><td><a href="../members/conductor/index.html">conductor</a></td><td>ok</td><td>The conductor's first run, in the editor's session: read the newsroom, the PHP story site, sgit.ai's team and repositories guidance, coding and nfrs; mapped both repositories; built the admin section (v0.5.14), Commit-FS-lite as the protocol with tools/notes.py and the notes page (v0.5.15), the roster of every session from the editor's screenshot (v0.5.18); the CLI's AGENTS.md (cbd466d, ef92296). Collided three times with build@ and pbp@ releasing within minutes; renumbered each time. Findings: releases collide for want of a release script; comms.html was hand-edited by two agents before it was generated from rows; no commit before 23:42 carries an Agent: line; the CLI has no reality file; notes are unsigned claims. Each is a brief. <span class="dim small">released v0.5.18</span></td></tr>
     </tbody>
   </table></div>
@@ -154,7 +155,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../../project/releases.html">v0.5.23</a> · <a href="../../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.24</a> · <a href="../../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>Components</h4>

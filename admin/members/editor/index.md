@@ -34,7 +34,7 @@ Sets direction by voice memo and in each agent's session, decides what only a pe
 | State | deciding (as of 26 Oct 2026) |
 | Last did | Asked the conductor to join (25 Oct); asked for the commit-notes protocol and sent the list of running sessions (26 Oct). |
 | Waiting for | nothing from the team; the R rows on the board wait on him |
-| Next | R7, R8, R17 (the go on the schedule cards), R9 and R11 (the sherpa), R12 and R13 (the conductor), R15 and R16 (security), R18 (the CLI's settings); sharness.pbp waits for his read of design/pbp |
+| Next | R17 (the go on the schedule cards), R19 (merge Dependabot #2 and #3 on the CLI), R7, R8, R9 and R11, R12 and R13, R15 and R16, R18; sharness.pbp waits for his read of design/pbp and its roster of doors |
 
 ## The policy
 

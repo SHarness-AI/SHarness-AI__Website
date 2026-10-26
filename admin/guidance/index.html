@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.23</a>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.24</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -167,7 +167,7 @@
 <li><b>Work on a branch of your own</b>, pushed early and often: the session's <code>claude/&lt;name&gt;</code> branch or <code>&lt;member&gt;/&lt;work&gt;</code>. Push after every step that builds and at least every 30 minutes. Work in progress is welcome; say so in the message.</li>
 <li><b>Take in <code>dev</code> often</b>: <code>git fetch origin dev &amp;&amp; git merge origin/dev</code>, then rebuild. Never hand-edit a generated page; change the source and run the generator.</li>
 <li><b>Commit every self-contained step, and push it.</b> Production material every time: the gate passes, the tests pass, the message says what and why (section 6). A session's work is many small commits, not one at the end.</li>
-<li><b>Release your own finished work to <code>dev</code>.</b> On the website, a push to <code>dev</code> is a patch release: bump <code>tools/version.txt</code>, add the row to <code>project/releases.html</code>, run the generators and the gate (the website's <code>README.md</code> has the order), and the commit subject carries the version (<code>site vX.Y.Z: ...</code>). CI validates, tags and deploys. On the CLI, <code>dev</code> is where work lands and CI runs the tests; merging <code>dev</code> into <code>main</code> is a release to PyPI and is the editor's call (board R7). Do not bump the CLI's version by hand.</li>
+<li><b>Release your own finished work to <code>dev</code>.</b> On the website, one command does it all: <code>RELEASE_TRAILER=$'Agent: &lt;id&gt;\nTo-&lt;id&gt;: ...' python3 tools/ship.py "what changed" [--body-file F] [--snapshot]</code>. It merges <code>dev</code>, takes the newest of the latest tag and dev's version plus one, adds the release row, runs every generator and the gate, commits <code>site vX.Y.Z: &lt;subject&gt;</code> with your trailers, pushes <code>dev</code> (and tries once more from the merge if <code>dev</code> moved), pushes your branch and waits for the live site to serve the version. A failure anywhere means no commit and no push. CI then validates, tags and deploys. On the CLI, <code>dev</code> is where work lands and CI runs the tests; merging <code>dev</code> into <code>main</code> is a release to PyPI and is the editor's call (board R7). Do not bump the CLI's version by hand.</li>
 <li><b>Before you release</b>: fetch <code>dev</code> again and check the latest tag, because other sessions release too; the right bump is the latest tag plus one. Run the gate on your branch. Read your own diff.</li>
 <li><b>Never</b> push to <code>main</code>, force-push, rewrite history on a pushed branch, or skip the gate.</li>
 <li><b>Say where the change is.</b> The release row and the commit body name the pages or modules a reader should open to see it.</li>
@@ -222,7 +222,7 @@ To-all: run python3 tools/notes.py &lt;your id&gt; every time you take in dev.</
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../../project/releases.html">v0.5.23</a> · <a href="../../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.24</a> · <a href="../../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>Components</h4>
