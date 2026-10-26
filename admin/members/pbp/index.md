@@ -51,10 +51,10 @@ A board row with pbp@sharness as owner, or a `To-pbp:` note in a release commit 
 | | |
 |---|---|
 | State | done (as of 26 Oct 2026) |
-| Last did | Site v0.5.32 (26 Oct 2026): the second level is the target, where the door sends (disk, memory, s3; direct, proxy; sqlite, postgres); a twin is a target with the real thing's signature; dev and prod are one policy tree with different target rows; dialect withdrawn, correction dated on the page. |
+| Last did | Site v0.5.33 (26 Oct 2026): two schemas per door (accepts, emits) and the mirror rule for chains; the fuse-or-split rule and its cost; the existing examples named (net's two faces, the KMS protocol, topologies D and E, the interceptor, the agent proxy, the twins' S3 face). |
 | Waiting for | T14 and T19 on: cli; T18 on: conductor; T20 on: dev |
-| Branch | `pbp/targets` |
-| Next | the predicate language one kind at a time, append_only first; the conformance statement for a door, with each target's twin | live in its output |
+| Branch | `pbp/mirror` |
+| Next | the predicate language one kind at a time, append_only first; the contract per edge in the manifest schema (§4 of Policies) |
 
 ## Start here, on any Claude account
 
