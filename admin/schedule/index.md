@@ -6,7 +6,7 @@
 
 ---
 
-Every member that runs on its own keeps one card, `content/admin/members/<id>/card.json`: its objective, when it wakes (London time), the model, the session, the repositories to attach, the steps of each wake, what it reads, writes and never does, and two prompts word for word, the start prompt for a new session on any Claude account and the wake prompt for the scheduled task. A card is `proposed` until the editor's go creates the task; every wake leaves a run record, so a missing record is a missed wake. The protocol every wake follows is [WAKE.md](https://github.com/SHarness-AI/SHarness-AI__Website/blob/dev/WAKE.md); the brief is [schedules, cards and start pages](../briefs/2026-10-26__brief__schedules-cards-and-start-pages/index.md). Nothing here is a secret, and nothing here creates a schedule: the editor does, per card, from the member's page. 7 card(s), 0 active, 15 wake(s) a day, as of 26 Oct 2026.
+Every member that runs on its own keeps one card, `content/admin/members/<id>/card.json`: its objective, when it wakes (London time), the model, the session, the repositories to attach, the steps of each wake, what it reads, writes and never does, and two prompts word for word, the start prompt for a new session on any Claude account and the wake prompt for the scheduled task. A card is `proposed` until the editor's go creates the task; every wake leaves a run record, so a missing record is a missed wake. The protocol every wake follows is [WAKE.md](https://github.com/SHarness-AI/SHarness-AI__Website/blob/dev/WAKE.md); the brief is [schedules, cards and start pages](../briefs/2026-10-26__brief__schedules-cards-and-start-pages/index.md). Nothing here is a secret, and nothing here creates a schedule: the editor does, per card, from the member's page. 8 card(s), 0 active, 16 wake(s) a day, as of 26 Oct 2026.
 
 ## The cards
 
@@ -19,6 +19,7 @@ Every member that runs on its own keeps one card, `content/admin/members/<id>/ca
 | [sharness.dev](../members/sharness.dev/index.md) | The standards and their test vectors, then the reference implementations in the languages the editor decides (R8), each starting from a scenario a developer has. | proposed | 09:30 `CRON_TZ=Europe/London 30 9 * * *` | the session's model | none yet |
 | [sharness.pbp](../members/sharness.pbp/index.md) | Hold the definition of the Process Behaviour Policy: the specification on one page, its shape and hash agreed by every implementation, the row shape in the CLI (T14), the predicates one kind at a time. | proposed | 10:10 `CRON_TZ=Europe/London 10 10 * * *` | the session's model | none yet |
 | [sherpa](../members/sherpa/index.md) | Keep the board honest and scope each release: what ships next and what waits; drain the telemetry lane and keep the counts published; run the outreach once the editor gives the go per channel. | proposed | 08:45, 17:45 `CRON_TZ=Europe/London 45 8,17 * * *` | the session's model | none yet |
+| [website](../members/website/index.md) | Keep sharness.ai true to the code and the evidence and right for a user arriving cold: the pages, the generators, the gate, the chrome, the pipeline; every page with its twin; every release served live. | proposed | 09:15 `CRON_TZ=Europe/London 15 9 * * *` | the session's model | none yet |
 
 ## Setting a member up on any Claude account
 

@@ -6,21 +6,21 @@
 
 ---
 
-A snapshot taken by the conductor with `python3 tools/admin_status.py`, as of 26 Oct 2026 (2026-10-26T00:36Z): every branch of both repositories, its head, its last commit and how far it is from `dev`, read from git, never from a session; then every member's own `status.json`. A branch ahead of `dev` is work nobody has released yet; a session is only visible here once it has pushed.
+A snapshot taken by the conductor with `python3 tools/admin_status.py`, as of 26 Oct 2026 (2026-10-26T00:58Z): every branch of both repositories, its head, its last commit and how far it is from `dev`, read from git, never from a session; then every member's own `status.json`. A branch ahead of `dev` is work nobody has released yet; a session is only visible here once it has pushed.
 
 ## SHarness-AI__Website
 
-Latest tag `v0.5.23`; 1 branch(es) carry commits not yet on `dev`.
+Latest tag `v0.5.26`; 0 branch(es) carry commits not yet on `dev`.
 
 | Branch | Head | Last commit | Against dev |
 |---|---|---|---|
-| `dev` | `c784680` · 2026-10-26 00:33 | site v0.5.23: R7 carries Dinis's decision: the CLI release after the security and functionality pass | 0 ahead, 0 behind |
-| `main` | `a1f93f6` · 2026-10-24 17:30 | Initial commit | 0 ahead, 43 behind |
-| `claude/blissful-johnson-yk1c4p` | `e9a9679` · 2026-10-24 17:55 | site v0.3.1: completeness pass against the sgit design pack 00-04 | 0 ahead, 38 behind |
-| `claude/wonderful-cray-4xpawa` | `cc4bb69` · 2026-10-25 23:57 | Join the working branch to the released head; d0f0cf6 is the pre-amend copy of the v0.5.19 debrief (Agent: sharness.build) | 2 ahead, 6 behind |
-| `conductor/admin` | `7e15208` · 2026-10-26 00:05 | site v0.5.21: schedules, cards and start pages; WAKE.md; run records; briefs; the conductor's first review | 0 ahead, 3 behind |
-| `pbp/join` | `c0cde85` · 2026-10-25 23:52 | site v0.5.17: sharness.pbp joins; the Process Behaviour Policy on one page (Agent: sharness.pbp) | 0 ahead, 10 behind |
-| `security/join` | `e921452` · 2026-10-25 23:58 | site v0.5.20: the security section and the code at immutable paths, merged onto dev at v0.5.19 | 0 ahead, 4 behind |
+| `dev` | `c4ed956` · 2026-10-26 00:56 | site v0.5.26: sharness.build becomes cli@sharness (Agent: cli) | 0 ahead, 0 behind |
+| `main` | `a1f93f6` · 2026-10-24 17:30 | Initial commit | 0 ahead, 52 behind |
+| `claude/blissful-johnson-yk1c4p` | `e9a9679` · 2026-10-24 17:55 | site v0.3.1: completeness pass against the sgit design pack 00-04 | 0 ahead, 47 behind |
+| `claude/wonderful-cray-4xpawa` | `c4ed956` · 2026-10-26 00:56 | site v0.5.26: sharness.build becomes cli@sharness (Agent: cli) | 0 ahead, 0 behind |
+| `conductor/admin` | `de20840` · 2026-10-26 00:36 | site v0.5.24: the release script, tools/ship.py, used for its own first release; the check-in's review, R19, the update of 00:40 | 0 ahead, 6 behind |
+| `pbp/join` | `c0cde85` · 2026-10-25 23:52 | site v0.5.17: sharness.pbp joins; the Process Behaviour Policy on one page (Agent: sharness.pbp) | 0 ahead, 19 behind |
+| `security/join` | `e921452` · 2026-10-25 23:58 | site v0.5.20: the security section and the code at immutable paths, merged onto dev at v0.5.19 | 0 ahead, 13 behind |
 
 ## SHarness-AI__CLI
 
@@ -48,3 +48,4 @@ Latest tag `v0.1.0`; 4 branch(es) carry commits not yet on `dev`.
 | [sharness.dev](../members/sharness.dev/index.md) | The developer agent, reference implementations in several languages | blocked | Site v0.5.10 (25 Oct, 23:23 UTC). Its session 'sharness.ai / dev@' has been idle since 23:25 UTC, blocked on R8. | R8: the language set and order (it recommends JavaScript, then Go, then Rust; C as the floor), the repository layout, where the test vectors live; on: editor |
 | [sharness.pbp](../members/sharness.pbp/index.md) | The policy agent; holds the definition of the Process Behaviour Policy | done | Site v0.5.15 (25 Oct 2026): joined; the PBP on one page (design/pbp), wired into the nav, llms.txt, the design hub and the Policies page; T14 opened. | the editor's read of design/pbp; on: editor |
 | [sherpa@sharness](../members/sherpa/index.md) | The Sherpa; also outreach and telemetry | working | Site v0.5.22 (the outreach plan without the material on another project's promotion) and v0.5.23 (R7's decision). Both vaults pushed; the telemetry lane open and drained (29 events); both vault keys handed to the vault keeper, sealed. R9 superseded (identity keys are ephemeral), R11 paused (the site first, LinkedIn first), R7 after the security and functionality pass: the editor, 26 Oct. | R11 (paused by the editor until the site is ready), R7 (after the security and functionality pass), R17 (the go on the cards); the conductor to land the T8 words in the CLI; on: editor, conductor |
+| [website@sharness](../members/website/index.md) | The website agent; owns sharness.ai, its generators, its gate and its pages | proposed | Nothing yet: the editor decided on 26 October 2026 that the site gets an agent of its own, splitting the build agent into cli@sharness and website@sharness. This folder is the conductor's draft; the agent corrects it in its first commit. | the editor to open its session and paste the start prompt; the brief for the website (the editor's words); on: editor |
