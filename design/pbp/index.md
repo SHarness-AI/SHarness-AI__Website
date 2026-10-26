@@ -1,6 +1,6 @@
 # The Process Behaviour Policy, on one page
 
-> **Status: proposed, as of 25 Oct 2026.** This page states what a Process Behaviour Policy is, so that every other page, the CLI and any other enforcer can be checked against one definition. It names what exists (the v0 of six keys, runnable and measured) and what is proposed (the rest). No SHarness component is built. By sharness.pbp, the policy agent of this site, from Dinis Cruz's direction of 25 Oct 2026.
+> **Status: proposed, as of 26 Oct 2026.** This page states what a Process Behaviour Policy is, so that every other page, the CLI and any other enforcer can be checked against one definition. It names what exists (the v0 of six keys, runnable and measured) and what is proposed (the rest). No SHarness component is built. By pbp@sharness, the policy agent of this site, from Dinis Cruz's direction of 25 Oct 2026.
 
 ## 1. What it is
 
@@ -33,11 +33,11 @@ A skill that loads a PBP into an agent gives Boundaries to the agent's children 
 
 **Capability rows** bound what the process can reach: path prefixes for read, write and exec; TCP ports; no network; memory and process-count caps; no new privileges; later uids, seccomp and syscalls. The kernel holds them (Landlock, rlimits, cgroups, namespaces). These are v0, runnable.
 
-**Behaviour rows** bound what the process does with a reach it has: append only to this file; edit only this section; content valid against this schema; this field within this range, never negative; copy this file only after that one exists; connect only to this host, this endpoint, this vault id; edit only this row of this table; at most N per interval; this operation only with fresh approval. A keeper holds them: `sharness.fs` for files, `sharness.net` for the network, `sharness.kms` for keys, a keeper the business writes for its own rule. Proposed.
+**Behaviour rows** bound what the process does with a reach it has: append only to this file; edit only this section; content valid against this schema; this field within this range, never negative; copy this file only after that one exists; connect only to this host, this endpoint, this vault id; edit only this row of this table; at most N per interval; this operation only with fresh approval. A door holds them ([the components](../../components/index.md) are the doors): `sharness.fs` for files, `sharness.net` for the network, `sharness.kms` for keys, a door the business writes for its own rule. Proposed.
 
-**The rule that joins them.** A behaviour row is a Boundary only when the subject has no path to the resource except through the keeper that holds the row. So every behaviour row has preconditions made of capability rows: the side doors closed by the kernel, one door kept by a separate process, and an edge to that process. `append_only: /work/ledger.txt` for the app requires that the app's `files.write` excludes that path and that the app has an edge to `fs`. `policy check` should compute this: a behaviour row whose preconditions are not met is well formed and gets barrier kind **Expectation**, not an error. That is "what can currently be controlled", derived from the policy rather than hoped.
+**The rule that joins them.** A behaviour row is a Boundary only when the subject has no path to the resource except through the door that holds the row. So every behaviour row has preconditions made of capability rows: the side doors closed by the kernel, one door, a separate process, and an edge to that process. `append_only: /work/ledger.txt` for the app requires that the app's `files.write` excludes that path and that the app has an edge to `fs`. `policy check` should compute this: a behaviour row whose preconditions are not met is well formed and gets barrier kind **Expectation**, not an error. That is "what can currently be controlled", derived from the policy rather than hoped.
 
-**What that means for the richness of the policy.** The person writes the mandate all the way down to the business logic, and the policy says, row by row, who holds it. Rows no keeper holds in this deployment stay in the policy as Expectations, counted. The policy never claims a row is held when nothing holds it.
+**What that means for the richness of the policy.** The person writes the mandate all the way down to the business logic, and the policy says, row by row, who holds it. Rows no door holds in this deployment stay in the policy as Expectations, counted. The policy never claims a row is held when nothing holds it.
 
 ## 5. A row
 
@@ -51,13 +51,31 @@ A skill that loads a PBP into an agent gives Boundaries to the agent's children 
   requires: [ app.files.write excludes /work/ledger.txt, edge app->fs ]   # derived
 ```
 
-`where` is a **closed, declarative predicate language**: append only; a section by marker or line range; content by JSON Schema; a numeric field by range; count and rate per interval; ordering by "after this path exists"; "requires fresh approval". Anything else is a custom keeper under its own PBP, not an extension of the language. A policy that can express arbitrary logic is code, and code in the policy is a rules engine in the trusted path.
+`where` is a **closed, declarative predicate language**: append only; a section by marker or line range; content by JSON Schema; a numeric field by range; count and rate per interval; ordering by "after this path exists"; "requires fresh approval". Anything else is a custom door under its own PBP, not an extension of the language. A policy that can express arbitrary logic is code, and code in the policy is a rules engine in the trusted path.
 
-Hosts, URLs, tables and rows are keeper rows by construction: the kernel sees paths and ports. The [enforceability matrix](../../landscape/enforceability/index.md) says this per predicate kind, so nobody expects `translate --to docker` to carry "this row of this table". Where a target holds a behaviour row natively (a database's row-level security the app's credentials cannot change, a bucket policy), `translate` emits it and it counts as a Boundary there.
+Hosts, URLs, tables and rows are door rows by construction: the kernel sees paths and ports. The [enforceability matrix](../../landscape/enforceability/index.md) says this per predicate kind, so nobody expects `translate --to docker` to carry "this row of this table". Where a target holds a behaviour row natively (a database's row-level security the app's credentials cannot change, a bucket policy), `translate` emits it and it counts as a Boundary there.
 
-## 6. A keeper
+## 6. A door, and the tree of doors
 
-A keeper is a process that holds one predicate kind: it receives a request and the policy hash, answers allow or deny against the rows for that subject, and emits an audit line (never a secret). It runs under its own PBP, so it is itself bounded, and it stays within the size target (a component ≤ 300 lines) because it holds one kind of rule, not a rules engine. A business writes the keeper for "transaction amount within range, daily total under X" as its own small component. The interface is the spec's extension point; its protocol is proposed, not written.
+A **door** is a process that holds one resource's behaviour rows: it receives a request and the policy hash, answers allow or deny against the rows for that subject, and emits an audit line (never a secret). It runs under its own PBP, so it is itself bounded, and it stays within the size target (a component ≤ 300 lines) because it holds one resource's rows, not a rules engine. A business writes the door for "transaction amount within range, daily total under X" as its own small component. The door's request protocol is [the components'](../../components/index.md#2-everything-is-a-request): a small REST API on loopback under mutual TLS, so any language can call one and any language can be one. Proposed.
+
+**The names are a tree, and the dot means "sits on".** Dinis Cruz's rule of 26 Oct 2026. `sharness.<resource>` is a door: a resource class and its row vocabulary (`fs`, `net`, `db`, `llm`, `bash`, `kms`). `sharness.<resource>.<dialect>` is one concrete system that speaks the parent's vocabulary plus its own nouns, and **sits on** its parent: the parent closes every other path, so the child's only way to the world is through it. `sharness.net.http` reaches the network only through `net`; `sharness.db.sqlite` writes its file only through `fs`; `sharness.db.postgres` connects only through `net`, with the password in `kms`. Depth is open (`sharness.net.http.gmail` is a profile of HTTP), and a level earns a name only when it adds nouns its parent cannot see; otherwise it is configuration of the parent. A door whose rows name two parents goes under the one whose nouns dominate, with an edge to the other: git's rows are remote, branch, ref and the push, the irreversible step and a network act, so `sharness.net.git`, with an edge to `fs` for the working tree; every tool call passes through the model door, so `sharness.llm.tools`.
+
+**Three trees are one.** The architecture already puts the role in the certificate's SAN URI and chains policies by parent hash. With dotted names the name tree, the identity tree (`spiffe://<session>/net/http`) and the policy tree (`extends`, composed by intersection) are the same tree. That is what lets a dialect run on another machine, in another language, from another vendor, and still be addressed, authenticated and bounded by one path. The cost is one process per name: a mutual TLS handshake between two local processes measured about 3.2 ms (24 Oct 2026), and the cost stops mattering when the dialect is remote. The same tree is the code tree: module `sharness_ai.db.sqlite` in the CLI for now, a distribution `sharness-ai-db-sqlite` when a dialect leaves it, the component size target per dialect.
+
+**A dialect holds its rows in one of two modes.** *Proxy*: the door is the only path; the app sends structured requests (`select` table, columns, filter), never a query string, and the door holds the rows. *Translate*: the system enforces natively and the door holds only the credential and checks the configuration against the hash (Postgres row-level security, grants and views; a bucket policy). Each dialect is a row of the [enforceability matrix](../../landscape/enforceability/index.md). One rule keeps a door small: **never parse SQL or Cypher in the door**; structured requests in, or native enforcement.
+
+**The roster, all proposed, none built:**
+
+| Door | Its nouns | Dialects first | Later |
+|---|---|---|---|
+| `sharness.fs` | path, operation, content | `.s3` | |
+| `sharness.net` | host, port, endpoint, id | `.http` (method, host, path pattern, headers, body schema, response size), `.git` (remote, branch, ref, push; never force, never main), `.smtp` | `.ftp`, `.http.gmail`, `.http.slack` |
+| `sharness.db` | table or collection or label, row, column, value, count, total per interval | `.sqlite` (the first: the `sqlite3` module is in Python's standard library, so it is buildable under the no-dependency rule and would be the first door that is runnable), `.postgres` (translate: row-level security) | `.mysql`, `.mongo`, `.neo4j`, `.redshift` |
+| `sharness.llm` | model, tool list, tokens | `.tools` (tool name, argument predicates, calls per run: where "refund at most 100" lives for a tool that is not a database) | |
+| `sharness.bash`, `sharness.kms` | command, profile; key id, operation | none yet | |
+
+A door earns a name when it has nouns the door below cannot see, it can be the only path to the resource, and at least one dialect holds its rows as a Boundary. Anything else is a profile of an existing door. Not a door: a guardrail that judges intent on an allowed channel, which a kernel bound cannot do; the [landscape](../../landscape/index.md) says to consume such decisions at `llm`, not to build one.
 
 ## 7. The fractal
 
@@ -69,7 +87,7 @@ Four parts. A spec that nobody enforces is an Expectation, so the fourth part is
 
 | Part | What | Status |
 |---|---|---|
-| **Schema** | the row shape above; the v0 of six keys (`pbp`, `id`, `files`, `network`, `process`, `notes`) is the runnable subset | v0 runnable; the full schema proposed on [Policies](../policies/index.md) §4 |
+| **Schema** | the row shape above; the v0 of six keys (also on [the manifest's page](../../components/policy/index.md)) (`pbp`, `id`, `files`, `network`, `process`, `notes`) is the runnable subset | v0 runnable; the full schema proposed on [Policies](../policies/index.md) §4 |
 | **Canonical form and hash** | RFC 8785 target; sorted keys, no whitespace, integers only; `sha256:` over the bytes | runnable; measured identical in three implementations, 25 Oct 2026 |
 | **Composition** | layers by parent hash, effective policy = intersection; a child never widens | proposed; `layer` is a label in v0 |
 | **Conformance** | the probes a conformant enforcer must refuse (`sharness-ai hello`, six today), plus the matrix of which rows it holds as which kind, reported honestly | E04 runnable and measured; the matrix is written for five enforcers, none run as a conformance test |
@@ -78,7 +96,7 @@ An enforcer is conformant when it runs the suite and reports barrier kinds truth
 
 ## 9. Two numbers in every summary
 
-ABP's number is **unbounded excess**: reach nobody asked for and nothing bounds. A PBP adds a second: **unheld rows**, the mandate rows no Boundary holds. `hello` reports probes held; the policy summary should report rows held by the kernel, rows held by a keeper, and rows unheld, the way the newsroom counted its checks (1 boundary, 34 settings, 22 expectations). The second number is the business case for the next keeper.
+ABP's number is **unbounded excess**: reach nobody asked for and nothing bounds. A PBP adds a second: **unheld rows**, the mandate rows no Boundary holds. `hello` reports probes held; the policy summary should report rows held by the kernel, rows held by a door, and rows unheld, the way the newsroom counted its checks (1 boundary, 34 settings, 22 expectations). The second number is the business case for the next door.
 
 ## 10. Naming
 
@@ -86,9 +104,9 @@ ABP's number is **unbounded excess**: reach nobody asked for and nothing bounds.
 
 ## 11. What this page does not claim
 
-- Behaviour rows, keepers, the predicate language, composition by intersection and the conformance matrix as a test are **proposed**; the v0 schema, the hash and `hello` are the only runnable parts.
+- Behaviour rows, doors and dialects, the predicate language, composition by intersection and the conformance matrix as a test are **proposed**; the v0 schema, the hash and `hello` are the only runnable parts.
 - A PBP never protects against root or a compromised kernel; the kernel is trusted.
 - A policy applied by a process to its own children is a Setting for that process; only a launcher above it, not yet code, makes it a Boundary for the process too.
 - No product named on the landscape pages has agreed to anything; "valid enforcer" is a test, not an endorsement.
 
-Sources: [Process Behaviour Policies](../policies/index.md) §1 to §6 and §11; [the landscape thesis](../../landscape/index.md); [Agent Behaviour Policies](https://riskmandate.ai/abp.html) and [the four objects](https://abp.sgit.ai/model/index.html); Dinis Cruz's [memo of 24 Oct 2026](../../articles/secure-harness-for-agents.md) and his direction of 25 Oct 2026 (the policy must go all the way to the business logic; it is the user who defines the policy; harness on harness); [Hope or enforcement](https://newsroom.sgit.ai/articles/hope-or-enforcement.html) and [Behaviour policies from the checks](https://newsroom.sgit.ai/articles/behaviour-policies-from-the-checks.html) on newsroom.sgit.ai.
+Sources: [Process Behaviour Policies](../policies/index.md) §1 to §6 and §11; [the landscape thesis](../../landscape/index.md); [Agent Behaviour Policies](https://riskmandate.ai/abp.html) and [the four objects](https://abp.sgit.ai/model/index.html); Dinis Cruz's [memo of 24 Oct 2026](../../articles/secure-harness-for-agents.md) and his direction of 25 and 26 Oct 2026 (the policy must go all the way to the business logic; it is the user who defines the policy; harness on harness; the doors as a tree of dotted names, each sitting on its parent); [Hope or enforcement](https://newsroom.sgit.ai/articles/hope-or-enforcement.html) and [Behaviour policies from the checks](https://newsroom.sgit.ai/articles/behaviour-policies-from-the-checks.html) on newsroom.sgit.ai.
