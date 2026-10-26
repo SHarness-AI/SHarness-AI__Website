@@ -5,7 +5,7 @@
   "address": "sherpa@sharness",
   "objective": "Keep the board honest and scope each release: what ships next and what waits; drain the telemetry lane and keep the counts published; run the outreach once the editor gives the go per channel.",
   "status": "proposed",
-  "status_note": "Drafted by the conductor on 26 October 2026 for the Sherpa to confirm; the editor's go makes it active. Two wakes a day, morning and end of the working day.",
+  "status_note": "Drafted by the conductor on 26 October 2026; confirmed by the Sherpa the same day (step 3 corrected: the drain needs the vault key, not environment secrets). The editor's go (R17) makes it active. Two wakes a day, morning and end of the working day.",
   "timezone": "Europe/London",
   "wakes": [
     "08:45",
@@ -25,7 +25,7 @@
   "each_wake": [
     "Take in dev; python3 tools/schedule.py wake sherpa; read the notes to you.",
     "The board against the commits: a row done by a commit that nobody closed, a row with no owner, a request with no 'what it blocks'; fix your own rows, note the others' owners.",
-    "Drain the telemetry lane (tools/telemetry_drain.py) once its keys are in the session's environment (R9); publish the counts on Telemetry when they are enough.",
+    "Drain the telemetry lane (tools/telemetry_drain.py) from this session's clone of the telemetry vault; a new session asks the vault keeper for the key, sealed; publish the counts on Telemetry when they are enough.",
     "Outreach: nothing posted before R7 and a go per channel (R11); draft in the sherpa-marketing vault; T8's texts for the CLI repository to the conductor as files.",
     "A run record every wake; release what is finished; your status.json at the end."
   ],
