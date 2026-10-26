@@ -104,6 +104,17 @@ Three things make stopping early safe, and all three are the levels page's rules
 
 The brief [The mashup in code](../admin/briefs/2026-10-26__brief__the-mashup-in-code/index.html) carries the shape: every level and every door is a project of its own with the same seven files, in one repository, each shippable alone and replaceable by an implementation in another language that speaks the same accepts and emits. The levels are compilers, pure functions that the door kit can also serve, so a vendor, an organisation and a laptop can each run theirs. The order puts the level-3 form first (T22), then levels 4 and 5 as compilers, because they need no door and they are what a visitor meets first, then the first door, `sharness.fs.disk` and its twin. The front door's guide, which today draws a ladder of four steps, becomes a reading of where you are on the grid and the one command that takes you a row down.
 
+## Postscript: what shipped, the same evening {#postscript}
+
+The screens above were designs when the article went up. The same evening, on the CLI's `dev`:
+
+- **`contain`, `profile` and `explain` exist** and draw as mocked, with two changes: the hash is printed in full, and the "it became" line counts rows and kernel rules from the real chain rather than the illustrative numbers above. `policy show` and `policy check` read a levelled document and print the chain of hashes. The level-3 form is `network.sites`; a `connect_tcp_ports` row beside it is passed through and marked, the escape hatch as drawn.
+- **The first door runs.** `sharness-ai session new` issues a session by `openssl`; `sharness-ai fs serve --target disk.twin` or `disk` is `sharness.fs` under mutual TLS 1.3, the caller's role read from its certificate, every request matched against what the door accepts, then the rows: within the root, no clear secrets, `max_bytes`, `append_only`. Eighteen conformance vectors hold on the twin and on the disk. In one test an app under a Landlock policy with no write right to the root is refused a direct write by the kernel and writes through the door, which refuses the private key it then tries to store. That is the two halves together, as a Setting until the launcher.
+- **In the tab too.** The browser guest carries `openssl` now, so the same session, door, hello, write and refusal run inside the emulated kernel; in Node the whole scripted run took 194.8 s on one emulated core (26 Oct 2026), the door's five commands about 40 s of it. The playground's Linux tab has chips for them.
+- **Not done:** the report does not yet count "things you did not ask for" (that needs the grant measured against the mandate); `hello` reports its six probes as before; `manifest` and `level serve` are not verbs; no other door exists.
+
+The code shape follows the brief: every level, door, target and twin is a folder with its README, REALITY, ACCEPTS, EMITS and vectors. Numbers and dates are in the CLI's README and commit messages.
+
 ## What this does not claim {#limits}
 
 - **Every screen here is a design as of 26 October 2026**, drawn to the rules the levels page fixes. The runnable parts are level 3 (`policy`), level 1 (`translate`, `run --verbose`) and level 0 (`hello`, `doctor`). `contain`, `profile`, `manifest`, `explain` and `level serve` do not exist; neither does any door.

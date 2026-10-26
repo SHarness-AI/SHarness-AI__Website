@@ -227,6 +227,15 @@
 <p>The browser bench grows with each step: a door and an app under one guest kernel in the tab is the first place a visitor sees a Boundary for the app itself, not only for its child.</p>
 <h2 id="6-what-the-cli-shows-step-by-step">6. What the CLI shows, step by step</h2>
 <p>The front door already draws the map with honest status. Each step changes one thing on it: a door's node turns from designed to runnable the day its package is installed, its verb runs, and <code>sharness-ai doctor</code> gains a check for it (the door answers <code>GET /v0/hello</code>, its targets say <code>twin</code> or <code>live</code>). <code>sharness-ai components</code> reads the entry points, so a door written in another language shows up when its manifest row does. <code>sharness-ai help --format json</code> grows with the verbs, and the site's CLI page is generated from it.</p>
+<h2 id="what-shipped-the-same-day">What shipped the same day</h2>
+<p>Steps 1 to 4 landed on the CLI's <code>dev</code> on 26 October 2026 (commits 3392842 and 5421d4e), the folders as §2 says, each with README, REALITY, ACCEPTS, EMITS and vectors; separate distributions wait on the <code>packages/</code> move (assumption kept: one distribution for now):</p>
+<ul>
+<li><b>Step 1, T22</b>: <code>sharness_ai/level/l3/</code>, the level-3 form with <code>sites</code>; 9 accept and 6 refuse vectors.</li>
+<li><b>Step 2</b>: <code>l4/</code> (six profiles from P0 to P5) and <code>l5/</code> (<code>contain</code>), <code>explain</code> down the chain, one hash per level; 9/4 and 5/5 vectors.</li>
+<li><b>Step 3</b>: <code>sharness_ai/door/</code>: Session by <code>openssl</code> (E05), Door and Client over <code>ssl</code> with the role from the SAN URI and the edge checked both ways, Contract, Rows with the first four predicates, Audit, Conformance. A loopback mutual-TLS request measured about 7 to 8 ms end to end.</li>
+<li><b>Step 4</b>: <code>sharness_ai/fs/</code>, <code>fs/disk/</code>, <code>fs/disk/twin/</code>; 18 vectors held by both targets; the Boundary demo in <code>tests/unit/fs/</code>: an app under Landlock is refused a direct write (<code>EACCES</code>) and writes through the door, which refuses a key.</li>
+</ul>
+<p>Steps 5 to 9 are as written above. The grid's "N things you did not ask for" is not computed yet.</p>
 <h2 id="acceptance-criteria">Acceptance criteria</h2>
 <ol>
 <li><code>packages/</code> exists with <code>sharness-ai</code> (the current package, unchanged) and <code>sharness-ai-door</code>; each has the seven files of §2; <code>pip install ./packages/sharness-ai-door</code> works alone; the test suite runs per package and as a whole in CI.</li>

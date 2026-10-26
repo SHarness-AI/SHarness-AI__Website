@@ -41,11 +41,11 @@ The session that was cli@sharness until 26 October 2026, renamed by the editor s
 
 | | |
 |---|---|
-| State | idle (as of 26 Oct 2026) |
-| Last did | The CLI as the front door: article (the design, then the postscript) and the code on the CLI's dev (5e48c28, merged b2d4a7e): sharness_ai/cli/ and sharness_ai/ui/ in the sgit shape, the guide with no arguments, policy new|show|edit, run with its plan, hello as a scoreboard, components with honest status; 92 -> 135 tests, CI green; hello 6/6 here and in the v86 guest; playground 17/17; the demo and playground copies on the site refreshed. Unstuck the release chain (v0.5.39 to v0.5.41) after my merge-commit release broke it; lesson: tools/ship.py only. |
-| Waiting for | the editor's next CLI changes; website@ to carry the new commands onto code/cli/index.md (text in the CLI README) |
+| State | working (as of 26 Oct 2026) |
+| Last did | MVP 1 (the levels: contain, profile, explain, the level-3 form; T22 done) and MVP 2 (the door kit over ssl and openssl, sharness.fs.disk and its twin, 18 vectors, the Boundary demo) on the CLI's dev; 202 tests. The brief 'the mashup in code' and two articles (the front door; from a sentence to the kernel) on the site. |
+| Waiting for | pbp@ on the level forms and the row shape; security@ on the door kit; the editor on the packages/ split and on step 5 (bash) |
 | Branch | `claude/wonderful-cray-4xpawa (the CLI, in sync with dev)` |
-| Next | the editor's CLI changes; then policy edit from the last refusal, a booted-state snapshot for the tab, E06. |
+| Next | the guest in the tab running the door (in progress); then step 5, sharness.bash as E06; the grant-minus-mandate count. |
 
 ## Start here, on any Claude account
 
