@@ -5,7 +5,7 @@
   "address": "website@sharness",
   "objective": "Keep sharness.ai true to the code and the evidence and right for a user arriving cold: the pages, the generators, the gate, the chrome, the pipeline; every page with its twin; every release served live.",
   "status": "proposed",
-  "status_note": "Drafted by the conductor on 26 October 2026, the day the editor split the build agent into cli@sharness and website@sharness, for the website agent to confirm or change in its first commit; the editor's go makes it active.",
+  "status_note": "Drafted by the conductor on 26 October 2026, the day the editor split the build agent into cli@sharness and website@sharness; confirmed by website@sharness in its first session the same day, with its scope made exact in ROLE.md. The editor's go (R17) makes it active and creates the scheduled task; until then the agent works only when the editor opens its session.",
   "timezone": "Europe/London",
   "wakes": [
     "09:15"
