@@ -58,6 +58,10 @@ SHarness is unrelated to Sharness, the shell testing library.
   the four objects for a process; text + hash from outside + an enforcer the subject does not include;
   capability rows (kernel) and behaviour rows (keeper) and the precondition rule that joins them; the
   four parts of the spec (schema, hash, composition, conformance). PROPOSED, 25 Oct 2026
+- /design/levels/index.md — THE LEVELS: six levels of one policy (intent, profiles, rows in plain nouns,
+  doors and targets, mechanisms, the ground), each compiling deterministically into the one below so the
+  simplest is as binding as the deepest; every level reports unheld rows in its own nouns; an escape hatch
+  to any lower level; each level a service (vendor, organisation, laptop); two stacks on TCP. PROPOSED, 26 Oct 2026
 - /design/agents/index.md — how an agent message flowed in the observed workspace; where SHarness
   plugs in (hooks documented; Claude Code's own sandbox); sharness.llm; sharness.bash; dual-LLM
 - /design/process-tree/index.md — making every process go through sharness.bash; side doors;

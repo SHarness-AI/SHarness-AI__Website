@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The levels: one policy, written at the depth you need — SHarness</title>
+<meta name="description" content="Six levels from the sentence a person says to the ground that refuses, each compiling into the one below, each honest about what it cannot hold; each level a service, so the vendor, the organisation and the laptop can each run one. Proposed.">
+<link rel="canonical" href="https://sharness.ai/design/levels/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/design/levels/index.html">
+<meta property="og:title" content="The levels: one policy, written at the depth you need — SHarness">
+<meta property="og:description" content="Six levels from the sentence a person says to the ground that refuses, each compiling into the one below, each honest about what it cannot hold; each level a service, so the vendor, the organisation and the laptop can each run one. Proposed.">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><a class="skip" href="#content">Skip to content</a><div class="row">
+  <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../code/playground/index.html">Try it<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/playground/index.html">Start here: the playground, in your browser</a>
+      <a class="sl" href="../../code/browser/demo/index.html">A Linux kernel in a tab, running hello</a>
+      <a class="sl" href="../../index.html#start">Start in 60 seconds</a>
+      <a class="sl" href="../../evidence/machines/index.html">Help us measure it: report your machine</a>
+      <a class="sl" href="../../explain/mockups/policy-hash.html">Mockup: the policy hash</a>
+      <a class="sl" href="../../explain/mockups/edges.html">Mockup: the edge matrix</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../components/index.html">Components<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../components/index.html">Start here: the OS a process sees</a>
+      <a class="sl" href="../../components/bash/index.html">sharness.bash: the shell, as a service</a>
+      <a class="sl" href="../../components/net/index.html">sharness.net: the only network client</a>
+      <a class="sl" href="../../components/kms/index.html">sharness.kms: where a secret lives</a>
+      <a class="sl" href="../../components/fs/index.html">sharness.fs: the only writer</a>
+      <a class="sl" href="../../components/llm/index.html">sharness.llm: the only model client</a>
+      <a class="sl" href="../../components/launcher/index.html">sharness.launcher: the bootstrap</a>
+      <a class="sl" href="../../components/policy/index.html">sharness.policy: the manifest</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../design/index.html">How it works<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../design/index.html">Start here: the brief, in one read</a>
+      <a class="sl" href="../../design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="../../design/architecture/index.html">Architecture</a>
+      <a class="sl" href="../../design/components/index.html">Components in depth</a>
+      <a class="sl" href="../../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../../design/pbp/index.html">The PBP on one page</a>
+      <a class="sl" href="../../design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../../design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../../design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="../../design/surface/index.html">What a process can do</a>
+      <a class="sl" href="../../design/containment/index.html">Containment</a>
+      <a class="sl" href="../../design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      <a class="sl" href="../../explain/index.html">Storyboards &amp; mockups</a>
+      <a class="sl" href="../../articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../evidence/index.html">Start here: the measurements</a>
+      <a class="sl" href="../../evidence/status/index.html">What exists today</a>
+      <a class="sl" href="../../evidence/machines/index.html">hello on your machine: reported runs</a>
+      <a class="sl" href="../../evidence/research/index.html">Research note</a>
+      <a class="sl" href="../../landscape/index.html">How it compares: policies at the centre</a>
+      <a class="sl" href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+      <a class="sl" href="../../landscape/integrations/index.html">Integration points</a>
+      <a class="sl" href="../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+      <a class="sl" href="../../landscape/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../code/index.html">Code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/index.html">Start here: where the code is</a>
+      <a class="sl" href="../../code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl" href="../../code/flows/index.html">Flows through the code</a>
+      <a class="sl" href="../../code/examples/index.html">Examples</a>
+      <a class="sl" href="../../code/browser/index.html">Linux in the browser</a>
+      <a class="sl" href="../../code/releases/index.html">Releases of the code: immutable paths</a>
+      <a class="sl" href="../../code/languages/index.html">Languages</a>
+      <a class="sl" href="../../code/standards/index.html">Standards and test vectors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../security/index.html">Security<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../security/index.html">Start here: the register</a>
+      <a class="sl" href="../../security/threat-model/index.html">Threat model</a>
+      <a class="sl" href="../../security/risks/index.html">Known risks</a>
+      <a class="sl" href="../../security/reviews/index.html">Reviews</a>
+      <a class="sl" href="../../security/hardening/index.html">Hardening</a>
+      <a class="sl" href="../../security/supply-chain/index.html">Supply chain</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../project/index.html">Start here: the project</a>
+      <a class="sl" href="../../project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="../../project/releases.html">Release history</a>
+      <a class="sl" href="../../project/adoption/index.html">Getting users: the review and the plan</a>
+      <a class="sl" href="../../project/sources/index.html">The source documents</a>
+      <a class="sl" href="../../project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="../../admin/index.html">How the project is run</a>
+      <a class="sl" href="../../admin/board/index.html">The board: tasks &amp; requests</a>
+      <a class="sl" href="../../admin/updates/index.html">Updates: what is happening</a>
+      <a class="sl" href="../../project/outreach/index.html">Outreach: finding the people it is for</a>
+      <a class="sl" href="../../project/agents/index.html">The agents and their keys</a>
+      <a class="sl" href="../../project/telemetry/index.html">Telemetry: who reads this site</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__CLI">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+  <script src="../../assets/telemetry.js" data-root="../../" defer></script>
+</div></nav>
+
+<main class="doc has-toc" id="content" tabindex="-1">
+  <div class="doc-body">
+  <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">the design</a> / the levels: one policy, written at the depth you need · <a href="index.md">this page as markdown</a></div>
+  <h1>The levels: one policy, written at the depth you need</h1>
+  <details class="toc-inline">
+    <summary>On this page · 8 sections</summary>
+    <ol>
+      <li><a href="#1-the-claim-checked-against-what-exists">1. The claim, checked against what exists</a></li>
+      <li><a href="#2-the-idea">2. The idea</a></li>
+      <li><a href="#3-the-levels">3. The levels</a></li>
+      <li><a href="#4-three-rules-that-keep-the-simple-levels-honest">4. Three rules that keep the simple levels honest</a></li>
+      <li><a href="#5-each-level-is-a-service-and-that-is-where-the-power-is">5. Each level is a service, and that is where the power is</a></li>
+      <li><a href="#6-two-stacks-one-hash">6. Two stacks, one hash</a></li>
+      <li><a href="#7-what-a-person-meets-by-level">7. What a person meets, by level</a></li>
+      <li><a href="#8-what-this-page-does-not-claim">8. What this page does not claim</a></li>
+    </ol>
+  </details>
+<div class="note"><b>Status: proposed, <span class="asof">as of 26 Oct 2026</span>.</b> A proposal from Dinis Cruz's direction of 26 Oct 2026, written by pbp@sharness: the whole of SHarness arranged as levels of abstraction, each simpler than the one below, each compiling into it, so that a person writes at the level they need and everything below is there without being asked for. Nothing on this page is built. The v0 policy, its hash and <code>sharness-ai run</code> and <code>hello</code> are the only runnable parts, and they sit between levels 3 and 2.</div>
+<h2 id="1-the-claim-checked-against-what-exists">1. The claim, checked against what exists</h2>
+<p>The claim is that SHarness is now a shape that absorbs most curveballs: distributed, one connector away from anything, and able to reach the business logic. Checked against the design pages and the code, <span class="asof">as of 26 Oct 2026</span>:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Claim</th><th>Where it is true</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td><b>Distributed by construction</b></td><td>every door is a small service on a TCP port under mutual TLS; the same protocol runs on one laptop, in containers, on Kubernetes, with a remote KMS, or platform-provided (<a href="../architecture/index.html#deployment-topologies">topologies A to E</a>)</td><td>designed; A measured (24 Oct 2026)</td></tr>
+<tr><td><b>One connector away from anything</b></td><td>every door declares what it accepts and what it emits, and a chain is valid when hop N emits what hop N+1 accepts (<a href="../pbp/index.html#6-a-door-and-the-tree-of-doors">the mirror rule</a>); a new system is a new target with the real thing's signature</td><td>proposed</td></tr>
+<tr><td><b>All the way to the business logic</b></td><td>behaviour rows (append only, this field in this range, this row of this table) held by a door, and a Boundary only when the capability rows close every other path (<a href="../pbp/index.html#4-two-kinds-of-rows-one-policy">the rule</a>)</td><td>proposed</td></tr>
+<tr><td><b>Enforced from outside the agent</b></td><td>a hash the person supplies, a kernel told before <code>execve</code></td><td>runnable and measured for one child process (<a href="../../evidence/index.html#9-the-first-experiments-run-by-the-cli">Evidence §9</a>); the launcher above the agent is the design</td></tr>
+</tbody>
+</table></div>
+<p>So the shape is right and the parts are not built. The cost of the shape is also real: the full schema (<a href="../policies/index.html#4-schema">Policies §4</a>) is more than most people will ever write, and a tool that needs it to be useful is not useful. The answer is not a smaller schema. It is levels.</p>
+<h2 id="2-the-idea">2. The idea</h2>
+<p>The same move the risk work makes with "why does it matter?", asked until the top-level register, made downwards: <b>every level compiles into the one below, deterministically.</b> A person writes at the level they need, in that level's nouns. What they wrote is hashed. Its expansion down to the kernel is one canonical form, so the hash of a sentence names, through the chain, the Landlock rules that end up in the kernel. The simplest level is as binding as the deepest, because the person supplies the hash and the launcher verifies every step.</p>
+<p>Two things follow. A level never hides what it cannot hold: it reports the unheld rows in its own nouns. And a level never locks a person out of the one below: a document at any level may contain a row from any lower level, passed through unchanged. Go only as deep as you need; it is all there.</p>
+<h2 id="3-the-levels">3. The levels</h2>
+<p>Six, from the sentence a person says to the ground that refuses. Five are written at; the ground is measured.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Level</th><th>You write</th><th>Its nouns</th><th>What it compresses away</th><th>It emits</th></tr></thead>
+<tbody>
+<tr><td><b>5 · Intent</b></td><td>one sentence with blanks: "contain my agent to <em>this workspace</em>, <em>these sites</em>, <em>these secrets</em>"</td><td>agent, workspace, sites, secrets, budget</td><td>everything: a stance and three blanks</td><td>a level-4 profile with its parameters</td></tr>
+<tr><td><b>4 · Profiles</b></td><td>a profile's name and its parameters: a coding agent, a tool or MCP server, a newsroom agent, a vault CLI, a hello world</td><td>roles of processes</td><td>which rows a role needs; the example policies <a href="../../code/experiments/index.html#the-example-policies">P0 to P4</a> are these</td><td>a level-3 policy with the holes filled</td></tr>
+<tr><td><b>3 · Rows in plain nouns</b></td><td>the policy you would show a manager: files to read and write, sites, a database's tables and operations, commands, secrets, a budget; predicates in words (append only, within this range, once per order)</td><td>files, sites, databases, commands, secrets, budget</td><td>every mechanism: no ports, no Landlock, no certificates</td><td>a level-2 manifest</td></tr>
+<tr><td><b>2 · Doors and targets</b></td><td>the manifest: <code>sharness.&lt;door&gt;.&lt;target&gt;</code>, each door's rows, what each accepts and emits, the edges, twins or live (<a href="../pbp/index.html#6-a-door-and-the-tree-of-doors">the tree</a>)</td><td>doors, targets, rows, edges, hashes</td><td>how each row is held</td><td>a level-1 configuration per door</td></tr>
+<tr><td><b>1 · Mechanisms</b></td><td>nothing by hand: Landlock rules, seccomp, cgroups, namespaces, the session CA and certificates, a database's row-level security, a bucket policy, or another enforcer's form (<code>policy translate</code>: bubblewrap, Docker, Kubernetes, Claude Code's sandbox) (<a href="../policies/index.html#5-enforcement-map">the enforcement map</a>)</td><td>the kernel's and each system's own nouns</td><td>nothing; this is the whole truth of what is applied</td><td>syscalls and configurations</td></tr>
+<tr><td><b>0 · The ground</b></td><td>nothing: the kernel and the real systems refuse or allow</td><td>syscalls, sockets, engines</td><td></td><td>the measured result (<code>hello</code>)</td></tr>
+</tbody>
+</table></div>
+<p>Today's v0 policy sits between 3 and 2: <code>files.read</code> and <code>write</code> are level-3 nouns, <code>connect_tcp_ports</code> is a level-1 noun let through. The first step this page asks for is a true level-3 form, with sites rather than ports, and <code>hello</code> reporting at the level the person wrote.</p>
+<p>Each level is one person's universe. At level 5 the universe is "my agent, my workspace, the internet"; at level 3 it is the things a business names in a policy document; at level 2 it is the architecture; at level 1 the kernel. A person at level 5 never sees a door. A person at level 2 sees every door and no syscall.</p>
+<h2 id="4-three-rules-that-keep-the-simple-levels-honest">4. Three rules that keep the simple levels honest</h2>
+<ol>
+<li><b>Deterministic expansion.</b> Each statement at level N has exactly one canonical form at level N−1, and the manifest carries the chain of hashes, <code>sha256:L5 → L4 → L3 → L2 → L1</code>. The person supplies the hash of what they wrote; the launcher recomputes every expansion and refuses on any mismatch. A simpler level is never a weaker one.</li>
+<li><b>Every level reports in its own nouns.</b> The four objects of the <a href="https://riskmandate.ai/abp.html">ABP</a> survive the compression: at level 5 the grant is "today your agent can read every file on this machine and reach every site", the mandate is the sentence, the delta is "it can reach 14 things you did not ask for", and the barrier is "11 of those will be refused by the kernel; 3 are not held by anything here". Simplification never hides an unheld row; it only says it in words the level's reader knows.</li>
+<li><b>The escape hatch.</b> A document at any level may contain a row from any lower level, passed through unchanged. A level-3 policy may say <code>sites: [github.com]</code> and, beside it, one level-2 row that names a door and a target, or one level-1 row that names a port. The compiler passes it down; the report says which level each row came from. That is how a person goes one level deeper for one row and stays simple for the rest.</li>
+</ol>
+<h2 id="5-each-level-is-a-service-and-that-is-where-the-power-is">5. Each level is a service, and that is where the power is</h2>
+<p>The compiler of a level is a process with an accepts and an emits, like any door: it accepts level N and emits level N−1. So the levels are a chain of hops under the mirror rule, exactly as the doors are, and the chain can be cut anywhere and run anywhere:</p>
+<ul>
+<li><b>the vendor</b> ships level 4, the profiles, with its tool;</li>
+<li><b>the organisation</b> runs level 3 to 2: its targets, its proxies (<code>net.proxy</code>), its twins, its databases. A developer writing at level 3 cannot name a target the organisation's compiler does not offer, because composition is intersection across levels as it is across layers: a lower level can only narrow;</li>
+<li><b>the laptop</b> runs level 1 to 0: the kernel it has, with what that kernel can hold reported honestly (Landlock ABI 7 holds TCP ports; an older kernel does not).</li>
+</ul>
+<p>Who runs a level decides what the level below can be. That is the enterprise story without a product in the request path: the organisation owns one compiler and every policy on every laptop passes through it at launch. And it costs nothing at runtime: the abstraction chain runs once per launch, when the policy is expanded and hashed, not per request.</p>
+<h2 id="6-two-stacks-one-hash">6. Two stacks, one hash</h2>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th>The capability stack</th><th>The abstraction stack</th></tr></thead>
+<tbody>
+<tr><td><b>Hops</b></td><td>doors and targets: <code>app → fs.s3 → net.direct → the kernel</code></td><td>levels: <code>5 → 4 → 3 → 2 → 1 → 0</code></td></tr>
+<tr><td><b>Runs</b></td><td>per request, at runtime</td><td>once per launch, when the policy is expanded</td></tr>
+<tr><td><b>Contract per hop</b></td><td>accepts and emits; the mirror rule</td><td>accepts level N, emits level N−1; the same rule</td></tr>
+<tr><td><b>Can be distributed</b></td><td>yes: a target on another machine, in another language</td><td>yes: a level run by the vendor, the organisation or the laptop</td></tr>
+<tr><td><b>Composes by</b></td><td>intersection across layers (OS, runtime, app, component, invocation)</td><td>intersection across levels: a lower level only narrows</td></tr>
+<tr><td><b>Cost</b></td><td>about 3.2 ms per mutual TLS handshake, measured 24 Oct 2026</td><td>nil at runtime</td></tr>
+<tr><td><b>Meets the other at</b></td><td>the manifest hash the person supplies</td><td>the same hash</td></tr>
+</tbody>
+</table></div>
+<p>Both are TCP. TCP gives each stack the same two things: an abstraction, because every hop speaks a contract and nothing else, and distribution, because a contract does not care which machine answers. Two stacks, not one, because capability and abstraction are different axes: one says what a running process may do, the other says how much of the schema a person has to read.</p>
+<h2 id="7-what-a-person-meets-by-level">7. What a person meets, by level</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>A person who</th><th>Writes at</th><th>Sees</th></tr></thead>
+<tbody>
+<tr><td>runs a coding agent on a laptop and wants it contained</td><td>5</td><td>one command: contain this agent to this folder and these sites</td></tr>
+<tr><td>ships a tool or an MCP server</td><td>4</td><td>a profile name and the tool's own parameters, in the tool's README</td></tr>
+<tr><td>writes the policy for an agent in a business</td><td>3</td><td>files, sites, tables, commands, secrets, budget, in the words of the policy document; the unheld rows named</td></tr>
+<tr><td>builds or integrates a door, or runs a platform</td><td>2</td><td>the manifest: doors, targets, edges, twins</td></tr>
+<tr><td>reviews what the kernel was told, or audits a run</td><td>1</td><td>the mechanisms, one per row, with what each does not cover</td></tr>
+<tr><td>measures</td><td>0</td><td><code>hello</code>, with the date and the kernel</td></tr>
+</tbody>
+</table></div>
+<p>The site's front page offers three starts today (the browser, Linux, a Claude Code session). The same page, read through the levels, should offer the levels instead: level 5 is the start in sixty seconds, level 3 is the policy page, level 2 is the design, level 1 is the enforcement map, level 0 is the evidence. Nothing on the site moves; what changes is which page a reader is sent to first.</p>
+<h2 id="8-what-this-page-does-not-claim">8. What this page does not claim</h2>
+<ul>
+<li>No level's compiler exists. The v0 policy and <code>run</code> are one runnable slice between levels 3 and 2; <code>policy translate</code> writes level-1 forms for four enforcers and does not run them.</li>
+<li>"Deterministic expansion" is a requirement on the compilers, not a property anything has yet; the canonical form of each level is unwritten.</li>
+<li>Who runs a level is a deployment choice, not a product; no organisation runs one.</li>
+<li>Levels do not add enforcement. Everything a level holds is held by level 1 and refused by level 0; the caveat on every <code>hello</code> result (a Boundary for the child, a Setting for the process that applied it) holds at every level.</li>
+</ul>
+<p>Sources: Dinis Cruz's direction of 26 Oct 2026 in pbp@sharness's session (the levels; two stacks on TCP; the "why" ladder of the risk work); <a href="../pbp/index.html">the PBP on one page</a>; <a href="../policies/index.html">Process Behaviour Policies</a>; <a href="../architecture/index.html">Architecture</a>; <a href="../../code/experiments/index.html#the-example-policies">the example policies</a>; <a href="https://riskmandate.ai/abp.html">Agent Behaviour Policies</a>.</p>
+
+  </div>
+  <nav class="toc-side" aria-label="On this page">
+    <div class="toc-head">On this page</div>
+    <ol>
+      <li><a href="#1-the-claim-checked-against-what-exists">1. The claim, checked against what exists</a></li>
+      <li><a href="#2-the-idea">2. The idea</a></li>
+      <li><a href="#3-the-levels">3. The levels</a></li>
+      <li><a href="#4-three-rules-that-keep-the-simple-levels-honest">4. Three rules that keep the simple levels honest</a></li>
+      <li><a href="#5-each-level-is-a-service-and-that-is-where-the-power-is">5. Each level is a service, and that is where the power is</a></li>
+      <li><a href="#6-two-stacks-one-hash">6. Two stacks, one hash</a></li>
+      <li><a href="#7-what-a-person-meets-by-level">7. What a person meets, by level</a></li>
+      <li><a href="#8-what-this-page-does-not-claim">8. What this page does not claim</a></li>
+    </ol>
+    <a class="toc-top" href="#content">↑ Back to top</a>
+  </nav>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a class="ver" href="../../project/releases.html" title="Site release history">v0.6.4</a> · <a href="../../project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>Try it</h4>
+    <a href="../../code/playground/index.html">The playground</a>
+    <a href="../../code/browser/demo/index.html">A kernel in a tab</a>
+    <a href="../../index.html#start">Start in 60 seconds</a>
+    <a href="../../code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="../../evidence/machines/index.html">Report your machine</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai ↗</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI ↗</a>
+  </div>
+  <div>
+    <h4>Understand</h4>
+    <a href="../../design/index.html">The brief, in one read</a>
+    <a href="../../components/index.html">The components</a>
+    <a href="../../design/why/index.html">Why: the last metre</a>
+    <a href="../../design/architecture/index.html">Architecture</a>
+    <a href="../../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+    <a href="../../explain/storyboards/index.html">Storyboards</a>
+    <a href="../../articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Check it</h4>
+    <a href="../../evidence/index.html">Measurements</a>
+    <a href="../../evidence/status/index.html">What exists today</a>
+    <a href="../../evidence/machines/index.html">hello on your machine</a>
+    <a href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+    <a href="../../landscape/market/index.html">Market &amp; competitors</a>
+    <a href="../../security/index.html">Security: the register</a>
+    <a href="../../security/threat-model/index.html">Threat model</a>
+    <a href="../../security/risks/index.html">Known risks</a>
+  </div>
+  <div>
+    <h4>Follow the work</h4>
+    <a href="../../project/about/index.html">About &amp; naming</a>
+    <a href="../../project/releases.html">Release history</a>
+    <a href="../../project/adoption/index.html">Getting users</a>
+    <a href="../../admin/index.html">How the project is run</a>
+    <a href="../../admin/board/index.html">The board</a>
+    <a href="../../admin/updates/index.html">Updates</a>
+    <a href="../../admin/notes/index.html">Commit notes</a>
+    <a href="../../admin/guidance/index.html">Guidance for agents</a>
+  </div>
+</div>
+<div class="agentline">For agents and crawlers: <a href="../../llms.txt">llms.txt</a> · <a href="../../llms-full.txt">llms-full.txt</a> · <a href="../../index.md">index.md</a> · <a href="../../sitemap.xml">sitemap.xml</a> · <a href="../../.well-known/security.txt">security.txt</a></div></footer>
+
+</body>
+</html>

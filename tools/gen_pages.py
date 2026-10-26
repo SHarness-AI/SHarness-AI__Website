@@ -48,6 +48,8 @@ PAGES = [
      "The Agent Behaviour Policy model applied to a process: schema, intersection-composed layers, hashing and signing, the enforcement map, and learning a policy from traces."),
     ("design/pbp",          "The Process Behaviour Policy, on one page",
      "What a PBP is, in one definition every page and every enforcer is checked against: the four objects for a process, the three things that make it binding, capability rows and behaviour rows and the rule that joins them, keepers, the fractal, and the four parts of the spec."),
+    ("design/levels",       "The levels: one policy, written at the depth you need",
+     "Six levels from the sentence a person says to the ground that refuses, each compiling into the one below, each honest about what it cannot hold; each level a service, so the vendor, the organisation and the laptop can each run one. Proposed."),
     ("design/agents",       "Agents and LLMs",
      "How an agent message flows (observed), where SHarness plugs in, sharness.llm, sharness.bash, the dual-LLM split, and Claude API compatibility."),
     ("design/process-tree", "Enforcing the process tree",

@@ -108,6 +108,10 @@ An enforcer is conformant when it runs the suite and reports barrier kinds truth
 
 ## 9. Two numbers in every summary
 
+How a person meets all of this without reading it is [the levels](../levels/index.md): six levels of one policy, each written in its own nouns and compiled into the one below, the simplest as binding as the deepest. Proposed, 26 Oct 2026.
+
+### The two numbers
+
 ABP's number is **unbounded excess**: reach nobody asked for and nothing bounds. A PBP adds a second: **unheld rows**, the mandate rows no Boundary holds. `hello` reports probes held; the policy summary should report rows held by the kernel, rows held by a door, and rows unheld, the way the newsroom counted its checks (1 boundary, 34 settings, 22 expectations). The second number is the business case for the next door.
 
 ## 10. Naming
