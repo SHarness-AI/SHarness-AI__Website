@@ -51,10 +51,10 @@ A board row with pbp@sharness as owner, or a `To-pbp:` note in a release commit 
 | | |
 |---|---|
 | State | done (as of 26 Oct 2026) |
-| Last did | Site v0.5.33 (26 Oct 2026): two schemas per door (accepts, emits) and the mirror rule for chains; the fuse-or-split rule and its cost; the existing examples named (net's two faces, the KMS protocol, topologies D and E, the interceptor, the agent proxy, the twins' S3 face). |
+| Last did | Site v0.5.39 (26 Oct 2026): .twin as the terminal suffix on any name (fs.s3.twin, db.postgres.twin, net.twin, fs.twin), the editor's rule; .memory withdrawn as a name; correction dated on the page; T20 reworded. v0.5.38 was an empty release of mine (the edit failed, the script ran); its row says so. |
 | Waiting for | T14 and T19 on: cli; T18 on: conductor; T20 on: dev |
-| Branch | `pbp/mirror` |
-| Next | the predicate language one kind at a time, append_only first; the contract per edge in the manifest schema (§4 of Policies) |
+| Branch | `pbp/twin-suffix-2` |
+| Next | the predicate language one kind at a time, append_only first; the contract per edge in the manifest schema (Policies §4) |
 
 ## Start here, on any Claude account
 
