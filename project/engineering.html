@@ -135,7 +135,7 @@
   <div class="tablewrap"><table>
     <thead><tr><th>File</th><th>Job</th></tr></thead>
     <tbody>
-      <tr><td><code>tools/version.txt</code></td><td>Owns the site version. Bumped exactly once per release.</td></tr>
+      <tr><td><code>version</code> (root)</td><td>The site version, written by CI only: <code>tools/release.py</code>, in the one commit CI tags (R23, 26 Oct 2026). A push that edits it by hand is refused.</td></tr>
       <tr><td><code>tools/chrome.py</code></td><td>The single definition of the nav, the footer and the version badge, rewritten in place across every page. Also stamps the version into <code>llms.txt</code> and <code>index.md</code>.</td></tr>
       <tr><td id="validate"><code>tools/validate.js</code></td><td>The pre-release gate: version agreement, internal links, canonical host against <code>CNAME</code>, a vault-key-shaped-string tripwire, and <em>generate or date every number</em>. Any failure stops the release.</td></tr>
       <tr><td><code>tools/gen_pages.py</code></td><td>Generates each markdown page's <code>index.html</code> from its <code>index.md</code> twin (the design, code, evidence, explain and project sections), which is the source of truth and is served as-is. <code>--check</code> fails CI when any HTML is stale.</td></tr>

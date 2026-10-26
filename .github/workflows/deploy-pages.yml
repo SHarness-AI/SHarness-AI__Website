@@ -1,23 +1,21 @@
-# Deploys sharness.ai (this repo's working tree) to GitHub Pages, with the same pipeline
-# order as the *.sgit.ai sites (adapted from SGit-AI/SGit-AI__Website__NFRs):
-# validate → tag → publish.
+# Deploys sharness.ai (this repo's working tree) to GitHub Pages: validate → release → publish.
 #
-#   1. validate     — the pre-release gate (tools/validate.js: version agreement,
-#                     internal links, canonical/CNAME agreement, key-leak tripwire, dated
-#                     figures), plus the --check of each generator (HTML matches its markdown
-#                     source; storyboards match their data and pass the kit's validator). A failure
-#                     stops the release: no tag, no publish. Also runs
-#                     on pull requests, so branch work is gated before it reaches dev.
-#   2. tag-release  — every push to dev is a PATCH release (vX.Y.Z+1) and every push to
-#                     main is a MINOR release (vX.Y+1.0), tagged v{X}.{Y}.{Z}. The version is
-#                     owned by tools/version.txt (bumped exactly once per release)
-#                     and must also appear in the release commit's subject
-#                     ("site vX.Y.Z: ..."). CI verifies the two agree and that the bump is
-#                     the right one for the branch, then tags the release commit, which is
-#                     HEAD on a direct push and HEAD's parent when a pull request lands as
-#                     a merge commit.
-#   3. deploy       — publishes the tree from dev or main, or on a manual run. Never runs
-#                     when validation failed, never from a pull request.
+#   1. validate  — the pre-release gate (tools/validate.js: version agreement, internal links,
+#                  canonical/CNAME agreement, key-leak tripwire, dated figures), plus the --check of
+#                  each generator. A failure stops everything: no release, no publish. Also runs on
+#                  pull requests, so branch work is gated before it reaches dev.
+#   2. release   — CI owns the version (R23, the scheme of the send repository): the next number
+#                  comes from the tags, inside this one serialised job, never from the committer. A
+#                  push to dev bumps the last number (vX.Y.Z+1); a push to main bumps the middle one
+#                  (vX.Y+1.0). tools/release.py writes /version, adds the row to the release history,
+#                  re-stamps every page and runs the gate again; the job commits that as the actions
+#                  user ("site vX.Y.Z: <the pushed commit's subject>"), tags the commit, pushes the
+#                  branch and the tag. A push that lands while this runs is taken in before the bump,
+#                  so no number is ever guessed twice and no release is ever left untagged. A commit
+#                  that modifies /version by hand fails the job. A head already carrying its version
+#                  (dev fast-forwarded to main after a minor) is published as it is.
+#   3. deploy    — publishes the release commit, from dev or main, or on a manual run. Never when
+#                  validation or the release failed, never from a pull request.
 name: deploy-pages
 on:
   push:
@@ -53,86 +51,64 @@ jobs:
       - name: Storyboards are valid for the pinned kit (the kit's own validator)
         run: node tools/validate_storyboards.cjs
 
-  tag-release:
+  release:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     needs: [validate]
     if: github.event_name == 'push' && (github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main')
     permissions:
-      contents: write                        # pushes the release tag
+      contents: write                        # pushes the release commit and the tag
+    outputs:
+      sha: ${{ steps.release.outputs.sha }}
+      version: ${{ steps.release.outputs.version }}
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4  # zizmor: ignore[artipacked] - this job pushes the release commit and the tag
         with:
           fetch-depth: 0
-      - name: Tag this release
+          ref: ${{ github.ref_name }}
+      - name: The release commit, tagged (tools/release.py)
+        id: release
+        env:
+          BRANCH: ${{ github.ref_name }}
+          BEFORE: ${{ github.event.before }}
         run: |
           set -euo pipefail
+          git config user.name  "GitHub Actions"
+          git config user.email "actions@github.com"
           git fetch --tags --quiet
-
-          # Read the history ONCE, into a variable: piping `git log` into an early-exiting
-          # reader (grep -m1, head) kills git log with SIGPIPE, which under pipefail fails
-          # the job once the log outgrows the pipe buffer (seen on the sgit.ai sites).
-          LOG=$(git log --format='%H;%s')
-
-          # The version of THIS release, from the file that owns it.
-          VER=$(grep -oP '^v\K[0-9]+\.[0-9]+\.[0-9]+' tools/version.txt)
-          TAG="v$VER"
-          echo "version.txt says $TAG"
-
-          # The release commit is the newest one whose SUBJECT carries a version. Usually
-          # HEAD; when a pull request lands as a merge commit, it is HEAD's parent.
-          NEWEST=$(grep -oP '^[0-9a-f]+;site v\K[0-9]+\.[0-9]+\.[0-9]+(?=:)' <<< "$LOG" | head -1 || true)
-          if [ -z "$NEWEST" ]; then
-            echo "::error::no commit in this history carries a version in its subject (\"site vX.Y.Z: ...\")"
-            exit 1
-          fi
-          if [ "$NEWEST" != "$VER" ]; then
-            echo "::error::version.txt says $TAG but the newest release commit is v$NEWEST — the two disagree"
-            exit 1
-          fi
-          REL=$(grep -m1 -F ";site v$VER:" <<< "$LOG" | cut -d';' -f1)
-          echo "release commit is ${REL:0:9}"
-
-          # Already tagged: fine if on this very commit (a re-run), an error if the version
-          # was reused for a later commit instead of bumped.
-          if git rev-parse -q --verify "refs/tags/$TAG" >/dev/null; then
-            if [ "$(git rev-parse "refs/tags/$TAG^{commit}")" = "$REL" ]; then
-              echo "$TAG already tags ${REL:0:9}; nothing to do"
-              exit 0
+          python3 tools/release.py guard "$BEFORE" HEAD
+          for try in 1 2 3; do
+            git fetch --quiet origin "$BRANCH"
+            git reset -q --hard "origin/$BRANCH"            # whatever is newest: a push that landed meanwhile rides this release
+            SUBJECT=$(git log -1 --format=%s HEAD)
+            python3 tools/release.py bump --branch "$BRANCH" --subject "$SUBJECT" | tee release.out
+            VERSION=$(grep -oP '^version=\K.*' release.out); SHA=$(grep -oP '^sha=\K.*' release.out); BUMPED=$(grep -oP '^bumped=\K.*' release.out)
+            rm -f release.out
+            if [ "$BUMPED" = "false" ]; then break; fi
+            if git push origin "HEAD:$BRANCH"; then
+              git push origin "refs/tags/$VERSION"
+              echo "released $VERSION as ${SHA:0:9} on $BRANCH (attempt $try)"
+              break
             fi
-            echo "::error::$TAG already exists on an earlier commit — version.txt was not bumped for this release"
-            exit 1
+            echo "$BRANCH moved while the release was built; taking it in (attempt $try)"
+            git tag -d "$VERSION"
+            git checkout -q -- . ; git clean -fdq
+            [ "$try" = 3 ] && { echo "::error::$BRANCH kept moving; nothing released"; exit 1; }
+          done
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+          if [ "$BRANCH" = "main" ]; then
+            # a minor on main: dev follows it, fast-forward only; if dev has moved on, say so and leave it
+            git push origin "HEAD:dev" && echo "dev fast-forwarded to $VERSION" || echo "::notice::dev was not fast-forwarded to $VERSION (it has commits of its own); merge main into dev by hand"
           fi
-
-          # The versioning rule (Dinis Cruz, 24 Oct 2026): every push to dev is a PATCH
-          # release, vX.Y.Z+1; a merge to main is a MINOR release, vX.Y+1.0, tagged on main.
-          # `|| true`: on the very first release there is no previous tag.
-          PREV=$(git tag --list 'v*' | sort -V | tail -1 || true)
-          if [ -n "$PREV" ]; then
-            NEXT_PATCH=$(echo "$PREV" | awk -F. '{printf "%s.%s.%d", $1, $2, $3+1}')
-            NEXT_MINOR=$(echo "$PREV" | awk -F. '{split($1,a,"v"); printf "v%s.%d.0", a[2], $2+1}')
-            if [ "$GITHUB_REF" = "refs/heads/main" ]; then
-              if [ "$TAG" != "$NEXT_MINOR" ]; then
-                echo "::error::a push to main is a minor release: latest tag is $PREV, expected $NEXT_MINOR, got $TAG"
-                exit 1
-              fi
-            elif [ "$TAG" != "$NEXT_PATCH" ]; then
-              echo "::error::a push to dev is a patch release: latest tag is $PREV, expected $NEXT_PATCH, got $TAG (minor releases, $NEXT_MINOR, are cut on main)"
-              exit 1
-            fi
-          fi
-
-          git tag "$TAG" "$REL"
-          git push origin "refs/tags/$TAG"
-          echo "tagged ${REL:0:9} as $TAG"
 
   deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs: [validate, tag-release]
-    # Publish even when tag-release is skipped (push to main, manual run): never when
-    # validation failed or tagging failed, and never from a pull request.
-    if: always() && github.event_name != 'pull_request' && needs.validate.result == 'success' && (needs.tag-release.result == 'success' || needs.tag-release.result == 'skipped')
+    needs: [validate, release]
+    # Publish the release commit; on a manual run, the tree as it is. Never when validation or
+    # the release failed, and never from a pull request.
+    if: always() && github.event_name != 'pull_request' && needs.validate.result == 'success' && (needs.release.result == 'success' || needs.release.result == 'skipped')
     permissions:
       contents: read
       pages: write
@@ -144,6 +120,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           persist-credentials: false
+          ref: ${{ needs.release.outputs.sha || github.sha }}   # the release commit when there was one
       - name: Assemble site artifact
         run: |
           mkdir -p "$RUNNER_TEMP/site"

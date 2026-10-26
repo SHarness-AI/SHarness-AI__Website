@@ -3,7 +3,7 @@ title: CI owns the version: one file at the root, written by the one commit that
 date: 2026-10-26
 by: dev
 for: editor
-status: proposed
+status: built
 board: R23
 ---
 

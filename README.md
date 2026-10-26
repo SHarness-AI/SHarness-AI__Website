@@ -30,34 +30,28 @@ is the source of every page that has a twin; the HTML beside it is generated and
 | `assets/` | `site.css`, `nav.js`, `telemetry.js` (one anonymous event per page, see `/project/telemetry/`), `images/` | |
 | `content/` | the sources the generators read: `articles/`, `storyboards/`, `admin/` (`board/<ID>.md`, `members/<id>/` with `ROLE.md`, `policy.json`, `status.json`, `card.json`, `updates/<id>.md`, `briefs/<date>__brief__<slug>.md`, `runs/<id>/<time>.json`, `status.json`) | |
 | root | `WAKE.md`: what every scheduled wake does; `AGENTS.md`: the guidance every agent reads, on both repositories (rendered at `/admin/guidance/`); section 6 is Commit-FS-lite, how the agents talk in their commits; `tools/notes.py <id>` prints the notes to a member | kept by the conductor |
-| `tools/` | `version.txt` (owns the version), `chrome.py` (nav, footer, badge), the generators, `releases.py` (the immutable releases of the code), `validate.js` and `validate_storyboards.cjs` (the gate) | |
+| `version` (root) | the site version, written by CI only (`tools/release.py`), in the one commit CI tags |
+| `tools/` | `release.py` (the bump CI performs), `chrome.py` (nav, footer, badge), the generators, `releases.py` (the immutable releases of the code), `validate.js` and `validate_storyboards.cjs` (the gate) | |
 | root | `index.html` and `index.md`, `404.html` (maps the pre-v0.5.2 addresses to the new ones), `llms.txt`, `llms-full.txt`, `sitemap.xml`, `robots.txt`, `CNAME` | |
 
 ## Release process
 
-One command: `RELEASE_TRAILER=$'Agent: <id>' python3 tools/ship.py "what changed" [--body-file F] [--snapshot]` does every step below, refuses to push when the gate fails, and waits for the live site to serve the new version. The steps, for when you need one of them by hand:
+CI owns the version (R23, 26 Oct 2026; the scheme of the send repository). Nobody writes `/version`
+by hand; the deploy workflow refuses a push that does.
 
-
-1. Bump `tools/version.txt` (vX.Y.Z, exactly once per release) and add a row to
-   `project/releases.html`; open or close the board rows under `content/admin/board/` (never edit `project/comms.html`: it is generated).
-2. `python3 tools/chrome.py` — propagates the version badge and any nav/footer change
-   to every page, and stamps the version into `llms.txt` and `index.md`.
-3. `python3 tools/gen_admin.py && python3 tools/gen_pages.py && python3 tools/gen_articles.py && python3 tools/gen_storyboards.py`
-   (`python3 tools/admin_status.py` first when the status snapshot should move)
-4. `python3 tools/gen_sitemap.py && python3 tools/gen_llms_full.py`
-5. `node tools/validate.js && node tools/validate_storyboards.cjs` (validate.js also runs `tools/releases.py check`)
-   - a new CLI release: `python3 tools/releases.py cut --from ../SHarness-AI__CLI --release vX.Y.Z` (once; the folder is immutable);
-     the dev snapshot: `python3 tools/releases.py snapshot --from ../SHarness-AI__CLI`
-6. `git commit -am "site vX.Y.Z: ..." && git push origin dev`
-
-Every push to `dev` runs `.github/workflows/deploy-pages.yml`: validate → auto-tag → deploy to
-GitHub Pages. The versioning rule: **every push to `dev` is a patch release** (`vX.Y.Z+1`);
-**a merge to `main` is a minor release** (`vX.Y+1.0`), tagged on `main`. CI verifies the version
-in `version.txt` against the commit subject and against the latest tag, and refuses the wrong
-bump for the branch. Pull requests run validation only.
-
-To cut a minor: on `main`, merge `dev`, add a release commit that bumps `version.txt` to
-`vX.Y+1.0` (subject `site vX.Y+1.0: ...`), push; then fast-forward `dev` to `main` (CI sees the
-tag already on that commit and does nothing). The next push to `dev` is `vX.Y+1.1`.
+1. Work on a branch of your own. When a step is finished:
+   `RELEASE_TRAILER=$'Agent: <id>' python3 tools/ship.py "what changed" [--body-file F] [--snapshot]`.
+   It commits the work with your subject, body and trailers, merges `dev`, runs `chrome.py` and
+   every generator, the gate and every `--check`, pushes to `dev`, and waits for CI.
+2. Every push to `dev` runs `.github/workflows/deploy-pages.yml`: validate → **release** → deploy.
+   The release job reads the tags, takes the next number (`dev`: the last number plus one;
+   `main`: the middle number plus one, the last to zero), runs `tools/release.py`, which writes
+   `/version`, adds the row to `project/releases.html`, re-stamps every page and runs the gate again;
+   CI commits that as "site vX.Y.Z: <your subject>", tags the commit, pushes branch and tag, and
+   deploys that commit. A push that lands while the job runs rides the same release; no number is
+   ever guessed, and no release is ever left untagged.
+3. To cut a minor: push `main` (fast-forwarded to `dev`, or `dev` merged into it). CI numbers it
+   `vX.Y+1.0` on `main` and fast-forwards `dev` to it when it can. The next push to `dev` is
+   `vX.Y+1.1`. Pull requests run validation only.
 
 All content CC BY 4.0 unless noted. Code under the repository licence.

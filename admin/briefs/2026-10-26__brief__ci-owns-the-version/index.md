@@ -6,7 +6,7 @@
 
 ---
 
-brief · 2026-10-26 · by dev · for editor · proposed · board R23
+brief · 2026-10-26 · by dev · for editor · built · board R23
 
 ## The finding
 
