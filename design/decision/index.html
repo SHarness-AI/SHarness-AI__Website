@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The decision at the door — SHarness</title>
+<meta name="description" content="Yes to what the policy allows, silence for what it refuses, a question only for what it cannot hold: the prompt as the last resort; ux.sgit.ai&#x27;s principles read against the levels; the decision engine (a command, a policy, an intent: allow, deny or ask), a prototype run once; two things measured on the way. Proposed.">
+<link rel="canonical" href="https://sharness.ai/design/decision/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/design/decision/index.html">
+<meta property="og:title" content="The decision at the door — SHarness">
+<meta property="og:description" content="Yes to what the policy allows, silence for what it refuses, a question only for what it cannot hold: the prompt as the last resort; ux.sgit.ai&#x27;s principles read against the levels; the decision engine (a command, a policy, an intent: allow, deny or ask), a prototype run once; two things measured on the way. Proposed.">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><a class="skip" href="#content">Skip to content</a><div class="row">
+  <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
+  <a class="ver" href="../../project/releases.html" title="Site release history: what this version changed">v0.6.15</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../code/playground/index.html">Try it<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/playground/index.html">Start here: the playground, in your browser</a>
+      <a class="sl" href="../../code/browser/demo/index.html">A Linux kernel in a tab, running hello</a>
+      <a class="sl" href="../../index.html#start">Start in 60 seconds</a>
+      <a class="sl" href="../../evidence/machines/index.html">Help us measure it: report your machine</a>
+      <a class="sl" href="../../explain/mockups/policy-hash.html">Mockup: the policy hash</a>
+      <a class="sl" href="../../explain/mockups/edges.html">Mockup: the edge matrix</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../components/index.html">Components<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../components/index.html">Start here: the OS a process sees</a>
+      <a class="sl" href="../../components/bash/index.html">sharness.bash: the shell, as a service</a>
+      <a class="sl" href="../../components/net/index.html">sharness.net: the only network client</a>
+      <a class="sl" href="../../components/kms/index.html">sharness.kms: where a secret lives</a>
+      <a class="sl" href="../../components/fs/index.html">sharness.fs: the only writer</a>
+      <a class="sl" href="../../components/llm/index.html">sharness.llm: the only model client</a>
+      <a class="sl" href="../../components/launcher/index.html">sharness.launcher: the bootstrap</a>
+      <a class="sl" href="../../components/policy/index.html">sharness.policy: the manifest</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../design/index.html">How it works<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../design/index.html">Start here: the brief, in one read</a>
+      <a class="sl" href="../../design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="../../design/architecture/index.html">Architecture</a>
+      <a class="sl" href="../../design/components/index.html">Components in depth</a>
+      <a class="sl" href="../../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../../design/pbp/index.html">The PBP on one page</a>
+      <a class="sl" href="../../design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../../design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../../design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="../../design/surface/index.html">What a process can do</a>
+      <a class="sl" href="../../design/containment/index.html">Containment</a>
+      <a class="sl" href="../../design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      <a class="sl" href="../../explain/index.html">Storyboards &amp; mockups</a>
+      <a class="sl" href="../../articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../evidence/index.html">Start here: the measurements</a>
+      <a class="sl" href="../../evidence/status/index.html">What exists today</a>
+      <a class="sl" href="../../evidence/machines/index.html">hello on your machine: reported runs</a>
+      <a class="sl" href="../../evidence/research/index.html">Research note</a>
+      <a class="sl" href="../../landscape/index.html">How it compares: policies at the centre</a>
+      <a class="sl" href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+      <a class="sl" href="../../landscape/integrations/index.html">Integration points</a>
+      <a class="sl" href="../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+      <a class="sl" href="../../landscape/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../code/index.html">Code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/index.html">Start here: where the code is</a>
+      <a class="sl" href="../../code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl" href="../../code/flows/index.html">Flows through the code</a>
+      <a class="sl" href="../../code/examples/index.html">Examples</a>
+      <a class="sl" href="../../code/browser/index.html">Linux in the browser</a>
+      <a class="sl" href="../../code/releases/index.html">Releases of the code: immutable paths</a>
+      <a class="sl" href="../../code/languages/index.html">Languages</a>
+      <a class="sl" href="../../code/standards/index.html">Standards and test vectors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../security/index.html">Security<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../security/index.html">Start here: the register</a>
+      <a class="sl" href="../../security/threat-model/index.html">Threat model</a>
+      <a class="sl" href="../../security/risks/index.html">Known risks</a>
+      <a class="sl" href="../../security/reviews/index.html">Reviews</a>
+      <a class="sl" href="../../security/hardening/index.html">Hardening</a>
+      <a class="sl" href="../../security/supply-chain/index.html">Supply chain</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../project/index.html">Start here: the project</a>
+      <a class="sl" href="../../project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="../../project/releases.html">Release history</a>
+      <a class="sl" href="../../project/adoption/index.html">Getting users: the review and the plan</a>
+      <a class="sl" href="../../project/sources/index.html">The source documents</a>
+      <a class="sl" href="../../project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="../../admin/index.html">How the project is run</a>
+      <a class="sl" href="../../admin/board/index.html">The board: tasks &amp; requests</a>
+      <a class="sl" href="../../admin/updates/index.html">Updates: what is happening</a>
+      <a class="sl" href="../../project/outreach/index.html">Outreach: finding the people it is for</a>
+      <a class="sl" href="../../project/agents/index.html">The agents and their keys</a>
+      <a class="sl" href="../../project/telemetry/index.html">Telemetry: who reads this site</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__CLI">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+  <script src="../../assets/telemetry.js" data-root="../../" defer></script>
+</div></nav>
+
+<main class="doc has-toc" id="content" tabindex="-1">
+  <div class="doc-body">
+  <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">the design</a> / the decision at the door · <a href="index.md">this page as markdown</a></div>
+  <h1>The decision at the door: yes, no, or a question in your words</h1>
+  <details class="toc-inline">
+    <summary>On this page · 8 sections</summary>
+    <ol>
+      <li><a href="#1-today-s-prompt-is-weak-as-a-control-and-bad-as-a-decision-at-once">1. Today's prompt is weak as a control and bad as a decision, at once</a></li>
+      <li><a href="#2-the-prompt-as-the-last-resort">2. The prompt as the last resort</a></li>
+      <li><a href="#3-the-register-s-principles-read-against-the-levels">3. The register's principles, read against the levels</a></li>
+      <li><a href="#4-the-decision-engine">4. The decision engine</a></li>
+      <li><a href="#5-the-prototype-run-once">5. The prototype, run once</a></li>
+      <li><a href="#6-two-things-measured-on-the-way-26-oct-2026">6. Two things measured on the way, 26 Oct 2026</a></li>
+      <li><a href="#7-what-this-asks-of-the-code">7. What this asks of the code</a></li>
+      <li><a href="#8-what-this-page-does-not-claim">8. What this page does not claim</a></li>
+    </ol>
+  </details>
+<div class="note"><b>Status: proposed, <span class="asof">as of 26 Oct 2026</span>, with one prototype run.</b> Dinis Cruz's direction of 26 Oct 2026, written by pbp@sharness: an agent should be able to run with every permission granted, because the policy underneath decides, and the one decision the policy cannot make should reach the person as a question in their own words, not as a box of shell. Nothing here is built. A 99-line prototype of the decision engine answered twelve sample commands on 26 Oct 2026 (§5); it is on a branch for the CLI agent, not in the package.</div>
+<h2 id="1-today-s-prompt-is-weak-as-a-control-and-bad-as-a-decision-at-once">1. Today's prompt is weak as a control and bad as a decision, at once</h2>
+<p>A coding agent's permission prompt asks the person to approve a command before it runs. In the <a href="https://riskmandate.ai/abp.html">ABP</a>'s terms it is a <b>Setting</b>: the agent's own process asks the agent's own user, and the same account can turn the prompts off. It bounds nothing the grant does not already include. <a href="https://ux.sgit.ai">ux.sgit.ai</a>'s finding <a href="https://ux.sgit.ai/findings/UX-059.html">UX-059</a> (25 Oct 2026) shows it fails as a decision too: "Bash wants to run:" over a box of raw shell that fades out before the line that matters, Deny beside a filled "Allow once", and nothing about what the command reads, writes, reaches or can undo. The register's first principle is the test: <em>can they say what will happen if they press each button?</em> They cannot. The finding's own sentence is the whole case: repeated prompts like this teach people to press Allow without reading, which defeats the purpose of asking.</p>
+<h2 id="2-the-prompt-as-the-last-resort">2. The prompt as the last resort</h2>
+<p>A Process Behaviour Policy moves the decision: from the moment of the call to the moment of launch, from the agent's process to the kernel, and from a box of shell to a short list in the person's nouns (this workspace, these sites, these secrets), made once, with what you need to make it, and hashed. After that:</p>
+<ol>
+<li><b>Everything the policy allows needs no prompt.</b> It was decided.</li>
+<li><b>Everything the policy refuses needs no prompt.</b> The kernel refuses it; the agent gets an error and reports it. A refusal is nothing, not damage.</li>
+<li><b>A prompt remains only for what the policy cannot hold.</b></li>
+</ol>
+<p>The third clause is the honest one, and today it is not empty: hostnames (the v0 policy names ports), UDP, the inherited environment, and anything about <em>intent on an allowed channel</em>, such as a force push on a branch the policy lets the agent write, or a delete of files it may write. Those rows belong to <code>net</code>, <code>bash</code> and the behaviour rows of <a href="../pbp/index.html#4-two-kinds-of-rows-one-policy">the PBP</a>; until the doors exist they are the residue a prompt still covers. The report counts them, as <code>hello</code> counts probes: rows held, rows refused, rows unheld.</p>
+<p>So "accept every permission" is the wrong name for the mode. The mode is: <b>yes to what the policy allows, silence for what it refuses, and a question only for what it cannot hold.</b></p>
+<h2 id="3-the-register-s-principles-read-against-the-levels">3. The register's principles, read against the levels</h2>
+<p><a href="https://ux.sgit.ai/principles/">ux.sgit.ai's principles</a> map onto <a href="../levels/index.html">the levels</a> almost one to one:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Principle (ux.sgit.ai)</th><th>What it is here</th></tr></thead>
+<tbody>
+<tr><td>A decision comes with what you need to make it</td><td>the level-3 and level-5 report: your agent can reach N things you did not ask for; M will be refused; K are not held here</td></tr>
+<tr><td>Work is never lost to one tap or a silent failure</td><td>a refusal is nothing: a refused write leaves the file as it was, and the agent says so</td></tr>
+<tr><td>The reader can always tell what the system is doing</td><td>an audit line per refusal, by the door that refused; the terminal itself unchanged (§6)</td></tr>
+<tr><td>The same gesture gives the same result</td><td>the kernel refuses the same way every time, which is exactly what a prompt a tired person clicks through does not do</td></tr>
+<tr><td>What a page says about the present is true now</td><td>the hash and the date on every run</td></tr>
+</tbody>
+</table></div>
+<p>UX-059's proposed fix is a PBP row. It asks the prompt to lead with one plain line, then "decision factors as labels: reads, writes, deletes, network access, changes outside the working directory, and whether the change is reversible." That is subject, resource, operation, predicate and the ABP's undo class. The one prompt that survives should show the row in that shape, and the row the person approves can be written back into the policy.</p>
+<h2 id="4-the-decision-engine">4. The decision engine</h2>
+<p>Dinis Cruz's proposal: before the agent runs a command, it calls the policy with <b>the exact command, its working directory and its stated intent</b>. The engine maps the command to the policy's rows and answers one of three things.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Answer</th><th>When</th><th>What the person sees</th></tr></thead>
+<tbody>
+<tr><td><b>allow</b></td><td>every row the command touches is held by the policy</td><td>nothing; an audit line</td></tr>
+<tr><td><b>deny</b></td><td>a row the policy refuses, a behaviour row it breaks, or a command the engine cannot read</td><td>nothing, unless they look: the agent gets the reason and says so</td></tr>
+<tr><td><b>ask</b></td><td>a row the policy cannot hold (a host under a ports-only policy; an irreversible delete under a policy that says only "write")</td><td>one question, in the UX-059 shape: what it reads, writes, reaches, whether it can be undone, the agent's stated intent, and three choices: once, add the row, refuse</td></tr>
+</tbody>
+</table></div>
+<p><b>Four rules.</b></p>
+<ul>
+<li><b>Deterministic in, deterministic out.</b> The command's parameters are what they are; the mapping to rows is a function of the command, the directory and the policy. The same command under the same policy gets the same answer, every time (the register's principle 6).</li>
+<li><b>What cannot be read cannot be allowed.</b> A command the engine does not know, a pipeline it cannot parse, downloaded text piped into a shell: the answer is no, with the reason. An engine that guesses is a prompt with a worse interface.</li>
+<li><b>Intent is a claim, not a fact.</b> The agent's stated intent goes into the question so the person can judge it; it never changes the verdict. Only rows do.</li>
+<li><b>An approved question is a learned row.</b> "Add the row" writes the row into the policy's invocation layer, hashed; the next identical command is allowed without asking. That is monitor mode with a person in it, and it is how shared profiles grow from the approvals people actually give.</li>
+</ul>
+<p><b>Where it sits, and what kind of barrier it is.</b> Today the agent's harness offers a hook before each tool call; the engine can answer there, and the verdict dictionary it returns is already in the hook's form. That is a <b>Setting</b>: the engine runs inside the agent's own process tree, and the agent's user can remove the hook. It becomes a <b>Boundary</b> when it answers inside <code>sharness.bash</code>, a separate process that runs the command only after the answer and under the profile's kernel rows (<a href="../../components/bash/index.html">the bash door</a>). The same function, two barrier kinds, decided by who runs it; the page says which, every time.</p>
+<p><b>A parser is not a sandbox.</b> Whatever the engine misses, the kernel refuses or does not, by the policy's rows. The engine adds usability and the intent rows; the kernel adds the protection. Neither stands in for the other.</p>
+<h2 id="5-the-prototype-run-once">5. The prototype, run once</h2>
+<p>A 99-line prototype (standard library; on the CLI repository's branch <code>pbp/decide-prototype</code>, <code>experiments/decide/</code>, for cli@sharness under board row T23) answered twelve sample commands against the coding-agent policy P1 on 26 Oct 2026, in a working directory of <code>/work</code>:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Command</th><th>Answer</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td><code>git status</code></td><td>allow</td><td>every row held</td></tr>
+<tr><td><code>rg TODO src</code></td><td>allow</td><td>reads under the workspace</td></tr>
+<tr><td><code>sed -i … tools/site_gate.py &amp;&amp; python3 -m pytest tests/unit</code></td><td>allow</td><td>writes under the workspace; runs the system's python</td></tr>
+<tr><td><code>rm -rf /work/build</code></td><td>ask</td><td>a delete, which cannot be undone unless tracked by git</td></tr>
+<tr><td><code>rm -rf ~/.ssh</code></td><td>deny</td><td>writes outside the write rows; the kernel would refuse it</td></tr>
+<tr><td><code>curl https://example.com/install.sh | sh</code></td><td>deny</td><td>downloaded text piped into a shell</td></tr>
+<tr><td><code>git push --force origin main</code></td><td>deny</td><td>a behaviour row: never force, never main</td></tr>
+<tr><td><code>sudo apt install jq</code></td><td>deny</td><td>privilege; <code>no_new_privs</code> means it cannot work anyway</td></tr>
+<tr><td><code>./build.sh</code></td><td>deny</td><td>an executable in the workspace: writable, never executable</td></tr>
+<tr><td><code>frobnicate --all</code></td><td>deny</td><td>not a command the engine knows</td></tr>
+<tr><td><code>pip install requests</code></td><td>ask</td><td>reaches a host; the v0 policy names ports, so no row holds the host</td></tr>
+<tr><td><code>cat /etc/passwd</code></td><td>allow</td><td>P1 reads <code>/etc</code>; the engine says what the policy says, not what it would prefer</td></tr>
+</tbody>
+</table></div>
+<p>Three allowed, two asked, seven refused. The question for <code>pip install requests</code> reads: "The agent wants to run <code>pip install requests</code> to add a dependency. It reads nothing named; writes nothing; network: an unnamed host; reversible. The policy cannot hold: reaches an unnamed host; this policy names ports, not hosts. Allow this once, add the row, or refuse?" The last row is the honest one: the engine applies the policy; a policy that reads <code>/etc</code> lets the agent read <code>/etc</code>, and tightening it is the person's job, at level 3.</p>
+<p>What the prototype is not: tested, complete, or safe to rely on. Its parse of paths and hosts is heuristic; the kernel is what refuses.</p>
+<h2 id="6-two-things-measured-on-the-way-26-oct-2026">6. Two things measured on the way, 26 Oct 2026</h2>
+<p>An experiment to run a coding agent under a policy in this project's own hosted session was started and stopped the same morning: it reached into the session's own wiring, which the design's <a href="../process-tree/index.html#4-safety-rules-for-testing-inside-a-live-agent-session">safety rules</a> say not to touch, and it belongs on a machine that is the person's own. Two findings stand, measured on Linux 6.18 with Landlock ABI 7, as root:</p>
+<ul>
+<li><b>The terminal needs its devices as write rows.</b> Under a policy that lets a process read <code>/dev</code> but not write it, tmux fails with "fork failed: Permission denied". With <code>/dev/pts</code>, <code>/dev/ptmx</code> and <code>/dev/tty</code> writable, tmux starts a session, lists it and kills it normally. Every profile for an interactive agent carries those three rows.</li>
+<li><b>A learned policy is generated from every successful open, never trimmed by hand.</b> A draft that kept only the most frequent prefixes from one <code>strace</code> dropped a path the run needs, and the run then failed with an unhelpful error rather than a clear refusal. Monitor mode is a command that writes the whole footprint, not a script a person edits.</li>
+</ul>
+<h2 id="7-what-this-asks-of-the-code">7. What this asks of the code</h2>
+<ul>
+<li><b>T23</b> (cli@sharness): <code>sharness-ai decide</code>, the engine, from the prototype or from scratch: a command, a policy, a directory and an intent in; allow, deny or ask out, with the summary line and the hook form; unknown is no; every verdict tested.</li>
+<li>The hook wiring as the first home for it, said to be a Setting; <code>sharness.bash</code> as the second, a Boundary.</li>
+<li>Monitor mode as a command (<code>learn</code>, proposed) that writes a policy from every successful open of a traced run, with the terminal rows included for interactive profiles.</li>
+<li>An approved <b>ask</b> written back as a row in the invocation layer, so profiles learn.</li>
+</ul>
+<h2 id="8-what-this-page-does-not-claim">8. What this page does not claim</h2>
+<ul>
+<li>Nothing is built. The prototype ran once on twelve strings and is not in the package.</li>
+<li>The engine adds no enforcement. Everything it decides is held by the kernel or not, by the policy's rows; at a hook it is a Setting.</li>
+<li>"Accept every permission" is safe only to the extent the policy holds the rows the permission would have guarded; the unheld rows are counted and named, and today they include hostnames.</li>
+<li>The two measurements are from one machine on one day; the experiment they came from was not completed and is not claimed.</li>
+</ul>
+<p>Sources: Dinis Cruz's direction of 26 Oct 2026 in pbp@sharness's session; <a href="https://ux.sgit.ai">ux.sgit.ai</a>, its <a href="https://ux.sgit.ai/principles/">principles</a> and <a href="https://ux.sgit.ai/findings/UX-059.html">UX-059</a> (read 26 Oct 2026); <a href="../pbp/index.html">the PBP on one page</a>; <a href="../levels/index.html">the levels</a>; <a href="../agents/index.html">Agents and LLMs</a> for where the harness offers a hook; <a href="../../components/bash/index.html">the bash door</a>; <a href="https://riskmandate.ai/abp.html">Agent Behaviour Policies</a> for the barrier kinds and the undo class.</p>
+
+  </div>
+  <nav class="toc-side" aria-label="On this page">
+    <div class="toc-head">On this page</div>
+    <ol>
+      <li><a href="#1-today-s-prompt-is-weak-as-a-control-and-bad-as-a-decision-at-once">1. Today's prompt is weak as a control and bad as a decision, at once</a></li>
+      <li><a href="#2-the-prompt-as-the-last-resort">2. The prompt as the last resort</a></li>
+      <li><a href="#3-the-register-s-principles-read-against-the-levels">3. The register's principles, read against the levels</a></li>
+      <li><a href="#4-the-decision-engine">4. The decision engine</a></li>
+      <li><a href="#5-the-prototype-run-once">5. The prototype, run once</a></li>
+      <li><a href="#6-two-things-measured-on-the-way-26-oct-2026">6. Two things measured on the way, 26 Oct 2026</a></li>
+      <li><a href="#7-what-this-asks-of-the-code">7. What this asks of the code</a></li>
+      <li><a href="#8-what-this-page-does-not-claim">8. What this page does not claim</a></li>
+    </ol>
+    <a class="toc-top" href="#content">↑ Back to top</a>
+  </nav>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a class="ver" href="../../project/releases.html" title="Site release history">v0.6.15</a> · <a href="../../project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>Try it</h4>
+    <a href="../../code/playground/index.html">The playground</a>
+    <a href="../../code/browser/demo/index.html">A kernel in a tab</a>
+    <a href="../../index.html#start">Start in 60 seconds</a>
+    <a href="../../code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="../../evidence/machines/index.html">Report your machine</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai ↗</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI ↗</a>
+  </div>
+  <div>
+    <h4>Understand</h4>
+    <a href="../../design/index.html">The brief, in one read</a>
+    <a href="../../components/index.html">The components</a>
+    <a href="../../design/why/index.html">Why: the last metre</a>
+    <a href="../../design/architecture/index.html">Architecture</a>
+    <a href="../../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+    <a href="../../explain/storyboards/index.html">Storyboards</a>
+    <a href="../../articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Check it</h4>
+    <a href="../../evidence/index.html">Measurements</a>
+    <a href="../../evidence/status/index.html">What exists today</a>
+    <a href="../../evidence/machines/index.html">hello on your machine</a>
+    <a href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+    <a href="../../landscape/market/index.html">Market &amp; competitors</a>
+    <a href="../../security/index.html">Security: the register</a>
+    <a href="../../security/threat-model/index.html">Threat model</a>
+    <a href="../../security/risks/index.html">Known risks</a>
+  </div>
+  <div>
+    <h4>Follow the work</h4>
+    <a href="../../project/about/index.html">About &amp; naming</a>
+    <a href="../../project/releases.html">Release history</a>
+    <a href="../../project/adoption/index.html">Getting users</a>
+    <a href="../../admin/index.html">How the project is run</a>
+    <a href="../../admin/board/index.html">The board</a>
+    <a href="../../admin/updates/index.html">Updates</a>
+    <a href="../../admin/notes/index.html">Commit notes</a>
+    <a href="../../admin/guidance/index.html">Guidance for agents</a>
+  </div>
+</div>
+<div class="agentline">For agents and crawlers: <a href="../../llms.txt">llms.txt</a> · <a href="../../llms-full.txt">llms-full.txt</a> · <a href="../../index.md">index.md</a> · <a href="../../sitemap.xml">sitemap.xml</a> · <a href="../../.well-known/security.txt">security.txt</a></div></footer>
+
+</body>
+</html>

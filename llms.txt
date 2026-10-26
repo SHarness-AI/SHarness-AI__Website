@@ -62,6 +62,11 @@ SHarness is unrelated to Sharness, the shell testing library.
   doors and targets, mechanisms, the ground), each compiling deterministically into the one below so the
   simplest is as binding as the deepest; every level reports unheld rows in its own nouns; an escape hatch
   to any lower level; each level a service (vendor, organisation, laptop); two stacks on TCP. PROPOSED, 26 Oct 2026
+- /design/decision/index.md — THE DECISION AT THE DOOR: the permission prompt as a Setting and a bad decision (ux.sgit.ai
+  UX-059); the prompt as the last resort (yes to what the policy allows, silence for what it refuses, a question only
+  for what it cannot hold); the decision engine: command + policy + intent -> allow, deny or ask, unknown is no, an
+  approved ask is a learned row; a Setting at a hook, a Boundary in sharness.bash; a 99-line prototype on twelve
+  commands; two measurements (the terminal's devices as write rows; a learned policy is never trimmed by hand). PROPOSED, 26 Oct 2026
 - /design/agents/index.md — how an agent message flowed in the observed workspace; where SHarness
   plugs in (hooks documented; Claude Code's own sandbox); sharness.llm; sharness.bash; dual-LLM
 - /design/process-tree/index.md — making every process go through sharness.bash; side doors;

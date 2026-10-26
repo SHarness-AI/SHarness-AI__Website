@@ -50,6 +50,8 @@ PAGES = [
      "What a PBP is, in one definition every page and every enforcer is checked against: the four objects for a process, the three things that make it binding, capability rows and behaviour rows and the rule that joins them, keepers, the fractal, and the four parts of the spec."),
     ("design/levels",       "The levels: one policy, written at the depth you need",
      "Six levels from the sentence a person says to the ground that refuses, each compiling into the one below, each honest about what it cannot hold; each level a service, so the vendor, the organisation and the laptop can each run one. Proposed."),
+    ("design/decision",     "The decision at the door",
+     "Yes to what the policy allows, silence for what it refuses, a question only for what it cannot hold: the prompt as the last resort; ux.sgit.ai's principles read against the levels; the decision engine (a command, a policy, an intent: allow, deny or ask), a prototype run once; two things measured on the way. Proposed."),
     ("design/agents",       "Agents and LLMs",
      "How an agent message flows (observed), where SHarness plugs in, sharness.llm, sharness.bash, the dual-LLM split, and Claude API compatibility."),
     ("design/process-tree", "Enforcing the process tree",

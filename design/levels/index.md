@@ -83,7 +83,11 @@ Both are TCP. TCP gives each stack the same two things: an abstraction, because 
 
 The site's front page offers three starts today (the browser, Linux, a Claude Code session). The same page, read through the levels, should offer the levels instead: level 5 is the start in sixty seconds, level 3 is the policy page, level 2 is the design, level 1 is the enforcement map, level 0 is the evidence. Nothing on the site moves; what changes is which page a reader is sent to first.
 
-## 8. What this page does not claim
+## 8. The prompt, after the levels
+
+What happens to the agent's permission prompt once a policy sits underneath is its own page: [the decision at the door](../decision/index.md). In one line: yes to what the policy allows, silence for what it refuses, a question in the person's words only for what it cannot hold.
+
+## 9. What this page does not claim
 
 - No level's compiler exists. The v0 policy and `run` are one runnable slice between levels 3 and 2; `policy translate` writes level-1 forms for four enforcers and does not run them.
 - "Deterministic expansion" is a requirement on the compilers, not a property anything has yet; the canonical form of each level is unwritten.
