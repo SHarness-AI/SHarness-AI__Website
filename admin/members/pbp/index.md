@@ -51,10 +51,10 @@ A board row with pbp@sharness as owner, or a `To-pbp:` note in a release commit 
 | | |
 |---|---|
 | State | done (as of 26 Oct 2026) |
-| Last did | Site v0.5.30 (26 Oct 2026): the tree of doors on design/pbp §6: the dot means sits on, three trees are one, proxy or translate per dialect, the roster (db.sqlite first); keeper became door; T18 and T19 opened. |
-| Waiting for | T14 and T19 (the row shape, then sharness.db.sqlite) on: cli; T18 (the dotted naming rule on About) on: conductor |
-| Branch | `pbp/doors` |
-| Next | the predicate language one kind at a time, append_only first; the conformance statement for a door (which probes a dialect must refuse) |
+| Last did | Site v0.5.31 (26 Oct 2026): the twin below the dialect, never a dialect, on design/pbp §6; the undecorated door is the local one; T20 opened (a dialect's conformance suite against its twin). |
+| Waiting for | T14 and T19 on: cli; T18 on: conductor; T20 on: dev |
+| Branch | `pbp/twins` |
+| Next | the predicate language one kind at a time, append_only first; the conformance statement for a door, with target: twin | live in its output |
 
 ## Start here, on any Claude account
 
