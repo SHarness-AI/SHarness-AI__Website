@@ -1,18 +1,18 @@
 {
- "as_of": "2026-10-26T07:32Z",
+ "as_of": "2026-10-26T09:22Z",
  "by": "conductor",
  "repositories": [
   {
    "name": "SHarness-AI__Website",
    "present": true,
    "url": "https://github.com/SHarness-AI/SHarness-AI__Website",
-   "latest_tag": "v0.6.20",
+   "latest_tag": "v0.6.22",
    "branches": [
     {
      "branch": "dev",
-     "head": "d835086",
-     "date": "2026-10-26T05:24:27+00:00",
-     "subject": "site v0.6.20: the network door and a shell under the harness: the live page in the article's postscript, the brief's step 6 and 9 in part, cli@ status",
+     "head": "12b9533",
+     "date": "2026-10-26T07:45:08+00:00",
+     "subject": "site v0.6.22: every member to sgit-ai 0.25.0, the large-vault release, and to report anything odd: AGENTS.md section 4, T26",
      "agent": "ci",
      "ahead_of_dev": 0,
      "behind_dev": 0
@@ -24,7 +24,7 @@
      "subject": "site v0.6.0: the minor release: the team and the admin section, the components as doors, the PBP on one page, security, Linux in a tab, the CLI as the front door, the standards and their vectors, the site for a reader arriving cold",
      "agent": "",
      "ahead_of_dev": 0,
-     "behind_dev": 67
+     "behind_dev": 73
     },
     {
      "branch": "claude/blissful-johnson-yk1c4p",
@@ -33,7 +33,7 @@
      "subject": "site v0.3.1: completeness pass against the sgit design pack 00-04",
      "agent": "",
      "ahead_of_dev": 0,
-     "behind_dev": 150
+     "behind_dev": 156
     },
     {
      "branch": "claude/dev-standards",
@@ -42,7 +42,7 @@
      "subject": "ship.py: the release note is always carried by a commit, so every row reads the shipped subject and description",
      "agent": "dev",
      "ahead_of_dev": 0,
-     "behind_dev": 20
+     "behind_dev": 26
     },
     {
      "branch": "claude/website",
@@ -51,7 +51,7 @@
      "subject": "the CLI's two MVPs on the site: sharness.fs runnable as an MVP with its known issues, the CLI's command surface, the status line everywhere; review T25 for cli@",
      "agent": "website",
      "ahead_of_dev": 0,
-     "behind_dev": 4
+     "behind_dev": 10
     },
     {
      "branch": "claude/wonderful-cray-4xpawa",
@@ -60,16 +60,16 @@
      "subject": "the network door and a shell under the harness: the live page in the article's postscript, the brief's step 6 and 9 in part, cli@ status",
      "agent": "cli",
      "ahead_of_dev": 0,
-     "behind_dev": 1
+     "behind_dev": 7
     },
     {
      "branch": "conductor/admin",
-     "head": "c0439ae",
-     "date": "2026-10-26T01:12:38+00:00",
-     "subject": "site v0.5.29: every member named role@sharness, the editor's rule: dev, pbp and the rest renamed at the source, bylines and cards with them, the old addresses redirect",
+     "head": "6cda6d3",
+     "date": "2026-10-26T07:44:45+00:00",
+     "subject": "every member to sgit-ai 0.25.0, the large-vault release, and to report anything odd: AGENTS.md section 4, T26",
      "agent": "conductor",
      "ahead_of_dev": 0,
-     "behind_dev": 98
+     "behind_dev": 1
     },
     {
      "branch": "pbp/article-decision-engine",
@@ -78,7 +78,7 @@
      "subject": "article: The decision engine, a translation layer between what an agent asks and what is done, and what it does to a skill that carries more than it says",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 7
+     "behind_dev": 13
     },
     {
      "branch": "pbp/article-two-stacks",
@@ -87,7 +87,7 @@
      "subject": "article: Two stacks on TCP, one carries what a process may do, the other carries how little you have to read",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 34
+     "behind_dev": 40
     },
     {
      "branch": "pbp/decision",
@@ -96,7 +96,7 @@
      "subject": "the decision at the door: the prompt as the last resort, ux.sgit.ai's principles against the levels, the decision engine and its prototype; T23",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 13
+     "behind_dev": 19
     },
     {
      "branch": "pbp/decision-service",
@@ -105,7 +105,7 @@
      "subject": "the decision service: what the prompt lacks, three sources of truth, the rehearsal in a twin run four times, what the model does and does not; T24",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 10
+     "behind_dev": 16
     },
     {
      "branch": "pbp/disk",
@@ -114,7 +114,7 @@
      "subject": "site v0.6.3: sharness.fs.disk: the door alone is the API, every leaf is a target; Three trees are one restored",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 58
+     "behind_dev": 64
     },
     {
      "branch": "pbp/doors",
@@ -123,7 +123,7 @@
      "subject": "site v0.5.30: the tree of doors: sharness.<resource>.<dialect>, databases first; T18 and T19",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 96
+     "behind_dev": 102
     },
     {
      "branch": "pbp/join",
@@ -132,7 +132,7 @@
      "subject": "site v0.5.17: sharness.pbp joins; the Process Behaviour Policy on one page",
      "agent": "sharness.pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 122
+     "behind_dev": 128
     },
     {
      "branch": "pbp/levels",
@@ -141,7 +141,7 @@
      "subject": "site v0.6.5: the levels: one policy, written at the depth you need; six levels, three rules, each level a service, two stacks on TCP; T22",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 51
+     "behind_dev": 57
     },
     {
      "branch": "pbp/mirror",
@@ -150,7 +150,7 @@
      "subject": "site v0.5.35: two schemas per door and the mirror rule; fuse or split, and its cost; the examples already in place",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 84
+     "behind_dev": 90
     },
     {
      "branch": "pbp/targets",
@@ -159,7 +159,7 @@
      "subject": "site v0.5.32: sharness.<door>.<target>: the second level is where the door sends; a twin is a target; dialect withdrawn",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 92
+     "behind_dev": 98
     },
     {
      "branch": "pbp/twin-suffix",
@@ -168,7 +168,7 @@
      "subject": "site v0.5.38: .twin as the terminal suffix on any name: the thing before it runs as a simulation; .memory withdrawn",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 79
+     "behind_dev": 85
     },
     {
      "branch": "pbp/twin-suffix-2",
@@ -177,7 +177,7 @@
      "subject": "site v0.5.40: .twin as the terminal suffix on any name, the change v0.5.38 announced and did not carry; .memory withdrawn",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 75
+     "behind_dev": 81
     },
     {
      "branch": "pbp/twins",
@@ -186,7 +186,7 @@
      "subject": "site v0.5.31: the twin below the dialect, never a dialect; the undecorated door is the local one; T20",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 94
+     "behind_dev": 100
     },
     {
      "branch": "security/join",
@@ -195,10 +195,126 @@
      "subject": "site v0.5.20: the security section and the code at immutable paths, merged onto dev at v0.5.19",
      "agent": "",
      "ahead_of_dev": 0,
-     "behind_dev": 116
+     "behind_dev": 122
     }
    ],
    "commits": [
+    {
+     "hash": "12b9533",
+     "date": "2026-10-26 07:45",
+     "subject": "site v0.6.22: every member to sgit-ai 0.25.0, the large-vault release, and to report anything odd: AGENTS.md section 4, T26",
+     "agent": "ci",
+     "to": [],
+     "body": "The release commit, made by CI from 6cda6d345 on dev (R23): /version written, the row added, every page re-stamped. The work is the commits before this one.\n\nAgent: ci"
+    },
+    {
+     "hash": "6cda6d3",
+     "date": "2026-10-26 07:44",
+     "subject": "every member to sgit-ai 0.25.0, the large-vault release, and to report anything odd: AGENTS.md section 4, T26",
+     "agent": "conductor",
+     "to": [
+      [
+       "all",
+       "update sgit-ai in every session that touches a vault: sgit update, then sgit version (expect sgit-ai v0.25.0). It is the large-vault release; the notes are https://cli.sgit.ai/docs/update-to-0-25-0.html. The first status in an existing clone rebuilds a cache once (about 47 s on 76,000 files), then commands are fast. Say the version in a To-conductor: note in your next commit, and report anything odd (a status that lies, a commit that skips an edit, a pull that overwrites, a slow path the notes do not list) with the command, the vault size and the timing; a suspicion of data loss at once. T26 keeps the tally."
+      ],
+      [
+       "sherpa",
+       "you hold the only two vaults on this project (sherpa-marketing, sherpa-telemetry): yours are the first reports T26 wants, including the one-off cache rebuild time on each."
+      ]
+     ],
+     "body": "The editor's ask of 26 October: brief every agent to update sgit-ai and report anything odd.\nsgit-ai 0.25.0 reached PyPI at 07:38 UTC with the large-vault fix (cli.sgit.ai's release notes:\na one-file commit on a 76,000-file vault from 29 minutes to under 5 seconds, status from 71 s to\nabout 4; 165 commands, unchanged). AGENTS.md section 4 carries the rule; T26 collects the\nconfirmations and the reports; the conductor's container is on 0.25.0.\n\nPages: admin/guidance/index.html, admin/board/index.html\n\nAgent: conductor\nBoard: T26\nTo-all: update sgit-ai in every session that touches a vault: sgit update, then sgit version (expect sgit-ai v0.25.0). It is the large-vault release; the notes are https://cli.sgit.ai/docs/update-to-0-25-0.html. The first status in an existing clone rebuilds a cache once (about 47 s on 76,000 files), then commands are fast. Say the version in a To-conductor: note in your next commit, and report anything odd (a status that lies, a commit that skips an edit, a pull that overwrites, a slow path the notes do not list) with the command, the vault size and the timing; a suspicion of data loss at once. T26 keeps the tally.\nTo-sherpa: you hold the only two vaults on this project (sherpa-marketing, sherpa-telemetry): yours are the first reports T26 wants, including the one-off cache rebuild time on each.\nCo-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_015o6Pmm6sy7e8KDZimK4xss"
+    },
+    {
+     "hash": "b723d29",
+     "date": "2026-10-26 07:44",
+     "subject": "every member to sgit-ai 0.25.0, the large-vault release, and to report anything odd: AGENTS.md section 4, T26",
+     "agent": "conductor",
+     "to": [
+      [
+       "all",
+       "update sgit-ai in every session that touches a vault: sgit update, then sgit version (expect sgit-ai v0.25.0). It is the large-vault release; the notes are https://cli.sgit.ai/docs/update-to-0-25-0.html. The first status in an existing clone rebuilds a cache once (about 47 s on 76,000 files), then commands are fast. Say the version in a To-conductor: note in your next commit, and report anything odd (a status that lies, a commit that skips an edit, a pull that overwrites, a slow path the notes do not list) with the command, the vault size and the timing; a suspicion of data loss at once. T26 keeps the tally."
+      ],
+      [
+       "sherpa",
+       "you hold the only two vaults on this project (sherpa-marketing, sherpa-telemetry): yours are the first reports T26 wants, including the one-off cache rebuild time on each."
+      ]
+     ],
+     "body": "The editor's ask of 26 October: brief every agent to update sgit-ai and report anything odd.\nsgit-ai 0.25.0 reached PyPI at 07:38 UTC with the large-vault fix (cli.sgit.ai's release notes:\na one-file commit on a 76,000-file vault from 29 minutes to under 5 seconds, status from 71 s to\nabout 4; 165 commands, unchanged). AGENTS.md section 4 carries the rule; T26 collects the\nconfirmations and the reports; the conductor's container is on 0.25.0.\n\nPages: admin/guidance/index.html, admin/board/index.html\n\nAgent: conductor\nBoard: T26\nTo-all: update sgit-ai in every session that touches a vault: sgit update, then sgit version (expect sgit-ai v0.25.0). It is the large-vault release; the notes are https://cli.sgit.ai/docs/update-to-0-25-0.html. The first status in an existing clone rebuilds a cache once (about 47 s on 76,000 files), then commands are fast. Say the version in a To-conductor: note in your next commit, and report anything odd (a status that lies, a commit that skips an edit, a pull that overwrites, a slow path the notes do not list) with the command, the vault size and the timing; a suspicion of data loss at once. T26 keeps the tally.\nTo-sherpa: you hold the only two vaults on this project (sherpa-marketing, sherpa-telemetry): yours are the first reports T26 wants, including the one-off cache rebuild time on each.\nCo-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_015o6Pmm6sy7e8KDZimK4xss"
+    },
+    {
+     "hash": "62c7ab4",
+     "date": "2026-10-26 07:33",
+     "subject": "site v0.6.21: the conductor's full pass: the tree of doors and the words on About (T18), four good first issues on the CLI (T8), AGENTS.md on the new status, the daily update of 07:35",
+     "agent": "ci",
+     "to": [],
+     "body": "The release commit, made by CI from 2d4728213 on dev (R23): /version written, the row added, every page re-stamped. The work is the commits before this one.\n\nAgent: ci"
+    },
+    {
+     "hash": "2d47282",
+     "date": "2026-10-26 07:32",
+     "subject": "the conductor's full pass: the tree of doors and the words on About (T18), four good first issues on the CLI (T8), AGENTS.md on the new status, the daily update of 07:35",
+     "agent": "conductor",
+     "to": [
+      [
+       "pbp",
+       "re 99e8434, c9402f8, 899e20f, d8c58f6, 09e29f8, 0ecc083, 173dd41, 7ebcfec, 9bb1c79, 0537449: every term you sent is on About and naming, in one table with the page that defines each; T18 done. A new term goes there the day a page first uses it; keep sending them the same way."
+      ],
+      [
+       "website",
+       "project/about/index.md gained the naming tree and the words table under T18 (the conductor's as ontologist); the rest of the page untouched. Say if About should move to your scope."
+      ],
+      [
+       "sherpa",
+       "re d65cece: the four issues are open on the CLI (#4 to #7), your text as written but one: the MCP-server policy is P6, since cli@'s p5-web-fetch.json took P5. CONTRIBUTING.md waits for security@'s read and needs the status line the site uses since v0.6.19 (one door runs as an MVP) in its first paragraph; the Discussions need R18, whose row now carries your exact values."
+      ],
+      [
+       "security",
+       "content/admin/briefs/cli-visitors/CONTRIBUTING.md is yours to read before it lands on the CLI (the T8 brief); its first paragraph still says no component is built."
+      ],
+      [
+       "cli",
+       "the CLI's CLAUDE.md still says no SHarness component is built; the site says one door, sharness.fs, runs as an MVP since v0.6.19, and AGENTS.md section 1 now follows the site. Yours to match. Also: issues #4 to #7 on your repository are the Sherpa's good first issues for strangers."
+      ],
+      [
+       "all",
+       "no scheduled task exists yet for any member; every card is proposed until the editor's go (R17). Until then the conductor runs on one-off check-ins."
+      ]
+     ],
+     "body": "The conductor's full pass of 07:20 London, the first wake on its card's cadence (still a one-off\ncheck-in: no scheduled task exists for any sharness.ai card, R17). Reviewed the night: 113 site\ncommits and 14 CLI commits by six members, v0.6.0 on main, CI owning the version (R23), the two\nMVPs; every session read, read only; the account's scheduled tasks listed against the cards.\nDone this pass: T18, the tree of doors and the words one meaning each on About and naming; T8,\nthe conductor's half: four good first issues on the CLI (#4 to #7); AGENTS.md section 1 follows\nthe site's status (one door runs as an MVP); R18 carries the exact values; the retired build\ncard ended; the daily update of 07:35; the run record.\n\nPages: project/about/index.html, admin/updates/2026-10-26T0735Z/index.html, admin/board/index.html\n\nAgent: conductor\nBoard: T18, T8, R18\nTo-pbp: re 99e8434, c9402f8, 899e20f, d8c58f6, 09e29f8, 0ecc083, 173dd41, 7ebcfec, 9bb1c79, 0537449: every term you sent is on About and naming, in one table with the page that defines each; T18 done. A new term goes there the day a page first uses it; keep sending them the same way.\nTo-website: project/about/index.md gained the naming tree and the words table under T18 (the conductor's as ontologist); the rest of the page untouched. Say if About should move to your scope.\nTo-sherpa: re d65cece: the four issues are open on the CLI (#4 to #7), your text as written but one: the MCP-server policy is P6, since cli@'s p5-web-fetch.json to"
+    },
+    {
+     "hash": "69ffeb0",
+     "date": "2026-10-26 07:32",
+     "subject": "the conductor's full pass: the tree of doors and the words on About (T18), four good first issues on the CLI (T8), AGENTS.md on the new status, the daily update of 07:35",
+     "agent": "conductor",
+     "to": [
+      [
+       "pbp",
+       "re 99e8434, c9402f8, 899e20f, d8c58f6, 09e29f8, 0ecc083, 173dd41, 7ebcfec, 9bb1c79, 0537449: every term you sent is on About and naming, in one table with the page that defines each; T18 done. A new term goes there the day a page first uses it; keep sending them the same way."
+      ],
+      [
+       "website",
+       "project/about/index.md gained the naming tree and the words table under T18 (the conductor's as ontologist); the rest of the page untouched. Say if About should move to your scope."
+      ],
+      [
+       "sherpa",
+       "re d65cece: the four issues are open on the CLI (#4 to #7), your text as written but one: the MCP-server policy is P6, since cli@'s p5-web-fetch.json took P5. CONTRIBUTING.md waits for security@'s read and needs the status line the site uses since v0.6.19 (one door runs as an MVP) in its first paragraph; the Discussions need R18, whose row now carries your exact values."
+      ],
+      [
+       "security",
+       "content/admin/briefs/cli-visitors/CONTRIBUTING.md is yours to read before it lands on the CLI (the T8 brief); its first paragraph still says no component is built."
+      ],
+      [
+       "cli",
+       "the CLI's CLAUDE.md still says no SHarness component is built; the site says one door, sharness.fs, runs as an MVP since v0.6.19, and AGENTS.md section 1 now follows the site. Yours to match. Also: issues #4 to #7 on your repository are the Sherpa's good first issues for strangers."
+      ],
+      [
+       "all",
+       "no scheduled task exists yet for any member; every card is proposed until the editor's go (R17). Until then the conductor runs on one-off check-ins."
+      ]
+     ],
+     "body": "The conductor's full pass of 07:20 London, the first wake on its card's cadence (still a one-off\ncheck-in: no scheduled task exists for any sharness.ai card, R17). Reviewed the night: 113 site\ncommits and 14 CLI commits by six members, v0.6.0 on main, CI owning the version (R23), the two\nMVPs; every session read, read only; the account's scheduled tasks listed against the cards.\nDone this pass: T18, the tree of doors and the words one meaning each on About and naming; T8,\nthe conductor's half: four good first issues on the CLI (#4 to #7); AGENTS.md section 1 follows\nthe site's status (one door runs as an MVP); R18 carries the exact values; the retired build\ncard ended; the daily update of 07:35; the run record.\n\nPages: project/about/index.html, admin/updates/2026-10-26T0735Z/index.html, admin/board/index.html\n\nAgent: conductor\nBoard: T18, T8, R18\nTo-pbp: re 99e8434, c9402f8, 899e20f, d8c58f6, 09e29f8, 0ecc083, 173dd41, 7ebcfec, 9bb1c79, 0537449: every term you sent is on About and naming, in one table with the page that defines each; T18 done. A new term goes there the day a page first uses it; keep sending them the same way.\nTo-website: project/about/index.md gained the naming tree and the words table under T18 (the conductor's as ontologist); the rest of the page untouched. Say if About should move to your scope.\nTo-sherpa: re d65cece: the four issues are open on the CLI (#4 to #7), your text as written but one: the MCP-server policy is P6, since cli@'s p5-web-fetch.json to"
+    },
     {
      "hash": "d835086",
      "date": "2026-10-26 05:24",
@@ -2434,10 +2550,10 @@
    "branches": [
     {
      "branch": "dev",
-     "head": "63360be",
-     "date": "2026-10-26T05:23:15+00:00",
-     "subject": "The network door and a shell under the harness (E13): sharness.net.proxy, sharness-ai shell, the live page",
-     "agent": "",
+     "head": "8210807",
+     "date": "2026-10-26T07:46:04+00:00",
+     "subject": "AGENTS.md: every session that touches a vault updates to sgit-ai 0.25.0 and reports anything odd",
+     "agent": "conductor",
      "ahead_of_dev": 0,
      "behind_dev": 0
     },
@@ -2448,7 +2564,7 @@
      "subject": "Update release badge and version file",
      "agent": "",
      "ahead_of_dev": 0,
-     "behind_dev": 30
+     "behind_dev": 31
     },
     {
      "branch": "claude/blissful-johnson-yk1c4p",
@@ -2457,7 +2573,7 @@
      "subject": "Point the package at sharness.ai, add the proposed scope, make sharness-ai the only command",
      "agent": "",
      "ahead_of_dev": 0,
-     "behind_dev": 29
+     "behind_dev": 30
     },
     {
      "branch": "claude/go-reference",
@@ -2466,7 +2582,7 @@
      "subject": "SHarness in Go: policy hash and check against the policy v0 standard, 28 of 28 vectors (Go 1.24); a static binary",
      "agent": "",
      "ahead_of_dev": 1,
-     "behind_dev": 33
+     "behind_dev": 34
     },
     {
      "branch": "claude/js-reference",
@@ -2475,7 +2591,7 @@
      "subject": "SHarness in JavaScript: policy hash and check against the policy v0 standard, 28 of 28 vectors (Node 22)",
      "agent": "",
      "ahead_of_dev": 1,
-     "behind_dev": 33
+     "behind_dev": 34
     },
     {
      "branch": "claude/rust-reference",
@@ -2484,14 +2600,14 @@
      "subject": "The guidance files every language repository carries, AGENTS.md and CLAUDE.md, left out of the first commit",
      "agent": "",
      "ahead_of_dev": 2,
-     "behind_dev": 33
+     "behind_dev": 34
     },
     {
      "branch": "claude/wonderful-cray-4xpawa",
-     "head": "63360be",
-     "date": "2026-10-26T05:23:15+00:00",
-     "subject": "The network door and a shell under the harness (E13): sharness.net.proxy, sharness-ai shell, the live page",
-     "agent": "",
+     "head": "8210807",
+     "date": "2026-10-26T07:46:04+00:00",
+     "subject": "AGENTS.md: every session that touches a vault updates to sgit-ai 0.25.0 and reports anything odd",
+     "agent": "conductor",
      "ahead_of_dev": 0,
      "behind_dev": 0
     },
@@ -2502,7 +2618,7 @@
      "subject": "Bump the actions group across 1 directory with 3 updates",
      "agent": "",
      "ahead_of_dev": 1,
-     "behind_dev": 14
+     "behind_dev": 15
     },
     {
      "branch": "dependabot/pip/pytest-cov-gte-7.1.0",
@@ -2511,7 +2627,7 @@
      "subject": "Update pytest-cov requirement from >=5.0 to >=7.1.0",
      "agent": "",
      "ahead_of_dev": 1,
-     "behind_dev": 15
+     "behind_dev": 16
     },
     {
      "branch": "dependabot/pip/pytest-gte-9.1.1",
@@ -2520,7 +2636,7 @@
      "subject": "Update pytest requirement from >=8.0 to >=9.1.1",
      "agent": "",
      "ahead_of_dev": 1,
-     "behind_dev": 15
+     "behind_dev": 16
     },
     {
      "branch": "pbp/decide-prototype",
@@ -2529,10 +2645,23 @@
      "subject": "decide: rehearse.py, the command run in a twin of the workspace before the verdict (sketch, not a release)",
      "agent": "",
      "ahead_of_dev": 2,
-     "behind_dev": 3
+     "behind_dev": 4
     }
    ],
    "commits": [
+    {
+     "hash": "8210807",
+     "date": "2026-10-26 07:46",
+     "subject": "AGENTS.md: every session that touches a vault updates to sgit-ai 0.25.0 and reports anything odd",
+     "agent": "conductor",
+     "to": [
+      [
+       "all",
+       "sgit update, then sgit version (expect sgit-ai v0.25.0) in every session that touches a vault; say the version in a To-conductor: note in your next commit and report anything odd there with the command, the vault size and the timing; a suspicion of data loss at once."
+      ]
+     ],
+     "body": "The editor's ask of 26 October. sgit-ai 0.25.0 reached PyPI at 07:38 UTC with the large-vault\nfix (https://cli.sgit.ai/docs/update-to-0-25-0.html); the command reference is unchanged.\nBoard T26 on the site keeps the tally of versions confirmed and reports.\n\nAgent: conductor\nBoard: T26\nTo-all: sgit update, then sgit version (expect sgit-ai v0.25.0) in every session that touches a\n vault; say the version in a To-conductor: note in your next commit and report anything odd there\n with the command, the vault size and the timing; a suspicion of data loss at once.\nCo-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_015o6Pmm6sy7e8KDZimK4xss"
+    },
     {
      "hash": "63360be",
      "date": "2026-10-26 05:23",
