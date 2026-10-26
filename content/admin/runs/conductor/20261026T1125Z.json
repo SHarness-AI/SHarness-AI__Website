@@ -1,0 +1,20 @@
+{
+  "member": "conductor",
+  "started": "2026-10-26T11:25Z",
+  "finished": "2026-10-26T11:27Z",
+  "outcome": "idle",
+  "summary": "Third quiet check-in in a row (07:20, 09:20, 11:20 London). Since the 09:23 release nothing landed on either repository but CI's version commit; no notes to conductor or all; no sgit-ai 0.25.0 confirmation on T26 beyond the conductor's own; every sharness.ai session idle; no scheduled task for any card (R17 still open). No further one-off check-in armed: the next wake comes from the editor's go on R17 or a message from the editor.",
+  "released": "",
+  "read": [
+    "both repositories dev",
+    " notes.py conductor --since 05d822dea",
+    " list_triggers",
+    " list_sessions"
+  ],
+  "sent": [],
+  "heads": {
+    "website": "01e5654",
+    "cli": "8210807"
+  },
+  "model": ""
+}
