@@ -175,6 +175,7 @@
 </tbody>
 </table></div>
 <p>Today's v0 policy sits between 3 and 2: <code>files.read</code> and <code>write</code> are level-3 nouns, <code>connect_tcp_ports</code> is a level-1 noun let through. The first step this page asks for is a true level-3 form, with sites rather than ports, and <code>hello</code> reporting at the level the person wrote.</p>
+<p><b>Level is not layer.</b> The <a href="../policies/index.html#3-fractal-layers">Policies page</a> composes one policy from <em>layers</em> L0 to L5 (the OS, the runtime, the application, the component, the subcommand, the invocation), by intersection, all at level 2. A <em>level</em> is how much of the schema a person has to read. The two are different axes and this page keeps the words apart.</p>
 <p>Each level is one person's universe. At level 5 the universe is "my agent, my workspace, the internet"; at level 3 it is the things a business names in a policy document; at level 2 it is the architecture; at level 1 the kernel. A person at level 5 never sees a door. A person at level 2 sees every door and no syscall.</p>
 <h2 id="4-three-rules-that-keep-the-simple-levels-honest">4. Three rules that keep the simple levels honest</h2>
 <ol>
@@ -249,7 +250,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a class="ver" href="../../project/releases.html" title="Site release history">v0.6.4</a> · <a href="../../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a class="ver" href="../../project/releases.html" title="Site release history">v0.6.5</a> · <a href="../../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>Try it</h4>

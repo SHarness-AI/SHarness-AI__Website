@@ -51,10 +51,10 @@ A board row with pbp@sharness as owner, or a `To-pbp:` note in a release commit 
 | | |
 |---|---|
 | State | done (as of 26 Oct 2026) |
-| Last did | First release after v0.6.0 (26 Oct 2026): the door alone is the API, every leaf is a target: fs.disk, fs.disk.twin, net.direct, net.direct.twin; 'the undecorated door is the local one' withdrawn with a dated correction on design/pbp §6; the 'Three trees are one' paragraph restored; the empty v0.5.38 row corrected. |
-| Waiting for | T14 and T19 on: cli; T18 on: conductor; T20 on: dev |
-| Branch | `pbp/disk` |
-| Next | the predicate language one kind at a time, append_only first; the contract per edge in the manifest schema (Policies §4); the accepts and emits line per door with build@ |
+| Last did | The levels (design/levels, 26 Oct 2026): six levels of one policy, each compiling into the one below; three rules that keep the simple levels honest; each level a service; two stacks on TCP; the claim checked against what exists. T22 opened for the level-3 form in the CLI. |
+| Waiting for | the editor's read of design/levels; the menu entry from website@ (the nav is theirs); T14, T19 and T22 on: cli; T18 on: conductor; T20 on: dev |
+| Branch | `pbp/levels` |
+| Next | the canonical form of each level, level 3 first (the compiler's contract); the predicate language, append_only first |
 
 ## Start here, on any Claude account
 
