@@ -6,42 +6,60 @@
 
 ---
 
-A snapshot taken by the conductor with `python3 tools/admin_status.py`, as of 26 Oct 2026 (2026-10-26T01:12Z): every branch of both repositories, its head, its last commit and how far it is from `dev`, read from git, never from a session; then every member's own `status.json`. A branch ahead of `dev` is work nobody has released yet; a session is only visible here once it has pushed.
+A snapshot taken by the conductor with `python3 tools/admin_status.py`, as of 26 Oct 2026 (2026-10-26T07:32Z): every branch of both repositories, its head, its last commit and how far it is from `dev`, read from git, never from a session; then every member's own `status.json`. A branch ahead of `dev` is work nobody has released yet; a session is only visible here once it has pushed.
 
 ## SHarness-AI__Website
 
-Latest tag `v0.5.28`; 0 branch(es) carry commits not yet on `dev`.
+Latest tag `v0.6.20`; 0 branch(es) carry commits not yet on `dev`.
 
 | Branch | Head | Last commit | Against dev |
 |---|---|---|---|
-| `dev` | `4d92fed` · 2026-10-26 01:11 | site v0.5.28: article: The CLI is the front door, the design for the next sharness-ai | 0 ahead, 0 behind |
-| `main` | `a1f93f6` · 2026-10-24 17:30 | Initial commit | 0 ahead, 55 behind |
-| `claude/blissful-johnson-yk1c4p` | `e9a9679` · 2026-10-24 17:55 | site v0.3.1: completeness pass against the sgit design pack 00-04 | 0 ahead, 50 behind |
-| `claude/wonderful-cray-4xpawa` | `4d92fed` · 2026-10-26 01:11 | site v0.5.28: article: The CLI is the front door, the design for the next sharness-ai | 0 ahead, 0 behind |
-| `conductor/admin` | `c4c4b9b` · 2026-10-26 00:58 | site v0.5.27: website@sharness joins the roster as a draft: its role, its card and its start prompt, so one line onboards it from any account; R20 (Agent: conductor) | 0 ahead, 1 behind |
-| `pbp/join` | `c0cde85` · 2026-10-25 23:52 | site v0.5.17: sharness.pbp joins; the Process Behaviour Policy on one page (Agent: sharness.pbp) | 0 ahead, 22 behind |
-| `security/join` | `e921452` · 2026-10-25 23:58 | site v0.5.20: the security section and the code at immutable paths, merged onto dev at v0.5.19 | 0 ahead, 16 behind |
+| `dev` | `d835086` · 2026-10-26 05:24 | site v0.6.20: the network door and a shell under the harness: the live page in the article's postscript, the brief's step 6 and 9 in part, cli@ status (Agent: ci) | 0 ahead, 0 behind |
+| `main` | `27d164a` · 2026-10-26 02:08 | site v0.6.0: the minor release: the team and the admin section, the components as doors, the PBP on one page, security, Linux in a tab, the CLI as the front door, the standards and their vectors, the site for a reader arriving cold | 0 ahead, 67 behind |
+| `claude/blissful-johnson-yk1c4p` | `e9a9679` · 2026-10-24 17:55 | site v0.3.1: completeness pass against the sgit design pack 00-04 | 0 ahead, 150 behind |
+| `claude/dev-standards` | `9cbc478` · 2026-10-26 02:56 | ship.py: the release note is always carried by a commit, so every row reads the shipped subject and description (Agent: dev) | 0 ahead, 20 behind |
+| `claude/website` | `9b7ced5` · 2026-10-26 05:01 | the CLI's two MVPs on the site: sharness.fs runnable as an MVP with its known issues, the CLI's command surface, the status line everywhere; review T25 for cli@ (Agent: website) | 0 ahead, 4 behind |
+| `claude/wonderful-cray-4xpawa` | `6479ad2` · 2026-10-26 05:24 | the network door and a shell under the harness: the live page in the article's postscript, the brief's step 6 and 9 in part, cli@ status (Agent: cli) | 0 ahead, 1 behind |
+| `conductor/admin` | `c0439ae` · 2026-10-26 01:12 | site v0.5.29: every member named role@sharness, the editor's rule: dev, pbp and the rest renamed at the source, bylines and cards with them, the old addresses redirect (Agent: conductor) | 0 ahead, 98 behind |
+| `pbp/article-decision-engine` | `e5ebfca` · 2026-10-26 04:50 | article: The decision engine, a translation layer between what an agent asks and what is done, and what it does to a skill that carries more than it says (Agent: pbp) | 0 ahead, 7 behind |
+| `pbp/article-two-stacks` | `96dbffc` · 2026-10-26 02:46 | article: Two stacks on TCP, one carries what a process may do, the other carries how little you have to read (Agent: pbp) | 0 ahead, 34 behind |
+| `pbp/decision` | `6d84e90` · 2026-10-26 04:30 | the decision at the door: the prompt as the last resort, ux.sgit.ai's principles against the levels, the decision engine and its prototype; T23 (Agent: pbp) | 0 ahead, 13 behind |
+| `pbp/decision-service` | `cd49c2a` · 2026-10-26 04:40 | the decision service: what the prompt lacks, three sources of truth, the rehearsal in a twin run four times, what the model does and does not; T24 (Agent: pbp) | 0 ahead, 10 behind |
+| `pbp/disk` | `0ecc083` · 2026-10-26 02:11 | site v0.6.3: sharness.fs.disk: the door alone is the API, every leaf is a target; Three trees are one restored (Agent: pbp) | 0 ahead, 58 behind |
+| `pbp/doors` | `99e8434` · 2026-10-26 01:19 | site v0.5.30: the tree of doors: sharness.<resource>.<dialect>, databases first; T18 and T19 (Agent: pbp) | 0 ahead, 96 behind |
+| `pbp/join` | `c0cde85` · 2026-10-25 23:52 | site v0.5.17: sharness.pbp joins; the Process Behaviour Policy on one page (Agent: sharness.pbp) | 0 ahead, 122 behind |
+| `pbp/levels` | `173dd41` · 2026-10-26 02:21 | site v0.6.5: the levels: one policy, written at the depth you need; six levels, three rules, each level a service, two stacks on TCP; T22 (Agent: pbp) | 0 ahead, 51 behind |
+| `pbp/mirror` | `d8c58f6` · 2026-10-26 01:37 | site v0.5.35: two schemas per door and the mirror rule; fuse or split, and its cost; the examples already in place (Agent: pbp) | 0 ahead, 84 behind |
+| `pbp/targets` | `899e20f` · 2026-10-26 01:31 | site v0.5.32: sharness.<door>.<target>: the second level is where the door sends; a twin is a target; dialect withdrawn (Agent: pbp) | 0 ahead, 92 behind |
+| `pbp/twin-suffix` | `09e29f8` · 2026-10-26 01:42 | site v0.5.38: .twin as the terminal suffix on any name: the thing before it runs as a simulation; .memory withdrawn (Agent: pbp) | 0 ahead, 79 behind |
+| `pbp/twin-suffix-2` | `1ca573f` · 2026-10-26 01:44 | site v0.5.40: .twin as the terminal suffix on any name, the change v0.5.38 announced and did not carry; .memory withdrawn (Agent: pbp) | 0 ahead, 75 behind |
+| `pbp/twins` | `c9402f8` · 2026-10-26 01:22 | site v0.5.31: the twin below the dialect, never a dialect; the undecorated door is the local one; T20 (Agent: pbp) | 0 ahead, 94 behind |
+| `security/join` | `e921452` · 2026-10-25 23:58 | site v0.5.20: the security section and the code at immutable paths, merged onto dev at v0.5.19 | 0 ahead, 116 behind |
 
 ## SHarness-AI__CLI
 
-Latest tag `v0.1.0`; 4 branch(es) carry commits not yet on `dev`.
+Latest tag `v0.1.0`; 7 branch(es) carry commits not yet on `dev`.
 
 | Branch | Head | Last commit | Against dev |
 |---|---|---|---|
-| `dev` | `7dcbe05` · 2026-10-26 00:00 | security.yml: audit what the package installs, not the venv's pip; dependency review waits on a setting | 0 ahead, 0 behind |
-| `main` | `6836292` · 2026-10-24 16:27 | Update release badge and version file | 0 ahead, 16 behind |
-| `claude/blissful-johnson-yk1c4p` | `0a53a7c` · 2026-10-24 16:50 | Point the package at sharness.ai, add the proposed scope, make sharness-ai the only command | 0 ahead, 15 behind |
-| `claude/wonderful-cray-4xpawa` | `2aa5d8d` · 2026-10-25 23:56 | Join the working branch back to dev; ba86a3f is a stray copy of 997459a (Agent: sharness.build) | 2 ahead, 1 behind |
-| `dependabot/github_actions/actions-b6b218e832` | `199e5b0` · 2026-10-26 00:05 | Bump the actions group across 1 directory with 3 updates | 1 ahead, 0 behind |
-| `dependabot/pip/pytest-cov-gte-7.1.0` | `aa31efd` · 2026-10-25 23:52 | Update pytest-cov requirement from >=5.0 to >=7.1.0 | 1 ahead, 1 behind |
-| `dependabot/pip/pytest-gte-9.1.1` | `be65598` · 2026-10-25 23:52 | Update pytest requirement from >=8.0 to >=9.1.1 | 1 ahead, 1 behind |
+| `dev` | `63360be` · 2026-10-26 05:23 | The network door and a shell under the harness (E13): sharness.net.proxy, sharness-ai shell, the live page | 0 ahead, 0 behind |
+| `main` | `6836292` · 2026-10-24 16:27 | Update release badge and version file | 0 ahead, 30 behind |
+| `claude/blissful-johnson-yk1c4p` | `0a53a7c` · 2026-10-24 16:50 | Point the package at sharness.ai, add the proposed scope, make sharness-ai the only command | 0 ahead, 29 behind |
+| `claude/go-reference` | `76c2dfc` · 2026-10-26 01:30 | SHarness in Go: policy hash and check against the policy v0 standard, 28 of 28 vectors (Go 1.24); a static binary | 1 ahead, 33 behind |
+| `claude/js-reference` | `a5bc25d` · 2026-10-26 01:30 | SHarness in JavaScript: policy hash and check against the policy v0 standard, 28 of 28 vectors (Node 22) | 1 ahead, 33 behind |
+| `claude/rust-reference` | `472c00e` · 2026-10-26 01:37 | The guidance files every language repository carries, AGENTS.md and CLAUDE.md, left out of the first commit | 2 ahead, 33 behind |
+| `claude/wonderful-cray-4xpawa` | `63360be` · 2026-10-26 05:23 | The network door and a shell under the harness (E13): sharness.net.proxy, sharness-ai shell, the live page | 0 ahead, 0 behind |
+| `dependabot/github_actions/actions-b6b218e832` | `199e5b0` · 2026-10-26 00:05 | Bump the actions group across 1 directory with 3 updates | 1 ahead, 14 behind |
+| `dependabot/pip/pytest-cov-gte-7.1.0` | `aa31efd` · 2026-10-25 23:52 | Update pytest-cov requirement from >=5.0 to >=7.1.0 | 1 ahead, 15 behind |
+| `dependabot/pip/pytest-gte-9.1.1` | `be65598` · 2026-10-25 23:52 | Update pytest requirement from >=8.0 to >=9.1.1 | 1 ahead, 15 behind |
+| `pbp/decide-prototype` | `17da921` · 2026-10-26 04:40 | decide: rehearse.py, the command run in a twin of the workspace before the verdict (sketch, not a release) | 2 ahead, 3 behind |
 
 ## The members
 
 | Member | Role | State | Last did | Waiting for |
 |---|---|---|---|---|
 | [cli@sharness](../members/cli/index.md) | The CLI agent; builds the sharness-ai package, the experiments and the browser bench | working | Two review passes of the door kit and sharness.fs (mine and an independent reader's): a quadratic regex, the handshake on the accept thread, a directory-symlink race, and nine more, each fixed with a test. Then E13: sharness.net.proxy (a proxy for one uid, SNI checked) and sharness-ai shell (a unique uid, the proxy as the only port, a live page), measured here and in Chromium; 229 tests. | security@ on door/, fs/, net/ and the launcher's uid drop; pbp@ on the level forms; the editor on Landlock audit for the page and the packages/ split |
-| [conductor@sharness](../members/conductor/index.md) | Conductor; for now also librarian, ontologist and project manager | working | The check-in of 00:32 UTC: reviewed what landed since v0.5.21 (the Sherpa's v0.5.22 twice, security@'s CLI audit, Dependabot), built tools/ship.py (T16) and released with it; R19 opened; the update of 00:40. | R17 (the go on the cards), R12, R13; on: editor |
+| [conductor@sharness](../members/conductor/index.md) | Conductor; for now also librarian, ontologist and project manager | working | The full pass of 07:20 London: 113 commits reviewed, every session and scheduled task read; T18 done (the tree and the words on About); T8's four good first issues opened on the CLI (#4 to #7); AGENTS.md section 1 matches the site's status; R18 carries the exact values; the update of 07:35. | R17 (the go on the cards: no scheduled task exists yet for any sharness.ai member), R12, R13; on: editor |
 | [dev@sharness](../members/dev/index.md) | The developer agent, reference implementations in several languages | working | The editor decided R8 in session (26 Oct): one repository per language, same structure, vectors on the site. Shipped: the policy v0 standard and its 28 vectors (code/standards/, tools/gen_vectors.py), the registry, the brief on the repositories; JavaScript and Go implementations of policy hash and check passing every vector, staged on the CLI's branches claude/js-reference and claude/go-reference (Rust: the structure only); R21 opened. Then: the pages queue dropped v0.5.33's run and the tags stalled at v0.5.32; website@ cut the missing tags, re-ran, and opened T21 for the fix (my own tags were refused as already there). Took in pbp@'s tree of doors (v0.5.30 to v0.5.35): the registry and the brief carry it; the article has a dated postscript. | R21: the three repositories (editor); T20's door design (pbp); on: editor, pbp |
 | [Dinis Cruz](../members/editor/index.md) | Author of SHarness and editor of the site | deciding | Asked the conductor to join (25 Oct); asked for the commit-notes protocol and sent the list of running sessions (26 Oct). | nothing from the team; the R rows on the board wait on him |
 | [pbp@sharness](../members/pbp/index.md) | The policy agent; holds the definition of the Process Behaviour Policy | done | Article: The decision engine (26 Oct 2026), with four hand-drawn figures: the architecture, the decision flow, the request and verdict schemas, a skill under the engine (its policy bound to its folder's hash, the effective rows as the intersection, its measured delta as its reputation, and what the engine does not catch). Before it: design/decision §9 to §12 and the two prototypes on the CLI branch pbp/decide-prototype. | the editor's read; menu entries from website@ for design/levels and design/decision; T14, T19, T22, T23 and T24 on: cli; T18 on: conductor; T20 on: dev |

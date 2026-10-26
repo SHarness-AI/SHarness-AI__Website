@@ -133,11 +133,12 @@
   <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">project</a> / about and naming · <a href="index.md">this page as markdown</a></div>
   <h1>About and naming</h1>
   <details class="toc-inline">
-    <summary>On this page · 6 sections</summary>
+    <summary>On this page · 7 sections</summary>
     <ol>
       <li><a href="#the-name">The name</a></li>
       <li><a href="#identity">Identity</a></li>
       <li><a href="#naming-rules">Naming rules</a></li>
+      <li><a href="#the-words-one-meaning-each">The words, one meaning each</a></li>
       <li><a href="#where-it-came-from">Where it came from</a></li>
       <li><a href="#who-writes-here">Who writes here</a></li>
       <li><a href="#what-is-real-today">What is real today</a></li>
@@ -169,7 +170,30 @@
 <li>There is no plain <code>sharness</code> command: on Debian, pkgsrc and OpenBSD that name is the unrelated shell test library's package. The command is <code>sharness-ai</code>.</li>
 <li>Environment variables use <code>SHARNESS_AI_</code>, not <code>SHARNESS_</code>, which the shell test library uses.</li>
 <li>One role, one noun: each component is named for its one job.</li>
+<li><b>The names are a tree, <code>sharness.&lt;door&gt;.&lt;target&gt;</code></b> (Dinis Cruz's rule of 26 Oct 2026, set out on <a href="../../design/pbp/index.html#6-a-door-and-the-tree-of-doors">the PBP on one page</a> §6). A <b>door</b> is <code>sharness.&lt;resource&gt;</code>: <code>fs</code>, <code>net</code>, <code>db</code>, <code>llm</code>, <code>bash</code>, <code>kms</code>; the door alone is the API and the vocabulary its rows are written in, never a place. A <b>target</b> is where the door sends: <code>sharness.fs.disk</code>, <code>sharness.fs.s3</code>, <code>sharness.net.direct</code>, <code>sharness.net.proxy</code>, <code>sharness.net.http</code>, <code>sharness.net.git</code>, <code>sharness.db.sqlite</code>, <code>sharness.db.postgres</code>, <code>sharness.llm.tools</code>. Read from above, the dot means <em>sits on</em>: the parent closes every other path, so the child's only way to the world is through it. Read from below, it means <em>sends to</em>. Depth is open (<code>sharness.net.http.gmail</code>), and a level earns a name only when it adds nouns its parent cannot see; otherwise it is configuration of the parent.</li>
+<li><b><code>.twin</code> is a terminal suffix on any target</b>: the thing named before it runs as a simulation of what is on the other side (<code>sharness.fs.s3.twin</code>, <code>sharness.db.postgres.twin</code>, <code>sharness.fs.disk.twin</code>). A door alone has no other side, so <code>sharness.fs.twin</code> is not a name; a twin's backend (memory, a vault, record and replay) is its configuration, not a name. The same tree names the identity (<code>spiffe://&lt;session&gt;/fs/s3</code>), the policy (<code>extends</code>, composed by intersection) and the code: <code>sharness_ai.fs</code> is the door's interface module, <code>sharness_ai.fs.disk</code> and <code>sharness_ai.fs.s3</code> its targets, in the CLI for now and a distribution of its own (<code>sharness-ai-fs-s3</code>) when a target leaves it.</li>
+<li><b>Withdrawn</b>: <em>dialect</em> (the second level was briefly called a protocol; it is the target) and <code>.memory</code> as a name (memory is a twin's backend).</li>
 </ul>
+<h2 id="the-words-one-meaning-each">The words, one meaning each</h2>
+<p>The vocabulary the pages share, kept by the conductor as ontologist (board T18); each term is defined once, on the page linked, and used the same way everywhere. A new term is added here the day a page first uses it.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Term</th><th>Means</th><th>Defined on</th></tr></thead>
+<tbody>
+<tr><td><b>door</b>, <b>target</b>, <b>twin</b></td><td>above</td><td><a href="../../design/pbp/index.html#6-a-door-and-the-tree-of-doors">the PBP on one page</a> §6</td></tr>
+<tr><td><b>accepts</b>, <b>emits</b>, <b>the mirror rule</b></td><td>every door declares what it accepts (its API, the vocabulary of its rows) and what it emits (the calls it makes downstream); a chain is valid when what one hop emits the next accepts; a twin accepts the real thing's API and emits nothing, or to its backend</td><td>the same §6</td></tr>
+<tr><td><b>row</b></td><td>one line of a policy: subject, resource, operation, a predicate, who holds it, and the derived kind (Boundary, or an Expectation when nothing holds it)</td><td><a href="../../design/pbp/index.html#5-a-row">the PBP on one page</a> §5</td></tr>
+<tr><td><b>unheld</b></td><td>a row no barrier holds, counted in every summary beside the rows held by the kernel and by a keeper</td><td><a href="../../design/pbp/index.html#9-two-numbers-in-every-summary">the PBP on one page</a> §9</td></tr>
+<tr><td><b>level</b></td><td>how much of the schema a person has to read: 5 intent, 4 profiles, 3 rows in plain nouns, 2 doors and targets, 1 mechanisms, 0 the ground; a <em>level</em> is not a <em>layer</em> (the layers L0 to L5 compose one policy by intersection, all at level 2)</td><td><a href="../../design/levels/index.html#3-the-levels">the levels</a> §3</td></tr>
+<tr><td><b>intent</b></td><td>level 5: one sentence with blanks, "contain my agent to this workspace, these sites, these secrets"; it emits a profile</td><td>the same §3</td></tr>
+<tr><td><b>profile</b></td><td>level 4: a role of process with its parameters (a coding agent, a tool or MCP server, a newsroom agent, a vault CLI, a hello world); the example policies P0 to P5 are these; it emits rows in plain nouns</td><td>the same §3</td></tr>
+<tr><td><b>decide</b></td><td>the decision engine's verdict on a command under a policy: allow, deny or ask, with the row that decided; unknown is no</td><td><a href="../../design/decision/index.html">the decision at the door</a></td></tr>
+<tr><td><b>the three sources of truth</b></td><td>what the engine reads, in order of cost: the parse of the command, the rehearsal, the policy</td><td><a href="../../design/decision/index.html#10-three-sources-of-truth-in-order-of-cost">the decision at the door</a> §10</td></tr>
+<tr><td><b>rehearsal</b></td><td>the command run first in a twin of the workspace, under a policy derived from the real one with no network, traced; the verdict comes from the facts it found</td><td><a href="../../design/decision/index.html#11-the-rehearsal-run-once">the decision at the door</a> §11</td></tr>
+<tr><td><b>skill delta</b></td><td>the actions a skill attempted outside the rows it declared, read from a rehearsal of the skill</td><td><a href="../../design/decision/index.html">the decision at the door</a> and <a href="../../articles/index.html">The decision engine</a></td></tr>
+<tr><td><b>Boundary</b>, <b>Setting</b>, <b>Expectation</b></td><td>what holds a row: a Boundary is enforced from outside the process; a Setting is applied by the process to itself or its children, which could have skipped it; an Expectation is a row nothing holds</td><td><a href="../../design/policies/index.html#2-who-enforces-decides-the-barrier-kind">Process Behaviour Policies</a> §2</td></tr>
+<tr><td><b>measured</b>, <b>designed</b>, <b>proposed</b>, <b>planned</b>, <b>runnable</b></td><td>the status words: measured only with a method, an environment and a date; runnable means the code is here and its tests pass</td><td><a href="../../evidence/index.html">Evidence</a></td></tr>
+</tbody>
+</table></div>
 <h2 id="where-it-came-from">Where it came from</h2>
 <p>SHarness grew out of <a href="https://cli.sgit.ai">sgit</a>, the encrypted vault CLI, and uses sgit's PKI. The first analysis was <a href="https://cli.sgit.ai/articles/a-vault-key-that-never-lands.md">A vault key that never lands</a>; the handover it builds on is <a href="https://pki.sgit.ai/handover.md">pki.sgit.ai/handover.md</a>; its policies apply the <a href="https://riskmandate.ai/abp.html">Agent Behaviour Policy</a> model to processes. sgit is the first app designed to run inside SHarness.</p>
 <h2 id="who-writes-here">Who writes here</h2>
@@ -197,6 +221,7 @@
       <li><a href="#the-name">The name</a></li>
       <li><a href="#identity">Identity</a></li>
       <li><a href="#naming-rules">Naming rules</a></li>
+      <li><a href="#the-words-one-meaning-each">The words, one meaning each</a></li>
       <li><a href="#where-it-came-from">Where it came from</a></li>
       <li><a href="#who-writes-here">Who writes here</a></li>
       <li><a href="#what-is-real-today">What is real today</a></li>

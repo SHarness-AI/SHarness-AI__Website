@@ -12,10 +12,10 @@ Everything here is public and CC BY 4.0, including this file, the board, every m
 
 ## 1. What this is, and the words to use
 
-- SHarness is at the **experiments** stage. The design is published at [sharness.ai](https://sharness.ai); the CLI carries the experiments E01 to E04, E09 and E10. **No SHarness component (launcher, kms, net, fs, bash, llm) is built.** Say so wherever status is stated.
+- SHarness is at the **experiments** stage. The design is published at [sharness.ai](https://sharness.ai); the CLI carries the experiments (E01 to E04, E09 to E13) and, since 26 October 2026, two MVPs: the levels in the terminal and the first door, `sharness.fs`, over the disk and its twin. **One door runs as an MVP, a Setting until the launcher exists; no other component (launcher, kms, net, bash, llm) is built.** Say so wherever status is stated, in the words [What exists today](https://sharness.ai/evidence/status/index.html) uses; that page is the authority and this line follows it.
 - **Status words.** *Measured* only with a method, an environment and a date. Everything else is *designed*, *proposed* or *planned*. *Runnable* means the code is here and its tests pass.
 - **The threat model trusts the kernel.** Root and kernel compromise are out of scope; never claim protection against them. A policy a process applies to its own children is a **Boundary** for them and a **Setting** for itself: say which, every time.
-- **Names.** Brand *SHarness*; command `sharness-ai` (never plain `sharness`); import `sharness_ai`; env prefix `SHARNESS_AI_`; components `sharness.<role>`. No model names in committed text. Each agent writes under the name on [Who writes here](https://sharness.ai/project/about/index.html#who-writes-here).
+- **Names.** Brand *SHarness*; command `sharness-ai` (never plain `sharness`); import `sharness_ai`; env prefix `SHARNESS_AI_`; components as a tree of doors and targets, `sharness.<door>.<target>` ([the naming rules](https://sharness.ai/project/about/index.html#naming-rules)). No model names in committed text. Each agent writes under the name on [Who writes here](https://sharness.ai/project/about/index.html#who-writes-here).
 
 ## 2. Where the work is
 

@@ -52,7 +52,7 @@ You are sharness.build (build@sharness), a member of the SHarness project, in th
 
 ## The schedule
 
-proposed: Drafted by the conductor on 26 October 2026 for sharness.build to confirm or change; the editor's go makes it active. Once a day at 09:00 London, after the overnight security review.
+ended: Ended 26 October 2026: the build agent became cli@sharness (the editor's decision); its card is content/admin/members/cli/card.json. Kept as history.
 
 - Objective: Build the experiments up the ladder (E05 to E08, then the launcher above the agent), keep every measurement on Evidence with its method and date, and keep the site's and the CLI's pipelines sound.
 - Wakes: 09:00 Europe/London, `CRON_TZ=Europe/London 0 9 * * *`; quiet hours 22:00 to 07:00 Europe/London: no wake, unless the editor says so by name

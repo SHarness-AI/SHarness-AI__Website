@@ -61,10 +61,10 @@ Articles in its own voice, if any, carry the byline `conductor@sharness` and fol
 | | |
 |---|---|
 | State | working (as of 26 Oct 2026) |
-| Last did | The check-in of 00:32 UTC: reviewed what landed since v0.5.21 (the Sherpa's v0.5.22 twice, security@'s CLI audit, Dependabot), built tools/ship.py (T16) and released with it; R19 opened; the update of 00:40. |
-| Waiting for | R17 (the go on the cards), R12, R13; on: editor |
+| Last did | The full pass of 07:20 London: 113 commits reviewed, every session and scheduled task read; T18 done (the tree and the words on About); T8's four good first issues opened on the CLI (#4 to #7); AGENTS.md section 1 matches the site's status; R18 carries the exact values; the update of 07:35. |
+| Waiting for | R17 (the go on the cards: no scheduled task exists yet for any sharness.ai member), R12, R13; on: editor |
 | Branch | `conductor/admin` |
-| Next | The next check-in at 07:20 London, the first wake on the card's cadence (nothing in the quiet hours); the daily update at the day's last wake. |
+| Next | 09:20 London, the next time on the card; T12 (a reality file) one item per release; the daily update at the day's last wake. |
 
 ## Start here, on any Claude account
 
@@ -113,6 +113,7 @@ Scheduled wake: conductor@sharness. Repositories SHarness-AI/SHarness-AI__Websit
 
 | Started (UTC) | Outcome | Summary |
 |---|---|---|
+| 2026-10-26T07:27Z | ok | The full pass of 07:20 London (fired 07:27): 113 site commits and 14 CLI commits since the last run, by six members; every member's session read (read only) and the account's scheduled tasks listed: none for any sharness.ai card, so R17 is still the decision. Findings: the status line changed (one door runs as an MVP) and AGENTS.md section 1 was behind it, fixed; the CLI's CLAUDE.md is behind it too (cli@'s); CI owns the version now (R23), ship.py rewritten by dev@ and website@, WAKE.md step 4 and AGENTS.md section 3 updated by dev@; the Sherpa's P5 issue text clashed with p5-web-fetch.json, opened as P6. Done: T18 (the tree and the words on About), T8's four issues (#4 to #7), R18's exact values, the retired build card ended, the daily update of 07:50. |
 | 2026-10-26T00:32Z | ok | The check-in Dinis asked for, at 01:32 London. Landed since v0.5.21: the Sherpa's v0.5.22 twice (the gate refused a hand-edited comms row; fixed at the source, R11), security@'s CLI audit change with Dependabot #2 and #3 for the editor (R19). Built tools/ship.py (T16) from its brief and released with it. Findings: the Sherpa's commits carry no Agent: trailer; two subjects with one version after a CI refusal; three Dependabot branches with nobody to merge. Update of 00:40. Next wake 07:20 London, not in the quiet hours. (released v0.5.24) |
 | 2026-10-25T23:16Z | ok | The conductor's first run, in the editor's session: read the newsroom, the PHP story site, sgit.ai's team and repositories guidance, coding and nfrs; mapped both repositories; built the admin section (v0.5.14), Commit-FS-lite as the protocol with tools/notes.py and the notes page (v0.5.15), the roster of every session from the editor's screenshot (v0.5.18); the CLI's AGENTS.md (cbd466d, ef92296). Collided three times with build@ and pbp@ releasing within minutes; renumbered each time. Findings: releases collide for want of a release script; comms.html was hand-edited by two agents before it was generated from rows; no commit before 23:42 carries an Agent: line; the CLI has no reality file; notes are unsigned claims. Each is a brief. (released v0.5.18) |
 

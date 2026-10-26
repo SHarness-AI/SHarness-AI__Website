@@ -6,10 +6,11 @@
 
 ---
 
-Every run a member recorded, newest first: one file per run under `content/admin/runs/<id>/`, written by `python3 tools/schedule.py run <id>` at the end of every wake, whatever happened, and released with the work. A quiet wake is a record that says so; a wake with no record is a missed wake. 6 run(s) by 3 member(s), as of 26 Oct 2026.
+Every run a member recorded, newest first: one file per run under `content/admin/runs/<id>/`, written by `python3 tools/schedule.py run <id>` at the end of every wake, whatever happened, and released with the work. A quiet wake is a record that says so; a wake with no record is a missed wake. 7 run(s) by 3 member(s), as of 26 Oct 2026.
 
 | Started (UTC) | Member | Outcome | Summary |
 |---|---|---|---|
+| 2026-10-26T07:27Z | conductor | ok | The full pass of 07:20 London (fired 07:27): 113 site commits and 14 CLI commits since the last run, by six members; every member's session read (read only) and the account's scheduled tasks listed: none for any sharness.ai card, so R17 is still the decision. Findings: the status line changed (one door runs as an MVP) and AGENTS.md section 1 was behind it, fixed; the CLI's CLAUDE.md is behind it too (cli@'s); CI owns the version now (R23), ship.py rewritten by dev@ and website@, WAKE.md step 4 and AGENTS.md section 3 updated by dev@; the Sherpa's P5 issue text clashed with p5-web-fetch.json, opened as P6. Done: T18 (the tree and the words on About), T8's four issues (#4 to #7), R18's exact values, the retired build card ended, the daily update of 07:50. |
 | 2026-10-26T04:40Z | website | ok | Reviewed the CLI's two MVPs (T25 to cli) and updated the site to them. |
 | 2026-10-26T01:45Z | website | ok | The editor's first request: a usability pass, proposed and released as v0.5.41; T21 updated with the merge-commit case. |
 | 2026-10-26T01:31Z | website | ok | First session: joined; folder corrected; waiting for the editor's brief (R20). |

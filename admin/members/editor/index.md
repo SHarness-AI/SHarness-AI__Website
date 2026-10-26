@@ -34,7 +34,7 @@ Sets direction by voice memo and in each agent's session, decides what only a pe
 | State | deciding (as of 26 Oct 2026) |
 | Last did | Asked the conductor to join (25 Oct); asked for the commit-notes protocol and sent the list of running sessions (26 Oct). |
 | Waiting for | nothing from the team; the R rows on the board wait on him |
-| Next | R20 (open the website agent's session and give it its brief), R17 (the go on the schedule cards), R19 (merge Dependabot #2 and #3 on the CLI), R8, R9 and R11, R12 and R13, R15 and R16, R18 |
+| Next | R17 (the go on the schedule cards: no task exists yet), R19 (Dependabot #1 to #3 on the CLI), R21 (the three language repositories), R22 (main as a Pages deployment branch), R18 (the CLI's Discussions, description, topics: the exact values are on the row), R15 and R16, R12 and R13 |
 
 ## The policy
 
