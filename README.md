@@ -35,6 +35,9 @@ is the source of every page that has a twin; the HTML beside it is generated and
 
 ## Release process
 
+One command: `RELEASE_TRAILER=$'Agent: <id>' python3 tools/ship.py "what changed" [--body-file F] [--snapshot]` does every step below, refuses to push when the gate fails, and waits for the live site to serve the new version. The steps, for when you need one of them by hand:
+
+
 1. Bump `tools/version.txt` (vX.Y.Z, exactly once per release) and add a row to
    `project/releases.html`; open or close the board rows under `content/admin/board/` (never edit `project/comms.html`: it is generated).
 2. `python3 tools/chrome.py` — propagates the version badge and any nav/footer change

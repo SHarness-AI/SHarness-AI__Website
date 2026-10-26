@@ -1,9 +1,9 @@
 {
   "member": "conductor",
-  "as_of": "2026-10-26T00:10Z",
+  "as_of": "2026-10-26T00:40Z",
   "state": "working",
-  "last_did": "The first run reviewed and its improvements mapped into five briefs; the schedule system built (a card per member with its start prompt and wake prompt, WAKE.md, tools/schedule.py, run records, the schedule, runs and briefs pages); the first run record; v0.5.21.",
-  "waiting_for": "R17 (the go on the cards, which creates the scheduled tasks), R12, R13; on: editor",
+  "last_did": "The check-in of 00:32 UTC: reviewed what landed since v0.5.21 (the Sherpa's v0.5.22 twice, security@'s CLI audit, Dependabot), built tools/ship.py (T16) and released with it; R19 opened; the update of 00:40.",
+  "waiting_for": "R17 (the go on the cards), R12, R13; on: editor",
   "branch": "conductor/admin",
-  "next": "T16, the release script, at the next wake; the next update; the check-in at 00:31 UTC follows WAKE.md."
+  "next": "The next check-in at 07:20 London, the first wake on the card's cadence (nothing in the quiet hours); the daily update at the day's last wake."
 }

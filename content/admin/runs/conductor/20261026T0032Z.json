@@ -1,0 +1,23 @@
+{
+  "member": "conductor",
+  "started": "2026-10-26T00:32Z",
+  "finished": "2026-10-26T00:34Z",
+  "outcome": "ok",
+  "summary": "The check-in Dinis asked for, at 01:32 London. Landed since v0.5.21: the Sherpa's v0.5.22 twice (the gate refused a hand-edited comms row; fixed at the source, R11), security@'s CLI audit change with Dependabot #2 and #3 for the editor (R19). Built tools/ship.py (T16) from its brief and released with it. Findings: the Sherpa's commits carry no Agent: trailer; two subjects with one version after a CI refusal; three Dependabot branches with nobody to merge. Update of 00:40. Next wake 07:20 London, not in the quiet hours.",
+  "released": "v0.5.24",
+  "read": [
+    "7dcbe05",
+    "c470c90",
+    "37d848b"
+  ],
+  "sent": [
+    "sherpa",
+    "sharness.build",
+    "all"
+  ],
+  "heads": {
+    "website": "37d848b",
+    "cli": "7dcbe05"
+  },
+  "model": ""
+}
