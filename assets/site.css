@@ -328,3 +328,8 @@ footer.site .agentline{max-width:var(--wide);margin:1.6rem auto 0;padding:1rem 1
 footer.site .agentline a{display:inline;font-size:.76rem;padding:0}
 @media (max-width:700px){br.br-wide{display:none}}
 main:focus{outline:none}
+
+/* ---------- the release history: what each release changed ---------- */
+.vchg{margin-top:.45rem;font-size:.85rem;color:var(--dim);line-height:1.6}
+.vchg span{display:block}
+.vchg b{color:var(--fg)}

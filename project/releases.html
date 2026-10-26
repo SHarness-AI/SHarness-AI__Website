@@ -18,7 +18,7 @@
 
 <nav class="site"><a class="skip" href="#content">Skip to content</a><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
-  <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
+  <a class="ver" href="../project/releases.html" title="Site release history: what this version changed">v0.6.11</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -129,10 +129,11 @@
 <main class="doc">
   <div class="crumb"><a href="../index.html">sharness.ai</a> / <a href="engineering.html">admin</a> / release history</div>
   <h1>Release history</h1>
-  <p class="lead">One row per release, newest first. CI assigns each number from the tags and writes it to <code>/version</code> in the commit it tags (R23, 26 Oct 2026): a push to <code>dev</code> bumps the last number (<code>vX.Y.Z+1</code>); a push to <code>main</code> bumps the middle one (<code>vX.Y+1.0</code>). Rows from v0.6.6 on are written by CI from the pushed commit's subject.</p>
+  <p class="lead">One row per release, newest first. CI assigns each number from the tags and writes it to <code>/version</code> in the commit it tags (R23, 26 Oct 2026): a push to <code>dev</code> bumps the last number (<code>vX.Y.Z+1</code>); a push to <code>main</code> bumps the middle one (<code>vX.Y+1.0</code>). Rows from v0.6.6 on are written by CI from the pushed commit: its subject, the first paragraph of its body, and the pages the push added (<b>New</b>) and changed (<b>Updated</b>), each linked, so a new page is two clicks from the version badge at the top of every page. Older rows were written by hand.</p>
   <div class="tablewrap"><table class="vers">
     <thead><tr><th>Version</th><th>Date</th><th>What changed</th></tr></thead>
     <tbody>
+      <tr id="v0.6.11"><td class="vnum">v0.6.11</td><td>26 Oct 2026</td><td>The version badge back in the top bar, the status pill out; release rows with a description and links to the pages each release added or changed. The generated pages after taking in dev; the work is the commit before this one.<div class="vchg"><span><b>Updated:</b> <a href="../code/playground/index.html">Playground: sharness-ai in Pyodide and in Linux</a>, <a href="../explain/mockups/edges.html">Edge matrix mockup</a>, <a href="../explain/mockups/policy-hash.html">Policy hash mockup</a>, <a href="../project/engineering.html">Admin &amp; engineering</a>.</span> <span><a href="https://github.com/SHarness-AI/SHarness-AI__Website/compare/v0.6.10...v0.6.11">Every change in this release, in git</a>.</span></div></td></tr>
       <tr><td class="vnum">v0.6.10</td><td>26 Oct 2026</td><td>article: Two stacks on TCP, one carries what a process may do, the other carries how little you have to read</td></tr>
       <tr><td class="vnum">v0.6.9</td><td>26 Oct 2026</td><td>the mashup brief: the other stack: the grid of levels by doors, one verb per level, the levels moved up the order; zero dependencies, openssl by subprocess</td></tr>
       <tr><td class="vnum">v0.6.8</td><td>26 Oct 2026</td><td>cli@ brief: the mashup in code: every door, target, twin and level as a project of its own, in one repository, replaceable in any language</td></tr>
@@ -206,7 +207,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a class="ver" href="../project/releases.html" title="Site release history">v0.6.10</a> · <a href="../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a class="ver" href="../project/releases.html" title="Site release history">v0.6.11</a> · <a href="../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>Try it</h4>
