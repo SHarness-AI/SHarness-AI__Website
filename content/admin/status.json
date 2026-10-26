@@ -1,18 +1,18 @@
 {
- "as_of": "2026-10-26T11:28Z",
+ "as_of": "2026-10-26T16:09Z",
  "by": "conductor",
  "repositories": [
   {
    "name": "SHarness-AI__Website",
    "present": true,
    "url": "https://github.com/SHarness-AI/SHarness-AI__Website",
-   "latest_tag": "v0.6.23",
+   "latest_tag": "v0.6.25",
    "branches": [
     {
      "branch": "dev",
-     "head": "01e5654",
-     "date": "2026-10-26T09:22:34+00:00",
-     "subject": "site v0.6.23: the conductor's quiet wake of 09:20 London: a run record, nothing else moved; no scheduled task for any card yet (R17)",
+     "head": "fc22676",
+     "date": "2026-10-26T16:06:07+00:00",
+     "subject": "site v0.6.25: article: CI owns the version: three years of one release scheme, and the three days it took this site to adopt it",
      "agent": "ci",
      "ahead_of_dev": 0,
      "behind_dev": 0
@@ -24,7 +24,7 @@
      "subject": "site v0.6.0: the minor release: the team and the admin section, the components as doors, the PBP on one page, security, Linux in a tab, the CLI as the front door, the standards and their vectors, the site for a reader arriving cold",
      "agent": "",
      "ahead_of_dev": 0,
-     "behind_dev": 76
+     "behind_dev": 82
     },
     {
      "branch": "claude/blissful-johnson-yk1c4p",
@@ -33,7 +33,7 @@
      "subject": "site v0.3.1: completeness pass against the sgit design pack 00-04",
      "agent": "",
      "ahead_of_dev": 0,
-     "behind_dev": 159
+     "behind_dev": 165
     },
     {
      "branch": "claude/dev-standards",
@@ -42,7 +42,7 @@
      "subject": "ship.py: the release note is always carried by a commit, so every row reads the shipped subject and description",
      "agent": "dev",
      "ahead_of_dev": 0,
-     "behind_dev": 29
+     "behind_dev": 35
     },
     {
      "branch": "claude/website",
@@ -51,7 +51,7 @@
      "subject": "the CLI's two MVPs on the site: sharness.fs runnable as an MVP with its known issues, the CLI's command surface, the status line everywhere; review T25 for cli@",
      "agent": "website",
      "ahead_of_dev": 0,
-     "behind_dev": 13
+     "behind_dev": 19
     },
     {
      "branch": "claude/wonderful-cray-4xpawa",
@@ -60,14 +60,14 @@
      "subject": "the network door and a shell under the harness: the live page in the article's postscript, the brief's step 6 and 9 in part, cli@ status",
      "agent": "cli",
      "ahead_of_dev": 0,
-     "behind_dev": 10
+     "behind_dev": 16
     },
     {
      "branch": "conductor/admin",
-     "head": "05d822d",
-     "date": "2026-10-26T09:22:08+00:00",
-     "subject": "the conductor's quiet wake of 09:20 London: a run record, nothing else moved; no scheduled task for any card yet (R17)",
-     "agent": "conductor",
+     "head": "f60e085",
+     "date": "2026-10-26T16:05:36+00:00",
+     "subject": "article: CI owns the version: three years of one release scheme, and the three days it took this site to adopt it",
+     "agent": "",
      "ahead_of_dev": 0,
      "behind_dev": 1
     },
@@ -78,7 +78,7 @@
      "subject": "article: The decision engine, a translation layer between what an agent asks and what is done, and what it does to a skill that carries more than it says",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 16
+     "behind_dev": 22
     },
     {
      "branch": "pbp/article-two-stacks",
@@ -87,7 +87,7 @@
      "subject": "article: Two stacks on TCP, one carries what a process may do, the other carries how little you have to read",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 43
+     "behind_dev": 49
     },
     {
      "branch": "pbp/decision",
@@ -96,7 +96,7 @@
      "subject": "the decision at the door: the prompt as the last resort, ux.sgit.ai's principles against the levels, the decision engine and its prototype; T23",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 22
+     "behind_dev": 28
     },
     {
      "branch": "pbp/decision-service",
@@ -105,7 +105,7 @@
      "subject": "the decision service: what the prompt lacks, three sources of truth, the rehearsal in a twin run four times, what the model does and does not; T24",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 19
+     "behind_dev": 25
     },
     {
      "branch": "pbp/disk",
@@ -114,7 +114,7 @@
      "subject": "site v0.6.3: sharness.fs.disk: the door alone is the API, every leaf is a target; Three trees are one restored",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 67
+     "behind_dev": 73
     },
     {
      "branch": "pbp/doors",
@@ -123,7 +123,7 @@
      "subject": "site v0.5.30: the tree of doors: sharness.<resource>.<dialect>, databases first; T18 and T19",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 105
+     "behind_dev": 111
     },
     {
      "branch": "pbp/join",
@@ -132,7 +132,7 @@
      "subject": "site v0.5.17: sharness.pbp joins; the Process Behaviour Policy on one page",
      "agent": "sharness.pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 131
+     "behind_dev": 137
     },
     {
      "branch": "pbp/levels",
@@ -141,7 +141,7 @@
      "subject": "site v0.6.5: the levels: one policy, written at the depth you need; six levels, three rules, each level a service, two stacks on TCP; T22",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 60
+     "behind_dev": 66
     },
     {
      "branch": "pbp/mirror",
@@ -150,7 +150,7 @@
      "subject": "site v0.5.35: two schemas per door and the mirror rule; fuse or split, and its cost; the examples already in place",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 93
+     "behind_dev": 99
     },
     {
      "branch": "pbp/targets",
@@ -159,7 +159,7 @@
      "subject": "site v0.5.32: sharness.<door>.<target>: the second level is where the door sends; a twin is a target; dialect withdrawn",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 101
+     "behind_dev": 107
     },
     {
      "branch": "pbp/twin-suffix",
@@ -168,7 +168,7 @@
      "subject": "site v0.5.38: .twin as the terminal suffix on any name: the thing before it runs as a simulation; .memory withdrawn",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 88
+     "behind_dev": 94
     },
     {
      "branch": "pbp/twin-suffix-2",
@@ -177,7 +177,7 @@
      "subject": "site v0.5.40: .twin as the terminal suffix on any name, the change v0.5.38 announced and did not carry; .memory withdrawn",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 84
+     "behind_dev": 90
     },
     {
      "branch": "pbp/twins",
@@ -186,7 +186,7 @@
      "subject": "site v0.5.31: the twin below the dialect, never a dialect; the undecorated door is the local one; T20",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 103
+     "behind_dev": 109
     },
     {
      "branch": "security/join",
@@ -195,10 +195,86 @@
      "subject": "site v0.5.20: the security section and the code at immutable paths, merged onto dev at v0.5.19",
      "agent": "",
      "ahead_of_dev": 0,
-     "behind_dev": 125
+     "behind_dev": 131
     }
    ],
    "commits": [
+    {
+     "hash": "fc22676",
+     "date": "2026-10-26 16:06",
+     "subject": "site v0.6.25: article: CI owns the version: three years of one release scheme, and the three days it took this site to adopt it",
+     "agent": "ci",
+     "to": [],
+     "body": "The release commit, made by CI from f60e0858e on dev (R23): /version written, the row added, every page re-stamped. The work is the commits before this one.\n\nAgent: ci"
+    },
+    {
+     "hash": "f60e085",
+     "date": "2026-10-26 16:05",
+     "subject": "article: CI owns the version: three years of one release scheme, and the three days it took this site to adopt it",
+     "agent": "conductor",
+     "to": [
+      [
+       "all",
+       "read /articles/ci-owns-the-version.html before your next release: it says why the subject carries no number, what CI does with your push, and what the retry means when dev moves under you. If you take the scheme to another repository, start from the portable job and the checklist in it; the vocabulary is \"main bumps the middle number, dev the last\"."
+      ],
+      [
+       "cli",
+       "the article states the CLI's dev branch still gets no number (R23's CLI half); when that lands, tell the conductor so the article's limits section is corrected."
+      ]
+     ],
+     "body": "The article the editor asked for on 26 Oct: the record of the three days of committer-chosen numbers on this site (T16's collisions, T21's two stuck chains), the release job as it runs now (R23), and the history of the scheme in the owasp-sbot repositories, with dates and commits: the first increment-tag actions and CI's first tag on 27 October 2023, git__increment-tag since June 2024, 1,129 tags on OSBot-Utils, the CLI on 24 October 2026, this site on 26 October. It ends with a portable thirty-line release job, a checklist of what to keep and what to adapt, and the vocabulary (main bumps the middle number, dev the last), so the next project starts from the page.\n\nAgent: conductor\nBoard: R23, T16, T21\nTo-all: read /articles/ci-owns-the-version.html before your next release: it says why the subject carries no number, what CI does with your push, and what the retry means when dev moves under you. If you take the scheme to another repository, start from the portable job and the checklist in it; the vocabulary is \"main bumps the middle number, dev the last\".\nTo-cli: the article states the CLI's dev branch still gets no number (R23's CLI half); when that lands, tell the conductor so the article's limits section is corrected.\n\nCo-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_015o6Pmm6sy7e8KDZimK4xss"
+    },
+    {
+     "hash": "0d3e247",
+     "date": "2026-10-26 16:05",
+     "subject": "article: CI owns the version: three years of one release scheme, and the three days it took this site to adopt it",
+     "agent": "conductor",
+     "to": [
+      [
+       "all",
+       "read /articles/ci-owns-the-version.html before your next release: it says why the subject carries no number, what CI does with your push, and what the retry means when dev moves under you. If you take the scheme to another repository, start from the portable job and the checklist in it; the vocabulary is \"main bumps the middle number, dev the last\"."
+      ],
+      [
+       "cli",
+       "the article states the CLI's dev branch still gets no number (R23's CLI half); when that lands, tell the conductor so the article's limits section is corrected."
+      ]
+     ],
+     "body": "The article the editor asked for on 26 Oct: the record of the three days of committer-chosen numbers on this site (T16's collisions, T21's two stuck chains), the release job as it runs now (R23), and the history of the scheme in the owasp-sbot repositories, with dates and commits: the first increment-tag actions and CI's first tag on 27 October 2023, git__increment-tag since June 2024, 1,129 tags on OSBot-Utils, the CLI on 24 October 2026, this site on 26 October. It ends with a portable thirty-line release job, a checklist of what to keep and what to adapt, and the vocabulary (main bumps the middle number, dev the last), so the next project starts from the page.\n\nAgent: conductor\nBoard: R23, T16, T21\nTo-all: read /articles/ci-owns-the-version.html before your next release: it says why the subject carries no number, what CI does with your push, and what the retry means when dev moves under you. If you take the scheme to another repository, start from the portable job and the checklist in it; the vocabulary is \"main bumps the middle number, dev the last\".\nTo-cli: the article states the CLI's dev branch still gets no number (R23's CLI half); when that lands, tell the conductor so the article's limits section is corrected.\n\nCo-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_015o6Pmm6sy7e8KDZimK4xss"
+    },
+    {
+     "hash": "81d38b0",
+     "date": "2026-10-26 11:28",
+     "subject": "site v0.6.24: the conductor's third quiet check-in (11:20 London): a run record; no further check-in armed until the editor's go on R17",
+     "agent": "ci",
+     "to": [],
+     "body": "The release commit, made by CI from 7a5919573 on dev (R23): /version written, the row added, every page re-stamped. The work is the commits before this one.\n\nAgent: ci"
+    },
+    {
+     "hash": "7a59195",
+     "date": "2026-10-26 11:28",
+     "subject": "the conductor's third quiet check-in (11:20 London): a run record; no further check-in armed until the editor's go on R17",
+     "agent": "conductor",
+     "to": [
+      [
+       "all",
+       "the 11:20 London check-in was the third quiet one in a row; the conductor arms no further one-off check-in. Its next wake comes from the editor's go on R17 (the schedule cards) or a message from the editor. Still open for every session that touches a vault: confirm sgit-ai 0.25.0 on T26."
+      ]
+     ],
+     "body": "Agent: conductor\nBoard: R17, T26\nTo-all: the 11:20 London check-in was the third quiet one in a row; the conductor arms no further one-off check-in. Its next wake comes from the editor's go on R17 (the schedule cards) or a message from the editor. Still open for every session that touches a vault: confirm sgit-ai 0.25.0 on T26.\n\nCo-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_015o6Pmm6sy7e8KDZimK4xss"
+    },
+    {
+     "hash": "bbea044",
+     "date": "2026-10-26 11:28",
+     "subject": "the conductor's third quiet check-in (11:20 London): a run record; no further check-in armed until the editor's go on R17",
+     "agent": "conductor",
+     "to": [
+      [
+       "all",
+       "the 11:20 London check-in was the third quiet one in a row; the conductor arms no further one-off check-in. Its next wake comes from the editor's go on R17 (the schedule cards) or a message from the editor. Still open for every session that touches a vault: confirm sgit-ai 0.25.0 on T26."
+      ]
+     ],
+     "body": "Agent: conductor\nBoard: R17, T26\nTo-all: the 11:20 London check-in was the third quiet one in a row; the conductor arms no further one-off check-in. Its next wake comes from the editor's go on R17 (the schedule cards) or a message from the editor. Still open for every session that touches a vault: confirm sgit-ai 0.25.0 on T26.\n\nCo-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_015o6Pmm6sy7e8KDZimK4xss"
+    },
     {
      "hash": "01e5654",
      "date": "2026-10-26 09:22",
