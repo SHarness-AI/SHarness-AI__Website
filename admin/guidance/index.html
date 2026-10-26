@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.19</a>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.25</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -77,7 +77,19 @@
       <a class="sl" href="../../code/examples/index.html">Examples</a>
       <a class="sl" href="../../code/browser/index.html">Linux in the browser</a>
       <a class="sl" href="../../code/playground/index.html">Playground: run it in your browser</a>
+      <a class="sl" href="../../code/releases/index.html">Releases of the code: immutable paths</a>
       <a class="sl" href="../../code/languages/index.html">Languages</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../security/index.html">Security<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../security/index.html">&#9679; Security: the register</a>
+      <a class="sl" href="../../security/threat-model/index.html">Threat model</a>
+      <a class="sl" href="../../security/risks/index.html">Known risks</a>
+      <a class="sl" href="../../security/reviews/index.html">Reviews</a>
+      <a class="sl" href="../../security/hardening/index.html">Hardening</a>
+      <a class="sl" href="../../security/supply-chain/index.html">Supply chain</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -126,7 +138,7 @@
 <main class="doc">
   <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">admin</a> / guidance · <a href="index.md">this page as markdown</a></div>
   <h1>AGENTS.md: how to work on SHarness, for every agent and every person</h1>
-<p class="byline">The source is <a href="https://github.com/SHarness-AI/SHarness-AI__Website/blob/dev/AGENTS.md"><code>AGENTS.md</code></a> at the root of the website repository; the CLI repository carries a pointer to it. <span class="asof">as of 25 Oct 2026</span></p>
+<p class="byline">The source is <a href="https://github.com/SHarness-AI/SHarness-AI__Website/blob/dev/AGENTS.md"><code>AGENTS.md</code></a> at the root of the website repository; the CLI repository carries a pointer to it. <span class="asof">as of 26 Oct 2026</span></p>
 <p>Read this before your first commit to <a href="https://github.com/SHarness-AI/SHarness-AI__Website">SHarness-AI__Website</a> or <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">SHarness-AI__CLI</a>, and again when the editor says it changed. It is short on purpose. Where it says <em>the editor</em>, that is Dinis Cruz; where it says <em>the conductor</em>, that is <a href="https://sharness.ai/admin/members/conductor/index.html">sharness.conductor</a>, who keeps this file. Rendered at <a href="https://sharness.ai/admin/guidance/index.html">sharness.ai/admin/guidance</a>; the source is this file at the root of the website repository, and the CLI repository carries a pointer to it.</p>
 <p>Everything here is public and CC BY 4.0, including this file, the board, every member's role and every update. That is the point: the journey is part of the story, and anyone who wants to help can read how the work is run and join it.</p>
 <h2 id="1-what-this-is-and-the-words-to-use">1. What this is, and the words to use</h2>
@@ -155,7 +167,7 @@
 <li><b>Work on a branch of your own</b>, pushed early and often: the session's <code>claude/&lt;name&gt;</code> branch or <code>&lt;member&gt;/&lt;work&gt;</code>. Push after every step that builds and at least every 30 minutes. Work in progress is welcome; say so in the message.</li>
 <li><b>Take in <code>dev</code> often</b>: <code>git fetch origin dev &amp;&amp; git merge origin/dev</code>, then rebuild. Never hand-edit a generated page; change the source and run the generator.</li>
 <li><b>Commit every self-contained step, and push it.</b> Production material every time: the gate passes, the tests pass, the message says what and why (section 6). A session's work is many small commits, not one at the end.</li>
-<li><b>Release your own finished work to <code>dev</code>.</b> On the website, a push to <code>dev</code> is a patch release: bump <code>tools/version.txt</code>, add the row to <code>project/releases.html</code>, run the generators and the gate (the website's <code>README.md</code> has the order), and the commit subject carries the version (<code>site vX.Y.Z: ...</code>). CI validates, tags and deploys. On the CLI, <code>dev</code> is where work lands and CI runs the tests; merging <code>dev</code> into <code>main</code> is a release to PyPI and is the editor's call (board R7). Do not bump the CLI's version by hand.</li>
+<li><b>Release your own finished work to <code>dev</code>.</b> On the website, one command does it all: <code>RELEASE_TRAILER=$'Agent: &lt;id&gt;\nTo-&lt;id&gt;: ...' python3 tools/ship.py "what changed" [--body-file F] [--snapshot]</code>. It merges <code>dev</code>, takes the newest of the latest tag and dev's version plus one, adds the release row, runs every generator and the gate, commits <code>site vX.Y.Z: &lt;subject&gt;</code> with your trailers, pushes <code>dev</code> (and tries once more from the merge if <code>dev</code> moved), pushes your branch and waits for the live site to serve the version. A failure anywhere means no commit and no push. CI then validates, tags and deploys. On the CLI, <code>dev</code> is where work lands and CI runs the tests; merging <code>dev</code> into <code>main</code> is a release to PyPI and is the editor's call (board R7). Do not bump the CLI's version by hand.</li>
 <li><b>Before you release</b>: fetch <code>dev</code> again and check the latest tag, because other sessions release too; the right bump is the latest tag plus one. Run the gate on your branch. Read your own diff.</li>
 <li><b>Never</b> push to <code>main</code>, force-push, rewrite history on a pushed branch, or skip the gate.</li>
 <li><b>Say where the change is.</b> The release row and the commit body name the pages or modules a reader should open to see it.</li>
@@ -210,7 +222,7 @@ To-all: run python3 tools/notes.py &lt;your id&gt; every time you take in dev.</
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../../project/releases.html">v0.5.19</a> · <a href="../../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.25</a> · <a href="../../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>Components</h4>
@@ -247,12 +259,18 @@ To-all: run python3 tools/notes.py &lt;your id&gt; every time you take in dev.</
     <a href="../../code/flows/index.html">Flows through the code</a>
     <a href="../../code/examples/index.html">Examples</a>
     <a href="../../code/browser/index.html">Linux in the browser</a>
+    <a href="../../code/releases/index.html">Releases of the code</a>
     <a href="../../code/languages/index.html">Languages</a>
     <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
     <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
   </div>
   <div>
-    <h4>Evidence, landscape, explain</h4>
+    <h4>Security, evidence, landscape</h4>
+    <a href="../../security/index.html">Security: the register</a>
+    <a href="../../security/threat-model/index.html">Threat model</a>
+    <a href="../../security/risks/index.html">Known risks</a>
+    <a href="../../security/hardening/index.html">Hardening</a>
+    <a href="../../security/supply-chain/index.html">Supply chain</a>
     <a href="../../evidence/index.html">Measurements</a>
     <a href="../../evidence/status/index.html">What exists today</a>
     <a href="../../evidence/research/index.html">Research note</a>
@@ -262,7 +280,6 @@ To-all: run python3 tools/notes.py &lt;your id&gt; every time you take in dev.</
     <a href="../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
     <a href="../../landscape/market/index.html">Market &amp; competitors</a>
     <a href="../../explain/storyboards/index.html">Storyboards</a>
-    <a href="../../explain/index.html">Mockups</a>
     <a href="../../articles/index.html">Articles</a>
   </div>
   <div>
@@ -275,11 +292,14 @@ To-all: run python3 tools/notes.py &lt;your id&gt; every time you take in dev.</
     <a href="../../admin/board/index.html">The board</a>
     <a href="../../admin/updates/index.html">Updates</a>
     <a href="../../admin/notes/index.html">Commit notes</a>
+    <a href="../../admin/schedule/index.html">Schedule and runs</a>
+    <a href="../../admin/briefs/index.html">Briefs</a>
     <a href="../../admin/guidance/index.html">Guidance for agents (AGENTS.md)</a>
     <a href="../../project/adoption/index.html">Getting users</a>
     <a href="../../project/outreach/index.html">Outreach</a>
     <a href="../../project/agents/index.html">The agents and their keys</a>
     <a href="../../project/telemetry/index.html">Telemetry</a>
+    <a href="../../.well-known/security.txt">security.txt</a>
     <a href="../../llms.txt">llms.txt</a>
     <a href="../../llms-full.txt">llms-full.txt</a>
     <a href="../../index.md">index.md</a>

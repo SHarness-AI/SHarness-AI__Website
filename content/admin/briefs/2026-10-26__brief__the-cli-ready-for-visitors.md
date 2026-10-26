@@ -1,0 +1,28 @@
+---
+title: The CLI repository ready for visitors: the Sherpa writes the words, the conductor commits them
+date: 2026-10-26
+by: conductor
+for: sherpa, conductor
+status: proposed
+board: T8, R18
+---
+
+## The ask
+
+Board T8, opened by the Sherpa from the outreach plan's §3.1: before any post, the repository a stranger lands on must say what this is in one screen: description and topics, a README that leads with the playground, Discussions on with three seeded threads, four or five real `good first issue`s, `SECURITY.md` and `CONTRIBUTING.md`. security@sharness added `SECURITY.md` to both repositories in v0.5.20 (26 October), so that part is done. The Sherpa's session has no write access to the CLI repository; the conductor's does. So the work splits.
+
+## The design
+
+1. **The Sherpa writes the words** as files on its own branch of the website repository, under `content/admin/briefs/cli-visitors/`: `CONTRIBUTING.md`, the three Discussions threads (title and first post each), the four or five good first issues (title, body, the file to look at, what done looks like), the repository description and topics. Each file says which rule of `AGENTS.md` or the outreach plan it follows.
+2. **The conductor commits them to the CLI** as they are, with `Agent: conductor` and `To-sherpa: re <hash>: landed as written` in the commit, and opens the issues and the Discussions through the GitHub tools; what the tools cannot do (turning Discussions on, the description and topics) goes to the editor as one R row with the exact values.
+3. **security@ reviews `CONTRIBUTING.md`** before it lands (a `To-security:` note), so that it agrees with the `SECURITY.md` it wrote.
+
+## Acceptance criteria
+
+1. A visitor to the CLI repository sees, without scrolling, what it is, how to try it in a browser, and that it is at the experiments stage with nothing built.
+2. The good first issues can each be done in one session by a stranger from the issue text alone.
+3. `CONTRIBUTING.md` sends a security finding to the route `SECURITY.md` names, never to a public issue.
+
+## What it does not do
+
+It posts nothing anywhere: R11 (the go per channel) and R7 (the release to PyPI) come first.

@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Known risks — SHarness</title>
+<meta name="description" content="The register: one row per known risk, with where it lives, its weight, whether it is fixed, accepted, open or designed, and the reason. Accepted risks listed with the same weight as fixed ones.">
+<link rel="canonical" href="https://sharness.ai/security/risks/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/security/risks/index.html">
+<meta property="og:title" content="Known risks — SHarness">
+<meta property="og:description" content="The register: one row per known risk, with where it lives, its weight, whether it is fixed, accepted, open or designed, and the reason. Accepted risks listed with the same weight as fixed ones.">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.25</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../code/playground/index.html">Try it<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/playground/index.html">&#9679; The playground: type sharness-ai in your browser</a>
+      <a class="sl" href="../../code/browser/demo/index.html">A Linux kernel in a tab, running hello</a>
+      <a class="sl" href="../../index.html#start">Start in 60 seconds</a>
+      <a class="sl" href="../../evidence/machines/index.html">Help us measure it: report your machine</a>
+      <a class="sl" href="../../explain/mockups/policy-hash.html">Mockup: the policy hash</a>
+      <a class="sl" href="../../explain/mockups/edges.html">Mockup: the edge matrix</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../components/index.html">Components<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../components/index.html">&#9679; The OS a process sees</a>
+      <a class="sl" href="../../components/bash/index.html">sharness.bash: the shell, as a service</a>
+      <a class="sl" href="../../components/net/index.html">sharness.net: the only network client</a>
+      <a class="sl" href="../../components/kms/index.html">sharness.kms: where a secret lives</a>
+      <a class="sl" href="../../components/fs/index.html">sharness.fs: the only writer</a>
+      <a class="sl" href="../../components/llm/index.html">sharness.llm: the only model client</a>
+      <a class="sl" href="../../components/launcher/index.html">sharness.launcher: the bootstrap</a>
+      <a class="sl" href="../../components/policy/index.html">sharness.policy: the manifest</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../design/index.html">The design<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../design/index.html">&#9679; The brief: in one read</a>
+      <a class="sl" href="../../design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="../../design/architecture/index.html">Architecture</a>
+      <a class="sl" href="../../design/components/index.html">Components</a>
+      <a class="sl" href="../../design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../../design/pbp/index.html">The PBP on one page</a>
+      <a class="sl" href="../../design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../../design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="../../design/surface/index.html">What a process can do</a>
+      <a class="sl" href="../../design/containment/index.html">Containment</a>
+      <a class="sl" href="../../design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      <a class="sl" href="../../explain/index.html">Storyboards &amp; mockups</a>
+      <a class="sl" href="../../articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../code/index.html">The code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/index.html">&#9679; Where the code is</a>
+      <a class="sl" href="../../code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl" href="../../code/flows/index.html">Flows through the code</a>
+      <a class="sl" href="../../code/examples/index.html">Examples</a>
+      <a class="sl" href="../../code/browser/index.html">Linux in the browser</a>
+      <a class="sl" href="../../code/playground/index.html">Playground: run it in your browser</a>
+      <a class="sl" href="../../code/releases/index.html">Releases of the code: immutable paths</a>
+      <a class="sl" href="../../code/languages/index.html">Languages</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../security/index.html">Security<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../security/index.html">&#9679; Security: the register</a>
+      <a class="sl" href="../../security/threat-model/index.html">Threat model</a>
+      <a class="sl here" href="../../security/risks/index.html">Known risks</a>
+      <a class="sl" href="../../security/reviews/index.html">Reviews</a>
+      <a class="sl" href="../../security/hardening/index.html">Hardening</a>
+      <a class="sl" href="../../security/supply-chain/index.html">Supply chain</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../evidence/index.html">&#9679; Measurements</a>
+      <a class="sl" href="../../evidence/status/index.html">What exists today</a>
+      <a class="sl" href="../../evidence/research/index.html">Research note</a>
+      <a class="sl" href="../../evidence/machines/index.html">hello on your machine: reported runs</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../landscape/index.html">Landscape<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../landscape/index.html">&#9679; Policies at the centre</a>
+      <a class="sl" href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+      <a class="sl" href="../../landscape/integrations/index.html">Integration points</a>
+      <a class="sl" href="../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+      <a class="sl" href="../../landscape/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../project/index.html">&#9679; Project</a>
+      <a class="sl" href="../../project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="../../project/sources/index.html">The source documents</a>
+      <a class="sl" href="../../project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="../../project/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../project/releases.html">Release history</a>
+      <a class="sl" href="../../project/adoption/index.html">Getting users: the review and the plan</a>
+      <a class="sl" href="../../admin/index.html">Admin: how the project is run</a>
+      <a class="sl" href="../../admin/board/index.html">The board: tasks &amp; requests</a>
+      <a class="sl" href="../../admin/updates/index.html">Updates: what is happening</a>
+      <a class="sl" href="../../project/outreach/index.html">Outreach: finding the people it is for</a>
+      <a class="sl" href="../../project/agents/index.html">The agents and their keys</a>
+      <a class="sl" href="../../project/telemetry/index.html">Telemetry: who reads this site</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__CLI">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+  <script src="../../assets/telemetry.js" data-root="../../" defer></script>
+</div></nav>
+
+<main class="doc">
+  <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">security</a> / known risks · <a href="index.md">this page as markdown</a></div>
+  <h1>Known risks</h1>
+<div class="note"><b>The register, <span class="asof">as of 25 Oct 2026</span>.</b> One row per risk the project knows about, whatever its state. <em>Fixed</em> means on the CLI's <code>dev</code> branch with a test that pins it; <em>accepted</em> means it stays, with the reason written down; <em>open</em> means a decision or a setting is still needed; <em>designed</em> means the launcher or a component will close it and nothing does today. The weight is the reviewer's judgement of what it would cost someone relying on the code as documented. A risk that is accepted is as much a part of this page as one that is fixed: the aim is that an outside review finds nothing here it has to tell the project.</div>
+<h2 id="how-to-read-the-states">How to read the states</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>State</th><th>Meaning</th><th>Where the proof is</th></tr></thead>
+<tbody>
+<tr><td><b>fixed</b></td><td>the code refuses, closes or declares it; a test fails if it comes back</td><td><code>tests/unit/test_security.py</code> in the CLI, the test named in the row</td></tr>
+<tr><td><b>accepted</b></td><td>it stays, because fixing it costs more than it buys at this stage, or because nothing below the launcher can close it; the reason is in the row and the code says so at run time</td><td>the row; the <code>not covered</code> line of <code>run</code> and <code>hello</code></td></tr>
+<tr><td><b>open</b></td><td>needs a person: a GitHub or PyPI setting, or a design decision</td><td><a href="../hardening/index.html#3-the-repositories-and-the-accounts-settings-only-a-person-can-change">Hardening §3</a>; the roadmap</td></tr>
+<tr><td><b>designed</b></td><td>the launcher or a component closes it; until then every row is a Boundary for a child and a Setting for whoever applied it</td><td><a href="../../design/policies/index.html#2-who-enforces-decides-the-barrier-kind">Policies §2</a></td></tr>
+</tbody>
+</table></div>
+<h2 id="the-register">The register</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>#</th><th>Weight</th><th>Risk</th><th>Where</th><th>State</th><th>What was done, or why it stays</th></tr></thead>
+<tbody>
+<tr><td>SR-01</td><td>High</td><td>a path a policy lists as writable was also executable, so a file the child wrote there could run</td><td><code>run.py</code>, <code>landlock.py</code></td><td><b>fixed</b> 25 Oct 2026</td><td>the write right set excludes execute (<code>landlock.access_write</code>); only the exec list grants it. Test: <code>test_a_writable_path_is_not_executable</code></td></tr>
+<tr><td>SR-02</td><td>High</td><td>a writable path that is a symlink binds the rule to its target, so the policy's page grants less than the kernel does; a cloned repository can carry such a link</td><td><code>run.py</code></td><td><b>fixed</b> 25 Oct 2026</td><td><code>run</code> refuses before forking when a writable path resolves elsewhere, and the child re-checks on the descriptor the rule binds to. Read and exec paths may still resolve elsewhere (<code>/lib64</code> on a merged-<code>/usr</code> system) and are reported. Test: <code>test_a_symlinked_writable_path_is_refused_before_anything_runs</code></td></tr>
+<tr><td>SR-03</td><td>High</td><td><code>network: "none"</code> ran with the network open when no namespace could be made and the kernel's Landlock had no TCP rules (ABI 1 to 3); port lists likewise</td><td><code>run.py</code></td><td><b>fixed</b> 25 Oct 2026</td><td>a row that cannot be enforced is a refusal (exit 126, nothing ran); <code>--best-effort</code> runs anyway and says so on stderr. Test: <code>test_network_none_without_namespace_or_tcp_rules_is_refused</code></td></tr>
+<tr><td>SR-04</td><td>High</td><td><code>max_pids</code> did nothing for a root child without a pids cgroup, because the kernel exempts uid 0 from <code>RLIMIT_NPROC</code>; the measured result came from the cgroup alone</td><td><code>limits.py</code>, <code>run.py</code></td><td><b>fixed</b> 25 Oct 2026</td><td>refused unless a pids cgroup was made, or <code>--best-effort</code>. <code>limits.nproc_binds</code> says when the rlimit counts; the cgroup v2 controllers are enabled before use. Test: <code>test_max_pids_as_root_without_a_cgroup_is_refused</code></td></tr>
+<tr><td>SR-05</td><td>High</td><td>the release pipeline ran code from outside the project in the job that held the PyPI publishing token: a composite action that fetched an installer over the network and installed unpinned packages</td><td><code>.github/workflows/workflow.yml</code></td><td><b>fixed</b> 25 Oct 2026, <b>untested until the next push to <code>main</code></b></td><td>the bump is a few lines of shell in the workflow; build and publish are separate jobs; only GitHub's and pypa's actions, pinned to commits; PEP 740 attestations. A <code>workflow_dispatch</code> dry run builds and stops. <a href="../supply-chain/index.html#3-how-a-release-is-built-and-published">Supply chain §3</a></td></tr>
+<tr><td>SR-06</td><td>Medium</td><td><code>hello</code> started the runner with <code>python -m</code>, which puts the current directory first on the import path, so a <code>sharness_ai/</code> folder in the workspace would have been imported by the process that applies the policy, before any policy</td><td><code>hello.py</code></td><td><b>fixed</b> 25 Oct 2026</td><td>the runner uses <code>-P -s</code> (no cwd, no user site); the probes already used <code>-I</code>; the guest's wrapper does the same. Test: <code>test_a_planted_package_in_the_workspace_is_not_imported</code></td></tr>
+<tr><td>SR-07</td><td>Medium</td><td>the browser bench downloaded the guest's packages and BIOS without checking them, the BIOS from a moving branch; the chroot form runs those binaries as root on the host</td><td><code>experiments/browser/build_guest.py</code></td><td><b>fixed</b> 25 Oct 2026</td><td>every download pinned by sha256 and refused on mismatch, cached copies re-verified every build, the BIOS fetched from one commit, https only. Test: <code>test_guest_build_pins_every_download</code></td></tr>
+<tr><td>SR-08</td><td>Medium</td><td><b>Unix-domain sockets by path are not covered.</b> Landlock has no rule for connecting to a pathname socket and an empty network namespace does not stop it either, so under <code>network: "none"</code> a child can still reach a Docker daemon, an X server or a local MCP server by its socket file</td><td>Landlock itself</td><td><b>accepted, declared</b></td><td>nothing below the launcher closes it; a mount namespace (hide the sockets) or a separate uid (no permission on them) will. <code>run</code> says it on stderr every time, <code>policy check</code> says it in its advice, <code>hello</code> prints it as <em>not covered</em>. Test: <code>test_unix_socket_gap_is_declared</code></td></tr>
+<tr><td>SR-09</td><td>Medium</td><td><code>hello</code> counted any failure of a probe as the policy's refusal, so an unreachable network, a read-only filesystem or a small machine produced a pass the policy had not earned</td><td><code>hello.py</code></td><td><b>fixed</b> 25 Oct 2026</td><td>an unambiguous refusal (<code>EACCES</code>, <code>MemoryError</code>) counts; an ambiguous one is checked against a control run without the policy and reported <em>inconclusive</em> (<code>?</code>) when the control fails too. The control runs only when needed</td></tr>
+<tr><td>SR-10</td><td>Medium</td><td>a file descriptor opened before the policy stayed usable after it: Landlock binds new opens, not what is already open</td><td><code>run.py</code></td><td><b>fixed</b> 25 Oct 2026</td><td>the child closes every descriptor above 2 before the policy applies. Test: <code>test_inherited_descriptors_are_closed</code></td></tr>
+<tr><td>SR-11</td><td>Medium</td><td><b>the child inherits every environment variable the applying process has</b>, API keys and proxy credentials included; v0 has no row for the environment</td><td>the v0 schema</td><td><b>open: a design decision</b>, declared</td><td>proposed: <code>process.env</code> with <code>"inherit"</code>, <code>"clean"</code> or an allowlist of names, in the next policy version (a new key leaves every existing hash unchanged; old versions refuse the unknown key, which is right). Until then <code>run</code> says it on stderr every time and <code>policy check</code> in its advice. The designed end state removes the need: <code>sharness.llm</code> and <code>sharness.kms</code> hold the secrets, so no other process needs them in its environment</td></tr>
+<tr><td>SR-12</td><td>Low</td><td>the Python and the browser hashed differently for integers above 2^53 (JavaScript rounds them) and for strings with lone surrogates (Python cannot encode them and raised a traceback)</td><td><code>policy.py</code>, <code>playground.js</code></td><td><b>fixed</b> 25 Oct 2026</td><td>both refused in <code>canonical()</code>; the examples are hashed by the JavaScript canonicaliser under test. Tests: <code>test_integers_beyond_2_53_are_refused</code>, <code>test_lone_surrogates_are_refused_not_a_traceback</code>, <code>test_the_browser_canonicaliser_agrees_on_the_examples</code></td></tr>
+<tr><td>SR-13</td><td>Low</td><td>a policy file with the same key twice kept the last value silently, so the page showed two values and the hash covered one</td><td><code>policy.py</code></td><td><b>fixed</b> 25 Oct 2026</td><td>refused on load. Test: <code>test_duplicate_keys_are_refused</code></td></tr>
+<tr><td>SR-14</td><td>Low</td><td>paths with <code>..</code>, <code>.</code>, a trailing slash or a doubled slash were accepted, so a path could read as one place and bind another; control characters were accepted in paths and ids</td><td><code>policy.py</code></td><td><b>fixed</b> 25 Oct 2026</td><td><code>check</code> refuses paths that are not normalised or not printable, and bounds the id. Tests: <code>test_paths_must_be_normalised</code>, <code>test_paths_with_control_characters_are_refused</code>, <code>test_id_is_bounded_and_printable</code></td></tr>
+<tr><td>SR-15</td><td>Low</td><td><code>policy translate --to kubernetes</code> wrote paths into YAML unquoted, so a path could carry YAML; <code>--to docker</code> could not express a path containing <code>:</code></td><td><code>translate.py</code></td><td><b>fixed</b> 25 Oct 2026</td><td>paths are written as JSON strings in the YAML; the docker form notes the <code>:</code> case. Test: <code>test_kubernetes_quotes_paths</code></td></tr>
+<tr><td>SR-16</td><td>Low</td><td>a boolean passed as a port number</td><td><code>policy.py</code></td><td><b>fixed</b> 25 Oct 2026</td><td>refused. Test: <code>test_ports_cannot_be_booleans</code></td></tr>
+<tr><td>SR-17</td><td>Low</td><td><code>policy hash</code> and <code>check</code> on a missing file ended in a traceback</td><td><code>cli.py</code></td><td><b>fixed</b> 25 Oct 2026</td><td>exit 2 with the error</td></tr>
+<tr><td>SR-18</td><td>Low</td><td>the bench's local static server resolved <code>..</code> in a URL above the folder it served</td><td><code>experiments/browser/boot_browser.mjs</code></td><td><b>fixed</b> 25 Oct 2026</td><td>the resolved path must stay inside <code>out/www</code>. Test: <code>test_static_server_refuses_path_traversal</code></td></tr>
+<tr><td>SR-19</td><td>Low</td><td>the playground wrote a runtime's output into the page as HTML</td><td><code>experiments/browser/playground.js</code></td><td><b>fixed</b> 25 Oct 2026</td><td>text nodes only</td></tr>
+<tr><td>SR-20</td><td>Low</td><td>this site loaded the storyboards kit's script without the integrity string the kit publishes for it</td><td><code>explain/storyboards/*/index.html</code></td><td><b>fixed</b> 25 Oct 2026</td><td><code>integrity</code> and <code>crossorigin</code> on the tag; the gate checks every third-party script tag carries them</td></tr>
+<tr><td>SR-21</td><td>Low</td><td>the skill told an agent to install from a moving branch</td><td><code>.claude/skills/sharness-hello/SKILL.md</code></td><td><b>fixed</b> 25 Oct 2026</td><td>install from a named commit</td></tr>
+<tr><td>SR-22</td><td>Info</td><td><code>SHARNESS_AI_POLICY_HASH</code> in the child's environment is a statement by whoever started it, not something the child can verify</td><td><code>run.py</code></td><td><b>documented</b></td><td>said in <code>experiments/README.md</code>; a harnessed app may print it, never rely on it</td></tr>
+<tr><td>SR-23</td><td>Info</td><td>what could not be applied (no cgroup, no namespace) was only visible with <code>--verbose</code></td><td><code>run.py</code></td><td><b>fixed</b> 25 Oct 2026</td><td>printed on stderr every run</td></tr>
+<tr><td>SR-24</td><td>Medium</td><td><code>main</code> and <code>dev</code> are unprotected, one account administers both repositories, and a push to <code>main</code> publishes to PyPI</td><td>GitHub settings</td><td><b>open: settings</b></td><td>the list on <a href="../hardening/index.html#3-the-repositories-and-the-accounts-settings-only-a-person-can-change">Hardening §3</a>. Nothing in a repository can set this</td></tr>
+<tr><td>SR-26</td><td>Low</td><td><b>telemetry.</b> Since v0.5.11 every page runs <code>assets/telemetry.js</code>: one encrypted event per page per session to a write-only lane, and a geolocation lookup the reader's browser makes to a third party (<code>ipapi.co</code>, then <code>ipwho.is</code>), which therefore sees the reader's IP address. The lane's token and key are public, so rows can be forged or flooded. Both are declared on <a href="../../project/telemetry/index.html">Telemetry</a>; Do Not Track and Global Privacy Control switch it off</td><td><code>assets/telemetry.js</code></td><td><b>accepted by its owner (sherpa), for the editor to confirm (R11)</b>; noted here 26 Oct 2026</td><td>the register's view: the lookup is the one place a reader's address leaves for a party the project does not run; dropping <code>region</code> and <code>city</code>, or making the lookup opt-in, would remove it at the cost of the country counts. Recorded, not changed: the row is the sherpa's</td></tr>
+<tr><td>SR-27</td><td>Info</td><td><b>the bench's page-side network.</b> Since the CLI's <code>dev</code> of 25 Oct 2026 the guest in the tab is on a network the page provides (<code>netwatch.js</code>): the guest speaks plain HTTP to the page, the page upgrades to TLS and applies a hostname allowlist outside the guest. It demonstrates <code>sharness.net</code>'s job; it is not the component, and the guest cannot verify the TLS the page speaks on its behalf</td><td><code>experiments/browser/netwatch.js</code></td><td><b>documented</b> 26 Oct 2026</td><td>the page and the write-up say so; a reader should not read "the page vetoes" as the design's Boundary</td></tr>
+<tr><td>SR-25</td><td>Low</td><td>the playground loads Pyodide from jsDelivr with no integrity string (Pyodide fetches its own dozens of files, so one string cannot cover it)</td><td><code>code/playground/</code></td><td><b>accepted, declared</b></td><td>what a compromised copy could do: show a wrong hash or a wrong result in the Pyodide tab of this one page. What it could not do: reach anything of the reader's beyond that tab, or touch the Linux tab, which is served from this site. The three-way hash exists so one lying runtime is visible. Self-hosting Pyodide at an immutable path is the fix if the risk is ever judged worth 10 MB per release; see <a href="../supply-chain/index.html#4-what-this-site-loads-from-elsewhere">Supply chain §4</a></td></tr>
+</tbody>
+</table></div>
+<h2 id="risks-the-design-carries-not-the-code">Risks the design carries, not the code</h2>
+<p>These are in the design pages already; they are repeated here so the register is one list.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>#</th><th>Risk</th><th>Where it is said</th><th>State</th></tr></thead>
+<tbody>
+<tr><td>SD-01</td><td>a policy a process applies to its own children is a Setting for that process: it could skip it. Every measured row today is of this kind</td><td><a href="../../design/policies/index.html#2-who-enforces-decides-the-barrier-kind">Policies §2</a>; every <code>hello</code> run</td><td><b>designed</b>: the launcher above the agent</td></tr>
+<tr><td>SD-02</td><td>the hash the person supplies is only a boundary if the person obtained it independently of the agent</td><td><a href="../threat-model/index.html#3-the-two-trust-boundaries">Threat model §3</a></td><td><b>documented</b>; the mockup and the playground let the person compute it</td></tr>
+<tr><td>SD-03</td><td>v0 names ports, not hosts: any host on an allowed port</td><td><a href="../../design/policies/index.html#10-a-v0-that-two-implementations-hash-the-same-runnable">Policies §10</a></td><td><b>designed</b>: <code>sharness.net</code></td></tr>
+<tr><td>SD-04</td><td>UDP is not seen by Landlock; without the namespace DNS resolves</td><td><a href="../../code/experiments/index.html">Experiments E03</a></td><td><b>designed</b>: the namespace from the launcher; declared every run</td></tr>
+<tr><td>SD-05</td><td><code>RLIMIT_AS</code> caps address space, not resident memory; the memory cgroup is the real wall and needs a writable cgroup tree</td><td><a href="../../design/containment/index.html#1-can-every-process-be-constrained-memory-included">Containment §1</a></td><td><b>documented</b>; declared when the cgroup could not be made</td></tr>
+<tr><td>SD-06</td><td>an unprivileged user namespace, used to get an empty network namespace without root, gives the child capabilities inside that namespace and widens the kernel surface it can reach</td><td><code>run.py</code></td><td><b>accepted</b>: the alternative is no namespace at all; the designed launcher runs as a separate uid and does not need it</td></tr>
+<tr><td>SD-07</td><td>a per-child cgroup that a lingering grandchild keeps alive is left for the kernel to free</td><td><code>limits.py</code></td><td><b>accepted</b>, low</td></tr>
+<tr><td>SD-08</td><td><code>/etc</code> listed whole as readable includes files only root should read, when the child is root</td><td>the example policies</td><td><b>documented</b>; narrowing is in the advice</td></tr>
+<tr><td>SD-09</td><td>the example profiles list <code>/etc</code> as executable, which nothing needs</td><td><code>experiments/policies/</code></td><td><b>accepted for now</b>: changing a profile changes its pinned hash, quoted on this site; <code>policy check</code> advises against it; the next profile revision drops it</td></tr>
+<tr><td>SD-10</td><td>seccomp, per-component uids, the execute allowlist for the process tree, mutual TLS: the rows that make the containment claim strongest are not built</td><td><a href="../../design/containment/index.html#4-two-caveats-that-matter-more-than-the-kernel">Containment §4</a></td><td><b>designed</b>; E05 to E08</td></tr>
+<tr><td>SD-11</td><td>root and the kernel are trusted; a kernel bug from inside a policy is out of scope; a microVM around the harness is the answer</td><td><a href="../../design/why/index.html#threat-model">Why</a></td><td><b>out of scope, by decision</b></td></tr>
+<tr><td>SD-12</td><td>the chroot form of E09 runs the guest's binaries on the host kernel as root; it is a test bench, and now a pinned one</td><td><a href="../../code/browser/index.html">Linux in the browser</a></td><td><b>accepted</b>: documented as needing root; the pins are SR-07</td></tr>
+</tbody>
+</table></div>
+<h2 id="adding-to-this-page">Adding to this page</h2>
+<p>A new finding gets the next <code>SR-</code> number and a row the day it is found, in whatever state it is in. A fixed row keeps its number for ever; nothing is deleted. The CLI's <code>SECURITY.md</code> points here, and every review on <a href="../reviews/index.html">Reviews</a> cites rows here.</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.25</a> · <a href="../../project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>Components</h4>
+    <a href="../../components/index.html">The OS a process sees</a>
+    <a href="../../components/bash/index.html">sharness.bash</a>
+    <a href="../../components/net/index.html">sharness.net</a>
+    <a href="../../components/kms/index.html">sharness.kms</a>
+    <a href="../../components/fs/index.html">sharness.fs</a>
+    <a href="../../components/llm/index.html">sharness.llm</a>
+    <a href="../../components/launcher/index.html">sharness.launcher</a>
+    <a href="../../components/policy/index.html">sharness.policy</a>
+  </div>
+  <div>
+    <h4>The design</h4>
+    <a href="../../design/index.html">The brief: in one read</a>
+    <a href="../../design/why/index.html">Why: the last metre</a>
+    <a href="../../design/architecture/index.html">Architecture</a>
+    <a href="../../design/components/index.html">Components</a>
+    <a href="../../design/keys/index.html">Keys and the KMS</a>
+    <a href="../../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../../design/pbp/index.html">The PBP on one page</a>
+    <a href="../../design/agents/index.html">Agents and LLMs</a>
+    <a href="../../design/process-tree/index.html">Enforcing the process tree</a>
+    <a href="../../design/surface/index.html">What a process can do</a>
+    <a href="../../design/containment/index.html">Containment</a>
+    <a href="../../design/spectrum/index.html">The spectrum</a>
+    <a href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+  </div>
+  <div>
+    <h4>The code</h4>
+    <a href="../../code/index.html">Where the code is</a>
+    <a href="../../code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../../code/flows/index.html">Flows through the code</a>
+    <a href="../../code/examples/index.html">Examples</a>
+    <a href="../../code/browser/index.html">Linux in the browser</a>
+    <a href="../../code/releases/index.html">Releases of the code</a>
+    <a href="../../code/languages/index.html">Languages</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
+  </div>
+  <div>
+    <h4>Security, evidence, landscape</h4>
+    <a href="../../security/index.html">Security: the register</a>
+    <a href="../../security/threat-model/index.html">Threat model</a>
+    <a href="../../security/risks/index.html">Known risks</a>
+    <a href="../../security/hardening/index.html">Hardening</a>
+    <a href="../../security/supply-chain/index.html">Supply chain</a>
+    <a href="../../evidence/index.html">Measurements</a>
+    <a href="../../evidence/status/index.html">What exists today</a>
+    <a href="../../evidence/research/index.html">Research note</a>
+    <a href="../../evidence/machines/index.html">hello on your machine</a>
+    <a href="../../landscape/index.html">Landscape: policies at the centre</a>
+    <a href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+    <a href="../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+    <a href="../../landscape/market/index.html">Market &amp; competitors</a>
+    <a href="../../explain/storyboards/index.html">Storyboards</a>
+    <a href="../../articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Project &amp; agents</h4>
+    <a href="../../project/about/index.html">About &amp; naming</a>
+    <a href="../../project/sources/index.html">The source documents</a>
+    <a href="../../project/engineering.html">Engineering</a>
+    <a href="../../project/comms.html">Comms &amp; release history</a>
+    <a href="../../admin/index.html">Admin: how the project is run</a>
+    <a href="../../admin/board/index.html">The board</a>
+    <a href="../../admin/updates/index.html">Updates</a>
+    <a href="../../admin/notes/index.html">Commit notes</a>
+    <a href="../../admin/schedule/index.html">Schedule and runs</a>
+    <a href="../../admin/briefs/index.html">Briefs</a>
+    <a href="../../admin/guidance/index.html">Guidance for agents (AGENTS.md)</a>
+    <a href="../../project/adoption/index.html">Getting users</a>
+    <a href="../../project/outreach/index.html">Outreach</a>
+    <a href="../../project/agents/index.html">The agents and their keys</a>
+    <a href="../../project/telemetry/index.html">Telemetry</a>
+    <a href="../../.well-known/security.txt">security.txt</a>
+    <a href="../../llms.txt">llms.txt</a>
+    <a href="../../llms-full.txt">llms-full.txt</a>
+    <a href="../../index.md">index.md</a>
+    <a href="../../sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

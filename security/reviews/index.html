@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Security reviews — SHarness</title>
+<meta name="description" content="Each security review, dated: scope, method, environment, the findings with the fix and the test that pins each, what was examined and found clean, and what was not examined.">
+<link rel="canonical" href="https://sharness.ai/security/reviews/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/security/reviews/index.html">
+<meta property="og:title" content="Security reviews — SHarness">
+<meta property="og:description" content="Each security review, dated: scope, method, environment, the findings with the fix and the test that pins each, what was examined and found clean, and what was not examined.">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.25</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../code/playground/index.html">Try it<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/playground/index.html">&#9679; The playground: type sharness-ai in your browser</a>
+      <a class="sl" href="../../code/browser/demo/index.html">A Linux kernel in a tab, running hello</a>
+      <a class="sl" href="../../index.html#start">Start in 60 seconds</a>
+      <a class="sl" href="../../evidence/machines/index.html">Help us measure it: report your machine</a>
+      <a class="sl" href="../../explain/mockups/policy-hash.html">Mockup: the policy hash</a>
+      <a class="sl" href="../../explain/mockups/edges.html">Mockup: the edge matrix</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../components/index.html">Components<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../components/index.html">&#9679; The OS a process sees</a>
+      <a class="sl" href="../../components/bash/index.html">sharness.bash: the shell, as a service</a>
+      <a class="sl" href="../../components/net/index.html">sharness.net: the only network client</a>
+      <a class="sl" href="../../components/kms/index.html">sharness.kms: where a secret lives</a>
+      <a class="sl" href="../../components/fs/index.html">sharness.fs: the only writer</a>
+      <a class="sl" href="../../components/llm/index.html">sharness.llm: the only model client</a>
+      <a class="sl" href="../../components/launcher/index.html">sharness.launcher: the bootstrap</a>
+      <a class="sl" href="../../components/policy/index.html">sharness.policy: the manifest</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../design/index.html">The design<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../design/index.html">&#9679; The brief: in one read</a>
+      <a class="sl" href="../../design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="../../design/architecture/index.html">Architecture</a>
+      <a class="sl" href="../../design/components/index.html">Components</a>
+      <a class="sl" href="../../design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../../design/pbp/index.html">The PBP on one page</a>
+      <a class="sl" href="../../design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../../design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="../../design/surface/index.html">What a process can do</a>
+      <a class="sl" href="../../design/containment/index.html">Containment</a>
+      <a class="sl" href="../../design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      <a class="sl" href="../../explain/index.html">Storyboards &amp; mockups</a>
+      <a class="sl" href="../../articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../code/index.html">The code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/index.html">&#9679; Where the code is</a>
+      <a class="sl" href="../../code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl" href="../../code/flows/index.html">Flows through the code</a>
+      <a class="sl" href="../../code/examples/index.html">Examples</a>
+      <a class="sl" href="../../code/browser/index.html">Linux in the browser</a>
+      <a class="sl" href="../../code/playground/index.html">Playground: run it in your browser</a>
+      <a class="sl" href="../../code/releases/index.html">Releases of the code: immutable paths</a>
+      <a class="sl" href="../../code/languages/index.html">Languages</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../security/index.html">Security<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../security/index.html">&#9679; Security: the register</a>
+      <a class="sl" href="../../security/threat-model/index.html">Threat model</a>
+      <a class="sl" href="../../security/risks/index.html">Known risks</a>
+      <a class="sl here" href="../../security/reviews/index.html">Reviews</a>
+      <a class="sl" href="../../security/hardening/index.html">Hardening</a>
+      <a class="sl" href="../../security/supply-chain/index.html">Supply chain</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../evidence/index.html">&#9679; Measurements</a>
+      <a class="sl" href="../../evidence/status/index.html">What exists today</a>
+      <a class="sl" href="../../evidence/research/index.html">Research note</a>
+      <a class="sl" href="../../evidence/machines/index.html">hello on your machine: reported runs</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../landscape/index.html">Landscape<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../landscape/index.html">&#9679; Policies at the centre</a>
+      <a class="sl" href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+      <a class="sl" href="../../landscape/integrations/index.html">Integration points</a>
+      <a class="sl" href="../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+      <a class="sl" href="../../landscape/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../project/index.html">&#9679; Project</a>
+      <a class="sl" href="../../project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="../../project/sources/index.html">The source documents</a>
+      <a class="sl" href="../../project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="../../project/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../project/releases.html">Release history</a>
+      <a class="sl" href="../../project/adoption/index.html">Getting users: the review and the plan</a>
+      <a class="sl" href="../../admin/index.html">Admin: how the project is run</a>
+      <a class="sl" href="../../admin/board/index.html">The board: tasks &amp; requests</a>
+      <a class="sl" href="../../admin/updates/index.html">Updates: what is happening</a>
+      <a class="sl" href="../../project/outreach/index.html">Outreach: finding the people it is for</a>
+      <a class="sl" href="../../project/agents/index.html">The agents and their keys</a>
+      <a class="sl" href="../../project/telemetry/index.html">Telemetry: who reads this site</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__CLI">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+  <script src="../../assets/telemetry.js" data-root="../../" defer></script>
+</div></nav>
+
+<main class="doc">
+  <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">security</a> / security reviews · <a href="index.md">this page as markdown</a></div>
+  <h1>Security reviews</h1>
+<div class="note"><b>One review so far, <span class="asof">as of 25 Oct 2026</span>.</b> Each review is recorded with its scope, method and environment, its findings (each with the fix and the test that pins it), what was examined and found clean, and what was not examined. Findings are numbered <code>SF-</code> here; their state is kept on the <a href="../risks/index.html">register</a> under the matching <code>SR-</code> number.</div>
+<h2 id="review-1-25-october-2026">Review 1: 25 October 2026</h2>
+<p><b>By</b> security@sharness, the project's security agent (an AI agent working in a Claude Code cloud session, as the build agent does; Dinis Cruz asked for the review and decides every acceptance).</p>
+<p><b>Scope.</b> The CLI repository at <code>dev</code> commit <code>ebd1445</code>: every module in <code>sharness_ai/</code>, the seven example policies, <code>experiments/browser/</code> (the guest build, the runners, the playground), the skill, both workflows. The website repository at <code>dev</code> v0.5.8: the deploy workflow, the gate, every page that loads a script. The GitHub settings visible through the API (branches, collaborators, tags, workflow runs). The two composite actions the release pipeline used, read at the commit they were pinned to.</p>
+<p><b>Method.</b> Every file read in full. Each suspected gap was tried before it was written down, as a child process under a policy in the review's own session, so each finding below is an observed behaviour of the code as it was, not a reading of it. Each fix was then tried the same way and given a test. The scanners ruff (with bandit's rule set), bandit and zizmor were run before and after; they found none of the High findings, which is the usual shape: the holes were in what the code meant, not in how it was written.</p>
+<p><b>Environment.</b> One Claude Code cloud session: Ubuntu 24.04, Linux 6.18.44, Landlock ABI 7, uid 0, Python 3.13.17, cgroups v1 with a unified mount. The same kind of session as the measurements on <a href="../../evidence/index.html">Evidence</a>.</p>
+<h3 id="findings">Findings</h3>
+<p>The weight is the reviewer's judgement of what the finding would cost someone relying on the code as documented. "Fixed" means on the CLI's <code>dev</code> branch with the named test in <code>tests/unit/test_security.py</code>, unless another place is named.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>#</th><th>Weight</th><th>Where</th><th>Finding</th><th>Done</th></tr></thead>
+<tbody>
+<tr><td>SF-01</td><td>High</td><td><code>run.py</code>, <code>landlock.py</code></td><td>the Landlock rights granted on a writable path included execute, while the documentation and the profiles said the workspace is never executable. The test that existed checked the policy text, not the kernel</td><td>fixed: <code>landlock.access_write()</code>; <code>test_a_writable_path_is_not_executable</code></td></tr>
+<tr><td>SF-02</td><td>High</td><td><code>run.py</code></td><td>a writable path that is a symlink binds the rule to its target, so the kernel grants more than the page says; a cloned repository can carry the link</td><td>fixed: refused before forking; re-checked by the child on the bound descriptor; <code>test_a_symlinked_writable_path_is_refused_before_anything_runs</code></td></tr>
+<tr><td>SF-03</td><td>High</td><td><code>run.py</code></td><td>with <code>network: "none"</code> and neither a network namespace nor Landlock TCP rules available (kernels before 6.7 without a usable user namespace), the command ran with the network and nothing said so; ports likewise on ABI &lt; 4</td><td>fixed: a refusal, or <code>--best-effort</code> with the gap on stderr; <code>test_network_none_without_namespace_or_tcp_rules_is_refused</code></td></tr>
+<tr><td>SF-04</td><td>High</td><td><code>limits.py</code>, <code>run.py</code></td><td><code>max_pids</code> relied on <code>RLIMIT_NPROC</code>, which the kernel does not apply to uid 0; without a pids cgroup a root child's count was unlimited and the result said otherwise</td><td>fixed: a refusal without the cgroup; <code>test_max_pids_as_root_without_a_cgroup_is_refused</code>, <code>test_nproc_does_not_bind_root</code></td></tr>
+<tr><td>SF-05</td><td>High</td><td><code>.github/workflows/workflow.yml</code></td><td>the publish job ran a composite action from another repository that fetched an installer over the network and installed unpinned packages, in the job holding the PyPI OIDC token; its inner actions were pinned by tag</td><td>fixed: inline bump, separate build and publish jobs, GitHub's and pypa's actions pinned to commits, attestations. Untested until the next push to <code>main</code></td></tr>
+<tr><td>SF-06</td><td>Medium</td><td><code>hello.py</code></td><td>the runner was started with <code>python -m</code>, which puts the current directory first on the import path; a package folder of the same name in the workspace would be imported by the process that applies the policy</td><td>fixed: <code>-P -s</code>; <code>test_a_planted_package_in_the_workspace_is_not_imported</code></td></tr>
+<tr><td>SF-07</td><td>Medium</td><td><code>experiments/browser/build_guest.py</code></td><td>the guest's packages and BIOS were downloaded without verification, the BIOS from a branch; the chroot form runs them as root on the host</td><td>fixed: sha256 for every file, refused on mismatch, BIOS from one commit, https only; <code>test_guest_build_pins_every_download</code></td></tr>
+<tr><td>SF-08</td><td>Medium</td><td>Landlock</td><td>Unix-domain sockets by path are reachable under <code>network: "none"</code>; neither Landlock nor the empty network namespace covers them</td><td>accepted and declared on stderr, in <code>policy check</code>'s advice and in <code>hello</code>; <code>test_unix_socket_gap_is_declared</code></td></tr>
+<tr><td>SF-09</td><td>Medium</td><td><code>hello.py</code></td><td>any failure of a probe counted as the policy's refusal, including failures the environment would have produced without a policy</td><td>fixed: a control run and an <em>inconclusive</em> state</td></tr>
+<tr><td>SF-10</td><td>Medium</td><td><code>run.py</code></td><td>a descriptor opened before the policy stayed usable after it</td><td>fixed: every descriptor above 2 closed in the child; <code>test_inherited_descriptors_are_closed</code></td></tr>
+<tr><td>SF-11</td><td>Medium</td><td>the v0 schema</td><td>the child inherits the applying process's whole environment</td><td>open: a policy row is proposed on <a href="../risks/index.html#the-register">SR-11</a>; declared on stderr meanwhile</td></tr>
+<tr><td>SF-12</td><td>Low</td><td><code>policy.py</code></td><td>hashes diverged between Python and JavaScript for integers above 2^53; a lone surrogate ended in a traceback</td><td>fixed: refused; the browser canonicaliser is run under test</td></tr>
+<tr><td>SF-13</td><td>Low</td><td><code>policy.py</code></td><td>a duplicate key kept the last value silently</td><td>fixed: refused on load</td></tr>
+<tr><td>SF-14</td><td>Low</td><td><code>policy.py</code></td><td>paths with <code>..</code>, <code>.</code>, trailing or doubled slashes, and control characters in paths and ids were accepted</td><td>fixed: refused</td></tr>
+<tr><td>SF-15</td><td>Low</td><td><code>translate.py</code></td><td>unquoted paths in the Kubernetes YAML; a <code>:</code> in a path not expressible for docker</td><td>fixed: JSON-quoted; noted</td></tr>
+<tr><td>SF-16</td><td>Low</td><td><code>policy.py</code></td><td>a boolean accepted as a port</td><td>fixed</td></tr>
+<tr><td>SF-17</td><td>Low</td><td><code>cli.py</code></td><td>a missing policy file ended in a traceback</td><td>fixed: exit 2</td></tr>
+<tr><td>SF-18</td><td>Low</td><td><code>experiments/browser/boot_browser.mjs</code></td><td>the local static server followed <code>..</code> above the folder it served</td><td>fixed</td></tr>
+<tr><td>SF-19</td><td>Low</td><td><code>experiments/browser/playground.js</code></td><td>a runtime's output was written into the page as HTML</td><td>fixed: text nodes</td></tr>
+<tr><td>SF-20</td><td>Low</td><td>this site</td><td>the storyboards kit's script loaded without the integrity string the kit publishes</td><td>fixed: <code>integrity</code> and <code>crossorigin</code>; the gate checks it</td></tr>
+<tr><td>SF-21</td><td>Low</td><td>the skill</td><td>installing from a moving branch</td><td>fixed: a named commit</td></tr>
+<tr><td>SF-22</td><td>Info</td><td><code>run.py</code></td><td><code>SHARNESS_AI_POLICY_HASH</code> is a statement the child cannot verify</td><td>documented</td></tr>
+<tr><td>SF-23</td><td>Info</td><td><code>run.py</code></td><td>what could not be applied was visible only with <code>--verbose</code></td><td>fixed: stderr every run</td></tr>
+<tr><td>SF-24</td><td>Medium</td><td>GitHub settings</td><td><code>main</code> and <code>dev</code> unprotected; one administrator; a push to <code>main</code> publishes</td><td>open: <a href="../hardening/index.html#3-the-repositories-and-the-accounts-settings-only-a-person-can-change">Hardening §3</a></td></tr>
+<tr><td>SF-25</td><td>Low</td><td><code>code/playground/</code></td><td>Pyodide from a CDN with no integrity string</td><td>accepted and declared: <a href="../risks/index.html#the-register">SR-25</a></td></tr>
+</tbody>
+</table></div>
+<h3 id="examined-and-found-as-documented">Examined and found as documented</h3>
+<ul>
+<li><code>policy_hash</code>: SHA-256 over canonical JSON with sorted keys, no whitespace, UTF-8; the seven examples hash identically in Python and in the browser's canonicaliser (now under test).</li>
+<li><code>--expect-hash</code>: the file is loaded once, hashed, checked and enforced as the same object, so there is no window between the check and the use.</li>
+<li><code>landlock.py</code>: the ruleset attributes grow with the ABI as the kernel documents; rights not handled by the running ABI are masked; <code>no_new_privs</code> is set before <code>restrict_self</code>; the ruleset descriptor is closed after.</li>
+<li><code>probe</code>: prints the names of proxy variables and never their values (tested); reads only <code>/proc/self</code>, <code>/proc/config.gz</code>, <code>/sys/fs/cgroup</code> and the tools on <code>PATH</code>.</li>
+<li><code>translate</code>: the bwrap and docker lines quote every argument with <code>shlex.quote</code>; the Claude Code settings are JSON; the notes name what each target does not enforce.</li>
+<li><code>build_wheel.py</code>: the RECORD hashes every file; the wheel's version says <code>+dev.&lt;commit&gt;</code>, so it cannot be mistaken for a release.</li>
+<li><code>write_cpio</code>: deterministic (fixed inode numbers, zero gzip timestamp), under test.</li>
+<li>the skill's safety rules: child subtrees only; nothing written outside a temporary directory.</li>
+<li>the website's gate: version agreement, internal links, canonical host, a key-leak tripwire, dated figures, the newsroom format; the deploy workflow's actions pinned to commits; <code>persist-credentials: false</code> where nothing pushes.</li>
+<li>the GitHub settings that could be read: both repositories have one collaborator, Dinis Cruz, as admin; two tags on the CLI; the <code>tests</code> workflow green on the last two pushes to <code>dev</code>.</li>
+</ul>
+<h3 id="not-examined">Not examined</h3>
+<ul>
+<li>The design's cryptography (the KMS protocol, the sealing envelope, the session CA) beyond reading it: nothing of it is code yet, and a protocol review belongs with E05 and E08.</li>
+<li>The kernel's Landlock implementation itself; this review trusts the kernel, as the design does.</li>
+<li>GitHub settings the API does not show to this session: rulesets, the Actions permission policy, secret scanning and push protection, Pages' environment rules, the organisation's two-factor requirement. These are on the lock-down list as things to set and then confirm.</li>
+<li>The PyPI side of Trusted Publishing: the publisher's configuration was not visible; the lock-down list asks for it to be bound to an environment.</li>
+<li>A run of the rewritten release pipeline. It runs on the next push to <code>main</code>; a <code>workflow_dispatch</code> dry run builds and stops.</li>
+<li>sgit, and anything on the *.sgit.ai sites.</li>
+</ul>
+<h2 id="next-review">Next review</h2>
+<p>When the launcher exists as a script (E06 and after), before any component is called a Boundary for the agent. Then on each release that adds a component. Each review is a new section on this page; the register grows, and nothing on it is removed.</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.25</a> · <a href="../../project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>Components</h4>
+    <a href="../../components/index.html">The OS a process sees</a>
+    <a href="../../components/bash/index.html">sharness.bash</a>
+    <a href="../../components/net/index.html">sharness.net</a>
+    <a href="../../components/kms/index.html">sharness.kms</a>
+    <a href="../../components/fs/index.html">sharness.fs</a>
+    <a href="../../components/llm/index.html">sharness.llm</a>
+    <a href="../../components/launcher/index.html">sharness.launcher</a>
+    <a href="../../components/policy/index.html">sharness.policy</a>
+  </div>
+  <div>
+    <h4>The design</h4>
+    <a href="../../design/index.html">The brief: in one read</a>
+    <a href="../../design/why/index.html">Why: the last metre</a>
+    <a href="../../design/architecture/index.html">Architecture</a>
+    <a href="../../design/components/index.html">Components</a>
+    <a href="../../design/keys/index.html">Keys and the KMS</a>
+    <a href="../../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../../design/pbp/index.html">The PBP on one page</a>
+    <a href="../../design/agents/index.html">Agents and LLMs</a>
+    <a href="../../design/process-tree/index.html">Enforcing the process tree</a>
+    <a href="../../design/surface/index.html">What a process can do</a>
+    <a href="../../design/containment/index.html">Containment</a>
+    <a href="../../design/spectrum/index.html">The spectrum</a>
+    <a href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+  </div>
+  <div>
+    <h4>The code</h4>
+    <a href="../../code/index.html">Where the code is</a>
+    <a href="../../code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../../code/flows/index.html">Flows through the code</a>
+    <a href="../../code/examples/index.html">Examples</a>
+    <a href="../../code/browser/index.html">Linux in the browser</a>
+    <a href="../../code/releases/index.html">Releases of the code</a>
+    <a href="../../code/languages/index.html">Languages</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
+  </div>
+  <div>
+    <h4>Security, evidence, landscape</h4>
+    <a href="../../security/index.html">Security: the register</a>
+    <a href="../../security/threat-model/index.html">Threat model</a>
+    <a href="../../security/risks/index.html">Known risks</a>
+    <a href="../../security/hardening/index.html">Hardening</a>
+    <a href="../../security/supply-chain/index.html">Supply chain</a>
+    <a href="../../evidence/index.html">Measurements</a>
+    <a href="../../evidence/status/index.html">What exists today</a>
+    <a href="../../evidence/research/index.html">Research note</a>
+    <a href="../../evidence/machines/index.html">hello on your machine</a>
+    <a href="../../landscape/index.html">Landscape: policies at the centre</a>
+    <a href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+    <a href="../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+    <a href="../../landscape/market/index.html">Market &amp; competitors</a>
+    <a href="../../explain/storyboards/index.html">Storyboards</a>
+    <a href="../../articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Project &amp; agents</h4>
+    <a href="../../project/about/index.html">About &amp; naming</a>
+    <a href="../../project/sources/index.html">The source documents</a>
+    <a href="../../project/engineering.html">Engineering</a>
+    <a href="../../project/comms.html">Comms &amp; release history</a>
+    <a href="../../admin/index.html">Admin: how the project is run</a>
+    <a href="../../admin/board/index.html">The board</a>
+    <a href="../../admin/updates/index.html">Updates</a>
+    <a href="../../admin/notes/index.html">Commit notes</a>
+    <a href="../../admin/schedule/index.html">Schedule and runs</a>
+    <a href="../../admin/briefs/index.html">Briefs</a>
+    <a href="../../admin/guidance/index.html">Guidance for agents (AGENTS.md)</a>
+    <a href="../../project/adoption/index.html">Getting users</a>
+    <a href="../../project/outreach/index.html">Outreach</a>
+    <a href="../../project/agents/index.html">The agents and their keys</a>
+    <a href="../../project/telemetry/index.html">Telemetry</a>
+    <a href="../../.well-known/security.txt">security.txt</a>
+    <a href="../../llms.txt">llms.txt</a>
+    <a href="../../llms-full.txt">llms-full.txt</a>
+    <a href="../../index.md">index.md</a>
+    <a href="../../sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

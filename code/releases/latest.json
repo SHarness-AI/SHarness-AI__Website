@@ -1,0 +1,7 @@
+{
+ "what": "The newest release. This file and latest/ are the only paths under code/releases/ that move; pin the versioned path when the bytes must never change under you.",
+ "release": "v0.1.0",
+ "path": "v0/v0.1/v0.1.0/",
+ "manifest": "v0/v0.1/v0.1.0/manifest.json",
+ "base": "https://sharness.ai/code/releases/v0/v0.1/v0.1.0/"
+}

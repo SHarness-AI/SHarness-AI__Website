@@ -6,43 +6,44 @@
 
 ---
 
-A snapshot taken by the conductor with `python3 tools/admin_status.py`, as of 25 Oct 2026 (2026-10-25T23:55Z): every branch of both repositories, its head, its last commit and how far it is from `dev`, read from git, never from a session; then every member's own `status.json`. A branch ahead of `dev` is work nobody has released yet; a session is only visible here once it has pushed.
+A snapshot taken by the conductor with `python3 tools/admin_status.py`, as of 26 Oct 2026 (2026-10-26T00:36Z): every branch of both repositories, its head, its last commit and how far it is from `dev`, read from git, never from a session; then every member's own `status.json`. A branch ahead of `dev` is work nobody has released yet; a session is only visible here once it has pushed.
 
 ## SHarness-AI__Website
 
-Latest tag `v0.5.17`; 1 branch(es) carry commits not yet on `dev`.
+Latest tag `v0.5.23`; 1 branch(es) carry commits not yet on `dev`.
 
 | Branch | Head | Last commit | Against dev |
 |---|---|---|---|
-| `dev` | `c0cde85` · 2026-10-25 23:52 | site v0.5.17: sharness.pbp joins; the Process Behaviour Policy on one page (Agent: sharness.pbp) | 0 ahead, 0 behind |
-| `main` | `a1f93f6` · 2026-10-24 17:30 | Initial commit | 0 ahead, 33 behind |
-| `claude/blissful-johnson-yk1c4p` | `e9a9679` · 2026-10-24 17:55 | site v0.3.1: completeness pass against the sgit design pack 00-04 | 0 ahead, 28 behind |
-| `claude/wonderful-cray-4xpawa` | `d0f0cf6` · 2026-10-25 23:54 | site v0.5.17: the build agent's debrief; notes to the conductor and to security (Agent: sharness.build) | 1 ahead, 3 behind |
-| `conductor/admin` | `c0cde85` · 2026-10-25 23:52 | site v0.5.17: sharness.pbp joins; the Process Behaviour Policy on one page (Agent: sharness.pbp) | 0 ahead, 0 behind |
-| `pbp/join` | `c0cde85` · 2026-10-25 23:52 | site v0.5.17: sharness.pbp joins; the Process Behaviour Policy on one page (Agent: sharness.pbp) | 0 ahead, 0 behind |
+| `dev` | `c784680` · 2026-10-26 00:33 | site v0.5.23: R7 carries Dinis's decision: the CLI release after the security and functionality pass | 0 ahead, 0 behind |
+| `main` | `a1f93f6` · 2026-10-24 17:30 | Initial commit | 0 ahead, 43 behind |
+| `claude/blissful-johnson-yk1c4p` | `e9a9679` · 2026-10-24 17:55 | site v0.3.1: completeness pass against the sgit design pack 00-04 | 0 ahead, 38 behind |
+| `claude/wonderful-cray-4xpawa` | `cc4bb69` · 2026-10-25 23:57 | Join the working branch to the released head; d0f0cf6 is the pre-amend copy of the v0.5.19 debrief (Agent: sharness.build) | 2 ahead, 6 behind |
+| `conductor/admin` | `7e15208` · 2026-10-26 00:05 | site v0.5.21: schedules, cards and start pages; WAKE.md; run records; briefs; the conductor's first review | 0 ahead, 3 behind |
+| `pbp/join` | `c0cde85` · 2026-10-25 23:52 | site v0.5.17: sharness.pbp joins; the Process Behaviour Policy on one page (Agent: sharness.pbp) | 0 ahead, 10 behind |
+| `security/join` | `e921452` · 2026-10-25 23:58 | site v0.5.20: the security section and the code at immutable paths, merged onto dev at v0.5.19 | 0 ahead, 4 behind |
 
 ## SHarness-AI__CLI
 
-Latest tag `v0.1.0`; 3 branch(es) carry commits not yet on `dev`.
+Latest tag `v0.1.0`; 4 branch(es) carry commits not yet on `dev`.
 
 | Branch | Head | Last commit | Against dev |
 |---|---|---|---|
-| `dev` | `997459a` · 2026-10-25 23:48 | Security review 1: fail-closed enforcement, pinned supply chain, a security test suite and CI | 0 ahead, 0 behind |
-| `main` | `6836292` · 2026-10-24 16:27 | Update release badge and version file | 0 ahead, 15 behind |
-| `claude/blissful-johnson-yk1c4p` | `0a53a7c` · 2026-10-24 16:50 | Point the package at sharness.ai, add the proposed scope, make sharness-ai the only command | 0 ahead, 14 behind |
-| `claude/wonderful-cray-4xpawa` | `ef92296` · 2026-10-25 23:49 | AGENTS.md: the commit-notes protocol in full; commit every self-contained step; know who is in place | 0 ahead, 1 behind |
-| `dependabot/github_actions/actions-b6b218e832` | `7b39751` · 2026-10-25 23:54 | Bump the actions group with 3 updates | 1 ahead, 0 behind |
-| `dependabot/pip/pytest-cov-gte-7.1.0` | `aa31efd` · 2026-10-25 23:52 | Update pytest-cov requirement from >=5.0 to >=7.1.0 | 1 ahead, 0 behind |
-| `dependabot/pip/pytest-gte-9.1.1` | `be65598` · 2026-10-25 23:52 | Update pytest requirement from >=8.0 to >=9.1.1 | 1 ahead, 0 behind |
+| `dev` | `7dcbe05` · 2026-10-26 00:00 | security.yml: audit what the package installs, not the venv's pip; dependency review waits on a setting | 0 ahead, 0 behind |
+| `main` | `6836292` · 2026-10-24 16:27 | Update release badge and version file | 0 ahead, 16 behind |
+| `claude/blissful-johnson-yk1c4p` | `0a53a7c` · 2026-10-24 16:50 | Point the package at sharness.ai, add the proposed scope, make sharness-ai the only command | 0 ahead, 15 behind |
+| `claude/wonderful-cray-4xpawa` | `2aa5d8d` · 2026-10-25 23:56 | Join the working branch back to dev; ba86a3f is a stray copy of 997459a (Agent: sharness.build) | 2 ahead, 1 behind |
+| `dependabot/github_actions/actions-b6b218e832` | `199e5b0` · 2026-10-26 00:05 | Bump the actions group across 1 directory with 3 updates | 1 ahead, 0 behind |
+| `dependabot/pip/pytest-cov-gte-7.1.0` | `aa31efd` · 2026-10-25 23:52 | Update pytest-cov requirement from >=5.0 to >=7.1.0 | 1 ahead, 1 behind |
+| `dependabot/pip/pytest-gte-9.1.1` | `be65598` · 2026-10-25 23:52 | Update pytest requirement from >=8.0 to >=9.1.1 | 1 ahead, 1 behind |
 
 ## The members
 
 | Member | Role | State | Last did | Waiting for |
 |---|---|---|---|---|
-| [sharness.conductor](../members/conductor/index.md) | Conductor; for now also librarian, ontologist and project manager | working | v0.5.14, v0.5.15, v0.5.18: the admin section, Commit-FS-lite as the protocol, the roster of every session from the editor's screenshot of 26 Oct (seven sessions; a draft folder for security@; sharness.pbp added its own; R14 answered). | R12 (a comms vault for conductor@sharness, keys sealed), R13 (the editor to accept or change this role and the three hats it wears), R14 (which other sessions are running, so each gets a member folder); on: editor |
+| [sharness.conductor](../members/conductor/index.md) | Conductor; for now also librarian, ontologist and project manager | working | The check-in of 00:32 UTC: reviewed what landed since v0.5.21 (the Sherpa's v0.5.22 twice, security@'s CLI audit, Dependabot), built tools/ship.py (T16) and released with it; R19 opened; the update of 00:40. | R17 (the go on the cards), R12, R13; on: editor |
 | [Dinis Cruz](../members/editor/index.md) | Author of SHarness and editor of the site | deciding | Asked the conductor to join (25 Oct); asked for the commit-notes protocol and sent the list of running sessions (26 Oct). | nothing from the team; the R rows on the board wait on him |
-| [security@sharness](../members/security/index.md) | Security; the site's and the CLI's own security pages, the gate's security checks | working | At the conductor's look: rewriting two security pages, then regenerating the site. Nothing pushed yet, no branch of its own visible. | nothing known; its first commit will say |
+| [sharness.security](../members/security/index.md) | Security agent; keeps the register and reviews what lands | working | Review 1 of the CLI, the policies, the bench, both pipelines and the site (25 findings; 5 High, all fixed on the CLI's dev at 997459a with 32 tests); the security section (threat model, register, reviews, hardening, supply chain); security.yml, codeql.yml, dependabot.yml, SECURITY.md in both repositories; the code at immutable paths under code/releases/ with tools/releases.py and the gate's checks; the storyboards kit loaded with its integrity string. | R15 (the repository and account settings on the lock-down list) and R16 (the process.env row); the first run of the rewritten release pipeline on the CLI's next push to main (SR-05 reads fixed, untested until then); on: editor |
 | [sharness.build](../members/sharness.build/index.md) | The build agent of the site and the CLI | working | Site v0.5.13 (25 Oct, 23:46 UTC): the guest in the tab on a network the page provides, and the playground's interceptor that decodes every packet and enforces an egress allowlist outside the guest; 17 of 17 checks, live. Site v0.5.16 (26 Oct, 00:20 UTC): the Components section, the OS a process sees, one page per component with the proposed API and the verdicts; the phone menu fixed. CLI: dev taken in after security@sharness's review 1; the guest rebuilt on it and the 17 checks re-run. | R7 (the CLI's dev to main; the editor said not before the reviews are done); the editor's reviews R6 and T3/T4; a decision on the proposed component APIs (REST on loopback), which are written as proposed on /components/ |
 | [sharness.dev](../members/sharness.dev/index.md) | The developer agent, reference implementations in several languages | blocked | Site v0.5.10 (25 Oct, 23:23 UTC). Its session 'sharness.ai / dev@' has been idle since 23:25 UTC, blocked on R8. | R8: the language set and order (it recommends JavaScript, then Go, then Rust; C as the floor), the repository layout, where the test vectors live; on: editor |
 | [sharness.pbp](../members/sharness.pbp/index.md) | The policy agent; holds the definition of the Process Behaviour Policy | done | Site v0.5.15 (25 Oct 2026): joined; the PBP on one page (design/pbp), wired into the nav, llms.txt, the design hub and the Policies page; T14 opened. | the editor's read of design/pbp; on: editor |
-| [sherpa@sharness](../members/sherpa/index.md) | The Sherpa; also outreach and telemetry | waiting | Site v0.5.11 and v0.5.12 (25 Oct, 23:27 and 23:30 UTC). Its session 'sharness.ai / sherpa@' idle since 23:32 UTC. | R9 (its key confirmed, the two environment secrets stored), R11 (a go per outreach channel); on: editor |
+| [sherpa@sharness](../members/sherpa/index.md) | The Sherpa; also outreach and telemetry | working | Site v0.5.22 (the outreach plan without the material on another project's promotion) and v0.5.23 (R7's decision). Both vaults pushed; the telemetry lane open and drained (29 events); both vault keys handed to the vault keeper, sealed. R9 superseded (identity keys are ephemeral), R11 paused (the site first, LinkedIn first), R7 after the security and functionality pass: the editor, 26 Oct. | R11 (paused by the editor until the site is ready), R7 (after the security and functionality pass), R17 (the go on the cards); the conductor to land the T8 words in the CLI; on: editor, conductor |

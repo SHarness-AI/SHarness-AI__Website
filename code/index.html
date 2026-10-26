@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.19</a>
+  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.25</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -77,7 +77,19 @@
       <a class="sl" href="../code/examples/index.html">Examples</a>
       <a class="sl" href="../code/browser/index.html">Linux in the browser</a>
       <a class="sl" href="../code/playground/index.html">Playground: run it in your browser</a>
+      <a class="sl" href="../code/releases/index.html">Releases of the code: immutable paths</a>
       <a class="sl" href="../code/languages/index.html">Languages</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../security/index.html">Security<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../security/index.html">&#9679; Security: the register</a>
+      <a class="sl" href="../security/threat-model/index.html">Threat model</a>
+      <a class="sl" href="../security/risks/index.html">Known risks</a>
+      <a class="sl" href="../security/reviews/index.html">Reviews</a>
+      <a class="sl" href="../security/hardening/index.html">Hardening</a>
+      <a class="sl" href="../security/supply-chain/index.html">Supply chain</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -137,8 +149,9 @@
 <tr><td>the playground: <code>sharness-ai</code> in Pyodide and in a shell on the Linux guest</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/browser/playground.js"><code>experiments/browser/playground.js</code></a>, one ES module; served on this site at <a href="playground/index.html">code/playground</a>; <code>test_playground.mjs</code> drives both tabs</td><td>runnable; 11 of 11 checks 25 Oct 2026</td></tr>
 <tr><td>E09, the harness under a second kernel: the guest build, the Node and browser runners, the chroot form</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/experiments/browser"><code>experiments/browser/</code></a>: <code>build_guest.py</code> (standard library), <code>init.sh</code>, <code>page.html</code>, <code>boot_node.mjs</code>, <code>boot_browser.mjs</code>, <code>chroot_native.sh</code>; v86 pinned in its own <code>package.json</code></td><td>runnable; measured 25 Oct 2026 (<a href="browser/index.html">Linux in the browser</a>)</td></tr>
 <tr><td>the skill for a Claude Code session</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/.claude/skills/sharness-hello/SKILL.md"><code>.claude/skills/sharness-hello/SKILL.md</code></a></td><td>runnable</td></tr>
-<tr><td>the tests</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/tests/unit"><code>tests/unit/</code></a>, 60 tests, run on every push to <code>dev</code> by <code>tests.yml</code> on Python 3.11, 3.12 and 3.13; Landlock tests skip where it is absent</td><td>green on 25 Oct 2026</td></tr>
+<tr><td>the tests</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/tests/unit"><code>tests/unit/</code></a>, 92 tests (32 of them the security tests that pin each finding of the 25 Oct 2026 review), run on every push to <code>dev</code> by <code>tests.yml</code> on Python 3.11, 3.12 and 3.13; Landlock tests skip where it is absent</td><td>green on 25 Oct 2026</td></tr>
 <tr><td>the ground rules for agents working in the repository</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/CLAUDE.md"><code>CLAUDE.md</code></a></td><td></td></tr>
+<tr><td>the code published on this site at immutable paths, with a manifest of hashes and a <code>latest</code></td><td><a href="releases/index.html"><code>code/releases/</code></a>: <code>releases.json</code>, <code>latest.json</code>, <code>vN/vN.M/vN.M.P/</code>, <code>dev/</code>; <code>tools/releases.py</code> cuts and checks them</td><td>v0.1.0 and the dev snapshot, 25 Oct 2026</td></tr>
 <tr><td>the release pipeline</td><td><a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/.github/workflows/workflow.yml"><code>.github/workflows/workflow.yml</code></a>: tests, version bump, tag, PyPI by Trusted Publishing</td><td>runs on a push to <code>main</code></td></tr>
 <tr><td>the browser mockups</td><td>this site, <a href="https://github.com/SHarness-AI/SHarness-AI__Website/tree/dev/explain/mockups"><code>explain/mockups/</code></a>: hand-written HTML, no build</td><td>published</td></tr>
 <tr><td>the storyboards' data</td><td>this site, <a href="https://github.com/SHarness-AI/SHarness-AI__Website/tree/dev/content/storyboards"><code>content/storyboards/</code></a></td><td>published</td></tr>
@@ -150,18 +163,18 @@
 <div class="tablewrap"><table>
 <thead><tr><th>Module</th><th>Lines</th><th>Does</th><th>Experiment</th></tr></thead>
 <tbody>
-<tr><td><code>cli.py</code></td><td>98</td><td>the argument parser and the dispatch: <code>probe</code>, <code>policy hash</code>, <code>policy check</code>, <code>run</code>, <code>hello</code></td><td></td></tr>
-<tr><td><code>probe.py</code></td><td>138</td><td>the grant: reads <code>/proc/self/status</code>, the Landlock ABI, <code>memfd_secret</code>, the namespaces, cgroups, the kernel config, the tools present, the names of proxy variables</td><td>E01</td></tr>
-<tr><td><code>policy.py</code></td><td>126</td><td>a v0 policy: load, check the shape (including the caps), canonicalise (sorted keys, no whitespace, integers only), hash</td><td>E02</td></tr>
-<tr><td><code>translate.py</code></td><td>176</td><td>the policy as bubblewrap, <code>docker run</code>, a Claude Code sandbox <code>settings.json</code>, a Kubernetes Pod and NetworkPolicy; each with what it does not enforce</td><td>E10</td></tr>
-<tr><td><code>landlock.py</code></td><td>157</td><td>Landlock through <code>ctypes</code>: the ABI, a ruleset, path rules, port rules, <code>restrict_self</code></td><td>E03</td></tr>
-<tr><td><code>run.py</code></td><td>133</td><td>fork, apply the policy in the child (network namespace, caps, <code>no_new_privs</code>, Landlock), exec; <code>--expect-hash</code></td><td>E03</td></tr>
-<tr><td><code>limits.py</code></td><td>95</td><td>the caps: <code>RLIMIT_AS</code> and <code>RLIMIT_NPROC</code>, and a memory and pids cgroup (v1 or v2) where <code>/sys/fs/cgroup</code> is writable</td><td>E03</td></tr>
-<tr><td><code>hello.py</code></td><td>124</td><td>the acceptance test: a deny-all policy for the running interpreter with a 128 MiB cap, six probes, the caveat</td><td>E04</td></tr>
+<tr><td><code>cli.py</code></td><td>133</td><td>the argument parser and the dispatch: <code>probe</code>, <code>policy hash</code>, <code>policy check</code>, <code>run</code>, <code>hello</code></td><td></td></tr>
+<tr><td><code>probe.py</code></td><td>147</td><td>the grant: reads <code>/proc/self/status</code>, the Landlock ABI, <code>memfd_secret</code>, the namespaces, cgroups, the kernel config, the tools present, the names of proxy variables</td><td>E01</td></tr>
+<tr><td><code>policy.py</code></td><td>234</td><td>a v0 policy: load (no duplicate keys, no oversized file), check the shape (normalised printable paths, the caps, integers JavaScript keeps exact), canonicalise, hash, advise</td><td>E02</td></tr>
+<tr><td><code>translate.py</code></td><td>187</td><td>the policy as bubblewrap, <code>docker run</code>, a Claude Code sandbox <code>settings.json</code>, a Kubernetes Pod and NetworkPolicy; each with what it does not enforce</td><td>E10</td></tr>
+<tr><td><code>landlock.py</code></td><td>174</td><td>Landlock through <code>ctypes</code>: the ABI, a ruleset, path rules, port rules, <code>restrict_self</code></td><td>E03</td></tr>
+<tr><td><code>run.py</code></td><td>251</td><td>fork, close inherited descriptors, apply the policy in the child (network namespace, caps, <code>no_new_privs</code>, Landlock with write never executable), exec; <code>--expect-hash</code>; refuses a row it cannot enforce and a writable symlink; says what is not covered</td><td>E03</td></tr>
+<tr><td><code>limits.py</code></td><td>124</td><td>the caps: <code>RLIMIT_AS</code> and <code>RLIMIT_NPROC</code>, and a memory and pids cgroup (v1 or v2) where <code>/sys/fs/cgroup</code> is writable</td><td>E03</td></tr>
+<tr><td><code>hello.py</code></td><td>170</td><td>the acceptance test: a deny-all policy for the running interpreter with a 128 MiB cap, six probes with a control for ambiguous refusals, the not-covered line, the caveat</td><td>E04</td></tr>
 <tr><td><code>_version.py</code></td><td>17</td><td>the version, read from the file CI maintains</td><td></td></tr>
 </tbody>
 </table></div>
-<p>Counts from <code>wc -l</code> on 25 Oct 2026. How a command moves through these modules is on <a href="flows/index.html">Flows</a>.</p>
+<p>Counts from <code>wc -l</code> on 25 Oct 2026, after the security review's fixes. How a command moves through these modules is on <a href="flows/index.html">Flows</a>.</p>
 <h2 id="the-commands">The commands</h2>
 <pre class="diagram">sharness-ai probe [--json]                                E01  the grant
 sharness-ai policy hash|check FILE                        E02  the one value the person supplies
@@ -194,7 +207,7 @@ cd experiments/browser &amp;&amp; npm run node|browser|native     E09  the same,
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../project/releases.html">v0.5.19</a> · <a href="../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../project/releases.html">v0.5.25</a> · <a href="../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>Components</h4>
@@ -231,12 +244,18 @@ cd experiments/browser &amp;&amp; npm run node|browser|native     E09  the same,
     <a href="../code/flows/index.html">Flows through the code</a>
     <a href="../code/examples/index.html">Examples</a>
     <a href="../code/browser/index.html">Linux in the browser</a>
+    <a href="../code/releases/index.html">Releases of the code</a>
     <a href="../code/languages/index.html">Languages</a>
     <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
     <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
   </div>
   <div>
-    <h4>Evidence, landscape, explain</h4>
+    <h4>Security, evidence, landscape</h4>
+    <a href="../security/index.html">Security: the register</a>
+    <a href="../security/threat-model/index.html">Threat model</a>
+    <a href="../security/risks/index.html">Known risks</a>
+    <a href="../security/hardening/index.html">Hardening</a>
+    <a href="../security/supply-chain/index.html">Supply chain</a>
     <a href="../evidence/index.html">Measurements</a>
     <a href="../evidence/status/index.html">What exists today</a>
     <a href="../evidence/research/index.html">Research note</a>
@@ -246,7 +265,6 @@ cd experiments/browser &amp;&amp; npm run node|browser|native     E09  the same,
     <a href="../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
     <a href="../landscape/market/index.html">Market &amp; competitors</a>
     <a href="../explain/storyboards/index.html">Storyboards</a>
-    <a href="../explain/index.html">Mockups</a>
     <a href="../articles/index.html">Articles</a>
   </div>
   <div>
@@ -259,11 +277,14 @@ cd experiments/browser &amp;&amp; npm run node|browser|native     E09  the same,
     <a href="../admin/board/index.html">The board</a>
     <a href="../admin/updates/index.html">Updates</a>
     <a href="../admin/notes/index.html">Commit notes</a>
+    <a href="../admin/schedule/index.html">Schedule and runs</a>
+    <a href="../admin/briefs/index.html">Briefs</a>
     <a href="../admin/guidance/index.html">Guidance for agents (AGENTS.md)</a>
     <a href="../project/adoption/index.html">Getting users</a>
     <a href="../project/outreach/index.html">Outreach</a>
     <a href="../project/agents/index.html">The agents and their keys</a>
     <a href="../project/telemetry/index.html">Telemetry</a>
+    <a href="../.well-known/security.txt">security.txt</a>
     <a href="../llms.txt">llms.txt</a>
     <a href="../llms-full.txt">llms-full.txt</a>
     <a href="../index.md">index.md</a>

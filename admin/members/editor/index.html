@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="../../../project/releases.html" title="Site release history">v0.5.19</a>
+  <a class="ver" href="../../../project/releases.html" title="Site release history">v0.5.25</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -77,7 +77,19 @@
       <a class="sl" href="../../../code/examples/index.html">Examples</a>
       <a class="sl" href="../../../code/browser/index.html">Linux in the browser</a>
       <a class="sl" href="../../../code/playground/index.html">Playground: run it in your browser</a>
+      <a class="sl" href="../../../code/releases/index.html">Releases of the code: immutable paths</a>
       <a class="sl" href="../../../code/languages/index.html">Languages</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../../security/index.html">Security<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../../security/index.html">&#9679; Security: the register</a>
+      <a class="sl" href="../../../security/threat-model/index.html">Threat model</a>
+      <a class="sl" href="../../../security/risks/index.html">Known risks</a>
+      <a class="sl" href="../../../security/reviews/index.html">Reviews</a>
+      <a class="sl" href="../../../security/hardening/index.html">Hardening</a>
+      <a class="sl" href="../../../security/supply-chain/index.html">Supply chain</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -143,7 +155,7 @@
 <li>Nothing is called measured that he, or anyone, cannot check from the published method.</li>
 </ul>
 <h2 id="where-it-is">Where it is</h2>
-<div class="tablewrap"><table><tbody><tr><th>State</th><td><span class="tstat t-open">deciding</span> <span class="asof">as of 26 Oct 2026</span></td></tr><tr><th>Last did</th><td>Asked the conductor to join (25 Oct); asked for the commit-notes protocol and sent the list of running sessions (26 Oct).</td></tr><tr><th>Waiting for</th><td>nothing from the team; the R rows on the board wait on him</td></tr><tr><th>Next</th><td>R7 (release the CLI's dev to main), R8 (the languages), R9 and R11 (the sherpa), R12 and R13 (the conductor); sharness.pbp waits for his read of design/pbp</td></tr></tbody></table></div>
+<div class="tablewrap"><table><tbody><tr><th>State</th><td><span class="tstat t-open">deciding</span> <span class="asof">as of 26 Oct 2026</span></td></tr><tr><th>Last did</th><td>Asked the conductor to join (25 Oct); asked for the commit-notes protocol and sent the list of running sessions (26 Oct).</td></tr><tr><th>Waiting for</th><td>nothing from the team; the R rows on the board wait on him</td></tr><tr><th>Next</th><td>R17 (the go on the schedule cards), R19 (merge Dependabot #2 and #3 on the CLI), R7, R8, R9 and R11, R12 and R13, R15 and R16, R18; sharness.pbp waits for his read of design/pbp and its roster of doors</td></tr></tbody></table></div>
 <h2 id="the-policy">The policy</h2>
 <p>not yet written; the conductor's policy.json is the shape. Until it exists the member's scope is what its ROLE.md says it owns.</p>
 
@@ -155,7 +167,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../../../project/releases.html">v0.5.19</a> · <a href="../../../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../../../project/releases.html">v0.5.25</a> · <a href="../../../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>Components</h4>
@@ -192,12 +204,18 @@
     <a href="../../../code/flows/index.html">Flows through the code</a>
     <a href="../../../code/examples/index.html">Examples</a>
     <a href="../../../code/browser/index.html">Linux in the browser</a>
+    <a href="../../../code/releases/index.html">Releases of the code</a>
     <a href="../../../code/languages/index.html">Languages</a>
     <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
     <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
   </div>
   <div>
-    <h4>Evidence, landscape, explain</h4>
+    <h4>Security, evidence, landscape</h4>
+    <a href="../../../security/index.html">Security: the register</a>
+    <a href="../../../security/threat-model/index.html">Threat model</a>
+    <a href="../../../security/risks/index.html">Known risks</a>
+    <a href="../../../security/hardening/index.html">Hardening</a>
+    <a href="../../../security/supply-chain/index.html">Supply chain</a>
     <a href="../../../evidence/index.html">Measurements</a>
     <a href="../../../evidence/status/index.html">What exists today</a>
     <a href="../../../evidence/research/index.html">Research note</a>
@@ -207,7 +225,6 @@
     <a href="../../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
     <a href="../../../landscape/market/index.html">Market &amp; competitors</a>
     <a href="../../../explain/storyboards/index.html">Storyboards</a>
-    <a href="../../../explain/index.html">Mockups</a>
     <a href="../../../articles/index.html">Articles</a>
   </div>
   <div>
@@ -220,11 +237,14 @@
     <a href="../../../admin/board/index.html">The board</a>
     <a href="../../../admin/updates/index.html">Updates</a>
     <a href="../../../admin/notes/index.html">Commit notes</a>
+    <a href="../../../admin/schedule/index.html">Schedule and runs</a>
+    <a href="../../../admin/briefs/index.html">Briefs</a>
     <a href="../../../admin/guidance/index.html">Guidance for agents (AGENTS.md)</a>
     <a href="../../../project/adoption/index.html">Getting users</a>
     <a href="../../../project/outreach/index.html">Outreach</a>
     <a href="../../../project/agents/index.html">The agents and their keys</a>
     <a href="../../../project/telemetry/index.html">Telemetry</a>
+    <a href="../../../.well-known/security.txt">security.txt</a>
     <a href="../../../llms.txt">llms.txt</a>
     <a href="../../../llms-full.txt">llms-full.txt</a>
     <a href="../../../index.md">index.md</a>

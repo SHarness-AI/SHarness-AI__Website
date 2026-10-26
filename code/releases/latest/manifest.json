@@ -1,0 +1,72 @@
+{
+ "what": "Immutable release of the sharness-ai code: nothing at this path will ever change; a fix is the next release in its own folder. Every file is listed with its sha256 and a sha384 integrity string for a <script integrity> attribute.",
+ "kind": "release",
+ "release": "v0.1.0",
+ "date": "2026-10-25",
+ "source": {
+  "repository": "https://github.com/SHarness-AI/SHarness-AI__CLI",
+  "ref": "68362921eee67d3939dab89c8ec5b6cbba6b4e4a",
+  "commit": "68362921eee67d3939dab89c8ec5b6cbba6b4e4a"
+ },
+ "base": "https://sharness.ai/code/releases/v0/v0.1/v0.1.0/",
+ "counts": {
+  "files": 9,
+  "bytes": 16044
+ },
+ "files": [
+  {
+   "path": "LICENSE",
+   "bytes": 11357,
+   "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+   "integrity": "sha384-FpFtzV8m58dpDyvTpZ8htCgBPTjkNp1plYQuZckY7SU0rnDgCYZJgZrAs69bWKU+"
+  },
+  {
+   "path": "README.md",
+   "bytes": 758,
+   "sha256": "8c7ee9455a741553ac710a53362c309737e97ac46e7b54f625562186d1c7bb05",
+   "integrity": "sha384-k9TnGf8Ahracvk+JL5MlJgk/XJ70kL8gFJjJMFSHZevuD+JZFvFI+ro6WqXvE0Sm"
+  },
+  {
+   "path": "sharness_ai/__init__.py",
+   "bytes": 41,
+   "sha256": "351d0833ee7129d278559398cb0656d768991960db90fa5ca17ba44a3fc5c338",
+   "integrity": "sha384-pTRj58Yuwaq6mkfM5qCVasbsQTigzUiMVsMXIxziMntaehXiFwIk04XgLCovuR37"
+  },
+  {
+   "path": "sharness_ai/__main__.py",
+   "bytes": 41,
+   "sha256": "c0d79ed82eed91afbd59d4459a8f036c60217b6fc00f0c0a2dc0af43c8f4593e",
+   "integrity": "sha384-XVsH7o1wgzUVD2UJhLHZ+I/ESadfnud3pUKfY5SOOcm71tuhd+tRPNOlEF4ZTw6I"
+  },
+  {
+   "path": "sharness_ai/_version.py",
+   "bytes": 510,
+   "sha256": "c2be16630643f99db5ae3a465b844284c8c9d4bd637dc695eaa882444203ad62",
+   "integrity": "sha384-8/jZzpQ7EtwJfpFR9UVkKG1udIhosc86yYvrAjyRXBjGUdwk4aZ/PlVN0jOFVs0h"
+  },
+  {
+   "path": "sharness_ai/cli.py",
+   "bytes": 514,
+   "sha256": "a09d789accb9d5da844bf09ac362da412d3fa48526c3eb6c98e48c5cf2033f70",
+   "integrity": "sha384-b1A9lPGgFLT5/XZoloc3KfyqNJYxZ0MgtsqGxvjR3Osiv7vFp75kK2f0hLwXhglX"
+  },
+  {
+   "path": "sharness_ai/version",
+   "bytes": 7,
+   "sha256": "d0b4f9120ba026c00fa23cb84b4e1620a2e6436592e58155a5151653179572c0",
+   "integrity": "sha384-7cjJ4IGHhuQ0QwbPxA4FjaG2Sso0kigDUJ9LkymLUIx/YDlKvoihDYS8fqAAwMrH"
+  },
+  {
+   "path": "sharness_ai-0.1.0-py3-none-any.whl",
+   "bytes": 2619,
+   "sha256": "8eefe0931f6eb85004df0eaec70d084a05e05cf872bbda3f57940847254bb596",
+   "integrity": "sha384-6waCmz1ChezzUA1Iq+tc3hHi/eUMWqRzbX0Ezrt4zoUGvcZ905fIQ8Gy38POPbhz"
+  },
+  {
+   "path": "wheel.json",
+   "bytes": 197,
+   "sha256": "66b1e54d562ed528175c52b637fa528077ead6b2d3c4413ff0889aa83c95fcf6",
+   "integrity": "sha384-ZwU7hd4Rzvmi5x2CIpL0GvQyhj/nlYEJqobLqeHm7KzULmu8aF2g4uiS1qMDzi3F"
+  }
+ ]
+}

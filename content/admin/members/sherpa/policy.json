@@ -3,6 +3,17 @@
   "member": "sherpa",
   "status": "not yet written; the conductor's policy.json is the shape. Until it exists the member's scope is what its ROLE.md says it owns.",
   "mandate": [],
-  "reach": {"repositories": {"push": [], "pull": []}, "writes": [], "keys_held": ["the sherpa-marketing and sherpa-telemetry vault keys (its own); the SG/Send access token, in the clones' local token file"]},
+  "reach": {
+    "repositories": {
+      "push": [],
+      "pull": []
+    },
+    "writes": [],
+    "keys_held": [
+      "its own identity key (a session key, ephemeral)",
+      "the sherpa-marketing and sherpa-telemetry vault keys, in this session's clones; copies with the vault keeper, sealed",
+      "the SG/Send access token, in the clones' local token file"
+    ]
+  },
   "barriers": []
 }

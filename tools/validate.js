@@ -26,6 +26,7 @@ function walk(dir, out = []) {
   for (const name of fs.readdirSync(dir)) {
     if (name === '.git' || name === '.github' || name === 'node_modules' || name === '.sg_vault') continue;
     const p = path.join(dir, name);
+    if (path.relative(ROOT, p) === 'code/releases') continue;   // immutable copies of the CLI: tools/releases.py checks every byte
     const st = fs.statSync(p);
     if (st.isDirectory()) walk(p, out);
     else out.push(p);
@@ -107,6 +108,57 @@ for (const f of files) {
   }
 }
 
+// --- 4b. secret shapes beyond vault keys -------------------------------------
+// The shapes of the tokens an agent working here could leak: cloud keys, GitHub tokens, model
+// API keys, private key blocks. The pattern list is the one the CLI's own test uses.
+const SECRET_SHAPES = [
+  /AKIA[0-9A-Z]{16}/, /ghp_[A-Za-z0-9]{36}/, /github_pat_[A-Za-z0-9_]{22,}/, /gh[ousr]_[A-Za-z0-9]{36}/,
+  /sk-ant-[A-Za-z0-9_-]{20,}/, /-----BEGIN (RSA |EC |OPENSSH |)PRIVATE KEY-----\s*\n[A-Za-z0-9+/=]{40,}/, /xox[baprs]-[A-Za-z0-9-]{10,}/,   // a real block, not prose naming the header
+];
+for (const f of files) {
+  if (/\.(png|jpg|jpeg|gif|webp|ico|woff2?|zip|gz|bin|wasm|whl|mjs)$/.test(f)) continue;
+  if (/code\/releases\//.test(f) && !/\.(md|json|html|js|py)$/.test(f)) continue;
+  const t = fs.readFileSync(f, 'utf8');
+  for (const s of SECRET_SHAPES) if (s.test(t)) {
+    errors.push(`${path.relative(ROOT, f)}: contains a secret-shaped string (${s})`);
+  }
+}
+
+// --- 4c. third-party scripts carry an integrity string -------------------------
+// A script from another host must name its bytes (SRI) or be on the accepted list on
+// security/supply-chain (Pyodide, loaded by the playground module, not by a tag).
+for (const f of htmlFiles) {
+  const t = fs.readFileSync(f, 'utf8');
+  for (const m of t.matchAll(/<script[^>]+src="(https?:[^"]+)"[^>]*>/g)) {
+    if (!/\sintegrity="sha(256|384|512)-[A-Za-z0-9+/=]+"/.test(m[0]) || !/\scrossorigin=/.test(m[0])) {
+      errors.push(`${path.relative(ROOT, f)}: third-party script without integrity+crossorigin -> ${m[1]}`);
+    }
+  }
+}
+
+// --- 4d. the deploy workflow's actions are pinned to commits ---------------------
+const WF = path.join(ROOT, '.github/workflows');
+if (fs.existsSync(WF)) {
+  for (const name of fs.readdirSync(WF).filter(n => /\.ya?ml$/.test(n))) {
+    const t = fs.readFileSync(path.join(WF, name), 'utf8');
+    if (!/^permissions:\s*$/m.test(t)) errors.push(`.github/workflows/${name}: no top-level permissions block`);
+    for (const line of t.split('\n')) {
+      const m = line.match(/^\s*-?\s*uses:\s*([^\s#]+)/);
+      if (m && !m[1].startsWith('./') && !/@[0-9a-f]{40}(\s|$)/.test(line)) {
+        errors.push(`.github/workflows/${name}: ${line.trim()} is not pinned to a commit`);
+      }
+    }
+  }
+}
+
+// --- 4e. the published releases are intact -----------------------------------------
+// tools/releases.py check recomputes every hash of every immutable release; run it here so one
+// gate reports everything.
+{
+  const r = require('child_process').spawnSync('python3', [path.join(ROOT, 'tools/releases.py'), 'check'], { encoding: 'utf8' });
+  if (r.status !== 0) errors.push(`releases: ${(r.stderr || r.stdout).trim().split('\n').join(' | ')}`);
+}
+
 // --- 5. generate or date every number --------------------------------------
 // The nav and the footer are stripped before looking, so the chrome can neither
 // satisfy nor trip a check meant for the page body.
@@ -138,7 +190,8 @@ for (const f of htmlFiles) {
   const prose = bodyOnly(t)
     .replace(/<[^>]+>/g, ' ')                  // attributes hold paths and versions
     .replace(/\bv\d+(?:\.\d+)+/g, ' ')       // version strings
-    .replace(/\bCC BY \d+(?:\.\d+)?/g, ' '); // the licence name
+    .replace(/\bCC BY \d+(?:\.\d+)?/g, ' ') // the licence name
+    .replace(/\b(?:SR|SF|SD)-\d+\b/g, ' ');  // register numbers
   const figures = (prose.match(/\d[\d,]{2,}(?:\.\d+)?|\d+(?:\.\d+)?%/g) || [])
     .filter(x => !YEAR.test(x.replace(/,/g, '')));
   if (figures.length) {
@@ -190,4 +243,4 @@ if (errors.length) {
   for (const e of errors) console.error('  ✗ ' + e);
   process.exit(1);
 }
-console.log(`validate: OK — ${VERSION} on ${HOST}, ${htmlFiles.length} pages, links resolve, every figure dated, no key-shaped strings`);
+console.log(`validate: OK — ${VERSION} on ${HOST}, ${htmlFiles.length} pages, links resolve, every figure dated, no secret-shaped strings, third-party scripts carry integrity, workflows pinned, releases intact`);

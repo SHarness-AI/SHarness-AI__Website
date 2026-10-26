@@ -267,3 +267,8 @@ header.hero .status a{color:var(--accent-dk);font-weight:600}
 .ask .box .g{color:var(--term-green)}
 .who .card h3{font-size:1.02rem}
 .who .card code{font-size:.78em}
+
+/* the schedule's day: one column per hour, the quiet hours shaded (admin/schedule/) */
+main.doc table.day td,main.doc table.day th{text-align:center;padding:.3rem .2rem;font-size:.72rem}
+main.doc table.day td:first-child{text-align:left;padding-left:.6rem}
+main.doc table.day .q{background:var(--panel2)}

@@ -1,8 +1,9 @@
 {
   "member": "sherpa",
-  "as_of": "2026-10-26T00:00Z",
-  "state": "waiting",
-  "last_did": "Site v0.5.11 and v0.5.12 (25 Oct, 23:27 and 23:30 UTC). Its session 'sharness.ai | sherpa@' idle since 23:32 UTC.",
-  "waiting_for": "R9 (its key confirmed, the two environment secrets stored), R11 (a go per outreach channel); on: editor",
-  "next": "T8 (the CLI repository ready for visitors), T9, T11; render the telemetry counts once there are enough"
+  "as_of": "2026-10-26T01:05Z",
+  "state": "working",
+  "last_did": "Site v0.5.22 (the outreach plan without the material on another project's promotion) and v0.5.23 (R7's decision). Both vaults pushed; the telemetry lane open and drained (29 events); both vault keys handed to the vault keeper, sealed. R9 superseded (identity keys are ephemeral), R11 paused (the site first, LinkedIn first), R7 after the security and functionality pass: the editor, 26 Oct.",
+  "waiting_for": "R11 (paused by the editor until the site is ready), R7 (after the security and functionality pass), R17 (the go on the cards); the conductor to land the T8 words in the CLI; on: editor, conductor",
+  "branch": "dev (releases through tools/ship.py)",
+  "next": "T8's words under content/admin/briefs/cli-visitors/ (this release); T9 (the skill to the plugin directory), T11 (the articles into the newsroom); the telemetry counts rendered when they are enough; the drain at every wake."
 }

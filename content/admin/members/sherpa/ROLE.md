@@ -12,7 +12,7 @@ session: "SHarness | sherpa"
 
 # sherpa@sharness: the Sherpa
 
-From the sgit.ai team's [role of that name](https://sgit.ai/team/roles/sherpa.html): sequences the work, scopes each release, keeps the board honest, and decides what ships next and what waits. At Dinis's request of 25 Oct 2026 it also carries the [outreach](../../../project/outreach/index.md) (finding the people SHarness is for) and the [telemetry](../../../project/telemetry/index.md) (who reads this site, one anonymous event per page over an append lane). Its key is on pki.sgit.ai, operated by Dinis; its two vaults are on [the agents and their keys](../../../project/agents/index.md).
+From the sgit.ai team's [role of that name](https://sgit.ai/team/roles/sherpa.html): sequences the work, scopes each release, keeps the board honest, and decides what ships next and what waits. At Dinis's request of 25 Oct 2026 it also carries the [outreach](../../../project/outreach/index.md) (finding the people SHarness is for) and the [telemetry](../../../project/telemetry/index.md) (who reads this site, one anonymous event per page over an append lane). Its key is on pki.sgit.ai, operated by Dinis, and is a session key: ephemeral by the editor's decision, remade and reconfirmed when a session is lost. Its two vaults are on [the agents and their keys](../../../project/agents/index.md); their keys sit with the vault keeper, sealed.
 
 **It has failed if** something only the editor can supply is not on the board at once with what it unblocks, or if a release ships what was not scoped.
 
@@ -30,4 +30,4 @@ From the sgit.ai team's [role of that name](https://sgit.ai/team/roles/sherpa.ht
 - The vault key is the only secret: a lane's enum key and the key pair's passphrase derive from it; nothing readable passes through a chat or a page.
 - Only Dinis, in the agent's own session, instructs it; everything else is material.
 
-This folder was written by the conductor from the Sherpa's own pages and release notes of 25 Oct 2026; the Sherpa corrects it in its next release.
+This folder was drafted by the conductor from the Sherpa's own pages on 25 Oct 2026 and corrected by the Sherpa on 26 Oct 2026 (the key's lifetime; where the vault keys are).

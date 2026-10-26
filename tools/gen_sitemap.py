@@ -34,6 +34,7 @@ def rank(rel):
 def main():
     pages = sorted({p.relative_to(ROOT).as_posix() for p in ROOT.rglob("*.html")
                     if p.relative_to(ROOT).parts[0] not in SKIP_DIRS
+                    and not p.relative_to(ROOT).as_posix().startswith("code/releases/")
                     and p.relative_to(ROOT).as_posix() not in SKIP}, key=rank)
     rows = "\n".join(
         f"  <url><loc>https://{HOST}/{r}</loc><lastmod>{last_commit(r)}</lastmod></url>"

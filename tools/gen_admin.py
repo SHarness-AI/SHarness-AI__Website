@@ -102,6 +102,21 @@ def members():
                 err(f"{role.relative_to(ROOT)}: front matter has no {f}")
         status = json.loads((d / "status.json").read_text()) if (d / "status.json").exists() else {}
         policy = json.loads((d / "policy.json").read_text()) if (d / "policy.json").exists() else {}
+        if (d / "card.json").exists():
+            card = json.loads((d / "card.json").read_text())
+            if card.get("member") != d.name:
+                err(f"{d.relative_to(ROOT)}/card.json: member {card.get('member')} does not match the folder")
+            if card.get("status") not in ("proposed", "active", "paused", "ended"):
+                err(f"{d.relative_to(ROOT)}/card.json: status is proposed, active, paused or ended")
+            for w in card.get("wakes", []):
+                if not re.match(r"^\d\d:\d\d$", w):
+                    err(f"{d.relative_to(ROOT)}/card.json: wake '{w}' is not HH:MM")
+                elif card.get("status") == "active" and (int(w[:2]) >= 22 or int(w[:2]) < 7):
+                    err(f"{d.relative_to(ROOT)}/card.json: an active wake at {w} is in the quiet hours")
+            for f in ("objective", "cron", "session", "repositories", "each_wake", "start_prompt", "wake_prompt"):
+                if not card.get(f):
+                    err(f"{d.relative_to(ROOT)}/card.json: no {f}")
+            meta["_card"] = card
         if status and status.get("member") != d.name:
             err(f"{d.relative_to(ROOT)}/status.json: member {status.get('member')} does not match the folder")
         out.append((meta, body, status, policy))
@@ -122,6 +137,44 @@ def updates():
             err(f"{rel}: the file name is YYYY-MM-DDTHHMMZ")
         if meta.get("kind") not in ("hourly", "daily", "flash"):
             err(f"{rel}: kind is hourly, daily or flash")
+        out.append((meta, body))
+    return out
+
+
+def runs_of():
+    out = {}
+    for p in sorted(SRC.glob("runs/*/*.json")):
+        r = json.loads(p.read_text())
+        rel = p.relative_to(ROOT)
+        if r.get("member") != p.parent.name:
+            err(f"{rel}: member {r.get('member')} does not match the folder")
+        if r.get("outcome") not in ("ok", "idle", "partial", "failed"):
+            err(f"{rel}: outcome is ok, idle, partial or failed")
+        for f in ("started", "finished", "summary"):
+            if not r.get(f):
+                err(f"{rel}: no {f}")
+        out.setdefault(p.parent.name, []).append(r)
+    for v in out.values():
+        v.sort(key=lambda r: r["started"], reverse=True)
+    return out
+
+
+BRIEF_FIELDS = ("title", "date", "by", "for", "status")
+
+
+def briefs():
+    out = []
+    for p in sorted(SRC.glob("briefs/*.md"), reverse=True):
+        meta, body = parse(p)
+        rel = p.relative_to(ROOT)
+        for f in BRIEF_FIELDS:
+            if not meta.get(f):
+                err(f"{rel}: front matter has no {f}")
+        if not re.match(r"^\d{4}-\d{2}-\d{2}__brief__[a-z0-9-]+$", p.stem):
+            err(f"{rel}: the file name is YYYY-MM-DD__brief__<slug>")
+        if meta.get("status") not in ("proposed", "accepted", "built", "superseded"):
+            err(f"{rel}: status is proposed, accepted, built or superseded")
+        meta["slug"] = p.stem
         out.append((meta, body))
     return out
 
@@ -255,7 +308,8 @@ def gen_board(all_rows, snap, out):
                                    + board_md_table(needs) + "\n\n## Open tasks\n\n" + board_md_table(tasks)
                                    + "\n\n## Done and decided\n\n" + board_md_table(done) + "\n")
     # The same board at the address it had since v0.1.0, so every link to project/comms.html#r7 still lands.
-    rebase = lambda s: s.replace("](../../", "](../").replace("](../members/", "](../admin/members/")
+    # rows are written relative to admin/board/; comms.html is one level up, under project/
+    rebase = lambda s: s.replace("](../../", "\x00").replace("](../", "](../admin/").replace("\x00", "](../")
     cbody = ('<p class="lead">The board, at the address it has had since the first release. Generated from the same rows as '
              '<a href="../admin/board/index.html">the board</a>; to change a row, edit its file under <code>content/admin/board/</code> '
              'and run <code>python3 tools/gen_admin.py</code>. <span class="asof">' + date + '</span></p>\n'
@@ -340,12 +394,39 @@ def gen_members(ms, snap, out):
             else:
                 pol_html = f'<h2 id="the-policy">The policy</h2>\n<p>{inline(pol.get("status", ""))}</p>\n'
                 pol_md = f"\n\n## The policy\n\n{pol.get('status', '')}"
+        card = meta.get("_card")
+        card_html, card_md = "", ""
+        if card:
+            repos = ", ".join(card["repositories"].get("push", []))
+            steps_html = "".join(f"<li>{inline(s)}</li>" for s in card.get("each_wake", []))
+            lst = lambda k: "".join(f"<li>{inline(x)}</li>" for x in card.get(k, []))
+            card_html = (f'<h2 id="start-here">Start here, on any Claude account</h2>'
+                         f'<p>To take this role over in a new session, on this account or another: attach <code>{html.escape(repos)}</code> with push access; name the session <code>{html.escape(card["session"])}</code>; paste the start prompt below. '
+                         f'Nothing on this page is a secret; a key, if the role needs one, is handed sealed by the editor (<a href="https://pki.sgit.ai/handover.md">the handover</a>). Then, with the editor\'s go, create the scheduled task from the cron and the wake prompt below, firing into that same session.</p>'
+                         f'<h3>The start prompt</h3><pre class="diagram">{html.escape(card["start_prompt"])}</pre>'
+                         f'<h2 id="the-schedule">The schedule</h2><p>{chip(card["status"])} {inline(card.get("status_note", ""))}</p>'
+                         f'<div class="tablewrap"><table><tbody><tr><th>Objective</th><td>{inline(card["objective"])}</td></tr>'
+                         f'<tr><th>Wakes</th><td>{html.escape(", ".join(card["wakes"]))} {html.escape(card["timezone"])}, <code>{html.escape(card["cron"])}</code>; {len(card["wakes"])} a day. Quiet hours: {html.escape(card.get("quiet_hours", ""))}</td></tr>'
+                         f'<tr><th>Model</th><td>{inline(card["model"])}</td></tr><tr><th>Brief</th><td><code>{html.escape(card.get("brief", ""))}</code></td></tr>'
+                         f'<tr><th>Scheduled task</th><td>name <code>{html.escape(card["scheduled_task"]["name"])}</code>; cron <code>{html.escape(card["scheduled_task"]["cron_expression"])}</code>; session: {html.escape(card["scheduled_task"]["session"])}; prompt: {html.escape(card["scheduled_task"]["prompt"])}</td></tr></tbody></table></div>'
+                         f'<h3>Each wake</h3><ol>{steps_html}</ol><h3>Reads</h3><ul>{lst("reads")}</ul><h3>Writes</h3><ul>{lst("writes")}</ul><h3>Never</h3><ul>{lst("never")}</ul>'
+                         f'<h3>The wake prompt, word for word</h3><pre class="diagram">{html.escape(card["wake_prompt"])}</pre>'
+                         f'<p class="small dim">The card is <a href="{GH}/content/admin/members/{meta["id"]}/card.json">card.json</a>, kept by {html.escape(card.get("kept_by", meta["id"]))}, updated {html.escape(card.get("updated", ""))}; the protocol every wake follows is <a href="../../guidance/index.html">AGENTS.md</a> and <a href="{GH}/WAKE.md">WAKE.md</a>.</p>')
+            card_md = ("\n\n## Start here, on any Claude account\n\n" + f"Attach `{repos}` with push access; name the session `{card['session']}`; paste the start prompt; then, with the editor's go, create the scheduled task from the cron and the wake prompt. Nothing here is a secret.\n\n"
+                       f"**The start prompt**\n\n```\n{card['start_prompt']}\n```\n\n## The schedule\n\n{card['status']}: {card.get('status_note', '')}\n\n"
+                       f"- Objective: {card['objective']}\n- Wakes: {', '.join(card['wakes'])} {card['timezone']}, `{card['cron']}`; quiet hours {card.get('quiet_hours', '')}\n- Model: {card['model']}\n- Brief: `{card.get('brief', '')}`\n- Scheduled task: name `{card['scheduled_task']['name']}`, cron `{card['scheduled_task']['cron_expression']}`, {card['scheduled_task']['session']}, prompt: {card['scheduled_task']['prompt']}\n\n"
+                       "**Each wake**\n\n" + "\n".join(f"{i}. {s}" for i, s in enumerate(card.get("each_wake", []), 1))
+                       + "\n\n**Reads**: " + "; ".join(card.get("reads", [])) + "\n\n**Writes**: " + "; ".join(card.get("writes", [])) + "\n\n**Never**: " + "; ".join(card.get("never", []))
+                       + f"\n\n**The wake prompt, word for word**\n\n```\n{card['wake_prompt']}\n```")
+        rr = RUNS.get(meta["id"], [])
+        runs_html = ('<h2 id="runs">Runs</h2>' + runs_table(rr, "../../runs/index.html")) if rr else ""
+        runs_md = ("\n\n## Runs\n\n" + runs_md_table(rr)) if rr else ""
         rel = f"admin/members/{meta['id']}/index.html"
         page_title = f"{meta['name']}: {meta['role']}"
         out[rel] = shell(rel, meta["name"], f"{meta['name']} on the SHarness team: {meta['role']}.", h1 or html.escape(page_title),
-                         facts + body_html + "\n" + status_html + pol_html, f'<a href="../../index.html">admin</a> / <a href="../index.html">members</a> / {html.escape(meta["id"])}')
+                         facts + body_html + "\n" + status_html + card_html + runs_html + pol_html, f'<a href="../../index.html">admin</a> / <a href="../index.html">members</a> / {html.escape(meta["id"])}')
         out[f"admin/members/{meta['id']}/index.md"] = (twin_header(page_title, f"{meta['name']} on the SHarness team: {meta['role']}.", rel)
-                                                       + f"{meta['kind']} · {meta['status']} · joined {meta['joined']}\n\n" + body + status_md + pol_md + "\n")
+                                                       + f"{meta['kind']} · {meta['status']} · joined {meta['joined']}\n\n" + body + status_md + card_md + runs_md + pol_md + "\n")
 
 
 # ---------------------------------------------------------------- the updates
@@ -416,6 +497,107 @@ def gen_status(ms, snap, out):
     out["admin/status/index.md"] = twin_header(title, desc, "admin/status/index.html") + intro + "\n\n" + "\n\n".join(parts_md) + "\n\n## The members\n\n" + member_rows_md(ms, "../members/") + "\n"
 
 
+# ---------------------------------------------------------------- runs, schedule, briefs
+RUNS = {}
+
+
+def runs_table(rr, up_runs="index.html"):
+    trs = "\n".join(
+        f'      <tr><td><span class="dim small">{html.escape(r["started"])}</span></td><td>{chip({"ok": "done", "idle": "open", "partial": "waiting", "failed": "needs you"}[r["outcome"]]).replace(">done<", ">ok<").replace(">open<", ">idle<").replace(">waiting<", ">partial<").replace(">needs you<", ">failed<")}</td>'
+        f'<td>{inline(r["summary"])}' + (f' <span class="dim small">released {html.escape(r["released"])}</span>' if r.get("released") else "") + "</td></tr>" for r in rr)
+    return ('  <div class="tablewrap"><table>\n    <thead><tr><th>Started (UTC)</th><th>Outcome</th><th>Summary</th></tr></thead>\n'
+            f'    <tbody>\n{trs}\n    </tbody>\n  </table></div>\n')
+
+
+def runs_md_table(rr):
+    return "| Started (UTC) | Outcome | Summary |\n|---|---|---|\n" + "\n".join(
+        f"| {r['started']} | {r['outcome']} | {r['summary'].replace('|', '/')}" + (f" (released {r['released']})" if r.get("released") else "") + " |" for r in rr)
+
+
+SCHEDULE_INTRO = ("Every member that runs on its own keeps one card, `content/admin/members/<id>/card.json`: its objective, when it wakes "
+                  "(London time), the model, the session, the repositories to attach, the steps of each wake, what it reads, writes and never does, "
+                  "and two prompts word for word, the start prompt for a new session on any Claude account and the wake prompt for the scheduled task. "
+                  "A card is `proposed` until the editor's go creates the task; every wake leaves a run record, so a missing record is a missed wake. "
+                  "The protocol every wake follows is [WAKE.md](" + GH + "/WAKE.md); the brief is [schedules, cards and start pages](../briefs/2026-10-26__brief__schedules-cards-and-start-pages/index.md). "
+                  "Nothing here is a secret, and nothing here creates a schedule: the editor does, per card, from the member's page.")
+
+
+def gen_schedule(ms, snap, out):
+    date = asof(snap["as_of"])
+    cards = [(m, m[0]["_card"]) for m in ms if m[0].get("_card")]
+    active = sum(1 for _, c in cards if c["status"] == "active")
+    wakes = sum(len(c["wakes"]) for _, c in cards)
+    intro = SCHEDULE_INTRO + f" {len(cards)} card(s), {active} active, {wakes} wake(s) a day, {date}."
+    hours = list(range(24))
+    head = "".join(f'<th class="{"q" if h >= 22 or h < 7 else ""}">{h:02d}</th>' for h in hours)
+    rows = []
+    for m, c in cards:
+        cells = []
+        for h in hours:
+            marks = [w for w in c["wakes"] if int(w[:2]) == h]
+            mark = ("&#9679;" if c["status"] == "active" else "&#9675;") if marks else ""
+            cells.append(f'<td class="{"q" if h >= 22 or h < 7 else ""}" title="{html.escape(", ".join(marks))}">{mark}</td>')
+        rows.append(f'<tr><td><a href="../members/{m[0]["id"]}/index.html">{html.escape(m[0]["id"])}</a></td>{"".join(cells)}</tr>')
+    day = ('<div class="tablewrap"><table class="day"><thead><tr><th>London</th>' + head + '</tr></thead><tbody>' + "".join(rows) + '</tbody></table></div>'
+           '<p class="small dim">Filled: active; hollow: proposed or paused. Shaded: the quiet hours, 22:00 to 07:00 London. Hover a mark for its minute.</p>')
+    trs = "\n".join(
+        f'      <tr><td><a href="../members/{m[0]["id"]}/index.html"><b>{html.escape(m[0]["id"])}</b></a><br><span class="dim small">{html.escape(c["session"])}</span></td>'
+        f'<td>{inline(c["objective"])}</td><td>{chip(c["status"])}</td><td>{html.escape(", ".join(c["wakes"]))}<br><code class="small">{html.escape(c["cron"])}</code></td>'
+        f'<td>{inline(c["model"])}</td><td>{(html.escape(RUNS[m[0]["id"]][0]["started"]) + " " + html.escape(RUNS[m[0]["id"]][0]["outcome"])) if RUNS.get(m[0]["id"]) else "none yet"}</td></tr>' for m, c in cards)
+    table = ('  <div class="tablewrap"><table>\n    <thead><tr><th>Member</th><th>Objective</th><th>Status</th><th>Wakes (London)</th><th>Model</th><th>Last run</th></tr></thead>\n'
+             f'    <tbody>\n{trs}\n    </tbody>\n  </table></div>\n')
+    setup = ('<h2 id="on-any-account">Setting a member up on any Claude account</h2><ol>'
+             '<li>Open the member\'s page and read its card: the repositories, the session name, the start prompt, the cron, the wake prompt.</li>'
+             '<li>On the account, start a session with those repositories attached (push access) and name it as the card says.</li>'
+             '<li>Paste the start prompt. The session reads the guidance, its page and the board, and replies with its role, what it may and must not do, where it writes, and what waits on it.</li>'
+             '<li>With the editor\'s go, create one scheduled task on that account: the card\'s name and cron, firing into that session, with the wake prompt word for word. The session then makes the card <code>active</code> in its next release and records the task\'s id in its status.</li>'
+             '<li>A key the role needs is handed sealed to the session\'s key, never pasted: <a href="https://pki.sgit.ai/handover.md">the handover</a>.</li></ol>')
+    title, desc = "Schedule", "Every member that runs on its own: its card, its wakes on one day, its prompts; how to set a member up on any Claude account."
+    out["admin/schedule/index.html"] = shell("admin/schedule/index.html", title, desc, "Schedule: every member that runs on its own", f"<p class=\"lead\">{inline(intro)}</p>\n<h2 id=\"one-day\">One day, every wake</h2>\n{day}\n<h2 id=\"the-cards\">The cards</h2>\n{table}{setup}",
+                                             '<a href="../index.html">admin</a> / schedule')
+    out["admin/schedule/index.md"] = (twin_header(title, desc, "admin/schedule/index.html") + intro + "\n\n## The cards\n\n| Member | Objective | Status | Wakes (London) | Model | Last run |\n|---|---|---|---|---|---|\n"
+                                      + "\n".join(f"| [{m[0]['id']}](../members/{m[0]['id']}/index.md) | {c['objective']} | {c['status']} | {', '.join(c['wakes'])} `{c['cron']}` | {c['model']} | " + ((RUNS[m[0]['id']][0]['started'] + ' ' + RUNS[m[0]['id']][0]['outcome']) if RUNS.get(m[0]['id']) else 'none yet') + " |" for m, c in cards)
+                                      + "\n\n## Setting a member up on any Claude account\n\n1. Open the member's page and read its card: the repositories, the session name, the start prompt, the cron, the wake prompt.\n2. On the account, start a session with those repositories attached (push access) and name it as the card says.\n3. Paste the start prompt.\n4. With the editor's go, create one scheduled task on that account from the card's name, cron and wake prompt, firing into that session; the session makes the card active in its next release.\n5. A key the role needs is handed sealed, never pasted: https://pki.sgit.ai/handover.md\n")
+
+
+def gen_runs(ms, snap, out):
+    date = asof(snap["as_of"])
+    allr = sorted(((mid, r) for mid, rr in RUNS.items() for r in rr), key=lambda x: x[1]["started"], reverse=True)
+    intro = (f"Every run a member recorded, newest first: one file per run under `content/admin/runs/<id>/`, written by `python3 tools/schedule.py run <id>` at the end of every wake, "
+             f"whatever happened, and released with the work. A quiet wake is a record that says so; a wake with no record is a missed wake. {len(allr)} run(s) by {len(RUNS)} member(s), {date}.")
+    trs = "\n".join(f'      <tr><td><span class="dim small">{html.escape(r["started"])}</span></td><td><a href="../members/{mid}/index.html">{html.escape(mid)}</a></td>'
+                     f'<td>{html.escape(r["outcome"])}</td><td>{inline(r["summary"])}' + (f' <span class="dim small">released {html.escape(r["released"])}</span>' if r.get("released") else "") + "</td></tr>" for mid, r in allr)
+    table = ('  <div class="tablewrap"><table>\n    <thead><tr><th>Started (UTC)</th><th>Member</th><th>Outcome</th><th>Summary</th></tr></thead>\n'
+             f'    <tbody>\n{trs}\n    </tbody>\n  </table></div>\n')
+    title, desc = "Runs", "Every run a member recorded, newest first; a quiet wake is a record, a missing record is a missed wake."
+    out["admin/runs/index.html"] = shell("admin/runs/index.html", title, desc, "Runs: every wake, and what it did", f"<p class=\"lead\">{inline(intro)}</p>\n{table}", '<a href="../index.html">admin</a> / runs')
+    out["admin/runs/index.md"] = (twin_header(title, desc, "admin/runs/index.html") + intro + "\n\n| Started (UTC) | Member | Outcome | Summary |\n|---|---|---|---|\n"
+                                  + "\n".join(f"| {r['started']} | {mid} | {r['outcome']} | {r['summary'].replace('|', '/')}" + (f" (released {r['released']})" if r.get("released") else "") + " |" for mid, r in allr) + "\n")
+
+
+BRIEFS_INTRO = ("Every brief, published in full before the work, newest first: the ask in the editor's words, the design, numbered acceptance criteria, "
+                "the owner, and what it does not do. A brief is one file under `content/admin/briefs/`, `YYYY-MM-DD__brief__<slug>.md`; its status is "
+                "proposed, accepted (the editor's go), built or superseded. The conductor writes one for every improvement it maps; any member may write one.")
+
+
+def gen_briefs(bs, snap, out):
+    date = asof(snap["as_of"])
+    intro = BRIEFS_INTRO + f" {len(bs)} brief(s), {date}."
+    items = "\n".join(f'<h3 id="{m["slug"]}">{chip(m["status"]) if m["status"] in ROW_STATUS else "<span class=\"tstat t-open\">" + html.escape(m["status"]) + "</span>"} {m["date"]} · <a href="{m["slug"]}/index.html">{html.escape(m["title"])}</a></h3>'
+                       f'<p class="small dim">by {html.escape(m["by"])}, for {html.escape(m["for"])}' + (f'; board {html.escape(m["board"])}' if m.get("board") else "") + "</p>" for m, _ in bs)
+    title, desc = "Briefs", "Every build brief for SHarness, published in full before the work: the ask, the design, the acceptance criteria, the owner."
+    out["admin/briefs/index.html"] = shell("admin/briefs/index.html", title, desc, "Briefs: the work, before it is done", f"<p class=\"lead\">{inline(intro)}</p>\n{items}\n", '<a href="../index.html">admin</a> / briefs')
+    out["admin/briefs/index.md"] = (twin_header(title, desc, "admin/briefs/index.html") + intro + "\n\n"
+                                    + "\n".join(f"- **{m['status']} · {m['date']}** · [{m['title']}]({m['slug']}/index.md): by {m['by']}, for {m['for']}" + (f"; board {m['board']}" if m.get("board") else "") for m, _ in bs) + "\n")
+    for m, body in bs:
+        _, body_html = md_to_html(body)
+        by = (f'<p class="byline">brief · <time datetime="{m["date"]}">{m["date"]}</time> · by <a href="../../members/{html.escape(m["by"])}/index.html">{html.escape(m["by"])}</a> · for {html.escape(m["for"])} · {html.escape(m["status"])}'
+              + (f' · board {html.escape(m["board"])}' if m.get("board") else "") + f' · <a href="{GH}/content/admin/briefs/{m["slug"]}.md">the file</a></p>\n')
+        rel = f"admin/briefs/{m['slug']}/index.html"
+        out[rel] = shell(rel, m["title"].split(":")[0], m["title"], html.escape(m["title"]), by + body_html, f'<a href="../../index.html">admin</a> / <a href="../index.html">briefs</a> / {m["slug"]}')
+        out[f"admin/briefs/{m['slug']}/index.md"] = twin_header(m["title"], m["title"], rel) + f"brief · {m['date']} · by {m['by']} · for {m['for']} · {m['status']}" + (f" · board {m['board']}" if m.get("board") else "") + f"\n\n{body}\n"
+
+
 # ---------------------------------------------------------------- commit notes
 NOTES_INTRO = ("Commit-FS-lite: there is no shared chat between the sessions that work on SHarness, so a short note to another "
                "member goes into the commit that carries the work, as a `To-<id>:` line beside the sender's `Agent:` line, and every "
@@ -469,7 +651,8 @@ HUB = """SHarness is built in the open by one person and a few agents, and this 
 2. **A row on [the board](board/index.md)**: `R<n>` when it needs the editor, `T<n>` when a member can do it; one owner, one status, never renumbered.
 3. **A branch**, pushed early and often; then **a release to `dev`** by the member that did the work, with the version in the commit subject and a sentence in [the release history](../project/releases.html). CI validates, tags and deploys.
 4. **A note in the commit** to whoever needs to know (`To-<id>:`), read by every agent when it takes in `dev` and published on [Commit notes](notes/index.md). An **update** on [Updates](updates/index.md) when something moved: what changed, what waits on whom, by number.
-5. **A debrief** at the end of every session in the member's own `status.json`, read on [Status](status/index.md).
+5. **A run record** at the end of every wake (`tools/schedule.py run`), on [Runs](runs/index.md), and **a debrief** in the member's own `status.json`, read on [Status](status/index.md).
+6. **A review by the conductor** at each of its wakes: what landed and collided, what waits on whom; anything seen twice becomes a [brief](briefs/index.md) with an owner.
 
 ## The pages
 
@@ -477,6 +660,9 @@ HUB = """SHarness is built in the open by one person and a few agents, and this 
 - [The members](members/index.md): one person and the agents, each with a role, a policy and a status of its own.
 - [Updates](updates/index.md): what is happening, dated, newest first.
 - [Commit notes](notes/index.md): what the agents tell each other in the commits they already write, from both repositories, newest first.
+- [Schedule](schedule/index.md): every member that runs on its own, its card and its wakes on one day; how to set a member up on any Claude account.
+- [Runs](runs/index.md): every wake and what it did; a missing record is a missed wake.
+- [Briefs](briefs/index.md): the work before it is done: the ask, the design, the acceptance criteria, the owner.
 - [Status](status/index.md): where every branch of both repositories is, and every member.
 - [Guidance for agents](guidance/index.md): `AGENTS.md`, the rules every agent works by.
 - Kept elsewhere in the project section: [engineering](../project/engineering.html) (how the site is built and released), [the agents and their keys](../project/agents/index.md) (keys on pki.sgit.ai, the vault register), [telemetry](../project/telemetry/index.md), [outreach](../project/outreach/index.md) and [getting users](../project/adoption/index.md), [the release history](../project/releases.html).
@@ -503,6 +689,11 @@ def gen_hub(all_rows, ms, ups, snap, out):
 def build():
     out = {}
     all_rows, ms, ups, snap = rows(), members(), updates(), snapshot()
+    RUNS.clear(); RUNS.update(runs_of())
+    bs = briefs()
+    for mid in RUNS:
+        if not (SRC / "members" / mid).is_dir():
+            err(f"content/admin/runs/{mid}/: no member folder")
     owners = {m[0]["id"] for m in ms} | {"anyone"}
     for meta, _ in all_rows:
         if meta.get("owner") not in owners:
@@ -516,6 +707,9 @@ def build():
     gen_guidance(snap, out)
     gen_status(ms, snap, out)
     gen_notes(ms, snap, out)
+    gen_schedule(ms, snap, out)
+    gen_runs(ms, snap, out)
+    gen_briefs(bs, snap, out)
     gen_hub(all_rows, ms, ups, snap, out)
     return out
 

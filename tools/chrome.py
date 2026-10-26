@@ -70,8 +70,17 @@ NAV = [
         ("Examples", "code/examples/index.html"),
         ("Linux in the browser", "code/browser/index.html"),
         ("Playground: run it in your browser", "code/playground/index.html"),
+        ("Releases of the code: immutable paths", "code/releases/index.html"),
         ("Languages", "code/languages/index.html"),
     ], ("code/",)),
+    ("Security", "security/index.html", [
+        ("&#9679; Security: the register", "security/index.html"),
+        ("Threat model", "security/threat-model/index.html"),
+        ("Known risks", "security/risks/index.html"),
+        ("Reviews", "security/reviews/index.html"),
+        ("Hardening", "security/hardening/index.html"),
+        ("Supply chain", "security/supply-chain/index.html"),
+    ], ("security/",)),
     ("Evidence", "evidence/index.html", [
         ("&#9679; Measurements", "evidence/index.html"),
         ("What exists today", "evidence/status/index.html"),
@@ -135,11 +144,17 @@ FOOTER = [
         ("Flows through the code", "code/flows/index.html"),
         ("Examples", "code/examples/index.html"),
         ("Linux in the browser", "code/browser/index.html"),
+        ("Releases of the code", "code/releases/index.html"),
         ("Languages", "code/languages/index.html"),
         ("PyPI: sharness-ai", "https://pypi.org/project/sharness-ai/"),
         ("GitHub: SHarness-AI__CLI", "https://github.com/SHarness-AI/SHarness-AI__CLI"),
     ]),
-    ("Evidence, landscape, explain", [
+    ("Security, evidence, landscape", [
+        ("Security: the register", "security/index.html"),
+        ("Threat model", "security/threat-model/index.html"),
+        ("Known risks", "security/risks/index.html"),
+        ("Hardening", "security/hardening/index.html"),
+        ("Supply chain", "security/supply-chain/index.html"),
         ("Measurements", "evidence/index.html"),
         ("What exists today", "evidence/status/index.html"),
         ("Research note", "evidence/research/index.html"),
@@ -149,7 +164,6 @@ FOOTER = [
         ("Ruflo and ruv.sgit", "landscape/ruflo/index.html"),
         ("Market &amp; competitors", "landscape/market/index.html"),
         ("Storyboards", "explain/storyboards/index.html"),
-        ("Mockups", "explain/index.html"),
         ("Articles", "articles/index.html"),
     ]),
     ("Project &amp; agents", [
@@ -161,11 +175,14 @@ FOOTER = [
         ("The board", "admin/board/index.html"),
         ("Updates", "admin/updates/index.html"),
         ("Commit notes", "admin/notes/index.html"),
+        ("Schedule and runs", "admin/schedule/index.html"),
+        ("Briefs", "admin/briefs/index.html"),
         ("Guidance for agents (AGENTS.md)", "admin/guidance/index.html"),
         ("Getting users", "project/adoption/index.html"),
         ("Outreach", "project/outreach/index.html"),
         ("The agents and their keys", "project/agents/index.html"),
         ("Telemetry", "project/telemetry/index.html"),
+        ("security.txt", ".well-known/security.txt"),
         ("llms.txt", "llms.txt"),
         ("llms-full.txt", "llms-full.txt"),
         ("index.md", "index.md"),
@@ -257,6 +274,8 @@ def main():
         if ".git" in path.parts:
             continue
         rel = path.relative_to(ROOT).as_posix()
+        if rel.startswith("code/releases/") or rel.startswith("code/browser/demo/"):
+            continue                     # published copies of the CLI's files: immutable, never re-chromed
         up = "../" * (len(path.relative_to(ROOT).parts) - 1)
         if rel == "404.html":
             up = "/"                     # served at any missing address, so its links must be absolute
