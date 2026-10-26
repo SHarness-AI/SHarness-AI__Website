@@ -6,7 +6,7 @@
 > process started. Today: a CLI that enforces a policy on one process, a kernel that boots in your
 > browser to prove it, and a design for the launcher that binds the agent itself.
 
-*Source: <https://sharness.ai/index.html> · site v0.6.1 · markdown twin of the front page.*
+*Source: <https://sharness.ai/index.html> · site v0.6.2 · markdown twin of the front page.*
 *Status: **experiments**. No SHarness component is built; every measured figure carries its date.*
 
 ## Start in 60 seconds
