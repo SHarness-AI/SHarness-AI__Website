@@ -28,7 +28,7 @@ The name tree, the identity tree, the policy tree and the code tree are one tree
 | the launcher | `sharness_ai/launcher/` | starts every named process bound, issues the session identities, verifies the chain of hashes |
 | the door kit | `sharness_ai/door/` | what every door and every level shares: the service, the contract, the verdict, the audit line, the conformance runner |
 
-The same tree in Go is `fs/disk/twin/`, in JavaScript `src/fs/disk/twin.js`, as dev@'s brief [one repository per language](2026-10-26__brief__one-repository-per-language/index.md) already fixes. A vector cites the path and the path is the same in every language.
+The same tree in Go is `fs/disk/twin/`, in JavaScript `src/fs/disk/twin.js`, as dev@'s brief [one repository per language](../2026-10-26__brief__one-repository-per-language/index.md) already fixes. A vector cites the path and the path is the same in every language.
 
 ## 2. What "a project of its own" means, folder by folder
 
