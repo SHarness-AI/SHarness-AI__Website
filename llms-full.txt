@@ -339,7 +339,7 @@ By Dinis Cruz. Design session written up with Claude, 24 October 2026.
 
 # The brief: SHarness in one read
 
-> **Status: design, with the first experiments runnable.** This is the one page to read first: what SHarness is, the moving parts and how they work together, one request end to end, what binds a process, the spectrum from a hello world to sgit, where it is now and what to decide. Everything on it is drawn from the design pages, as of 24 Oct 2026; the design pages hold the detail and the evidence. By sharness.build for Dinis Cruz.
+> **Status: design, with the first experiments runnable.** This is the one page to read first: what SHarness is, the moving parts and how they work together, one request end to end, what binds a process, the spectrum from a hello world to sgit, where it is now and what to decide. Everything on it is drawn from the design pages, as of 24 Oct 2026; the design pages hold the detail and the evidence. By cli@sharness (then named sharness.build) for Dinis Cruz.
 
 ## 1. What it is, in three sentences
 

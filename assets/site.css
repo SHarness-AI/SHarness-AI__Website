@@ -69,7 +69,9 @@ nav.site .sub a.sl.here{color:var(--accent-dk);font-weight:600}
     font:600 .78rem/1 var(--sans);color:var(--fg);cursor:pointer}
   .nav-toggle:hover{border-color:var(--accent)}
   nav.site .parent{order:2}
-  nav.site .gh{order:4;margin-left:0}
+  /* GitHub moves into the open menu, so the closed bar is one row: name, status, Menu. */
+  nav.site .gh{order:6;margin-left:0;display:none}
+  nav.site.open .gh{display:inline-block;margin:.5rem 0 .2rem}
   /* The open menu is taller than a phone's screen, and the bar it lives in is sticky: a sticky
      element taller than the viewport only reveals its lower part when the page is scrolled to its
      end, which is exactly the bug readers hit (the menu "did not scroll"). So the list scrolls
@@ -85,6 +87,15 @@ nav.site .sub a.sl.here{color:var(--accent-dk);font-weight:600}
   nav.site .sub{position:static;display:flex;flex-direction:column;border:0;
     box-shadow:none;background:none;padding:0 0 .3rem .9rem;min-width:0;gap:0}
   nav.site .sub a.sl{padding:.3rem .2rem;font-size:.86rem}
+  /* With nav.js loaded the groups fold: seven labels, a tap opens one (its own page is the
+     group's first item). Without it every group shows open, as it always did. */
+  nav.site.js .ni-has > .nl{display:flex;justify-content:space-between;align-items:center;
+    min-height:44px;padding:.2rem .2rem;border-bottom:1px solid var(--line)}
+  nav.site.js .ni-has > .nl::after{content:"+";color:var(--dim2);font-weight:400;font-size:1.1rem}
+  nav.site.js .ni-has.open > .nl::after{content:"\2212";color:var(--accent)}
+  nav.site.js .ni-has:not(.open) > .sub{display:none}
+  nav.site.js .ni-has.open > .sub{border-bottom:1px solid var(--line);padding-bottom:.5rem}
+  nav.site.js .sub a.sl{min-height:38px;display:flex;align-items:center}
 }
 .stage-pill{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--warm);
   border:1px solid rgba(180,83,9,.35);background:rgba(180,83,9,.07);border-radius:99px;padding:.15rem .55rem;white-space:nowrap}
@@ -169,7 +180,7 @@ table.vers td.vnum{font-family:var(--mono);font-weight:700;color:var(--accent-dk
 
 /* ---------- footer ---------- */
 footer.site{border-top:1px solid var(--line);margin-top:3.5rem;padding:2.2rem 0 3rem;background:var(--panel2)}
-footer.site .cols{max-width:var(--wide);margin:0 auto;padding:0 1.1rem;display:grid;gap:1.4rem;grid-template-columns:1.6fr 1fr 1fr 1fr 1fr 1fr}
+footer.site .cols{max-width:var(--wide);margin:0 auto;padding:0 1.1rem;display:grid;gap:1.4rem;grid-template-columns:1.6fr 1fr 1fr 1fr 1fr}
 @media (max-width:1080px){footer.site .cols{grid-template-columns:1fr 1fr 1fr}}
 @media (max-width:940px){footer.site .cols{grid-template-columns:1fr 1fr}}
 footer.site h4{font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;color:var(--dim);margin:0 0 .6rem}
@@ -272,3 +283,48 @@ header.hero .status a{color:var(--accent-dk);font-weight:600}
 main.doc table.day td,main.doc table.day th{text-align:center;padding:.3rem .2rem;font-size:.72rem}
 main.doc table.day td:first-child{text-align:left;padding-left:.6rem}
 main.doc table.day .q{background:var(--panel2)}
+
+/* ---------- skip link: the first stop for a keyboard, out of sight until focused ---------- */
+nav.site .skip{position:absolute;left:.6rem;top:-3rem;z-index:80;background:var(--accent-dk);color:#fff;
+  padding:.45rem .9rem;border-radius:6px;font-size:.85rem;font-weight:600}
+nav.site .skip:focus{top:.5rem;text-decoration:none}
+
+/* ---------- on this page: a column beside a long page, a folding box on a narrow screen ---------- */
+.toc-side{display:none}
+.toc-inline{margin:0 0 1.4rem;border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:.2rem .9rem}
+.toc-inline summary{cursor:pointer;font-size:.85rem;font-weight:600;color:var(--dim);padding:.55rem 0;min-height:24px}
+.toc-inline ol,.toc-side ol{list-style:none;margin:0;padding:0}
+.toc-inline ol{padding:0 0 .6rem}
+.toc-inline li a{display:block;padding:.3rem 0;font-size:.88rem}
+main.doc .toc-inline li{font-size:.88rem}
+@media (min-width:1240px){
+  main.doc.has-toc{max-width:calc(var(--measure) + 290px);display:grid;
+    grid-template-columns:minmax(0,1fr) 230px;column-gap:56px;align-items:start}
+  main.doc.has-toc .toc-inline{display:none}
+  .toc-side{display:block;position:sticky;top:78px;max-height:calc(100vh - 100px);overflow-y:auto;
+    padding-top:5.6rem;font-size:.8rem}
+  .toc-side .toc-head{font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--dim2);padding:0 0 .5rem .8rem}
+  .toc-side li a{display:block;padding:.28rem .8rem;border-left:2px solid var(--line);color:var(--dim);line-height:1.4}
+  .toc-side li a:hover{color:var(--fg);text-decoration:none;border-left-color:var(--line2)}
+  .toc-side li a.on{color:var(--accent-dk);border-left-color:var(--accent);font-weight:600}
+  .toc-side .toc-top{display:block;padding:.9rem .8rem 0;color:var(--dim2);font-size:.75rem}
+}
+
+/* ---------- previous and next, in the menu's order ---------- */
+nav.pager{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:3rem;
+  padding-top:1.4rem;border-top:1px solid var(--line)}
+nav.pager a{display:flex;flex-direction:column;gap:.2rem;border:1px solid var(--line);border-radius:10px;
+  padding:.85rem 1.1rem;background:var(--panel)}
+nav.pager a:hover{border-color:var(--accent);text-decoration:none}
+nav.pager .pg-next{text-align:right}
+nav.pager .pg-dir{font-size:.75rem;color:var(--dim2)}
+nav.pager .pg-title{font-size:1rem;font-weight:600;color:var(--accent-dk)}
+@media (max-width:600px){nav.pager{grid-template-columns:1fr}nav.pager span:empty{display:none}}
+
+/* ---------- footer: the files agents read, on one line ---------- */
+footer.site .agentline{max-width:var(--wide);margin:1.6rem auto 0;padding:1rem 1.1rem 0;border-top:1px solid var(--line);
+  font-size:.76rem;color:var(--dim2)}
+footer.site .agentline a{display:inline;font-size:.76rem;padding:0}
+@media (max-width:700px){br.br-wide{display:none}}
+main:focus{outline:none}

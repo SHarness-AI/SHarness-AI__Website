@@ -282,10 +282,32 @@ SECTIONS = {"design": "the design", "code": "the code", "evidence": "evidence", 
 
 
 def crumb(dir_, title):
+    """The section, then every folder between it and this page, each a link to its own index."""
     parts = dir_.split("/")
-    if len(parts) == 1:
-        return html.escape(title.lower())
-    return f'<a href="../index.html">{SECTIONS.get(parts[0], parts[0])}</a> / {html.escape(title.lower())}'
+    links = []
+    for k in range(len(parts) - 1):
+        up = "../" * (len(parts) - 1 - k)
+        name = SECTIONS.get(parts[0], parts[0]) if k == 0 else parts[k].replace("-", " ")
+        links.append(f'<a href="{up}index.html">{html.escape(name)}</a> / ')
+    return "".join(links) + html.escape(title.lower())
+
+
+TOC_MIN = 4                                                          # a page with fewer sections needs no map
+
+
+def toc(body):
+    """The page's h2 sections as an "On this page" list: a column beside the text on a wide
+    screen, a folding box under the title on a narrow one. Links inside a heading are unwrapped,
+    since the entry is itself a link."""
+    heads = re.findall(r'<h2 id="([^"]+)">(.*?)</h2>', body)
+    if len(heads) < TOC_MIN:
+        return "", ""
+    items = "\n".join(f'      <li><a href="#{hid}">{re.sub(r"</?a\b[^>]*>", "", text)}</a></li>' for hid, text in heads)
+    side = (f'  <nav class="toc-side" aria-label="On this page">\n    <div class="toc-head">On this page</div>\n'
+            f'    <ol>\n{items}\n    </ol>\n    <a class="toc-top" href="#content">↑ Back to top</a>\n  </nav>')
+    inline_ = (f'  <details class="toc-inline">\n    <summary>On this page · {len(heads)} sections</summary>\n'
+               f'    <ol>\n{items}\n    </ol>\n  </details>')
+    return side, inline_
 
 
 def render(dir_, title, desc):
@@ -293,6 +315,7 @@ def render(dir_, title, desc):
     up = "../" * len(dir_.split("/"))
     md = (ROOT / dir_ / "index.md").read_text()
     h1, body = md_to_html(md)
+    side, inline_ = toc(body)
     url = f"https://{chrome.HOST}/{rel}"
     full_title = f"{title} — SHarness"
     d = html.escape(desc)
@@ -317,10 +340,15 @@ def render(dir_, title, desc):
 
 {chrome.nav_html(rel, up)}
 
-<main class="doc">
+<main class="doc{" has-toc" if side else ""}" id="content" tabindex="-1">
+  <div class="doc-body">
   <div class="crumb"><a href="{up}index.html">sharness.ai</a> / {crumb(dir_, title)} · <a href="index.md">this page as markdown</a></div>
   <h1>{h1 or html.escape(title)}</h1>
+{inline_}
 {body}
+{chrome.pager_html(rel, up)}
+  </div>
+{side}
 </main>
 
 {chrome.footer_html(rel, up)}

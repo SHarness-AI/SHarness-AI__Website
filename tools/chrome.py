@@ -28,15 +28,15 @@ HOST    = (ROOT / "CNAME").read_text().strip()
 #     lights up the group it belongs to.
 NAV = [
     ("Try it", "code/playground/index.html", [
-        ("&#9679; The playground: type sharness-ai in your browser", "code/playground/index.html"),
+        ("Start here: the playground, in your browser", "code/playground/index.html"),
         ("A Linux kernel in a tab, running hello", "code/browser/demo/index.html"),
         ("Start in 60 seconds", "index.html#start"),
         ("Help us measure it: report your machine", "evidence/machines/index.html"),
         ("Mockup: the policy hash", "explain/mockups/policy-hash.html"),
         ("Mockup: the edge matrix", "explain/mockups/edges.html"),
-    ], ("code/playground/", "code/browser/demo/", "evidence/machines/")),
+    ], ("code/playground/", "code/browser/demo/")),
     ("Components", "components/index.html", [
-        ("&#9679; The OS a process sees", "components/index.html"),
+        ("Start here: the OS a process sees", "components/index.html"),
         ("sharness.bash: the shell, as a service", "components/bash/index.html"),
         ("sharness.net: the only network client", "components/net/index.html"),
         ("sharness.kms: where a secret lives", "components/kms/index.html"),
@@ -45,14 +45,14 @@ NAV = [
         ("sharness.launcher: the bootstrap", "components/launcher/index.html"),
         ("sharness.policy: the manifest", "components/policy/index.html"),
     ], ("components/",)),
-    ("The design", "design/index.html", [
-        ("&#9679; The brief: in one read", "design/index.html"),
+    ("How it works", "design/index.html", [
+        ("Start here: the brief, in one read", "design/index.html"),
         ("Why: the last metre", "design/why/index.html"),
         ("Architecture", "design/architecture/index.html"),
-        ("Components", "design/components/index.html"),
-        ("Keys and the KMS", "design/keys/index.html"),
+        ("Components in depth", "design/components/index.html"),
         ("Process Behaviour Policies", "design/policies/index.html"),
         ("The PBP on one page", "design/pbp/index.html"),
+        ("Keys and the KMS", "design/keys/index.html"),
         ("Agents and LLMs", "design/agents/index.html"),
         ("Enforcing the process tree", "design/process-tree/index.html"),
         ("What a process can do", "design/surface/index.html"),
@@ -62,48 +62,44 @@ NAV = [
         ("Storyboards &amp; mockups", "explain/index.html"),
         ("Articles", "articles/index.html"),
     ], ("design/", "explain/", "articles/")),
-    ("The code", "code/index.html", [
-        ("&#9679; Where the code is", "code/index.html"),
+    ("Evidence", "evidence/index.html", [
+        ("Start here: the measurements", "evidence/index.html"),
+        ("What exists today", "evidence/status/index.html"),
+        ("hello on your machine: reported runs", "evidence/machines/index.html"),
+        ("Research note", "evidence/research/index.html"),
+        ("How it compares: policies at the centre", "landscape/index.html"),
+        ("Enforceability matrix", "landscape/enforceability/index.html"),
+        ("Integration points", "landscape/integrations/index.html"),
+        ("Ruflo and ruv.sgit", "landscape/ruflo/index.html"),
+        ("Market &amp; competitors", "landscape/market/index.html"),
+    ], ("evidence/", "landscape/")),
+    ("Code", "code/index.html", [
+        ("Start here: where the code is", "code/index.html"),
         ("The CLI: sharness-ai", "code/cli/index.html"),
         ("Mockups &amp; experiments", "code/experiments/index.html"),
         ("Flows through the code", "code/flows/index.html"),
         ("Examples", "code/examples/index.html"),
         ("Linux in the browser", "code/browser/index.html"),
-        ("Playground: run it in your browser", "code/playground/index.html"),
         ("Releases of the code: immutable paths", "code/releases/index.html"),
         ("Languages", "code/languages/index.html"),
         ("Standards and test vectors", "code/standards/index.html"),
     ], ("code/",)),
     ("Security", "security/index.html", [
-        ("&#9679; Security: the register", "security/index.html"),
+        ("Start here: the register", "security/index.html"),
         ("Threat model", "security/threat-model/index.html"),
         ("Known risks", "security/risks/index.html"),
         ("Reviews", "security/reviews/index.html"),
         ("Hardening", "security/hardening/index.html"),
         ("Supply chain", "security/supply-chain/index.html"),
     ], ("security/",)),
-    ("Evidence", "evidence/index.html", [
-        ("&#9679; Measurements", "evidence/index.html"),
-        ("What exists today", "evidence/status/index.html"),
-        ("Research note", "evidence/research/index.html"),
-        ("hello on your machine: reported runs", "evidence/machines/index.html"),
-    ], ("evidence/",)),
-    ("Landscape", "landscape/index.html", [
-        ("&#9679; Policies at the centre", "landscape/index.html"),
-        ("Enforceability matrix", "landscape/enforceability/index.html"),
-        ("Integration points", "landscape/integrations/index.html"),
-        ("Ruflo and ruv.sgit", "landscape/ruflo/index.html"),
-        ("Market &amp; competitors", "landscape/market/index.html"),
-    ], ("landscape/",)),
     ("Project", "project/index.html", [
-        ("&#9679; Project", "project/index.html"),
+        ("Start here: the project", "project/index.html"),
         ("About &amp; naming", "project/about/index.html"),
-        ("The source documents", "project/sources/index.html"),
-        ("Engineering: how the site is built", "project/engineering.html"),
-        ("Comms: tasks &amp; requests", "project/comms.html"),
         ("Release history", "project/releases.html"),
         ("Getting users: the review and the plan", "project/adoption/index.html"),
-        ("Admin: how the project is run", "admin/index.html"),
+        ("The source documents", "project/sources/index.html"),
+        ("Engineering: how the site is built", "project/engineering.html"),
+        ("How the project is run", "admin/index.html"),
         ("The board: tasks &amp; requests", "admin/board/index.html"),
         ("Updates: what is happening", "admin/updates/index.html"),
         ("Outreach: finding the people it is for", "project/outreach/index.html"),
@@ -112,85 +108,50 @@ NAV = [
     ], ("project/", "admin/")),
 ]
 
+# The footer: four columns by what a reader wants to do, then the files agents read on one line.
 FOOTER = [
-    ("Components", [
-        ("The OS a process sees", "components/index.html"),
-        ("sharness.bash", "components/bash/index.html"),
-        ("sharness.net", "components/net/index.html"),
-        ("sharness.kms", "components/kms/index.html"),
-        ("sharness.fs", "components/fs/index.html"),
-        ("sharness.llm", "components/llm/index.html"),
-        ("sharness.launcher", "components/launcher/index.html"),
-        ("sharness.policy", "components/policy/index.html"),
+    ("Try it", [
+        ("The playground", "code/playground/index.html"),
+        ("A kernel in a tab", "code/browser/demo/index.html"),
+        ("Start in 60 seconds", "index.html#start"),
+        ("The CLI: sharness-ai", "code/cli/index.html"),
+        ("Report your machine", "evidence/machines/index.html"),
+        ("PyPI: sharness-ai ↗", "https://pypi.org/project/sharness-ai/"),
+        ("GitHub: SHarness-AI__CLI ↗", "https://github.com/SHarness-AI/SHarness-AI__CLI"),
     ]),
-    ("The design", [
-        ("The brief: in one read", "design/index.html"),
+    ("Understand", [
+        ("The brief, in one read", "design/index.html"),
+        ("The components", "components/index.html"),
         ("Why: the last metre", "design/why/index.html"),
         ("Architecture", "design/architecture/index.html"),
-        ("Components", "design/components/index.html"),
-        ("Keys and the KMS", "design/keys/index.html"),
         ("Process Behaviour Policies", "design/policies/index.html"),
-        ("The PBP on one page", "design/pbp/index.html"),
-        ("Agents and LLMs", "design/agents/index.html"),
-        ("Enforcing the process tree", "design/process-tree/index.html"),
-        ("What a process can do", "design/surface/index.html"),
-        ("Containment", "design/containment/index.html"),
-        ("The spectrum", "design/spectrum/index.html"),
         ("Roadmap &amp; open decisions", "design/roadmap/index.html"),
-    ]),
-    ("The code", [
-        ("Where the code is", "code/index.html"),
-        ("The CLI: sharness-ai", "code/cli/index.html"),
-        ("Mockups &amp; experiments", "code/experiments/index.html"),
-        ("Flows through the code", "code/flows/index.html"),
-        ("Examples", "code/examples/index.html"),
-        ("Linux in the browser", "code/browser/index.html"),
-        ("Releases of the code", "code/releases/index.html"),
-        ("Languages", "code/languages/index.html"),
-        ("Standards and test vectors", "code/standards/index.html"),
-        ("PyPI: sharness-ai", "https://pypi.org/project/sharness-ai/"),
-        ("GitHub: SHarness-AI__CLI", "https://github.com/SHarness-AI/SHarness-AI__CLI"),
-    ]),
-    ("Security, evidence, landscape", [
-        ("Security: the register", "security/index.html"),
-        ("Threat model", "security/threat-model/index.html"),
-        ("Known risks", "security/risks/index.html"),
-        ("Hardening", "security/hardening/index.html"),
-        ("Supply chain", "security/supply-chain/index.html"),
-        ("Measurements", "evidence/index.html"),
-        ("What exists today", "evidence/status/index.html"),
-        ("Research note", "evidence/research/index.html"),
-        ("hello on your machine", "evidence/machines/index.html"),
-        ("Landscape: policies at the centre", "landscape/index.html"),
-        ("Enforceability matrix", "landscape/enforceability/index.html"),
-        ("Ruflo and ruv.sgit", "landscape/ruflo/index.html"),
-        ("Market &amp; competitors", "landscape/market/index.html"),
         ("Storyboards", "explain/storyboards/index.html"),
         ("Articles", "articles/index.html"),
     ]),
-    ("Project &amp; agents", [
+    ("Check it", [
+        ("Measurements", "evidence/index.html"),
+        ("What exists today", "evidence/status/index.html"),
+        ("hello on your machine", "evidence/machines/index.html"),
+        ("Enforceability matrix", "landscape/enforceability/index.html"),
+        ("Market &amp; competitors", "landscape/market/index.html"),
+        ("Security: the register", "security/index.html"),
+        ("Threat model", "security/threat-model/index.html"),
+        ("Known risks", "security/risks/index.html"),
+    ]),
+    ("Follow the work", [
         ("About &amp; naming", "project/about/index.html"),
-        ("The source documents", "project/sources/index.html"),
-        ("Engineering", "project/engineering.html"),
-        ("Comms &amp; release history", "project/comms.html"),
-        ("Admin: how the project is run", "admin/index.html"),
+        ("Release history", "project/releases.html"),
+        ("Getting users", "project/adoption/index.html"),
+        ("How the project is run", "admin/index.html"),
         ("The board", "admin/board/index.html"),
         ("Updates", "admin/updates/index.html"),
         ("Commit notes", "admin/notes/index.html"),
-        ("Schedule and runs", "admin/schedule/index.html"),
-        ("Briefs", "admin/briefs/index.html"),
-        ("Guidance for agents (AGENTS.md)", "admin/guidance/index.html"),
-        ("Getting users", "project/adoption/index.html"),
-        ("Outreach", "project/outreach/index.html"),
-        ("The agents and their keys", "project/agents/index.html"),
-        ("Telemetry", "project/telemetry/index.html"),
-        ("security.txt", ".well-known/security.txt"),
-        ("llms.txt", "llms.txt"),
-        ("llms-full.txt", "llms-full.txt"),
-        ("index.md", "index.md"),
-        ("sitemap.xml", "sitemap.xml"),
+        ("Guidance for agents", "admin/guidance/index.html"),
     ]),
 ]
+AGENT_FILES = [("llms.txt", "llms.txt"), ("llms-full.txt", "llms-full.txt"), ("index.md", "index.md"),
+               ("sitemap.xml", "sitemap.xml"), ("security.txt", ".well-known/security.txt")]
 
 BLURB = ("SHarness runs agents and their tools as small, single-purpose processes, each locked "
          "down by the kernel and talking only over allowed, mutually authenticated connections. "
@@ -219,16 +180,40 @@ def nav_html(rel, up):
             f'      <div class="sub">\n{links}\n      </div>\n'
             f'    </div>')
     rows = "\n".join(groups)
-    return (f'<nav class="site"><div class="row">\n'
+    return (f'<nav class="site"><a class="skip" href="#content">Skip to content</a><div class="row">\n'
             f'  <a class="brand" href="{up}index.html">sharness<span>.ai</span></a>\n'
             f'  <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>\n'
-            f'  <a class="ver" href="{up}project/releases.html" title="Site release history">{VERSION}</a>\n'
             f'  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>\n'
             f'  <div class="nav-items">\n{rows}\n  </div>\n'
             f'  <a class="gh" href="{GH}">★ GitHub</a>\n'
             f'  <script src="{up}assets/nav.js" defer></script>\n'
             f'  <script src="{up}assets/telemetry.js" data-root="{up}" defer></script>\n'
             f'</div></nav>')
+
+
+def pager_html(rel, up):
+    """Previous and next for a page that is in a menu, in the menu's order: the menu is the
+    reading order, so a reader who finishes a page is told where it goes next. Empty for a
+    page in no menu."""
+    for label, _own, subs, _prefixes in NAV:
+        seq = [(t, h) for t, h in subs if "#" not in h and not h.startswith("http")]
+        hrefs = [h for _t, h in seq]
+        if rel not in hrefs:
+            continue
+        i = hrefs.index(rel)
+        def card(item, cls, word):
+            if not item:
+                return '<span></span>'
+            text = re.sub(r"^Start here: ", "", item[0])
+            return (f'<a class="{cls}" href="{up}{item[1]}"><span class="pg-dir">{word} in {label}</span>'
+                    f'<span class="pg-title">{text}</span></a>')
+        prev = seq[i - 1] if i > 0 else None
+        nxt = seq[i + 1] if i + 1 < len(seq) else None
+        if not prev and not nxt:
+            return ""
+        return (f'<nav class="pager" aria-label="Previous and next in {label}">'
+                f'{card(prev, "pg-prev", "← Previous")}{card(nxt, "pg-next", "Next →")}</nav>')
+    return ""
 
 
 def footer_html(rel, up):
@@ -240,15 +225,17 @@ def footer_html(rel, up):
         + "\n".join(f'    <a href="{l if l.startswith("http") else up + l}">{t}</a>' for t, l in links)
         + "\n  </div>"
         for head, links in FOOTER)
+    files = " · ".join(f'<a href="{up}{l}">{t}</a>' for t, l in AGENT_FILES)
     return (f'<footer class="site"><div class="cols">\n'
             f'  <div>\n'
             f'    <div class="brandline">sharness<span>.ai</span></div>\n'
             f'    <p>{BLURB}</p>\n'
             f'    <p class="netline">{NETLINE}</p>\n'
             f'    <p class="partnote">{partnote}</p>\n'
-            f'    <p class="verline">site <a href="{up}project/releases.html">{VERSION}</a> · '
+            f'    <p class="verline">site <a class="ver" href="{up}project/releases.html" title="Site release history">{VERSION}</a> · '
             f'<a href="{up}project/engineering.html">engineering</a>{md_twin}</p>\n'
-            f'  </div>\n{cols}\n</div></footer>')
+            f'  </div>\n{cols}\n</div>\n'
+            f'<div class="agentline">For agents and crawlers: {files}</div></footer>')
 
 
 def stamp_text_twins():
