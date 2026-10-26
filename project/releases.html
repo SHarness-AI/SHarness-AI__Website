@@ -19,7 +19,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.22</a>
+  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.23</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -140,6 +140,7 @@
   <div class="tablewrap"><table class="vers">
     <thead><tr><th>Version</th><th>Date</th><th>What changed</th></tr></thead>
     <tbody>
+      <tr><td class="vnum">v0.5.23</td><td>26 Oct 2026</td><td>R7 carries Dinis's decision: the CLI's <code>dev</code> goes to <code>main</code> after one more pass over security and functionality; the outreach plan's week 0 waits on it.</td></tr>
       <tr><td class="vnum">v0.5.22</td><td>26 Oct 2026</td><td><a href="outreach/index.html">The outreach plan</a> at Dinis's request: the section on another project's promotion and the lines about learning from it are gone (they stay in the history); the integration already done, <a href="https://ruv.sgit.ai">ruv.sgit</a>, stays as what there is to show and as the channel into the Agentics Foundation; sections renumbered; R11 loses one question.</td></tr>
       <tr><td class="vnum">v0.5.21</td><td>26 Oct 2026</td><td>Every member that runs on its own has a card: its wakes (London time), its cron, the steps of each wake, a <b>start prompt</b> any Claude account can be pointed at and the <b>wake prompt</b> word for word, on <a href="../admin/schedule/index.html">the schedule</a> and on each member's page, all proposed until the editor's go (R17). <code>WAKE.md</code>, the six steps every wake follows; <code>tools/schedule.py</code> (<code>wake</code>, <code>run</code>, <code>card</code>); run records under <code>content/admin/runs/</code> and <a href="../admin/runs/index.html">the runs page</a>; <a href="../admin/briefs/index.html">briefs</a>, one page each, with the five from the conductor's first review (the release script, the CLI ready for visitors, a reality file, signed commit notes, this system). The conductor's loop in its card: review what landed, map the improvements, write the brief, decide who does it. The first run record; the update of 00:10 UTC.</td></tr>
       <tr><td class="vnum">v0.5.20</td><td>26 Oct 2026</td><td>The <a href="../security/index.html">security section</a>, by the project's security agent after the first full review of the CLI, the example policies, the browser bench, both pipelines and this site: the <a href="../security/threat-model/index.html">threat model</a> in long form, the <a href="../security/risks/index.html">register of known risks</a> (fixed, accepted, open, designed; nothing deleted), the <a href="../security/reviews/index.html">review</a> with its 25 findings and what was done about each, <a href="../security/hardening/index.html">hardening</a> (how to run it; the lock-down list for the repositories and accounts, board R15) and the <a href="../security/supply-chain/index.html">supply chain</a>. The CLI's fixes landed on its <code>dev</code> (write never executable, symlinked writable paths refused, rows that cannot be enforced refused, root's <code>max_pids</code>, the runner's import path, pinned guest downloads, a hardened release pipeline, 92 tests). The code is now published here at <a href="../code/releases/index.html">immutable paths</a> (<code>code/releases/vN/vN.M/vN.M.P/</code>, complete, with a manifest of hashes, and a <code>latest</code>), checked by the gate on every push. <code>SECURITY.md</code>, <code>/.well-known/security.txt</code>, the storyboards kit loaded with its integrity string, the gate's secret tripwire widened. Board rows R15 and R16 for the editor; the security member folder corrected.</td></tr>
@@ -181,7 +182,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../project/releases.html">v0.5.22</a> · <a href="../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../project/releases.html">v0.5.23</a> · <a href="../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>Components</h4>
