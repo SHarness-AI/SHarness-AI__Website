@@ -77,6 +77,10 @@ def describe(before):
     """The newest commit's subject and the first paragraph of its body; the pages the range touched."""
     subject = git("log", "-1", "--format=%s")
     body = [l for l in git("log", "-1", "--format=%b").splitlines() if not TRAILER.match(l)]
+    if body and body[0].startswith("The generated pages after taking in dev"):
+        # a regeneration commit from a ship.py older than v0.6.13: the work is the commit before it
+        subject = git("log", "-1", "--format=%s", "HEAD~1")
+        body = [l for l in git("log", "-1", "--format=%b", "HEAD~1").splitlines() if not TRAILER.match(l)]
     para = []
     for line in body:
         if not line.strip() and para:
