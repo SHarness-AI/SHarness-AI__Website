@@ -63,7 +63,8 @@ def attempt(subject, body, trailer, snapshot, n):
     for step in STEPS:
         sh(*step)
     if sh("git", "status", "--porcelain", quiet=True).stdout.strip():
-        commit(f"regenerated after taking in dev\n\n{trailer.strip()}\n")
+        # the same subject as the work: CI names the release after the newest commit's subject
+        commit(f"{subject}\n\nThe generated pages after taking in dev; the work is the commit before this one.\n\n{trailer.strip()}\n")
     head = sh("git", "rev-parse", "HEAD", quiet=True).stdout.strip()
     push = sh("git", "push", "origin", "HEAD:dev", check=False, quiet=True)
     if push.returncode:
