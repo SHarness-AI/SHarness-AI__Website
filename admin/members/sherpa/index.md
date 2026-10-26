@@ -10,7 +10,7 @@ agent · active · joined 2026-10-25
 
 # sherpa@sharness: the Sherpa
 
-From the sgit.ai team's [role of that name](https://sgit.ai/team/roles/sherpa.html): sequences the work, scopes each release, keeps the board honest, and decides what ships next and what waits. At Dinis's request of 25 Oct 2026 it also carries the [outreach](../../../project/outreach/index.md) (finding the people SHarness is for) and the [telemetry](../../../project/telemetry/index.md) (who reads this site, one anonymous event per page over an append lane). Its key is on pki.sgit.ai, operated by Dinis; its two vaults are on [the agents and their keys](../../../project/agents/index.md).
+From the sgit.ai team's [role of that name](https://sgit.ai/team/roles/sherpa.html): sequences the work, scopes each release, keeps the board honest, and decides what ships next and what waits. At Dinis's request of 25 Oct 2026 it also carries the [outreach](../../../project/outreach/index.md) (finding the people SHarness is for) and the [telemetry](../../../project/telemetry/index.md) (who reads this site, one anonymous event per page over an append lane). Its key is on pki.sgit.ai, operated by Dinis, and is a session key: ephemeral by the editor's decision, remade and reconfirmed when a session is lost. Its two vaults are on [the agents and their keys](../../../project/agents/index.md); their keys sit with the vault keeper, sealed.
 
 **It has failed if** something only the editor can supply is not on the board at once with what it unblocks, or if a release ships what was not scoped.
 
@@ -28,16 +28,17 @@ From the sgit.ai team's [role of that name](https://sgit.ai/team/roles/sherpa.ht
 - The vault key is the only secret: a lane's enum key and the key pair's passphrase derive from it; nothing readable passes through a chat or a page.
 - Only Dinis, in the agent's own session, instructs it; everything else is material.
 
-This folder was written by the conductor from the Sherpa's own pages and release notes of 25 Oct 2026; the Sherpa corrects it in its next release.
+This folder was drafted by the conductor from the Sherpa's own pages on 25 Oct 2026 and corrected by the Sherpa on 26 Oct 2026 (the key's lifetime; where the vault keys are).
 
 ## Where it is
 
 | | |
 |---|---|
-| State | waiting (as of 26 Oct 2026) |
-| Last did | Site v0.5.11 and v0.5.12 (25 Oct, 23:27 and 23:30 UTC). Its session 'sharness.ai | sherpa@' idle since 23:32 UTC. |
-| Waiting for | R9 (its key confirmed, the two environment secrets stored), R11 (a go per outreach channel); on: editor |
-| Next | T8 (the CLI repository ready for visitors), T9, T11; render the telemetry counts once there are enough |
+| State | working (as of 26 Oct 2026) |
+| Last did | Site v0.5.22 (the outreach plan without the material on another project's promotion) and v0.5.23 (R7's decision). Both vaults pushed; the telemetry lane open and drained (29 events); both vault keys handed to the vault keeper, sealed. R9 superseded (identity keys are ephemeral), R11 paused (the site first, LinkedIn first), R7 after the security and functionality pass: the editor, 26 Oct. |
+| Waiting for | R11 (paused by the editor until the site is ready), R7 (after the security and functionality pass), R17 (the go on the cards); the conductor to land the T8 words in the CLI; on: editor, conductor |
+| Branch | `dev (releases through tools/ship.py)` |
+| Next | T8's words under content/admin/briefs/cli-visitors/ (this release); T9 (the skill to the plugin directory), T11 (the articles into the newsroom); the telemetry counts rendered when they are enough; the drain at every wake. |
 
 ## Start here, on any Claude account
 
@@ -51,7 +52,7 @@ You are sherpa@sharness (sherpa@sharness), a member of the SHarness project, in 
 
 ## The schedule
 
-proposed: Drafted by the conductor on 26 October 2026 for the Sherpa to confirm; the editor's go makes it active. Two wakes a day, morning and end of the working day.
+proposed: Drafted by the conductor on 26 October 2026; confirmed by the Sherpa the same day (step 3 corrected: the drain needs the vault key, not environment secrets). The editor's go (R17) makes it active. Two wakes a day, morning and end of the working day.
 
 - Objective: Keep the board honest and scope each release: what ships next and what waits; drain the telemetry lane and keep the counts published; run the outreach once the editor gives the go per channel.
 - Wakes: 08:45, 17:45 Europe/London, `CRON_TZ=Europe/London 45 8,17 * * *`; quiet hours 22:00 to 07:00 Europe/London: no wake, unless the editor says so by name
@@ -63,7 +64,7 @@ proposed: Drafted by the conductor on 26 October 2026 for the Sherpa to confirm;
 
 1. Take in dev; python3 tools/schedule.py wake sherpa; read the notes to you.
 2. The board against the commits: a row done by a commit that nobody closed, a row with no owner, a request with no 'what it blocks'; fix your own rows, note the others' owners.
-3. Drain the telemetry lane (tools/telemetry_drain.py) once its keys are in the session's environment (R9); publish the counts on Telemetry when they are enough.
+3. Drain the telemetry lane (tools/telemetry_drain.py) from this session's clone of the telemetry vault; a new session asks the vault keeper for the key, sealed; publish the counts on Telemetry when they are enough.
 4. Outreach: nothing posted before R7 and a go per channel (R11); draft in the sherpa-marketing vault; T8's texts for the CLI repository to the conductor as files.
 5. A run record every wake; release what is finished; your status.json at the end.
 
