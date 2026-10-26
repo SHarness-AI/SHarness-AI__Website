@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 560" width="1100" height="560" role="img" aria-labelledby="t">
+<title id="t">The request and the verdict, side by side: the request carries the command, the directory, the intent, the policy hash, the tool, the skill in force and the names of environment variables, never a value; the verdict carries the decision, the summary line, the facts, the row that decided, the question when asking, and the harness's hook form</title>
+<style>text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;fill:#111827;white-space:pre}.h{font-family:ui-sans-serif,system-ui,sans-serif;font-weight:700;font-size:17px}.s{font-family:ui-sans-serif,system-ui,sans-serif;fill:#4b5563;font-size:13px}.k{fill:#7c2d12}.v{fill:#1e3a8a}.c{fill:#6b7280}</style>
+<rect width="1100" height="560" fill="#f9fafb"/>
+<text x="40" y="36" class="h">accepts: the request</text><text x="40" y="56" class="s">from the hook or from sharness.bash; no secret, by construction</text>
+<rect x="40" y="70" width="500" height="440" rx="10" fill="#ffffff" stroke="#1f2937" stroke-width="1.5"/>
+<text x="60" y="98">{</text>
+<text x="60" y="120"><tspan class="k">  "v"</tspan>: <tspan class="v">1</tspan>,</text>
+<text x="60" y="142"><tspan class="k">  "tool"</tspan>: <tspan class="v">"Bash"</tspan>,                 <tspan class="c">// or Write, Edit, WebFetch</tspan></text>
+<text x="60" y="164"><tspan class="k">  "command"</tspan>: <tspan class="v">"sh install.sh"</tspan>,</text>
+<text x="60" y="186"><tspan class="k">  "cwd"</tspan>: <tspan class="v">"/work/app"</tspan>,</text>
+<text x="60" y="208"><tspan class="k">  "intent"</tspan>: <tspan class="v">"install the pdf tool"</tspan>,  <tspan class="c">// a claim, not a fact</tspan></text>
+<text x="60" y="230"><tspan class="k">  "policy"</tspan>: <tspan class="v">"sha256:4dda5a16…"</tspan>,     <tspan class="c">// the session's, by hash</tspan></text>
+<text x="60" y="252"><tspan class="k">  "skill"</tspan>: {</text>
+<text x="60" y="274"><tspan class="k">    "name"</tspan>: <tspan class="v">"pdf-tools"</tspan>,</text>
+<text x="60" y="296"><tspan class="k">    "hash"</tspan>: <tspan class="v">"sha256:9b1c…"</tspan>,          <tspan class="c">// of the skill's folder</tspan></text>
+<text x="60" y="318"><tspan class="k">    "policy"</tspan>: <tspan class="v">"sha256:77e0…"</tspan>         <tspan class="c">// what it declared, or none</tspan></text>
+<text x="60" y="340">  },</text>
+<text x="60" y="362"><tspan class="k">  "env_names"</tspan>: [<tspan class="v">"HOME"</tspan>, <tspan class="v">"PATH"</tspan>, <tspan class="v">"AWS_PROFILE"</tspan>],</text>
+<text x="60" y="384"><tspan class="c">                                   // names only, never values</tspan></text>
+<text x="60" y="406"><tspan class="k">  "session"</tspan>: <tspan class="v">"a1f3…"</tspan>,              <tspan class="c">// so earlier verdicts count</tspan></text>
+<text x="60" y="428"><tspan class="k">  "rehearse"</tspan>: <tspan class="v">"if_unsure"</tspan>          <tspan class="c">// never | if_unsure | always</tspan></text>
+<text x="60" y="450">}</text>
+<text x="60" y="490" class="s">Nothing here is secret. A decision about a command is a decision about rows.</text>
+<text x="580" y="36" class="h">emits: the verdict</text><text x="580" y="56" class="s">to the hook (a Setting) or to sharness.bash (a Boundary); signed by the service</text>
+<rect x="580" y="70" width="480" height="440" rx="10" fill="#ffffff" stroke="#1f2937" stroke-width="1.5"/>
+<text x="600" y="98">{</text>
+<text x="600" y="120"><tspan class="k">  "decision"</tspan>: <tspan class="v">"deny"</tspan>,             <tspan class="c">// allow | deny | ask</tspan></text>
+<text x="600" y="142"><tspan class="k">  "summary"</tspan>: <tspan class="v">"writes 1 path outside the</tspan></text>
+<text x="600" y="164"><tspan class="v">     workspace; reaches 1 host; irreversible"</tspan>,</text>
+<text x="600" y="186"><tspan class="k">  "facts"</tspan>: {</text>
+<text x="600" y="208"><tspan class="k">    "writes_refused"</tspan>: [<tspan class="v">"~/.bashrc"</tspan>],</text>
+<text x="600" y="230"><tspan class="k">    "connects"</tspan>: [<tspan class="v">"example.com:443 EACCES"</tspan>],</text>
+<text x="600" y="252"><tspan class="k">    "source"</tspan>: <tspan class="v">"rehearsal"</tspan>          <tspan class="c">// parse | rehearsal | policy</tspan></text>
+<text x="600" y="274">  },</text>
+<text x="600" y="296"><tspan class="k">  "row"</tspan>: <tspan class="v">"files.write excludes ~"</tspan>,  <tspan class="c">// the row that decided</tspan></text>
+<text x="600" y="318"><tspan class="k">  "skill_delta"</tspan>: [<tspan class="v">"network: not declared"</tspan>],</text>
+<text x="600" y="340"><tspan class="k">  "question"</tspan>: <tspan class="v">null</tspan>,                <tspan class="c">// text, when "ask"</tspan></text>
+<text x="600" y="362"><tspan class="k">  "choices"</tspan>: [],                   <tspan class="c">// once | add_row | refuse</tspan></text>
+<text x="600" y="384"><tspan class="k">  "hook"</tspan>: { <tspan class="k">"permissionDecision"</tspan>: <tspan class="v">"deny"</tspan>, … },</text>
+<text x="600" y="406"><tspan class="k">  "audit"</tspan>: <tspan class="v">"2026-10-26T07:12Z deny sh install.sh"</tspan>,</text>
+<text x="600" y="428"><tspan class="k">  "sig"</tspan>: <tspan class="v">"…"</tspan>                        <tspan class="c">// the service's key</tspan></text>
+<text x="600" y="450">}</text>
+<text x="600" y="490" class="s">The hook form is what the agent's harness reads today; the rest is for the person, the audit and the next decision.</text>
+<text x="40" y="540" class="s">Proposed shapes, 26 Oct 2026. The prototypes emit the decision, the summary, the facts and the hook form; the rest is drawn, not written.</text>
+</svg>

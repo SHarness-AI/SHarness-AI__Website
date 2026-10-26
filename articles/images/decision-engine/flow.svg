@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 560" width="1100" height="560" role="img" aria-labelledby="t">
+<title id="t">The decision flow: a request arrives; the parse reads the command; if it cannot be read, deny; if a row is refused or a behaviour row broken, deny; if every row is held and nothing is irreversible, allow; otherwise rehearse in a twin; a refused write outside the workspace is deny; a network attempt, a delete or a timeout is ask with the facts; otherwise allow; an approved ask becomes a learned row</title>
+<style>text{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;font-size:14px;fill:#111827}.h{font-weight:700;font-size:17px}.s{fill:#4b5563;font-size:12px}.box{fill:#ffffff;stroke:#1f2937;stroke-width:1.5}.q{fill:#fef3c7;stroke:#b45309;stroke-width:1.5}.twin{fill:#f3e8ff;stroke:#7e22ce;stroke-width:1.5;stroke-dasharray:6 4}.yes{fill:#dcfce7;stroke:#15803d;stroke-width:1.5}.no{fill:#fee2e2;stroke:#b91c1c;stroke-width:1.5}.ask{fill:#e0f2fe;stroke:#0369a1;stroke-width:1.5}.arrow{stroke:#374151;stroke-width:1.5;fill:none;marker-end:url(#a)}</style>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#374151"/></marker></defs>
+<rect width="1100" height="560" fill="#f9fafb"/>
+<text x="40" y="36" class="h">One command, one decision: the tree</text>
+<text x="40" y="56" class="s">deterministic: the same command under the same policy gets the same answer; intent goes into the question and never changes the verdict</text>
+<rect x="40" y="90" width="200" height="50" rx="8" class="box"/><text x="140" y="111" text-anchor="middle">request arrives</text><text x="140" y="129" text-anchor="middle" class="s">command, cwd, intent, policy hash</text>
+<path d="M240 115 H298" class="arrow"/>
+<rect x="300" y="90" width="200" height="50" rx="8" class="q"/><text x="400" y="111" text-anchor="middle">can the parse read it?</text><text x="400" y="129" text-anchor="middle" class="s">known programs, paths, hosts, flags</text>
+<path d="M400 140 V188" class="arrow"/><text x="412" y="168" class="s">no</text>
+<rect x="300" y="190" width="200" height="44" rx="8" class="no"/><text x="400" y="210" text-anchor="middle">deny</text><text x="400" y="226" text-anchor="middle" class="s">what cannot be read cannot be allowed</text>
+<path d="M500 115 H558" class="arrow"/><text x="529" y="106" text-anchor="middle" class="s">yes</text>
+<rect x="560" y="90" width="220" height="50" rx="8" class="q"/><text x="670" y="111" text-anchor="middle">a row refused, or a</text><text x="670" y="129" text-anchor="middle">behaviour row broken?</text>
+<path d="M670 140 V188" class="arrow"/><text x="682" y="168" class="s">yes</text>
+<rect x="560" y="190" width="220" height="44" rx="8" class="no"/><text x="670" y="210" text-anchor="middle">deny, with the row</text><text x="670" y="226" text-anchor="middle" class="s">outside the write rows; never force; sudo; a pipe into sh</text>
+<path d="M780 115 H838" class="arrow"/><text x="809" y="106" text-anchor="middle" class="s">no</text>
+<rect x="840" y="90" width="220" height="50" rx="8" class="q"/><text x="950" y="111" text-anchor="middle">every row held, and</text><text x="950" y="129" text-anchor="middle">nothing irreversible?</text>
+<path d="M950 140 V188" class="arrow"/><text x="962" y="168" class="s">yes</text>
+<rect x="840" y="190" width="220" height="44" rx="8" class="yes"/><text x="950" y="210" text-anchor="middle">allow</text><text x="950" y="226" text-anchor="middle" class="s">an audit line; the person sees nothing</text>
+<path d="M1060 115 H1080 V300 H1000" class="arrow"/><text x="1070" y="290" text-anchor="end" class="s">no, or unsure</text>
+<rect x="760" y="280" width="240" height="56" rx="8" class="twin"/><text x="880" y="300" text-anchor="middle">rehearse it in a twin</text><text x="880" y="318" text-anchor="middle" class="s">a copy of the workspace, no network, traced</text>
+<path d="M760 308 H700" class="arrow"/>
+<rect x="470" y="280" width="230" height="56" rx="8" class="q"/><text x="585" y="300" text-anchor="middle">what did it try?</text><text x="585" y="318" text-anchor="middle" class="s">writes outside, connects, deletes, exit</text>
+<path d="M585 336 V388" class="arrow"/><text x="597" y="366" class="s">a write outside the workspace</text>
+<rect x="470" y="390" width="230" height="44" rx="8" class="no"/><text x="585" y="410" text-anchor="middle">deny, with the fact</text><text x="585" y="426" text-anchor="middle" class="s">"tried to write /root/.bashrc"</text>
+<path d="M470 308 H410" class="arrow"/><text x="440" y="298" text-anchor="middle" class="s">network,</text><text x="440" y="326" text-anchor="middle" class="s">delete, timeout</text>
+<rect x="180" y="280" width="230" height="56" rx="8" class="ask"/><text x="295" y="300" text-anchor="middle">ask, in the person's words</text><text x="295" y="318" text-anchor="middle" class="s">reads, writes, network, reversible, intent</text>
+<path d="M295 336 V388" class="arrow"/>
+<rect x="180" y="390" width="230" height="44" rx="8" class="box"/><text x="295" y="410" text-anchor="middle">once · add the row · refuse</text><text x="295" y="426" text-anchor="middle" class="s">"add the row" writes it into the policy, hashed</text>
+<path d="M180 412 H120 V300 H140 V140" class="arrow"/><text x="60" y="280" class="s">a learned row:</text><text x="60" y="296" class="s">the next time,</text><text x="60" y="312" class="s">no question</text>
+<path d="M585 280 V250 H950 V234" class="arrow"/><text x="770" y="262" text-anchor="middle" class="s">nothing outside, nothing irreversible: allow, with the facts</text>
+<text x="40" y="500" class="s">The two prototypes of 26 Oct 2026: the parse answered twelve commands (3 allow, 2 ask, 7 deny); the rehearsal ran four in a twin (1 allow, 1 deny, 2 ask), the real workspace untouched.</text>
+<text x="40" y="522" class="s">Refused reads inside the rehearsal are reported, never judged: the kernel will refuse them in the real run too, and the command went on.</text>
+<text x="40" y="544" class="s">Proposed; no engine is in the package.</text>
+</svg>
