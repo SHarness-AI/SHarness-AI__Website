@@ -9,8 +9,9 @@ The one way anything reaches dev (the brief: content/admin/briefs/2026-10-26__br
 and R23: CI owns the version). In order: refuse main and anything key-shaped in the message; commit
 the work in the tree if any, with the subject, the body and the trailers; fetch and merge origin/dev
 (a conflict stops here, with the files named); tools/admin_status.py when --snapshot; chrome.py and
-every generator, then the gate and every --check (a second commit when taking in dev changed a
-generated page); push to dev, and if dev moved meanwhile, once more from the merge; push the
+every generator, then the gate and every --check (a second commit under the same message when taking
+in dev changed a generated page; a note commit of its own when the work was committed by hand, since
+CI names and describes the release from the newest commit); push to dev, and if dev moved meanwhile, once more from the merge; push the
 branch; then wait for CI's release commit that contains yours (the tag names the version) and for
 the live site to serve it. The version is never written here: /version belongs to CI
 (tools/release.py). A failure anywhere means no push. Standard library only.
@@ -49,8 +50,11 @@ def commit(message):
 
 def attempt(subject, body, trailer, snapshot, n):
     sh("git", "fetch", "--quiet", "--tags", "origin", "dev", quiet=True)
+    message = f"{subject}\n\n{body.strip()}\n\n{trailer.strip()}\n" if body.strip() else f"{subject}\n\n{trailer.strip()}\n"
+    carried = False                      # CI names and describes the release from the newest commit, so one must carry the message
     if sh("git", "status", "--porcelain", quiet=True).stdout.strip():
-        commit(f"{subject}\n\n{body.strip()}\n\n{trailer.strip()}\n" if body.strip() else f"{subject}\n\n{trailer.strip()}\n")
+        commit(message)
+        carried = True
     r = sh("git", "merge", "--no-edit", "origin/dev", check=False, quiet=True)
     if r.returncode:
         files = sh("git", "diff", "--name-only", "--diff-filter=U", quiet=True).stdout.strip()
@@ -63,9 +67,11 @@ def attempt(subject, body, trailer, snapshot, n):
     for step in STEPS:
         sh(*step)
     if sh("git", "status", "--porcelain", quiet=True).stdout.strip():
-        # the same subject as the work: CI names the release after the newest commit's subject
-        # the same message as the work: CI names and describes the release from the newest commit
-        commit(f"{subject}\n\n{body.strip()}\n\n{trailer.strip()}\n" if body.strip() else f"{subject}\n\n{trailer.strip()}\n")
+        commit(message)                  # the generated pages after taking in dev, under the same message
+        carried = True
+    if not carried:
+        # the work was committed by hand: the release note is a commit of its own, so the row reads it
+        subprocess.run(["git", "commit", "-q", "--allow-empty", "-F", "-"], cwd=ROOT, input=message, text=True, check=True)
     head = sh("git", "rev-parse", "HEAD", quiet=True).stdout.strip()
     push = sh("git", "push", "origin", "HEAD:dev", check=False, quiet=True)
     if push.returncode:
