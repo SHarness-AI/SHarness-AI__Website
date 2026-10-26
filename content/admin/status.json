@@ -1,18 +1,18 @@
 {
- "as_of": "2026-10-26T09:22Z",
+ "as_of": "2026-10-26T11:28Z",
  "by": "conductor",
  "repositories": [
   {
    "name": "SHarness-AI__Website",
    "present": true,
    "url": "https://github.com/SHarness-AI/SHarness-AI__Website",
-   "latest_tag": "v0.6.22",
+   "latest_tag": "v0.6.23",
    "branches": [
     {
      "branch": "dev",
-     "head": "12b9533",
-     "date": "2026-10-26T07:45:08+00:00",
-     "subject": "site v0.6.22: every member to sgit-ai 0.25.0, the large-vault release, and to report anything odd: AGENTS.md section 4, T26",
+     "head": "01e5654",
+     "date": "2026-10-26T09:22:34+00:00",
+     "subject": "site v0.6.23: the conductor's quiet wake of 09:20 London: a run record, nothing else moved; no scheduled task for any card yet (R17)",
      "agent": "ci",
      "ahead_of_dev": 0,
      "behind_dev": 0
@@ -24,7 +24,7 @@
      "subject": "site v0.6.0: the minor release: the team and the admin section, the components as doors, the PBP on one page, security, Linux in a tab, the CLI as the front door, the standards and their vectors, the site for a reader arriving cold",
      "agent": "",
      "ahead_of_dev": 0,
-     "behind_dev": 73
+     "behind_dev": 76
     },
     {
      "branch": "claude/blissful-johnson-yk1c4p",
@@ -33,7 +33,7 @@
      "subject": "site v0.3.1: completeness pass against the sgit design pack 00-04",
      "agent": "",
      "ahead_of_dev": 0,
-     "behind_dev": 156
+     "behind_dev": 159
     },
     {
      "branch": "claude/dev-standards",
@@ -42,7 +42,7 @@
      "subject": "ship.py: the release note is always carried by a commit, so every row reads the shipped subject and description",
      "agent": "dev",
      "ahead_of_dev": 0,
-     "behind_dev": 26
+     "behind_dev": 29
     },
     {
      "branch": "claude/website",
@@ -51,7 +51,7 @@
      "subject": "the CLI's two MVPs on the site: sharness.fs runnable as an MVP with its known issues, the CLI's command surface, the status line everywhere; review T25 for cli@",
      "agent": "website",
      "ahead_of_dev": 0,
-     "behind_dev": 10
+     "behind_dev": 13
     },
     {
      "branch": "claude/wonderful-cray-4xpawa",
@@ -60,13 +60,13 @@
      "subject": "the network door and a shell under the harness: the live page in the article's postscript, the brief's step 6 and 9 in part, cli@ status",
      "agent": "cli",
      "ahead_of_dev": 0,
-     "behind_dev": 7
+     "behind_dev": 10
     },
     {
      "branch": "conductor/admin",
-     "head": "6cda6d3",
-     "date": "2026-10-26T07:44:45+00:00",
-     "subject": "every member to sgit-ai 0.25.0, the large-vault release, and to report anything odd: AGENTS.md section 4, T26",
+     "head": "05d822d",
+     "date": "2026-10-26T09:22:08+00:00",
+     "subject": "the conductor's quiet wake of 09:20 London: a run record, nothing else moved; no scheduled task for any card yet (R17)",
      "agent": "conductor",
      "ahead_of_dev": 0,
      "behind_dev": 1
@@ -78,7 +78,7 @@
      "subject": "article: The decision engine, a translation layer between what an agent asks and what is done, and what it does to a skill that carries more than it says",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 13
+     "behind_dev": 16
     },
     {
      "branch": "pbp/article-two-stacks",
@@ -87,7 +87,7 @@
      "subject": "article: Two stacks on TCP, one carries what a process may do, the other carries how little you have to read",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 40
+     "behind_dev": 43
     },
     {
      "branch": "pbp/decision",
@@ -96,7 +96,7 @@
      "subject": "the decision at the door: the prompt as the last resort, ux.sgit.ai's principles against the levels, the decision engine and its prototype; T23",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 19
+     "behind_dev": 22
     },
     {
      "branch": "pbp/decision-service",
@@ -105,7 +105,7 @@
      "subject": "the decision service: what the prompt lacks, three sources of truth, the rehearsal in a twin run four times, what the model does and does not; T24",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 16
+     "behind_dev": 19
     },
     {
      "branch": "pbp/disk",
@@ -114,7 +114,7 @@
      "subject": "site v0.6.3: sharness.fs.disk: the door alone is the API, every leaf is a target; Three trees are one restored",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 64
+     "behind_dev": 67
     },
     {
      "branch": "pbp/doors",
@@ -123,7 +123,7 @@
      "subject": "site v0.5.30: the tree of doors: sharness.<resource>.<dialect>, databases first; T18 and T19",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 102
+     "behind_dev": 105
     },
     {
      "branch": "pbp/join",
@@ -132,7 +132,7 @@
      "subject": "site v0.5.17: sharness.pbp joins; the Process Behaviour Policy on one page",
      "agent": "sharness.pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 128
+     "behind_dev": 131
     },
     {
      "branch": "pbp/levels",
@@ -141,7 +141,7 @@
      "subject": "site v0.6.5: the levels: one policy, written at the depth you need; six levels, three rules, each level a service, two stacks on TCP; T22",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 57
+     "behind_dev": 60
     },
     {
      "branch": "pbp/mirror",
@@ -150,7 +150,7 @@
      "subject": "site v0.5.35: two schemas per door and the mirror rule; fuse or split, and its cost; the examples already in place",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 90
+     "behind_dev": 93
     },
     {
      "branch": "pbp/targets",
@@ -159,7 +159,7 @@
      "subject": "site v0.5.32: sharness.<door>.<target>: the second level is where the door sends; a twin is a target; dialect withdrawn",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 98
+     "behind_dev": 101
     },
     {
      "branch": "pbp/twin-suffix",
@@ -168,7 +168,7 @@
      "subject": "site v0.5.38: .twin as the terminal suffix on any name: the thing before it runs as a simulation; .memory withdrawn",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 85
+     "behind_dev": 88
     },
     {
      "branch": "pbp/twin-suffix-2",
@@ -177,7 +177,7 @@
      "subject": "site v0.5.40: .twin as the terminal suffix on any name, the change v0.5.38 announced and did not carry; .memory withdrawn",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 81
+     "behind_dev": 84
     },
     {
      "branch": "pbp/twins",
@@ -186,7 +186,7 @@
      "subject": "site v0.5.31: the twin below the dialect, never a dialect; the undecorated door is the local one; T20",
      "agent": "pbp",
      "ahead_of_dev": 0,
-     "behind_dev": 100
+     "behind_dev": 103
     },
     {
      "branch": "security/join",
@@ -195,10 +195,34 @@
      "subject": "site v0.5.20: the security section and the code at immutable paths, merged onto dev at v0.5.19",
      "agent": "",
      "ahead_of_dev": 0,
-     "behind_dev": 122
+     "behind_dev": 125
     }
    ],
    "commits": [
+    {
+     "hash": "01e5654",
+     "date": "2026-10-26 09:22",
+     "subject": "site v0.6.23: the conductor's quiet wake of 09:20 London: a run record, nothing else moved; no scheduled task for any card yet (R17)",
+     "agent": "ci",
+     "to": [],
+     "body": "The release commit, made by CI from 05d822dea on dev (R23): /version written, the row added, every page re-stamped. The work is the commits before this one.\n\nAgent: ci"
+    },
+    {
+     "hash": "05d822d",
+     "date": "2026-10-26 09:22",
+     "subject": "the conductor's quiet wake of 09:20 London: a run record, nothing else moved; no scheduled task for any card yet (R17)",
+     "agent": "conductor",
+     "to": [],
+     "body": "Agent: conductor\nCo-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_015o6Pmm6sy7e8KDZimK4xss"
+    },
+    {
+     "hash": "1c26b49",
+     "date": "2026-10-26 09:22",
+     "subject": "the conductor's quiet wake of 09:20 London: a run record, nothing else moved; no scheduled task for any card yet (R17)",
+     "agent": "conductor",
+     "to": [],
+     "body": "Agent: conductor\nCo-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_015o6Pmm6sy7e8KDZimK4xss"
+    },
     {
      "hash": "12b9533",
      "date": "2026-10-26 07:45",
