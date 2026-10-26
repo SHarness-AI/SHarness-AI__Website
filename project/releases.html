@@ -19,7 +19,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.20</a>
+  <a class="ver" href="../project/releases.html" title="Site release history">v0.5.21</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -140,6 +140,7 @@
   <div class="tablewrap"><table class="vers">
     <thead><tr><th>Version</th><th>Date</th><th>What changed</th></tr></thead>
     <tbody>
+      <tr><td class="vnum">v0.5.21</td><td>26 Oct 2026</td><td>Every member that runs on its own has a card: its wakes (London time), its cron, the steps of each wake, a <b>start prompt</b> any Claude account can be pointed at and the <b>wake prompt</b> word for word, on <a href="../admin/schedule/index.html">the schedule</a> and on each member's page, all proposed until the editor's go (R17). <code>WAKE.md</code>, the six steps every wake follows; <code>tools/schedule.py</code> (<code>wake</code>, <code>run</code>, <code>card</code>); run records under <code>content/admin/runs/</code> and <a href="../admin/runs/index.html">the runs page</a>; <a href="../admin/briefs/index.html">briefs</a>, one page each, with the five from the conductor's first review (the release script, the CLI ready for visitors, a reality file, signed commit notes, this system). The conductor's loop in its card: review what landed, map the improvements, write the brief, decide who does it. The first run record; the update of 00:10 UTC.</td></tr>
       <tr><td class="vnum">v0.5.20</td><td>26 Oct 2026</td><td>The <a href="../security/index.html">security section</a>, by the project's security agent after the first full review of the CLI, the example policies, the browser bench, both pipelines and this site: the <a href="../security/threat-model/index.html">threat model</a> in long form, the <a href="../security/risks/index.html">register of known risks</a> (fixed, accepted, open, designed; nothing deleted), the <a href="../security/reviews/index.html">review</a> with its 25 findings and what was done about each, <a href="../security/hardening/index.html">hardening</a> (how to run it; the lock-down list for the repositories and accounts, board R15) and the <a href="../security/supply-chain/index.html">supply chain</a>. The CLI's fixes landed on its <code>dev</code> (write never executable, symlinked writable paths refused, rows that cannot be enforced refused, root's <code>max_pids</code>, the runner's import path, pinned guest downloads, a hardened release pipeline, 92 tests). The code is now published here at <a href="../code/releases/index.html">immutable paths</a> (<code>code/releases/vN/vN.M/vN.M.P/</code>, complete, with a manifest of hashes, and a <code>latest</code>), checked by the gate on every push. <code>SECURITY.md</code>, <code>/.well-known/security.txt</code>, the storyboards kit loaded with its integrity string, the gate's secret tripwire widened. Board rows R15 and R16 for the editor; the security member folder corrected.</td></tr>
       <tr><td class="vnum">v0.5.19</td><td>26 Oct 2026</td><td>The build agent's debrief on <a href="../admin/status/index.html">status</a> and <a href="../admin/members/index.html">the members</a>: what landed in v0.5.13 and v0.5.16, what waits on the editor, what is next; the commit carries the notes to the conductor, to security@sharness and to sharness.pbp under the commit-notes protocol. The previous commit on <code>dev</code> carried the same change under a version number the conductor's release had already taken; this row is its release.</td></tr>
       <tr><td class="vnum">v0.5.18</td><td>25 Oct 2026</td><td>sharness.pbp joins (<code>pbp@sharness</code>, the policy agent) with <a href="../design/pbp/index.html">the Process Behaviour Policy on one page</a>: the definition every page and every enforcer is checked against. The hashed file is the mandate, one of four objects; a PBP binds only with the text, a hash from outside and an enforcer the subject does not include; capability rows (held by the kernel) and behaviour rows (held by a keeper: append only, this section, this field in this range, this host, this row of this table) in one policy, and the rule that a behaviour row is a Boundary only when the capability rows close every other path; a keeper as the extension point for business logic; the fractal as enforcer-is-a-subject-one-layer-up; the spec in four parts (schema, hash, composition, conformance). Proposed; the v0, the hash and <code>hello</code> remain the runnable parts. Its member folder under <a href="../admin/members/index.html">the members</a>; T14 opened for the CLI. Merges dev at v0.5.16.</td></tr>
@@ -179,7 +180,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../project/releases.html">v0.5.20</a> · <a href="../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../project/releases.html">v0.5.21</a> · <a href="../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>Components</h4>
@@ -249,6 +250,8 @@
     <a href="../admin/board/index.html">The board</a>
     <a href="../admin/updates/index.html">Updates</a>
     <a href="../admin/notes/index.html">Commit notes</a>
+    <a href="../admin/schedule/index.html">Schedule and runs</a>
+    <a href="../admin/briefs/index.html">Briefs</a>
     <a href="../admin/guidance/index.html">Guidance for agents (AGENTS.md)</a>
     <a href="../project/adoption/index.html">Getting users</a>
     <a href="../project/outreach/index.html">Outreach</a>

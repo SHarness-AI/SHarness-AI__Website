@@ -1,8 +1,8 @@
 {
   "member": "editor",
-  "as_of": "2026-10-26T00:00Z",
+  "as_of": "2026-10-26T00:10Z",
   "state": "deciding",
   "last_did": "Asked the conductor to join (25 Oct); asked for the commit-notes protocol and sent the list of running sessions (26 Oct).",
   "waiting_for": "nothing from the team; the R rows on the board wait on him",
-  "next": "R7 (release the CLI's dev to main), R8 (the languages), R9 and R11 (the sherpa), R12 and R13 (the conductor); sharness.pbp waits for his read of design/pbp"
+  "next": "R7, R8, R17 (the go on the schedule cards), R9 and R11 (the sherpa), R12 and R13 (the conductor), R15 and R16 (security), R18 (the CLI's settings); sharness.pbp waits for his read of design/pbp"
 }

@@ -1,0 +1,35 @@
+---
+title: Schedules, cards and start pages: every member runs on a cadence, and one page is enough to join from any Claude account
+date: 2026-10-26
+by: conductor
+for: conductor
+status: built
+board: R17, T15
+---
+
+## The ask, in the editor's words (condensed)
+
+"Within that run, you review everything that happens. You recycle the state you're in, map out what can be improved, write briefs for other agents, and decide: spin up an agent here and do the work, or give it to the session that has more context. We also need some of the other agents running on a schedule: look at the scheduling work in the PHP project; maybe each agent runs at least once a day. I can move this to another Claude session, so it should be generic. And you need a page for each one, so that if I start a Claude session on a new Claude account, I can point it at one page and say: you're going to join this project, here's the access you have, you act as this agent, and it picks up from there, including setting up the schedule on that account."
+
+## The design
+
+1. **One card per member**, `content/admin/members/<id>/card.json`: the objective, the status (`proposed`, `active`, `paused`, `ended`), the wakes in London time and the cron, the model, the session name, the repositories to attach, the brief, the steps of each wake, what it reads, writes and never does, and two prompts word for word: the **start prompt** (paste into a new session on any account: who you are, the repositories, what to read in which order, what to reply with) and the **wake prompt** (the scheduled task's prompt, which points at `WAKE.md`). The card is the member's own; the conductor drafts one for a member that has none, marked as a draft.
+2. **`WAKE.md`** at the root of the website repository: the six steps every wake follows, the same for every member, so a prompt stays one paragraph and the steps change in one place.
+3. **`tools/schedule.py`**: `wake <id>` prints what changed for the member since its last run (the commits, the notes to it, its card's steps); `run <id>` writes one run record, `content/admin/runs/<id>/<time>.json`, named by its UTC time so two members never write the same file; `card <id>` prints the two prompts.
+4. **The pages**, built by `tools/gen_admin.py` with a markdown twin each: `/admin/schedule/` (every card, the day drawn hour by hour with the quiet hours shaded, how to set a schedule up on any account), `/admin/runs/` (every run, newest first; a missing run is a missed wake), `/admin/briefs/` (every brief, one page each), and on every member's page the start-here block, the card and its runs.
+5. **The conductor's loop**, in its card: review what landed and what collided, refresh the snapshot, map the improvements into briefs with an owner, decide for each whether to do it now, hand it to the member with the most context, or ask the editor for a session; board hygiene; an update when something moved; a run record and a report.
+6. **The cadence, proposed**: the conductor every two hours 07:20 to 21:20 London; sharness.build 09:00; sharness.dev 09:30; sharness.pbp 10:10; the Sherpa 08:45 and 17:45; security 21:35. Nothing in the quiet hours, 22:00 to 07:00. Each card is `proposed` until the editor's go creates the task and makes it `active`.
+
+## Acceptance criteria
+
+1. Every agent member has a card, and `python3 tools/schedule.py card <id>` prints a start prompt and a wake prompt that a stranger could paste.
+2. `/admin/schedule/` shows every card and every wake on one day; `/admin/runs/` shows every run record; both have markdown twins; the gate checks them.
+3. Each member's page carries the start-here block (repositories, the prompt, the scheduled-task setup) with no secret on it.
+4. A wake that follows `WAKE.md` and its card leaves a run record whatever happened, and a quiet wake is visible as one.
+5. The conductor's first run record exists and names what it found.
+
+## What it does not do
+
+- It creates no scheduled task: that is the editor's go, per card (`AGENTS.md` section 5). R17 asks for it.
+- It does not flag a missed wake by itself: the build has no clock; the conductor's wake compares the cards with the runs.
+- It does not sign anything: a run record is a file anyone with push can write (the signed-notes brief).

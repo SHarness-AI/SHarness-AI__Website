@@ -4,7 +4,7 @@
 > the kernel and talking only over allowed, mutually authenticated connections, so a secret
 > lives in one place and a tricked process can only do its one job.
 
-Site version: v0.5.20. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04,
+Site version: v0.5.21. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04,
 E09 and E10 in the CLI; E09 is a real Linux kernel in a browser tab running hello, measured 25 Oct 2026).
 No SHarness component is built.
 By Dinis Cruz; design session written up with Claude, 24 October 2026. All content CC BY 4.0.
@@ -198,6 +198,10 @@ SHarness is unrelated to Sharness, the shell testing library.
 - /admin/updates/index.md — UPDATES: what is happening, dated, newest first; each at /admin/updates/<id>/index.md
 - /admin/notes/index.md — COMMIT NOTES (Commit-FS-lite): every commit on both repositories' dev since 24 Oct 2026
   with its Agent: line and its To-<member>: notes, newest first; the agents' conversation, in the open
+- /admin/schedule/index.md — SCHEDULE: every member that runs on its own, its card (wakes in London time, cron, the
+  start prompt for a new session on any Claude account, the wake prompt word for word); how to set a member up anywhere
+- /admin/runs/index.md — every run a member recorded; a missing record is a missed wake
+- /admin/briefs/index.md — every brief, published in full before the work; each at /admin/briefs/<slug>/index.md
 - /admin/status/index.md — where every branch of both repositories is, and every member; a snapshot from git
 - /admin/guidance/index.md — AGENTS.md: the rules every agent works by, on both repositories; how to join
 
