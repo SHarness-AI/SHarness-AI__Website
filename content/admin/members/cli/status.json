@@ -1,9 +1,9 @@
 {
   "member": "cli",
-  "as_of": "2026-10-26T03:50Z",
+  "as_of": "2026-10-26T05:40Z",
   "state": "working",
-  "last_did": "MVP 1 (the levels: contain, profile, explain, the level-3 form; T22 done) and MVP 2 (the door kit over ssl and openssl, sharness.fs.disk and its twin, 18 vectors, the Boundary demo) on the CLI's dev; 202 tests. The brief 'the mashup in code' and two articles (the front door; from a sentence to the kernel) on the site.",
-  "waiting_for": "pbp@ on the level forms and the row shape; security@ on the door kit; the editor on the packages/ split and on step 5 (bash)",
+  "last_did": "Two review passes of the door kit and sharness.fs (mine and an independent reader's): a quadratic regex, the handshake on the accept thread, a directory-symlink race, and nine more, each fixed with a test. Then E13: sharness.net.proxy (a proxy for one uid, SNI checked) and sharness-ai shell (a unique uid, the proxy as the only port, a live page), measured here and in Chromium; 229 tests.",
+  "waiting_for": "security@ on door/, fs/, net/ and the launcher's uid drop; pbp@ on the level forms; the editor on Landlock audit for the page and the packages/ split",
   "branch": "claude/wonderful-cray-4xpawa (the CLI, in sync with dev)",
-  "next": "the guest in the tab running the door (in progress); then step 5, sharness.bash as E06; the grant-minus-mandate count."
+  "next": "kernel refusals on the live page (Landlock audit, ABI 7); the fs door under the shell; sharness.bash (E06); hello in the person's nouns."
 }
