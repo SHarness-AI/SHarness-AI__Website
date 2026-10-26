@@ -1,0 +1,8 @@
+{
+  "schema": "sharness-ai.member-policy/v0",
+  "member": "website",
+  "status": "not yet written; the conductor's policy.json is the shape. Until it exists the member's scope is what its ROLE.md says it owns.",
+  "mandate": [],
+  "reach": {"repositories": {"push": ["SHarness-AI__Website"], "pull": ["SHarness-AI__CLI"]}, "writes": [], "keys_held": []},
+  "barriers": []
+}
