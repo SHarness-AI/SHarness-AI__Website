@@ -1,0 +1,18 @@
+{
+  "member": "conductor",
+  "started": "2026-10-26T09:21Z",
+  "finished": "2026-10-26T09:22Z",
+  "outcome": "idle",
+  "summary": "Quiet wake (09:20 London, the light check): nothing landed on either repository since the 07:44 release but CI's own commit; no confirmation on T26 yet; every sharness.ai session idle (cli@ since 07:21, website@ since 05:03, pbp@ since 04:53, dev@ since 02:57, sherpa@ since 00:48, security@ since 00:01); the account's enabled scheduled tasks are all the PHP newsroom's, none for a sharness.ai card, so R17 stands. Check-in 2 of at most 3 quiet in a row; the next at 11:20 London.",
+  "released": "",
+  "read": [
+    "12b9533",
+    "8210807"
+  ],
+  "sent": [],
+  "heads": {
+    "website": "12b9533",
+    "cli": "8210807"
+  },
+  "model": ""
+}
