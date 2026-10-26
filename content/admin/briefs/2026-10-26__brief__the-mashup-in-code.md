@@ -1,0 +1,100 @@
+---
+title: The mashup in code: every door, target, twin and level as a project of its own, in one repository, replaceable in any language
+date: 2026-10-26
+by: cli
+for: editor, pbp, dev, conductor, security
+status: proposed
+board: T22, T20, R21
+---
+
+## The ask
+
+Dinis Cruz, 26 October 2026, to cli@sharness: read what pbp@sharness has written (the tree of doors `sharness.<door>.<target>`, `.twin` as the terminal suffix, two schemas per door and the mirror rule, the six levels each a service, two stacks on TCP) and say how it is done in code in the CLI. The constraint is the shape of the code: every one of those things is its own project, in its own folder, shippable on its own, so that any one of them can later be written in another language and dropped in; they may all live in one repository, but each must stand alone. The Python CLI is the reference implementation that everybody replaces components from.
+
+This brief is that plan. It builds nothing; it says what the folders are, what every folder must contain to count, in what order they are written, and where each lesson of the design lands in code. Status words as the site uses them: everything below is proposed until its tests pass on `dev`.
+
+## 1. One rule: the dotted name is the folder, and the folder is a project
+
+The name tree, the identity tree, the policy tree and the code tree are one tree ([the PBP on one page §6](../../../design/pbp/index.md#6-a-door-and-the-tree-of-doors)). In code that means one rule, applied without exception: **`sharness.<door>.<target>[.twin]` is a path, and every node on that path is a project**. In Python, the module path is the dotted name with `sharness_ai` in front and `.twin` as a subpackage, because a module name cannot carry a dot:
+
+| Name | Python module | What the folder holds |
+|---|---|---|
+| `sharness.fs` | `sharness_ai/fs/` | the door: its vocabulary (the request schema it **accepts**), what it **emits**, its rows' predicate kinds, its conformance vectors, its verb. No storage. |
+| `sharness.fs.disk` | `sharness_ai/fs/disk/` | the target: the door's API over the local disk, the one target the kernel also bounds |
+| `sharness.fs.disk.twin` | `sharness_ai/fs/disk/twin/` | the twin: the same accepts, no emits, a swappable backend (memory by default; record and replay later) |
+| `sharness.net.proxy` | `sharness_ai/net/proxy/` | a target that is a relay to an upstream proxy |
+| `sharness.db.sqlite` | `sharness_ai/db/sqlite/` | the first target that is buildable under the no-dependency rule (`sqlite3` is in the standard library) |
+| level 3 | `sharness_ai/level/l3/` | a compiler: accepts a level-3 document, emits a level-2 manifest, deterministically |
+| the launcher | `sharness_ai/launcher/` | starts every named process bound, issues the session identities, verifies the chain of hashes |
+| the door kit | `sharness_ai/door/` | what every door and every level shares: the service, the contract, the verdict, the audit line, the conformance runner |
+
+The same tree in Go is `fs/disk/twin/`, in JavaScript `src/fs/disk/twin.js`, as dev@'s brief [one repository per language](2026-10-26__brief__one-repository-per-language/index.md) already fixes. A vector cites the path and the path is the same in every language.
+
+## 2. What "a project of its own" means, folder by folder
+
+A folder is a project when a stranger can take it alone and know what it is, what it does not do, how to test it and how to ship it. Every folder in §1 carries, without exception:
+
+| File | What it is |
+|---|---|
+| `README.md` | what this is in one screen; its status in the site's words; how to run it alone |
+| `REALITY.md` | what exists in this folder, by file; a thing not in it does not exist; the dependency exceptions taken, each with the reason (the standard-library rule is per project: the core and every door are standard library; a target that needs a client library says so here) |
+| `ACCEPTS.json`, `EMITS.json` | the two schemas, hashed; the contract on every edge of the manifest (the mirror rule). A door has both; a twin's `EMITS.json` is empty or names its backend; a level's accepts is level N and emits is level N−1 |
+| `vectors/` | the conformance vectors for this node, vendored; `fetch.py` refreshes them from the site's registry. For a target they are run against the twin first (T20); for a level they are documents and their canonical expansions |
+| `tests/` | the unit tests of this folder only; `Test_*` classes, `test_*` functions, the repository's convention |
+| `pyproject.toml` | its own distribution: `sharness-ai-fs-disk`, `sharness-ai-level-l3`; the package is a PEP 420 namespace package so that `sharness_ai.fs.disk` can ship separately from `sharness_ai.fs` and both from `sharness_ai` |
+| a verb | registered in the entry-point group `sharness_ai.doors` (or `sharness_ai.levels`), so the front door finds it when it is installed and draws it as runnable, and draws it as designed, exit 69, when it is not |
+
+**Independent, but one repository for now.** The CLI repository becomes a monorepo of these projects, under one `packages/` folder, one version for all of them (CI owns the version and bumps them together; a reader of the registry never meets two versions of one release). A project leaves the repository the day one of three things is true: it needs a dependency the core refuses, another language ships it, or it runs on another machine. The move is a folder, not a rewrite, because every folder already has the files above. The current `sharness_ai/` (policy v0, hash, `run`, `probe`, `hello`, the front door) becomes `packages/sharness-ai/`, unchanged inside.
+
+**Replaceable in any language, by construction.** The front door never imports a door; it reads the manifest. A manifest row names the process, not the module: `{"name": "sharness.fs.s3", "exec": ["sharness-ai-fs-s3"], "accepts": "sha256:…", "emits": "sha256:…", "mode": "live"}`. The launcher starts whatever `exec` names, issues it the identity `spiffe://<session>/fs/s3`, and checks on the first connect that it speaks the hash of `ACCEPTS.json`. A Go binary and the Python module are indistinguishable from the manifest, which is the point. The Python one is the oracle: `tools/gen_vectors.py` on the site imports `sharness_ai.<door>.<target>.twin` to produce the vectors, so a change there is a new version of that standard (dev@'s rule, 26 Oct 2026).
+
+## 3. The door kit: what every project shares, written once
+
+`sharness_ai/door/` is the one place the shape lives, so that a door is its rows and nothing else, under the component size target (≤ 300 lines). Standard library only, which the design allows here because the pieces exist: `ssl` for TLS 1.3 with client certificates, `http.server` for a small HTTP/1.1 API, `json`, `hashlib`.
+
+| Piece | Role |
+|---|---|
+| `Door` | the service: a loopback TCP port (or a Unix socket), mutual TLS from the session CA, the peer's role read from the SAN URI, the edge checked on both sides, one JSON request in, one verdict out, `GET /v0/policy` and `GET /v0/hello` (its targets, and `twin` or `live` for each, read off the policy, never guessed) on every door |
+| `Contract` | `ACCEPTS.json` and `EMITS.json` loaded, hashed and checked against the manifest's edge; a request that is not in the accepts is a refusal before any row is read; the check is a closed schema validator in the style of `policy.py`'s type check, not a schema library |
+| `Rows`, `Predicate` | the rows for this subject and the closed predicate language, `append_only` first, then section by marker, content by schema, range, count per interval, order, approval (pbp@'s list; pbp@ owns the language, the kit executes it, each predicate a small class) |
+| `Verdict`, `Audit` | allow or deny with the row that decided; one audit line per request, never a secret, never a body |
+| `Twin` | a `Door` whose target is a backend (memory by default) and whose emits is empty; the backend is configuration below the name |
+| `Conformance` | runs a node's `vectors/` against a running instance: the twin first, the live target only when asked and with credentials; prints held, refused, inconclusive the way `hello` does; exit 0 only when every vector held |
+
+The kit is also what a level is: a level's compiler is a `Door` that accepts level N and emits level N−1 (`POST /v0/compile`), so the abstraction stack and the capability stack are the same code, as the design says they are the same contract.
+
+## 4. The order of work, and why
+
+Each step is a project that ships on its own, with its tests, its registry row and its verb; no step waits for the next.
+
+1. **The level-3 form and the manifest in `policy` (T22).** `sites:` in plain nouns compiled deterministically into the ports the kernel holds, the unheld rows (hostnames, until `net`) named as such, the hash of the level-3 document carried beside the hash of its expansion; `policy check` computing `held_by` and the barrier kind per row from the capability rows (pbp@'s rule in §4 of the PBP page). This is the manifest every door reads, so it comes first. Owner cli, with pbp@ for the canonical form.
+2. **The door kit and E05.** `Door`, `Contract`, `Verdict`, `Audit`, `Twin`, `Conformance`, and E05 as the kit's own test: a session CA, four role certificates, the edge matrix refused and allowed over mutual TLS, repeatable. One decision for security@ and the editor: issuing X.509 certificates has no standard-library writer, so the launcher either shells out to `openssl` where it exists (reuse before build) or takes `cryptography` as its one dependency exception, listed in its `REALITY.md`; the doors themselves need neither, `ssl` verifies.
+3. **`sharness.fs.disk` and `sharness.fs.disk.twin`.** The first door, because its kernel half already runs (`sharness-ai run` with the workspace read-only for the app and owned by the door's uid) and its first rows are the ones the design has wanted since day one: `append_only`, refuse anything that parses as a key, size and count. The twin is memory-backed; the vectors run against it first; `GET /v0/hello` says `twin` or `live`. A Boundary for the app's process the moment the launcher starts both; the verb `sharness-ai fs serve --target disk.twin --policy …` and `sharness-ai fs hello`.
+4. **`sharness.bash` (E06).** The server form of `run`: a command in a fresh sandbox under a named profile, outside the agent's domain, so the agent cannot skip the locks. The centre of the mashup, as the components page says; it comes after `fs` only because it needs the kit and the manifest the first three steps give it.
+5. **`sharness.net.direct`, `.direct.twin`, `.proxy`.** The TLS client for everything the agent reaches; the hostname allowlist and the three verdicts already run in the playground's interceptor and are ported, not redesigned; `.direct.twin` is the internet recorded and replayed, which is what makes a door's conformance suite runnable offline.
+6. **`sharness.db.sqlite`**, then **`sharness.kms` (E08)** and **`sharness.llm` (E07)**, each in its language where the design names one (the bash client and the KMS in Rust, dev@'s brief), the Python one as the oracle.
+7. **The levels as services.** `level/l3`, `l4`, `l5` in that order (level 3 first, pbp@'s next step), each a `Door` that compiles down with the chain of hashes; the launcher verifies every expansion before anything starts. Level 2 is the manifest itself and level 1 is `policy translate`, which exists.
+8. **The launcher.** Last, because it is the sum: reads the manifest, issues identities, starts every `exec` bound under its own policy, checks every edge's contract by hash, and makes the app's policy a Boundary rather than a Setting. The caveat on every page ends here.
+
+The browser bench grows with each step: a door and an app under one guest kernel in the tab is the first place a visitor sees a Boundary for the app itself, not only for its child.
+
+## 5. What the CLI shows, step by step
+
+The front door already draws the map with honest status. Each step changes one thing on it: a door's node turns from designed to runnable the day its package is installed, its verb runs, and `sharness-ai doctor` gains a check for it (the door answers `GET /v0/hello`, its targets say `twin` or `live`). `sharness-ai components` reads the entry points, so a door written in another language shows up when its manifest row does. `sharness-ai help --format json` grows with the verbs, and the site's CLI page is generated from it.
+
+## Acceptance criteria
+
+1. `packages/` exists with `sharness-ai` (the current package, unchanged) and `sharness-ai-door`; each has the seven files of §2; `pip install ./packages/sharness-ai-door` works alone; the test suite runs per package and as a whole in CI.
+2. `sharness-ai fs serve --target disk.twin` starts a door that refuses a write outside its rows with the row named, answers `GET /v0/hello` with `twin`, and passes its vectors; the same vectors pass against `--target disk` on a Linux machine, with the date in the registry row.
+3. A manifest naming `sharness.fs.disk` by `exec` starts the same door whether `exec` is the Python entry point or another language's binary, and refuses one whose `ACCEPTS.json` hash does not match the edge.
+4. Every status word in every `README.md` and `REALITY.md` is one the site allows; a folder with no tests is not in the registry.
+
+## What it does not do
+
+- It builds nothing and measures nothing; no component is built. The names, the predicate language and the canonical form of each level are pbp@'s; the repositories per language are the editor's (R21); the registry rows are dev@'s.
+- It does not decide the certificate question in step 2; it names the two options for security@ and the editor.
+- It does not add enforcement: everything a door holds is a Boundary only when the launcher (step 8) closes every other path; until then every verb prints the caveat.
+
+## Owner
+
+cli@sharness, with pbp@ (the names, the predicate language, the level forms), dev@ (the registry, the vectors, the other languages) and security@ (the kit's TLS and the certificate decision). First commit: the `packages/` move and the door kit's skeleton, each with its seven files, no behaviour.

@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The mashup in code — SHarness</title>
+<meta name="description" content="The mashup in code: every door, target, twin and level as a project of its own, in one repository, replaceable in any language">
+<link rel="canonical" href="https://sharness.ai/admin/briefs/2026-10-26__brief__the-mashup-in-code/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/admin/briefs/2026-10-26__brief__the-mashup-in-code/index.html">
+<meta property="og:title" content="The mashup in code — SHarness">
+<meta property="og:description" content="The mashup in code: every door, target, twin and level as a project of its own, in one repository, replaceable in any language">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><a class="skip" href="#content">Skip to content</a><div class="row">
+  <a class="brand" href="../../../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../../code/playground/index.html">Try it<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../../code/playground/index.html">Start here: the playground, in your browser</a>
+      <a class="sl" href="../../../code/browser/demo/index.html">A Linux kernel in a tab, running hello</a>
+      <a class="sl" href="../../../index.html#start">Start in 60 seconds</a>
+      <a class="sl" href="../../../evidence/machines/index.html">Help us measure it: report your machine</a>
+      <a class="sl" href="../../../explain/mockups/policy-hash.html">Mockup: the policy hash</a>
+      <a class="sl" href="../../../explain/mockups/edges.html">Mockup: the edge matrix</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../../components/index.html">Components<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../../components/index.html">Start here: the OS a process sees</a>
+      <a class="sl" href="../../../components/bash/index.html">sharness.bash: the shell, as a service</a>
+      <a class="sl" href="../../../components/net/index.html">sharness.net: the only network client</a>
+      <a class="sl" href="../../../components/kms/index.html">sharness.kms: where a secret lives</a>
+      <a class="sl" href="../../../components/fs/index.html">sharness.fs: the only writer</a>
+      <a class="sl" href="../../../components/llm/index.html">sharness.llm: the only model client</a>
+      <a class="sl" href="../../../components/launcher/index.html">sharness.launcher: the bootstrap</a>
+      <a class="sl" href="../../../components/policy/index.html">sharness.policy: the manifest</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../../design/index.html">How it works<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../../design/index.html">Start here: the brief, in one read</a>
+      <a class="sl" href="../../../design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="../../../design/architecture/index.html">Architecture</a>
+      <a class="sl" href="../../../design/components/index.html">Components in depth</a>
+      <a class="sl" href="../../../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../../../design/pbp/index.html">The PBP on one page</a>
+      <a class="sl" href="../../../design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../../../design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../../../design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="../../../design/surface/index.html">What a process can do</a>
+      <a class="sl" href="../../../design/containment/index.html">Containment</a>
+      <a class="sl" href="../../../design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="../../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      <a class="sl" href="../../../explain/index.html">Storyboards &amp; mockups</a>
+      <a class="sl" href="../../../articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../../evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../../evidence/index.html">Start here: the measurements</a>
+      <a class="sl" href="../../../evidence/status/index.html">What exists today</a>
+      <a class="sl" href="../../../evidence/machines/index.html">hello on your machine: reported runs</a>
+      <a class="sl" href="../../../evidence/research/index.html">Research note</a>
+      <a class="sl" href="../../../landscape/index.html">How it compares: policies at the centre</a>
+      <a class="sl" href="../../../landscape/enforceability/index.html">Enforceability matrix</a>
+      <a class="sl" href="../../../landscape/integrations/index.html">Integration points</a>
+      <a class="sl" href="../../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+      <a class="sl" href="../../../landscape/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../../code/index.html">Code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../../code/index.html">Start here: where the code is</a>
+      <a class="sl" href="../../../code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="../../../code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl" href="../../../code/flows/index.html">Flows through the code</a>
+      <a class="sl" href="../../../code/examples/index.html">Examples</a>
+      <a class="sl" href="../../../code/browser/index.html">Linux in the browser</a>
+      <a class="sl" href="../../../code/releases/index.html">Releases of the code: immutable paths</a>
+      <a class="sl" href="../../../code/languages/index.html">Languages</a>
+      <a class="sl" href="../../../code/standards/index.html">Standards and test vectors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../../security/index.html">Security<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../../security/index.html">Start here: the register</a>
+      <a class="sl" href="../../../security/threat-model/index.html">Threat model</a>
+      <a class="sl" href="../../../security/risks/index.html">Known risks</a>
+      <a class="sl" href="../../../security/reviews/index.html">Reviews</a>
+      <a class="sl" href="../../../security/hardening/index.html">Hardening</a>
+      <a class="sl" href="../../../security/supply-chain/index.html">Supply chain</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../../project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../../project/index.html">Start here: the project</a>
+      <a class="sl" href="../../../project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="../../../project/releases.html">Release history</a>
+      <a class="sl" href="../../../project/adoption/index.html">Getting users: the review and the plan</a>
+      <a class="sl" href="../../../project/sources/index.html">The source documents</a>
+      <a class="sl" href="../../../project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="../../../admin/index.html">How the project is run</a>
+      <a class="sl" href="../../../admin/board/index.html">The board: tasks &amp; requests</a>
+      <a class="sl" href="../../../admin/updates/index.html">Updates: what is happening</a>
+      <a class="sl" href="../../../project/outreach/index.html">Outreach: finding the people it is for</a>
+      <a class="sl" href="../../../project/agents/index.html">The agents and their keys</a>
+      <a class="sl" href="../../../project/telemetry/index.html">Telemetry: who reads this site</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__CLI">★ GitHub</a>
+  <script src="../../../assets/nav.js" defer></script>
+  <script src="../../../assets/telemetry.js" data-root="../../../" defer></script>
+</div></nav>
+
+<main class="doc">
+  <div class="crumb"><a href="../../../index.html">sharness.ai</a> / <a href="../../index.html">admin</a> / <a href="../index.html">briefs</a> / 2026-10-26__brief__the-mashup-in-code · <a href="index.md">this page as markdown</a></div>
+  <h1>The mashup in code: every door, target, twin and level as a project of its own, in one repository, replaceable in any language</h1>
+<p class="byline">brief · <time datetime="2026-10-26">2026-10-26</time> · by <a href="../../members/cli/index.html">cli</a> · for editor, pbp, dev, conductor, security · proposed · board T22, T20, R21 · <a href="https://github.com/SHarness-AI/SHarness-AI__Website/blob/dev/content/admin/briefs/2026-10-26__brief__the-mashup-in-code.md">the file</a></p>
+<h2 id="the-ask">The ask</h2>
+<p>Dinis Cruz, 26 October 2026, to cli@sharness: read what pbp@sharness has written (the tree of doors <code>sharness.&lt;door&gt;.&lt;target&gt;</code>, <code>.twin</code> as the terminal suffix, two schemas per door and the mirror rule, the six levels each a service, two stacks on TCP) and say how it is done in code in the CLI. The constraint is the shape of the code: every one of those things is its own project, in its own folder, shippable on its own, so that any one of them can later be written in another language and dropped in; they may all live in one repository, but each must stand alone. The Python CLI is the reference implementation that everybody replaces components from.</p>
+<p>This brief is that plan. It builds nothing; it says what the folders are, what every folder must contain to count, in what order they are written, and where each lesson of the design lands in code. Status words as the site uses them: everything below is proposed until its tests pass on <code>dev</code>.</p>
+<h2 id="1-one-rule-the-dotted-name-is-the-folder-and-the-folder-is-a-project">1. One rule: the dotted name is the folder, and the folder is a project</h2>
+<p>The name tree, the identity tree, the policy tree and the code tree are one tree (<a href="../../../design/pbp/index.html#6-a-door-and-the-tree-of-doors">the PBP on one page §6</a>). In code that means one rule, applied without exception: <b><code>sharness.&lt;door&gt;.&lt;target&gt;[.twin]</code> is a path, and every node on that path is a project</b>. In Python, the module path is the dotted name with <code>sharness_ai</code> in front and <code>.twin</code> as a subpackage, because a module name cannot carry a dot:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Name</th><th>Python module</th><th>What the folder holds</th></tr></thead>
+<tbody>
+<tr><td><code>sharness.fs</code></td><td><code>sharness_ai/fs/</code></td><td>the door: its vocabulary (the request schema it <b>accepts</b>), what it <b>emits</b>, its rows' predicate kinds, its conformance vectors, its verb. No storage.</td></tr>
+<tr><td><code>sharness.fs.disk</code></td><td><code>sharness_ai/fs/disk/</code></td><td>the target: the door's API over the local disk, the one target the kernel also bounds</td></tr>
+<tr><td><code>sharness.fs.disk.twin</code></td><td><code>sharness_ai/fs/disk/twin/</code></td><td>the twin: the same accepts, no emits, a swappable backend (memory by default; record and replay later)</td></tr>
+<tr><td><code>sharness.net.proxy</code></td><td><code>sharness_ai/net/proxy/</code></td><td>a target that is a relay to an upstream proxy</td></tr>
+<tr><td><code>sharness.db.sqlite</code></td><td><code>sharness_ai/db/sqlite/</code></td><td>the first target that is buildable under the no-dependency rule (<code>sqlite3</code> is in the standard library)</td></tr>
+<tr><td>level 3</td><td><code>sharness_ai/level/l3/</code></td><td>a compiler: accepts a level-3 document, emits a level-2 manifest, deterministically</td></tr>
+<tr><td>the launcher</td><td><code>sharness_ai/launcher/</code></td><td>starts every named process bound, issues the session identities, verifies the chain of hashes</td></tr>
+<tr><td>the door kit</td><td><code>sharness_ai/door/</code></td><td>what every door and every level shares: the service, the contract, the verdict, the audit line, the conformance runner</td></tr>
+</tbody>
+</table></div>
+<p>The same tree in Go is <code>fs/disk/twin/</code>, in JavaScript <code>src/fs/disk/twin.js</code>, as dev@'s brief <a href="2026-10-26__brief__one-repository-per-language/index.html">one repository per language</a> already fixes. A vector cites the path and the path is the same in every language.</p>
+<h2 id="2-what-a-project-of-its-own-means-folder-by-folder">2. What "a project of its own" means, folder by folder</h2>
+<p>A folder is a project when a stranger can take it alone and know what it is, what it does not do, how to test it and how to ship it. Every folder in §1 carries, without exception:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>File</th><th>What it is</th></tr></thead>
+<tbody>
+<tr><td><code>README.md</code></td><td>what this is in one screen; its status in the site's words; how to run it alone</td></tr>
+<tr><td><code>REALITY.md</code></td><td>what exists in this folder, by file; a thing not in it does not exist; the dependency exceptions taken, each with the reason (the standard-library rule is per project: the core and every door are standard library; a target that needs a client library says so here)</td></tr>
+<tr><td><code>ACCEPTS.json</code>, <code>EMITS.json</code></td><td>the two schemas, hashed; the contract on every edge of the manifest (the mirror rule). A door has both; a twin's <code>EMITS.json</code> is empty or names its backend; a level's accepts is level N and emits is level N−1</td></tr>
+<tr><td><code>vectors/</code></td><td>the conformance vectors for this node, vendored; <code>fetch.py</code> refreshes them from the site's registry. For a target they are run against the twin first (T20); for a level they are documents and their canonical expansions</td></tr>
+<tr><td><code>tests/</code></td><td>the unit tests of this folder only; <code>Test_*</code> classes, <code>test_*</code> functions, the repository's convention</td></tr>
+<tr><td><code>pyproject.toml</code></td><td>its own distribution: <code>sharness-ai-fs-disk</code>, <code>sharness-ai-level-l3</code>; the package is a PEP 420 namespace package so that <code>sharness_ai.fs.disk</code> can ship separately from <code>sharness_ai.fs</code> and both from <code>sharness_ai</code></td></tr>
+<tr><td>a verb</td><td>registered in the entry-point group <code>sharness_ai.doors</code> (or <code>sharness_ai.levels</code>), so the front door finds it when it is installed and draws it as runnable, and draws it as designed, exit 69, when it is not</td></tr>
+</tbody>
+</table></div>
+<p><b>Independent, but one repository for now.</b> The CLI repository becomes a monorepo of these projects, under one <code>packages/</code> folder, one version for all of them (CI owns the version and bumps them together; a reader of the registry never meets two versions of one release). A project leaves the repository the day one of three things is true: it needs a dependency the core refuses, another language ships it, or it runs on another machine. The move is a folder, not a rewrite, because every folder already has the files above. The current <code>sharness_ai/</code> (policy v0, hash, <code>run</code>, <code>probe</code>, <code>hello</code>, the front door) becomes <code>packages/sharness-ai/</code>, unchanged inside.</p>
+<p><b>Replaceable in any language, by construction.</b> The front door never imports a door; it reads the manifest. A manifest row names the process, not the module: <code>{"name": "sharness.fs.s3", "exec": ["sharness-ai-fs-s3"], "accepts": "sha256:…", "emits": "sha256:…", "mode": "live"}</code>. The launcher starts whatever <code>exec</code> names, issues it the identity <code>spiffe://&lt;session&gt;/fs/s3</code>, and checks on the first connect that it speaks the hash of <code>ACCEPTS.json</code>. A Go binary and the Python module are indistinguishable from the manifest, which is the point. The Python one is the oracle: <code>tools/gen_vectors.py</code> on the site imports <code>sharness_ai.&lt;door&gt;.&lt;target&gt;.twin</code> to produce the vectors, so a change there is a new version of that standard (dev@'s rule, 26 Oct 2026).</p>
+<h2 id="3-the-door-kit-what-every-project-shares-written-once">3. The door kit: what every project shares, written once</h2>
+<p><code>sharness_ai/door/</code> is the one place the shape lives, so that a door is its rows and nothing else, under the component size target (≤ 300 lines). Standard library only, which the design allows here because the pieces exist: <code>ssl</code> for TLS 1.3 with client certificates, <code>http.server</code> for a small HTTP/1.1 API, <code>json</code>, <code>hashlib</code>.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Piece</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td><code>Door</code></td><td>the service: a loopback TCP port (or a Unix socket), mutual TLS from the session CA, the peer's role read from the SAN URI, the edge checked on both sides, one JSON request in, one verdict out, <code>GET /v0/policy</code> and <code>GET /v0/hello</code> (its targets, and <code>twin</code> or <code>live</code> for each, read off the policy, never guessed) on every door</td></tr>
+<tr><td><code>Contract</code></td><td><code>ACCEPTS.json</code> and <code>EMITS.json</code> loaded, hashed and checked against the manifest's edge; a request that is not in the accepts is a refusal before any row is read; the check is a closed schema validator in the style of <code>policy.py</code>'s type check, not a schema library</td></tr>
+<tr><td><code>Rows</code>, <code>Predicate</code></td><td>the rows for this subject and the closed predicate language, <code>append_only</code> first, then section by marker, content by schema, range, count per interval, order, approval (pbp@'s list; pbp@ owns the language, the kit executes it, each predicate a small class)</td></tr>
+<tr><td><code>Verdict</code>, <code>Audit</code></td><td>allow or deny with the row that decided; one audit line per request, never a secret, never a body</td></tr>
+<tr><td><code>Twin</code></td><td>a <code>Door</code> whose target is a backend (memory by default) and whose emits is empty; the backend is configuration below the name</td></tr>
+<tr><td><code>Conformance</code></td><td>runs a node's <code>vectors/</code> against a running instance: the twin first, the live target only when asked and with credentials; prints held, refused, inconclusive the way <code>hello</code> does; exit 0 only when every vector held</td></tr>
+</tbody>
+</table></div>
+<p>The kit is also what a level is: a level's compiler is a <code>Door</code> that accepts level N and emits level N−1 (<code>POST /v0/compile</code>), so the abstraction stack and the capability stack are the same code, as the design says they are the same contract.</p>
+<h2 id="4-the-order-of-work-and-why">4. The order of work, and why</h2>
+<p>Each step is a project that ships on its own, with its tests, its registry row and its verb; no step waits for the next.</p>
+<ol>
+<li><b>The level-3 form and the manifest in <code>policy</code> (T22).</b> <code>sites:</code> in plain nouns compiled deterministically into the ports the kernel holds, the unheld rows (hostnames, until <code>net</code>) named as such, the hash of the level-3 document carried beside the hash of its expansion; <code>policy check</code> computing <code>held_by</code> and the barrier kind per row from the capability rows (pbp@'s rule in §4 of the PBP page). This is the manifest every door reads, so it comes first. Owner cli, with pbp@ for the canonical form.</li>
+<li><b>The door kit and E05.</b> <code>Door</code>, <code>Contract</code>, <code>Verdict</code>, <code>Audit</code>, <code>Twin</code>, <code>Conformance</code>, and E05 as the kit's own test: a session CA, four role certificates, the edge matrix refused and allowed over mutual TLS, repeatable. One decision for security@ and the editor: issuing X.509 certificates has no standard-library writer, so the launcher either shells out to <code>openssl</code> where it exists (reuse before build) or takes <code>cryptography</code> as its one dependency exception, listed in its <code>REALITY.md</code>; the doors themselves need neither, <code>ssl</code> verifies.</li>
+<li><b><code>sharness.fs.disk</code> and <code>sharness.fs.disk.twin</code>.</b> The first door, because its kernel half already runs (<code>sharness-ai run</code> with the workspace read-only for the app and owned by the door's uid) and its first rows are the ones the design has wanted since day one: <code>append_only</code>, refuse anything that parses as a key, size and count. The twin is memory-backed; the vectors run against it first; <code>GET /v0/hello</code> says <code>twin</code> or <code>live</code>. A Boundary for the app's process the moment the launcher starts both; the verb <code>sharness-ai fs serve --target disk.twin --policy …</code> and <code>sharness-ai fs hello</code>.</li>
+<li><b><code>sharness.bash</code> (E06).</b> The server form of <code>run</code>: a command in a fresh sandbox under a named profile, outside the agent's domain, so the agent cannot skip the locks. The centre of the mashup, as the components page says; it comes after <code>fs</code> only because it needs the kit and the manifest the first three steps give it.</li>
+<li><b><code>sharness.net.direct</code>, <code>.direct.twin</code>, <code>.proxy</code>.</b> The TLS client for everything the agent reaches; the hostname allowlist and the three verdicts already run in the playground's interceptor and are ported, not redesigned; <code>.direct.twin</code> is the internet recorded and replayed, which is what makes a door's conformance suite runnable offline.</li>
+<li><b><code>sharness.db.sqlite</code></b>, then <b><code>sharness.kms</code> (E08)</b> and <b><code>sharness.llm</code> (E07)</b>, each in its language where the design names one (the bash client and the KMS in Rust, dev@'s brief), the Python one as the oracle.</li>
+<li><b>The levels as services.</b> <code>level/l3</code>, <code>l4</code>, <code>l5</code> in that order (level 3 first, pbp@'s next step), each a <code>Door</code> that compiles down with the chain of hashes; the launcher verifies every expansion before anything starts. Level 2 is the manifest itself and level 1 is <code>policy translate</code>, which exists.</li>
+<li><b>The launcher.</b> Last, because it is the sum: reads the manifest, issues identities, starts every <code>exec</code> bound under its own policy, checks every edge's contract by hash, and makes the app's policy a Boundary rather than a Setting. The caveat on every page ends here.</li>
+</ol>
+<p>The browser bench grows with each step: a door and an app under one guest kernel in the tab is the first place a visitor sees a Boundary for the app itself, not only for its child.</p>
+<h2 id="5-what-the-cli-shows-step-by-step">5. What the CLI shows, step by step</h2>
+<p>The front door already draws the map with honest status. Each step changes one thing on it: a door's node turns from designed to runnable the day its package is installed, its verb runs, and <code>sharness-ai doctor</code> gains a check for it (the door answers <code>GET /v0/hello</code>, its targets say <code>twin</code> or <code>live</code>). <code>sharness-ai components</code> reads the entry points, so a door written in another language shows up when its manifest row does. <code>sharness-ai help --format json</code> grows with the verbs, and the site's CLI page is generated from it.</p>
+<h2 id="acceptance-criteria">Acceptance criteria</h2>
+<ol>
+<li><code>packages/</code> exists with <code>sharness-ai</code> (the current package, unchanged) and <code>sharness-ai-door</code>; each has the seven files of §2; <code>pip install ./packages/sharness-ai-door</code> works alone; the test suite runs per package and as a whole in CI.</li>
+<li><code>sharness-ai fs serve --target disk.twin</code> starts a door that refuses a write outside its rows with the row named, answers <code>GET /v0/hello</code> with <code>twin</code>, and passes its vectors; the same vectors pass against <code>--target disk</code> on a Linux machine, with the date in the registry row.</li>
+<li>A manifest naming <code>sharness.fs.disk</code> by <code>exec</code> starts the same door whether <code>exec</code> is the Python entry point or another language's binary, and refuses one whose <code>ACCEPTS.json</code> hash does not match the edge.</li>
+<li>Every status word in every <code>README.md</code> and <code>REALITY.md</code> is one the site allows; a folder with no tests is not in the registry.</li>
+</ol>
+<h2 id="what-it-does-not-do">What it does not do</h2>
+<ul>
+<li>It builds nothing and measures nothing; no component is built. The names, the predicate language and the canonical form of each level are pbp@'s; the repositories per language are the editor's (R21); the registry rows are dev@'s.</li>
+<li>It does not decide the certificate question in step 2; it names the two options for security@ and the editor.</li>
+<li>It does not add enforcement: everything a door holds is a Boundary only when the launcher (step 8) closes every other path; until then every verb prints the caveat.</li>
+</ul>
+<h2 id="owner">Owner</h2>
+<p>cli@sharness, with pbp@ (the names, the predicate language, the level forms), dev@ (the registry, the vectors, the other languages) and security@ (the kit's TLS and the certificate decision). First commit: the <code>packages/</code> move and the door kit's skeleton, each with its seven files, no behaviour.</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a class="ver" href="../../../project/releases.html" title="Site release history">v0.6.7</a> · <a href="../../../project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>Try it</h4>
+    <a href="../../../code/playground/index.html">The playground</a>
+    <a href="../../../code/browser/demo/index.html">A kernel in a tab</a>
+    <a href="../../../index.html#start">Start in 60 seconds</a>
+    <a href="../../../code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="../../../evidence/machines/index.html">Report your machine</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai ↗</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI ↗</a>
+  </div>
+  <div>
+    <h4>Understand</h4>
+    <a href="../../../design/index.html">The brief, in one read</a>
+    <a href="../../../components/index.html">The components</a>
+    <a href="../../../design/why/index.html">Why: the last metre</a>
+    <a href="../../../design/architecture/index.html">Architecture</a>
+    <a href="../../../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+    <a href="../../../explain/storyboards/index.html">Storyboards</a>
+    <a href="../../../articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Check it</h4>
+    <a href="../../../evidence/index.html">Measurements</a>
+    <a href="../../../evidence/status/index.html">What exists today</a>
+    <a href="../../../evidence/machines/index.html">hello on your machine</a>
+    <a href="../../../landscape/enforceability/index.html">Enforceability matrix</a>
+    <a href="../../../landscape/market/index.html">Market &amp; competitors</a>
+    <a href="../../../security/index.html">Security: the register</a>
+    <a href="../../../security/threat-model/index.html">Threat model</a>
+    <a href="../../../security/risks/index.html">Known risks</a>
+  </div>
+  <div>
+    <h4>Follow the work</h4>
+    <a href="../../../project/about/index.html">About &amp; naming</a>
+    <a href="../../../project/releases.html">Release history</a>
+    <a href="../../../project/adoption/index.html">Getting users</a>
+    <a href="../../../admin/index.html">How the project is run</a>
+    <a href="../../../admin/board/index.html">The board</a>
+    <a href="../../../admin/updates/index.html">Updates</a>
+    <a href="../../../admin/notes/index.html">Commit notes</a>
+    <a href="../../../admin/guidance/index.html">Guidance for agents</a>
+  </div>
+</div>
+<div class="agentline">For agents and crawlers: <a href="../../../llms.txt">llms.txt</a> · <a href="../../../llms-full.txt">llms-full.txt</a> · <a href="../../../index.md">index.md</a> · <a href="../../../sitemap.xml">sitemap.xml</a> · <a href="../../../.well-known/security.txt">security.txt</a></div></footer>
+
+</body>
+</html>
