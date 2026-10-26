@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.32</a>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.33</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -79,6 +79,7 @@
       <a class="sl" href="../../code/playground/index.html">Playground: run it in your browser</a>
       <a class="sl" href="../../code/releases/index.html">Releases of the code: immutable paths</a>
       <a class="sl" href="../../code/languages/index.html">Languages</a>
+      <a class="sl" href="../../code/standards/index.html">Standards and test vectors</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -147,7 +148,7 @@
     <tbody>
       <tr><td><a href="../members/cli/index.html"><b>cli</b></a><br><span class="dim small">sharness.ai | build@</span></td><td>Build the experiments up the ladder (E05 to E08, then the launcher above the agent), keep every measurement on Evidence with its method and date, and keep the site's and the CLI's pipelines sound.</td><td><span class="tstat t-open">proposed</span></td><td>09:00<br><code class="small">CRON_TZ=Europe/London 0 9 * * *</code></td><td>the session's model</td><td>none yet</td></tr>
       <tr><td><a href="../members/conductor/index.html"><b>conductor</b></a><br><span class="dim small">sharness.ai | conductor@</span></td><td>Keep every member, person and agent, in step: what landed on both repositories, what collided, what each member is doing and waiting for, what only the editor can decide; map what can be improved and write the brief for whoever should do it.</td><td><span class="tstat t-open">proposed</span></td><td>07:20, 09:20, 11:20, 13:20, 15:20, 17:20, 19:20, 21:20<br><code class="small">CRON_TZ=Europe/London 20 7-21/2 * * *</code></td><td>the session's model (Sonnet would do for the light checks)</td><td>2026-10-26T00:32Z ok</td></tr>
-      <tr><td><a href="../members/dev/index.html"><b>dev</b></a><br><span class="dim small">sharness.ai | dev@</span></td><td>The standards and their test vectors, then the reference implementations in the languages the editor decides (R8), each starting from a scenario a developer has.</td><td><span class="tstat t-open">proposed</span></td><td>09:30<br><code class="small">CRON_TZ=Europe/London 30 9 * * *</code></td><td>the session's model</td><td>none yet</td></tr>
+      <tr><td><a href="../members/dev/index.html"><b>dev</b></a><br><span class="dim small">sharness.ai | dev@</span></td><td>The standards and their test vectors, then the reference implementations in the languages the editor decides (R8), each starting from a scenario a developer has.</td><td><span class="tstat t-open">proposed</span></td><td>09:30<br><code class="small">CRON_TZ=Europe/London 30 9 * * *</code></td><td>the session's model</td><td>2026-10-26T01:21Z ok</td></tr>
       <tr><td><a href="../members/pbp/index.html"><b>pbp</b></a><br><span class="dim small">sharness.ai | pbp@</span></td><td>Hold the definition of the Process Behaviour Policy: the specification on one page, its shape and hash agreed by every implementation, the row shape in the CLI (T14), the predicates one kind at a time.</td><td><span class="tstat t-open">proposed</span></td><td>10:10<br><code class="small">CRON_TZ=Europe/London 10 10 * * *</code></td><td>the session's model</td><td>none yet</td></tr>
       <tr><td><a href="../members/security/index.html"><b>security</b></a><br><span class="dim small">sharness.ai | security@</span></td><td>Each evening, review what the team changed that day for leaks, injection and vulnerabilities; keep the gate's security checks, the security pages and the advisories; review every change to the workflows and the release path.</td><td><span class="tstat t-open">proposed</span></td><td>21:35<br><code class="small">CRON_TZ=Europe/London 35 21 * * *</code></td><td>the session's model</td><td>none yet</td></tr>
       <tr><td><a href="../members/sharness.build/index.html"><b>sharness.build</b></a><br><span class="dim small">sharness.ai | build@</span></td><td>Build the experiments up the ladder (E05 to E08, then the launcher above the agent), keep every measurement on Evidence with its method and date, and keep the site's and the CLI's pipelines sound.</td><td><span class="tstat t-open">proposed</span></td><td>09:00<br><code class="small">CRON_TZ=Europe/London 0 9 * * *</code></td><td>the session's model</td><td>none yet</td></tr>
@@ -164,7 +165,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../../project/releases.html">v0.5.32</a> · <a href="../../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.33</a> · <a href="../../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>Components</h4>
@@ -203,6 +204,7 @@
     <a href="../../code/browser/index.html">Linux in the browser</a>
     <a href="../../code/releases/index.html">Releases of the code</a>
     <a href="../../code/languages/index.html">Languages</a>
+    <a href="../../code/standards/index.html">Standards and test vectors</a>
     <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
     <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
   </div>

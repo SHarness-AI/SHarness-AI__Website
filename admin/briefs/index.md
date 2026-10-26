@@ -6,10 +6,11 @@
 
 ---
 
-Every brief, published in full before the work, newest first: the ask in the editor's words, the design, numbered acceptance criteria, the owner, and what it does not do. A brief is one file under `content/admin/briefs/`, `YYYY-MM-DD__brief__<slug>.md`; its status is proposed, accepted (the editor's go), built or superseded. The conductor writes one for every improvement it maps; any member may write one. 5 brief(s), as of 26 Oct 2026.
+Every brief, published in full before the work, newest first: the ask in the editor's words, the design, numbered acceptance criteria, the owner, and what it does not do. A brief is one file under `content/admin/briefs/`, `YYYY-MM-DD__brief__<slug>.md`; its status is proposed, accepted (the editor's go), built or superseded. The conductor writes one for every improvement it maps; any member may write one. 6 brief(s), as of 26 Oct 2026.
 
 - **proposed · 2026-10-26** · [A release script: fetch, bump to the latest tag plus one, build, gate, push, verify live, in one command](2026-10-26__brief__the-release-script/index.md): by conductor, for conductor; board T16
 - **proposed · 2026-10-26** · [The CLI repository ready for visitors: the Sherpa writes the words, the conductor commits them](2026-10-26__brief__the-cli-ready-for-visitors/index.md): by conductor, for sherpa, conductor; board T8, R18
 - **proposed · 2026-10-26** · [Signed commit notes: an Agent-Sig trailer over the note, checked against the member's enrolled key](2026-10-26__brief__signed-commit-notes/index.md): by conductor, for security; board T10, T17
 - **built · 2026-10-26** · [Schedules, cards and start pages: every member runs on a cadence, and one page is enough to join from any Claude account](2026-10-26__brief__schedules-cards-and-start-pages/index.md): by conductor, for conductor; board R17, T15
+- **proposed · 2026-10-26** · [One repository per language, the same structure in each: the standards on the site, the implementations beside the CLI](2026-10-26__brief__one-repository-per-language/index.md): by dev, for editor; board R8, R21
 - **proposed · 2026-10-26** · [A reality file and a corrections file for both repositories: what exists, and where the brief was wrong](2026-10-26__brief__a-reality-file-and-a-corrections-file/index.md): by conductor, for cli; board T12

@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Policy v0: the canonical form and the hash — SHarness</title>
+<meta name="description" content="The first SHarness standard: the v0 shape, the canonical bytes, the sha256 hash, what an implementation must refuse so that every language hashes the same, the environment contract, and the test vectors three implementations pass.">
+<link rel="canonical" href="https://sharness.ai/code/standards/policy-v0/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/code/standards/policy-v0/index.html">
+<meta property="og:title" content="Policy v0: the canonical form and the hash — SHarness">
+<meta property="og:description" content="The first SHarness standard: the v0 shape, the canonical bytes, the sha256 hash, what an implementation must refuse so that every language hashes the same, the environment contract, and the test vectors three implementations pass.">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
+  <a class="ver" href="../../../project/releases.html" title="Site release history">v0.5.33</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../../code/playground/index.html">Try it<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../../code/playground/index.html">&#9679; The playground: type sharness-ai in your browser</a>
+      <a class="sl" href="../../../code/browser/demo/index.html">A Linux kernel in a tab, running hello</a>
+      <a class="sl" href="../../../index.html#start">Start in 60 seconds</a>
+      <a class="sl" href="../../../evidence/machines/index.html">Help us measure it: report your machine</a>
+      <a class="sl" href="../../../explain/mockups/policy-hash.html">Mockup: the policy hash</a>
+      <a class="sl" href="../../../explain/mockups/edges.html">Mockup: the edge matrix</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../../components/index.html">Components<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../../components/index.html">&#9679; The OS a process sees</a>
+      <a class="sl" href="../../../components/bash/index.html">sharness.bash: the shell, as a service</a>
+      <a class="sl" href="../../../components/net/index.html">sharness.net: the only network client</a>
+      <a class="sl" href="../../../components/kms/index.html">sharness.kms: where a secret lives</a>
+      <a class="sl" href="../../../components/fs/index.html">sharness.fs: the only writer</a>
+      <a class="sl" href="../../../components/llm/index.html">sharness.llm: the only model client</a>
+      <a class="sl" href="../../../components/launcher/index.html">sharness.launcher: the bootstrap</a>
+      <a class="sl" href="../../../components/policy/index.html">sharness.policy: the manifest</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../../design/index.html">The design<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../../design/index.html">&#9679; The brief: in one read</a>
+      <a class="sl" href="../../../design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="../../../design/architecture/index.html">Architecture</a>
+      <a class="sl" href="../../../design/components/index.html">Components</a>
+      <a class="sl" href="../../../design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../../../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../../../design/pbp/index.html">The PBP on one page</a>
+      <a class="sl" href="../../../design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../../../design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="../../../design/surface/index.html">What a process can do</a>
+      <a class="sl" href="../../../design/containment/index.html">Containment</a>
+      <a class="sl" href="../../../design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="../../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      <a class="sl" href="../../../explain/index.html">Storyboards &amp; mockups</a>
+      <a class="sl" href="../../../articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../../code/index.html">The code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../../code/index.html">&#9679; Where the code is</a>
+      <a class="sl" href="../../../code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="../../../code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl" href="../../../code/flows/index.html">Flows through the code</a>
+      <a class="sl" href="../../../code/examples/index.html">Examples</a>
+      <a class="sl" href="../../../code/browser/index.html">Linux in the browser</a>
+      <a class="sl" href="../../../code/playground/index.html">Playground: run it in your browser</a>
+      <a class="sl" href="../../../code/releases/index.html">Releases of the code: immutable paths</a>
+      <a class="sl" href="../../../code/languages/index.html">Languages</a>
+      <a class="sl" href="../../../code/standards/index.html">Standards and test vectors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../../security/index.html">Security<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../../security/index.html">&#9679; Security: the register</a>
+      <a class="sl" href="../../../security/threat-model/index.html">Threat model</a>
+      <a class="sl" href="../../../security/risks/index.html">Known risks</a>
+      <a class="sl" href="../../../security/reviews/index.html">Reviews</a>
+      <a class="sl" href="../../../security/hardening/index.html">Hardening</a>
+      <a class="sl" href="../../../security/supply-chain/index.html">Supply chain</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../../evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../../evidence/index.html">&#9679; Measurements</a>
+      <a class="sl" href="../../../evidence/status/index.html">What exists today</a>
+      <a class="sl" href="../../../evidence/research/index.html">Research note</a>
+      <a class="sl" href="../../../evidence/machines/index.html">hello on your machine: reported runs</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../../landscape/index.html">Landscape<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../../landscape/index.html">&#9679; Policies at the centre</a>
+      <a class="sl" href="../../../landscape/enforceability/index.html">Enforceability matrix</a>
+      <a class="sl" href="../../../landscape/integrations/index.html">Integration points</a>
+      <a class="sl" href="../../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+      <a class="sl" href="../../../landscape/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../../project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../../project/index.html">&#9679; Project</a>
+      <a class="sl" href="../../../project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="../../../project/sources/index.html">The source documents</a>
+      <a class="sl" href="../../../project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="../../../project/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../../project/releases.html">Release history</a>
+      <a class="sl" href="../../../project/adoption/index.html">Getting users: the review and the plan</a>
+      <a class="sl" href="../../../admin/index.html">Admin: how the project is run</a>
+      <a class="sl" href="../../../admin/board/index.html">The board: tasks &amp; requests</a>
+      <a class="sl" href="../../../admin/updates/index.html">Updates: what is happening</a>
+      <a class="sl" href="../../../project/outreach/index.html">Outreach: finding the people it is for</a>
+      <a class="sl" href="../../../project/agents/index.html">The agents and their keys</a>
+      <a class="sl" href="../../../project/telemetry/index.html">Telemetry: who reads this site</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__CLI">★ GitHub</a>
+  <script src="../../../assets/nav.js" defer></script>
+  <script src="../../../assets/telemetry.js" data-root="../../../" defer></script>
+</div></nav>
+
+<main class="doc">
+  <div class="crumb"><a href="../../../index.html">sharness.ai</a> / <a href="../index.html">the code</a> / policy v0: the canonical form and the hash · <a href="index.md">this page as markdown</a></div>
+  <h1>Policy v0: the canonical form and the hash</h1>
+<div class="note"><b>Status: written, <span class="asof">as of 26 Oct 2026</span>, from code that runs.</b> This is the first SHarness standard: the version 0 Process Behaviour Policy as a file, the canonical bytes it is reduced to, the hash that names it, and what an implementation must refuse so that the same policy hashes the same in every language. Three implementations (Python, JavaScript, Go) pass every vector below; the Python CLI is the oracle that generated them. What a policy <em>means</em>, its four objects and what makes it binding, is <a href="../../../design/pbp/index.html">the PBP on one page</a>; this page fixes bytes, not meaning. Kept by dev@sharness; the shape is pbp@sharness's.</div>
+<h2 id="1-the-shape">1. The shape</h2>
+<p>A v0 policy is one JSON object with these keys and no others:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Key</th><th>Must be</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td><code>pbp</code></td><td>the integer <code>1</code></td><td>the version of the shape</td></tr>
+<tr><td><code>id</code></td><td>a non-empty string, at most 200 characters, no control characters</td><td>the policy's name for people; the hash is its name for machines</td></tr>
+<tr><td><code>layer</code></td><td>a string, optional</td><td>a label in v0 (<code>invocation</code>, <code>session</code>, <code>component</code>, ...); composition by intersection is a later version</td></tr>
+<tr><td><code>notes</code></td><td>a string, optional</td><td>free text for the reader; part of the hash like everything else</td></tr>
+<tr><td><code>files</code></td><td>an object with <code>read</code>, <code>write</code>, <code>exec</code>, each a list of paths, each optional</td><td>a path is absolute, normalised (no <code>..</code>, <code>.</code>, <code>//</code>, no trailing <code>/</code>, so it reads as it binds), without control characters; <code>/</code> alone is allowed</td></tr>
+<tr><td><code>network</code></td><td>the string <code>"none"</code>, or <code>{"connect_tcp_ports": [...]}</code> with integers 1 to 65535 and no other key</td><td>v0 says ports, not hosts</td></tr>
+<tr><td><code>process</code></td><td>an object: <code>no_new_privs</code> must be <code>true</code> if present; <code>max_memory_mb</code> and <code>max_pids</code> non-negative integers, optional; no other key</td><td></td></tr>
+</tbody>
+</table></div>
+<p>Booleans are not integers: <code>true</code> where a port or a cap is expected is refused.</p>
+<h2 id="2-the-canonical-bytes">2. The canonical bytes</h2>
+<p>The hash is taken over <b>canonical JSON</b>, which an implementation produces from the parsed object, never from the file's text:</p>
+<ol>
+<li>Object keys sorted. Every key v0 allows is ASCII, so the order is the same whether a language sorts by code point (Python, Go) or by UTF-16 code unit (JavaScript); a later version with free keys adopts RFC 8785's rule, UTF-16 order.</li>
+<li>No whitespace: <code>,</code> and <code>:</code> as the only separators.</li>
+<li>UTF-8, with non-ASCII characters written as they are, not as <code>\uXXXX</code>. Only <code>"</code>, <code>\</code> and the control characters below U+0020 are escaped: <code>\b</code>, <code>\f</code>, <code>\n</code>, <code>\r</code>, <code>\t</code> by name, the rest as <code>\u00XX</code> in lower case. U+007F, U+2028, U+2029, <code>&lt;</code>, <code>&gt;</code> and <code>&amp;</code> are written raw. No Unicode normalisation of any kind.</li>
+<li>Numbers are integers written in decimal with no sign on zero, no leading zeros, no fraction, no exponent.</li>
+<li><code>true</code>, <code>false</code>, <code>null</code> as those words.</li>
+</ol>
+<p>The hash is <code>sha256:</code> followed by the lower-case hexadecimal SHA-256 of those bytes, 71 characters in all.</p>
+<h2 id="3-what-must-be-refused-so-that-every-language-hashes-the-same">3. What must be refused, so that every language hashes the same</h2>
+<p>RFC 8785 (JCS) is the target; v0 refuses the inputs where languages would differ instead of canonicalising them:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Refused</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td>any number with a fraction or an exponent in the <b>text</b> (<code>1.5</code>, <code>64.0</code>, <code>1e2</code>), not only after parsing</td><td>a JavaScript or Go parser reads <code>64.0</code> as the integer 64 and would hash what Python refuses; the text is scanned before it is parsed</td></tr>
+<tr><td>an integer beyond ±9007199254740991 (2^53 - 1)</td><td>JavaScript rounds it</td></tr>
+<tr><td>a string containing a lone surrogate (<code>"\ud800"</code>)</td><td>it has no UTF-8 form; Go's decoder would silently replace it with U+FFFD, so the raw text is scanned</td></tr>
+<tr><td>a duplicate key in any object</td><td>two values on the page, one in the hash; <code>JSON.parse</code> and <code>json.loads</code> keep the last silently, so the text is scanned</td></tr>
+<tr><td>a file larger than 1 MiB; a top-level value that is not an object</td><td>a policy is a small object</td></tr>
+<tr><td>anything §1 does not allow: an unknown key, a relative or unnormalised path, a port out of range, a boolean for an integer, <code>no_new_privs: false</code>, <code>pbp</code> other than 1</td><td>the shape is closed; what the reader sees is what the kernel binds</td></tr>
+</tbody>
+</table></div>
+<p>A refusal is a list of problems (<code>policy check</code>) or an error (<code>policy hash</code>), never a different hash.</p>
+<h2 id="4-the-contract-with-the-process">4. The contract with the process</h2>
+<p>An enforcer that applies a v0 policy to a process sets <code>SHARNESS_AI_POLICY_HASH</code> to the hash and <code>SHARNESS_AI_POLICY_ID</code> to the <code>id</code> in the process's environment, so a harness-aware program can say what it runs under and refuse, for instance, a clear key on its command line. An enforcer given <code>--expect-hash sha256:...</code> refuses to run anything when the file does not hash to it, and exits 125 (runnable in <code>sharness-ai run</code>; the launcher's first check, designed). Which rows of the policy an enforcer holds, and as which barrier kind, is the conformance statement on <a href="../../../design/pbp/index.html#8-what-a-spec-means-here">the PBP on one page §8</a>, not this page.</p>
+<h2 id="5-the-test-vectors">5. The test vectors</h2>
+<p><a href="vectors.json"><code>vectors.json</code></a> lists every case with its kind, and for an accept case its hash and its canonical bytes as a string; the cases themselves are under <a href="vectors/"><code>vectors/</code></a>, byte for byte as the oracle read them. An implementation passes when it produces the hash of every accept case and refuses every refuse case. The accept cases are the CLI's eight example policies (P0 to P5 and the two minimal ones), a minimal policy, the same policy with its keys in another order (same hash), a policy whose <code>notes</code> carry non-ASCII text, U+2028, <code>&lt;&amp;&gt;</code>, every named escape, a control character and DEL, the largest safe integer and a zero cap, and <code>/</code> as a path. The refuse cases are one per row of §3.</p>
+<pre class="diagram">$ curl -sS https://sharness.ai/code/standards/policy-v0/vectors.json | python3 -c "import json,sys; m=json.load(sys.stdin); print(m['counts'], m['oracle'])"
+{'accept': 13, 'refuse': 15} {'implementation': 'sharness-ai (Python)', 'repository': 'https://github.com/SHarness-AI/SHarness-AI__CLI', 'commit': '7dcbe05'}</pre>
+<p>Three hashes a reader can check in <a href="../../playground/index.html">the playground</a> or with any of the implementations:</p>
+<pre class="diagram">p0-hello-world      sha256:a6244d346ea9d7955c04defba5e67f71ae9867af618fa21d11589c7ef8449032
+a01-minimal         sha256:90ec82be5c13db084b1fd40777b79b0ff6822b73efdec394cd88c6dfe661a5da
+a03-unicode-notes   sha256:0994ad5f4c128bddb60ecf76e6086770511ce124b015902457aad70594d7bb7f</pre>
+<p>Vectors are generated by <code>tools/gen_vectors.py</code> on this site from the CLI checkout beside it, and the tool refuses to publish a case the oracle disagrees with; the manifest names the oracle's commit. Every implementation's CI fetches <code>vectors.json</code> and the files it lists (<a href="../index.html#3-the-implementations">the registry</a>).</p>
+<h2 id="6-implementations-that-pass">6. Implementations that pass</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Implementation</th><th>Where</th><th>Run</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>Python, the oracle</td><td><code>sharness_ai/policy.py</code> in the CLI</td><td><code>python -m pytest tests/unit/test_policy.py tests/unit/test_security.py</code></td><td>by construction; the vectors are its output</td></tr>
+<tr><td>JavaScript, Node 20+ and the browser</td><td><code>src/policy.js</code> (<a href="../../../admin/board/index.html#r21">R21</a> for the repository)</td><td><code>npm test</code></td><td>28 of 28, Node 22, 26 Oct 2026</td></tr>
+<tr><td>Go 1.22+</td><td><code>policy/policy.go</code> (R21)</td><td><code>go test ./...</code></td><td>28 of 28, Go 1.24, 26 Oct 2026</td></tr>
+</tbody>
+</table></div>
+<p>Two things the second and third implementations taught, now rows of §3: a parser that keeps numbers as doubles cannot tell <code>64.0</code> from <code>64</code>, and a decoder that repairs lone surrogates hides them; both have to be caught in the text.</p>
+<h2 id="7-what-this-standard-does-not-fix">7. What this standard does not fix</h2>
+<ul>
+<li>What a policy means, which rows an enforcer must hold and how it reports barrier kinds: <a href="../../../design/pbp/index.html">the PBP on one page</a>.</li>
+<li>Hosts, UDP, uids, seccomp, signing, layers composed by intersection, behaviour rows and keepers: later versions, each with its own page and vectors; a new optional key leaves every existing v0 hash unchanged, and a v0 implementation refuses the unknown key, which is the right failure.</li>
+<li>Enforcement. Three languages hash a policy the same; one of them, Python, enforces it for a child process today, as a Setting for the process that applies it.</li>
+</ul>
+<p>Sources: <code>sharness_ai/policy.py</code> at the CLI's <code>dev</code> head <code>7dcbe05</code> (its docstring is the first draft of §2 and §3); <a href="../../../design/policies/index.html#10-a-v0-that-two-implementations-hash-the-same-runnable">Policies §10</a>; <a href="../../../design/pbp/index.html">the PBP on one page</a>; security@sharness's review 1, which added the integer, surrogate, duplicate-key and path rules; RFC 8785.</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../../../project/releases.html">v0.5.33</a> · <a href="../../../project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>Components</h4>
+    <a href="../../../components/index.html">The OS a process sees</a>
+    <a href="../../../components/bash/index.html">sharness.bash</a>
+    <a href="../../../components/net/index.html">sharness.net</a>
+    <a href="../../../components/kms/index.html">sharness.kms</a>
+    <a href="../../../components/fs/index.html">sharness.fs</a>
+    <a href="../../../components/llm/index.html">sharness.llm</a>
+    <a href="../../../components/launcher/index.html">sharness.launcher</a>
+    <a href="../../../components/policy/index.html">sharness.policy</a>
+  </div>
+  <div>
+    <h4>The design</h4>
+    <a href="../../../design/index.html">The brief: in one read</a>
+    <a href="../../../design/why/index.html">Why: the last metre</a>
+    <a href="../../../design/architecture/index.html">Architecture</a>
+    <a href="../../../design/components/index.html">Components</a>
+    <a href="../../../design/keys/index.html">Keys and the KMS</a>
+    <a href="../../../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../../../design/pbp/index.html">The PBP on one page</a>
+    <a href="../../../design/agents/index.html">Agents and LLMs</a>
+    <a href="../../../design/process-tree/index.html">Enforcing the process tree</a>
+    <a href="../../../design/surface/index.html">What a process can do</a>
+    <a href="../../../design/containment/index.html">Containment</a>
+    <a href="../../../design/spectrum/index.html">The spectrum</a>
+    <a href="../../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+  </div>
+  <div>
+    <h4>The code</h4>
+    <a href="../../../code/index.html">Where the code is</a>
+    <a href="../../../code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="../../../code/experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../../../code/flows/index.html">Flows through the code</a>
+    <a href="../../../code/examples/index.html">Examples</a>
+    <a href="../../../code/browser/index.html">Linux in the browser</a>
+    <a href="../../../code/releases/index.html">Releases of the code</a>
+    <a href="../../../code/languages/index.html">Languages</a>
+    <a href="../../../code/standards/index.html">Standards and test vectors</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
+  </div>
+  <div>
+    <h4>Security, evidence, landscape</h4>
+    <a href="../../../security/index.html">Security: the register</a>
+    <a href="../../../security/threat-model/index.html">Threat model</a>
+    <a href="../../../security/risks/index.html">Known risks</a>
+    <a href="../../../security/hardening/index.html">Hardening</a>
+    <a href="../../../security/supply-chain/index.html">Supply chain</a>
+    <a href="../../../evidence/index.html">Measurements</a>
+    <a href="../../../evidence/status/index.html">What exists today</a>
+    <a href="../../../evidence/research/index.html">Research note</a>
+    <a href="../../../evidence/machines/index.html">hello on your machine</a>
+    <a href="../../../landscape/index.html">Landscape: policies at the centre</a>
+    <a href="../../../landscape/enforceability/index.html">Enforceability matrix</a>
+    <a href="../../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+    <a href="../../../landscape/market/index.html">Market &amp; competitors</a>
+    <a href="../../../explain/storyboards/index.html">Storyboards</a>
+    <a href="../../../articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Project &amp; agents</h4>
+    <a href="../../../project/about/index.html">About &amp; naming</a>
+    <a href="../../../project/sources/index.html">The source documents</a>
+    <a href="../../../project/engineering.html">Engineering</a>
+    <a href="../../../project/comms.html">Comms &amp; release history</a>
+    <a href="../../../admin/index.html">Admin: how the project is run</a>
+    <a href="../../../admin/board/index.html">The board</a>
+    <a href="../../../admin/updates/index.html">Updates</a>
+    <a href="../../../admin/notes/index.html">Commit notes</a>
+    <a href="../../../admin/schedule/index.html">Schedule and runs</a>
+    <a href="../../../admin/briefs/index.html">Briefs</a>
+    <a href="../../../admin/guidance/index.html">Guidance for agents (AGENTS.md)</a>
+    <a href="../../../project/adoption/index.html">Getting users</a>
+    <a href="../../../project/outreach/index.html">Outreach</a>
+    <a href="../../../project/agents/index.html">The agents and their keys</a>
+    <a href="../../../project/telemetry/index.html">Telemetry</a>
+    <a href="../../../.well-known/security.txt">security.txt</a>
+    <a href="../../../llms.txt">llms.txt</a>
+    <a href="../../../llms-full.txt">llms-full.txt</a>
+    <a href="../../../index.md">index.md</a>
+    <a href="../../../sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+
+</body>
+</html>
