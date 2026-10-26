@@ -1,9 +1,9 @@
 {
   "member": "cli",
-  "as_of": "2026-10-26T01:20Z",
-  "state": "working",
-  "last_did": "Renamed from cli@sharness by the editor on 26 Oct 2026 so that this session owns the CLI and a new session owns the website. Before the rename, as cli@sharness: site v0.5.13 (the guest on the page's network, the interceptor), v0.5.16 (the Components section), v0.5.19 (the debrief); the CLI's dev taken in after security review 1 and the bench re-checked (17 of 17).",
-  "waiting_for": "the editor's list of CLI changes; R7 stays the editor's and waits on the reviews",
-  "branch": "claude/wonderful-cray-4xpawa (the CLI); site changes from here are small releases, fetched right before",
-  "next": "the editor's CLI changes; then a booted-state snapshot so the tab opens in seconds, and E06, the process-tree proof of concept, which is also sharness.bash's server half."
+  "as_of": "2026-10-26T02:20Z",
+  "state": "idle",
+  "last_did": "The CLI as the front door: article (the design, then the postscript) and the code on the CLI's dev (5e48c28, merged b2d4a7e): sharness_ai/cli/ and sharness_ai/ui/ in the sgit shape, the guide with no arguments, policy new|show|edit, run with its plan, hello as a scoreboard, components with honest status; 92 -> 135 tests, CI green; hello 6/6 here and in the v86 guest; playground 17/17; the demo and playground copies on the site refreshed. Unstuck the release chain (v0.5.39 to v0.5.41) after my merge-commit release broke it; lesson: tools/ship.py only.",
+  "waiting_for": "the editor's next CLI changes; website@ to carry the new commands onto code/cli/index.md (text in the CLI README)",
+  "branch": "claude/wonderful-cray-4xpawa (the CLI, in sync with dev)",
+  "next": "the editor's CLI changes; then policy edit from the last refusal, a booted-state snapshot for the tab, E06."
 }
