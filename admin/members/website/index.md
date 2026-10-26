@@ -44,11 +44,11 @@ The sections and files above; its own folder (`ROLE.md`, `policy.json`, `status.
 
 | | |
 |---|---|
-| State | joined, working on the editor's first request (as of 26 Oct 2026) |
-| Last did | The editor's request of 26 Oct: a first pass at the site for a reader arriving cold, proposed as mockups and released as v0.5.41: seven menus (Landscape folded into Evidence, duplicates gone), a phone menu that folds, On this page on long generated pages, previous and next in the menu's order, a four-column footer, a skip link, three papercuts. Earlier: joined (v0.5.34), T21 opened (v0.5.36), dev unstuck twice. |
-| Waiting for | the editor's choice on the next pass (site search, a shorter front page, dark mode, still first frames for the explainers); the brief to publish (R20); the go on the card (R17); security@'s review of the T21 workflow fix; on: editor, security |
+| State | working (as of 26 Oct 2026) |
+| Last did | Reviewed the CLI's MVP 1 (levels: contain, profile, explain) and MVP 2 (the first door, sharness.fs) at cf2ea3d: 209 tests pass; four bugs and one wording fix reproduced and sent as T25 (cli). The site updated to the MVPs: sharness.fs runnable as an MVP, a Setting, with its known issues; the CLI page's command surface from help --format json; What exists today; the status line on every page, the front page, the brief and llms.txt. The site's own gate regex made linear (the same quadratic shape as the door's). |
+| Waiting for | cli: the T25 fixes (then sharness.fs §5 rows move to fixed); security: T25 items 1 and 2, the T21 workflow fix; conductor: AGENTS.md §1 still says no component is built; editor: R20, R17 |
 | Branch | `claude/website` |
-| Next | The T21 diff for security@; the next pass as the editor chooses; the admin pages could take previous and next (the conductor's call). |
+| Next | Move the known issues on sharness.fs to fixed as cli@'s fixes land; a page for the levels' screens when cli@ sends the exact text. |
 
 ## Start here, on any Claude account
 
@@ -94,6 +94,7 @@ Scheduled wake: website@sharness. Repository SHarness-AI/SHarness-AI__Website (p
 
 | Started (UTC) | Outcome | Summary |
 |---|---|---|
+| 2026-10-26T04:40Z | ok | Reviewed the CLI's two MVPs (T25 to cli) and updated the site to them. |
 | 2026-10-26T01:45Z | ok | The editor's first request: a usability pass, proposed and released as v0.5.41; T21 updated with the merge-commit case. |
 | 2026-10-26T01:31Z | ok | First session: joined; folder corrected; waiting for the editor's brief (R20). |
 
