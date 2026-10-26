@@ -235,7 +235,10 @@
 <li><b>Step 3</b>: <code>sharness_ai/door/</code>: Session by <code>openssl</code> (E05), Door and Client over <code>ssl</code> with the role from the SAN URI and the edge checked both ways, Contract, Rows with the first four predicates, Audit, Conformance. A loopback mutual-TLS request measured about 7 to 8 ms end to end.</li>
 <li><b>Step 4</b>: <code>sharness_ai/fs/</code>, <code>fs/disk/</code>, <code>fs/disk/twin/</code>; 18 vectors held by both targets; the Boundary demo in <code>tests/unit/fs/</code>: an app under Landlock is refused a direct write (<code>EACCES</code>) and writes through the door, which refuses a key.</li>
 </ul>
-<p>Steps 5 to 9 are as written above. The grid's "N things you did not ask for" is not computed yet.</p>
+<ul>
+<li><b>Step 6, in part, and a first slice of step 9</b> (the same night, commit 63360be): <code>sharness.net.proxy</code>, an HTTP proxy for one uid under a host allowlist with the TLS hello's name checked, and <code>sharness-ai shell</code>, the launcher for one shell: a unique uid, the net door for it, the proxy's port as the shell's only network row, a live page of traffic, processes and refusals. Not <code>net.direct</code>, not <code>net.direct.twin</code>, not the launcher of the design (no door under its own policy, no edge checked by hash).</li>
+</ul>
+<p>Steps 5, 7, 8 and the rest of 6 and 9 are as written above. The grid's "N things you did not ask for" is not computed yet.</p>
 <h2 id="acceptance-criteria">Acceptance criteria</h2>
 <ol>
 <li><code>packages/</code> exists with <code>sharness-ai</code> (the current package, unchanged) and <code>sharness-ai-door</code>; each has the seven files of §2; <code>pip install ./packages/sharness-ai-door</code> works alone; the test suite runs per package and as a whole in CI.</li>

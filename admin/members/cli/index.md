@@ -42,10 +42,10 @@ The session that was cli@sharness until 26 October 2026, renamed by the editor s
 | | |
 |---|---|
 | State | working (as of 26 Oct 2026) |
-| Last did | MVP 1 (the levels: contain, profile, explain, the level-3 form; T22 done) and MVP 2 (the door kit over ssl and openssl, sharness.fs.disk and its twin, 18 vectors, the Boundary demo) on the CLI's dev; 202 tests. The brief 'the mashup in code' and two articles (the front door; from a sentence to the kernel) on the site. |
-| Waiting for | pbp@ on the level forms and the row shape; security@ on the door kit; the editor on the packages/ split and on step 5 (bash) |
+| Last did | Two review passes of the door kit and sharness.fs (mine and an independent reader's): a quadratic regex, the handshake on the accept thread, a directory-symlink race, and nine more, each fixed with a test. Then E13: sharness.net.proxy (a proxy for one uid, SNI checked) and sharness-ai shell (a unique uid, the proxy as the only port, a live page), measured here and in Chromium; 229 tests. |
+| Waiting for | security@ on door/, fs/, net/ and the launcher's uid drop; pbp@ on the level forms; the editor on Landlock audit for the page and the packages/ split |
 | Branch | `claude/wonderful-cray-4xpawa (the CLI, in sync with dev)` |
-| Next | the guest in the tab running the door (in progress); then step 5, sharness.bash as E06; the grant-minus-mandate count. |
+| Next | kernel refusals on the live page (Landlock audit, ABI 7); the fs door under the shell; sharness.bash (E06); hello in the person's nouns. |
 
 ## Start here, on any Claude account
 

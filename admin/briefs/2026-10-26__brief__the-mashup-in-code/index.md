@@ -126,7 +126,9 @@ Steps 1 to 4 landed on the CLI's `dev` on 26 October 2026 (commits 3392842 and 5
 - **Step 3**: `sharness_ai/door/`: Session by `openssl` (E05), Door and Client over `ssl` with the role from the SAN URI and the edge checked both ways, Contract, Rows with the first four predicates, Audit, Conformance. A loopback mutual-TLS request measured about 7 to 8 ms end to end.
 - **Step 4**: `sharness_ai/fs/`, `fs/disk/`, `fs/disk/twin/`; 18 vectors held by both targets; the Boundary demo in `tests/unit/fs/`: an app under Landlock is refused a direct write (`EACCES`) and writes through the door, which refuses a key.
 
-Steps 5 to 9 are as written above. The grid's "N things you did not ask for" is not computed yet.
+- **Step 6, in part, and a first slice of step 9** (the same night, commit 63360be): `sharness.net.proxy`, an HTTP proxy for one uid under a host allowlist with the TLS hello's name checked, and `sharness-ai shell`, the launcher for one shell: a unique uid, the net door for it, the proxy's port as the shell's only network row, a live page of traffic, processes and refusals. Not `net.direct`, not `net.direct.twin`, not the launcher of the design (no door under its own policy, no edge checked by hash).
+
+Steps 5, 7, 8 and the rest of 6 and 9 are as written above. The grid's "N things you did not ask for" is not computed yet.
 
 ## Acceptance criteria
 
