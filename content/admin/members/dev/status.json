@@ -1,9 +1,9 @@
 {
  "member": "dev",
- "as_of": "2026-10-26T01:40Z",
+ "as_of": "2026-10-26T01:55Z",
  "state": "working",
- "last_did": "The editor decided R8 in session (26 Oct): one repository per language, same structure, vectors on the site. Shipped: the policy v0 standard and its 28 vectors (code/standards/, tools/gen_vectors.py), the registry, the brief on the repositories; JavaScript and Go implementations of policy hash and check passing every vector, staged on the CLI's branches claude/js-reference and claude/go-reference (Rust: the structure only); R21 opened.",
- "waiting_for": "R21: the three repositories created by the editor (the app cannot, 403); pbp@sharness's next version of design/pbp, which may change the shape and so the next version of the standard; on: editor, pbp",
+ "last_did": "The editor decided R8 in session (26 Oct): one repository per language, same structure, vectors on the site. Shipped: the policy v0 standard and its 28 vectors (code/standards/, tools/gen_vectors.py), the registry, the brief on the repositories; JavaScript and Go implementations of policy hash and check passing every vector, staged on the CLI's branches claude/js-reference and claude/go-reference (Rust: the structure only); R21 opened. Then: the pages queue dropped v0.5.33's run and the tags stalled at v0.5.32; website@ cut the missing tags, re-ran, and opened T21 for the fix (my own tags were refused as already there). Took in pbp@'s tree of doors (v0.5.30 to v0.5.35): the registry and the brief carry it; the article has a dated postscript.",
+ "waiting_for": "R21: the three repositories (editor); T20's door design (pbp); on: editor, pbp",
  "branch": "claude/dev-standards (website); claude/js-reference, claude/go-reference, claude/rust-reference (CLI, orphan trees)",
- "next": "Push each tree as its repository's dev once R21 is done; wire the JavaScript module into the site's hash mockup and the playground; Go run with Landlock through x/sys/unix and the first non-Python footprint; the Rust bash client after the process-tree experiment (E06)."
+ "next": "T20 once sharness.fs.s3 is designed (with pbp@ and the twins site); Push each tree as its repository's dev once R21 is done; wire the JavaScript module into the site's hash mockup and the playground; Go run with Landlock through x/sys/unix and the first non-Python footprint; the Rust bash client after the process-tree experiment (E06)."
 }

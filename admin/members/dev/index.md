@@ -33,10 +33,10 @@ A Claude Code session that joined on 25 October 2026 with the brief to build ref
 | | |
 |---|---|
 | State | working (as of 26 Oct 2026) |
-| Last did | The editor decided R8 in session (26 Oct): one repository per language, same structure, vectors on the site. Shipped: the policy v0 standard and its 28 vectors (code/standards/, tools/gen_vectors.py), the registry, the brief on the repositories; JavaScript and Go implementations of policy hash and check passing every vector, staged on the CLI's branches claude/js-reference and claude/go-reference (Rust: the structure only); R21 opened. |
-| Waiting for | R21: the three repositories created by the editor (the app cannot, 403); pbp@sharness's next version of design/pbp, which may change the shape and so the next version of the standard; on: editor, pbp |
+| Last did | The editor decided R8 in session (26 Oct): one repository per language, same structure, vectors on the site. Shipped: the policy v0 standard and its 28 vectors (code/standards/, tools/gen_vectors.py), the registry, the brief on the repositories; JavaScript and Go implementations of policy hash and check passing every vector, staged on the CLI's branches claude/js-reference and claude/go-reference (Rust: the structure only); R21 opened. Then: the pages queue dropped v0.5.33's run and the tags stalled at v0.5.32; website@ cut the missing tags, re-ran, and opened T21 for the fix (my own tags were refused as already there). Took in pbp@'s tree of doors (v0.5.30 to v0.5.35): the registry and the brief carry it; the article has a dated postscript. |
+| Waiting for | R21: the three repositories (editor); T20's door design (pbp); on: editor, pbp |
 | Branch | `claude/dev-standards (website); claude/js-reference, claude/go-reference, claude/rust-reference (CLI, orphan trees)` |
-| Next | Push each tree as its repository's dev once R21 is done; wire the JavaScript module into the site's hash mockup and the playground; Go run with Landlock through x/sys/unix and the first non-Python footprint; the Rust bash client after the process-tree experiment (E06). |
+| Next | T20 once sharness.fs.s3 is designed (with pbp@ and the twins site); Push each tree as its repository's dev once R21 is done; wire the JavaScript module into the site's hash mockup and the playground; Go run with Landlock through x/sys/unix and the first non-Python footprint; the Rust bash client after the process-tree experiment (E06). |
 
 ## Start here, on any Claude account
 
@@ -82,7 +82,7 @@ Scheduled wake: dev@sharness. Repositories SHarness-AI/SHarness-AI__Website and 
 
 | Started (UTC) | Outcome | Summary |
 |---|---|---|
-| 2026-10-26T01:21Z | ok | The editor decided R8 in session: one repository per language, the same structure, the vectors on the site. Written and shipped: the policy v0 standard with 28 vectors generated from the oracle (tools/gen_vectors.py), the registry, the brief on the repositories, R21 for the editor to create them (the app cannot: 403). JavaScript and Go implementations of policy hash and check pass every vector and are staged on the CLI's orphan branches claude/js-reference and claude/go-reference; Rust carries the structure only. pbp@sharness's one-page PBP (v0.5.17) is the latest published; nothing newer on any branch. (released v0.5.30) |
+| 2026-10-26T01:21Z | ok | The editor decided R8 in session: one repository per language, the same structure, the vectors on the site. Written and shipped: the policy v0 standard with 28 vectors generated from the oracle (tools/gen_vectors.py), the registry, the brief on the repositories, R21 for the editor to create them (the app cannot: 403). JavaScript and Go implementations of policy hash and check pass every vector and are staged on the CLI's orphan branches claude/js-reference and claude/go-reference; Rust carries the structure only. pbp@sharness's one-page PBP (v0.5.17) is the latest published; nothing newer on any branch. (released v0.5.33) |
 
 ## The policy
 

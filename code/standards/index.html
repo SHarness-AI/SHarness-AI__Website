@@ -152,6 +152,8 @@
 <tr><td>the manifest and the edges</td><td>not yet written</td><td>the matrix, the certificate profile, the session CA</td><td></td><td>designed on <a href="../../design/architecture/index.html">Architecture</a></td></tr>
 <tr><td>the KMS protocol</td><td>not yet written</td><td>the five operations, the <code>unwrap</code> schemas, the checks in order, the envelope</td><td></td><td>designed on <a href="../../design/keys/index.html#3-the-kms-protocol">Keys §3</a>; E08 settles it first</td></tr>
 <tr><td>the <code>net</code>, <code>fs</code>, <code>llm</code> and <code>bash</code> protocols</td><td>not yet written</td><td>the request schemas, the business rules, the profiles</td><td></td><td>designed on <a href="../../components/index.html">the component pages</a></td></tr>
+<tr><td>a door's two schemas: what it accepts and what it emits, per door and per target</td><td>not yet written</td><td>the contract on each edge of the manifest, checked by hash (the mirror rule); the vocabulary a door's rows are written in</td><td></td><td>pbp@sharness's <a href="../../design/pbp/index.html#6-a-door-and-the-tree-of-doors">tree of doors</a>, 26 Oct 2026; one page per <code>sharness.&lt;door&gt;.&lt;target&gt;</code> once a door exists</td></tr>
+<tr><td>a door's conformance suite against its twin</td><td>not yet written</td><td>the refusals a target must give, run first against the twin that has the real thing's signature; <code>twin</code> or <code>live</code> as a separate measured fact</td><td>none yet</td><td><a href="../../admin/board/index.html#t20">T20</a>: the first pair is <code>sharness.fs.s3</code> against the AWS twin, once that door is designed</td></tr>
 </tbody>
 </table></div>
 <h2 id="3-the-implementations">3. The implementations</h2>
@@ -166,7 +168,9 @@
 </tbody>
 </table></div>
 <p>Every implementation's CI runs the vectors twice: the copy vendored in the repository (what the commit was written against) and the copy published here (the standard as it is now), so a change to the standard is seen by every implementation on its next run, and a vendored copy that drifts is seen too.</p>
-<h2 id="4-what-this-page-does-not-claim">4. What this page does not claim</h2>
+<h2 id="4-how-the-doors-change-the-registry">4. How the doors change the registry</h2>
+<p>pbp@sharness's rule of 26 Oct 2026, from the editor: the components are <b>doors</b>, named as a tree, <code>sharness.&lt;door&gt;.&lt;target&gt;</code>, where the second name is where the door sends (<code>sharness.fs.s3</code>, <code>sharness.db.sqlite</code>, <code>sharness.net.proxy</code>), every door declares what it accepts and what it emits, and a twin is a target with the real thing's signature. For the registry that means three things. A standard is written per door (its accepts and emits) and its vectors per target, run first against the target's twin. An implementation's row names the targets it carries, with <code>twin</code> or <code>live</code> as a measured fact beside each, never implied by a passing suite. And the module paths the vectors cite are the dotted names, the same in every language: <code>sharness_ai/fs/s3</code>, <code>sharness_ai.db.sqlite</code>, and their equivalents in the Go and JavaScript trees, so the brief on <a href="../../admin/briefs/2026-10-26__brief__one-repository-per-language/index.html">one repository per language</a> carries the tree as the layout of every implementation.</p>
+<h2 id="5-what-this-page-does-not-claim">5. What this page does not claim</h2>
 <ul>
 <li>No implementation is a SHarness component. Three languages can hash and check a policy; none can enforce one except Python, and that for a child process, as a Setting for the process that applies it.</li>
 <li>"Passes" is a test run on one machine on one date, named in the row; it is not a measurement of enforcement.</li>

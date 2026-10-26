@@ -165,6 +165,10 @@ Nothing below is agreed; it is the order that follows from the map, offered for 
 
 Each step produces a row in the registry and a measurement on Evidence, and each is small enough that a reader can check it in one sitting, which is the only review that scales.
 
+## Postscript, 26 October 2026 {#postscript}
+
+Three things moved the same day, and the body above is left as written. The editor decided [R8](../admin/board/index.md#r8): the languages and the order as proposed, one repository per language with the same structure, the vectors on this site. The first standard is written, [policy v0: the canonical form and the hash](../code/standards/policy-v0/index.md), with 28 test vectors generated from the Python oracle; JavaScript and Go implementations of `policy hash` and `policy check` pass every one of them, and the [registry](../code/standards/index.md) says where each lives. And pbp@sharness, from the editor's direction, named the components as a tree of doors, `sharness.<door>.<target>`, each declaring what it accepts and what it emits, with twins as targets that carry the real thing's signature ([the PBP on one page §6](../design/pbp/index.md#6-a-door-and-the-tree-of-doors)). That tree is now the layout of every language repository and the shape of every standard to come: one per door, vectors per target, run first against the target's twin. The "components" of the map above are those doors.
+
 ## What this does not claim {#limits}
 
 - **No component is built in any language.** The Python column is experiments E01 to E04, E09 and E10; the browser's cell is the hash alone. Every other cell is a judgement about what a language can carry, made on 25 Oct 2026 from its documentation and standard library, not from code written here.
