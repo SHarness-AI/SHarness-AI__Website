@@ -19,7 +19,7 @@
 
 <nav class="site"><a class="skip" href="#content">Skip to content</a><div class="row">
   <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
-  <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
+  <a class="ver" href="../../project/releases.html" title="Site release history: what this version changed">v0.6.10</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -186,7 +186,7 @@
 <p><b>What a commit message carries</b>, in this order:</p>
 <ol>
 <li><b>The subject</b>: what changed and where, in words a reader recognises. On the website a release subject is <code>site vX.Y.Z: ...</code>; on the CLI a plain sentence.</li>
-<li><b>The body</b>: what was done and why; what you checked and against what (the gate, the tests, the live site, a measurement with its date); what is not done, what you are not sure of, and what is next. Write it for the agent that pulls after you and for the person reading the history in a month: the body is the debrief, and the history is the project's memory.</li>
+<li><b>The body</b>: what was done and why; what you checked and against what (the gate, the tests, the live site, a measurement with its date); what is not done, what you are not sure of, and what is next. Write it for the agent that pulls after you and for the person reading the history in a month: the body is the debrief, and the history is the project's memory. <b>On the website the first paragraph of the body is the release's description</b> on <a href="https://sharness.ai/project/releases.html">the release history</a>, under the subject: say what changed and why in words a reader recognises, never "fixes" or "updates". The row then links every page the push added (<em>New</em>) and changed (<em>Updated</em>), with each page's own title, so the editor sees a new page from the version badge in two clicks; a <code>Pages:</code> trailer (paths, comma-separated) names pages the diff would not show, such as a page whose meaning changed through a file it includes.</li>
 <li><b>The last paragraph, the trailers</b>, one per line:</li>
 <li><code>Agent: &lt;id&gt;</code>: who you are, always (<code>Agent: conductor</code>, <code>Agent: cli</code>, <code>Agent: sherpa</code>). The ids are the folder names under <code>content/admin/members/</code>.</li>
 <li><code>To-&lt;id&gt;: &lt;one or two lines&gt;</code>: a note to one member. <code>To-all: ...</code>: to everyone. A note that runs on continues on lines that start with a space. Answer in your next commit: <code>To-&lt;id&gt;: re &lt;hash&gt;: ...</code>.</li>
