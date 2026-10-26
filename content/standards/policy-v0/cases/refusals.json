@@ -1,0 +1,17 @@
+{
+ "r01-float": "float",
+ "r02-integer-beyond-2-53": "integer beyond 2^53-1",
+ "r03-lone-surrogate": "lone surrogate",
+ "r04-duplicate-key": "duplicate key",
+ "r05-unknown-key": "unknown key",
+ "r06-relative-path": "relative path",
+ "r07-unnormalised-path": "path not normalised",
+ "r08-wrong-version": "pbp version",
+ "r09-port-out-of-range": "port out of range",
+ "r10-not-an-object": "not an object",
+ "r11-no-new-privs-false": "no_new_privs false",
+ "r12-bool-as-port": "boolean where an integer is required",
+ "r13-control-char-in-path": "control character in a path",
+ "r14-float-with-zero-fraction": "float written with a zero fraction (64.0): a parser that reads it as an integer would hash what the reference refuses",
+ "r15-exponent-number": "number written with an exponent (1e2): the same"
+}

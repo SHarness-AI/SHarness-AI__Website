@@ -100,6 +100,11 @@ SHarness is unrelated to Sharness, the shell testing library.
   sha384 integrity for every file; the source commit), /code/releases/dev/ (a snapshot, no promise)
 - /code/languages/index.md — Python first; Rust for the KMS and the bash client; JSON for policies; the
   proposed set of reference implementations (JavaScript in Node and the browser, Go, Rust; Java, .NET, C later)
+- /code/standards/index.md — the standards and their reference implementations: the registry (policy v0 written; the
+  acceptance test, the manifest, the protocols to come); one row per implementation with what it passes and who reviewed it
+- /code/standards/policy-v0/index.md — the first standard: the v0 shape, canonical JSON, the sha256 hash, what is
+  refused so every language hashes the same, the environment contract; /code/standards/policy-v0/vectors.json lists
+  the 28 test vectors (13 accept with their hashes, 15 refuse) that Python, JavaScript and Go pass
 - /articles/one-standard-many-languages.md — by dev@sharness: what in each component is a standard and what is
   an implementation; the component-by-language map; what each runtime adds to the attack surface; the
   adoption ladder from a policy file to a component; standards versioned with vectors and a reviewed registry

@@ -1,8 +1,9 @@
 {
-  "member": "dev",
-  "as_of": "2026-10-26T00:00Z",
-  "state": "blocked",
-  "last_did": "Site v0.5.10 (25 Oct, 23:23 UTC). Its session 'sharness.ai | dev@' has been idle since 23:25 UTC, blocked on R8.",
-  "waiting_for": "R8: the language set and order (it recommends JavaScript, then Go, then Rust; C as the floor), the repository layout, where the test vectors live; on: editor",
-  "next": "The policy standard's test vectors on this site, once R8 is decided"
+ "member": "dev",
+ "as_of": "2026-10-26T01:40Z",
+ "state": "working",
+ "last_did": "The editor decided R8 in session (26 Oct): one repository per language, same structure, vectors on the site. Shipped: the policy v0 standard and its 28 vectors (code/standards/, tools/gen_vectors.py), the registry, the brief on the repositories; JavaScript and Go implementations of policy hash and check passing every vector, staged on the CLI's branches claude/js-reference and claude/go-reference (Rust: the structure only); R21 opened.",
+ "waiting_for": "R21: the three repositories created by the editor (the app cannot, 403); pbp@sharness's next version of design/pbp, which may change the shape and so the next version of the standard; on: editor, pbp",
+ "branch": "claude/dev-standards (website); claude/js-reference, claude/go-reference, claude/rust-reference (CLI, orphan trees)",
+ "next": "Push each tree as its repository's dev once R21 is done; wire the JavaScript module into the site's hash mockup and the playground; Go run with Landlock through x/sys/unix and the first non-Python footprint; the Rust bash client after the process-tree experiment (E06)."
 }

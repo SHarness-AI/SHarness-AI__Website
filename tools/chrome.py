@@ -72,6 +72,7 @@ NAV = [
         ("Playground: run it in your browser", "code/playground/index.html"),
         ("Releases of the code: immutable paths", "code/releases/index.html"),
         ("Languages", "code/languages/index.html"),
+        ("Standards and test vectors", "code/standards/index.html"),
     ], ("code/",)),
     ("Security", "security/index.html", [
         ("&#9679; Security: the register", "security/index.html"),
@@ -146,6 +147,7 @@ FOOTER = [
         ("Linux in the browser", "code/browser/index.html"),
         ("Releases of the code", "code/releases/index.html"),
         ("Languages", "code/languages/index.html"),
+        ("Standards and test vectors", "code/standards/index.html"),
         ("PyPI: sharness-ai", "https://pypi.org/project/sharness-ai/"),
         ("GitHub: SHarness-AI__CLI", "https://github.com/SHarness-AI/SHarness-AI__CLI"),
     ]),
