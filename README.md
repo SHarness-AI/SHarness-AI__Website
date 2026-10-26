@@ -46,7 +46,9 @@ by hand; the deploy workflow refuses a push that does.
 2. Every push to `dev` runs `.github/workflows/deploy-pages.yml`: validate → **release** → deploy.
    The release job reads the tags, takes the next number (`dev`: the last number plus one;
    `main`: the middle number plus one, the last to zero), runs `tools/release.py`, which writes
-   `/version`, adds the row to `project/releases.html`, re-stamps every page and runs the gate again;
+   `/version`, adds the row to `project/releases.html` (your subject, the first paragraph of your
+   body as the description, the pages the push added and changed as links, a `Pages:` trailer if
+   you wrote one, and the compare link in git), re-stamps every page and runs the gate again;
    CI commits that as "site vX.Y.Z: <your subject>", tags the commit, pushes branch and tag, and
    deploys that commit. A push that lands while the job runs rides the same release; no number is
    ever guessed, and no release is ever left untagged.

@@ -7,8 +7,9 @@
 #   2. release   — CI owns the version (R23, the scheme of the send repository): the next number
 #                  comes from the tags, inside this one serialised job, never from the committer. A
 #                  push to dev bumps the last number (vX.Y.Z+1); a push to main bumps the middle one
-#                  (vX.Y+1.0). tools/release.py writes /version, adds the row to the release history,
-#                  re-stamps every page and runs the gate again; the job commits that as the actions
+#                  (vX.Y+1.0). tools/release.py writes /version, adds the row to the release history
+#                  (the pushed commit's subject and first paragraph, the pages the push added and
+#                  changed, each linked), re-stamps every page and runs the gate again; the job commits that as the actions
 #                  user ("site vX.Y.Z: <the pushed commit's subject>"), tags the commit, pushes the
 #                  branch and the tag. A push that lands while this runs is taken in before the bump,
 #                  so no number is ever guessed twice and no release is ever left untagged. A commit
@@ -80,8 +81,7 @@ jobs:
           for try in 1 2 3; do
             git fetch --quiet origin "$BRANCH"
             git reset -q --hard "origin/$BRANCH"            # whatever is newest: a push that landed meanwhile rides this release
-            SUBJECT=$(git log -1 --format=%s HEAD)
-            python3 tools/release.py bump --branch "$BRANCH" --subject "$SUBJECT" | tee release.out
+            python3 tools/release.py bump --branch "$BRANCH" --before "$BEFORE" | tee release.out
             VERSION=$(grep -oP '^version=\K.*' release.out); SHA=$(grep -oP '^sha=\K.*' release.out); BUMPED=$(grep -oP '^bumped=\K.*' release.out)
             rm -f release.out
             if [ "$BUMPED" = "false" ]; then break; fi

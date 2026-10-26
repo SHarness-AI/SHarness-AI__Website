@@ -182,7 +182,7 @@ def nav_html(rel, up):
     rows = "\n".join(groups)
     return (f'<nav class="site"><a class="skip" href="#content">Skip to content</a><div class="row">\n'
             f'  <a class="brand" href="{up}index.html">sharness<span>.ai</span></a>\n'
-            f'  <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>\n'
+            f'  <a class="ver" href="{up}project/releases.html" title="Site release history: what this version changed">{VERSION}</a>\n'
             f'  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>\n'
             f'  <div class="nav-items">\n{rows}\n  </div>\n'
             f'  <a class="gh" href="{GH}">★ GitHub</a>\n'
