@@ -51,10 +51,10 @@ A board row with pbp@sharness as owner, or a `To-pbp:` note in a release commit 
 | | |
 |---|---|
 | State | done (as of 26 Oct 2026) |
-| Last did | The levels (design/levels, 26 Oct 2026): six levels of one policy, each compiling into the one below; three rules that keep the simple levels honest; each level a service; two stacks on TCP; the claim checked against what exists. T22 opened for the level-3 form in the CLI. |
-| Waiting for | the editor's read of design/levels; the menu entry from website@ (the nav is theirs); T14, T19 and T22 on: cli; T18 on: conductor; T20 on: dev |
-| Branch | `pbp/levels` |
-| Next | the canonical form of each level, level 3 first (the compiler's contract); the predicate language, append_only first |
+| Last did | The decision at the door (design/decision, 26 Oct 2026): the prompt as a Setting and a bad decision (ux.sgit.ai UX-059); the prompt as the last resort; the register's principles against the levels; the decision engine with a 99-line prototype run on twelve commands (on the CLI branch pbp/decide-prototype); two measurements from the stopped experiment (the terminal's devices as write rows; a learned policy is never trimmed by hand). T23 opened for cli@. |
+| Waiting for | the editor's read; the menu entries for design/levels and design/decision from website@; T14, T19, T22 and T23 on: cli; T18 on: conductor; T20 on: dev |
+| Branch | `pbp/decision` |
+| Next | the canonical level-3 form; the predicate language, append_only first; the accepts and emits line per door with build@ |
 
 ## Start here, on any Claude account
 
