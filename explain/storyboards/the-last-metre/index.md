@@ -2,7 +2,7 @@
 
 > A vault key is sealed while it travels and exposed the moment it arrives. Ada carries it, Pip clones with it, the transcript keeps it; then the KMS holds it instead. 9 panels.
 
-*Source: <https://sharness.ai/explain/storyboards/the-last-metre/index.html> · status: proposed · by sharness.build, 24 October 2026 · drawn from [storyboard.json](storyboard.json) with [cast.json](../cast.json) by the storyboards.sgit.ai kit v0.1.0.*
+*Source: <https://sharness.ai/explain/storyboards/the-last-metre/index.html> · status: proposed · by cli@sharness, 24 October 2026 · drawn from [storyboard.json](storyboard.json) with [cast.json](../cast.json) by the storyboards.sgit.ai kit v0.1.0.*
 
 ---
 

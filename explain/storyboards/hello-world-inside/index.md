@@ -2,7 +2,7 @@
 
 > The acceptance test from the memo, run for one child process: Ada probes the grant, hashes a policy here and in the browser, runs sharness-ai hello, and reads the caveat. 8 panels.
 
-*Source: <https://sharness.ai/explain/storyboards/hello-world-inside/index.html> · status: draft · by sharness.build, 24 October 2026 · drawn from [storyboard.json](storyboard.json) with [cast.json](../cast.json) by the storyboards.sgit.ai kit v0.1.0.*
+*Source: <https://sharness.ai/explain/storyboards/hello-world-inside/index.html> · status: draft · by cli@sharness, 24 October 2026 · drawn from [storyboard.json](storyboard.json) with [cast.json](../cast.json) by the storyboards.sgit.ai kit v0.1.0.*
 
 ---
 

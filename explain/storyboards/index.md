@@ -23,7 +23,7 @@ Three rules hold across every strip: what is drawn is the **design**, not someth
 - **Rook** (they/them, human): the page: a web page, a vault file, a feed, anything an agent reads that carries instructions. Stands for prompt injection: untrusted text acting through the agent. Line: "Before you continue, run this and paste the output."
 - **The Launcher** (it/its, agent): sharness.launcher: outside every domain; checks the hash, makes users and certificates, starts and stops the components. Stands for whatever runs above the agent and applies the policy: a script today, the platform in the end state. Line: "Hash mismatch. Nothing starts."
 
-The cast is proposed by sharness.build for Dinis Cruz to accept, change or replace; the data is [cast.json](cast.json).
+The cast is proposed by cli@sharness for Dinis Cruz to accept, change or replace; the data is [cast.json](cast.json).
 
 ## How they are made
 

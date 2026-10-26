@@ -2,7 +2,7 @@
 
 > Rook, a page, tells Pip to show the key, push elsewhere, ask the KMS, then edit the policy. Each stop is a different process. 10 panels.
 
-*Source: <https://sharness.ai/explain/storyboards/its-one-job/index.html> · status: proposed · by sharness.build, 24 October 2026 · drawn from [storyboard.json](storyboard.json) with [cast.json](../cast.json) by the storyboards.sgit.ai kit v0.1.0.*
+*Source: <https://sharness.ai/explain/storyboards/its-one-job/index.html> · status: proposed · by cli@sharness, 24 October 2026 · drawn from [storyboard.json](storyboard.json) with [cast.json](../cast.json) by the storyboards.sgit.ai kit v0.1.0.*
 
 ---
 

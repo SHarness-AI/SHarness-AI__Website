@@ -6,21 +6,21 @@
 
 ---
 
-A snapshot taken by the conductor with `python3 tools/admin_status.py`, as of 26 Oct 2026 (2026-10-26T00:58Z): every branch of both repositories, its head, its last commit and how far it is from `dev`, read from git, never from a session; then every member's own `status.json`. A branch ahead of `dev` is work nobody has released yet; a session is only visible here once it has pushed.
+A snapshot taken by the conductor with `python3 tools/admin_status.py`, as of 26 Oct 2026 (2026-10-26T01:12Z): every branch of both repositories, its head, its last commit and how far it is from `dev`, read from git, never from a session; then every member's own `status.json`. A branch ahead of `dev` is work nobody has released yet; a session is only visible here once it has pushed.
 
 ## SHarness-AI__Website
 
-Latest tag `v0.5.26`; 0 branch(es) carry commits not yet on `dev`.
+Latest tag `v0.5.28`; 0 branch(es) carry commits not yet on `dev`.
 
 | Branch | Head | Last commit | Against dev |
 |---|---|---|---|
-| `dev` | `c4ed956` · 2026-10-26 00:56 | site v0.5.26: sharness.build becomes cli@sharness (Agent: cli) | 0 ahead, 0 behind |
-| `main` | `a1f93f6` · 2026-10-24 17:30 | Initial commit | 0 ahead, 52 behind |
-| `claude/blissful-johnson-yk1c4p` | `e9a9679` · 2026-10-24 17:55 | site v0.3.1: completeness pass against the sgit design pack 00-04 | 0 ahead, 47 behind |
-| `claude/wonderful-cray-4xpawa` | `c4ed956` · 2026-10-26 00:56 | site v0.5.26: sharness.build becomes cli@sharness (Agent: cli) | 0 ahead, 0 behind |
-| `conductor/admin` | `de20840` · 2026-10-26 00:36 | site v0.5.24: the release script, tools/ship.py, used for its own first release; the check-in's review, R19, the update of 00:40 | 0 ahead, 6 behind |
-| `pbp/join` | `c0cde85` · 2026-10-25 23:52 | site v0.5.17: sharness.pbp joins; the Process Behaviour Policy on one page (Agent: sharness.pbp) | 0 ahead, 19 behind |
-| `security/join` | `e921452` · 2026-10-25 23:58 | site v0.5.20: the security section and the code at immutable paths, merged onto dev at v0.5.19 | 0 ahead, 13 behind |
+| `dev` | `4d92fed` · 2026-10-26 01:11 | site v0.5.28: article: The CLI is the front door, the design for the next sharness-ai | 0 ahead, 0 behind |
+| `main` | `a1f93f6` · 2026-10-24 17:30 | Initial commit | 0 ahead, 55 behind |
+| `claude/blissful-johnson-yk1c4p` | `e9a9679` · 2026-10-24 17:55 | site v0.3.1: completeness pass against the sgit design pack 00-04 | 0 ahead, 50 behind |
+| `claude/wonderful-cray-4xpawa` | `4d92fed` · 2026-10-26 01:11 | site v0.5.28: article: The CLI is the front door, the design for the next sharness-ai | 0 ahead, 0 behind |
+| `conductor/admin` | `c4c4b9b` · 2026-10-26 00:58 | site v0.5.27: website@sharness joins the roster as a draft: its role, its card and its start prompt, so one line onboards it from any account; R20 (Agent: conductor) | 0 ahead, 1 behind |
+| `pbp/join` | `c0cde85` · 2026-10-25 23:52 | site v0.5.17: sharness.pbp joins; the Process Behaviour Policy on one page (Agent: sharness.pbp) | 0 ahead, 22 behind |
+| `security/join` | `e921452` · 2026-10-25 23:58 | site v0.5.20: the security section and the code at immutable paths, merged onto dev at v0.5.19 | 0 ahead, 16 behind |
 
 ## SHarness-AI__CLI
 
