@@ -51,10 +51,10 @@ A board row with pbp@sharness as owner, or a `To-pbp:` note in a release commit 
 | | |
 |---|---|
 | State | done (as of 26 Oct 2026) |
-| Last did | The decision at the door (design/decision, 26 Oct 2026): the prompt as a Setting and a bad decision (ux.sgit.ai UX-059); the prompt as the last resort; the register's principles against the levels; the decision engine with a 99-line prototype run on twelve commands (on the CLI branch pbp/decide-prototype); two measurements from the stopped experiment (the terminal's devices as write rows; a learned policy is never trimmed by hand). T23 opened for cli@. |
-| Waiting for | the editor's read; the menu entries for design/levels and design/decision from website@; T14, T19, T22 and T23 on: cli; T18 on: conductor; T20 on: dev |
-| Branch | `pbp/decision` |
-| Next | the canonical level-3 form; the predicate language, append_only first; the accepts and emits line per door with build@ |
+| Last did | design/decision §9 to §12 (26 Oct 2026): from an engine to a service (what the prompt lacks and the service holds; no secrets in the request; the service elsewhere, a Setting at a hook and a Boundary as sharness.bash); three sources of truth (parse, rehearsal, policy); the rehearsal prototype run four times in a twin of a workspace (an installer refused on facts); what the model does and does not. T24 opened; rehearse.py on the CLI branch. |
+| Waiting for | the editor's read; menu entries from website@; T14, T19, T22, T23 and T24 on: cli; T18 on: conductor; T20 on: dev |
+| Branch | `pbp/decision-service` |
+| Next | the request and verdict schemas of the decision service (accepts and emits), on the Policies page; the canonical level-3 form |
 
 ## Start here, on any Claude account
 
