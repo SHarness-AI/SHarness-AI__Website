@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 510" width="1100" height="510" role="img" aria-labelledby="t">
+<title id="t">From simple to advanced: six steps down the levels, each one command, each optional; a person stops at the step they need</title>
+<style>text{font-family:ui-sans-serif,system-ui,sans-serif;font-size:14px}.m{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}.s{animation:f 6s infinite}@keyframes f{0%,100%{opacity:.55}50%{opacity:1}}@media(prefers-reduced-motion:reduce){.s{animation:none}}</style>
+<rect width="1100" height="510" rx="14" fill="#0b1020"/>
+<text x="24" y="34" fill="#e5e7eb" font-size="16" font-weight="600">Go only as deep as you need: every step is one command, and the one above it is still enough</text>
+<rect class="s" style="animation-delay:0.0s" x="24" y="60" width="1052" height="60" rx="8" fill="#161b2e" stroke="#c4b5fd" stroke-opacity=".5"/>
+<text x="38" y="82" fill="#fbbf24" font-weight="600">day one</text>
+<text x="38" y="106" fill="#7dd3fc" class="m">sharness-ai contain --workspace . --sites github.com -- my-agent</text>
+<text x="1062" y="82" text-anchor="end" fill="#e879f9">level 5</text>
+<text x="1062" y="106" text-anchor="end" fill="#9ca3af">one sentence; the kernel enforces; nothing read</text>
+<rect class="s" style="animation-delay:0.6s" x="174" y="130" width="902" height="60" rx="8" fill="#161b2e" stroke="#c4b5fd" stroke-opacity=".5"/>
+<text x="188" y="152" fill="#fbbf24" font-weight="600">when it refuses something</text>
+<text x="188" y="176" fill="#7dd3fc" class="m">sharness-ai explain</text>
+<text x="1062" y="152" text-anchor="end" fill="#e879f9">levels 5 to 1</text>
+<text x="1062" y="176" text-anchor="end" fill="#9ca3af">see why: the row, the level it came from, the hash</text>
+<rect class="s" style="animation-delay:1.2s" x="324" y="200" width="752" height="60" rx="8" fill="#161b2e" stroke="#c4b5fd" stroke-opacity=".5"/>
+<text x="338" y="222" fill="#fbbf24" font-weight="600">one row deeper</text>
+<text x="338" y="246" fill="#7dd3fc" class="m">sharness-ai policy edit FILE --level 3</text>
+<text x="1062" y="222" text-anchor="end" fill="#e879f9">level 3</text>
+<text x="1062" y="246" text-anchor="end" fill="#9ca3af">change the row a manager would, the name changes</text>
+<rect class="s" style="animation-delay:1.7999999999999998s" x="474" y="270" width="602" height="60" rx="8" fill="#161b2e" stroke="#c4b5fd" stroke-opacity=".5"/>
+<text x="488" y="292" fill="#fbbf24" font-weight="600">your own profile</text>
+<text x="488" y="316" fill="#7dd3fc" class="m">sharness-ai profile new my-tool</text>
+<text x="1062" y="292" text-anchor="end" fill="#e879f9">level 4</text>
+<text x="1062" y="316" text-anchor="end" fill="#9ca3af">ship rows with your tool; users fill the blanks</text>
+<rect class="s" style="animation-delay:2.4s" x="624" y="340" width="452" height="60" rx="8" fill="#161b2e" stroke="#c4b5fd" stroke-opacity=".5"/>
+<text x="638" y="362" fill="#fbbf24" font-weight="600">the organisation</text>
+<text x="638" y="386" fill="#7dd3fc" class="m">sharness-ai manifest · level serve 3</text>
+<text x="1062" y="362" text-anchor="end" fill="#e879f9">level 2</text>
+<text x="1062" y="386" text-anchor="end" fill="#9ca3af">your targets, your proxy, your twins; every laptop narrows</text>
+<rect class="s" style="animation-delay:3.0s" x="774" y="410" width="302" height="60" rx="8" fill="#161b2e" stroke="#c4b5fd" stroke-opacity=".5"/>
+<text x="788" y="432" fill="#fbbf24" font-weight="600">the auditor</text>
+<text x="788" y="456" fill="#7dd3fc" class="m">sharness-ai translate · run --verbose · hello</text>
+<text x="1062" y="432" text-anchor="end" fill="#e879f9">levels 1 and 0</text>
+<text x="1062" y="456" text-anchor="end" fill="#9ca3af">what the kernel was told; what it refused, dated</text></svg>
