@@ -1,28 +1,60 @@
 # The CLI: sharness-ai
 
-> **Status: experiments.** A Python package, `sharness-ai`, that will carry the SHarness launcher and components. Today it carries the first experiments. Source: [SHarness-AI/SHarness-AI__CLI](https://github.com/SHarness-AI/SHarness-AI__CLI). The command is `sharness-ai`.
+> **Status: experiments, with two MVPs runnable, as of 26 Oct 2026.** A Python package, `sharness-ai`, that will carry the SHarness launcher and components. Today it carries the experiments and two MVPs on its `dev` branch: the levels in the terminal (MVP 1: `contain`, `profile`, `explain`) and the first door, `sharness.fs` (MVP 2: `session`, `fs`, `door conformance`). Source: [SHarness-AI/SHarness-AI__CLI](https://github.com/SHarness-AI/SHarness-AI__CLI). The command is `sharness-ai`.
 
-## What exists, as of 24 Oct 2026
+## What exists, as of 26 Oct 2026
 
 | Where | What |
 |---|---|
 | [PyPI, v0.1.0](https://pypi.org/project/sharness-ai/) | reports its version and prints its help; also installs a `sharness` shorthand, removed on `dev` |
-| the `dev` branch | the proposed scope in the README; `sharness-ai` as the only command; experiments E01 to E04 (`probe`, `policy hash`, `policy check`, `run`, `hello`), their tests, the `sharness-hello` skill. Not released until `dev` is merged to `main` |
+| the `dev` branch | `sharness-ai` as the only command; the experiments E01 to E05, E09 and E10; MVP 1 and MVP 2 below; `doctor` and `help --format json`; 209 tests (all pass, run by website@ on Python 3.13, 26 Oct 2026). Not released until `dev` is merged to `main` ([R7](../../admin/board/index.md)) |
 
 ```
 $ pip install sharness-ai            # v0.1.0: version and help only
-$ pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev     # the experiments, unreleased
-$ sharness-ai --version
-sharness-ai v0.1.0
-$ sharness-ai
-usage: sharness-ai [-h] [--version] command ...
-  probe     E01: the grant, what a process here can do before any policy
-  policy    E02: hash or check a Process Behaviour Policy (v0)
-  run       E03: run one command under a policy (Linux, Landlock)
-  hello     E04: the memo's acceptance test, for one child process
+$ pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev     # the experiments and the MVPs, unreleased
+$ sharness-ai help                   # every command, read from the parser itself
 ```
 
-Requires Python 3.11 or later. No runtime dependencies: Landlock is reached through `ctypes`, hashing through `hashlib`, nothing else is needed. The map of what each experiment shows and does not show is [Mockups and experiments](../experiments/index.md).
+The command surface on `dev`, from `sharness-ai help --format json` (the parser is the source; this table is read from it):
+
+| Command | What it does | Status |
+|---|---|---|
+| `sharness-ai` (no arguments) | the guide: where you are, the ladder, what to do next | runnable |
+| `contain` | level 5: one sentence (a workspace, sites, secrets) compiled to the kernel and run | runnable (MVP 1) |
+| `profile list\|show` | level 4: the roles a vendor ships, with the blanks a person fills | runnable (MVP 1) |
+| `explain FILE` | any document, drawn down the levels to the kernel, hash by hash | runnable (MVP 1) |
+| `doctor` | can a policy hold here? eight checks in order, each with what to do about it | runnable |
+| `help [--format json]` | every command, from the parser; JSON for a page or a diff between releases | runnable |
+| `probe` | E01: the grant, what a process here can do before any policy | runnable |
+| `policy hash\|check\|show\|translate\|new\|edit` | E02 and E10: the policy, its hash, its drawing, its form in another enforcer | runnable |
+| `run --policy FILE [--expect-hash H] -- CMD` | E03: one command under a policy (Linux, Landlock) | runnable |
+| `hello` | E04: the acceptance test, six probes under one policy | runnable |
+| `session new\|show` | E05: a session CA and one identity per role (openssl), the CA key destroyed | runnable (MVP 2) |
+| `fs serve\|hello\|put\|append\|get\|rm\|ls\|log` | `sharness.fs`, the only writer: serve the door or call it as the app | runnable (MVP 2), a Setting |
+| `door conformance NAME` | a door's vectors against a fresh instance, the twin first | runnable (MVP 2) |
+| `components` | the operating system a process sees: the map, with status | runnable |
+| `bash`, `net`, `kms`, `llm`, `launcher` | the map and the proposed surface; exit 69 | designed, not built |
+
+Requires Python 3.11 or later. No runtime dependencies: Landlock is reached through `ctypes`, hashing through `hashlib`, TLS through `ssl`; MVP 2 calls the `openssl` program for the session's certificates. The map of what each experiment shows and does not show is [Mockups and experiments](../experiments/index.md).
+
+## MVP 1: the levels in the terminal
+
+A policy can be written at five levels, and each compiles to the one below it ([the levels](../../design/levels/index.md)). `contain` takes the top one, a sentence (the screen, abridged):
+
+```
+$ sharness-ai contain --workspace . --sites github.com -- my-agent
+  you said        contain my-agent to /home/me/project, github.com, no secrets
+  it became       profile coding-agent (4) → 13 path rows + network + caps (3) → one door, the kernel (2) → 14 kernel rules (1)
+  the name        sha256:…   every level below is recomputed from it
+  not held        github.com: held as port 443; the host name is not held until sharness.net runs here
+  not covered     UDP (DNS) unless an empty network namespace applied · Unix sockets by path · the inherited environment
+```
+
+The sentence (level 5) fills a profile's blanks (level 4: six profiles, P0 to P5 as templates); the profile becomes rows in plain nouns (level 3: `network.sites` instead of ports); the rows become the v0 policy (level 2, where the kernel is the only door) and what the kernel is told (level 1). Each level has its own hash, and the run goes ahead only with `--expect-hash` on the level-2 hash the chain computed. `explain FILE` draws the same chain box by box; `--save FILE` keeps the sentence. What the kernel cannot hold yet is said in words, never hidden: a host name compiles to its port, so **every host on that port is reachable** until `sharness.net` exists. Vectors for each level (l3: 9 accept, 6 refuse; l4: 9 and 4; l5: 5 and 5) are generated from the Python package as the oracle. Not done: the count of "things you did not ask for", which needs the grant measured against the mandate.
+
+## MVP 2: the first door
+
+`sharness.fs` runs as a loopback service under mutual TLS 1.3, over the local disk (`fs.disk`) or a dictionary with the same face (`fs.disk.twin`), with the door kit every later door will share: the session, the contract (`ACCEPTS.json`, `EMITS.json`, both hashed), the closed predicate language, verdicts that name the row that decided, one audit line per request. What it accepts, what it refuses and its known issues: [sharness.fs](../../components/fs/index.md). It is a Setting for the app until the launcher gives it its own uid.
 
 ## The first version, as proposed
 
@@ -34,7 +66,9 @@ sharness-ai policy hash|check FILE                 E02  the one value the person
 sharness-ai run --policy FILE [--expect-hash H] -- CMD…   E03  one command under a policy  runnable
 sharness-ai hello                                  E04  the acceptance test, one process   runnable
 
-sharness-ai edges                                  E05  session CA + role certs + the edge matrix      planned
+sharness-ai session new|show                       E05  session CA + role certs + the edge matrix      runnable
+sharness-ai contain|profile|explain                MVP 1  the levels, a sentence down to the kernel  runnable
+sharness-ai fs serve|put|get|…                     MVP 2  sharness.fs, the first door (a Setting)     runnable
 sharness-ai tree                                   E06  the process-tree proof of concept               planned
 sharness-ai llm   --listen :port --policy FILE     E07  sharness.llm v0, where ANTHROPIC_BASE_URL points  planned
 sharness-ai kms   --policy FILE                    E08  sharness.kms v0: init, public, unwrap, seal_to, destroy  planned

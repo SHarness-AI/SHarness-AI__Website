@@ -7,7 +7,7 @@
 > browser to prove it, and a design for the launcher that binds the agent itself.
 
 *Source: <https://sharness.ai/index.html> · site v0.6.18 · markdown twin of the front page.*
-*Status: **experiments**. No SHarness component is built; every measured figure carries its date.*
+*Status: **experiments**. One door, sharness.fs, runs as an MVP (a Setting until the launcher exists); no other component is built; every measured figure carries its date.*
 
 ## Start in 60 seconds
 
@@ -84,8 +84,8 @@ The memo's method is to start with very simple examples. [Mockups and experiment
 
 ## What this site claims
 
-Measured figures carry their environment and date, with method on the Evidence page. Everything else is designed or proposed. The site never claims anything is
-built, never claims protection against root or kernel compromise, and says nothing about any
+Measured figures carry their environment and date, with method on the Evidence page. Everything else is designed or proposed. The site never claims a component is a Boundary
+before the launcher exists, or anything released beyond PyPI v0.1.0, never claims protection against root or kernel compromise, and says nothing about any
 platform's plans.
 
 By Dinis Cruz. Design session written up with Claude, 24 October 2026.

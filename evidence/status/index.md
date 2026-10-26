@@ -1,13 +1,15 @@
 # What exists today, and what does not
 
-> **The honest column, as of 25 Oct 2026.** SHarness is at the design stage with the first experiments runnable. What exists as running code is listed here and kept apart from the design, so a reader, human or agent, can tell what they can rely on.
+> **The honest column, as of 26 Oct 2026.** SHarness is at the design stage with the first experiments runnable, and two MVPs: the levels in the terminal and the first door, `sharness.fs`, a Setting until the launcher exists. What exists as running code is listed here and kept apart from the design, so a reader, human or agent, can tell what they can rely on.
 
 ## Exists, and can be checked
 
 | Thing | Where to check it |
 |---|---|
 | **The `sharness-ai` package on PyPI**, v0.1.0: reports its version and prints its help | [pypi.org/project/sharness-ai](https://pypi.org/project/sharness-ai/) |
-| **Experiments E01 to E04, E09 and E10** (`probe`, `policy hash`, `run`, `hello`, the harness under a second kernel in Node, in a browser tab and through chroot, `policy translate`), with 92 tests run in CI on Python 3.11 to 3.13 on every push to the CLI's `dev` branch; unreleased to PyPI | [the code](../../code/index.md) · [experiments/README.md](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md) · E04 and E09 measured on [Evidence §9](../index.md#9-the-first-experiments-run-by-the-cli) |
+| **Experiments E01 to E04, E09 and E10** (`probe`, `policy hash`, `run`, `hello`, the harness under a second kernel in Node, in a browser tab and through chroot, `policy translate`), with the CLI's tests (209 on 26 Oct 2026) run in CI on Python 3.11 to 3.13 on every push to the CLI's `dev` branch; unreleased to PyPI | [the code](../../code/index.md) · [experiments/README.md](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md) · E04 and E09 measured on [Evidence §9](../index.md#9-the-first-experiments-run-by-the-cli) |
+| **MVP 1, the levels in the terminal**: `contain` (a sentence), `profile` (six profiles with blanks), `explain` (any document down to the kernel, one hash per level), with vectors per level; on the CLI's `dev` | [The CLI §MVP 1](../../code/cli/index.md#mvp-1-the-levels-in-the-terminal) · [the levels](../../design/levels/index.md) |
+| **MVP 2, the first door, `sharness.fs`**: the door kit (session CA by openssl, mutual TLS 1.3, contracts, rows, verdicts, audit) over the disk and its twin, 18 conformance vectors; a Setting for the app until the launcher gives it its own uid; five known issues | [sharness.fs](../../components/fs/index.md) · [the issues](../../components/fs/index.md#5-known-issues-as-of-26-oct-2026) |
 | **A real Linux kernel in a tab** running `probe`, `hello` and `run`: the E09 page | [open it](../../code/browser/demo/index.html) · [the write-up](../../code/browser/index.md) · [the article](../../articles/linux-in-a-tab.md) |
 | **The playground**: `pip install sharness-ai` in Pyodide, a shell on the Linux guest on a network the page provides, one policy hashed three ways, and an interceptor that decodes every packet and vetoes hosts outside an allowlist | [open it](../../code/playground/index.html) |
 | **Seven example policies** (two minimal, five profiles P0 to P4 from a hello world to sgit) **and a skill** for Claude Code sessions | [the policies](../../code/experiments/index.md#the-example-policies) · [Examples](../../code/examples/index.md) |
@@ -21,7 +23,7 @@
 
 | Missing | Status |
 |---|---|
-| **Any SHarness component** (launcher, kms, net, fs, bash, llm) | Not built. Designed on [Components](../../design/components/index.md). |
+| **Any SHarness component but `sharness.fs`** (launcher, kms, net, bash, llm) | Not built. Designed on [Components](../../design/components/index.md). `sharness.fs` runs as an MVP, a Setting, not a Boundary, until the launcher exists. |
 | **A CLI release beyond `--version`** | v0.1.0 on PyPI is the skeleton and the pipeline; the experiments are on `dev`, unreleased ([R7](../../project/comms.html#r7)). |
 | **The launcher above the agent** | Not built. Every experiment applies a policy to a child process; nothing yet binds the agent itself. |
 | **The process-tree proof of concept** (E06) | Started, not completed, not run. See [Enforcing the process tree](../../design/process-tree/index.md). |

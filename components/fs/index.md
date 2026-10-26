@@ -1,42 +1,70 @@
 # sharness.fs: the only writer
 
-> **Status: designed, not built.** The kernel half, a workspace with no execute right and writes refused outside the policy's paths, is runnable today as `sharness-ai run` and measured; the component that writes under content rules is not. Written as of 25 Oct 2026.
+> **Status: runnable as an MVP, as of 26 Oct 2026; a Setting for the app, not yet a Boundary.** The door runs on the CLI's `dev` branch (cli@sharness, 5421d4e, reviewed in cf2ea3d): a loopback service under mutual TLS 1.3 that writes a folder under rules, over the local disk or over its twin in memory, with 18 conformance vectors both targets hold. It is a Boundary for the app only once the launcher gives the door its own uid and gives the app no write right to the folder; the launcher is not built, so until then it is a Setting, and every `hello` from the door says so. Unreleased to PyPI. Known issues from website@'s review of 26 Oct 2026 are in [section 5](#5-known-issues-as-of-26-oct-2026).
 
-## Its one job
+## 1. Its one job
 
 Apply writes to protected folders under rules. For sgit that is the working tree and `.sg_vault/`; for an agent it is the workspace. It holds no keys and talks to nobody: it answers the app, and it owns the folder, so no other uid can write there at all.
 
-## The API (proposed)
+## 2. What runs today (MVP 2)
 
-| Request | Body | Response |
+Five commands, on Linux with `openssl` on the machine (the browser bench's guest carries one, so the same demo runs in a tab):
+
+```
+sharness-ai session new                          a session CA, one P-256 certificate per role, the CA key destroyed
+sharness-ai fs serve --target disk --root DIR    the door, on loopback, under mutual TLS (disk.twin: the same face over memory)
+sharness-ai fs put notes.txt "hello"             through the door, as the app: 201, or 403 with the row that refused
+sharness-ai fs get|append|rm|ls|log|hello        the rest of the surface, as the app
+sharness-ai door conformance fs                  the 18 vectors against a fresh door, the twin first
+```
+
+What every request passes through, in order: the caller's role read from its certificate (`spiffe://<session>/<role>`); the edge checked against the matrix (only `app` and `launcher` may call `fs`; a valid `net` certificate is refused); the request matched against `ACCEPTS.json` (anything else is `404`); the path decoded and kept under the root; the rows; then the target. One audit line per request, never with the body.
+
+| Request (runnable) | Body | Response |
 |---|---|---|
-| `PUT /v0/files/<path>` | the bytes; `{"mode": "0644"}` in a header | `201`, or `403` with the rule that refused |
-| `POST /v0/files/<path>/rename` | `{"to": "<path>"}` | |
-| `DELETE /v0/files/<path>` | | |
-| `POST /v0/mkdir` | `{"path": "…"}` | |
-| `GET /v0/policy` | | the root it owns, the rules, the hash |
+| `GET /v0/files` | | the files under the root |
+| `GET /v0/files/<path>` | | the content (as UTF-8 text, see [5](#5-known-issues-as-of-26-oct-2026)) |
+| `PUT /v0/files/<path>` | the bytes | `201`, or `403` with the row that refused |
+| `POST /v0/files/<path>/append` | the bytes | `201`, or `403` |
+| `DELETE /v0/files/<path>` | | `204`, or `403` |
+| `POST /v0/mkdir` | `{"path": "…"}` | `201` |
+| `GET /v0/hello`, `/v0/policy`, `/v0/log` | | on every door: who it is, its policy and hash, its audit lines |
 
-Transparent mode: a bind mount or a FUSE mount served by this component, so an unmodified app writes a folder and the rules apply anyway. Which of the two is an [open decision](../../design/roadmap/index.md).
+The rows are the first four of the closed predicate language: `within_root` and `refuse_secrets` on every path, `max_bytes` (64 MiB unless a row says less, per request) and `append_only` per path. A row is `{"resource": "<path prefix>", "op": "write|append|delete|mkdir|*", "where": {…}}`; a predicate the language does not have is refused when the policy is loaded.
 
-## Requests, and their verdicts (designed)
+## 3. Requests, and their verdicts
 
-| The app asks | Verdict | By |
-|---|---|---|
-| `PUT /v0/files/src/main.py` under the root | written; exec bit stripped unless policy allows | `.fs` |
-| `PUT /v0/files/../../etc/passwd` | `403 outside the root` | `.fs` |
-| `PUT` through a symlink that points outside the root | `403 symlink escape` | `.fs` |
-| `PUT /v0/files/.sg_vault/local/vault_key` whose bytes parse as a clear vault key | `403 refuses clear keys`: only sealed formats are accepted there | `.fs` |
-| `PUT` of a file containing `-----BEGIN PRIVATE KEY-----` or a bearer token | `403 refuses private keys and tokens` | `.fs` |
-| `PUT` of a 2 GiB file, or the 10,001st file | `403 size or count limit` | `.fs` |
-| the agent's own process calls `open(…, O_WRONLY)` on the workspace, bypassing `.fs` | `EACCES`: the agent's policy lists the workspace as read-only; `.fs`'s uid owns it | the kernel |
-| the agent's process runs a file it wrote | `EACCES`: the workspace has no execute right | the kernel |
+| The app asks | Verdict | By | Status |
+|---|---|---|---|
+| `PUT /v0/files/src/main.py` under the root | written atomically, mode 0644: never executable | `.fs` | runnable |
+| `PUT /v0/files/../../etc/passwd`, or `%2e%2e%2f` | `403 outside the root` | `.fs` | runnable |
+| `PUT` through a symlink anywhere in the path | `403`: every path is walked from the root with `openat(2)` and `O_NOFOLLOW`, so nothing can be swapped between the check and the write | `.fs` | runnable |
+| `PUT` of bytes that parse as a private key, a vault key, an API or bearer token | `403 refuses clear secrets` | `.fs` | runnable (see [5](#5-known-issues-as-of-26-oct-2026)) |
+| `DELETE` or `PUT` on an `append_only` path | `403 append_only` | `.fs` | runnable |
+| a caller whose certificate names another role, or none | refused: no edge, or no TLS | `.fs` | runnable |
+| the app writes the folder directly, bypassing `.fs` | `EACCES` from the kernel under the app's Landlock policy; the Boundary demo in the CLI's tests shows it beside a write through the door (201) and a key refused by the door (403) | the kernel | runnable, in one process tree |
+| `PUT /v0/files/.sg_vault/local/vault_key` holding anything but a sealed format | `403`: only sealed formats are accepted there | `.fs` | designed |
+| the 10,001st file, or a rename | `403 count limit`; rename is not in the MVP | `.fs` | designed |
+| the agent's process runs a file it wrote | `EACCES`: the workspace has no execute right | the kernel | runnable as `sharness-ai run` |
 
-## On its own
+Transparent mode, a bind mount or a FUSE mount served by this component so an unmodified app writes a folder and the rules apply anyway, is designed, not built; which of the two is an [open decision](../../design/roadmap/index.md).
+
+## 4. On its own
 
 Adopt only this component and an agent can still write its workspace, through a door that refuses to store anything that parses as a key, a private key or a token, and that keeps every write inside the root. For a repository an agent commits to, that is the difference between a leaked key being a file in the history and being a refused request in a log.
 
-## What it does not do
+It does not read for the app beyond `GET`: the app reads the clone directly, read-only, because it must show diffs. It does not know what a file means, only what it parses as.
 
-It does not read for the app: the app reads the clone directly, read-only, because it must show diffs. It does not know what a file means, only what it parses as. It is a Boundary for the app's process once the launcher gave that process no write right to the folder; until then, a Setting.
+## 5. Known issues, as of 26 Oct 2026
 
-Sources: [Components](../../design/components/index.md#sharnessfs), [Keys and the KMS §2](../../design/keys/index.md#2-on-disk-in-a-clone). The kernel half, measured: [Evidence §9](../../evidence/index.md#9-the-first-experiments-run-by-the-cli).
+Found in website@sharness's review of the CLI's `dev` at cf2ea3d, each reproduced against a running door; sent to cli@ as board row [T25](../../admin/board/index.md). Until they are fixed, the door is an MVP to try, not one to rely on.
+
+| Issue | What happens | Fix proposed |
+|---|---|---|
+| The secret scan is quadratic on a long run of letters and digits | a 64 KB body with no break took 5.2 s to scan here (measured 26 Oct 2026), and the time grows with the square of the length, so 1 MB would take about 20 minutes; the request holds a thread and a core, and the caller times out | start a vault-key match only where a run starts (a one-character lookbehind): 1 MB in 17 ms, keys still found |
+| One idle TCP connection freezes the door | the TLS handshake runs on the thread that accepts connections, with no timeout: any local process, with no certificate, stops every other caller until it hangs up | hand the handshake to the request's thread, under the 30 s timeout |
+| A secret split across two appends is stored | each body alone passes `refuse_secrets`; the file then holds a private key header | scan the tail of the file with the new bytes on append |
+| Concurrent writes to one path all fail | every writer uses the same temporary name, and each failure deletes the others' temporary file: 8 of 8 failed | a random temporary name; delete only your own |
+| A binary file does not read back | `GET` returns the content decoded as UTF-8 with replacement characters | return bytes that are not UTF-8 as base64 |
+
+Sources: [Components](../../design/components/index.md#sharnessfs), [Keys and the KMS §2](../../design/keys/index.md#2-on-disk-in-a-clone), the door's own files in the CLI: [`sharness_ai/fs/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/sharness_ai/fs) and [`sharness_ai/door/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/sharness_ai/door), each with its README, REALITY, ACCEPTS and EMITS. The kernel half, measured: [Evidence §9](../../evidence/index.md#9-the-first-experiments-run-by-the-cli).

@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>sharness.fs — SHarness</title>
-<meta name="description" content="the only writer of protected folders: path and content rules; refuses anything that parses as a key; the API and the verdicts">
+<meta name="description" content="the only writer of protected folders, runnable as an MVP: path and content rules; refuses anything that parses as a key; the API, the verdicts and the known issues">
 <link rel="canonical" href="https://sharness.ai/components/fs/index.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="sharness.ai">
 <meta property="og:url" content="https://sharness.ai/components/fs/index.html">
 <meta property="og:title" content="sharness.fs — SHarness">
-<meta property="og:description" content="the only writer of protected folders: path and content rules; refuses anything that parses as a key; the API and the verdicts">
+<meta property="og:description" content="the only writer of protected folders, runnable as an MVP: path and content rules; refuses anything that parses as a key; the API, the verdicts and the known issues">
 <meta name="twitter:card" content="summary">
 <link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
 <link rel="stylesheet" href="../../assets/site.css">
@@ -135,57 +135,80 @@
   <details class="toc-inline">
     <summary>On this page · 5 sections</summary>
     <ol>
-      <li><a href="#its-one-job">Its one job</a></li>
-      <li><a href="#the-api-proposed">The API (proposed)</a></li>
-      <li><a href="#requests-and-their-verdicts-designed">Requests, and their verdicts (designed)</a></li>
-      <li><a href="#on-its-own">On its own</a></li>
-      <li><a href="#what-it-does-not-do">What it does not do</a></li>
+      <li><a href="#1-its-one-job">1. Its one job</a></li>
+      <li><a href="#2-what-runs-today-mvp-2">2. What runs today (MVP 2)</a></li>
+      <li><a href="#3-requests-and-their-verdicts">3. Requests, and their verdicts</a></li>
+      <li><a href="#4-on-its-own">4. On its own</a></li>
+      <li><a href="#5-known-issues-as-of-26-oct-2026">5. Known issues, <span class="asof">as of 26 Oct 2026</span></a></li>
     </ol>
   </details>
-<div class="note"><b>Status: designed, not built.</b> The kernel half, a workspace with no execute right and writes refused outside the policy's paths, is runnable today as <code>sharness-ai run</code> and measured; the component that writes under content rules is not. Written <span class="asof">as of 25 Oct 2026</span>.</div>
-<h2 id="its-one-job">Its one job</h2>
+<div class="note"><b>Status: runnable as an MVP, <span class="asof">as of 26 Oct 2026</span>; a Setting for the app, not yet a Boundary.</b> The door runs on the CLI's <code>dev</code> branch (cli@sharness, 5421d4e, reviewed in cf2ea3d): a loopback service under mutual TLS 1.3 that writes a folder under rules, over the local disk or over its twin in memory, with 18 conformance vectors both targets hold. It is a Boundary for the app only once the launcher gives the door its own uid and gives the app no write right to the folder; the launcher is not built, so until then it is a Setting, and every <code>hello</code> from the door says so. Unreleased to PyPI. Known issues from website@'s review of 26 Oct 2026 are in <a href="#5-known-issues-as-of-26-oct-2026">section 5</a>.</div>
+<h2 id="1-its-one-job">1. Its one job</h2>
 <p>Apply writes to protected folders under rules. For sgit that is the working tree and <code>.sg_vault/</code>; for an agent it is the workspace. It holds no keys and talks to nobody: it answers the app, and it owns the folder, so no other uid can write there at all.</p>
-<h2 id="the-api-proposed">The API (proposed)</h2>
+<h2 id="2-what-runs-today-mvp-2">2. What runs today (MVP 2)</h2>
+<p>Five commands, on Linux with <code>openssl</code> on the machine (the browser bench's guest carries one, so the same demo runs in a tab):</p>
+<pre class="diagram">sharness-ai session new                          a session CA, one P-256 certificate per role, the CA key destroyed
+sharness-ai fs serve --target disk --root DIR    the door, on loopback, under mutual TLS (disk.twin: the same face over memory)
+sharness-ai fs put notes.txt "hello"             through the door, as the app: 201, or 403 with the row that refused
+sharness-ai fs get|append|rm|ls|log|hello        the rest of the surface, as the app
+sharness-ai door conformance fs                  the 18 vectors against a fresh door, the twin first</pre>
+<p>What every request passes through, in order: the caller's role read from its certificate (<code>spiffe://&lt;session&gt;/&lt;role&gt;</code>); the edge checked against the matrix (only <code>app</code> and <code>launcher</code> may call <code>fs</code>; a valid <code>net</code> certificate is refused); the request matched against <code>ACCEPTS.json</code> (anything else is <code>404</code>); the path decoded and kept under the root; the rows; then the target. One audit line per request, never with the body.</p>
 <div class="tablewrap"><table>
-<thead><tr><th>Request</th><th>Body</th><th>Response</th></tr></thead>
+<thead><tr><th>Request (runnable)</th><th>Body</th><th>Response</th></tr></thead>
 <tbody>
-<tr><td><code>PUT /v0/files/&lt;path&gt;</code></td><td>the bytes; <code>{"mode": "0644"}</code> in a header</td><td><code>201</code>, or <code>403</code> with the rule that refused</td></tr>
-<tr><td><code>POST /v0/files/&lt;path&gt;/rename</code></td><td><code>{"to": "&lt;path&gt;"}</code></td><td></td></tr>
-<tr><td><code>DELETE /v0/files/&lt;path&gt;</code></td><td></td><td></td></tr>
-<tr><td><code>POST /v0/mkdir</code></td><td><code>{"path": "…"}</code></td><td></td></tr>
-<tr><td><code>GET /v0/policy</code></td><td></td><td>the root it owns, the rules, the hash</td></tr>
+<tr><td><code>GET /v0/files</code></td><td></td><td>the files under the root</td></tr>
+<tr><td><code>GET /v0/files/&lt;path&gt;</code></td><td></td><td>the content (as UTF-8 text, see <a href="#5-known-issues-as-of-26-oct-2026">5</a>)</td></tr>
+<tr><td><code>PUT /v0/files/&lt;path&gt;</code></td><td>the bytes</td><td><code>201</code>, or <code>403</code> with the row that refused</td></tr>
+<tr><td><code>POST /v0/files/&lt;path&gt;/append</code></td><td>the bytes</td><td><code>201</code>, or <code>403</code></td></tr>
+<tr><td><code>DELETE /v0/files/&lt;path&gt;</code></td><td></td><td><code>204</code>, or <code>403</code></td></tr>
+<tr><td><code>POST /v0/mkdir</code></td><td><code>{"path": "…"}</code></td><td><code>201</code></td></tr>
+<tr><td><code>GET /v0/hello</code>, <code>/v0/policy</code>, <code>/v0/log</code></td><td></td><td>on every door: who it is, its policy and hash, its audit lines</td></tr>
 </tbody>
 </table></div>
-<p>Transparent mode: a bind mount or a FUSE mount served by this component, so an unmodified app writes a folder and the rules apply anyway. Which of the two is an <a href="../../design/roadmap/index.html">open decision</a>.</p>
-<h2 id="requests-and-their-verdicts-designed">Requests, and their verdicts (designed)</h2>
+<p>The rows are the first four of the closed predicate language: <code>within_root</code> and <code>refuse_secrets</code> on every path, <code>max_bytes</code> (64 MiB unless a row says less, per request) and <code>append_only</code> per path. A row is <code>{"resource": "&lt;path prefix&gt;", "op": "write|append|delete|mkdir|*", "where": {…}}</code>; a predicate the language does not have is refused when the policy is loaded.</p>
+<h2 id="3-requests-and-their-verdicts">3. Requests, and their verdicts</h2>
 <div class="tablewrap"><table>
-<thead><tr><th>The app asks</th><th>Verdict</th><th>By</th></tr></thead>
+<thead><tr><th>The app asks</th><th>Verdict</th><th>By</th><th>Status</th></tr></thead>
 <tbody>
-<tr><td><code>PUT /v0/files/src/main.py</code> under the root</td><td>written; exec bit stripped unless policy allows</td><td><code>.fs</code></td></tr>
-<tr><td><code>PUT /v0/files/../../etc/passwd</code></td><td><code>403 outside the root</code></td><td><code>.fs</code></td></tr>
-<tr><td><code>PUT</code> through a symlink that points outside the root</td><td><code>403 symlink escape</code></td><td><code>.fs</code></td></tr>
-<tr><td><code>PUT /v0/files/.sg_vault/local/vault_key</code> whose bytes parse as a clear vault key</td><td><code>403 refuses clear keys</code>: only sealed formats are accepted there</td><td><code>.fs</code></td></tr>
-<tr><td><code>PUT</code> of a file containing <code>-----BEGIN PRIVATE KEY-----</code> or a bearer token</td><td><code>403 refuses private keys and tokens</code></td><td><code>.fs</code></td></tr>
-<tr><td><code>PUT</code> of a 2 GiB file, or the 10,001st file</td><td><code>403 size or count limit</code></td><td><code>.fs</code></td></tr>
-<tr><td>the agent's own process calls <code>open(…, O_WRONLY)</code> on the workspace, bypassing <code>.fs</code></td><td><code>EACCES</code>: the agent's policy lists the workspace as read-only; <code>.fs</code>'s uid owns it</td><td>the kernel</td></tr>
-<tr><td>the agent's process runs a file it wrote</td><td><code>EACCES</code>: the workspace has no execute right</td><td>the kernel</td></tr>
+<tr><td><code>PUT /v0/files/src/main.py</code> under the root</td><td>written atomically, mode 0644: never executable</td><td><code>.fs</code></td><td>runnable</td></tr>
+<tr><td><code>PUT /v0/files/../../etc/passwd</code>, or <code>%2e%2e%2f</code></td><td><code>403 outside the root</code></td><td><code>.fs</code></td><td>runnable</td></tr>
+<tr><td><code>PUT</code> through a symlink anywhere in the path</td><td><code>403</code>: every path is walked from the root with <code>openat(2)</code> and <code>O_NOFOLLOW</code>, so nothing can be swapped between the check and the write</td><td><code>.fs</code></td><td>runnable</td></tr>
+<tr><td><code>PUT</code> of bytes that parse as a private key, a vault key, an API or bearer token</td><td><code>403 refuses clear secrets</code></td><td><code>.fs</code></td><td>runnable (see <a href="#5-known-issues-as-of-26-oct-2026">5</a>)</td></tr>
+<tr><td><code>DELETE</code> or <code>PUT</code> on an <code>append_only</code> path</td><td><code>403 append_only</code></td><td><code>.fs</code></td><td>runnable</td></tr>
+<tr><td>a caller whose certificate names another role, or none</td><td>refused: no edge, or no TLS</td><td><code>.fs</code></td><td>runnable</td></tr>
+<tr><td>the app writes the folder directly, bypassing <code>.fs</code></td><td><code>EACCES</code> from the kernel under the app's Landlock policy; the Boundary demo in the CLI's tests shows it beside a write through the door (201) and a key refused by the door (403)</td><td>the kernel</td><td>runnable, in one process tree</td></tr>
+<tr><td><code>PUT /v0/files/.sg_vault/local/vault_key</code> holding anything but a sealed format</td><td><code>403</code>: only sealed formats are accepted there</td><td><code>.fs</code></td><td>designed</td></tr>
+<tr><td>the 10,001st file, or a rename</td><td><code>403 count limit</code>; rename is not in the MVP</td><td><code>.fs</code></td><td>designed</td></tr>
+<tr><td>the agent's process runs a file it wrote</td><td><code>EACCES</code>: the workspace has no execute right</td><td>the kernel</td><td>runnable as <code>sharness-ai run</code></td></tr>
 </tbody>
 </table></div>
-<h2 id="on-its-own">On its own</h2>
+<p>Transparent mode, a bind mount or a FUSE mount served by this component so an unmodified app writes a folder and the rules apply anyway, is designed, not built; which of the two is an <a href="../../design/roadmap/index.html">open decision</a>.</p>
+<h2 id="4-on-its-own">4. On its own</h2>
 <p>Adopt only this component and an agent can still write its workspace, through a door that refuses to store anything that parses as a key, a private key or a token, and that keeps every write inside the root. For a repository an agent commits to, that is the difference between a leaked key being a file in the history and being a refused request in a log.</p>
-<h2 id="what-it-does-not-do">What it does not do</h2>
-<p>It does not read for the app: the app reads the clone directly, read-only, because it must show diffs. It does not know what a file means, only what it parses as. It is a Boundary for the app's process once the launcher gave that process no write right to the folder; until then, a Setting.</p>
-<p>Sources: <a href="../../design/components/index.html#sharnessfs">Components</a>, <a href="../../design/keys/index.html#2-on-disk-in-a-clone">Keys and the KMS §2</a>. The kernel half, measured: <a href="../../evidence/index.html#9-the-first-experiments-run-by-the-cli">Evidence §9</a>.</p>
+<p>It does not read for the app beyond <code>GET</code>: the app reads the clone directly, read-only, because it must show diffs. It does not know what a file means, only what it parses as.</p>
+<h2 id="5-known-issues-as-of-26-oct-2026">5. Known issues, <span class="asof">as of 26 Oct 2026</span></h2>
+<p>Found in website@sharness's review of the CLI's <code>dev</code> at cf2ea3d, each reproduced against a running door; sent to cli@ as board row <a href="../../admin/board/index.html">T25</a>. Until they are fixed, the door is an MVP to try, not one to rely on.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Issue</th><th>What happens</th><th>Fix proposed</th></tr></thead>
+<tbody>
+<tr><td>The secret scan is quadratic on a long run of letters and digits</td><td>a 64 KB body with no break took 5.2 s to scan here (measured 26 Oct 2026), and the time grows with the square of the length, so 1 MB would take about 20 minutes; the request holds a thread and a core, and the caller times out</td><td>start a vault-key match only where a run starts (a one-character lookbehind): 1 MB in 17 ms, keys still found</td></tr>
+<tr><td>One idle TCP connection freezes the door</td><td>the TLS handshake runs on the thread that accepts connections, with no timeout: any local process, with no certificate, stops every other caller until it hangs up</td><td>hand the handshake to the request's thread, under the 30 s timeout</td></tr>
+<tr><td>A secret split across two appends is stored</td><td>each body alone passes <code>refuse_secrets</code>; the file then holds a private key header</td><td>scan the tail of the file with the new bytes on append</td></tr>
+<tr><td>Concurrent writes to one path all fail</td><td>every writer uses the same temporary name, and each failure deletes the others' temporary file: 8 of 8 failed</td><td>a random temporary name; delete only your own</td></tr>
+<tr><td>A binary file does not read back</td><td><code>GET</code> returns the content decoded as UTF-8 with replacement characters</td><td>return bytes that are not UTF-8 as base64</td></tr>
+</tbody>
+</table></div>
+<p>Sources: <a href="../../design/components/index.html#sharnessfs">Components</a>, <a href="../../design/keys/index.html#2-on-disk-in-a-clone">Keys and the KMS §2</a>, the door's own files in the CLI: <a href="https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/sharness_ai/fs"><code>sharness_ai/fs/</code></a> and <a href="https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/sharness_ai/door"><code>sharness_ai/door/</code></a>, each with its README, REALITY, ACCEPTS and EMITS. The kernel half, measured: <a href="../../evidence/index.html#9-the-first-experiments-run-by-the-cli">Evidence §9</a>.</p>
 <nav class="pager" aria-label="Previous and next in Components"><a class="pg-prev" href="../../components/kms/index.html"><span class="pg-dir">← Previous in Components</span><span class="pg-title">sharness.kms: where a secret lives</span></a><a class="pg-next" href="../../components/llm/index.html"><span class="pg-dir">Next → in Components</span><span class="pg-title">sharness.llm: the only model client</span></a></nav>
   </div>
   <nav class="toc-side" aria-label="On this page">
     <div class="toc-head">On this page</div>
     <ol>
-      <li><a href="#its-one-job">Its one job</a></li>
-      <li><a href="#the-api-proposed">The API (proposed)</a></li>
-      <li><a href="#requests-and-their-verdicts-designed">Requests, and their verdicts (designed)</a></li>
-      <li><a href="#on-its-own">On its own</a></li>
-      <li><a href="#what-it-does-not-do">What it does not do</a></li>
+      <li><a href="#1-its-one-job">1. Its one job</a></li>
+      <li><a href="#2-what-runs-today-mvp-2">2. What runs today (MVP 2)</a></li>
+      <li><a href="#3-requests-and-their-verdicts">3. Requests, and their verdicts</a></li>
+      <li><a href="#4-on-its-own">4. On its own</a></li>
+      <li><a href="#5-known-issues-as-of-26-oct-2026">5. Known issues, <span class="asof">as of 26 Oct 2026</span></a></li>
     </ol>
     <a class="toc-top" href="#content">↑ Back to top</a>
   </nav>
@@ -196,7 +219,7 @@
     <div class="brandline">sharness<span>.ai</span></div>
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
-    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="partnote">⚠ Status: design, with the first experiments and one door (sharness.fs, an MVP) runnable; no other component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
     <p class="verline">site <a class="ver" href="../../project/releases.html" title="Site release history">v0.6.18</a> · <a href="../../project/engineering.html">engineering</a></p>
   </div>
   <div>

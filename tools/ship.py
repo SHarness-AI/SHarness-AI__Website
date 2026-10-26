@@ -26,7 +26,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 HOST = (ROOT / "CNAME").read_text().strip()
-KEY_SHAPE = re.compile(r"[A-Za-z0-9_-]{20,}:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|sgit_private_vault_|-----BEGIN")
+KEY_SHAPE = re.compile(r"(?<![A-Za-z0-9_-])[A-Za-z0-9_-]{20,}:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|sgit_private_vault_|-----BEGIN")
 STEPS = [["python3", "tools/chrome.py"], ["python3", "tools/gen_admin.py"], ["python3", "tools/gen_pages.py"],
          ["python3", "tools/gen_articles.py"], ["python3", "tools/gen_storyboards.py"], ["python3", "tools/gen_sitemap.py"],
          ["python3", "tools/gen_llms_full.py"], ["node", "tools/validate.js"], ["node", "tools/validate_storyboards.cjs"],

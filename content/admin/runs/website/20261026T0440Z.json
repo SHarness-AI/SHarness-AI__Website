@@ -1,0 +1,14 @@
+{
+  "member": "website",
+  "started": "2026-10-26T04:40Z",
+  "finished": "2026-10-26T05:01Z",
+  "outcome": "ok",
+  "summary": "Reviewed the CLI's two MVPs (T25 to cli) and updated the site to them.",
+  "released": "",
+  "read": [],
+  "sent": [],
+  "heads": {
+    "website": "c1f0cb8"
+  },
+  "model": ""
+}

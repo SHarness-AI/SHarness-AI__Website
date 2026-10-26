@@ -99,7 +99,8 @@ for (const f of htmlFiles) {
 }
 
 // --- 4. key-leak tripwire -------------------------------------------------
-const KEY_SHAPE = /[A-Za-z0-9_-]{20,}:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
+// the lookbehind starts a match only where a run starts: without it a long run of letters costs quadratic time
+const KEY_SHAPE = /(?<![A-Za-z0-9_-])[A-Za-z0-9_-]{20,}:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
 for (const f of files) {
   if (/\.(png|jpg|jpeg|gif|webp|ico|woff2?|zip)$/.test(f)) continue;
   const t = fs.readFileSync(f, 'utf8');
