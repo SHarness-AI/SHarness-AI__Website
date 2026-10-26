@@ -133,7 +133,7 @@
   <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">the design</a> / the decision at the door · <a href="index.md">this page as markdown</a></div>
   <h1>The decision at the door: yes, no, or a question in your words</h1>
   <details class="toc-inline">
-    <summary>On this page · 8 sections</summary>
+    <summary>On this page · 12 sections</summary>
     <ol>
       <li><a href="#1-today-s-prompt-is-weak-as-a-control-and-bad-as-a-decision-at-once">1. Today's prompt is weak as a control and bad as a decision, at once</a></li>
       <li><a href="#2-the-prompt-as-the-last-resort">2. The prompt as the last resort</a></li>
@@ -142,10 +142,14 @@
       <li><a href="#5-the-prototype-run-once">5. The prototype, run once</a></li>
       <li><a href="#6-two-things-measured-on-the-way-26-oct-2026">6. Two things measured on the way, 26 Oct 2026</a></li>
       <li><a href="#7-what-this-asks-of-the-code">7. What this asks of the code</a></li>
-      <li><a href="#8-what-this-page-does-not-claim">8. What this page does not claim</a></li>
+      <li><a href="#9-from-an-engine-to-a-service">9. From an engine to a service</a></li>
+      <li><a href="#10-three-sources-of-truth-in-order-of-cost">10. Three sources of truth, in order of cost</a></li>
+      <li><a href="#11-the-rehearsal-run-once">11. The rehearsal, run once</a></li>
+      <li><a href="#12-what-the-model-does-and-does-not">12. What the model does, and does not</a></li>
+      <li><a href="#13-what-this-page-does-not-claim">13. What this page does not claim</a></li>
     </ol>
   </details>
-<div class="note"><b>Status: proposed, <span class="asof">as of 26 Oct 2026</span>, with one prototype run.</b> Dinis Cruz's direction of 26 Oct 2026, written by pbp@sharness: an agent should be able to run with every permission granted, because the policy underneath decides, and the one decision the policy cannot make should reach the person as a question in their own words, not as a box of shell. Nothing here is built. A 99-line prototype of the decision engine answered twelve sample commands on 26 Oct 2026 (§5); it is on a branch for the CLI agent, not in the package.</div>
+<div class="note"><b>Status: proposed, <span class="asof">as of 26 Oct 2026</span>, with two prototype runs.</b> Dinis Cruz's direction of 26 Oct 2026, written by pbp@sharness: an agent should be able to run with every permission granted, because the policy underneath decides, and the one decision the policy cannot make should reach the person as a question in their own words, not as a box of shell. Nothing here is built. A 99-line prototype of the decision engine answered twelve sample commands on 26 Oct 2026 (§5), and an 82-line prototype rehearsed four commands in a twin of a workspace the same day (§11); both are on a branch for the CLI agent, not in the package.</div>
 <h2 id="1-today-s-prompt-is-weak-as-a-control-and-bad-as-a-decision-at-once">1. Today's prompt is weak as a control and bad as a decision, at once</h2>
 <p>A coding agent's permission prompt asks the person to approve a command before it runs. In the <a href="https://riskmandate.ai/abp.html">ABP</a>'s terms it is a <b>Setting</b>: the agent's own process asks the agent's own user, and the same account can turn the prompts off. It bounds nothing the grant does not already include. <a href="https://ux.sgit.ai">ux.sgit.ai</a>'s finding <a href="https://ux.sgit.ai/findings/UX-059.html">UX-059</a> (25 Oct 2026) shows it fails as a decision too: "Bash wants to run:" over a box of raw shell that fades out before the line that matters, Deny beside a filled "Allow once", and nothing about what the command reads, writes, reaches or can undo. The register's first principle is the test: <em>can they say what will happen if they press each button?</em> They cannot. The finding's own sentence is the whole case: repeated prompts like this teach people to press Allow without reading, which defeats the purpose of asking.</p>
 <h2 id="2-the-prompt-as-the-last-resort">2. The prompt as the last resort</h2>
@@ -222,13 +226,53 @@
 <li>The hook wiring as the first home for it, said to be a Setting; <code>sharness.bash</code> as the second, a Boundary.</li>
 <li>Monitor mode as a command (<code>learn</code>, proposed) that writes a policy from every successful open of a traced run, with the terminal rows included for interactive profiles.</li>
 <li>An approved <b>ask</b> written back as a row in the invocation layer, so profiles learn.</li>
+<li><b>T24</b> (cli@sharness): <code>sharness-ai rehearse</code>, the command run first in a twin of the workspace under a derived policy with no network, traced, the verdict from the facts (§10, §11).</li>
+<li>The service form: a request without secrets, a signed verdict, the same engine behind a hook (a Setting) and inside <code>sharness.bash</code> (a Boundary); an organisation's instance with shared profiles (§9).</li>
 </ul>
-<h2 id="8-what-this-page-does-not-claim">8. What this page does not claim</h2>
+<h2 id="9-from-an-engine-to-a-service">9. From an engine to a service</h2>
+<p>Dinis Cruz's direction of 26 Oct 2026, continued: the engine is a <b>translation layer between what an agent asks and what is done</b>, and it is the first thing a person can adopt. The agent's harness is told one rule: <em>before you run a command or start a process, call this service with the exact command, the working directory and your intent; send no secret; run only what it answers yes to.</em> Everything the prompt lacks today lives in the service and not in the agent:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>What the prompt lacks</th><th>What the service holds</th></tr></thead>
+<tbody>
+<tr><td>the mandate</td><td>the policy, by hash: what the process may read, write, reach, run and spend</td></tr>
+<tr><td>the project's conventions</td><td>the rows derived from <code>CLAUDE.md</code>, <code>AGENTS.md</code> and the repository's rules (never bump the version by hand; never push to main)</td></tr>
+<tr><td>the session so far</td><td>the verdicts already given: the same command, approved once, is a row</td></tr>
+<tr><td>the undo class</td><td>whether the paths are tracked, whether the operation is a delete, whether a push can be undone</td></tr>
+<tr><td>what the command would actually do</td><td>the rehearsal (§10)</td></tr>
+<tr><td>the organisation's view</td><td>shared profiles, the targets and proxies it allows, the rows every agent on every laptop gets</td></tr>
+</tbody>
+</table></div>
+<p><b>The request carries no secret.</b> The harness sends the command, its arguments, the directory, the agent's intent and the <em>names</em> of the environment variables the command would see, never a value. The service never needs one: a decision about a command is a decision about rows.</p>
+<p><b>The service can be elsewhere.</b> It is a door's brain, with an accepts (the request) and an emits (the verdict), so it runs on the laptop, on an organisation's server or at a vendor, under the mirror rule like everything else. The local hook is ten lines: send, wait, obey. Where it runs decides what it is: advising a hook in the agent's own process it is a <b>Setting</b>, well informed but removable; running the command itself as <code>sharness.bash</code> it is a <b>Boundary</b>. An organisation that runs one has every agent's decisions in one place, with the policy, the learned rows and the audit, and nothing of its own in the request path of anything else.</p>
+<h2 id="10-three-sources-of-truth-in-order-of-cost">10. Three sources of truth, in order of cost</h2>
+<ol>
+<li><b>The parse</b> (milliseconds). The command's shape against the rows: which binaries, which paths, which hosts, which flags. Deterministic; what it cannot read it refuses. §5.</li>
+<li><b>The rehearsal</b> (seconds). The command run first in a <b>twin</b>: a copy of the workspace as the only writable place, under a policy derived from the real one with <code>network: "none"</code>, traced. What it tried to write outside the twin, what it tried to reach, what it deleted, how many processes it started. The twin is thrown away. This is Dinis Cruz's "simulate the installation": an installer rehearsed shows exactly which files it would touch and which hosts it would fetch from, before any of it is real. The verdict is from facts: a refused write outside the workspace is <b>deny</b>; a network attempt, a delete or a timeout is <b>ask</b>, with the facts in the question; otherwise <b>allow</b>. Refused reads are reported, not judged: the kernel will refuse them in the real run too, and the command went on.</li>
+<li><b>The policy</b> (the mandate). Every row the parse and the rehearsal name is checked against it, and the verdict carries the row that decided.</li>
+</ol>
+<p>The rehearsal has limits, named: it cannot rehearse what needs the network (the attempt is the fact, the outcome is not); it cannot see what a command would do differently on a second run; it costs a copy of the workspace, which is cheap for a repository and dear for a data set (a copy-on-write twin is the fix, not yet built); and a command that reads the clock or the environment may rehearse differently from how it runs.</p>
+<h2 id="11-the-rehearsal-run-once">11. The rehearsal, run once</h2>
+<p>An 82-line prototype (standard library; beside the parser on the CLI's branch <code>pbp/decide-prototype</code>, <code>experiments/decide/rehearse.py</code>, for cli@sharness under board row T24) rehearsed four commands against a sample repository on 26 Oct 2026, under the coding-agent policy P1, on Linux 6.18 with Landlock ABI 7:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Command</th><th>Answer</th><th>The facts the rehearsal found</th></tr></thead>
+<tbody>
+<tr><td><code>sed -i … tools/site_gate.py &amp;&amp; python3 -m json.tool data.json</code></td><td>allow</td><td>two writes inside the twin (the edit and sed's temporary file); four reads the kernel refused, all outside the policy and none the command needed</td></tr>
+<tr><td><code>sh install.sh</code> (an installer that appends to <code>~/.bashrc</code>, makes <code>~/.frob/bin</code> and fetches a binary)</td><td><b>deny</b></td><td>tried to write <code>/root/.bashrc</code>, refused; tried the network, refused (<code>EACCES</code>); the script printed "done" anyway, which is what an installer does</td></tr>
+<tr><td><code>rm -rf tests &amp;&amp; echo cleared</code></td><td>ask</td><td>deletes <code>tests</code>; nothing else</td></tr>
+<tr><td><code>python3 -c "urlopen('https://example.com')"</code></td><td>ask</td><td>tried the network, refused; exit 1</td></tr>
+</tbody>
+</table></div>
+<p>The real workspace was untouched after every run, checked each time. The installer is the point: its text looks like any other script, the parser alone would have had to guess, and the rehearsal says in two lines what it does.</p>
+<h2 id="12-what-the-model-does-and-does-not">12. What the model does, and does not</h2>
+<p>An LLM can sit in the loop in two places, and neither is the verdict. It can <b>explain</b>: turn the facts and the row into the person's words, in the UX-059 shape, better than a template. And it can <b>compare</b>: read the agent's stated intent against the facts ("you said run the tests; it writes outside <code>tests/</code>") and raise a flag the question carries. Both are Expectation-grade by the ABP's own test, a model keeps them, and so neither may decide. The parse, the rehearsal and the policy decide; the model narrates. This is the same division as giving an agent its behaviour policy: once it has the policy it can explain every point of view in it, and it still cannot enforce one.</p>
+<h2 id="13-what-this-page-does-not-claim">13. What this page does not claim</h2>
 <ul>
 <li>Nothing is built. The prototype ran once on twelve strings and is not in the package.</li>
 <li>The engine adds no enforcement. Everything it decides is held by the kernel or not, by the policy's rows; at a hook it is a Setting.</li>
 <li>"Accept every permission" is safe only to the extent the policy holds the rows the permission would have guarded; the unheld rows are counted and named, and today they include hostnames.</li>
 <li>The two measurements are from one machine on one day; the experiment they came from was not completed and is not claimed.</li>
+<li>The rehearsal prototype ran four times on one sample repository; it undercounts the programs a command starts (a known gap in its trace reading), copies the workspace rather than snapshotting it, and is not tested.</li>
+<li>No service exists, on any machine; "the organisation's instance" is a deployment described, not an offer.</li>
 </ul>
 <p>Sources: Dinis Cruz's direction of 26 Oct 2026 in pbp@sharness's session; <a href="https://ux.sgit.ai">ux.sgit.ai</a>, its <a href="https://ux.sgit.ai/principles/">principles</a> and <a href="https://ux.sgit.ai/findings/UX-059.html">UX-059</a> (read 26 Oct 2026); <a href="../pbp/index.html">the PBP on one page</a>; <a href="../levels/index.html">the levels</a>; <a href="../agents/index.html">Agents and LLMs</a> for where the harness offers a hook; <a href="../../components/bash/index.html">the bash door</a>; <a href="https://riskmandate.ai/abp.html">Agent Behaviour Policies</a> for the barrier kinds and the undo class.</p>
 
@@ -243,7 +287,11 @@
       <li><a href="#5-the-prototype-run-once">5. The prototype, run once</a></li>
       <li><a href="#6-two-things-measured-on-the-way-26-oct-2026">6. Two things measured on the way, 26 Oct 2026</a></li>
       <li><a href="#7-what-this-asks-of-the-code">7. What this asks of the code</a></li>
-      <li><a href="#8-what-this-page-does-not-claim">8. What this page does not claim</a></li>
+      <li><a href="#9-from-an-engine-to-a-service">9. From an engine to a service</a></li>
+      <li><a href="#10-three-sources-of-truth-in-order-of-cost">10. Three sources of truth, in order of cost</a></li>
+      <li><a href="#11-the-rehearsal-run-once">11. The rehearsal, run once</a></li>
+      <li><a href="#12-what-the-model-does-and-does-not">12. What the model does, and does not</a></li>
+      <li><a href="#13-what-this-page-does-not-claim">13. What this page does not claim</a></li>
     </ol>
     <a class="toc-top" href="#content">↑ Back to top</a>
   </nav>

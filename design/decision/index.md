@@ -1,6 +1,6 @@
 # The decision at the door: yes, no, or a question in your words
 
-> **Status: proposed, as of 26 Oct 2026, with one prototype run.** Dinis Cruz's direction of 26 Oct 2026, written by pbp@sharness: an agent should be able to run with every permission granted, because the policy underneath decides, and the one decision the policy cannot make should reach the person as a question in their own words, not as a box of shell. Nothing here is built. A 99-line prototype of the decision engine answered twelve sample commands on 26 Oct 2026 (§5); it is on a branch for the CLI agent, not in the package.
+> **Status: proposed, as of 26 Oct 2026, with two prototype runs.** Dinis Cruz's direction of 26 Oct 2026, written by pbp@sharness: an agent should be able to run with every permission granted, because the policy underneath decides, and the one decision the policy cannot make should reach the person as a question in their own words, not as a box of shell. Nothing here is built. A 99-line prototype of the decision engine answered twelve sample commands on 26 Oct 2026 (§5), and an 82-line prototype rehearsed four commands in a twin of a workspace the same day (§11); both are on a branch for the CLI agent, not in the package.
 
 ## 1. Today's prompt is weak as a control and bad as a decision, at once
 
@@ -89,12 +89,58 @@ An experiment to run a coding agent under a policy in this project's own hosted 
 - The hook wiring as the first home for it, said to be a Setting; `sharness.bash` as the second, a Boundary.
 - Monitor mode as a command (`learn`, proposed) that writes a policy from every successful open of a traced run, with the terminal rows included for interactive profiles.
 - An approved **ask** written back as a row in the invocation layer, so profiles learn.
+- **T24** (cli@sharness): `sharness-ai rehearse`, the command run first in a twin of the workspace under a derived policy with no network, traced, the verdict from the facts (§10, §11).
+- The service form: a request without secrets, a signed verdict, the same engine behind a hook (a Setting) and inside `sharness.bash` (a Boundary); an organisation's instance with shared profiles (§9).
 
-## 8. What this page does not claim
+## 9. From an engine to a service
+
+Dinis Cruz's direction of 26 Oct 2026, continued: the engine is a **translation layer between what an agent asks and what is done**, and it is the first thing a person can adopt. The agent's harness is told one rule: *before you run a command or start a process, call this service with the exact command, the working directory and your intent; send no secret; run only what it answers yes to.* Everything the prompt lacks today lives in the service and not in the agent:
+
+| What the prompt lacks | What the service holds |
+|---|---|
+| the mandate | the policy, by hash: what the process may read, write, reach, run and spend |
+| the project's conventions | the rows derived from `CLAUDE.md`, `AGENTS.md` and the repository's rules (never bump the version by hand; never push to main) |
+| the session so far | the verdicts already given: the same command, approved once, is a row |
+| the undo class | whether the paths are tracked, whether the operation is a delete, whether a push can be undone |
+| what the command would actually do | the rehearsal (§10) |
+| the organisation's view | shared profiles, the targets and proxies it allows, the rows every agent on every laptop gets |
+
+**The request carries no secret.** The harness sends the command, its arguments, the directory, the agent's intent and the *names* of the environment variables the command would see, never a value. The service never needs one: a decision about a command is a decision about rows.
+
+**The service can be elsewhere.** It is a door's brain, with an accepts (the request) and an emits (the verdict), so it runs on the laptop, on an organisation's server or at a vendor, under the mirror rule like everything else. The local hook is ten lines: send, wait, obey. Where it runs decides what it is: advising a hook in the agent's own process it is a **Setting**, well informed but removable; running the command itself as `sharness.bash` it is a **Boundary**. An organisation that runs one has every agent's decisions in one place, with the policy, the learned rows and the audit, and nothing of its own in the request path of anything else.
+
+## 10. Three sources of truth, in order of cost
+
+1. **The parse** (milliseconds). The command's shape against the rows: which binaries, which paths, which hosts, which flags. Deterministic; what it cannot read it refuses. §5.
+2. **The rehearsal** (seconds). The command run first in a **twin**: a copy of the workspace as the only writable place, under a policy derived from the real one with `network: "none"`, traced. What it tried to write outside the twin, what it tried to reach, what it deleted, how many processes it started. The twin is thrown away. This is Dinis Cruz's "simulate the installation": an installer rehearsed shows exactly which files it would touch and which hosts it would fetch from, before any of it is real. The verdict is from facts: a refused write outside the workspace is **deny**; a network attempt, a delete or a timeout is **ask**, with the facts in the question; otherwise **allow**. Refused reads are reported, not judged: the kernel will refuse them in the real run too, and the command went on.
+3. **The policy** (the mandate). Every row the parse and the rehearsal name is checked against it, and the verdict carries the row that decided.
+
+The rehearsal has limits, named: it cannot rehearse what needs the network (the attempt is the fact, the outcome is not); it cannot see what a command would do differently on a second run; it costs a copy of the workspace, which is cheap for a repository and dear for a data set (a copy-on-write twin is the fix, not yet built); and a command that reads the clock or the environment may rehearse differently from how it runs.
+
+## 11. The rehearsal, run once
+
+An 82-line prototype (standard library; beside the parser on the CLI's branch `pbp/decide-prototype`, `experiments/decide/rehearse.py`, for cli@sharness under board row T24) rehearsed four commands against a sample repository on 26 Oct 2026, under the coding-agent policy P1, on Linux 6.18 with Landlock ABI 7:
+
+| Command | Answer | The facts the rehearsal found |
+|---|---|---|
+| `sed -i … tools/site_gate.py && python3 -m json.tool data.json` | allow | two writes inside the twin (the edit and sed's temporary file); four reads the kernel refused, all outside the policy and none the command needed |
+| `sh install.sh` (an installer that appends to `~/.bashrc`, makes `~/.frob/bin` and fetches a binary) | **deny** | tried to write `/root/.bashrc`, refused; tried the network, refused (`EACCES`); the script printed "done" anyway, which is what an installer does |
+| `rm -rf tests && echo cleared` | ask | deletes `tests`; nothing else |
+| `python3 -c "urlopen('https://example.com')"` | ask | tried the network, refused; exit 1 |
+
+The real workspace was untouched after every run, checked each time. The installer is the point: its text looks like any other script, the parser alone would have had to guess, and the rehearsal says in two lines what it does.
+
+## 12. What the model does, and does not
+
+An LLM can sit in the loop in two places, and neither is the verdict. It can **explain**: turn the facts and the row into the person's words, in the UX-059 shape, better than a template. And it can **compare**: read the agent's stated intent against the facts ("you said run the tests; it writes outside `tests/`") and raise a flag the question carries. Both are Expectation-grade by the ABP's own test, a model keeps them, and so neither may decide. The parse, the rehearsal and the policy decide; the model narrates. This is the same division as giving an agent its behaviour policy: once it has the policy it can explain every point of view in it, and it still cannot enforce one.
+
+## 13. What this page does not claim
 
 - Nothing is built. The prototype ran once on twelve strings and is not in the package.
 - The engine adds no enforcement. Everything it decides is held by the kernel or not, by the policy's rows; at a hook it is a Setting.
 - "Accept every permission" is safe only to the extent the policy holds the rows the permission would have guarded; the unheld rows are counted and named, and today they include hostnames.
 - The two measurements are from one machine on one day; the experiment they came from was not completed and is not claimed.
+- The rehearsal prototype ran four times on one sample repository; it undercounts the programs a command starts (a known gap in its trace reading), copies the workspace rather than snapshotting it, and is not tested.
+- No service exists, on any machine; "the organisation's instance" is a deployment described, not an offer.
 
 Sources: Dinis Cruz's direction of 26 Oct 2026 in pbp@sharness's session; [ux.sgit.ai](https://ux.sgit.ai), its [principles](https://ux.sgit.ai/principles/) and [UX-059](https://ux.sgit.ai/findings/UX-059.html) (read 26 Oct 2026); [the PBP on one page](../pbp/index.md); [the levels](../levels/index.md); [Agents and LLMs](../agents/index.md) for where the harness offers a hook; [the bash door](../../components/bash/index.html); [Agent Behaviour Policies](https://riskmandate.ai/abp.html) for the barrier kinds and the undo class.
