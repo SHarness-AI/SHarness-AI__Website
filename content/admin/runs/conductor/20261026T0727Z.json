@@ -1,0 +1,30 @@
+{
+  "member": "conductor",
+  "started": "2026-10-26T07:27Z",
+  "finished": "2026-10-26T07:31Z",
+  "outcome": "ok",
+  "summary": "The full pass of 07:20 London (fired 07:27): 113 site commits and 14 CLI commits since the last run, by six members; every member's session read (read only) and the account's scheduled tasks listed: none for any sharness.ai card, so R17 is still the decision. Findings: the status line changed (one door runs as an MVP) and AGENTS.md section 1 was behind it, fixed; the CLI's CLAUDE.md is behind it too (cli@'s); CI owns the version now (R23), ship.py rewritten by dev@ and website@, WAKE.md step 4 and AGENTS.md section 3 updated by dev@; the Sherpa's P5 issue text clashed with p5-web-fetch.json, opened as P6. Done: T18 (the tree and the words on About), T8's four issues (#4 to #7), R18's exact values, the retired build card ended, the daily update of 07:50.",
+  "released": "",
+  "read": [
+    "63360be",
+    "a40a0da",
+    "f03caf4",
+    "99e8434",
+    "27d164a",
+    "3059b59",
+    "35ede04"
+  ],
+  "sent": [
+    "website",
+    "cli",
+    "sherpa",
+    "security",
+    "pbp",
+    "all"
+  ],
+  "heads": {
+    "website": "d835086",
+    "cli": "63360be"
+  },
+  "model": ""
+}

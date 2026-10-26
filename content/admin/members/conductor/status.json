@@ -1,9 +1,9 @@
 {
   "member": "conductor",
-  "as_of": "2026-10-26T00:40Z",
+  "as_of": "2026-10-26T07:35Z",
   "state": "working",
-  "last_did": "The check-in of 00:32 UTC: reviewed what landed since v0.5.21 (the Sherpa's v0.5.22 twice, security@'s CLI audit, Dependabot), built tools/ship.py (T16) and released with it; R19 opened; the update of 00:40.",
-  "waiting_for": "R17 (the go on the cards), R12, R13; on: editor",
+  "last_did": "The full pass of 07:20 London: 113 commits reviewed, every session and scheduled task read; T18 done (the tree and the words on About); T8's four good first issues opened on the CLI (#4 to #7); AGENTS.md section 1 matches the site's status; R18 carries the exact values; the update of 07:35.",
+  "waiting_for": "R17 (the go on the cards: no scheduled task exists yet for any sharness.ai member), R12, R13; on: editor",
   "branch": "conductor/admin",
-  "next": "The next check-in at 07:20 London, the first wake on the card's cadence (nothing in the quiet hours); the daily update at the day's last wake."
+  "next": "09:20 London, the next time on the card; T12 (a reality file) one item per release; the daily update at the day's last wake."
 }

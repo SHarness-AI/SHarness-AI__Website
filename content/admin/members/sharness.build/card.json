@@ -4,8 +4,8 @@
   "name": "sharness.build",
   "address": "build@sharness",
   "objective": "Build the experiments up the ladder (E05 to E08, then the launcher above the agent), keep every measurement on Evidence with its method and date, and keep the site's and the CLI's pipelines sound.",
-  "status": "proposed",
-  "status_note": "Drafted by the conductor on 26 October 2026 for sharness.build to confirm or change; the editor's go makes it active. Once a day at 09:00 London, after the overnight security review.",
+  "status": "ended",
+  "status_note": "Ended 26 October 2026: the build agent became cli@sharness (the editor's decision); its card is content/admin/members/cli/card.json. Kept as history.",
   "timezone": "Europe/London",
   "wakes": [
     "09:00"
