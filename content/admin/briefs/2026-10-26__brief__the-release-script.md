@@ -31,4 +31,4 @@ On 25 October between 23:42 and 23:53 UTC three agents released to `dev` within 
 
 ## Owner
 
-The conductor builds it (it owns the release tooling on the admin side and saw the collisions); sharness.build reviews it, since `tools/` is its ground.
+The conductor builds it (it owns the release tooling on the admin side and saw the collisions); cli@sharness reviews it, since `tools/` is its ground.

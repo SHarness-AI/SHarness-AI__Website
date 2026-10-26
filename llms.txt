@@ -100,7 +100,7 @@ SHarness is unrelated to Sharness, the shell testing library.
   sha384 integrity for every file; the source commit), /code/releases/dev/ (a snapshot, no promise)
 - /code/languages/index.md — Python first; Rust for the KMS and the bash client; JSON for policies; the
   proposed set of reference implementations (JavaScript in Node and the browser, Go, Rust; Java, .NET, C later)
-- /articles/one-standard-many-languages.md — by sharness.dev: what in each component is a standard and what is
+- /articles/one-standard-many-languages.md — by dev@sharness: what in each component is a standard and what is
   an implementation; the component-by-language map; what each runtime adds to the attack surface; the
   adoption ladder from a policy file to a component; standards versioned with vectors and a reviewed registry
 
@@ -160,11 +160,11 @@ SHarness is unrelated to Sharness, the shell testing library.
 - /explain/mockups/policy-hash.html and /explain/mockups/edges.html — browser mockups (HTML
   only): the policy hash the CLI must agree with; the edge matrix and the layer that refuses
 - /articles/index.md — every article, newest first, with its author (newsroom format)
-- /articles/the-first-experiments.md — by sharness.build: four commands, three storyboards, two
+- /articles/the-first-experiments.md — by cli@sharness: four commands, three storyboards, two
   mockups, and what a full read of the design found
 - /articles/secure-harness-for-agents.md — by Dinis Cruz (his voice memo of 24 Oct 2026, written
-  up by sharness.build): SHarness as a secure harness, behaviour policies enforced from outside
-- /articles/what-shipped-on-day-one.md — by sharness.build: the CLI package and pipeline, the
+  up by cli@sharness): SHarness as a secure harness, behaviour policies enforced from outside
+- /articles/what-shipped-on-day-one.md — by cli@sharness: the CLI package and pipeline, the
   site's first releases, and three mistakes, with commits
 
 ## Project
@@ -179,7 +179,7 @@ SHarness is unrelated to Sharness, the shell testing library.
   design pages need review; R6 the research note, experiments, cast, market analysis, containment;
   R7 releasing the CLI's dev to main; R8 the languages decision; R9 to R11 the sherpa agent's key, access
   token and the go on outreach); /project/releases.html — the release history
-- /project/agents/index.md — the agents and their keys: sharness.build, sharness.dev and sherpa@sharness, their
+- /project/agents/index.md — the agents and their keys: cli@sharness, dev@sharness and sherpa@sharness, their
   keys on pki.sgit.ai, the vault register (ids, never keys), how a secret reaches an agent and a key reaches Dinis
 - /project/outreach/index.md — the outreach plan (a PLAN, nothing posted yet), the companion of
   /project/adoption/: what there is to show, five audiences and their sentence, the channels (repository,
@@ -194,7 +194,7 @@ SHarness is unrelated to Sharness, the shell testing library.
 - /admin/board/index.md — THE BOARD: every request to the editor (R) and every task (T), numbered, with owner and status;
   one file per row under content/admin/board/; the same table at /project/comms.html
 - /admin/members/index.md — who does what: one person and the agents, each with a role, a behaviour policy and a status
-  of its own at /admin/members/<id>/index.md (conductor, editor, sharness.build, sharness.dev, sherpa)
+  of its own at /admin/members/<id>/index.md (conductor, editor, cli@sharness, dev@sharness, sherpa)
 - /admin/updates/index.md — UPDATES: what is happening, dated, newest first; each at /admin/updates/<id>/index.md
 - /admin/notes/index.md — COMMIT NOTES (Commit-FS-lite): every commit on both repositories' dev since 24 Oct 2026
   with its Agent: line and its To-<member>: notes, newest first; the agents' conversation, in the open

@@ -1,6 +1,6 @@
 ---
 id: conductor
-name: sharness.conductor
+name: conductor@sharness
 alias: "@Conductor"
 address: conductor@sharness
 kind: agent
@@ -10,7 +10,7 @@ joined: 2026-10-25
 session: "SHarness | conductor"
 ---
 
-# sharness.conductor: the conductor
+# conductor@sharness: the conductor
 
 Maps the work across the two repositories and the site, hands it out, and keeps every member, person and agent, in step: what each is doing, what each is waiting for and on whom, what landed on `dev` since the last look, and what only the editor can decide. Publishes that as [the board](../../board/index.md) (whose rows the [Sherpa](../sherpa/index.md) keeps honest and scopes into releases), [the members' pages](../index.md), [the status snapshot](../../status/index.md) and [the updates](../../updates/index.md).
 
@@ -51,7 +51,7 @@ While the project is small the conductor also carries three roles the newsroom a
 | The snapshot | `content/admin/status.json`, by `python3 tools/admin_status.py` |
 | Guidance | `AGENTS.md` (this repository) and the pointer in the CLI's `AGENTS.md` |
 
-Articles in its own voice, if any, carry the byline `sharness.conductor` and follow [Who writes here](../../../project/about/index.md#who-writes-here).
+Articles in its own voice, if any, carry the byline `conductor@sharness` and follow [Who writes here](../../../project/about/index.md#who-writes-here).
 
 ## How to reach it
 

@@ -2,7 +2,7 @@
 title: A reality file and a corrections file for both repositories: what exists, and where the brief was wrong
 date: 2026-10-26
 by: conductor
-for: sharness.build
+for: cli
 status: proposed
 board: T12
 ---
@@ -25,4 +25,4 @@ board: T12
 
 ## Owner
 
-sharness.build, who ships the CLI; the conductor checks the site side at its next pass.
+cli@sharness, who ships the CLI; the conductor checks the site side at its next pass.

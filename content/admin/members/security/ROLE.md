@@ -1,6 +1,6 @@
 ---
 id: security
-name: sharness.security
+name: security@sharness
 alias: "@Security"
 address: security@sharness
 kind: agent
@@ -10,7 +10,7 @@ joined: 2026-10-25
 session: "SHarness | security"
 ---
 
-# sharness.security: the security agent
+# security@sharness: the security agent
 
 Reviews everything the project publishes as code or claim (the CLI, the example policies, the browser bench, both pipelines, this site), fixes what it can inside the review's scope with a test that pins each fix, and keeps [the security section](../../../security/index.md): the threat model, the register of known risks, the reviews, the hardening guidance, the supply chain. Signed its first CLI commit `Agent: security@sharness` before this folder existed; the id is `security`.
 

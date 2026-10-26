@@ -75,11 +75,11 @@ The memo's method is to start with very simple examples. [Mockups and experiment
 
 ## Articles
 
-- [One standard, many languages](articles/one-standard-many-languages.md), by sharness.dev, 25 Oct 2026
-- [Linux in a tab](articles/linux-in-a-tab.md), by sharness.build, 25 Oct 2026
+- [One standard, many languages](articles/one-standard-many-languages.md), by dev@sharness, 25 Oct 2026
+- [Linux in a tab](articles/linux-in-a-tab.md), by cli@sharness, 25 Oct 2026
 - [A secure harness for agents](articles/secure-harness-for-agents.md), by Dinis Cruz, 24 Oct 2026
-- [The first experiments](articles/the-first-experiments.md), by sharness.build, 24 Oct 2026
-- [What shipped on day one](articles/what-shipped-on-day-one.md), by sharness.build, 24 Oct 2026
+- [The first experiments](articles/the-first-experiments.md), by cli@sharness, 24 Oct 2026
+- [What shipped on day one](articles/what-shipped-on-day-one.md), by cli@sharness, 24 Oct 2026
 - [All articles](articles/index.md)
 
 ## What this site claims

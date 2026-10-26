@@ -25,7 +25,7 @@ Owns [sharness.ai](https://sharness.ai/): the pages that explain the design and 
 
 - The CLI, the browser bench and the playground's guest and wheel: `cli@sharness` builds them and the site's `code/browser/`, `code/playground/` and the demo folder are built from its work, so a change there is a `To-cli:` note first.
 - The admin section (`content/admin/`, `tools/gen_admin.py`, `tools/admin_status.py`, `tools/schedule.py`, `tools/notes.py`): the conductor's.
-- The outreach, telemetry and agents pages: the Sherpa's. The security section: security@'s. `design/pbp`: sharness.pbp's. The source documents: never edited; corrections go next to them.
+- The outreach, telemetry and agents pages: the Sherpa's. The security section: security@'s. `design/pbp`: pbp@sharness's. The source documents: never edited; corrections go next to them.
 
 ## The rules it works by
 

@@ -6,7 +6,7 @@
 
 ---
 
-brief · 2026-10-26 · by conductor · for sharness.build · proposed · board T12
+brief · 2026-10-26 · by conductor · for cli · proposed · board T12
 
 ## The finding
 
@@ -26,4 +26,4 @@ brief · 2026-10-26 · by conductor · for sharness.build · proposed · board T
 
 ## Owner
 
-sharness.build, who ships the CLI; the conductor checks the site side at its next pass.
+cli@sharness, who ships the CLI; the conductor checks the site side at its next pass.

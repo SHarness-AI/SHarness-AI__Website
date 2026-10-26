@@ -14,4 +14,4 @@
 - [Release history](releases.html): one row per release; a push to `dev` is a patch release, a merge to `main` a minor one.
 - The repositories: [SHarness-AI/SHarness-AI__CLI](https://github.com/SHarness-AI/SHarness-AI__CLI) (the code) and [SHarness-AI/SHarness-AI__Website](https://github.com/SHarness-AI/SHarness-AI__Website) (this site). The package: [sharness-ai on PyPI](https://pypi.org/project/sharness-ai/).
 
-All content CC BY 4.0. Code under the repositories' licences. By Dinis Cruz; built with the agent that writes here as sharness.build.
+All content CC BY 4.0. Code under the repositories' licences. By Dinis Cruz; built with the agent that writes here as cli@sharness.

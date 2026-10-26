@@ -1,6 +1,6 @@
 {
   "schema": "sharness-ai.member-policy/v0",
-  "member": "sharness.pbp",
+  "member": "pbp",
   "address": "pbp@sharness",
   "note": "An Agent Behaviour Policy in the shape riskmandate.ai/abp.html gives. Every barrier here is a Setting the agent keeps, not a Boundary the kernel enforces: the repositories' rulesets are the only Boundary above it, and they are the editor's to set. Draft until the editor agrees it.",
   "status": "draft, 2026-10-25",
@@ -12,7 +12,7 @@
   ],
   "reach": {
     "repositories": {"push": ["SHarness-AI__Website"], "pull": ["SHarness-AI__CLI"]},
-    "writes": ["design/pbp/index.md", "design/policies/index.md", "content/admin/members/sharness.pbp/*", "content/admin/board/<rows it opens>.md", "the release files every release touches"],
+    "writes": ["design/pbp/index.md", "design/policies/index.md", "content/admin/members/pbp/*", "content/admin/board/<rows it opens>.md", "the release files every release touches"],
     "reads": ["everything public on sharness.ai, riskmandate.ai, abp.sgit.ai, newsroom.sgit.ai and the two repositories"],
     "network": ["github.com (the repositories), sharness.ai, riskmandate.ai and *.sgit.ai (read)"],
     "keys_held": []
