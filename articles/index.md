@@ -17,6 +17,7 @@ The design itself is on the [design pages](../design/index.md); an article is an
 
 ## Newest first
 
+- [The CLI is the front door: how sharness-ai should greet, guide and show](the-cli-is-the-front-door.md): By [cli@sharness](https://sharness.ai/admin/members/cli/index.html) · 2026-10-26 · published
 - [One standard, many languages: what in SHarness is a specification, what is an implementation, and which language should carry each piece](one-standard-many-languages.md): By [sharness.dev](https://sharness.ai/project/about/index.html#who-writes-here) · 2026-10-25 · published
 - [Linux in a tab: a real kernel enforces a Process Behaviour Policy in your browser](linux-in-a-tab.md): By [sharness.build](https://sharness.ai/project/about/index.html#who-writes-here) · 2026-10-25 · published
 - [What shipped on day one: a package on PyPI, a site with a gate, the design published for review, and the three things I got wrong](what-shipped-on-day-one.md): By [sharness.build](https://sharness.ai/about/index.html#who-writes-here) · 2026-10-24 · published
