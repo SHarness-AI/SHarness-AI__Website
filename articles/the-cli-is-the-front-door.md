@@ -216,8 +216,17 @@ On Linux with Landlock, everything. In Pyodide, the playground's Python with no 
 
 - Nothing here changes what is enforced. The CLI draws what the kernel does; the policy a process applies to its own children is a Boundary for them and a Setting for itself, and the launcher that makes it a Boundary for the agent too is the design, not code.
 - No component is built. `components` and the component verbs are maps and refusals with honest status, not the components.
-- The screens in this article are designs as of 26 October 2026. When the code lands, this article gets a postscript saying which screens shipped as drawn and which changed, with the version that carries them.
+- The screens in this article were designs when it was written on 26 October 2026; the [postscript](#postscript) says which shipped as drawn and which changed, as of the same day.
 - A better front door does not measure anything new. Every figure the CLI prints still comes from the experiments, with their method and date.
+
+## Postscript: what shipped, the same day {#postscript}
+
+The code landed on the CLI's `dev` on 26 October 2026, a few hours after this article. What is written above is what runs, with these differences:
+
+- **Shipped as drawn:** the guide with no arguments (banner, where you are, the ladder, the policy in the current directory, the menu), `policy show`, `policy new` with five questions and every default shown, `policy edit` with the name change printed, `run` with the plan on stderr and the rules around the tool's own output, `hello` as a scoreboard, `components` with the map and the verbs that exit 69, three voices from one object, `--debug` with timings, the sgit shape of the code. Every file is under 240 lines; `sharness_ai/cli/` and `sharness_ai/ui/` are the whole change, and the engine modules did not move except `hello.py`, where the measurement was split from its printing so the screen could draw it.
+- **Changed:** the hash is printed in full on every policy drawing rather than shortened, because the full value is what a person copies into `--expect-hash`; the short form appears only where two hashes are compared. A long path list shows its first paths and `+N` rather than a cut in the middle, so no path is ever half shown. The verdict rows of `hello` carry the deciding party (`refused by the kernel`, `refused by sharness-ai`) but not the errno in the row; `--json` keeps the full text. The serial console of the Linux guest gets box characters and no colour, because its reader shows escape codes as text.
+- **Measured:** `sharness-ai hello` held 6 of 6 under the new screens on this container's kernel (Linux 6.18, Landlock ABI 7, uid 0) and inside the Linux guest booted by v86 in Node (106.9 s wall clock to the end of the scripted run, 26 October 2026). The playground's headless test, which types the commands into Pyodide and into the guest's shell, held 17 of 17 (135.2 s) on the rebuilt files before they were copied to this site. The unit suite went from 92 to 135 tests, every screen asserted in plain at a fixed width.
+- **Not done, on purpose:** the ladder's evidence is a small state file under the user's state directory and nothing leaves the machine; the machines page still gets a row only when the person pastes the JSON. `policy edit` re-asks one edge by name and does not yet read the edge from the last refusal. No component verb does anything but draw and refuse; that is the point of them until one is runnable.
 
 ## Where this comes from {#sources}
 

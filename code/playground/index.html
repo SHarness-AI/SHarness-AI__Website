@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.37</a>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.38</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -140,7 +140,7 @@
   <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">the code</a> / playground</div>
   <h1>Playground: <code>sharness-ai</code> in Pyodide and in Linux</h1>
   <p class="lead">Two runtimes, one page, nothing installed on your machine. On the left, <b>Pyodide</b>: Python compiled to WebAssembly, where <code>pip install sharness-ai</code> installs the CLI and you can hash, check and translate Process Behaviour Policies. Switch to <b>Linux</b>: Alpine with a Landlock kernel, booted by v86 in this tab, where every <code>sharness-ai run</code> is enforced by a real kernel. On the right, one policy, hashed by three implementations.</p>
-  <div class="note">What each tab can show. Pyodide has no kernel and no processes, so <code>run</code> and <code>hello</code> refuse there with exit 126: there is no child to confine, and the CLI says so rather than pretend. In Linux every policy is applied by the shell's <code>sharness-ai</code> to its child: a Boundary for the child, a Setting for the shell, which could have skipped it. The kernel is real; the CPU is emulated, so a command takes seconds. The wheel is the CLI's <code>dev</code> branch, versioned <code>+dev.&lt;commit&gt;</code>; PyPI carries only releases. Built and tested <span class="asof">as of 25 Oct 2026</span>. The milestone behind it: <a href="../../articles/linux-in-a-tab.html">Linux in a tab</a>.</div>
+  <div class="note">What each tab can show. Pyodide has no kernel and no processes, so <code>run</code> and <code>hello</code> refuse there with exit 126: there is no child to confine, and the CLI says so rather than pretend. In Linux every policy is applied by the shell's <code>sharness-ai</code> to its child: a Boundary for the child, a Setting for the shell, which could have skipped it. The kernel is real; the CPU is emulated, so a command takes seconds. The wheel is the CLI's <code>dev</code> branch, versioned <code>+dev.&lt;commit&gt;</code>; PyPI carries only releases. Built and tested <span class="asof">as of 26 Oct 2026</span>, with the CLI's new screens (<code>sharness-ai guide --once</code>, <code>policy new</code>, <code>policy show</code>, <code>components</code>; <a href="../../articles/the-cli-is-the-front-door.html">the design</a>): 17 of 17 headless checks held on the files this page serves. The milestone behind it: <a href="../../articles/linux-in-a-tab.html">Linux in a tab</a>.</div>
 
   <div id="sharness-playground" data-assets="../browser/demo/"></div>
   <script type="module" src="../browser/demo/playground.js"></script>
@@ -174,7 +174,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../../project/releases.html">v0.5.37</a> · <a href="../../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.38</a> · <a href="../../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>Components</h4>
