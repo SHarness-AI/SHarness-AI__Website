@@ -18,7 +18,7 @@ import sys
 from pathlib import Path
 
 ROOT    = Path(__file__).resolve().parents[1]
-VERSION = (ROOT / "tools/version.txt").read_text().strip()
+VERSION = (ROOT / "version").read_text().strip()          # written by CI only (tools/release.py)
 GH      = "https://github.com/SHarness-AI/SHarness-AI__CLI"      # the header link: the code
 HOST    = (ROOT / "CNAME").read_text().strip()
 

@@ -12,7 +12,7 @@ import sys
 from pathlib import Path
 
 ROOT    = Path(__file__).resolve().parents[1]
-VERSION = (ROOT / "tools/version.txt").read_text().strip()
+VERSION = (ROOT / "version").read_text().strip()
 HOST    = (ROOT / "CNAME").read_text().strip()
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from gen_pages import PAGES                                      # noqa: E402

@@ -2,7 +2,7 @@
 // sharness.ai pre-release gate. Run from anywhere: node tools/validate.js
 // The same gate the *.sgit.ai sites run (this one is adapted from nfrs.sgit.ai).
 // Checks, in order:
-//   1. version agreement — tools/version.txt vs every page's version badge,
+//   1. version agreement — /version (written by CI, tools/release.py) vs every page's version badge,
 //      the versions table, llms.txt, llms-full.txt and index.md
 //   2. internal links — every relative href/src in every .html file resolves to a
 //      file in the tree (fragments stripped; external and mailto links skipped)
@@ -38,9 +38,9 @@ const files = walk(ROOT);
 const htmlFiles = files.filter(f => f.endsWith('.html'));
 
 // --- 1. version agreement -------------------------------------------------
-const VERSION = fs.readFileSync(path.join(ROOT, 'tools/version.txt'), 'utf8').trim();
+const VERSION = fs.readFileSync(path.join(ROOT, 'version'), 'utf8').trim();
 if (!/^v\d+\.\d+\.\d+$/.test(VERSION)) {
-  errors.push(`version.txt does not carry a vX.Y.Z version: "${VERSION}"`);
+  errors.push(`/version does not carry a vX.Y.Z version: "${VERSION}"`);
 }
 for (const f of htmlFiles) {
   const t = fs.readFileSync(f, 'utf8');
