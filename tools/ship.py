@@ -55,7 +55,8 @@ def attempt(subject, body, trailer, snapshot, n):
     if r.returncode:
         files = sh("git", "diff", "--name-only", "--diff-filter=U", quiet=True).stdout.strip()
         sys.exit(f"ship: merging origin/dev failed:\n{files or r.stderr.strip()[-800:]}\nResolve by hand (keep both sides), then run again.")
-    if (ROOT / "version").read_text() != sh("git", "show", "origin/dev:version", quiet=True).stdout:
+    on_dev = sh("git", "show", "origin/dev:version", check=False, quiet=True)
+    if on_dev.returncode == 0 and (ROOT / "version").read_text() != on_dev.stdout:
         sys.exit("ship: /version differs from dev's; it is written by CI only (tools/release.py). Restore it: git checkout origin/dev -- version")
     if snapshot:
         sh("python3", "tools/admin_status.py")
