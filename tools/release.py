@@ -89,12 +89,23 @@ def describe(before):
     for line in git("log", "--format=%B", rng).splitlines():
         if line.lower().startswith("pages:"):
             named += [x.strip().lstrip("/") for x in line.split(":", 1)[1].split(",") if x.strip()]
-    new, updated = [], []
+    changed = {}
     for line in git("diff", "--name-status", "-M", rng).splitlines():
         parts = line.split("\t")
-        status, path = parts[0][0], parts[-1]
-        if is_page(path) and path not in named:
-            (new if status == "A" else updated).append(path)
+        changed[parts[-1]] = parts[0][0]
+    new, updated = [], []
+    for path, status in changed.items():
+        if not is_page(path) or path in named:
+            continue
+        if status == "A":
+            new.append(path)
+            continue
+        # a generated page counts as updated only when its markdown twin changed: a change to the
+        # chrome or a re-stamp touches every page and says nothing about any of them
+        twin = path[:-5] + ".md"
+        if (ROOT / twin).exists() and twin not in changed:
+            continue
+        updated.append(path)
     return subject, description, named, new, updated
 
 
