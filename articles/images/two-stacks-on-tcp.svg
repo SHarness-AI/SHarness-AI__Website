@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 594" width="1100" height="594" role="img" aria-labelledby="t">
+<title id="t">Two stacks on TCP: the capability stack, a chain of doors and targets a request crosses at runtime; the abstraction stack, a chain of levels a policy descends once at launch; both meeting at the one hash the person supplies</title>
+<style>text{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;font-size:15px;fill:#111827}.m{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px}.h{font-weight:700;font-size:18px}.s{fill:#4b5563;font-size:13px}.box{fill:#ffffff;stroke:#1f2937;stroke-width:1.5}.door{fill:#ecfeff;stroke:#0e7490;stroke-width:1.5}.lvl{fill:#fef3c7;stroke:#b45309;stroke-width:1.5}.ground{fill:#e5e7eb;stroke:#374151;stroke-width:1.5}.hash{fill:#111827}.arrow{stroke:#374151;stroke-width:1.5;fill:none;marker-end:url(#a)}</style>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#374151"/></marker></defs>
+<rect width="1100" height="594" fill="#f9fafb"/>
+<text x="40" y="44" class="h">The capability stack: per request, at runtime</text>
+<text x="40" y="66" class="s">doors and targets; each hop accepts a contract and emits the next; the kernel refuses at the end</text>
+<rect x="40" y="90" width="120" height="56" rx="8" class="box"/><text x="100" y="114" text-anchor="middle">the app</text><text x="100" y="134" text-anchor="middle" class="s">or an agent's tool</text>
+<path d="M160 118 H198" class="arrow"/>
+<rect x="200" y="90" width="150" height="56" rx="8" class="door"/><text x="275" y="114" text-anchor="middle" class="m">sharness.fs.s3</text><text x="275" y="134" text-anchor="middle" class="s">paths, append only</text>
+<path d="M350 118 H388" class="arrow"/>
+<rect x="390" y="90" width="170" height="56" rx="8" class="door"/><text x="475" y="114" text-anchor="middle" class="m">sharness.net.direct</text><text x="475" y="134" text-anchor="middle" class="s">host, port, endpoint</text>
+<path d="M560 118 H598" class="arrow"/>
+<rect x="600" y="90" width="130" height="56" rx="8" class="ground"/><text x="665" y="114" text-anchor="middle">the kernel</text><text x="665" y="134" text-anchor="middle" class="s">Landlock, a socket</text>
+<path d="M730 118 H768" class="arrow"/>
+<rect x="770" y="90" width="150" height="56" rx="8" class="box"/><text x="845" y="114" text-anchor="middle">S3</text><text x="845" y="134" text-anchor="middle" class="s">or .s3.twin, same face</text>
+<text x="40" y="178" class="s">about 3.2 ms per mutual TLS hop, measured 24 Oct 2026; a target may be on another machine, in another language</text>
+<text x="40" y="236" class="h">The abstraction stack: once per launch</text>
+<text x="40" y="258" class="s">levels; each compiles deterministically into the one below; the simplest is as binding as the deepest</text>
+<rect x="40" y="280" width="150" height="46" rx="8" class="lvl"/><text x="115" y="300" text-anchor="middle">5 · intent</text><text x="115" y="318" text-anchor="middle" class="s">one sentence</text>
+<path d="M190 303 H218" class="arrow"/>
+<rect x="220" y="280" width="150" height="46" rx="8" class="lvl"/><text x="295" y="300" text-anchor="middle">4 · profile</text><text x="295" y="318" text-anchor="middle" class="s">a coding agent</text>
+<path d="M370 303 H398" class="arrow"/>
+<rect x="400" y="280" width="150" height="46" rx="8" class="lvl"/><text x="475" y="300" text-anchor="middle">3 · plain rows</text><text x="475" y="318" text-anchor="middle" class="s">files, sites, tables</text>
+<path d="M550 303 H578" class="arrow"/>
+<rect x="580" y="280" width="150" height="46" rx="8" class="lvl"/><text x="655" y="300" text-anchor="middle">2 · doors, targets</text><text x="655" y="318" text-anchor="middle" class="s">the manifest</text>
+<path d="M730 303 H758" class="arrow"/>
+<rect x="760" y="280" width="150" height="46" rx="8" class="lvl"/><text x="835" y="300" text-anchor="middle">1 · mechanisms</text><text x="835" y="318" text-anchor="middle" class="s">Landlock, seccomp</text>
+<path d="M910 303 H938" class="arrow"/>
+<rect x="940" y="280" width="120" height="46" rx="8" class="ground"/><text x="1000" y="300" text-anchor="middle">0 · ground</text><text x="1000" y="318" text-anchor="middle" class="s">refuses</text>
+<text x="40" y="358" class="s">the vendor ships level 4; the organisation runs 3 to 2; the laptop runs 1 to 0; a lower level only narrows; nil cost at runtime</text>
+<rect x="300" y="400" width="500" height="64" rx="10" class="hash"/>
+<text x="550" y="427" text-anchor="middle" fill="#f9fafb" class="m">sha256:M   the one value the person supplies</text>
+<text x="550" y="449" text-anchor="middle" fill="#d1d5db" class="s">both stacks meet here: the request path checks it, the launch path recomputes it</text>
+<path d="M475 150 V395" class="arrow"/>
+<path d="M655 330 V395" class="arrow"/>
+<text x="40" y="520" class="s">Two stacks, not one: capability says what a running process may do; abstraction says how much of the schema a person must read.</text>
+<text x="40" y="542" class="s">TCP gives each the same two things, an abstraction (every hop speaks a contract and nothing else) and distribution (a contract does not care which machine answers).</text>
+<text x="40" y="572" class="s">Proposed, 26 Oct 2026. No door and no level's compiler is built; the kernel's refusals under one v0 policy are the runnable part.</text>
+</svg>

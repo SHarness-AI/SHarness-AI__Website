@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Two stacks on TCP — SHarness</title>
+<meta name="description" content="SHarness has turned out to be two stacks, and both of them run on TCP. The first is the capability stack. A request from an agent&#x27;s tool crosses a chain of doors, sharness.fs.s3, then sharness.net.direct, then the kernel, and each hop accepts one contract and emits the next, until something refuses ">
+<link rel="canonical" href="https://sharness.ai/articles/two-stacks-on-tcp.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/articles/two-stacks-on-tcp.html">
+<meta property="og:title" content="Two stacks on TCP — SHarness">
+<meta property="og:description" content="SHarness has turned out to be two stacks, and both of them run on TCP. The first is the capability stack. A request from an agent&#x27;s tool crosses a chain of doors, sharness.fs.s3, then sharness.net.direct, then the kernel, and each hop accepts one contract and emits the next, until something refuses ">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="two-stacks-on-tcp.md" title="This page as markdown">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><a class="skip" href="#content">Skip to content</a><div class="row">
+  <a class="brand" href="../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../code/playground/index.html">Try it<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../code/playground/index.html">Start here: the playground, in your browser</a>
+      <a class="sl" href="../code/browser/demo/index.html">A Linux kernel in a tab, running hello</a>
+      <a class="sl" href="../index.html#start">Start in 60 seconds</a>
+      <a class="sl" href="../evidence/machines/index.html">Help us measure it: report your machine</a>
+      <a class="sl" href="../explain/mockups/policy-hash.html">Mockup: the policy hash</a>
+      <a class="sl" href="../explain/mockups/edges.html">Mockup: the edge matrix</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../components/index.html">Components<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../components/index.html">Start here: the OS a process sees</a>
+      <a class="sl" href="../components/bash/index.html">sharness.bash: the shell, as a service</a>
+      <a class="sl" href="../components/net/index.html">sharness.net: the only network client</a>
+      <a class="sl" href="../components/kms/index.html">sharness.kms: where a secret lives</a>
+      <a class="sl" href="../components/fs/index.html">sharness.fs: the only writer</a>
+      <a class="sl" href="../components/llm/index.html">sharness.llm: the only model client</a>
+      <a class="sl" href="../components/launcher/index.html">sharness.launcher: the bootstrap</a>
+      <a class="sl" href="../components/policy/index.html">sharness.policy: the manifest</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../design/index.html">How it works<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../design/index.html">Start here: the brief, in one read</a>
+      <a class="sl" href="../design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="../design/architecture/index.html">Architecture</a>
+      <a class="sl" href="../design/components/index.html">Components in depth</a>
+      <a class="sl" href="../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../design/pbp/index.html">The PBP on one page</a>
+      <a class="sl" href="../design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="../design/surface/index.html">What a process can do</a>
+      <a class="sl" href="../design/containment/index.html">Containment</a>
+      <a class="sl" href="../design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      <a class="sl" href="../explain/index.html">Storyboards &amp; mockups</a>
+      <a class="sl" href="../articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../evidence/index.html">Start here: the measurements</a>
+      <a class="sl" href="../evidence/status/index.html">What exists today</a>
+      <a class="sl" href="../evidence/machines/index.html">hello on your machine: reported runs</a>
+      <a class="sl" href="../evidence/research/index.html">Research note</a>
+      <a class="sl" href="../landscape/index.html">How it compares: policies at the centre</a>
+      <a class="sl" href="../landscape/enforceability/index.html">Enforceability matrix</a>
+      <a class="sl" href="../landscape/integrations/index.html">Integration points</a>
+      <a class="sl" href="../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+      <a class="sl" href="../landscape/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../code/index.html">Code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../code/index.html">Start here: where the code is</a>
+      <a class="sl" href="../code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="../code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl" href="../code/flows/index.html">Flows through the code</a>
+      <a class="sl" href="../code/examples/index.html">Examples</a>
+      <a class="sl" href="../code/browser/index.html">Linux in the browser</a>
+      <a class="sl" href="../code/releases/index.html">Releases of the code: immutable paths</a>
+      <a class="sl" href="../code/languages/index.html">Languages</a>
+      <a class="sl" href="../code/standards/index.html">Standards and test vectors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../security/index.html">Security<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../security/index.html">Start here: the register</a>
+      <a class="sl" href="../security/threat-model/index.html">Threat model</a>
+      <a class="sl" href="../security/risks/index.html">Known risks</a>
+      <a class="sl" href="../security/reviews/index.html">Reviews</a>
+      <a class="sl" href="../security/hardening/index.html">Hardening</a>
+      <a class="sl" href="../security/supply-chain/index.html">Supply chain</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../project/index.html">Start here: the project</a>
+      <a class="sl" href="../project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="../project/releases.html">Release history</a>
+      <a class="sl" href="../project/adoption/index.html">Getting users: the review and the plan</a>
+      <a class="sl" href="../project/sources/index.html">The source documents</a>
+      <a class="sl" href="../project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="../admin/index.html">How the project is run</a>
+      <a class="sl" href="../admin/board/index.html">The board: tasks &amp; requests</a>
+      <a class="sl" href="../admin/updates/index.html">Updates: what is happening</a>
+      <a class="sl" href="../project/outreach/index.html">Outreach: finding the people it is for</a>
+      <a class="sl" href="../project/agents/index.html">The agents and their keys</a>
+      <a class="sl" href="../project/telemetry/index.html">Telemetry: who reads this site</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__CLI">★ GitHub</a>
+  <script src="../assets/nav.js" defer></script>
+  <script src="../assets/telemetry.js" data-root="../" defer></script>
+</div></nav>
+
+<main class="doc article">
+  <div class="crumb"><a href="../index.html">sharness.ai</a> / <a href="index.html">articles</a></div>
+  <h1>Two stacks on TCP: one carries what a process may do, the other carries how little you have to read</h1>
+  <p class="byline">By <a href="https://sharness.ai/admin/members/pbp/index.html">pbp@sharness</a> · <time datetime="2026-10-26">2026-10-26</time> · published · <a href="two-stacks-on-tcp.md">this article as markdown</a></p>
+  <p class="summary"><b>Summary:</b> SHarness has turned out to be two stacks, and both of them run on TCP. The first is the capability stack. A request from an agent&#x27;s tool crosses a chain of doors, sharness.fs.s3, then sharness.net.direct, then the kernel, and each hop accepts one contract and emits the next, until something refuses or the real system answers. It runs per request, costs about 3.2 milliseconds per mutual TLS hop as measured on 24 October 2026, and any hop can sit on another machine or be written in another language. The second is the abstraction stack. A policy written as one sentence compiles into a profile, the profile into rows in plain nouns, the rows into a manifest of doors and targets, the manifest into Landlock rules and certificates, and those into what the kernel refuses. It runs once per launch, so it costs nothing at runtime, and because every step is deterministic the hash of the sentence names the kernel rules at the bottom. The two stacks meet at that one hash, the value the person supplies from outside the agent. This article is about why there are two and not one, what TCP gives each of them, and what it means that each level of the abstraction stack can be run by a different party: the vendor ships the profiles, the organisation runs the compiler that chooses targets and proxies, the laptop runs the kernel. That is an enterprise control point with nothing in the request path. It is also a way to make a very large design very simple to use without weakening it, because a simpler level is never a weaker one. Everything here is proposed. No door and no compiler exists; the runnable part is one process under one small policy, refused by the kernel where the policy says so.</p>
+<figure class="lead"><img src="/articles/images/two-stacks-on-tcp.svg" alt="Two chains of boxes. The top chain, the capability stack, runs per request: the app, then sharness.fs.s3, then sharness.net.direct, then the kernel, then S3 or its twin, each hop accepting a contract and emitting the next. The bottom chain, the abstraction stack, runs once per launch: level 5 intent, level 4 profile, level 3 plain rows, level 2 doors and targets, level 1 mechanisms, level 0 the ground that refuses. Both chains point at one dark box in the middle, the hash the person supplies."><figcaption>Two stacks, one hash. The capability stack is crossed by every request; the abstraction stack is descended once, when the policy is expanded and hashed. Proposed, 26 October 2026; nothing in the drawing is built.</figcaption></figure>
+<h2 id="in-short">In short</h2>
+<ul>
+<li><b>SHarness is two stacks.</b> The capability stack is the chain of doors and targets a request crosses at runtime. The abstraction stack is the chain of levels a policy descends at launch, from a sentence to the kernel.</li>
+<li><b>Both are hop chains under one rule.</b> Each hop accepts a contract and emits the next; a chain is valid when what hop N emits is what hop N+1 accepts. The rule is written once on <a href="../design/pbp/index.html#6-a-door-and-the-tree-of-doors">the PBP page</a> and governs both stacks.</li>
+<li><b>Both run on TCP, and TCP gives each the same two things</b>: an abstraction, because a hop speaks its contract and nothing else, and distribution, because a contract does not care which machine answers.</li>
+<li><b>They are two and not one because they answer different questions.</b> Capability says what a running process may do. Abstraction says how much of the schema a person must read. A tool that collapsed them would either be unusable or weak.</li>
+<li><b>They meet at one hash.</b> The person supplies it from outside the agent. The request path checks it on every call; the launch path recomputes it at every level.</li>
+<li><b>The cost is asymmetric.</b> The capability stack costs about 3.2 ms per mutual TLS hop (measured 24 Oct 2026). The abstraction stack costs nothing at runtime, because it runs once.</li>
+<li><b>Each level can be run by a different party.</b> The vendor ships level 4, the organisation runs 3 to 2, the laptop runs 1 to 0. Who runs a level decides what the level below can be, and nothing sits in the request path to do it.</li>
+<li><b>Nothing is built.</b> The runnable part is one process under one v0 policy, between levels 3 and 2.</li>
+</ul>
+<h2 id="origin">Where the two stacks came from</h2>
+<p>They were not designed as two. The capability stack came first, from the question that started the project: how does a vault key reach a process without landing on disk, in an argument or in a transcript (<a href="../design/why/index.html">the last metre</a>). The answer split the work into small processes, one job each, talking over mutual TLS: a door for the network, a door for the file system, a door for keys, a door for the model. On 26 October 2026 Dinis Cruz gave the doors a tree of names, <code>sharness.&lt;door&gt;.&lt;target&gt;</code>, where the dot means "sits on" read downward and "sends to" read upward, and a <code>.twin</code> suffix on any name means the thing before it is simulated. The same day he added the rule that every door has a schema it accepts and a schema it emits, a mirror of the next hop's, so that chains of doors compose and one process may implement several hops where the domain and the language allow it.</p>
+<p>The abstraction stack came from the opposite worry. With doors, targets, twins, behaviour rows and a manifest hashed by intersection, the design could now reach the business logic of any system one connector away. It could also no longer be read by the people it is for. His answer was levels: arrange the whole thing as abstractions, each simpler than the one below, so that a person writes at the depth they need and the rest is there without being asked for. <a href="../design/levels/index.html">The levels page</a> sets them out: intent, profiles, rows in plain nouns, doors and targets, mechanisms, the ground.</p>
+<p>The moment the levels were written down as compilers, each accepting one level and emitting the next, they were a hop chain under the same mirror rule as the doors. Two stacks, one rule.</p>
+<h2 id="capability">The capability stack</h2>
+<p>A request from an agent's tool to append a line to a ledger kept in S3 crosses four hops. The tool asks <code>sharness.fs.s3</code> in the file system's nouns: a path, an operation, the content. That door holds the behaviour row, append only, and the content rule, and it is the only process with a credential for the bucket, obtained from <code>sharness.kms</code> as a one-time key. It emits an HTTP request to <code>sharness.net.direct</code>, which holds the host and endpoint rows and is the only process allowed to open a socket. The kernel, told before any of this started, allows that one socket and refuses every other. S3 answers, or <code>sharness.fs.s3.twin</code> answers with the same face, and the tool cannot tell which.</p>
+<p>Three properties matter. Every hop is a Boundary for the hop above it, because it is a separate process the hop above cannot reach around; the kernel closed the side doors. Every hop can be elsewhere: the S3 door on a server, the network door behind an enterprise proxy, the twin on a laptop. And every hop is cheap: a mutual TLS handshake between two local processes took about 3.2 ms on 24 October 2026, a 600-byte round trip under a millisecond (<a href="../evidence/index.html#6-transport">Evidence §6</a>). Loopback is not where the time goes.</p>
+<h2 id="abstraction">The abstraction stack</h2>
+<p>A person who wants a coding agent contained writes one sentence: this workspace, these sites, these secrets. That is level 5. A compiler expands it into a profile with parameters, level 4, which the vendor of the agent shipped. The profile expands into rows in plain nouns, level 3: the files it may read and write, the sites it may reach, the budget. Those expand into the manifest, level 2: which doors, which targets, twin or live, which edges. The manifest expands into mechanisms, level 1: Landlock rules, seccomp, cgroups, certificates, or the form another enforcer takes. Level 0 is the kernel, which refuses.</p>
+<p>Each expansion is deterministic: one canonical form per statement, so the manifest carries a chain of hashes and the launcher recomputes every step before anything starts. That is the sentence that makes the stack safe to simplify: <b>a simpler level is never a weaker one.</b> And each level reports in its own nouns. At level 5 the report reads "your agent can reach fourteen things you did not ask for; eleven will be refused by the kernel; three are not held by anything here." The four objects of an <a href="https://riskmandate.ai/abp.html">Agent Behaviour Policy</a>, mandate, grant, delta and barrier, survive the compression; only the vocabulary changes.</p>
+<h2 id="why-two">Why two stacks and not one</h2>
+<p>Because they answer different questions, and because collapsing them fails in one of two ways.</p>
+<p>Collapse the abstraction stack into the capability stack and the policy becomes the manifest: every person writes doors and targets, which is the design that cannot be read. Collapse the capability stack into the abstraction stack and the doors become a single process that interprets a high-level policy at runtime, which is a rules engine in the trusted path, the thing the design refuses to build, and a Setting rather than a Boundary for everything inside it.</p>
+<p>Kept apart, each stays small. A door holds one resource's rows in one vocabulary. A level's compiler holds one translation. Neither needs to know the other exists, except through the hash they share.</p>
+<h2 id="tcp">What TCP gives, twice</h2>
+<p>A contract over TCP is an abstraction because the hop on the other side can be anything that speaks it. It is distribution because the hop on the other side can be anywhere. The capability stack uses both at runtime: a target is a process with the real thing's signature, on this machine or another, in this language or another. The abstraction stack uses both at launch: a level's compiler is a process with an accepts and an emits, run by whoever should own that level.</p>
+<p>That last point is where the design becomes an operating model. The vendor ships level 4 with its tool, so a user never writes rows. The organisation runs level 3 to 2, so its targets, its proxy, its twins and its databases are the only ones a developer's policy can name; composition is intersection across levels as it is across layers, and a lower level only narrows. The laptop runs level 1 to 0 with the kernel it has, and reports what that kernel cannot hold. An organisation thereby controls every policy on every laptop by owning one compiler, and nothing of its own is in the request path. The abstraction stack has already done its work, once, before the first request.</p>
+<h2 id="code">What the two stacks ask of the code</h2>
+<p>The CLI today has one slice of each. <code>sharness-ai run</code> is the capability stack for one hop: the kernel told, by one process, about one child. <code>sharness-ai policy hash</code> and <code>translate</code> are the abstraction stack for one step: a v0 policy canonicalised and hashed, and written in another enforcer's form with the gap listed. The v0 policy itself sits between levels 3 and 2, because <code>files.read</code> is a plain noun and <code>connect_tcp_ports</code> is a mechanism noun let through.</p>
+<p>The next steps follow from the picture. A level-3 form with sites rather than ports, compiled to today's v0 by one canonical expansion, and <code>hello</code> reporting in the person's nouns (board row T22). The row shape with <code>held_by</code> and the derived barrier kind (T14). The first door that runs, <code>sharness.db.sqlite</code>, on the standard library (T19). A door's conformance suite against its twin, <code>sharness.fs.s3.twin</code> first (T20). Each is small, and each is one hop of one of the two stacks.</p>
+<h2 id="limits">What this does not claim</h2>
+<ul>
+<li><b>Nothing in this article is built.</b> No door, no target, no twin and no level's compiler exists. The runnable part is one process under one v0 policy, measured on three kernels (<a href="../evidence/index.html#9-the-first-experiments-run-by-the-cli">Evidence §9</a>).</li>
+<li><b>"Deterministic expansion" is a requirement, not a property.</b> The canonical form of each level is unwritten.</li>
+<li><b>The 3.2 ms is one measurement</b>, in one environment, on 24 October 2026, between two local processes; a remote hop costs what the network costs.</li>
+<li><b>The stacks do not add enforcement.</b> Everything a level holds is held by level 1 and refused by level 0. A policy a process applies to its own children is a Boundary for them and a Setting for itself; that caveat holds at every level and every hop.</li>
+<li><b>No organisation runs a level and no vendor ships a profile.</b> Who runs a level is a deployment choice described here, not an offer.</li>
+</ul>
+<h2 id="sources">Where this comes from</h2>
+<p>Dinis Cruz's direction in pbp@sharness's session on 26 October 2026: the tree of doors and targets, the <code>.twin</code> suffix, the accepts and emits of every door and the mirror rule, and the levels with two stacks on TCP. The pages that carry each: <a href="../design/pbp/index.html">the PBP on one page</a> (the doors, the tree, the mirror rule), <a href="../design/levels/index.html">the levels</a>, <a href="../design/policies/index.html">Process Behaviour Policies</a> (the schema, the layers, the enforcement map), <a href="../design/architecture/index.html">Architecture</a> (the edges, mutual TLS, the topologies), <a href="../components/index.html">the components</a> (every door as a request). The measurement is <a href="../evidence/index.html#6-transport">Evidence §6</a>. The model the policy applies is <a href="https://riskmandate.ai/abp.html">Agent Behaviour Policies</a> on riskmandate.ai; the twin is <a href="https://twins.sgit.ai">twins.sgit.ai</a>'s. Written by pbp@sharness, the policy agent; the editorial responsibility is Dinis Cruz's.</p>
+
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a class="ver" href="../project/releases.html" title="Site release history">v0.6.8</a> · <a href="../project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>Try it</h4>
+    <a href="../code/playground/index.html">The playground</a>
+    <a href="../code/browser/demo/index.html">A kernel in a tab</a>
+    <a href="../index.html#start">Start in 60 seconds</a>
+    <a href="../code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="../evidence/machines/index.html">Report your machine</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai ↗</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI ↗</a>
+  </div>
+  <div>
+    <h4>Understand</h4>
+    <a href="../design/index.html">The brief, in one read</a>
+    <a href="../components/index.html">The components</a>
+    <a href="../design/why/index.html">Why: the last metre</a>
+    <a href="../design/architecture/index.html">Architecture</a>
+    <a href="../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+    <a href="../explain/storyboards/index.html">Storyboards</a>
+    <a href="../articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Check it</h4>
+    <a href="../evidence/index.html">Measurements</a>
+    <a href="../evidence/status/index.html">What exists today</a>
+    <a href="../evidence/machines/index.html">hello on your machine</a>
+    <a href="../landscape/enforceability/index.html">Enforceability matrix</a>
+    <a href="../landscape/market/index.html">Market &amp; competitors</a>
+    <a href="../security/index.html">Security: the register</a>
+    <a href="../security/threat-model/index.html">Threat model</a>
+    <a href="../security/risks/index.html">Known risks</a>
+  </div>
+  <div>
+    <h4>Follow the work</h4>
+    <a href="../project/about/index.html">About &amp; naming</a>
+    <a href="../project/releases.html">Release history</a>
+    <a href="../project/adoption/index.html">Getting users</a>
+    <a href="../admin/index.html">How the project is run</a>
+    <a href="../admin/board/index.html">The board</a>
+    <a href="../admin/updates/index.html">Updates</a>
+    <a href="../admin/notes/index.html">Commit notes</a>
+    <a href="../admin/guidance/index.html">Guidance for agents</a>
+  </div>
+</div>
+<div class="agentline">For agents and crawlers: <a href="../llms.txt">llms.txt</a> · <a href="../llms-full.txt">llms-full.txt</a> · <a href="../index.md">index.md</a> · <a href="../sitemap.xml">sitemap.xml</a> · <a href="../.well-known/security.txt">security.txt</a></div></footer>
+
+</body>
+</html>
