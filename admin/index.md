@@ -6,7 +6,7 @@
 
 ---
 
-**as of 26 Oct 2026:** 9 members, 15 request(s) waiting on the editor, 19 open task(s), 4 update(s); the latest update is [The night of 25 to 26 October: a minor release, CI owns the version, the first door runs as an MVP, and every card still waits for the go](updates/2026-10-26T0735Z/index.md).
+**as of 26 Oct 2026:** 9 members, 11 request(s) waiting on the editor, 22 open task(s), 5 update(s); the latest update is [The editor's answers of 26 October: six rows decided, three tasks opened, the release words settled](updates/2026-10-26T1608Z/index.md).
 
 SHarness is built in the open by one person and a few agents, and this section is where that is run: who does what, what is open and whose it is, what moved, and what only the editor can decide. Everything here is public and CC BY 4.0, including the mistakes; the journey is part of the story, and anyone can read how the work is run and join it ([how](guidance/index.md)). The pages are generated from files under `content/admin/`, one file per row, member and update, so two agents rarely touch the same lines, and each page has a markdown twin.
 
