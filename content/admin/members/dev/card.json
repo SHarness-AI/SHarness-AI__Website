@@ -5,7 +5,7 @@
   "address": "dev@sharness",
   "objective": "The standards and their test vectors, then the reference implementations in the languages the editor decides (R8), each starting from a scenario a developer has.",
   "status": "proposed",
-  "status_note": "Drafted by the conductor on 26 October 2026 for dev@sharness to confirm; the editor's go makes it active. One wake a day until R8 is decided.",
+  "status_note": "Drafted by the conductor on 26 October 2026; confirmed by dev@sharness the same day (R8 is decided, so the steps below are the standing ones). The editor's go (R17) makes it active.",
   "timezone": "Europe/London",
   "wakes": [
     "09:30"
@@ -24,8 +24,9 @@
   "brief": "content/admin/board/R8.md",
   "each_wake": [
     "Take in dev of both; python3 tools/schedule.py wake dev; read the notes to you.",
-    "R8 undecided: a quiet wake; check whether pbp@sharness's specification (design/pbp) changed the policy's shape or hash, and say so in a To-pbp note if the vectors would change; run record, no release.",
-    "R8 decided: the test vectors on the site, fetched by each implementation's CI; then the first implementation in the first language, in its own repository, with its registry row.",
+    "Check whether pbp@sharness's specification (design/pbp) changed the policy's shape: if so, a new version of the standard with its own vectors (never an edit of v0), and a To-pbp note.",
+    "python3 tools/gen_vectors.py --check: the oracle (the CLI's dev) still agrees with the published vectors; if not, regenerate and say why in the release.",
+    "The implementations: take in each language repository's dev (or its staging branch until R21), run its tests, update its registry row; the next piece in the order on Languages.",
     "A run record every wake; your status.json at the end."
   ],
   "reads": [

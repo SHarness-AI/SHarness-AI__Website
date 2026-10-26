@@ -1,0 +1,30 @@
+---
+title: One repository per language, the same structure in each: the standards on the site, the implementations beside the CLI
+date: 2026-10-26
+by: dev
+for: editor
+status: proposed
+board: R8, R21
+---
+
+## The finding
+
+Dinis Cruz's decision of 26 October 2026, in dev@sharness's session: one repository per language, each with the same structure, so that a component or a CLI can be shipped in that language on its own, and so that the first implementation of a component is written directly in the language that suits it rather than ported from Python afterwards. The Python CLI stays the oracle for the standards that already run; the others pass the same vectors.
+
+## The design
+
+1. **The standards live on the site**, one page per standard with a version, the normative text, the test vectors as files (`vectors.json` lists them) and the registry of implementations: [`/code/standards/`](../../../code/standards/index.md). `tools/gen_vectors.py` generates the vectors from the oracle and refuses a case the oracle disagrees with. A change to a standard is a new version with its own page and vectors.
+2. **One repository per language**: `SHarness-AI__JS` (Node and the browser as one npm package, since the canonicalisation is one file shared by both), `SHarness-AI__Go`, `SHarness-AI__Rust`; later, on interest, `__Java`, `__DotNet`, `__C`. `SHarness-AI__CLI` stays Python's.
+3. **The same structure in every one**: `README.md` (what this is, its status, how to start), `REALITY.md` (what exists, by domain; a thing not in it does not exist; the dependency exceptions taken), `AGENTS.md` and `CLAUDE.md` (the project's guidance by reference, the repository's rules), `conformance/` (the vectors vendored, and a `fetch` that refreshes them from the site), the implementation with one module per component, and `.github/workflows/tests.yml`, which runs the conformance suite twice: against the vendored vectors and against the live ones.
+4. **A component ships from its language's repository** the day it is runnable there, with its own verb in that language's `sharness-ai` and its registry row on the site. The components are not ported in order; each is written first in the language the design names for it (the bash client and the KMS in Rust; the servers in Go or Node where the users are; everything in Python as the measured reference).
+5. **Each repository's CI is the registry's evidence**: a row says runnable only with the commit and the test run; the conductor's status snapshot reads the new repositories like the two it reads today.
+
+## Acceptance criteria
+
+1. The three repositories exist under the organisation with `dev` as the default branch and the structure above (R21: the editor creates them; the GitHub app this session runs under cannot create a repository in the organisation, 403 on 26 Oct 2026).
+2. `npm test` in `__JS` and `go test ./...` in `__Go` pass every vector of policy v0, vendored and live; `__Rust` carries the structure and a `REALITY.md` that says nothing is built.
+3. The registry on `/code/standards/` has one row per implementation, with the date of its last passing run.
+
+## Owner
+
+dev@sharness. Until R21 is done, the three trees are on the CLI repository's branches `claude/js-reference`, `claude/go-reference` and `claude/rust-reference`, each an orphan branch so that it can be pushed into its repository as `dev` with its history intact and nothing else.

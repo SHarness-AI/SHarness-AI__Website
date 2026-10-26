@@ -4,7 +4,7 @@
 > the kernel and talking only over allowed, mutually authenticated connections, so a secret
 > lives in one place and a tricked process can only do its one job.
 
-Site version: v0.5.31. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04,
+Site version: v0.5.33. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04,
 E09 and E10 in the CLI; E09 is a real Linux kernel in a browser tab running hello, measured 25 Oct 2026).
 No SHarness component is built.
 By Dinis Cruz; design session written up with Claude, 24 October 2026. All content CC BY 4.0.
@@ -100,6 +100,11 @@ SHarness is unrelated to Sharness, the shell testing library.
   sha384 integrity for every file; the source commit), /code/releases/dev/ (a snapshot, no promise)
 - /code/languages/index.md — Python first; Rust for the KMS and the bash client; JSON for policies; the
   proposed set of reference implementations (JavaScript in Node and the browser, Go, Rust; Java, .NET, C later)
+- /code/standards/index.md — the standards and their reference implementations: the registry (policy v0 written; the
+  acceptance test, the manifest, the protocols to come); one row per implementation with what it passes and who reviewed it
+- /code/standards/policy-v0/index.md — the first standard: the v0 shape, canonical JSON, the sha256 hash, what is
+  refused so every language hashes the same, the environment contract; /code/standards/policy-v0/vectors.json lists
+  the 28 test vectors (13 accept with their hashes, 15 refuse) that Python, JavaScript and Go pass
 - /articles/one-standard-many-languages.md — by dev@sharness: what in each component is a standard and what is
   an implementation; the component-by-language map; what each runtime adds to the attack surface; the
   adoption ladder from a policy file to a component; standards versioned with vectors and a reviewed registry

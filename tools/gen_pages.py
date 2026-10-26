@@ -75,6 +75,10 @@ PAGES = [
      "How much of the harness can run in a browser tab: a real kernel in a tab (v86) can run Landlock, seccomp, namespaces and cgroups; syscall-emulation runtimes cannot. The options, the recommended build, and what a browser can never show."),
     ("code/releases",       "Releases of the code",
      "Every release of the sharness-ai code published on this site at a path that never changes, complete, with a manifest of hashes; a latest that names the newest; the dev snapshot."),
+    ("code/standards",      "Standards and their reference implementations",
+     "The registry: one row per standard with its version and its test vectors, one row per implementation with its language, where it lives, what it passes and who reviewed it; how a standard is published here."),
+    ("code/standards/policy-v0", "Policy v0: the canonical form and the hash",
+     "The first SHarness standard: the v0 shape, the canonical bytes, the sha256 hash, what an implementation must refuse so that every language hashes the same, the environment contract, and the test vectors three implementations pass."),
     ("code/languages",      "Languages",
      "What each part of SHarness is written in and why: Python for the experiments and the launcher, a static binary for the bash client, the case for Rust in the KMS, JavaScript only in the browser."),
     # evidence and status

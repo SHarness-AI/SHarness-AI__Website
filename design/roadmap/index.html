@@ -20,7 +20,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
   <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
-  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.31</a>
+  <a class="ver" href="../../project/releases.html" title="Site release history">v0.5.33</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -79,6 +79,7 @@
       <a class="sl" href="../../code/playground/index.html">Playground: run it in your browser</a>
       <a class="sl" href="../../code/releases/index.html">Releases of the code: immutable paths</a>
       <a class="sl" href="../../code/languages/index.html">Languages</a>
+      <a class="sl" href="../../code/standards/index.html">Standards and test vectors</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -169,7 +170,7 @@
 <tr><td>7</td><td>One CLI project, or one per component</td><td>one for now (memo of 24 Oct); revisit when a component is useful on its own</td></tr>
 <tr><td>8</td><td>What "a skill" means for SHarness</td><td>a skill can install and start the harness, but locks it applies to the agent that loaded it are only Settings; binding needs the launcher above the agent</td></tr>
 <tr><td>9</td><td><b>Claude Code's sandbox as a layer.</b> Should a PBP generate the sandbox's settings (<code>bubblewrap</code>, network namespace, hostname allowlist) as its transparent <code>sharness.bash</code> on a laptop, and what does the design still add there</td><td>prior art the pages had missed; comparison on <a href="../../code/experiments/index.html#what-claude-codes-own-sandbox-already-gives-and-what-sharness-adds">Mockups and experiments</a></td></tr>
-<tr><td>11</td><td><b>Languages.</b> Python for every component first; Rust for <code>sharness.kms</code> once the protocol is settled (memory hygiene) and for the bash client (a static binary, no interpreter on the allowlist). Extended 25 Oct 2026: reference implementations in several languages against one standard per component, with test vectors and a reviewed registry</td><td>recommended on <a href="../../code/languages/index.html">Languages</a>; the map and a proposed order (JavaScript, Go, Rust; Java, .NET, C later) on <a href="../../articles/one-standard-many-languages.md">One standard, many languages</a>; not yet decided</td></tr>
+<tr><td>11</td><td>~~<b>Languages.</b>~~</td><td><b>decided 26 Oct 2026</b>: reference implementations in several languages against one standard per component, with test vectors on this site and a reviewed registry (<a href="../../code/standards/index.html">Standards</a>); one repository per language with the same structure; the order JavaScript, Go, Rust, then Java, .NET and C on interest; Python stays the oracle and the measured reference, Rust takes the KMS and the bash client. The map is <a href="../../articles/one-standard-many-languages.md">One standard, many languages</a>; the set and the status per language on <a href="../../code/languages/index.html">Languages</a>; the repositories are <a href="../../admin/board/index.html#r21">R21</a></td></tr>
 <tr><td>10</td><td><b>Order of E05 to E08</b></td><td>proposed on the <a href="../../evidence/research/index.html#4-what-is-still-open-in-the-order-to-take-it">research note</a>: E06 (the process tree), E05 (the edges as a script), E08 before E07 (the KMS before the LLM gateway), then the launcher as a script on a laptop</td></tr>
 </tbody>
 </table></div>
@@ -224,7 +225,7 @@
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
     <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
-    <p class="verline">site <a href="../../project/releases.html">v0.5.31</a> · <a href="../../project/engineering.html">engineering</a></p>
+    <p class="verline">site <a href="../../project/releases.html">v0.5.33</a> · <a href="../../project/engineering.html">engineering</a></p>
   </div>
   <div>
     <h4>Components</h4>
@@ -263,6 +264,7 @@
     <a href="../../code/browser/index.html">Linux in the browser</a>
     <a href="../../code/releases/index.html">Releases of the code</a>
     <a href="../../code/languages/index.html">Languages</a>
+    <a href="../../code/standards/index.html">Standards and test vectors</a>
     <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
     <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
   </div>

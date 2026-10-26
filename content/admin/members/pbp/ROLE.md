@@ -22,7 +22,7 @@ Holds the one definition of the Process Behaviour Policy that every page, the CL
 - `design/policies/index.md`: the schema, the layers, the enforcement map, with the conductor as ontologist for the vocabulary.
 - The row shape and the predicate language of the policy, once they move from proposed to the CLI's `policy.py` (with cli@sharness and dev@sharness, who write the code).
 - The conformance statement: which probes an enforcer must refuse and how it reports barrier kinds.
-- The tree of doors and dialects (`sharness.<resource>.<dialect>`, the dot meaning "sits on"): which names exist, what each may hold, and the test for a new one; the component pages themselves are build@sharness's.
+- The tree of doors and targets (`sharness.<door>.<target>`, the dot meaning "sits on" and "sends to"): which names exist, what each may hold, and the test for a new one; the component pages themselves are build@sharness's.
 
 ## The rules it works by
 

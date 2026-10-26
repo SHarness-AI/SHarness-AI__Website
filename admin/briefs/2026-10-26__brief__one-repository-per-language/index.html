@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>One repository per language, the same structure in each — SHarness</title>
+<meta name="description" content="One repository per language, the same structure in each: the standards on the site, the implementations beside the CLI">
+<link rel="canonical" href="https://sharness.ai/admin/briefs/2026-10-26__brief__one-repository-per-language/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/admin/briefs/2026-10-26__brief__one-repository-per-language/index.html">
+<meta property="og:title" content="One repository per language, the same structure in each — SHarness">
+<meta property="og:description" content="One repository per language, the same structure in each: the standards on the site, the implementations beside the CLI">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../../index.html">sharness<span>.ai</span></a>
+  <span class="stage-pill" title="No SHarness component is built; the experiments are runnable and measured">status: experiments</span>
+  <a class="ver" href="../../../project/releases.html" title="Site release history">v0.5.33</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../../code/playground/index.html">Try it<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../../code/playground/index.html">&#9679; The playground: type sharness-ai in your browser</a>
+      <a class="sl" href="../../../code/browser/demo/index.html">A Linux kernel in a tab, running hello</a>
+      <a class="sl" href="../../../index.html#start">Start in 60 seconds</a>
+      <a class="sl" href="../../../evidence/machines/index.html">Help us measure it: report your machine</a>
+      <a class="sl" href="../../../explain/mockups/policy-hash.html">Mockup: the policy hash</a>
+      <a class="sl" href="../../../explain/mockups/edges.html">Mockup: the edge matrix</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../../components/index.html">Components<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../../components/index.html">&#9679; The OS a process sees</a>
+      <a class="sl" href="../../../components/bash/index.html">sharness.bash: the shell, as a service</a>
+      <a class="sl" href="../../../components/net/index.html">sharness.net: the only network client</a>
+      <a class="sl" href="../../../components/kms/index.html">sharness.kms: where a secret lives</a>
+      <a class="sl" href="../../../components/fs/index.html">sharness.fs: the only writer</a>
+      <a class="sl" href="../../../components/llm/index.html">sharness.llm: the only model client</a>
+      <a class="sl" href="../../../components/launcher/index.html">sharness.launcher: the bootstrap</a>
+      <a class="sl" href="../../../components/policy/index.html">sharness.policy: the manifest</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../../design/index.html">The design<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../../design/index.html">&#9679; The brief: in one read</a>
+      <a class="sl" href="../../../design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="../../../design/architecture/index.html">Architecture</a>
+      <a class="sl" href="../../../design/components/index.html">Components</a>
+      <a class="sl" href="../../../design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../../../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../../../design/pbp/index.html">The PBP on one page</a>
+      <a class="sl" href="../../../design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../../../design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="../../../design/surface/index.html">What a process can do</a>
+      <a class="sl" href="../../../design/containment/index.html">Containment</a>
+      <a class="sl" href="../../../design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="../../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      <a class="sl" href="../../../explain/index.html">Storyboards &amp; mockups</a>
+      <a class="sl" href="../../../articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../../code/index.html">The code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../../code/index.html">&#9679; Where the code is</a>
+      <a class="sl" href="../../../code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="../../../code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl" href="../../../code/flows/index.html">Flows through the code</a>
+      <a class="sl" href="../../../code/examples/index.html">Examples</a>
+      <a class="sl" href="../../../code/browser/index.html">Linux in the browser</a>
+      <a class="sl" href="../../../code/playground/index.html">Playground: run it in your browser</a>
+      <a class="sl" href="../../../code/releases/index.html">Releases of the code: immutable paths</a>
+      <a class="sl" href="../../../code/languages/index.html">Languages</a>
+      <a class="sl" href="../../../code/standards/index.html">Standards and test vectors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../../security/index.html">Security<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../../security/index.html">&#9679; Security: the register</a>
+      <a class="sl" href="../../../security/threat-model/index.html">Threat model</a>
+      <a class="sl" href="../../../security/risks/index.html">Known risks</a>
+      <a class="sl" href="../../../security/reviews/index.html">Reviews</a>
+      <a class="sl" href="../../../security/hardening/index.html">Hardening</a>
+      <a class="sl" href="../../../security/supply-chain/index.html">Supply chain</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../../evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../../evidence/index.html">&#9679; Measurements</a>
+      <a class="sl" href="../../../evidence/status/index.html">What exists today</a>
+      <a class="sl" href="../../../evidence/research/index.html">Research note</a>
+      <a class="sl" href="../../../evidence/machines/index.html">hello on your machine: reported runs</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../../landscape/index.html">Landscape<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../../landscape/index.html">&#9679; Policies at the centre</a>
+      <a class="sl" href="../../../landscape/enforceability/index.html">Enforceability matrix</a>
+      <a class="sl" href="../../../landscape/integrations/index.html">Integration points</a>
+      <a class="sl" href="../../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+      <a class="sl" href="../../../landscape/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../../project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../../project/index.html">&#9679; Project</a>
+      <a class="sl" href="../../../project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="../../../project/sources/index.html">The source documents</a>
+      <a class="sl" href="../../../project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="../../../project/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../../project/releases.html">Release history</a>
+      <a class="sl" href="../../../project/adoption/index.html">Getting users: the review and the plan</a>
+      <a class="sl" href="../../../admin/index.html">Admin: how the project is run</a>
+      <a class="sl" href="../../../admin/board/index.html">The board: tasks &amp; requests</a>
+      <a class="sl" href="../../../admin/updates/index.html">Updates: what is happening</a>
+      <a class="sl" href="../../../project/outreach/index.html">Outreach: finding the people it is for</a>
+      <a class="sl" href="../../../project/agents/index.html">The agents and their keys</a>
+      <a class="sl" href="../../../project/telemetry/index.html">Telemetry: who reads this site</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__CLI">★ GitHub</a>
+  <script src="../../../assets/nav.js" defer></script>
+  <script src="../../../assets/telemetry.js" data-root="../../../" defer></script>
+</div></nav>
+
+<main class="doc">
+  <div class="crumb"><a href="../../../index.html">sharness.ai</a> / <a href="../../index.html">admin</a> / <a href="../index.html">briefs</a> / 2026-10-26__brief__one-repository-per-language · <a href="index.md">this page as markdown</a></div>
+  <h1>One repository per language, the same structure in each: the standards on the site, the implementations beside the CLI</h1>
+<p class="byline">brief · <time datetime="2026-10-26">2026-10-26</time> · by <a href="../../members/dev/index.html">dev</a> · for editor · proposed · board R8, R21 · <a href="https://github.com/SHarness-AI/SHarness-AI__Website/blob/dev/content/admin/briefs/2026-10-26__brief__one-repository-per-language.md">the file</a></p>
+<h2 id="the-finding">The finding</h2>
+<p>Dinis Cruz's decision of 26 October 2026, in dev@sharness's session: one repository per language, each with the same structure, so that a component or a CLI can be shipped in that language on its own, and so that the first implementation of a component is written directly in the language that suits it rather than ported from Python afterwards. The Python CLI stays the oracle for the standards that already run; the others pass the same vectors.</p>
+<h2 id="the-design">The design</h2>
+<ol>
+<li><b>The standards live on the site</b>, one page per standard with a version, the normative text, the test vectors as files (<code>vectors.json</code> lists them) and the registry of implementations: <a href="../../../code/standards/index.html"><code>/code/standards/</code></a>. <code>tools/gen_vectors.py</code> generates the vectors from the oracle and refuses a case the oracle disagrees with. A change to a standard is a new version with its own page and vectors.</li>
+<li><b>One repository per language</b>: <code>SHarness-AI__JS</code> (Node and the browser as one npm package, since the canonicalisation is one file shared by both), <code>SHarness-AI__Go</code>, <code>SHarness-AI__Rust</code>; later, on interest, <code>__Java</code>, <code>__DotNet</code>, <code>__C</code>. <code>SHarness-AI__CLI</code> stays Python's.</li>
+<li><b>The same structure in every one</b>: <code>README.md</code> (what this is, its status, how to start), <code>REALITY.md</code> (what exists, by domain; a thing not in it does not exist; the dependency exceptions taken), <code>AGENTS.md</code> and <code>CLAUDE.md</code> (the project's guidance by reference, the repository's rules), <code>conformance/</code> (the vectors vendored, and a <code>fetch</code> that refreshes them from the site), the implementation with one module per component, and <code>.github/workflows/tests.yml</code>, which runs the conformance suite twice: against the vendored vectors and against the live ones.</li>
+<li><b>A component ships from its language's repository</b> the day it is runnable there, with its own verb in that language's <code>sharness-ai</code> and its registry row on the site. The components are not ported in order; each is written first in the language the design names for it (the bash client and the KMS in Rust; the servers in Go or Node where the users are; everything in Python as the measured reference).</li>
+<li><b>Each repository's CI is the registry's evidence</b>: a row says runnable only with the commit and the test run; the conductor's status snapshot reads the new repositories like the two it reads today.</li>
+</ol>
+<h2 id="acceptance-criteria">Acceptance criteria</h2>
+<ol>
+<li>The three repositories exist under the organisation with <code>dev</code> as the default branch and the structure above (R21: the editor creates them; the GitHub app this session runs under cannot create a repository in the organisation, 403 on 26 Oct 2026).</li>
+<li><code>npm test</code> in <code>__JS</code> and <code>go test ./...</code> in <code>__Go</code> pass every vector of policy v0, vendored and live; <code>__Rust</code> carries the structure and a <code>REALITY.md</code> that says nothing is built.</li>
+<li>The registry on <code>/code/standards/</code> has one row per implementation, with the date of its last passing run.</li>
+</ol>
+<h2 id="owner">Owner</h2>
+<p>dev@sharness. Until R21 is done, the three trees are on the CLI repository's branches <code>claude/js-reference</code>, <code>claude/go-reference</code> and <code>claude/rust-reference</code>, each an orphan branch so that it can be pushed into its repository as <code>dev</code> with its history intact and nothing else.</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments runnable. No component is built; measured figures carry their date. <a href="../../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a href="../../../project/releases.html">v0.5.33</a> · <a href="../../../project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>Components</h4>
+    <a href="../../../components/index.html">The OS a process sees</a>
+    <a href="../../../components/bash/index.html">sharness.bash</a>
+    <a href="../../../components/net/index.html">sharness.net</a>
+    <a href="../../../components/kms/index.html">sharness.kms</a>
+    <a href="../../../components/fs/index.html">sharness.fs</a>
+    <a href="../../../components/llm/index.html">sharness.llm</a>
+    <a href="../../../components/launcher/index.html">sharness.launcher</a>
+    <a href="../../../components/policy/index.html">sharness.policy</a>
+  </div>
+  <div>
+    <h4>The design</h4>
+    <a href="../../../design/index.html">The brief: in one read</a>
+    <a href="../../../design/why/index.html">Why: the last metre</a>
+    <a href="../../../design/architecture/index.html">Architecture</a>
+    <a href="../../../design/components/index.html">Components</a>
+    <a href="../../../design/keys/index.html">Keys and the KMS</a>
+    <a href="../../../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../../../design/pbp/index.html">The PBP on one page</a>
+    <a href="../../../design/agents/index.html">Agents and LLMs</a>
+    <a href="../../../design/process-tree/index.html">Enforcing the process tree</a>
+    <a href="../../../design/surface/index.html">What a process can do</a>
+    <a href="../../../design/containment/index.html">Containment</a>
+    <a href="../../../design/spectrum/index.html">The spectrum</a>
+    <a href="../../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+  </div>
+  <div>
+    <h4>The code</h4>
+    <a href="../../../code/index.html">Where the code is</a>
+    <a href="../../../code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="../../../code/experiments/index.html">Mockups &amp; experiments</a>
+    <a href="../../../code/flows/index.html">Flows through the code</a>
+    <a href="../../../code/examples/index.html">Examples</a>
+    <a href="../../../code/browser/index.html">Linux in the browser</a>
+    <a href="../../../code/releases/index.html">Releases of the code</a>
+    <a href="../../../code/languages/index.html">Languages</a>
+    <a href="../../../code/standards/index.html">Standards and test vectors</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI</a>
+  </div>
+  <div>
+    <h4>Security, evidence, landscape</h4>
+    <a href="../../../security/index.html">Security: the register</a>
+    <a href="../../../security/threat-model/index.html">Threat model</a>
+    <a href="../../../security/risks/index.html">Known risks</a>
+    <a href="../../../security/hardening/index.html">Hardening</a>
+    <a href="../../../security/supply-chain/index.html">Supply chain</a>
+    <a href="../../../evidence/index.html">Measurements</a>
+    <a href="../../../evidence/status/index.html">What exists today</a>
+    <a href="../../../evidence/research/index.html">Research note</a>
+    <a href="../../../evidence/machines/index.html">hello on your machine</a>
+    <a href="../../../landscape/index.html">Landscape: policies at the centre</a>
+    <a href="../../../landscape/enforceability/index.html">Enforceability matrix</a>
+    <a href="../../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+    <a href="../../../landscape/market/index.html">Market &amp; competitors</a>
+    <a href="../../../explain/storyboards/index.html">Storyboards</a>
+    <a href="../../../articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Project &amp; agents</h4>
+    <a href="../../../project/about/index.html">About &amp; naming</a>
+    <a href="../../../project/sources/index.html">The source documents</a>
+    <a href="../../../project/engineering.html">Engineering</a>
+    <a href="../../../project/comms.html">Comms &amp; release history</a>
+    <a href="../../../admin/index.html">Admin: how the project is run</a>
+    <a href="../../../admin/board/index.html">The board</a>
+    <a href="../../../admin/updates/index.html">Updates</a>
+    <a href="../../../admin/notes/index.html">Commit notes</a>
+    <a href="../../../admin/schedule/index.html">Schedule and runs</a>
+    <a href="../../../admin/briefs/index.html">Briefs</a>
+    <a href="../../../admin/guidance/index.html">Guidance for agents (AGENTS.md)</a>
+    <a href="../../../project/adoption/index.html">Getting users</a>
+    <a href="../../../project/outreach/index.html">Outreach</a>
+    <a href="../../../project/agents/index.html">The agents and their keys</a>
+    <a href="../../../project/telemetry/index.html">Telemetry</a>
+    <a href="../../../.well-known/security.txt">security.txt</a>
+    <a href="../../../llms.txt">llms.txt</a>
+    <a href="../../../llms-full.txt">llms-full.txt</a>
+    <a href="../../../index.md">index.md</a>
+    <a href="../../../sitemap.xml">sitemap.xml</a>
+  </div>
+</div></footer>
+
+</body>
+</html>
