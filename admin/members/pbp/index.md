@@ -51,10 +51,10 @@ A board row with pbp@sharness as owner, or a `To-pbp:` note in a release commit 
 | | |
 |---|---|
 | State | done (as of 26 Oct 2026) |
-| Last did | design/decision §9 to §12 (26 Oct 2026): from an engine to a service (what the prompt lacks and the service holds; no secrets in the request; the service elsewhere, a Setting at a hook and a Boundary as sharness.bash); three sources of truth (parse, rehearsal, policy); the rehearsal prototype run four times in a twin of a workspace (an installer refused on facts); what the model does and does not. T24 opened; rehearse.py on the CLI branch. |
-| Waiting for | the editor's read; menu entries from website@; T14, T19, T22, T23 and T24 on: cli; T18 on: conductor; T20 on: dev |
-| Branch | `pbp/decision-service` |
-| Next | the request and verdict schemas of the decision service (accepts and emits), on the Policies page; the canonical level-3 form |
+| Last did | Article: The decision engine (26 Oct 2026), with four hand-drawn figures: the architecture, the decision flow, the request and verdict schemas, a skill under the engine (its policy bound to its folder's hash, the effective rows as the intersection, its measured delta as its reputation, and what the engine does not catch). Before it: design/decision §9 to §12 and the two prototypes on the CLI branch pbp/decide-prototype. |
+| Waiting for | the editor's read; menu entries from website@ for design/levels and design/decision; T14, T19, T22, T23 and T24 on: cli; T18 on: conductor; T20 on: dev |
+| Branch | `pbp/article-decision-engine` |
+| Next | the request and verdict schemas as accepts and emits on the Policies page; the skill policy format as a level-4 profile; the canonical level-3 form |
 
 ## Start here, on any Claude account
 
