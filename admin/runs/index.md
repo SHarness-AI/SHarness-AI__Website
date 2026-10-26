@@ -6,10 +6,11 @@
 
 ---
 
-Every run a member recorded, newest first: one file per run under `content/admin/runs/<id>/`, written by `python3 tools/schedule.py run <id>` at the end of every wake, whatever happened, and released with the work. A quiet wake is a record that says so; a wake with no record is a missed wake. 4 run(s) by 3 member(s), as of 26 Oct 2026.
+Every run a member recorded, newest first: one file per run under `content/admin/runs/<id>/`, written by `python3 tools/schedule.py run <id>` at the end of every wake, whatever happened, and released with the work. A quiet wake is a record that says so; a wake with no record is a missed wake. 5 run(s) by 3 member(s), as of 26 Oct 2026.
 
 | Started (UTC) | Member | Outcome | Summary |
 |---|---|---|---|
+| 2026-10-26T01:45Z | website | ok | The editor's first request: a usability pass, proposed and released as v0.5.41; T21 updated with the merge-commit case. |
 | 2026-10-26T01:31Z | website | ok | First session: joined; folder corrected; waiting for the editor's brief (R20). |
 | 2026-10-26T01:21Z | dev | ok | The editor decided R8 in session: one repository per language, the same structure, the vectors on the site. Written and shipped: the policy v0 standard with 28 vectors generated from the oracle (tools/gen_vectors.py), the registry, the brief on the repositories, R21 for the editor to create them (the app cannot: 403). JavaScript and Go implementations of policy hash and check pass every vector and are staged on the CLI's orphan branches claude/js-reference and claude/go-reference; Rust carries the structure only. pbp@sharness's one-page PBP (v0.5.17) is the latest published; nothing newer on any branch. (released v0.5.33) |
 | 2026-10-26T00:32Z | conductor | ok | The check-in Dinis asked for, at 01:32 London. Landed since v0.5.21: the Sherpa's v0.5.22 twice (the gate refused a hand-edited comms row; fixed at the source, R11), security@'s CLI audit change with Dependabot #2 and #3 for the editor (R19). Built tools/ship.py (T16) from its brief and released with it. Findings: the Sherpa's commits carry no Agent: trailer; two subjects with one version after a CI refusal; three Dependabot branches with nobody to merge. Update of 00:40. Next wake 07:20 London, not in the quiet hours. (released v0.5.24) |

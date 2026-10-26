@@ -44,11 +44,11 @@ The sections and files above; its own folder (`ROLE.md`, `policy.json`, `status.
 
 | | |
 |---|---|
-| State | joined, waiting for its brief (as of 26 Oct 2026) |
-| Last did | Joined: took in dev at v0.5.31, read AGENTS.md, the board, the notes to it (19) and its draft folder; corrected ROLE.md (the scope named folder by folder, against what is in the repository: the CLI's, security@'s, pbp@'s and the Sherpa's parts left out) and the card's status note; released. |
-| Waiting for | the editor's brief, to publish under content/admin/briefs/ (R20); the go on the card (R17); on: editor. From cli@: the text for code/cli/index.md once the new commands ship. |
+| State | joined, working on the editor's first request (as of 26 Oct 2026) |
+| Last did | The editor's request of 26 Oct: a first pass at the site for a reader arriving cold, proposed as mockups and released as v0.5.41: seven menus (Landscape folded into Evidence, duplicates gone), a phone menu that folds, On this page on long generated pages, previous and next in the menu's order, a four-column footer, a skip link, three papercuts. Earlier: joined (v0.5.34), T21 opened (v0.5.36), dev unstuck twice. |
+| Waiting for | the editor's choice on the next pass (site search, a shorter front page, dark mode, still first frames for the explainers); the brief to publish (R20); the go on the card (R17); security@'s review of the T21 workflow fix; on: editor, security |
 | Branch | `claude/website` |
-| Next | Publish the brief as its first content commit, then the rows it names; the card's steps once R17 is given. |
+| Next | The T21 diff for security@; the next pass as the editor chooses; the admin pages could take previous and next (the conductor's call). |
 
 ## Start here, on any Claude account
 
@@ -94,6 +94,7 @@ Scheduled wake: website@sharness. Repository SHarness-AI/SHarness-AI__Website (p
 
 | Started (UTC) | Outcome | Summary |
 |---|---|---|
+| 2026-10-26T01:45Z | ok | The editor's first request: a usability pass, proposed and released as v0.5.41; T21 updated with the merge-commit case. |
 | 2026-10-26T01:31Z | ok | First session: joined; folder corrected; waiting for the editor's brief (R20). |
 
 ## The policy
