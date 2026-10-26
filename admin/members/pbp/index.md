@@ -20,7 +20,7 @@ Holds the one definition of the Process Behaviour Policy that every page, the CL
 - `design/policies/index.md`: the schema, the layers, the enforcement map, with the conductor as ontologist for the vocabulary.
 - The row shape and the predicate language of the policy, once they move from proposed to the CLI's `policy.py` (with cli@sharness and dev@sharness, who write the code).
 - The conformance statement: which probes an enforcer must refuse and how it reports barrier kinds.
-- The tree of doors and dialects (`sharness.<resource>.<dialect>`, the dot meaning "sits on"): which names exist, what each may hold, and the test for a new one; the component pages themselves are build@sharness's.
+- The tree of doors and targets (`sharness.<door>.<target>`, the dot meaning "sits on" and "sends to"): which names exist, what each may hold, and the test for a new one; the component pages themselves are build@sharness's.
 
 ## The rules it works by
 
@@ -51,10 +51,10 @@ A board row with pbp@sharness as owner, or a `To-pbp:` note in a release commit 
 | | |
 |---|---|
 | State | done (as of 26 Oct 2026) |
-| Last did | Site v0.5.31 (26 Oct 2026): the twin below the dialect, never a dialect, on design/pbp §6; the undecorated door is the local one; T20 opened (a dialect's conformance suite against its twin). |
+| Last did | Site v0.5.32 (26 Oct 2026): the second level is the target, where the door sends (disk, memory, s3; direct, proxy; sqlite, postgres); a twin is a target with the real thing's signature; dev and prod are one policy tree with different target rows; dialect withdrawn, correction dated on the page. |
 | Waiting for | T14 and T19 on: cli; T18 on: conductor; T20 on: dev |
-| Branch | `pbp/twins` |
-| Next | the predicate language one kind at a time, append_only first; the conformance statement for a door, with target: twin | live in its output |
+| Branch | `pbp/targets` |
+| Next | the predicate language one kind at a time, append_only first; the conformance statement for a door, with each target's twin | live in its output |
 
 ## Start here, on any Claude account
 
