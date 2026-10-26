@@ -116,6 +116,17 @@ The browser bench grows with each step: a door and an app under one guest kernel
 
 The front door already draws the map with honest status. Each step changes one thing on it: a door's node turns from designed to runnable the day its package is installed, its verb runs, and `sharness-ai doctor` gains a check for it (the door answers `GET /v0/hello`, its targets say `twin` or `live`). `sharness-ai components` reads the entry points, so a door written in another language shows up when its manifest row does. `sharness-ai help --format json` grows with the verbs, and the site's CLI page is generated from it.
 
+## What shipped the same day
+
+Steps 1 to 4 landed on the CLI's `dev` on 26 October 2026 (commits 3392842 and 5421d4e), the folders as §2 says, each with README, REALITY, ACCEPTS, EMITS and vectors; separate distributions wait on the `packages/` move (assumption kept: one distribution for now):
+
+- **Step 1, T22**: `sharness_ai/level/l3/`, the level-3 form with `sites`; 9 accept and 6 refuse vectors.
+- **Step 2**: `l4/` (six profiles from P0 to P5) and `l5/` (`contain`), `explain` down the chain, one hash per level; 9/4 and 5/5 vectors.
+- **Step 3**: `sharness_ai/door/`: Session by `openssl` (E05), Door and Client over `ssl` with the role from the SAN URI and the edge checked both ways, Contract, Rows with the first four predicates, Audit, Conformance. A loopback mutual-TLS request measured about 7 to 8 ms end to end.
+- **Step 4**: `sharness_ai/fs/`, `fs/disk/`, `fs/disk/twin/`; 18 vectors held by both targets; the Boundary demo in `tests/unit/fs/`: an app under Landlock is refused a direct write (`EACCES`) and writes through the door, which refuses a key.
+
+Steps 5 to 9 are as written above. The grid's "N things you did not ask for" is not computed yet.
+
 ## Acceptance criteria
 
 1. `packages/` exists with `sharness-ai` (the current package, unchanged) and `sharness-ai-door`; each has the seven files of §2; `pip install ./packages/sharness-ai-door` works alone; the test suite runs per package and as a whole in CI.
