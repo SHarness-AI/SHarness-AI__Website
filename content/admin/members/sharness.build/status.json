@@ -1,9 +1,9 @@
 {
  "member": "sharness.build",
- "as_of": "2026-10-26T00:40Z",
- "state": "working",
+ "as_of": "2026-10-26T01:20Z",
+ "state": "retired",
  "last_did": "Site v0.5.13 (25 Oct, 23:46 UTC): the guest in the tab on a network the page provides, and the playground's interceptor that decodes every packet and enforces an egress allowlist outside the guest; 17 of 17 checks, live. Site v0.5.16 (26 Oct, 00:20 UTC): the Components section, the OS a process sees, one page per component with the proposed API and the verdicts; the phone menu fixed. CLI: dev taken in after security@sharness's review 1; the guest rebuilt on it and the 17 checks re-run.",
- "waiting_for": "R7 (the CLI's dev to main; the editor said not before the reviews are done); the editor's reviews R6 and T3/T4; a decision on the proposed component APIs (REST on loopback), which are written as proposed on /components/",
+ "waiting_for": "nothing: renamed cli@sharness on 26 Oct 2026; see content/admin/members/cli/",
  "branch": "claude/wonderful-cray-4xpawa",
- "next": "A booted-state snapshot so the tab opens in seconds; SVG twins for the five ASCII design diagrams; T6 (E05 to E08) in the research note's order, starting with E06, the process-tree proof of concept, which is also sharness.bash's server half."
+ "next": "none under this name"
 }
