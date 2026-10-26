@@ -50,11 +50,11 @@ A board row with pbp@sharness as owner, or a `To-pbp:` note in a release commit 
 
 | | |
 |---|---|
-| State | done (as of 26 Oct 2026) |
-| Last did | Site v0.5.39 (26 Oct 2026): .twin as the terminal suffix on any name (fs.s3.twin, db.postgres.twin, net.twin, fs.twin), the editor's rule; .memory withdrawn as a name; correction dated on the page; T20 reworded. v0.5.38 was an empty release of mine (the edit failed, the script ran); its row says so. |
-| Waiting for | T14 and T19 on: cli; T18 on: conductor; T20 on: dev |
-| Branch | `pbp/twin-suffix-2` |
-| Next | the predicate language one kind at a time, append_only first; the contract per edge in the manifest schema (Policies §4) |
+| State | waiting (as of 26 Oct 2026) |
+| Last did | Branch pbp/disk (26 Oct 2026, not yet released): the door alone is the API, every leaf is a target: fs.disk, fs.disk.twin, net.direct, net.direct.twin; 'the undecorated door is the local one' withdrawn, third dated correction on design/pbp §6; the 'Three trees are one' paragraph restored. Before it, v0.5.40 on dev (the .twin suffix), not deployed: the tag job refuses v0.5.40 and v0.5.41 until v0.5.39 is tagged. |
+| Waiting for | v0.5.39 tagged by hand on 140b2c0 or T21 landing, so that dev deploys again and pbp/disk can ship; on: editor or website. T14 and T19 on: cli; T18 on: conductor; T20 on: dev |
+| Branch | `pbp/disk` |
+| Next | ship pbp/disk once dev deploys again; the predicate language, append_only first; the contract per edge (Policies §4) |
 
 ## Start here, on any Claude account
 
