@@ -4,7 +4,7 @@
 > the kernel and talking only over allowed, mutually authenticated connections, so a secret
 > lives in one place and a tricked process can only do its one job.
 
-Site version: v0.5.21. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04,
+Site version: v0.5.22. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04,
 E09 and E10 in the CLI; E09 is a real Linux kernel in a browser tab running hello, measured 25 Oct 2026).
 No SHarness component is built.
 By Dinis Cruz; design session written up with Claude, 24 October 2026. All content CC BY 4.0.
@@ -183,8 +183,8 @@ SHarness is unrelated to Sharness, the shell testing library.
   keys on pki.sgit.ai, the vault register (ids, never keys), how a secret reaches an agent and a key reaches Dinis
 - /project/outreach/index.md — the outreach plan (a PLAN, nothing posted yet), the companion of
   /project/adoption/: what there is to show, five audiences and their sentence, the channels (repository,
-  lists, Show HN, Reddit, LinkedIn, rUv and the Agentics Foundation, OWASP, the sandbox people,
-  directories, the network), rUv's playbook, the rules, thirty days, the measures
+  lists, Show HN, Reddit, LinkedIn, ruv.sgit and the Agentics Foundation, OWASP, the sandbox people,
+  directories, the network), the rules, thirty days, the measures
 - /project/telemetry/index.md — who reads this site: one anonymous event per page per session over an
   append lane, encrypted in the browser; what is sent, never sent; the lane waits on an access token (R10)
 

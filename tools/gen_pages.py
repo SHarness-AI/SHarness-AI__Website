@@ -141,7 +141,7 @@ PAGES = [
     ("project/agents",       "The agents and their keys",
      "Who writes here besides Dinis Cruz: each agent's name, role, key on pki.sgit.ai and vaults (ids, never keys); how a secret reaches an agent and how a vault key reaches Dinis; what the agents need from him."),
     ("project/outreach",     "Outreach",
-     "Finding the people SHarness is for: what there is to show, who it is for, where they are, what rUv's playbook teaches, a 30-day plan, the rules every post follows, and how the result is measured. A plan by sherpa@sharness, for Dinis Cruz's go."),
+     "Finding the people SHarness is for: what there is to show, who it is for, where they are, a 30-day plan, the rules every post follows, and how the result is measured. A plan by sherpa@sharness, for Dinis Cruz's go."),
     ("project/telemetry",    "Telemetry",
      "Who reads this site: one anonymous event per page per session, encrypted in the browser to a key only the telemetry vault holds and written to a write-only lane; what is sent, what is never sent, what the counts are worth."),
 ]
