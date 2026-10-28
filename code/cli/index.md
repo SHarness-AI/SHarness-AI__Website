@@ -1,13 +1,13 @@
 # The CLI: sharness-ai
 
-> **Status: experiments, with two MVPs runnable, as of 26 Oct 2026.** A Python package, `sharness-ai`, that will carry the SHarness launcher and components. Today it carries the experiments and two MVPs on its `dev` branch: the levels in the terminal (MVP 1: `contain`, `profile`, `explain`) and the first door, `sharness.fs` (MVP 2: `session`, `fs`, `door conformance`). Source: [SHarness-AI/SHarness-AI__CLI](https://github.com/SHarness-AI/SHarness-AI__CLI). The command is `sharness-ai`.
+> **Status: experiments, with three MVPs runnable, as of 28 Oct 2026.** A Python package, `sharness-ai`, that will carry the SHarness launcher and components. Today it carries the experiments and three MVPs on its `dev` branch: the levels in the terminal (MVP 1: `contain`, `profile`, `explain`), the first door, `sharness.fs` (MVP 2: `session`, `fs`, `door conformance`) and the network door with a shell under the harness (MVP 3: `net`, `shell`). Source: [SHarness-AI/SHarness-AI__CLI](https://github.com/SHarness-AI/SHarness-AI__CLI). The command is `sharness-ai`.
 
 ## What exists, as of 26 Oct 2026
 
 | Where | What |
 |---|---|
 | [PyPI, v0.1.0](https://pypi.org/project/sharness-ai/) | reports its version and prints its help; also installs a `sharness` shorthand, removed on `dev` |
-| the `dev` branch | `sharness-ai` as the only command; the experiments E01 to E05, E09 and E10; MVP 1 and MVP 2 below; `doctor` and `help --format json`; 209 tests (all pass, run by website@ on Python 3.13, 26 Oct 2026). Not released until `dev` is merged to `main` ([R7](../../admin/board/index.md)) |
+| the `dev` branch | `sharness-ai` as the only command; the experiments E01 to E05, E09 and E10; MVP 1, MVP 2 and MVP 3 below; `doctor` and `help --format json`; 229 tests (228 pass in website@'s run on Python 3.13 as root, 28 Oct 2026; the 229th starts a shell as a temporary user and needs an interpreter that user can reach, which a virtualenv under a root-only directory is not). Not released until `dev` is merged to `main` ([R7](../../admin/board/index.md)) |
 
 ```
 $ pip install sharness-ai            # v0.1.0: version and help only
@@ -33,9 +33,12 @@ The command surface on `dev`, from `sharness-ai help --format json` (the parser 
 | `fs serve\|hello\|put\|append\|get\|rm\|ls\|log` | `sharness.fs`, the only writer: serve the door or call it as the app | runnable (MVP 2), a Setting |
 | `door conformance NAME` | a door's vectors against a fresh instance, the twin first | runnable (MVP 2) |
 | `components` | the operating system a process sees: the map, with status | runnable |
-| `bash`, `net`, `kms`, `llm`, `launcher` | the map and the proposed surface; exit 69 | designed, not built |
+| `net serve\|hello\|log` | `sharness.net`, the only network client: an allowlisting proxy on loopback for one uid, and its admin door | runnable (MVP 3) |
+| `shell [--workspace D --sites H -- CMD]` | an interactive shell under the harness: a unique user (as root), the proxy's port as its only network row | runnable (MVP 3) |
+| `launcher` | the map; its first slice is `shell` | runnable, a first slice |
+| `bash`, `kms`, `llm` | the map and the proposed surface; exit 69 | designed, not built |
 
-Requires Python 3.11 or later. No runtime dependencies: Landlock is reached through `ctypes`, hashing through `hashlib`, TLS through `ssl`; MVP 2 calls the `openssl` program for the session's certificates. The map of what each experiment shows and does not show is [Mockups and experiments](../experiments/index.md).
+Requires Python 3.11 or later. No runtime dependencies: Landlock is reached through `ctypes`, hashing through `hashlib`, TLS through `ssl`; MVP 2 and 3 call the `openssl` program for the session's certificates, and `shell` calls `useradd` and `userdel` where it runs as root. The map of what each experiment shows and does not show is [Mockups and experiments](../experiments/index.md).
 
 ## MVP 1: the levels in the terminal
 
@@ -69,6 +72,7 @@ sharness-ai hello                                  E04  the acceptance test, one
 sharness-ai session new|show                       E05  session CA + role certs + the edge matrix      runnable
 sharness-ai contain|profile|explain                MVP 1  the levels, a sentence down to the kernel  runnable
 sharness-ai fs serve|put|get|…                     MVP 2  sharness.fs, the first door (a Setting)     runnable
+sharness-ai net serve · sharness-ai shell          MVP 3  sharness.net and the launcher's first slice   runnable
 sharness-ai tree                                   E06  the process-tree proof of concept               planned
 sharness-ai llm   --listen :port --policy FILE     E07  sharness.llm v0, where ANTHROPIC_BASE_URL points  planned
 sharness-ai kms   --policy FILE                    E08  sharness.kms v0: init, public, unwrap, seal_to, destroy  planned
@@ -94,6 +98,10 @@ Three rules for the package, carried from the design:
 ```
 
 Its hash, from `sharness-ai policy hash` and from the [browser mockup](../../explain/mockups/policy-hash.html): `sha256:ab1d3e4e779313274f7a1d3ef3e46f6eacef038d8cfaa6198151a45cd82dcc76`.
+
+## MVP 3: the network door and a shell under the harness
+
+`sharness-ai shell` starts a command, by default a shell, as a unique system user (where it runs as root; `--no-user` runs it as the caller, a Setting), with a policy whose only network row is the port of `sharness.net`, an HTTP proxy that holds the host allowlist and checks the server name inside the TLS hello against the CONNECT host. The kernel holds the port, the proxy holds the hosts, and the proxy answers only that user, so for the shell it starts the host allowlist is outside its reach: a Boundary. What it does not cover is named in the CLI's `REALITY.md`: UDP, Unix sockets by path, TLS termination, the fs door for the workspace. Checked by website@ on 28 Oct 2026: [sharness.net](../../components/net/index.md#update-28-oct-2026) and [sharness.launcher](../../components/launcher/index.md). Unreleased, like the rest of `dev`.
 
 ## Why sharness-ai, not sharness
 

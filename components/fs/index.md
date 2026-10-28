@@ -1,6 +1,6 @@
 # sharness.fs: the only writer
 
-> **Status: runnable as an MVP, as of 26 Oct 2026; a Setting for the app, not yet a Boundary.** The door runs on the CLI's `dev` branch (cli@sharness, 5421d4e, reviewed in cf2ea3d): a loopback service under mutual TLS 1.3 that writes a folder under rules, over the local disk or over its twin in memory, with 18 conformance vectors both targets hold. It is a Boundary for the app only once the launcher gives the door its own uid and gives the app no write right to the folder; the launcher is not built, so until then it is a Setting, and every `hello` from the door says so. Unreleased to PyPI. Known issues from website@'s review of 26 Oct 2026 are in [section 5](#5-known-issues-as-of-26-oct-2026).
+> **Status: runnable as an MVP, as of 26 Oct 2026; a Setting for the app, not yet a Boundary.** The door runs on the CLI's `dev` branch (cli@sharness, 5421d4e, reviewed twice, cf2ea3d and 4a0bdd3): a loopback service under mutual TLS 1.3 that writes a folder under rules, over the local disk or over its twin in memory, with 18 conformance vectors both targets hold. It is a Boundary for the app only once the launcher gives the door its own uid and gives the app no write right to the folder; the launcher is not built, so until then it is a Setting, and every `hello` from the door says so. Unreleased to PyPI. Known issues, with what has been fixed since, are in [section 5](#5-known-issues-as-of-28-oct-2026).
 
 ## 1. Its one job
 
@@ -11,11 +11,11 @@ Apply writes to protected folders under rules. For sgit that is the working tree
 Five commands, on Linux with `openssl` on the machine (the browser bench's guest carries one, so the same demo runs in a tab):
 
 ```
-sharness-ai session new                          a session CA, one P-256 certificate per role, the CA key destroyed
-sharness-ai fs serve --target disk --root DIR    the door, on loopback, under mutual TLS (disk.twin: the same face over memory)
+sharness-ai session new --dir SDIR                a session CA, one P-256 certificate per role, the CA key destroyed
+sharness-ai fs serve --target disk --root DIR --session SDIR   the door, on loopback, under mutual TLS (disk.twin: the same face over memory)
 sharness-ai fs put notes.txt "hello"             through the door, as the app: 201, or 403 with the row that refused
 sharness-ai fs get|append|rm|ls|log|hello        the rest of the surface, as the app
-sharness-ai door conformance fs                  the 18 vectors against a fresh door, the twin first
+sharness-ai door conformance sharness.fs.disk.twin   the 18 vectors against a fresh door (then sharness.fs.disk: the real disk)
 ```
 
 What every request passes through, in order: the caller's role read from its certificate (`spiffe://<session>/<role>`); the edge checked against the matrix (only `app` and `launcher` may call `fs`; a valid `net` certificate is refused); the request matched against `ACCEPTS.json` (anything else is `404`); the path decoded and kept under the root; the rows; then the target. One audit line per request, never with the body.
@@ -23,7 +23,7 @@ What every request passes through, in order: the caller's role read from its cer
 | Request (runnable) | Body | Response |
 |---|---|---|
 | `GET /v0/files` | | the files under the root |
-| `GET /v0/files/<path>` | | the content (as UTF-8 text, see [5](#5-known-issues-as-of-26-oct-2026)) |
+| `GET /v0/files/<path>` | | the content (as UTF-8 text: binary does not read back, see [5](#5-known-issues-as-of-28-oct-2026)) |
 | `PUT /v0/files/<path>` | the bytes | `201`, or `403` with the row that refused |
 | `POST /v0/files/<path>/append` | the bytes | `201`, or `403` |
 | `DELETE /v0/files/<path>` | | `204`, or `403` |
@@ -39,7 +39,7 @@ The rows are the first four of the closed predicate language: `within_root` and 
 | `PUT /v0/files/src/main.py` under the root | written atomically, mode 0644: never executable | `.fs` | runnable |
 | `PUT /v0/files/../../etc/passwd`, or `%2e%2e%2f` | `403 outside the root` | `.fs` | runnable |
 | `PUT` through a symlink anywhere in the path | `403`: every path is walked from the root with `openat(2)` and `O_NOFOLLOW`, so nothing can be swapped between the check and the write | `.fs` | runnable |
-| `PUT` of bytes that parse as a private key, a vault key, an API or bearer token | `403 refuses clear secrets` | `.fs` | runnable (see [5](#5-known-issues-as-of-26-oct-2026)) |
+| `PUT` of bytes that parse as a private key, a vault key, an API or bearer token | `403 refuses clear secrets` | `.fs` | runnable (see [5](#5-known-issues-as-of-28-oct-2026)) |
 | `DELETE` or `PUT` on an `append_only` path | `403 append_only` | `.fs` | runnable |
 | a caller whose certificate names another role, or none | refused: no edge, or no TLS | `.fs` | runnable |
 | the app writes the folder directly, bypassing `.fs` | `EACCES` from the kernel under the app's Landlock policy; the Boundary demo in the CLI's tests shows it beside a write through the door (201) and a key refused by the door (403) | the kernel | runnable, in one process tree |
@@ -55,16 +55,16 @@ Adopt only this component and an agent can still write its workspace, through a 
 
 It does not read for the app beyond `GET`: the app reads the clone directly, read-only, because it must show diffs. It does not know what a file means, only what it parses as.
 
-## 5. Known issues, as of 26 Oct 2026
+## 5. Known issues, as of 28 Oct 2026
 
-Found in website@sharness's review of the CLI's `dev` at cf2ea3d, each reproduced against a running door; sent to cli@ as board row [T25](../../admin/board/index.md). Until they are fixed, the door is an MVP to try, not one to rely on.
+**Correction, 28 Oct 2026.** This section first listed five issues found on 26 Oct 2026 in website@sharness's review of the CLI's `dev` at cf2ea3d, each reproduced against a running door, and sent to cli@ as board row [T25](../../admin/board/index.md). cli@'s second review landed as 4a0bdd3 the same day. On 28 Oct website@ re-ran every reproduction against `dev` at 8210807: three are fixed and two still reproduce. The original findings are left as written; the Status column is what changed. Two commands on this page, `door conformance fs` and `fs serve` without `--session`, were also wrong as first published (the door's name is `sharness.fs.disk.twin` or `sharness.fs.disk`); corrected above.
 
-| Issue | What happens | Fix proposed |
-|---|---|---|
-| The secret scan is quadratic on a long run of letters and digits | a 64 KB body with no break took 5.2 s to scan here (measured 26 Oct 2026), and the time grows with the square of the length, so 1 MB would take about 20 minutes; the request holds a thread and a core, and the caller times out | start a vault-key match only where a run starts (a one-character lookbehind): 1 MB in 17 ms, keys still found |
-| One idle TCP connection freezes the door | the TLS handshake runs on the thread that accepts connections, with no timeout: any local process, with no certificate, stops every other caller until it hangs up | hand the handshake to the request's thread, under the 30 s timeout |
-| A secret split across two appends is stored | each body alone passes `refuse_secrets`; the file then holds a private key header | scan the tail of the file with the new bytes on append |
-| Concurrent writes to one path all fail | every writer uses the same temporary name, and each failure deletes the others' temporary file: 8 of 8 failed | a random temporary name; delete only your own |
-| A binary file does not read back | `GET` returns the content decoded as UTF-8 with replacement characters | return bytes that are not UTF-8 as base64 |
+| Issue | What happened on 26 Oct | Fix proposed | Status, 28 Oct 2026 |
+|---|---|---|---|
+| The secret scan is quadratic on a long run of letters and digits | a 64 KB body with no break took 5.2 s to scan here (measured 26 Oct 2026), and the time grows with the square of the length, so 1 MB would take about 20 minutes; the request holds a thread and a core, and the caller times out | start a vault-key match only where a run starts (a one-character lookbehind): 1 MB in 17 ms, keys still found | **fixed** in 4a0bdd3: every shape is anchored on a literal or a fixed field, linear, pinned by a test |
+| One idle TCP connection freezes the door | the TLS handshake runs on the thread that accepts connections, with no timeout: any local process, with no certificate, stops every other caller until it hangs up | hand the handshake to the request's thread, under the 30 s timeout | **fixed** in 4a0bdd3: re-run, a `hello` answers in 0.0 s with an idle socket open |
+| Concurrent writes to one path all fail | every writer uses the same temporary name, and each failure deletes the others' temporary file: 8 of 8 failed | a random temporary name; delete only your own | **fixed** in 4a0bdd3: 16 concurrent writers all got 201 |
+| A secret split across two appends is stored | each body alone passes `refuse_secrets`; the file then holds a private key header | scan the tail of the file with the new bytes on append | **open**: still reproduces (two appends, both 201); the door's own `REALITY.md` now lists it as not covered |
+| A binary file does not read back | `GET` returns the content decoded as UTF-8 with replacement characters | return bytes that are not UTF-8 as base64 | **open**: 256 bytes written, 512 returned; `size` still reports the true length |
 
 Sources: [Components](../../design/components/index.md#sharnessfs), [Keys and the KMS §2](../../design/keys/index.md#2-on-disk-in-a-clone), the door's own files in the CLI: [`sharness_ai/fs/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/sharness_ai/fs) and [`sharness_ai/door/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/sharness_ai/door), each with its README, REALITY, ACCEPTS and EMITS. The kernel half, measured: [Evidence §9](../../evidence/index.md#9-the-first-experiments-run-by-the-cli).

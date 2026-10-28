@@ -139,25 +139,25 @@
       <li><a href="#2-what-runs-today-mvp-2">2. What runs today (MVP 2)</a></li>
       <li><a href="#3-requests-and-their-verdicts">3. Requests, and their verdicts</a></li>
       <li><a href="#4-on-its-own">4. On its own</a></li>
-      <li><a href="#5-known-issues-as-of-26-oct-2026">5. Known issues, <span class="asof">as of 26 Oct 2026</span></a></li>
+      <li><a href="#5-known-issues-as-of-28-oct-2026">5. Known issues, <span class="asof">as of 28 Oct 2026</span></a></li>
     </ol>
   </details>
-<div class="note"><b>Status: runnable as an MVP, <span class="asof">as of 26 Oct 2026</span>; a Setting for the app, not yet a Boundary.</b> The door runs on the CLI's <code>dev</code> branch (cli@sharness, 5421d4e, reviewed in cf2ea3d): a loopback service under mutual TLS 1.3 that writes a folder under rules, over the local disk or over its twin in memory, with 18 conformance vectors both targets hold. It is a Boundary for the app only once the launcher gives the door its own uid and gives the app no write right to the folder; the launcher is not built, so until then it is a Setting, and every <code>hello</code> from the door says so. Unreleased to PyPI. Known issues from website@'s review of 26 Oct 2026 are in <a href="#5-known-issues-as-of-26-oct-2026">section 5</a>.</div>
+<div class="note"><b>Status: runnable as an MVP, <span class="asof">as of 26 Oct 2026</span>; a Setting for the app, not yet a Boundary.</b> The door runs on the CLI's <code>dev</code> branch (cli@sharness, 5421d4e, reviewed twice, cf2ea3d and 4a0bdd3): a loopback service under mutual TLS 1.3 that writes a folder under rules, over the local disk or over its twin in memory, with 18 conformance vectors both targets hold. It is a Boundary for the app only once the launcher gives the door its own uid and gives the app no write right to the folder; the launcher is not built, so until then it is a Setting, and every <code>hello</code> from the door says so. Unreleased to PyPI. Known issues, with what has been fixed since, are in <a href="#5-known-issues-as-of-28-oct-2026">section 5</a>.</div>
 <h2 id="1-its-one-job">1. Its one job</h2>
 <p>Apply writes to protected folders under rules. For sgit that is the working tree and <code>.sg_vault/</code>; for an agent it is the workspace. It holds no keys and talks to nobody: it answers the app, and it owns the folder, so no other uid can write there at all.</p>
 <h2 id="2-what-runs-today-mvp-2">2. What runs today (MVP 2)</h2>
 <p>Five commands, on Linux with <code>openssl</code> on the machine (the browser bench's guest carries one, so the same demo runs in a tab):</p>
-<pre class="diagram">sharness-ai session new                          a session CA, one P-256 certificate per role, the CA key destroyed
-sharness-ai fs serve --target disk --root DIR    the door, on loopback, under mutual TLS (disk.twin: the same face over memory)
+<pre class="diagram">sharness-ai session new --dir SDIR                a session CA, one P-256 certificate per role, the CA key destroyed
+sharness-ai fs serve --target disk --root DIR --session SDIR   the door, on loopback, under mutual TLS (disk.twin: the same face over memory)
 sharness-ai fs put notes.txt "hello"             through the door, as the app: 201, or 403 with the row that refused
 sharness-ai fs get|append|rm|ls|log|hello        the rest of the surface, as the app
-sharness-ai door conformance fs                  the 18 vectors against a fresh door, the twin first</pre>
+sharness-ai door conformance sharness.fs.disk.twin   the 18 vectors against a fresh door (then sharness.fs.disk: the real disk)</pre>
 <p>What every request passes through, in order: the caller's role read from its certificate (<code>spiffe://&lt;session&gt;/&lt;role&gt;</code>); the edge checked against the matrix (only <code>app</code> and <code>launcher</code> may call <code>fs</code>; a valid <code>net</code> certificate is refused); the request matched against <code>ACCEPTS.json</code> (anything else is <code>404</code>); the path decoded and kept under the root; the rows; then the target. One audit line per request, never with the body.</p>
 <div class="tablewrap"><table>
 <thead><tr><th>Request (runnable)</th><th>Body</th><th>Response</th></tr></thead>
 <tbody>
 <tr><td><code>GET /v0/files</code></td><td></td><td>the files under the root</td></tr>
-<tr><td><code>GET /v0/files/&lt;path&gt;</code></td><td></td><td>the content (as UTF-8 text, see <a href="#5-known-issues-as-of-26-oct-2026">5</a>)</td></tr>
+<tr><td><code>GET /v0/files/&lt;path&gt;</code></td><td></td><td>the content (as UTF-8 text: binary does not read back, see <a href="#5-known-issues-as-of-28-oct-2026">5</a>)</td></tr>
 <tr><td><code>PUT /v0/files/&lt;path&gt;</code></td><td>the bytes</td><td><code>201</code>, or <code>403</code> with the row that refused</td></tr>
 <tr><td><code>POST /v0/files/&lt;path&gt;/append</code></td><td>the bytes</td><td><code>201</code>, or <code>403</code></td></tr>
 <tr><td><code>DELETE /v0/files/&lt;path&gt;</code></td><td></td><td><code>204</code>, or <code>403</code></td></tr>
@@ -173,7 +173,7 @@ sharness-ai door conformance fs                  the 18 vectors against a fresh 
 <tr><td><code>PUT /v0/files/src/main.py</code> under the root</td><td>written atomically, mode 0644: never executable</td><td><code>.fs</code></td><td>runnable</td></tr>
 <tr><td><code>PUT /v0/files/../../etc/passwd</code>, or <code>%2e%2e%2f</code></td><td><code>403 outside the root</code></td><td><code>.fs</code></td><td>runnable</td></tr>
 <tr><td><code>PUT</code> through a symlink anywhere in the path</td><td><code>403</code>: every path is walked from the root with <code>openat(2)</code> and <code>O_NOFOLLOW</code>, so nothing can be swapped between the check and the write</td><td><code>.fs</code></td><td>runnable</td></tr>
-<tr><td><code>PUT</code> of bytes that parse as a private key, a vault key, an API or bearer token</td><td><code>403 refuses clear secrets</code></td><td><code>.fs</code></td><td>runnable (see <a href="#5-known-issues-as-of-26-oct-2026">5</a>)</td></tr>
+<tr><td><code>PUT</code> of bytes that parse as a private key, a vault key, an API or bearer token</td><td><code>403 refuses clear secrets</code></td><td><code>.fs</code></td><td>runnable (see <a href="#5-known-issues-as-of-28-oct-2026">5</a>)</td></tr>
 <tr><td><code>DELETE</code> or <code>PUT</code> on an <code>append_only</code> path</td><td><code>403 append_only</code></td><td><code>.fs</code></td><td>runnable</td></tr>
 <tr><td>a caller whose certificate names another role, or none</td><td>refused: no edge, or no TLS</td><td><code>.fs</code></td><td>runnable</td></tr>
 <tr><td>the app writes the folder directly, bypassing <code>.fs</code></td><td><code>EACCES</code> from the kernel under the app's Landlock policy; the Boundary demo in the CLI's tests shows it beside a write through the door (201) and a key refused by the door (403)</td><td>the kernel</td><td>runnable, in one process tree</td></tr>
@@ -186,16 +186,16 @@ sharness-ai door conformance fs                  the 18 vectors against a fresh 
 <h2 id="4-on-its-own">4. On its own</h2>
 <p>Adopt only this component and an agent can still write its workspace, through a door that refuses to store anything that parses as a key, a private key or a token, and that keeps every write inside the root. For a repository an agent commits to, that is the difference between a leaked key being a file in the history and being a refused request in a log.</p>
 <p>It does not read for the app beyond <code>GET</code>: the app reads the clone directly, read-only, because it must show diffs. It does not know what a file means, only what it parses as.</p>
-<h2 id="5-known-issues-as-of-26-oct-2026">5. Known issues, <span class="asof">as of 26 Oct 2026</span></h2>
-<p>Found in website@sharness's review of the CLI's <code>dev</code> at cf2ea3d, each reproduced against a running door; sent to cli@ as board row <a href="../../admin/board/index.html">T25</a>. Until they are fixed, the door is an MVP to try, not one to rely on.</p>
+<h2 id="5-known-issues-as-of-28-oct-2026">5. Known issues, <span class="asof">as of 28 Oct 2026</span></h2>
+<p><b>Correction, 28 Oct 2026.</b> This section first listed five issues found on 26 Oct 2026 in website@sharness's review of the CLI's <code>dev</code> at cf2ea3d, each reproduced against a running door, and sent to cli@ as board row <a href="../../admin/board/index.html">T25</a>. cli@'s second review landed as 4a0bdd3 the same day. On 28 Oct website@ re-ran every reproduction against <code>dev</code> at 8210807: three are fixed and two still reproduce. The original findings are left as written; the Status column is what changed. Two commands on this page, <code>door conformance fs</code> and <code>fs serve</code> without <code>--session</code>, were also wrong as first published (the door's name is <code>sharness.fs.disk.twin</code> or <code>sharness.fs.disk</code>); corrected above.</p>
 <div class="tablewrap"><table>
-<thead><tr><th>Issue</th><th>What happens</th><th>Fix proposed</th></tr></thead>
+<thead><tr><th>Issue</th><th>What happened on 26 Oct</th><th>Fix proposed</th><th>Status, 28 Oct 2026</th></tr></thead>
 <tbody>
-<tr><td>The secret scan is quadratic on a long run of letters and digits</td><td>a 64 KB body with no break took 5.2 s to scan here (measured 26 Oct 2026), and the time grows with the square of the length, so 1 MB would take about 20 minutes; the request holds a thread and a core, and the caller times out</td><td>start a vault-key match only where a run starts (a one-character lookbehind): 1 MB in 17 ms, keys still found</td></tr>
-<tr><td>One idle TCP connection freezes the door</td><td>the TLS handshake runs on the thread that accepts connections, with no timeout: any local process, with no certificate, stops every other caller until it hangs up</td><td>hand the handshake to the request's thread, under the 30 s timeout</td></tr>
-<tr><td>A secret split across two appends is stored</td><td>each body alone passes <code>refuse_secrets</code>; the file then holds a private key header</td><td>scan the tail of the file with the new bytes on append</td></tr>
-<tr><td>Concurrent writes to one path all fail</td><td>every writer uses the same temporary name, and each failure deletes the others' temporary file: 8 of 8 failed</td><td>a random temporary name; delete only your own</td></tr>
-<tr><td>A binary file does not read back</td><td><code>GET</code> returns the content decoded as UTF-8 with replacement characters</td><td>return bytes that are not UTF-8 as base64</td></tr>
+<tr><td>The secret scan is quadratic on a long run of letters and digits</td><td>a 64 KB body with no break took 5.2 s to scan here (measured 26 Oct 2026), and the time grows with the square of the length, so 1 MB would take about 20 minutes; the request holds a thread and a core, and the caller times out</td><td>start a vault-key match only where a run starts (a one-character lookbehind): 1 MB in 17 ms, keys still found</td><td><b>fixed</b> in 4a0bdd3: every shape is anchored on a literal or a fixed field, linear, pinned by a test</td></tr>
+<tr><td>One idle TCP connection freezes the door</td><td>the TLS handshake runs on the thread that accepts connections, with no timeout: any local process, with no certificate, stops every other caller until it hangs up</td><td>hand the handshake to the request's thread, under the 30 s timeout</td><td><b>fixed</b> in 4a0bdd3: re-run, a <code>hello</code> answers in 0.0 s with an idle socket open</td></tr>
+<tr><td>Concurrent writes to one path all fail</td><td>every writer uses the same temporary name, and each failure deletes the others' temporary file: 8 of 8 failed</td><td>a random temporary name; delete only your own</td><td><b>fixed</b> in 4a0bdd3: 16 concurrent writers all got 201</td></tr>
+<tr><td>A secret split across two appends is stored</td><td>each body alone passes <code>refuse_secrets</code>; the file then holds a private key header</td><td>scan the tail of the file with the new bytes on append</td><td><b>open</b>: still reproduces (two appends, both 201); the door's own <code>REALITY.md</code> now lists it as not covered</td></tr>
+<tr><td>A binary file does not read back</td><td><code>GET</code> returns the content decoded as UTF-8 with replacement characters</td><td>return bytes that are not UTF-8 as base64</td><td><b>open</b>: 256 bytes written, 512 returned; <code>size</code> still reports the true length</td></tr>
 </tbody>
 </table></div>
 <p>Sources: <a href="../../design/components/index.html#sharnessfs">Components</a>, <a href="../../design/keys/index.html#2-on-disk-in-a-clone">Keys and the KMS §2</a>, the door's own files in the CLI: <a href="https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/sharness_ai/fs"><code>sharness_ai/fs/</code></a> and <a href="https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/sharness_ai/door"><code>sharness_ai/door/</code></a>, each with its README, REALITY, ACCEPTS and EMITS. The kernel half, measured: <a href="../../evidence/index.html#9-the-first-experiments-run-by-the-cli">Evidence §9</a>.</p>
@@ -208,7 +208,7 @@ sharness-ai door conformance fs                  the 18 vectors against a fresh 
       <li><a href="#2-what-runs-today-mvp-2">2. What runs today (MVP 2)</a></li>
       <li><a href="#3-requests-and-their-verdicts">3. Requests, and their verdicts</a></li>
       <li><a href="#4-on-its-own">4. On its own</a></li>
-      <li><a href="#5-known-issues-as-of-26-oct-2026">5. Known issues, <span class="asof">as of 26 Oct 2026</span></a></li>
+      <li><a href="#5-known-issues-as-of-28-oct-2026">5. Known issues, <span class="asof">as of 28 Oct 2026</span></a></li>
     </ol>
     <a class="toc-top" href="#content">↑ Back to top</a>
   </nav>
@@ -219,7 +219,7 @@ sharness-ai door conformance fs                  the 18 vectors against a fresh 
     <div class="brandline">sharness<span>.ai</span></div>
     <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
-    <p class="partnote">⚠ Status: design, with the first experiments and one door (sharness.fs, an MVP) runnable; no other component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="partnote">⚠ Status: design, with the first experiments, two doors (sharness.fs, sharness.net) and a first slice of the launcher runnable as MVPs; no other component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
     <p class="verline">site <a class="ver" href="../../project/releases.html" title="Site release history">v0.6.26</a> · <a href="../../project/engineering.html">engineering</a></p>
   </div>
   <div>

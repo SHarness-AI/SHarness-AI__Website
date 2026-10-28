@@ -6,8 +6,9 @@
 
 Site version: v0.6.26. Status of the project: DESIGN, with the first experiments RUNNABLE (E01 to E04,
 E05, E09 and E10 in the CLI; E09 is a real Linux kernel in a browser tab running hello, measured 25 Oct 2026),
-and two MVPs on the CLI's dev branch as of 26 Oct 2026: the levels (contain, profile, explain) and the first door,
-sharness.fs, a Setting until the launcher exists. No other SHarness component is built.
+and MVPs on the CLI's dev branch: the levels (contain, profile, explain), the first door,
+sharness.fs (a Setting) and, as of 28 Oct 2026, the network door sharness.net with the launcher's first slice,
+`sharness-ai shell` (a Boundary only for the shell it starts). No other SHarness component is built.
 By Dinis Cruz; design session written up with Claude, 24 October 2026. All content CC BY 4.0.
 SHarness is unrelated to Sharness, the shell testing library.
 
@@ -81,7 +82,7 @@ SHarness is unrelated to Sharness, the shell testing library.
 - /design/roadmap/index.md — decided, open decisions (1–11), the refactor path in sgit, the end
   state, and ground rules for the agents that will build SHarness
 
-## The code (RUNNABLE: experiments E01 to E05, E09, E10 and two MVPs in the CLI; one door, sharness.fs, runs as an MVP)
+## The code (RUNNABLE: experiments E01 to E05, E09, E10 and three MVPs in the CLI; two doors, sharness.fs and sharness.net, run as MVPs)
 
 - /components/index.md — the components as the operating system a process sees: five doors (fs, net, kms, bash, llm) and
   the bootstrap, each a small REST service on loopback with mutual TLS; everything is a request with a verdict;

@@ -66,7 +66,7 @@ The profiles, the policy each needs, and the map of how sgit's next version stay
 | planned | E05 the edges as a script, E06 the process tree, E07 `sharness.llm` v0, E08 `sharness.kms` v0 | in the order on the [research note](../evidence/research/index.md#4-what-is-still-open-in-the-order-to-take-it) |
 | designed | the components under one manifest hash; the launcher above the agent; the platform | the design pages |
 
-One component runs as an MVP, [sharness.fs](../components/fs/index.md), a Setting until the launcher exists; no other component is built. The whole ladder is on [Mockups and experiments](../code/experiments/index.md); the measurements on [Evidence](../evidence/index.md).
+Two doors run as MVPs, [sharness.fs](../components/fs/index.md) (a Setting) and [sharness.net](../components/net/index.md) (a Boundary only for the shell that `sharness-ai shell` starts), with the launcher's first slice; no other component is built. The whole ladder is on [Mockups and experiments](../code/experiments/index.md); the measurements on [Evidence](../evidence/index.md).
 
 ## 7. What there is to decide
 

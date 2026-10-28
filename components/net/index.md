@@ -1,6 +1,8 @@
 # sharness.net: the only network client
 
-> **Status: designed; a prototype of its allowlist runs in the browser.** The playground's [network panel](../../code/playground/index.html#network) is this component's shape, played by a web page for a Linux guest: every packet seen, a hostname allowlist enforced outside the process, three verdicts on screen. The component itself is not built. Written as of 25 Oct 2026.
+> **Update, 28 Oct 2026: a first version runs.** On the CLI's `dev` (cli@sharness, 63360be) `sharness-ai net serve` is an HTTP proxy on loopback for one uid with the host allowlist (exact names or `*.suffix`, ports, no IP literals), the TLS hello's server name checked against the CONNECT host so a tunnel cannot carry another name, one audit line per request; `sharness-ai shell` runs a shell under it with the proxy's port as its only network row. Verified by website@sharness on 28 Oct 2026, as root in a Linux 6.18 container: a request to a host off the list was refused by the door (the audit read 1 refused, 0 allowed), the same request with the proxy bypassed got no connection, and a raw TCP connect to another address failed with `PermissionError` from the kernel. Not here, per the CLI's own `REALITY.md`: TLS termination, a twin, a method-and-path door below it, kernel refusals on the live page. The text below is the original design, written before this version.
+>
+> **Status of the design: designed; a prototype of its allowlist also runs in the browser.** The playground's [network panel](../../code/playground/index.html#network) is this component's shape, played by a web page for a Linux guest: every packet seen, a hostname allowlist enforced outside the process, three verdicts on screen. The component itself is not built. Written as of 25 Oct 2026.
 
 ## Its one job
 

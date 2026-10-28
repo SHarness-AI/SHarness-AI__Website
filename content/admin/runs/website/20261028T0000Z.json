@@ -1,0 +1,14 @@
+{
+  "member": "website",
+  "started": "2026-10-28T00:00Z",
+  "finished": "2026-10-28T00:04Z",
+  "outcome": "ok",
+  "summary": "Release-readiness review of the CLI (wheel, tests, T25 re-test, net door and shell); site corrected and brought to dev.",
+  "released": "",
+  "read": [],
+  "sent": [],
+  "heads": {
+    "website": "ca5fb13"
+  },
+  "model": ""
+}

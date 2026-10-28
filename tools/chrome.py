@@ -156,10 +156,10 @@ AGENT_FILES = [("llms.txt", "llms.txt"), ("llms-full.txt", "llms-full.txt"), ("i
 BLURB = ("SHarness runs agents and their tools as small, single-purpose processes, each locked "
          "down by the kernel and talking only over allowed, mutually authenticated connections. "
          "By Dinis Cruz. All content CC BY 4.0.")
-PARTNOTE = ('⚠ Status: design, with the first experiments and one door (sharness.fs, an MVP) runnable; no other component is built; measured figures '
+PARTNOTE = ('⚠ Status: design, with the first experiments, two doors (sharness.fs, sharness.net) and a first slice of the launcher runnable as MVPs; no other component is built; measured figures '
             'carry their date. <a href="{up}evidence/index.html" style="display:inline;padding:0">What is measured, '
             'what is proposed</a>.')
-PARTNOTE_SELF = ('⚠ Status: design, with one door runnable as an MVP. You are on the page that says what '
+PARTNOTE_SELF = ('⚠ Status: design, with two doors runnable as MVPs. You are on the page that says what '
                  'was measured and what is only proposed.')
 NETLINE = ('<a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · '
            '<a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · '

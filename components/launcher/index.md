@@ -1,5 +1,7 @@
 # sharness.launcher: the bootstrap
 
+> **Update, 28 Oct 2026: a first slice runs.** `sharness-ai shell` (CLI `dev`, 63360be) is the launcher for one shell: where it is root it makes a unique system user and removes it on exit, starts the network door for that uid, compiles the shell's policy from a sentence with the proxy's port as its only network row, and starts the shell under `sharness-ai run`. Verified by website@sharness on 28 Oct 2026 (a Linux 6.18 container, root, Landlock ABI 7): the shell ran as a non-root uid, a write outside the workspace was refused, a write inside it landed, and the user was gone after exit; a background process did not outlive the shell. Not here: the fs door for the workspace under the shell, namespaces, the doors under their own policies, a manifest of components. The rest of this page is the design.
+>
 > **Status: designed; its one-process form is runnable.** `sharness-ai run --policy p.json --expect-hash sha256:… -- cmd` is the launcher for one process: it refuses unless the policy hashes to what the person supplied, applies the locks in the child, and starts the command; measured on three kernels. The session launcher that starts the components under one manifest is designed and not built. Written as of 25 Oct 2026.
 
 ## Its one job

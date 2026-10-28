@@ -7,7 +7,7 @@
 > browser to prove it, and a design for the launcher that binds the agent itself.
 
 *Source: <https://sharness.ai/index.html> · site v0.6.26 · markdown twin of the front page.*
-*Status: **experiments**. One door, sharness.fs, runs as an MVP (a Setting until the launcher exists); no other component is built; every measured figure carries its date.*
+*Status: **experiments**. Two doors, sharness.fs and sharness.net, run as MVPs, with the launcher's first slice (a Setting, except for the one shell it starts); no other component is built; every measured figure carries its date.*
 
 ## Start in 60 seconds
 
