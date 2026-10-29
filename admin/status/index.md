@@ -6,36 +6,37 @@
 
 ---
 
-A snapshot taken by the conductor with `python3 tools/admin_status.py`, as of 29 Oct 2026 (2026-10-29T01:26Z): every branch of both repositories, its head, its last commit and how far it is from `dev`, read from git, never from a session; then every member's own `status.json`. A branch ahead of `dev` is work nobody has released yet; a session is only visible here once it has pushed.
+A snapshot taken by the conductor with `python3 tools/admin_status.py`, as of 29 Oct 2026 (2026-10-29T02:11Z): every branch of both repositories, its head, its last commit and how far it is from `dev`, read from git, never from a session; then every member's own `status.json`. A branch ahead of `dev` is work nobody has released yet; a session is only visible here once it has pushed.
 
 ## SHarness-AI__Website
 
-Latest tag `v0.6.28`; 12 branch(es) carry commits not yet on `dev`.
+Latest tag `v0.6.31`; 12 branch(es) carry commits not yet on `dev`.
 
 | Branch | Head | Last commit | Against dev |
 |---|---|---|---|
-| `dev` | `d7436288` · 2026-10-29 00:49 | site v0.6.28: the site says what runs before the CLI's release: three MVPs, two doors, shell on the front page, the newest articles (Agent: ci) | 0 ahead, 0 behind |
-| `main` | `27d164a3` · 2026-10-26 02:08 | site v0.6.0: the minor release: the team and the admin section, the components as doors, the PBP on one page, security, Linux in a tab, the CLI as the front door, the standards and their vectors, the site for a reader arriving cold | 89 ahead, 54 behind |
-| `claude/blissful-johnson-yk1c4p` | `e9a9679f` · 2026-10-24 17:55 | site v0.3.1: completeness pass against the sgit design pack 00-04 | 6 ahead, 54 behind |
-| `claude/dev-standards` | `9cbc478d` · 2026-10-26 02:56 | ship.py: the release note is always carried by a commit, so every row reads the shipped subject and description (Agent: dev) | 0 ahead, 46 behind |
-| `claude/website` | `b9b83a4f` · 2026-10-28 00:04 | the site corrected and brought up to the CLI: three MVPs, the issues re-tested, two wrong commands fixed (Agent: website) | 0 ahead, 4 behind |
-| `claude/wonderful-babbage-pa7l37` | `5ead23c0` · 2026-10-29 00:48 | the site says what runs before the CLI's release: three MVPs, two doors, shell on the front page, the newest articles (Agent: website) | 0 ahead, 1 behind |
-| `claude/wonderful-cray-4xpawa` | `6479ad25` · 2026-10-26 05:24 | the network door and a shell under the harness: the live page in the article's postscript, the brief's step 6 and 9 in part, cli@ status (Agent: cli) | 0 ahead, 27 behind |
-| `conductor/admin` | `6d125812` · 2026-10-26 16:10 | the editor's answers of 26 October: R12, R13, R16, R19 and R22 decided, T27 to T29 opened, the release words settled | 0 ahead, 7 behind |
-| `pbp/article-decision-engine` | `e5ebfca9` · 2026-10-26 04:50 | article: The decision engine, a translation layer between what an agent asks and what is done, and what it does to a skill that carries more than it says (Agent: pbp) | 0 ahead, 33 behind |
-| `pbp/article-two-stacks` | `96dbffc5` · 2026-10-26 02:46 | article: Two stacks on TCP, one carries what a process may do, the other carries how little you have to read (Agent: pbp) | 122 ahead, 54 behind |
-| `pbp/decision` | `6d84e90a` · 2026-10-26 04:30 | the decision at the door: the prompt as the last resort, ux.sgit.ai's principles against the levels, the decision engine and its prototype; T23 (Agent: pbp) | 0 ahead, 39 behind |
-| `pbp/decision-service` | `cd49c2ab` · 2026-10-26 04:40 | the decision service: what the prompt lacks, three sources of truth, the rehearsal in a twin run four times, what the model does and does not; T24 (Agent: pbp) | 0 ahead, 36 behind |
-| `pbp/disk` | `0ecc083c` · 2026-10-26 02:11 | site v0.6.3: sharness.fs.disk: the door alone is the API, every leaf is a target; Three trees are one restored (Agent: pbp) | 98 ahead, 54 behind |
-| `pbp/doors` | `99e84349` · 2026-10-26 01:19 | site v0.5.30: the tree of doors: sharness.<resource>.<dialect>, databases first; T18 and T19 (Agent: pbp) | 60 ahead, 54 behind |
-| `pbp/join` | `c0cde853` · 2026-10-25 23:52 | site v0.5.17: sharness.pbp joins; the Process Behaviour Policy on one page (Agent: sharness.pbp) | 34 ahead, 54 behind |
-| `pbp/levels` | `173dd410` · 2026-10-26 02:21 | site v0.6.5: the levels: one policy, written at the depth you need; six levels, three rules, each level a service, two stacks on TCP; T22 (Agent: pbp) | 105 ahead, 54 behind |
-| `pbp/mirror` | `d8c58f61` · 2026-10-26 01:37 | site v0.5.35: two schemas per door and the mirror rule; fuse or split, and its cost; the examples already in place (Agent: pbp) | 72 ahead, 54 behind |
-| `pbp/targets` | `899e20f6` · 2026-10-26 01:31 | site v0.5.32: sharness.<door>.<target>: the second level is where the door sends; a twin is a target; dialect withdrawn (Agent: pbp) | 64 ahead, 54 behind |
-| `pbp/twin-suffix` | `09e29f8f` · 2026-10-26 01:42 | site v0.5.38: .twin as the terminal suffix on any name: the thing before it runs as a simulation; .memory withdrawn (Agent: pbp) | 77 ahead, 54 behind |
-| `pbp/twin-suffix-2` | `1ca573f3` · 2026-10-26 01:44 | site v0.5.40: .twin as the terminal suffix on any name, the change v0.5.38 announced and did not carry; .memory withdrawn (Agent: pbp) | 81 ahead, 54 behind |
-| `pbp/twins` | `c9402f85` · 2026-10-26 01:22 | site v0.5.31: the twin below the dialect, never a dialect; the undecorated door is the local one; T20 (Agent: pbp) | 62 ahead, 54 behind |
-| `security/join` | `e921452b` · 2026-10-25 23:58 | site v0.5.20: the security section and the code at immutable paths, merged onto dev at v0.5.19 | 40 ahead, 54 behind |
+| `dev` | `4330073c` · 2026-10-29 02:10 | site v0.6.31: security: the go for R7, confirmed on the CLI's dev at f9e51c8 (Agent: ci) | 0 ahead, 0 behind |
+| `main` | `27d164a3` · 2026-10-26 02:08 | site v0.6.0: the minor release: the team and the admin section, the components as doors, the PBP on one page, security, Linux in a tab, the CLI as the front door, the standards and their vectors, the site for a reader arriving cold | 89 ahead, 63 behind |
+| `claude/blissful-johnson-yk1c4p` | `e9a9679f` · 2026-10-24 17:55 | site v0.3.1: completeness pass against the sgit design pack 00-04 | 6 ahead, 63 behind |
+| `claude/dev-standards` | `9cbc478d` · 2026-10-26 02:56 | ship.py: the release note is always carried by a commit, so every row reads the shipped subject and description (Agent: dev) | 0 ahead, 55 behind |
+| `claude/elegant-hopper-ftyhqo` | `5be5f1d6` · 2026-10-29 02:09 | security: the go for R7, confirmed on the CLI's dev at f9e51c8 | 0 ahead, 1 behind |
+| `claude/website` | `b9b83a4f` · 2026-10-28 00:04 | the site corrected and brought up to the CLI: three MVPs, the issues re-tested, two wrong commands fixed (Agent: website) | 0 ahead, 13 behind |
+| `claude/wonderful-babbage-pa7l37` | `c58157e2` · 2026-10-29 01:26 | T30 for cli@: the README's status block and /dev/null in shell, before the CLI's release (Agent: website) | 0 ahead, 7 behind |
+| `claude/wonderful-cray-4xpawa` | `6479ad25` · 2026-10-26 05:24 | the network door and a shell under the harness: the live page in the article's postscript, the brief's step 6 and 9 in part, cli@ status (Agent: cli) | 0 ahead, 36 behind |
+| `conductor/admin` | `6d125812` · 2026-10-26 16:10 | the editor's answers of 26 October: R12, R13, R16, R19 and R22 decided, T27 to T29 opened, the release words settled | 0 ahead, 16 behind |
+| `pbp/article-decision-engine` | `e5ebfca9` · 2026-10-26 04:50 | article: The decision engine, a translation layer between what an agent asks and what is done, and what it does to a skill that carries more than it says (Agent: pbp) | 0 ahead, 42 behind |
+| `pbp/article-two-stacks` | `96dbffc5` · 2026-10-26 02:46 | article: Two stacks on TCP, one carries what a process may do, the other carries how little you have to read (Agent: pbp) | 122 ahead, 63 behind |
+| `pbp/decision` | `6d84e90a` · 2026-10-26 04:30 | the decision at the door: the prompt as the last resort, ux.sgit.ai's principles against the levels, the decision engine and its prototype; T23 (Agent: pbp) | 0 ahead, 48 behind |
+| `pbp/decision-service` | `cd49c2ab` · 2026-10-26 04:40 | the decision service: what the prompt lacks, three sources of truth, the rehearsal in a twin run four times, what the model does and does not; T24 (Agent: pbp) | 0 ahead, 45 behind |
+| `pbp/disk` | `0ecc083c` · 2026-10-26 02:11 | site v0.6.3: sharness.fs.disk: the door alone is the API, every leaf is a target; Three trees are one restored (Agent: pbp) | 98 ahead, 63 behind |
+| `pbp/doors` | `99e84349` · 2026-10-26 01:19 | site v0.5.30: the tree of doors: sharness.<resource>.<dialect>, databases first; T18 and T19 (Agent: pbp) | 60 ahead, 63 behind |
+| `pbp/join` | `c0cde853` · 2026-10-25 23:52 | site v0.5.17: sharness.pbp joins; the Process Behaviour Policy on one page (Agent: sharness.pbp) | 34 ahead, 63 behind |
+| `pbp/levels` | `173dd410` · 2026-10-26 02:21 | site v0.6.5: the levels: one policy, written at the depth you need; six levels, three rules, each level a service, two stacks on TCP; T22 (Agent: pbp) | 105 ahead, 63 behind |
+| `pbp/mirror` | `d8c58f61` · 2026-10-26 01:37 | site v0.5.35: two schemas per door and the mirror rule; fuse or split, and its cost; the examples already in place (Agent: pbp) | 72 ahead, 63 behind |
+| `pbp/targets` | `899e20f6` · 2026-10-26 01:31 | site v0.5.32: sharness.<door>.<target>: the second level is where the door sends; a twin is a target; dialect withdrawn (Agent: pbp) | 64 ahead, 63 behind |
+| `pbp/twin-suffix` | `09e29f8f` · 2026-10-26 01:42 | site v0.5.38: .twin as the terminal suffix on any name: the thing before it runs as a simulation; .memory withdrawn (Agent: pbp) | 77 ahead, 63 behind |
+| `pbp/twin-suffix-2` | `1ca573f3` · 2026-10-26 01:44 | site v0.5.40: .twin as the terminal suffix on any name, the change v0.5.38 announced and did not carry; .memory withdrawn (Agent: pbp) | 81 ahead, 63 behind |
+| `pbp/twins` | `c9402f85` · 2026-10-26 01:22 | site v0.5.31: the twin below the dialect, never a dialect; the undecorated door is the local one; T20 (Agent: pbp) | 62 ahead, 63 behind |
+| `security/join` | `e921452b` · 2026-10-25 23:58 | site v0.5.20: the security section and the code at immutable paths, merged onto dev at v0.5.19 | 40 ahead, 63 behind |
 
 ## SHarness-AI__CLI
 
