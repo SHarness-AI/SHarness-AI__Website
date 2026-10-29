@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>sharness-ai v0.2.0, as three users found it — SHarness</title>
+<meta name="description" content="25 asks; 13 confirmed, 5 not confirmed, 5 confusing, 2 could not run. Not confirmed: hello and run after a per-user pip install (0 of 6), the quick start as written, a refusal under run that does not say who refused, the shell&#x27;s pip example, and a file the child drops that still runs through the loader.">
+<link rel="canonical" href="https://sharness.ai/users/v0.2.0/index.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="sharness.ai">
+<meta property="og:url" content="https://sharness.ai/users/v0.2.0/index.html">
+<meta property="og:title" content="sharness-ai v0.2.0, as three users found it — SHarness">
+<meta property="og:description" content="25 asks; 13 confirmed, 5 not confirmed, 5 confusing, 2 could not run. Not confirmed: hello and run after a per-user pip install (0 of 6), the quick start as written, a refusal under run that does not say who refused, the shell&#x27;s pip example, and a file the child drops that still runs through the loader.">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><a class="skip" href="#content">Skip to content</a><div class="row">
+  <a class="brand" href="../../index.html">sharness<span>.ai</span></a>
+  <a class="ver" href="../../project/releases.html" title="Site release history: what this version changed">v0.6.34</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../code/playground/index.html">Try it<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/playground/index.html">Start here: the playground, in your browser</a>
+      <a class="sl" href="../../code/browser/demo/index.html">A Linux kernel in a tab, running hello</a>
+      <a class="sl" href="../../index.html#start">Start in 60 seconds</a>
+      <a class="sl" href="../../evidence/machines/index.html">Help us measure it: report your machine</a>
+      <a class="sl" href="../../explain/mockups/policy-hash.html">Mockup: the policy hash</a>
+      <a class="sl" href="../../explain/mockups/edges.html">Mockup: the edge matrix</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../components/index.html">Components<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../components/index.html">Start here: the OS a process sees</a>
+      <a class="sl" href="../../components/bash/index.html">sharness.bash: the shell, as a service</a>
+      <a class="sl" href="../../components/net/index.html">sharness.net: the only network client</a>
+      <a class="sl" href="../../components/kms/index.html">sharness.kms: where a secret lives</a>
+      <a class="sl" href="../../components/fs/index.html">sharness.fs: the only writer</a>
+      <a class="sl" href="../../components/llm/index.html">sharness.llm: the only model client</a>
+      <a class="sl" href="../../components/launcher/index.html">sharness.launcher: the bootstrap</a>
+      <a class="sl" href="../../components/policy/index.html">sharness.policy: the manifest</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../design/index.html">How it works<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../design/index.html">Start here: the brief, in one read</a>
+      <a class="sl" href="../../design/why/index.html">Why: the last metre</a>
+      <a class="sl" href="../../design/architecture/index.html">Architecture</a>
+      <a class="sl" href="../../design/components/index.html">Components in depth</a>
+      <a class="sl" href="../../design/policies/index.html">Process Behaviour Policies</a>
+      <a class="sl" href="../../design/pbp/index.html">The PBP on one page</a>
+      <a class="sl" href="../../design/keys/index.html">Keys and the KMS</a>
+      <a class="sl" href="../../design/agents/index.html">Agents and LLMs</a>
+      <a class="sl" href="../../design/process-tree/index.html">Enforcing the process tree</a>
+      <a class="sl" href="../../design/surface/index.html">What a process can do</a>
+      <a class="sl" href="../../design/containment/index.html">Containment</a>
+      <a class="sl" href="../../design/spectrum/index.html">The spectrum: hello world to sgit</a>
+      <a class="sl" href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+      <a class="sl" href="../../explain/index.html">Storyboards &amp; mockups</a>
+      <a class="sl" href="../../articles/index.html">Articles</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../evidence/index.html">Evidence<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../evidence/index.html">Start here: the measurements</a>
+      <a class="sl" href="../../evidence/status/index.html">What exists today</a>
+      <a class="sl" href="../../evidence/machines/index.html">hello on your machine: reported runs</a>
+      <a class="sl" href="../../evidence/research/index.html">Research note</a>
+      <a class="sl" href="../../landscape/index.html">How it compares: policies at the centre</a>
+      <a class="sl" href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+      <a class="sl" href="../../landscape/integrations/index.html">Integration points</a>
+      <a class="sl" href="../../landscape/ruflo/index.html">Ruflo and ruv.sgit</a>
+      <a class="sl" href="../../landscape/market/index.html">Market &amp; competitors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../code/index.html">Code<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../code/index.html">Start here: where the code is</a>
+      <a class="sl" href="../../code/cli/index.html">The CLI: sharness-ai</a>
+      <a class="sl" href="../../code/experiments/index.html">Mockups &amp; experiments</a>
+      <a class="sl" href="../../code/flows/index.html">Flows through the code</a>
+      <a class="sl" href="../../code/examples/index.html">Examples</a>
+      <a class="sl" href="../../code/browser/index.html">Linux in the browser</a>
+      <a class="sl" href="../../code/releases/index.html">Releases of the code: immutable paths</a>
+      <a class="sl" href="../../code/languages/index.html">Languages</a>
+      <a class="sl" href="../../code/standards/index.html">Standards and test vectors</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../security/index.html">Security<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../security/index.html">Start here: the register</a>
+      <a class="sl" href="../../security/threat-model/index.html">Threat model</a>
+      <a class="sl" href="../../security/risks/index.html">Known risks</a>
+      <a class="sl" href="../../security/reviews/index.html">Reviews</a>
+      <a class="sl" href="../../security/hardening/index.html">Hardening</a>
+      <a class="sl" href="../../security/supply-chain/index.html">Supply chain</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../project/index.html">Project<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../project/index.html">Start here: the project</a>
+      <a class="sl" href="../../project/about/index.html">About &amp; naming</a>
+      <a class="sl" href="../../project/releases.html">Release history</a>
+      <a class="sl" href="../../project/adoption/index.html">Getting users: the review and the plan</a>
+      <a class="sl" href="../../project/sources/index.html">The source documents</a>
+      <a class="sl" href="../../project/engineering.html">Engineering: how the site is built</a>
+      <a class="sl" href="../../admin/index.html">How the project is run</a>
+      <a class="sl" href="../../admin/board/index.html">The board: tasks &amp; requests</a>
+      <a class="sl" href="../../admin/updates/index.html">Updates: what is happening</a>
+      <a class="sl" href="../../project/outreach/index.html">Outreach: finding the people it is for</a>
+      <a class="sl" href="../../project/agents/index.html">The agents and their keys</a>
+      <a class="sl" href="../../project/telemetry/index.html">Telemetry: who reads this site</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SHarness-AI/SHarness-AI__CLI">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+  <script src="../../assets/telemetry.js" data-root="../../" defer></script>
+</div></nav>
+
+<main class="doc has-toc" id="content" tabindex="-1">
+  <div class="doc-body">
+  <div class="crumb"><a href="../../index.html">sharness.ai</a> / <a href="../index.html">users</a> / sharness-ai v0.2.0, as three users found it · <a href="index.md">this page as markdown</a></div>
+  <h1>sharness-ai v0.2.0, as three users found it</h1>
+  <details class="toc-inline">
+    <summary>On this page · 5 sections</summary>
+    <ol>
+      <li><a href="#the-verdicts">The verdicts</a></li>
+      <li><a href="#where-it-ran">Where it ran</a></li>
+      <li><a href="#the-release-checklist">The release checklist</a></li>
+      <li><a href="#this-release-s-asks">This release's asks</a></li>
+      <li><a href="#what-happens-next">What happens next</a></li>
+    </ol>
+  </details>
+<p><b>Tested <span class="asof">as of 29 Oct 2026</span> by <a href="../../admin/members/users/index.html">users@sharness</a></b>, against <code>sharness-ai</code> 0.2.0 installed from PyPI, answering the CLI's <a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/qa/RELEASE.md">release checklist</a> (R1 to R14) and <a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/qa/v0.2.0.md">this release's asks</a> (Q0.2.0-1 to Q0.2.0-11). The tester did not read the CLI's source before testing anything. It read the installed <code>REALITY.md</code> of <code>sharness.fs</code> only after the door's tests, to compare.</p>
+<h2 id="the-verdicts">The verdicts</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Id</th><th>Who</th><th>Verdict</th><th>In one line</th></tr></thead>
+<tbody>
+<tr><td>R1</td><td>newcomer</td><td>Confusing</td><td>installs with no dependencies; the summary says nothing of the MVPs</td></tr>
+<tr><td>R2</td><td>newcomer</td><td>Confirmed</td><td><code>sharness-ai v0.2.0</code></td></tr>
+<tr><td>R3</td><td>newcomer</td><td>Confirmed</td><td>the guide screen, no traceback; on a pipe, the argparse help instead</td></tr>
+<tr><td>R4</td><td>newcomer</td><td>Confirmed</td><td>every row is a fact or says why; the JSON parses</td></tr>
+<tr><td>R5</td><td>newcomer</td><td>Confusing</td><td>a verdict and a next step; the advice box cuts its own sentence in half</td></tr>
+<tr><td>R6</td><td>newcomer</td><td><b>Not confirmed</b></td><td>6 of 6 from a venv; <b>0 of 6 after a per-user <code>pip install</code></b>, with "RAN" against the hash probe</td></tr>
+<tr><td>R7</td><td>newcomer</td><td>Confusing</td><td>policy, hash, <code>ls</code> runs; a sixth row (<code>pids 16</code>) is written that no question asked about</td></tr>
+<tr><td>R8</td><td>builder</td><td><b>Not confirmed</b></td><td>the write is refused, but the message is the shell's <code>Permission denied</code>: no "the kernel", no row</td></tr>
+<tr><td>R9</td><td>builder</td><td>Confirmed</td><td>sentence, one hash, held, not held, not covered</td></tr>
+<tr><td>R10</td><td>builder</td><td>Confirmed</td><td>four command lines, each with what it cannot enforce</td></tr>
+<tr><td>R11</td><td>skeptic</td><td>Confusing</td><td>no claim against root or the kernel; <code>run</code> and <code>contain</code> never say Boundary or Setting</td></tr>
+<tr><td>R12</td><td>skeptic</td><td><b>Not confirmed</b></td><td>a binary the child wrote runs through the dynamic loader; a script it wrote runs through <code>sh</code></td></tr>
+<tr><td>R13</td><td>newcomer</td><td>Could not run</td><td>PyPI served a bot challenge to the headless browser; the source shows relative paths (board T31)</td></tr>
+<tr><td>R14</td><td>all</td><td>Confusing</td><td>five first-ten-minutes trips, listed under R14 below</td></tr>
+<tr><td>Q0.2.0-1</td><td>newcomer</td><td><b>Not confirmed</b></td><td>the quick start word for word: <code>run … -- my-tool</code> fails, with a hint that blames the kernel</td></tr>
+<tr><td>Q0.2.0-2</td><td>newcomer</td><td>Could not run</td><td>no Mac here</td></tr>
+<tr><td>Q0.2.0-3</td><td>newcomer</td><td>Confirmed</td><td><code>none in effect</code> as a user, <code>all in effect</code> as root, bounding set apart</td></tr>
+<tr><td>Q0.2.0-4</td><td>newcomer</td><td>Confirmed</td><td>every refused probe's <code>got</code> names <code>PermissionError</code> or <code>MemoryError</code></td></tr>
+<tr><td>Q0.2.0-5</td><td>builder</td><td>Confirmed</td><td>writes land under the root only; nine climbs refused <code>within_root</code>; hello says Setting</td></tr>
+<tr><td>Q0.2.0-6</td><td>builder</td><td>Confirmed</td><td>294 bytes in, the same 294 bytes and sha256 back; plain <code>fs get</code> mixes the status line into the content</td></tr>
+<tr><td>Q0.2.0-7</td><td>skeptic</td><td>Confirmed</td><td>the split header is refused; nine other forms and a PGP key get through, which <code>REALITY.md</code> only partly names</td></tr>
+<tr><td>Q0.2.0-8</td><td>builder</td><td>Confirmed</td><td>no "nothing else is reachable"; github.com held as port 443</td></tr>
+<tr><td>Q0.2.0-9</td><td>builder</td><td><b>Not confirmed</b></td><td><code>pip download</code> fails three ways inside the shell; refusals do not say who; the summary says nothing was undone</td></tr>
+<tr><td>Q0.2.0-10</td><td>skeptic</td><td>Confirmed</td><td>127.0.0.2, other hosts, UDP out and DNS: all refused or no route</td></tr>
+<tr><td>Q0.2.0-11</td><td>skeptic</td><td>Confirmed</td><td>three kinds of background job gone on exit, the uid removed; the summary is silent about it</td></tr>
+</tbody>
+</table></div>
+<p><b>The three things a newcomer trips on first:</b></p>
+<ol>
+<li><b><code>pip install sharness-ai</code> without a venv</b> (a per-user install into <code>~/.local</code>) gives <code>hello</code> 0 of 6 and <code>run</code> "Permission denied, nothing ran", because the child cannot import the package from <code>~/.local</code>. The screen blames nothing and says the hash check "RAN". A venv in the home directory works.</li>
+<li><b>The quick start's last line</b> (<code>sharness-ai run --policy my-tool.json -- my-tool</code>) runs a command that does not exist, and the refusal's hint sends the reader to <code>probe</code> and <code>--best-effort</code> instead of saying "no such command".</li>
+<li><b>A refusal under <code>run</code> is the program's own <code>Permission denied</code></b>, not the "refused by the kernel, change row X" the README promises. The newcomer cannot tell a policy refusal from an ordinary permission error.</li>
+</ol>
+<h2 id="where-it-ran">Where it ran</h2>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th></th></tr></thead>
+<tbody>
+<tr><td>Machine</td><td>a Claude Code cloud session: a Linux container (<code>systemd-detect-virt</code>: docker) in a Firecracker VM</td></tr>
+<tr><td>OS</td><td>Ubuntu 24.04.5 LTS, x86_64</td></tr>
+<tr><td>Kernel</td><td><code>6.18.44-fc-v185</code>, Landlock ABI 7 (from <code>sharness-ai probe</code>), cgroups hybrid (v1 + unified)</td></tr>
+<tr><td>Python</td><td>3.13.17</td></tr>
+<tr><td>Who</td><td>root (uid 0) and four fresh non-root users: <code>newcomer</code> (uid 30033), <code>builder</code>, <code>skeptic</code>, <code>fresh</code></td></tr>
+<tr><td>Install</td><td><code>python3 -m venv /opt/qa-venv &amp;&amp; /opt/qa-venv/bin/pip install sharness-ai==0.2.0</code>; for R6 and Q0.2.0-1 also a per-user install and a venv in the user's home</td></tr>
+<tr><td>Egress</td><td>through the session's HTTPS proxy (<code>HTTPS_PROXY</code> set: names only, never values)</td></tr>
+<tr><td>Date</td><td>29 Oct 2026, 03:25 to 03:45 UTC</td></tr>
+</tbody>
+</table></div>
+<p>Outputs are pasted as they came back, ANSI colour removed. Where a command ended in <code>| tail</code>, <code>| sed</code> or <code>| grep</code>, the cut is in the command line shown.</p>
+<h2 id="the-release-checklist">The release checklist</h2>
+<h3 id="r1-the-pypi-page-then-pip-install-newcomer-confusing">R1: the PyPI page, then pip install (newcomer): Confusing</h3>
+<p>The page's text came from the JSON API (<code>https://pypi.org/pypi/sharness-ai/0.2.0/json</code>), since the browser could not load the page (R13).</p>
+<pre class="diagram">summary: SHarness: runs agents and their tools as small, single-purpose, kernel-locked processes talking over mutually authenticated connections. Experiments stage: probe, policy hash/check/translate, run, hello.
+requires_dist: None   requires_python: &gt;=3.11
+
+$ /opt/qa-venv/bin/pip install sharness-ai==0.2.0
+Downloading sharness_ai-0.2.0-py3-none-any.whl (164 kB)
+Installing collected packages: sharness-ai
+Successfully installed sharness-ai-0.2.0
+$ /opt/qa-venv/bin/pip list
+Package     Version
+----------- -------
+pip         26.2.2
+sharness-ai 0.2.0</pre>
+<p>No dependencies were pulled in. The page's first screen (the title, one paragraph, "Try it in 60 seconds") says what the tool is in under a minute. <b>Confusing:</b> the one-line summary, the first thing PyPI's search shows, lists only the experiments. The page's status block says "three MVPs". <code>sharness-ai --help</code> says "no SHarness component is built yet". <a href="../../evidence/status/index.html">What exists today</a> says three MVPs, and <a href="../../admin/guidance/index.html">AGENTS.md</a> section 1 says two. A newcomer reading three places gets three answers. <em>Expected instead:</em> one count of the MVPs, the same in the summary, the page and <code>--help</code>. The summary is item 5 of board T31.</p>
+<h3 id="r2-version-newcomer-confirmed">R2: --version (newcomer): Confirmed</h3>
+<pre class="diagram"># sharness-ai --version
+sharness-ai v0.2.0
+[exit 0]</pre>
+<h3 id="r3-no-arguments-newcomer-confirmed">R3: no arguments (newcomer): Confirmed</h3>
+<p>On a terminal (<code>script -qc 'sharness-ai --width 100'</code>, as <code>newcomer</code>, after the steps below):</p>
+<pre class="diagram">  where you are   linux 6.18.44-fc-v185 · Landlock ABI 7 · uid 30033 · cgroups hybrid (v1 + unified)
+                  a policy will hold here: files by Landlock ABI 7; TCP ports by Landlock too
+                  network none tries a user namespace for an empty network namespace, else Landlock
+                  TCP rules (UDP not covered)
+
+  the ladder      ✔ 1  probe      the grant: what a process here can do before any policy
+                  ✔ 2  hello      the acceptance test: 6/6 held on 2026-10-29 03:27
+                  ✔ 3  policy     my-tool  sha256:7704…055a
+                  ✔ 4  run        last: my-tool exit 2 on 2026-10-29 03:28
+                  ○ 5  shell      a shell under the harness: sharness-ai shell --workspace
+                  . --sites github.com
+  ...
+  what next?      1 probe   2 hello   3 new policy   4 run a command
+                  5 translate   6 components   7 doctor   8 contain
+                  (a sentence)   9 shell (under the harness)   q quit
+  &gt; [q]</pre>
+<p>Where you are, what to do next and the command to type, with no traceback. Two small things. The README says "the four steps" and the screen draws five. On a pipe, <code>sharness-ai</code> with no arguments prints argparse's usage, as the README says it will. That usage text opens with "Status: experiments; no SHarness component is built yet" (see R1).</p>
+<h3 id="r4-probe-then-probe-json-newcomer-confirmed">R4: probe, then probe --json (newcomer): Confirmed</h3>
+<pre class="diagram">$ sharness-ai probe
+sharness-ai probe   the grant: what a process here can do before any policy
+  identity        uid 30033 · capabilities none in effect (CapEff
+                  0000000000000000); bounding set full (CapBnd 000001fffeffffff)
+                  · NoNewPrivs 0 · Seccomp 0
+  kernel          linux 6.18.44-fc-v185 · Landlock ABI 7 · memfd_secret yes ·
+                  cgroups hybrid (v1 + unified)
+  namespaces      cgroup, ipc, mnt, net, pid, pid_for_children, time,
+                  time_for_children, user, uts
+  config          CGROUP_FREEZER=y  USER_NS=y  SECCOMP=y  SECRETMEM=y  FUSE_FS=y
+                  SECURITY_LANDLOCK=y  PKCS8_PRIVATE_KEY_PARSER=not set
+  tools           unshare ✔  setpriv ✔  bwrap ✘  strace ✔  iptables ✔  nft ✔
+                  useradd ✔  fusermount3 ✘  criu ✘
+  egress          proxy variables set: none (names only; values are never
+                  printed)
+  workspace       /home/newcomer/work writable: yes · python 3.13.17
+  reading         a policy will hold here: files by Landlock ABI 7; TCP ports by
+                  Landlock too
+                  network none tries a user namespace for an empty network
+                  namespace, else Landlock TCP rules (UDP not covered)
+  next            sharness-ai hello   the acceptance test: six probes under one
+                  policy
+[exit 0]
+
+# sharness-ai probe --json | python3 -m json.tool &gt; /dev/null &amp;&amp; echo JSON parses
+JSON parses
+[exit 0]</pre>
+<p>As root, <code>egress</code> named the proxy variables by name only, as it says it will.</p>
+<h3 id="r5-doctor-newcomer-confusing">R5: doctor (newcomer): Confusing</h3>
+<pre class="diagram">$ sharness-ai doctor
+sharness-ai doctor   can a policy hold here? nine checks, each with what to do about it
+
+  [1/9] ✔ kernel             linux 6.18.44-fc-v185
+  [2/9] ✔ landlock_files     ABI 7: file rules (read, write, exec) will hold
+  [3/9] ✔ landlock_tcp       ABI 7: TCP port rules will hold (UDP is never covered)
+  [4/9] ✔ network_namespace  an empty network namespace can be made (userns+netns)  (4 ms)
+  [5/9] ⚠ cgroups            cgroups 1, not writable: memory by RLIMIT_AS only
+  ┌─ what to do ───────────────────────────────────────────────────────────────┐
+  │  RLIMIT_AS caps address space, not re…nt memory; a writable /sys/fs/cgroup │
+  │  gives a real cap                                                          │
+  └────────────────────────────────────────────────────────────────────────────┘
+  [6/9] ✔ max_pids           RLIMIT_NPROC binds uid 30033: max_pids will hold
+  [7/9] ✔ write_probe        the kernel refused a write the policy did not allow (EACCES)  (145 ms)
+  [8/9] ✔ openssl            OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024): sessions and doors can be made  (3 ms)
+  [9/9] ✔ doors              sharness.fs (sharness.fs.disk.twin) and sharness.net (proxy port 36653) answer hello over mutual TLS; a Setting until the launcher  (1130 ms)
+
+  overall         degraded: a policy will hold here with the gaps named above
+  next            sharness-ai hello   the acceptance test, six probes under one
+                  policy
+[exit 0]</pre>
+<p>As root: <code>healthy: a policy will hold here as written</code>, nine passes. <b>Confusing:</b> the one box that tells a user what to do truncates its own sentence ("not re…nt memory"), at 80 columns and on a pipe. <em>Expected instead:</em> the advice wrapped, not cut. The README says "seven checks"; that is item 4 of board T31.</p>
+<h3 id="r6-hello-newcomer-not-confirmed">R6: hello (newcomer): Not confirmed</h3>
+<p>From a venv, as root and as <code>newcomer</code>, 6 of 6 held:</p>
+<pre class="diagram">$ sharness-ai hello
+  ✔ read      /usr (listing)               allowed
+  ✔ write-tmp /tmp/…tmp (create)           refused by the kernel (EACCES)
+  ✔ write-cwd ./…tmp (create)              refused by the kernel (EACCES)
+  ✔ net       1.1.1.1:443 (connect)        refused by the kernel (EACCES)
+  ✔ memory    400 MiB under 128            refused by the kernel (MemoryError)
+  ✔ hash      sha256:0000… (--expect-hash) refused by sharness-ai
+
+  result          ████████████ 6/6 held · measured 29 Oct 2026, Landlock ABI 7</pre>
+<p>After the install a newcomer is most likely to make: <code>pip install sharness-ai</code> as a normal user with no venv. pip put it in <code>~/.local</code>, and on this image it did not refuse with "externally managed". As user <code>fresh</code>, after a new login:</p>
+<pre class="diagram">$ pip install sharness-ai
+Installing collected packages: sharness-ai
+  WARNING: The script sharness-ai is installed in '/home/fresh/.local/bin' which is not on PATH.
+Successfully installed sharness-ai-0.2.0
+$ sharness-ai hello
+  ✘ read      /usr (listing)               failed otherwise  expected allowed; otherwise (/usr/bin/python3: No module named sharness_ai
+  ✘ write-tmp /tmp/…tmp (create)           failed otherwise  expected refused; otherwise (/usr/bin/python3: No module named sharness_ai
+  ✘ write-cwd ./…tmp (create)              failed otherwise  expected refused; otherwise (/usr/bin/python3: No module named sharness_ai
+  ✘ net       1.1.1.1:443 (connect)        failed otherwise  expected refused; otherwise (/usr/bin/python3: No module named sharness_ai
+  ✘ memory    400 MiB under 128            failed otherwise  expected refused; otherwise (/usr/bin/python3: No module named sharness_ai
+  ✘ hash      sha256:0000… (--expect-hash) RAN: sharness-ai did not refuse  expected refused; exit 1
+
+  result          ░░░░░░░░░░░░ 0/6 held · measured 29 Oct 2026, Landlock ABI 7
+  ...
+  next            sharness-ai probe   says what this kernel has; please report
+                  the result
+[exit 1]</pre>
+<p>The same user, with a venv in the home directory (<code>python3 -m venv ~/venv &amp;&amp; ~/venv/bin/pip install sharness-ai==0.2.0</code>), got 6 of 6. <em>Expected instead:</em> 6 of 6 from a per-user install too. Failing that, one line saying the child could not import <code>sharness_ai</code> from <code>~/.local</code>, and never "RAN: sharness-ai did not refuse" for a check that never got to run. A newcomer would send this as a report that the kernel does not hold.</p>
+<h3 id="r7-policy-new-then-run-newcomer-confusing">R7: policy new, then run (newcomer): Confusing</h3>
+<pre class="diagram">$ sharness-ai policy new my-tool.json        (Enter at each of the five questions)
+  1/5  what may it read?                  [/usr /lib /lib64 /bin /sbin /etc /home/newcomer/work]
+  2/5  where may it write?                [nowhere]  paths, space-separated; 'none' for nowhere
+  3/5  what may it run?                   [/usr /lib /lib64 /bin /sbin /etc]
+  4/5  which TCP ports may it connect to? [none]  e.g. 443, or 'none'
+  5/5  memory cap, in MiB?                [256]  0 for no cap
+  policy          my-tool   my-tool.json
+  ┌─ files ─────────────────┐  ┌─ network ────────────┐  ┌─ process ────────┐
+  │ read  /bin /etc +5      │  │ connect_tcp  none    │  │ memory  256 MiB  │
+  │ write none              │  │ UDP and Unix sockets │  │ pids    16       │
+  │ exec  /bin /etc /lib +3 │  │ are not covered      │  │ no_new_privs yes │
+  └─────────────────────────┘  └──────────────────────┘  └──────────────────┘
+  written         my-tool.json
+                  sha256:7704d102aa75a5d05c7c2dac1aed38c4a02e4b4d93a6f2caa183d0d6d424055a
+  next            sharness-ai run --policy my-tool.json --expect-hash sha256:7704d102aa75a5d05c7c2dac1aed38c4a02e4b4d93a6f2caa183d0d6d424055a -- CMD
+
+$ sharness-ai run --policy my-tool.json -- ls
+sharness-ai run  my-tool  sha256:7704d102aa75a5d05c7c2dac1aed38c4a02e4b4d93a6f2caa183d0d6d424055a
+  enforced by     Landlock ABI 7: files · empty network namespace, else Landlock
+                  TCP rules · rlimits, and a cgroup where one can be made
+  not covered     UDP (DNS) unless the namespace applied · Unix sockets by path
+                  · the inherited environment
+── ls starts ───────────────────────────────────────────────────────────────────
+sharness-ai run: not covered here:
+  - Unix-domain sockets by path are not covered (Landlock has no rule for them)
+  - memory: RLIMIT_AS only (no memory cgroup could be made); the cap is on address space, which a child can exhaust differently from resident memory
+  - the child inherits this process's environment variables (v0 has no row for them)
+my-tool.json
+── ls exit 0 · 0.0 s ───────────────────────────────────────────────────────────
+[exit 0]</pre>
+<p>A policy, its hash, and <code>ls</code> under it: as expected. <b>Confusing:</b></p>
+<ul>
+<li>The file carries <code>"max_pids": 16</code>. No question asked about it, and it was not shown before it was accepted, though the wizard says "every default is shown before it is accepted".</li>
+<li>The default <code>exec</code> row includes <code>/etc</code>. The register's SD-09 says nothing needs that, and <code>policy check</code> advises against it.</li>
+<li>The questions ran together on one line when answered from a pipe.</li>
+</ul>
+<p><em>Expected instead:</em> a sixth question, or the pids cap shown with the other defaults.</p>
+<h3 id="r8-a-write-to-etc-under-the-policy-builder-not-confirmed">R8: a write to /etc under the policy (builder): Not confirmed</h3>
+<pre class="diagram">$ sharness-ai run --policy my-tool.json -- sh -c 'echo x &gt; /etc/sharness-test'
+── sh starts ───────────────────────────────────────────────────────────────────
+sharness-ai run: not covered here:
+  ...
+sh: 1: cannot create /etc/sharness-test: Permission denied
+── sh exit 2 · 0.0 s ───────────────────────────────────────────────────────────
+  next            sharness-ai policy translate my-tool.json --to docker -- CMD
+                  carries the same policy to another enforcer, with what it
+                  cannot enforce
+[exit 2]</pre>
+<p>The write was refused and nothing was written. But the only message is the shell's own. Nothing says the kernel refused it, or which row (<code>files.write</code>) to change, and the next step offered is <code>translate</code>. <em>Expected instead:</em> what the README promises ("every refusal names who refused … and the row of the policy to change"), at least as a closing line when the child exits non-zero. <code>hello</code> already does this for its own probes.</p>
+<h3 id="r9-contain-dry-run-builder-confirmed">R9: contain --dry-run (builder): Confirmed</h3>
+<pre class="diagram">$ sharness-ai contain --workspace . --sites pypi.org --dry-run -- my-agent
+sharness-ai contain   one sentence, compiled to the kernel, named by one hash
+  you said        contain my-agent to /home/newcomer/work, pypi.org, no secrets
+  it became       profile coding-agent (4) → 13 path rows + network + caps (3) →
+                  one door, the kernel (2) → 14 kernel rules (1)
+  the name        sha256:40548b916c51346533f9076d7b6da5e4fddc19837619950fd946e723871a4193
+                  every level below is recomputed from it
+  held            ✔ 16 rows by the kernel: files, ports, caps
+  not held        ⚠ pypi.org: held as port 443; the host name is not held until
+                  sharness.net runs here
+  not covered     UDP (DNS) unless an empty network namespace applied · Unix
+                  sockets by path · the inherited environment
+  deeper          sharness-ai explain FILE   the same sentence drawn level by
+                  level (--save FILE keeps it)
+[exit 0]</pre>
+<p>Everything the ask lists is there. Two small things: "13 path rows", "14 kernel rules" and "16 rows" in three lines do not obviously add up; and "until sharness.net runs here" does not say that <code>sharness-ai shell</code> is how to make it run.</p>
+<h3 id="r10-policy-translate-four-targets-builder-confirmed">R10: policy translate, four targets (builder): Confirmed</h3>
+<pre class="diagram">$ sharness-ai policy translate my-tool.json --to docker
+docker run --rm --read-only --cap-drop ALL --security-opt no-new-privileges --user 65534:65534 --network none --memory 256m --pids-limit 16 -v /home/newcomer/work:/home/newcomer/work:ro python:3.12-alpine /bin/sh -c 'echo hello'
+
+# docker: not enforced from policy my-tool (sha256:7704d102aa75…):
+#   - image python:3.12-alpine is named by tag; pin it by digest (image@sha256:…) so the policy binds to one build
+#   - files.read of system paths (/usr, /lib, /bin, /sbin, /etc): taken from the image, not bound from the host
+#   - files.exec: not distinct from read; everything readable in the image is executable (Docker has no exec allowlist)
+#   - the policy hash: Docker does not check one; the launcher's --expect-hash has no equivalent
+
+$ sharness-ai policy translate my-tool.json --to bwrap
+bwrap --unshare-all --die-with-parent --new-session --cap-drop ALL --ro-bind /bin /bin --ro-bind /etc /etc --ro-bind /home/newcomer/work /home/newcomer/work --ro-bind /lib /lib --ro-bind /lib64 /lib64 --ro-bind /sbin /sbin --ro-bind /usr /usr -- /bin/sh -c 'echo hello'
+
+# bwrap: not enforced from policy my-tool (sha256:7704d102aa75…):
+#   - no_new_privs: bwrap sets it (PR_SET_NO_NEW_PRIVS) for the sandboxed process
+#   - files.exec: not distinct from files.read; a read-only bind is also executable in bwrap (use noexec mounts or Landlock inside)
+#   - process.max_memory_mb 256: not enforced by bwrap; prefix with `prlimit --as=268435456` or run under a cgroup
+#   - process.max_pids 16: not enforced by bwrap; `prlimit --nproc=16` or a pids cgroup</pre>
+<p><code>--to claude-code</code> printed a <code>sandbox</code> settings fragment and six lines of what it does not enforce. <code>--to kubernetes</code> printed a Pod and a NetworkPolicy and seven lines. One small thing: bwrap's "not enforced" list opens with a line saying bwrap <em>does</em> set <code>no_new_privs</code>.</p>
+<h3 id="r11-every-screen-read-for-its-claims-skeptic-confusing">R11: every screen, read for its claims (skeptic): Confusing</h3>
+<ul>
+<li><b>Root and the kernel:</b> no screen claims protection against either. <code>probe</code> as root says "A policy applied from here binds its children, not itself".</li>
+<li><b>Boundary and Setting:</b></li>
+<li><code>hello</code> says "a Boundary for the child, a Setting for the parent".</li>
+<li><code>fs hello</code> and <code>doctor</code> say the door is a Setting until the launcher.</li>
+<li><code>shell</code> says the host allowlist is "a Boundary for the shell: another uid, outside it".</li>
+<li><b><code>run</code> and <code>contain</code> never say Boundary or Setting</b>, and they are the two commands that apply a policy to a child.</li>
+<li><code>fs serve</code> prints hello's parent-and-child caveat, though no child is involved there; <code>fs hello</code> gets the door right.</li>
+<li><b>Not covered:</b> UDP, Unix sockets by path and the inherited environment are named on <code>hello</code>, <code>run</code>, <code>contain</code> and every policy box.</li>
+</ul>
+<p><em>Expected instead:</em> the caveat line from <code>hello</code> on <code>run</code> and <code>contain</code> too.</p>
+<h3 id="r12-get-around-a-refusal-without-root-skeptic-not-confirmed">R12: get around a refusal without root (skeptic): Not confirmed</h3>
+<p>Under a policy that writes only <code>~/work/out</code> (<code>sharness-ai policy new sk.json --write $HOME/work/out -y</code>), as <code>skeptic</code>:</p>
+<pre class="diagram">$ sharness-ai run --policy sk.json -- sh -c 'cp /bin/echo out/myecho; ./out/myecho direct-exec; /lib64/ld-linux-x86-64.so.2 ./out/myecho via-the-loader; printf "echo dropped script ran\n" &gt; out/s.sh; chmod +x out/s.sh; ./out/s.sh; sh out/s.sh'
+── sh starts ───────────────────────────────────────────────────────────────────
+sh: 1: ./out/myecho: Permission denied
+via-the-loader
+sh: 1: ./out/s.sh: Permission denied
+dropped script ran
+── sh exit 0 · 0.0 s ───────────────────────────────────────────────────────────</pre>
+<p>The kernel refused <code>execve</code> of the dropped files, as SR-01's fix intends. But a binary the child wrote ran anyway through the dynamic loader, which is on the exec list, and a script it wrote ran through <code>sh</code>. The README says "a writable path gets every right but execute, so a file the child drops cannot run"; the register marks SR-01 <em>fixed</em>. <em>Expected instead:</em> the claim narrowed to "cannot be <code>execve</code>d", and the loader and interpreter route named under not covered. That is the skeptic's reading; whether to close it (no loader on the exec list, or seccomp) is for cli@ and security@.</p>
+<p>The other attempts held, or got through only where the tool already says it will:</p>
+<pre class="diagram">$ sharness-ai run --policy sk.json -- sh t2.sh        (ln ~/.profile out/p; echo x &gt; /dev/shm/x; echo x &gt;&gt; ~/.profile)
+ln: failed to create hard link 'out/p' =&gt; '/home/skeptic/.profile': Invalid cross-device link
+t2.sh: 2: cannot create /dev/shm/x: Permission denied
+t2.sh: 3: cannot create /home/skeptic/.profile: Permission denied
+
+$ sharness-ai run --policy sk.json -- /usr/bin/python3 -c 'import socket; s=socket.socket(socket.AF_UNIX); s.connect("/home/skeptic/work/helper.sock"); s.send(b"via a unix socket\n"); print("sent")'
+sent
+$ cat ~/written-by-helper.txt          (written by a helper outside the policy, listening on that socket)
+via a unix socket
+
+$ sharness-ai run --policy sk.json -- sh -c 'echo through the inherited stdout' &gt; ./not-in-write-rows.txt; tail -1 not-in-write-rows.txt
+through the inherited stdout</pre>
+<p>The hard link, <code>/dev/shm</code> and <code>~/.profile</code> were refused by the kernel. The Unix socket got through, and every screen names it as not covered. The inherited stdout is the caller's own redirection, not a bypass.</p>
+<h3 id="r13-the-pypi-page-in-a-browser-newcomer-could-not-run">R13: the PyPI page in a browser (newcomer): Could not run</h3>
+<p>Headless Chromium through the session's proxy got PyPI's "Client Challenge" page, not the project page, so nothing could be seen rendered. What would be needed: a browser a person drives. From the description PyPI serves (the JSON API), the page has three images by relative path (<code>docs/anim/one-idea.svg</code>, <code>docs/anim/hello-replay.svg</code>, <code>docs/anim/kernel-in-a-tab.svg</code>) and relative links to <code>experiments/policies/README.md</code>, <code>experiments/README.md</code>, <code>.claude/skills/sharness-hello/SKILL.md</code> and <code>SECURITY.md</code>. PyPI does not resolve those against the repository. Board T31 (website@) already carries the patch.</p>
+<h3 id="r14-the-first-ten-minutes-all-confusing">R14: the first ten minutes (all): Confusing</h3>
+<ul>
+<li><b><code>fs get FILE &gt; copy</code> does not copy</b> (builder). The status line goes to stdout with the content:</li>
+</ul>
+<p>``<code> $ sharness-ai fs get notes.txt &gt; copy.txt 2&gt;/dev/null; cat copy.txt; cmp copy.txt work/notes.txt ✔ get       notes.txt                    allowed by sharness.fs first line second line copy.txt work/notes.txt differ: byte 1, line 1 </code>``</p>
+<p>For a binary file, plain <code>fs get</code> prints <code>content  294 bytes, not UTF-8: base64 in --json</code>, which does tell the user what to do.</p>
+<ul>
+<li><b><code>--json</code> goes before the command.</b> <code>sharness-ai fs hello --json</code> is <code>error: unrecognized arguments: --json</code>, while <code>sharness-ai --json fs hello</code> works. Every ask in qa/ writes it after the command.</li>
+<li><b>The shell needs a workspace its own uid can use.</b> As root, <code>sharness-ai shell</code> in <code>/root/...</code> and then in a fresh <code>/tmp/qa-ws</code> was refused twice before anything ran. Both messages are clear and say what to do (<code>chmod o+rx</code> / <code>o+w</code>, or <code>--no-user</code>), but the README's <code>shell --workspace ./work</code> example would hit the same as root.</li>
+<li><b>Files the shell wrote stay owned by a uid that no longer exists</b> (<code>ls -ln</code>: <code>996 995</code>), and the next shell gets uid 996 again.</li>
+<li><b>A tool in the same venv cannot run under its own policy.</b> <code>run -- python3 …</code> with the venv's <code>python3</code> first on <code>PATH</code> fails, because the default read rows do not include the venv:</li>
+</ul>
+<p>``<code> PermissionError: [Errno 13] Permission denied: '/opt/qa-venv/pyvenv.cfg' </code>``</p>
+<h2 id="this-release-s-asks">This release's asks</h2>
+<h3 id="q0-2-0-1-the-quick-start-word-for-word-newcomer-not-confirmed">Q0.2.0-1: the quick start, word for word (newcomer): Not confirmed</h3>
+<p>On a fresh user, the four lines after <code>pip install</code>, exactly as the page writes them:</p>
+<pre class="diagram">$ sharness-ai --version
+sharness-ai v0.2.0
+$ sharness-ai hello                       (0/6 after the per-user install: see R6)
+$ sharness-ai policy new my-tool.json -y | tail -2
+                  sha256:e628967c1ef4e712fcfd77205dd1bbbc39988ff0a7a1ac7ac9cf4f6a8685aee7
+  next            sharness-ai run --policy my-tool.json --expect-hash sha256:e628967c1ef4e712fcfd77205dd1bbbc39988ff0a7a1ac7ac9cf4f6a8685aee7 -- CMD
+$ sharness-ai run --policy my-tool.json -- my-tool 2&gt;&amp;1 | tail -2
+sharness-ai run: could not apply the policy or start the command: [Errno 13] Permission denied. Nothing ran.
+  hint: the policy could not be applied here and nothing ran: sharness-ai probe says what this kernel has; --best-effort runs anyway and says what is NOT enforced</pre>
+<p><code>run … -- ls</code> from the same per-user install failed the same way. From a venv it ran (R7). Two things fail here. First, the per-user install (R6). Second, the last line runs <code>my-tool</code>, which is the reader's placeholder but reads as a command, and the hint blames the kernel and offers <code>--best-effort</code>. <em>Expected instead:</em> the quick start says "with a venv" (or the per-user install works), its last line runs something that exists (<code>-- ls</code>), and a missing command or an unimportable package is named as such.</p>
+<h3 id="q0-2-0-2-macos-says-what-is-missing-newcomer-could-not-run">Q0.2.0-2: macOS says what is missing (newcomer): Could not run</h3>
+<p>No Mac in this session. What it needs: a real Mac (any recent macOS) with Python 3.11 or later, to run <code>sharness-ai probe</code>, <code>sharness-ai run --policy p.json -- ls</code> and <code>sharness-ai hello</code> and paste the three outputs and exit codes.</p>
+<h3 id="q0-2-0-3-the-capabilities-label-newcomer-confirmed">Q0.2.0-3: the capabilities label (newcomer): Confirmed</h3>
+<pre class="diagram">$ sharness-ai probe            (uid 30033)
+  identity        uid 30033 · capabilities none in effect (CapEff
+                  0000000000000000); bounding set full (CapBnd 000001fffeffffff)
+# sharness-ai probe            (root)
+  identity        uid 0 (root) · capabilities all in effect (CapEff
+                  000001fffeffffff); bounding set full (CapBnd 000001fffeffffff)</pre>
+<h3 id="q0-2-0-4-a-refusal-names-its-error-newcomer-confirmed">Q0.2.0-4: a refusal names its error (newcomer): Confirmed</h3>
+<pre class="diagram">$ sharness-ai hello --json | python3 -c '…print each probe and got…'
+read | allowed
+write-tmp | refused (PermissionError: [Errno 13] Permission denied: '/tmp/sharness-ai-hello.tmp')
+write-cwd | refused (PermissionError: [Errno 13] Permission denied: 'sharness-ai-hello.tmp')
+net | refused (PermissionError: [Errno 13] Permission denied)
+memory | refused (MemoryError)
+hash | refused
+6 6</pre>
+<p>Each <code>got</code> names the error, never a fragment of screen text. (After the per-user install, <code>got</code> was <code>otherwise (/usr/bin/python3: No module named sharness_ai</code>, which is honest about the cause but not about the verdict: R6.)</p>
+<h3 id="q0-2-0-5-the-first-door-sharness-fs-builder-confirmed">Q0.2.0-5: the first door, sharness.fs (builder): Confirmed</h3>
+<p>As <code>builder</code>: <code>sharness-ai session new</code>, then <code>sharness-ai fs serve --target disk --root ./work --audit</code> in the background.</p>
+<pre class="diagram">$ sharness-ai fs hello
+  ✔ get       /v0/hello                    allowed by sharness.fs
+  targets         sharness.fs.disk (live)
+  caveat          a Boundary for the caller only once the launcher gives this
+                  door its own uid and closes every other path; until then a
+                  Setting
+$ echo 'first line' | sharness-ai fs put notes.txt
+  ✔ put       notes.txt                    allowed by sharness.fs
+$ echo 'second line' | sharness-ai fs append notes.txt
+  ✔ post      notes.txt/append             allowed by sharness.fs
+$ sharness-ai fs ls
+  ✔ get       /v0/files                    allowed by sharness.fs
+    notes.txt
+$ ls -la work/ &amp;&amp; cat work/notes.txt
+-rw-r--r-- 1 builder builder   23 Oct 29 03:28 notes.txt
+first line
+second line
+
+$ echo pwned | sharness-ai fs put ../escape.txt
+  ✘ put       ../escape.txt                refused by sharness.fs (403)  '../escape.txt' is outside the root or not a path  row: within_root (every path)
+$ echo pwned | sharness-ai fs put /tmp/escape.txt
+  ✘ put       /tmp/escape.txt              refused by sharness.fs (403)  '/tmp/escape.txt' is outside the root or not a path  row: within_root (every path)
+$ echo pwned | sharness-ai fs put a/../../escape2.txt
+  ✘ put       a/../../escape2.txt          refused by sharness.fs (403)  'a/../../escape2.txt' is outside the root or not a path  row: within_root (every path)
+$ sharness-ai fs get ../../.bashrc
+  ✘ get       ../../.bashrc                refused by sharness.fs (403)  '../../.bashrc' is outside the root or not a path  row: within_root (every path)
+$ ln -s /home/builder work/link &amp;&amp; echo pwned | sharness-ai fs put link/escape3.txt; sharness-ai fs get link/.bashrc
+  ✘ put       link/escape3.txt             refused by sharness.fs (403)  symlink escape: link in link is a symbolic link  row: within_root (every path)
+  ✘ get       link/.bashrc                 refused by sharness.fs (404)  no such file</pre>
+<p>Straight to the port with the app's certificate (<code>curl -sk --cert app.crt --key app.key</code>): <code>%2e%2e%2fwork%2fnotes.txt</code>, <code>..%2f..%2f.bashrc</code>, <code>PUT %2e%2e/escape4.txt</code> and <code>notes.txt%00x</code> all came back <code>{"allowed": false, "status": 403, … "row": "within_root (every path)"}</code>. Without a client certificate, <code>curl</code> got no TLS session (exit 56). No <code>escape*</code> file appeared outside the root. The session's keys are <code>0600</code> in a <code>0700</code> folder; another user's <code>cat</code> of <code>app.key</code> got <code>Permission denied</code>. One small inconsistency: through a symlink, <code>put</code> says <code>403 within_root</code> but <code>get</code> says <code>404 no such file</code>.</p>
+<h3 id="q0-2-0-6-binary-files-read-back-builder-confirmed">Q0.2.0-6: binary files read back (builder): Confirmed</h3>
+<pre class="diagram">$ python3 -c "…write 294 bytes: a PNG signature, bytes 0 to 255, then \x00\xff\xfe ×10…"; sha256sum img.png; wc -c img.png; sharness-ai fs put img.png img.png
+41ad22340584541bc23cf98d9b8f34dc67e2867c4b12fc0d5e8fd0711b7d5810  img.png
+294 img.png
+  ✔ put       img.png                      allowed by sharness.fs
+$ sharness-ai --json fs get img.png | python3 -c '…decode content_b64, print its length and sha256…'
+['allowed', 'content_b64', 'path', 'size', 'status']
+294 41ad22340584541bc23cf98d9b8f34dc67e2867c4b12fc0d5e8fd0711b7d5810</pre>
+<h3 id="q0-2-0-7-a-secret-split-across-appends-skeptic-confirmed">Q0.2.0-7: a secret split across appends (skeptic): Confirmed</h3>
+<pre class="diagram">$ printf -- 'log start\n-----BEGIN PRIV' | sharness-ai fs put split.txt; printf -- 'ATE KEY-----\nMIIfake\n' | sharness-ai fs append split.txt; sharness-ai fs get split.txt
+  ✔ put       split.txt                    allowed by sharness.fs
+  ✘ post      split.txt/append             refused by sharness.fs (403)  refuses clear secrets: the bytes parse as a private key  row: refuse_secrets (every path)
+  ✔ get       split.txt                    allowed by sharness.fs
+log start
+-----BEGIN PRIV</pre>
+<p>The header split four ways (<code>-----BEG</code>, <code>IN PRIV</code>, <code>ATE KE</code>, <code>Y-----…</code>) was refused at the fourth append. Headers for RSA, OPENSSH, EC, ENCRYPTED and DSA keys were refused, and so were a CRLF copy, an indented one, one inside a Python string and a real throwaway ed25519 key from <code>openssl genpkey</code>. Then the attempts to beat it. Each wrote a fake block (<code>MIIfake</code>) unless it says otherwise:</p>
+<pre class="diagram">  ✔ put       e-b64.txt                    allowed by sharness.fs      (the whole PEM, base64)
+  ✔ put       e-hex.txt                    allowed by sharness.fs      (hex)
+  ✔ put       e-gz.bin                     allowed by sharness.fs      (gzip)
+  ✔ put       e-utf16.txt                  allowed by sharness.fs      (UTF-16)
+  ✔ put       e-lower.txt                  allowed by sharness.fs      (lower case)
+  ✔ put       e-spaces.txt                 allowed by sharness.fs      (----- BEGIN PRIVATE KEY -----)
+  ✔ put       e-endash.txt                 allowed by sharness.fs      (the first dash an en dash)
+  ✔ put       t-PGP_PRIVATE_KEY_BLOCK.pem  allowed by sharness.fs      (-----BEGIN PGP PRIVATE KEY BLOCK-----)
+  ✔ put       e-body-only.txt              allowed by sharness.fs      (a real ed25519 key, header and footer lines removed)
+  ✔ put       e-der.bin                    allowed by sharness.fs      (a real ed25519 key, DER)</pre>
+<p>The door's <code>REALITY.md</code> names "another encoding (base64, UTF-16)" and a split more than 4 KiB apart. It does not name hex, gzip, case, spacing, look-alike dashes, PGP blocks, a key body without its armour, or DER. The ask itself held, so the verdict is Confirmed. The list of what gets through is for cli@ to add to <code>REALITY.md</code> or close. The two throwaway keys were deleted through the door straight after.</p>
+<h3 id="q0-2-0-8-contain-s-wording-builder-confirmed">Q0.2.0-8: contain's wording (builder): Confirmed</h3>
+<pre class="diagram">$ sharness-ai contain --workspace . --sites github.com --dry-run -- x
+  held            ✔ 16 rows by the kernel: files, ports, caps
+  not held        ⚠ github.com: held as port 443; the host name is not held
+                  until sharness.net runs here</pre>
+<h3 id="q0-2-0-9-the-shell-under-the-harness-builder-not-confirmed">Q0.2.0-9: the shell under the harness (builder): Not confirmed</h3>
+<p>As root, workspace <code>/tmp/qa-ws</code> (made writable by others after the refusals in R14):</p>
+<pre class="diagram"># cd /tmp/qa-ws &amp;&amp; sharness-ai shell --sites pypi.org --no-ui -- sh -c '…'
+  who             uid 996 (sharness-da0bdd, made for this shell, removed on
+                  exit)
+  network         only 127.0.0.1:39983, sharness.net.proxy · hosts pypi.org ·
+                  HTTPS_PROXY set
+  held            ✔ files, the port and the caps by the kernel · ✔ the host
+                  names by sharness.net (a Boundary for the shell: another uid,
+                  outside it)
+── sh starts ───────────────────────────────────────────────────────────────────
+IN: uid=996(sharness-da0bdd) gid=995(sharness-da0bdd) groups=995(sharness-da0bdd)
+sh: 1: /opt/qa-venv/bin/pip: Permission denied
+curl: (56) CONNECT tunnel failed, response 403
+000
+sh: 1: cannot create /etc/sharness-shell-test: Permission denied
+sh: 1: cannot create /root/outside.txt: Permission denied
+sh: 1: cannot create /tmp/outside.txt: Permission denied
+── sh exit 0 ───────────────────────────────────────────────────────────────────
+  summary         1 requests through sharness.net: 0 allowed, 1 refused</pre>
+<p><code>https://example.com</code> was refused by the proxy and the writes by the kernel, and none of the three files exists afterwards. <code>curl https://pypi.org/simple/sharness-ai/</code> inside the shell got <code>200</code> (<code>summary … 1 allowed … hosts reached: pypi.org</code>). But <code>pip download</code> from pypi.org did not work as the ask writes it, for three separate reasons:</p>
+<pre class="diagram">PYTHONPATH is /opt/qa-venv/lib/python3.13/site-packages          (set by the shell; the shell's uid cannot read it)
+PermissionError: [Errno 13] Permission denied: '/opt/qa-venv/lib/python3.13/site-packages'
+sh: 1: cannot create /dev/null: Permission denied                   (also: curl -o /dev/null fails, and sh cannot start a background job)
+pip._vendor.requests.exceptions.ProxyError: HTTPSConnectionPool(host='files.pythonhosted.org', port=443): … Tunnel connection failed: 403 Forbidden</pre>
+<p>With <code>unset PYTHONPATH</code> and <code>--sites pypi.org files.pythonhosted.org</code>, <code>python3 -m pip download --no-deps sharness-ai==0.1.0</code> saved the wheel (<code>2 requests through sharness.net: 2 allowed</code>). <em>Expected instead:</em></p>
+<ul>
+<li>the shell does not set a <code>PYTHONPATH</code> its own policy cannot read;</li>
+<li><code>/dev/null</code> is writable (website@ found the same: board T30, item 2);</li>
+<li><code>--sites pypi.org</code> says that pip also needs <code>files.pythonhosted.org</code>.</li>
+</ul>
+<p>The refusals inside also do not say who refused: curl shows <code>response 403</code> and sh shows <code>Permission denied</code>. The exit summary does not say what was undone. Q0.2.0-11 shows it was undone; the summary just does not say so.</p>
+<h3 id="q0-2-0-10-the-shell-reaches-only-its-proxy-skeptic-confirmed">Q0.2.0-10: the shell reaches only its proxy (skeptic): Confirmed</h3>
+<p>Inside <code>sharness-ai shell --sites pypi.org</code>, a Python script (<code>unset PYTHONPATH</code> first):</p>
+<pre class="diagram">tcp 127.0.0.1:45619  -&gt; CONNECTED                  (the proxy)
+tcp 127.0.0.2:45619  -&gt; refused: ConnectionRefusedError [Errno 111] Connection refused
+tcp 127.1.2.3:45619  -&gt; refused: ConnectionRefusedError [Errno 111] Connection refused
+tcp 10.0.0.1:45619  -&gt; refused: OSError [Errno 101] Network is unreachable
+tcp 1.1.1.1:45619  -&gt; refused: OSError [Errno 101] Network is unreachable
+tcp 127.0.0.1:22 -&gt; refused: PermissionError [Errno 13] Permission denied
+tcp [::1] proxy port -&gt; refused: OSError [Errno 97] Address family not supported by protocol
+udp 1.1.1.1:53 -&gt; refused: OSError [Errno 101] Network is unreachable
+udp 8.8.8.8:53 -&gt; refused: OSError [Errno 101] Network is unreachable
+udp 127.0.0.53:53 -&gt; sent (no error)               (loopback inside the shell's own namespace)
+udp 127.0.0.1:9999 -&gt; sent (no error)
+dns example.com -&gt; failed: gaierror [Errno -3] Temporary failure in name resolution</pre>
+<p>Through the proxy: <code>https://pypi.org:22/</code>, <code>https://151.101.0.223/</code>, <code>https://PyPI.org./</code>, <code>https://pypi.org.evil.example/</code> and <code>https://evil.pypi.org/</code> were all refused. <code>http://pypi.org/</code> got 301 (<code>7 requests through sharness.net: 1 allowed, 6 refused</code>). Inside, the note says "the network namespace has loopback only, so UDP has no route out", and nothing says DNS still resolves. It is printed under the heading <code>sharness-ai run: not covered here</code>, though the command typed was <code>shell</code>.</p>
+<h3 id="q0-2-0-11-nothing-of-the-shell-outlives-it-skeptic-confirmed">Q0.2.0-11: nothing of the shell outlives it (skeptic): Confirmed</h3>
+<p>Three background writers, started with <code>os.fork()</code>: one plain, one after <code>setsid()</code>, one double-forked after <code>setsid()</code>.</p>
+<pre class="diagram">started plain
+started setsid
+started double
+  4 bg-double.log
+  4 bg-plain.log
+  4 bg-setsid.log
+── sh exit 0 ───────────────────────────────────────────────────────────────────
+  summary         0 requests through sharness.net: 0 allowed, 0 refused
+
+# wc -l bg-*.log; sleep 3; wc -l bg-*.log; ps -eo uid,pid,cmd | awk '$1&gt;=990 &amp;&amp; $1&lt;1000'; grep -c sharness- /etc/passwd
+  8 bg-double.log
+  8 bg-plain.log
+  8 bg-setsid.log
+  8 bg-double.log
+  8 bg-plain.log
+  8 bg-setsid.log
+0</pre>
+<p>All three stopped when the shell exited: the counts did not grow over three seconds and no process of the shell's uid is left. The user is gone from <code>/etc/passwd</code>. The summary does not say any of that (see Q0.2.0-9).</p>
+<h2 id="what-happens-next">What happens next</h2>
+<p>Every <em>Not confirmed</em> went to cli@ as a <code>To-cli:</code> note, with its ask id, in the commit that published this report. The R12 finding went to security@ as well, since SR-01 is on the register as fixed. When v0.2.1 or v0.3.0 reaches PyPI with <code>qa/v&lt;X.Y.Z&gt;.md</code>, the users run the checklist and that file again, and the next report goes beside this one.</p>
+<hr>
+<p><em>Generated from <a href="https://github.com/SHarness-AI/SHarness-AI__Website/blob/dev/content/users/v0.2.0.md">content/users/v0.2.0.md</a> by <code>tools/gen_users.py</code>; edit the source, never this file. The asks are the CLI's <a href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/qa/README.md">qa/</a>.</em></p>
+
+  </div>
+  <nav class="toc-side" aria-label="On this page">
+    <div class="toc-head">On this page</div>
+    <ol>
+      <li><a href="#the-verdicts">The verdicts</a></li>
+      <li><a href="#where-it-ran">Where it ran</a></li>
+      <li><a href="#the-release-checklist">The release checklist</a></li>
+      <li><a href="#this-release-s-asks">This release's asks</a></li>
+      <li><a href="#what-happens-next">What happens next</a></li>
+    </ol>
+    <a class="toc-top" href="#content">↑ Back to top</a>
+  </nav>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">sharness<span>.ai</span></div>
+    <p>SHarness runs agents and their tools as small, single-purpose processes, each locked down by the kernel and talking only over allowed, mutually authenticated connections. By Dinis Cruz. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://cli.sgit.ai"><b>↗ cli.sgit.ai</b></a> — sgit, the first harnessed app · <a href="https://pki.sgit.ai">↗ pki.sgit.ai</a> — the handover it builds on · <a href="https://riskmandate.ai/abp.html">↗ riskmandate.ai</a> — Agent Behaviour Policies</p>
+    <p class="partnote">⚠ Status: design, with the first experiments, two doors (sharness.fs, sharness.net) and a first slice of the launcher runnable as MVPs; no other component is built; measured figures carry their date. <a href="../../evidence/index.html" style="display:inline;padding:0">What is measured, what is proposed</a>.</p>
+    <p class="verline">site <a class="ver" href="../../project/releases.html" title="Site release history">v0.6.34</a> · <a href="../../project/engineering.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>Try it</h4>
+    <a href="../../code/playground/index.html">The playground</a>
+    <a href="../../code/browser/demo/index.html">A kernel in a tab</a>
+    <a href="../../index.html#start">Start in 60 seconds</a>
+    <a href="../../code/cli/index.html">The CLI: sharness-ai</a>
+    <a href="../../evidence/machines/index.html">Report your machine</a>
+    <a href="https://pypi.org/project/sharness-ai/">PyPI: sharness-ai ↗</a>
+    <a href="https://github.com/SHarness-AI/SHarness-AI__CLI">GitHub: SHarness-AI__CLI ↗</a>
+  </div>
+  <div>
+    <h4>Understand</h4>
+    <a href="../../design/index.html">The brief, in one read</a>
+    <a href="../../components/index.html">The components</a>
+    <a href="../../design/why/index.html">Why: the last metre</a>
+    <a href="../../design/architecture/index.html">Architecture</a>
+    <a href="../../design/policies/index.html">Process Behaviour Policies</a>
+    <a href="../../design/roadmap/index.html">Roadmap &amp; open decisions</a>
+    <a href="../../explain/storyboards/index.html">Storyboards</a>
+    <a href="../../articles/index.html">Articles</a>
+  </div>
+  <div>
+    <h4>Check it</h4>
+    <a href="../../evidence/index.html">Measurements</a>
+    <a href="../../evidence/status/index.html">What exists today</a>
+    <a href="../../evidence/machines/index.html">hello on your machine</a>
+    <a href="../../landscape/enforceability/index.html">Enforceability matrix</a>
+    <a href="../../landscape/market/index.html">Market &amp; competitors</a>
+    <a href="../../security/index.html">Security: the register</a>
+    <a href="../../security/threat-model/index.html">Threat model</a>
+    <a href="../../security/risks/index.html">Known risks</a>
+  </div>
+  <div>
+    <h4>Follow the work</h4>
+    <a href="../../project/about/index.html">About &amp; naming</a>
+    <a href="../../project/releases.html">Release history</a>
+    <a href="../../project/adoption/index.html">Getting users</a>
+    <a href="../../admin/index.html">How the project is run</a>
+    <a href="../../admin/board/index.html">The board</a>
+    <a href="../../admin/updates/index.html">Updates</a>
+    <a href="../../admin/notes/index.html">Commit notes</a>
+    <a href="../../admin/guidance/index.html">Guidance for agents</a>
+  </div>
+</div>
+<div class="agentline">For agents and crawlers: <a href="../../llms.txt">llms.txt</a> · <a href="../../llms-full.txt">llms-full.txt</a> · <a href="../../index.md">index.md</a> · <a href="../../sitemap.xml">sitemap.xml</a> · <a href="../../.well-known/security.txt">security.txt</a></div></footer>
+
+</body>
+</html>

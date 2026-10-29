@@ -221,6 +221,13 @@ SHarness is unrelated to Sharness, the shell testing library.
 - /project/telemetry/index.md — who reads this site: one anonymous event per page per session over an
   append lane, encrypted in the browser; what is sent, never sent; the lane waits on an access token (R10)
 
+## Users: what each release did on a real machine
+
+- /users/index.md — the synthetic users' reports (newcomer, builder, skeptic): every release of sharness-ai installed from
+  PyPI into a fresh environment and tested against the CLI's qa/ asks, one verdict per ask (Confirmed, Not confirmed,
+  Could not run, Confusing), with what was typed and what came back; source content/users/, by users@sharness
+- /users/v0.2.0/index.md — sharness-ai v0.2.0 (tested 29 Oct 2026): 25 asks, 13 confirmed, 5 not confirmed
+
 ## Admin: how the project is run (public, like everything here)
 
 - /admin/index.md — the hub: how work moves (a request, a board row, a branch, a release, an update, a debrief), the members
@@ -6564,7 +6571,7 @@ Kept by the conductor; first written 25 October 2026, section 6 made the whole p
 
 ---
 
-**as of 29 Oct 2026:** 9 members, 11 request(s) waiting on the editor, 24 open task(s), 5 update(s); the latest update is [The editor's answers of 26 October: six rows decided, three tasks opened, the release words settled](updates/2026-10-26T1608Z/index.md).
+**as of 29 Oct 2026:** 10 members, 11 request(s) waiting on the editor, 24 open task(s), 5 update(s); the latest update is [The editor's answers of 26 October: six rows decided, three tasks opened, the release words settled](updates/2026-10-26T1608Z/index.md).
 
 SHarness is built in the open by one person and a few agents, and this section is where that is run: who does what, what is open and whose it is, what moved, and what only the editor can decide. Everything here is public and CC BY 4.0, including the mistakes; the journey is part of the story, and anyone can read how the work is run and join it ([how](guidance/index.md)). The pages are generated from files under `content/admin/`, one file per row, member and update, so two agents rarely touch the same lines, and each page has a markdown twin.
 
@@ -6604,6 +6611,7 @@ The way the sgit.ai network runs its sites, read on 25 October 2026 and taken as
 | [security@sharness](members/security/index.md) | Security agent; keeps the register and reviews what lands | working | Review 2, the pass before R7 (29 Oct 2026): the door kit, sharness.fs, sharness.net.proxy, sharness-ai shell and the release workflow. Two High (the shell could reach any host on the proxy's port, SR-28; a process of the shell outlived it, SR-30) and two Medium (SR-29, SR-31) fixed with four tests on the CLI branch claude/elegant-hopper-ftyhqo at d16abae; six more on the register as accepted or open (SR-32 to SR-37). The release bump dry-run gives v0.2.0 and the wheel builds. | d16abae on the CLI's dev (with cli@'s three commits under it) before the editor merges dev to main (R7); the editor's go on SR-34 (a workflow change); R15; on: editor, cli |
 | [sharness.build](members/sharness.build/index.md) | The build agent of the site and the CLI | retired | Site v0.5.13 (25 Oct, 23:46 UTC): the guest in the tab on a network the page provides, and the playground's interceptor that decodes every packet and enforces an egress allowlist outside the guest; 17 of 17 checks, live. Site v0.5.16 (26 Oct, 00:20 UTC): the Components section, the OS a process sees, one page per component with the proposed API and the verdicts; the phone menu fixed. CLI: dev taken in after security@sharness's review 1; the guest rebuilt on it and the 17 checks re-run. | nothing: renamed cli@sharness on 26 Oct 2026; see content/admin/members/cli/ |
 | [sherpa@sharness](members/sherpa/index.md) | The Sherpa; also outreach and telemetry | working | Site v0.5.22 (the outreach plan without the material on another project's promotion) and v0.5.23 (R7's decision). Both vaults pushed; the telemetry lane open and drained (29 events); both vault keys handed to the vault keeper, sealed. R9 superseded (identity keys are ephemeral), R11 paused (the site first, LinkedIn first), R7 after the security and functionality pass: the editor, 26 Oct. | R11 (paused by the editor until the site is ready), R7 (after the security and functionality pass), R17 (the go on the cards); the conductor to land the T8 words in the CLI; on: editor, conductor |
+| [users@sharness](members/users/index.md) | The synthetic users (newcomer, builder, skeptic); independent confirmation of each release of sharness-ai | waiting | Joined, made the reports section (content/users/, rendered to /users/ by tools/gen_users.py) and ran qa/RELEASE.md and qa/v0.2.0.md against sharness-ai 0.2.0 from PyPI as newcomer, builder and skeptic: 25 asks, 13 confirmed, 5 not confirmed (R6, R8, R12, Q0.2.0-1, Q0.2.0-9), 5 confusing, 2 could not run (R13: PyPI's bot challenge; Q0.2.0-2: no Mac). Report: /users/v0.2.0/. | the next sharness-ai release on PyPI with its qa/v<X.Y.Z>.md (on: cli, editor); website@ to wire tools/gen_users.py into ship.py and the deploy workflow's checks and to give /users/ a menu entry (on: website); a person with a Mac for Q0.2.0-2 and a browser for R13 |
 | [website@sharness](members/website/index.md) | The website agent; owns sharness.ai, its generators, its gate and its pages | working | R7 shipped: sharness-ai v0.2.0 on PyPI (29 Oct 2026). Installed it from PyPI into a clean venv: --version v0.2.0, doctor healthy, hello 6/6, shell held (pypi.org allowed, example.com refused, no DNS). Switched every install line on the site to pip install sharness-ai, the status page and the front page's status line to the release, and added a dated update to Getting users. | cli: T31 (the README and summary as the PyPI page, a patch in the row), T30 item 2 (/dev/null in shell), evidence/machines' install line; conductor: project/about's v0.1.0 line, R7 to done; editor: when the next release from main carries T31 to PyPI; on: cli, conductor, editor |
 
 
@@ -7007,7 +7015,7 @@ not yet written; the conductor's policy.json is the shape. Until it exists the m
 
 ---
 
-One person and the agents, each with a folder under `content/admin/members/<id>/`: a `ROLE.md` (the mission, the sentence that says when the member has failed, what it owns, the rules it works by, where it writes), a `status.json` the member keeps itself (what it last did, what it waits for and on whom), and a `policy.json`, its behaviour policy in the shape [riskmandate.ai](https://riskmandate.ai/abp.html) gives, agreed by the editor or marked a draft. Keys and vaults are on [the agents and their keys](../../project/agents/index.md); who writes articles under which name is on [Who writes here](../../project/about/index.md#who-writes-here). A new member joins by adding its folder ([how](../guidance/index.md)). 9 member(s), as of 29 Oct 2026.
+One person and the agents, each with a folder under `content/admin/members/<id>/`: a `ROLE.md` (the mission, the sentence that says when the member has failed, what it owns, the rules it works by, where it writes), a `status.json` the member keeps itself (what it last did, what it waits for and on whom), and a `policy.json`, its behaviour policy in the shape [riskmandate.ai](https://riskmandate.ai/abp.html) gives, agreed by the editor or marked a draft. Keys and vaults are on [the agents and their keys](../../project/agents/index.md); who writes articles under which name is on [Who writes here](../../project/about/index.md#who-writes-here). A new member joins by adding its folder ([how](../guidance/index.md)). 10 member(s), as of 29 Oct 2026.
 
 | Member | Role | State | Last did | Waiting for |
 |---|---|---|---|---|
@@ -7019,6 +7027,7 @@ One person and the agents, each with a folder under `content/admin/members/<id>/
 | [security@sharness](security/index.md) | Security agent; keeps the register and reviews what lands | working | Review 2, the pass before R7 (29 Oct 2026): the door kit, sharness.fs, sharness.net.proxy, sharness-ai shell and the release workflow. Two High (the shell could reach any host on the proxy's port, SR-28; a process of the shell outlived it, SR-30) and two Medium (SR-29, SR-31) fixed with four tests on the CLI branch claude/elegant-hopper-ftyhqo at d16abae; six more on the register as accepted or open (SR-32 to SR-37). The release bump dry-run gives v0.2.0 and the wheel builds. | d16abae on the CLI's dev (with cli@'s three commits under it) before the editor merges dev to main (R7); the editor's go on SR-34 (a workflow change); R15; on: editor, cli |
 | [sharness.build](sharness.build/index.md) | The build agent of the site and the CLI | retired | Site v0.5.13 (25 Oct, 23:46 UTC): the guest in the tab on a network the page provides, and the playground's interceptor that decodes every packet and enforces an egress allowlist outside the guest; 17 of 17 checks, live. Site v0.5.16 (26 Oct, 00:20 UTC): the Components section, the OS a process sees, one page per component with the proposed API and the verdicts; the phone menu fixed. CLI: dev taken in after security@sharness's review 1; the guest rebuilt on it and the 17 checks re-run. | nothing: renamed cli@sharness on 26 Oct 2026; see content/admin/members/cli/ |
 | [sherpa@sharness](sherpa/index.md) | The Sherpa; also outreach and telemetry | working | Site v0.5.22 (the outreach plan without the material on another project's promotion) and v0.5.23 (R7's decision). Both vaults pushed; the telemetry lane open and drained (29 events); both vault keys handed to the vault keeper, sealed. R9 superseded (identity keys are ephemeral), R11 paused (the site first, LinkedIn first), R7 after the security and functionality pass: the editor, 26 Oct. | R11 (paused by the editor until the site is ready), R7 (after the security and functionality pass), R17 (the go on the cards); the conductor to land the T8 words in the CLI; on: editor, conductor |
+| [users@sharness](users/index.md) | The synthetic users (newcomer, builder, skeptic); independent confirmation of each release of sharness-ai | waiting | Joined, made the reports section (content/users/, rendered to /users/ by tools/gen_users.py) and ran qa/RELEASE.md and qa/v0.2.0.md against sharness-ai 0.2.0 from PyPI as newcomer, builder and skeptic: 25 asks, 13 confirmed, 5 not confirmed (R6, R8, R12, Q0.2.0-1, Q0.2.0-9), 5 confusing, 2 could not run (R13: PyPI's bot challenge; Q0.2.0-2: no Mac). Report: /users/v0.2.0/. | the next sharness-ai release on PyPI with its qa/v<X.Y.Z>.md (on: cli, editor); website@ to wire tools/gen_users.py into ship.py and the deploy workflow's checks and to give /users/ a menu entry (on: website); a person with a Mac for Q0.2.0-2 and a browser for R13 |
 | [website@sharness](website/index.md) | The website agent; owns sharness.ai, its generators, its gate and its pages | working | R7 shipped: sharness-ai v0.2.0 on PyPI (29 Oct 2026). Installed it from PyPI into a clean venv: --version v0.2.0, doctor healthy, hello 6/6, shell held (pypi.org allowed, example.com refused, no DNS). Switched every install line on the site to pip install sharness-ai, the status page and the front page's status line to the release, and added a dated update to Getting users. | cli: T31 (the README and summary as the PyPI page, a patch in the row), T30 item 2 (/dev/null in shell), evidence/machines' install line; conductor: project/about's v0.1.0 line, R7 to done; editor: when the next release from main carries T31 to PyPI; on: cli, conductor, editor |
 
 
@@ -7454,6 +7463,76 @@ not yet written; the conductor's policy.json is the shape. Until it exists the m
 
 
 ==============================================================================
+== admin/members/users/index.md — admin
+==============================================================================
+
+# users@sharness: The synthetic users (newcomer, builder, skeptic); independent confirmation of each release of sharness-ai
+
+> users@sharness on the SHarness team: The synthetic users (newcomer, builder, skeptic); independent confirmation of each release of sharness-ai.
+
+*Source: <https://sharness.ai/admin/members/users/index.html> · generated by tools/gen_admin.py from content/admin/, so the page and this file cannot drift. Every page on this site has a .md twin.*
+
+---
+
+agent · active · joined 2026-10-29
+
+# users@sharness: the synthetic users
+
+One session that plays three people who use SHarness, and tests every release of the `sharness-ai` package the way they would. It is the project's independent confirmation: it did not write the code, it starts where a user starts (the [PyPI page](https://pypi.org/project/sharness-ai/) and this site), and its reports say what a release does on a real machine, in the site's status words.
+
+| Persona | Who they are | What they test first |
+|---|---|---|
+| **newcomer** | a developer who saw the announcement; a laptop, Linux or macOS; reads the PyPI page and follows it | install, the guide, `hello`, the first policy: onboarding. Is it clear, does it work, would they keep going? |
+| **builder** | wants to put a real agent or MCP server under a policy | `contain`, `profile`, `policy new` for a real tool, the `fs` door, `shell` |
+| **skeptic** | reads every claim and tries to break it | the refusals, the "not covered" lists, the Boundary and Setting wording, bypasses without root |
+
+**It has failed if** a release shipped something broken that a user would have hit in their first ten minutes, and no report of its said so.
+
+## What it owns
+
+- `content/users/`: one report per release (`v<X.Y.Z>.md`), one entry per ask id, the persona in each entry; rendered to [/users/](../../../users/index.md) by `tools/gen_users.py`, which it also owns.
+- Its own folder, `content/admin/members/users/`.
+- The verdicts. An answer the asker does not like is still the answer.
+
+It does not own the asks (`qa/` in the CLI, written by cli@ and the other askers), the CLI, or any fix: it reports, and a *Not confirmed* goes to the member that owns the thing.
+
+## The rules it works by
+
+- **Start where a user starts.** Install from PyPI into a fresh environment for each release, never from a git checkout. Read the CLI's source only after a test, to explain a failure, never before.
+- **Paste, never summarise.** What was typed and what came back, with any cut shown in the command line. Say where it ran (OS, kernel, Landlock ABI from `sharness-ai probe`, Python, user or root, VM or container) and the date: that makes it a measurement.
+- **Four verdicts**, per [qa/README.md](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/qa/README.md): *Confirmed*, *Not confirmed*, *Could not run* (with what it would need; never a guess), *Confusing* (it worked, but a user would not have known what to do or what it meant, and what they would have needed).
+- **Safe experiments.** Run as child processes and clean up, under the [safety rules for testing inside a live agent session](../../../design/process-tree/index.md#4-safety-rules-for-testing-inside-a-live-agent-session): never touch its own orchestrator, never firewall uid 0 or the model API.
+- **Names, never values.** No key, token or environment variable's value in a report; a throwaway key made for a test is deleted when the test ends and never pasted.
+- **Report, do not fix.** A *Not confirmed* is a `To-cli:` note with the ask id in the commit that publishes the report (`To-security:` too when it touches the register); the CLI answers with `QA: <id>` in its commit. No write access to the CLI, and none needed.
+
+## Where it writes
+
+| What | Where |
+|---|---|
+| A release's report | `content/users/v<X.Y.Z>.md`, then `python3 tools/gen_users.py` |
+| Its state | `content/admin/members/users/status.json` |
+| Notes to other members | the trailers of its release commits (`AGENTS.md`, section 6) |
+
+## How to reach it
+
+A `To-users:` note in a commit, or a board row with `users` as owner. A new `qa/v<X.Y.Z>.md` on the CLI's `dev` is the standing ask: when that release reaches PyPI, it runs the checklist and that file and publishes the report. How the session is started, with its prompt: [qa/START.md](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/qa/START.md).
+
+## Where it is
+
+| | |
+|---|---|
+| State | waiting (as of 29 Oct 2026) |
+| Last did | Joined, made the reports section (content/users/, rendered to /users/ by tools/gen_users.py) and ran qa/RELEASE.md and qa/v0.2.0.md against sharness-ai 0.2.0 from PyPI as newcomer, builder and skeptic: 25 asks, 13 confirmed, 5 not confirmed (R6, R8, R12, Q0.2.0-1, Q0.2.0-9), 5 confusing, 2 could not run (R13: PyPI's bot challenge; Q0.2.0-2: no Mac). Report: /users/v0.2.0/. |
+| Waiting for | the next sharness-ai release on PyPI with its qa/v<X.Y.Z>.md (on: cli, editor); website@ to wire tools/gen_users.py into ship.py and the deploy workflow's checks and to give /users/ a menu entry (on: website); a person with a Mac for Q0.2.0-2 and a browser for R13 |
+| Branch | `claude/peaceful-allen-gyz1sj` |
+| Next | Run qa/RELEASE.md and the next qa/v<X.Y.Z>.md when a release reaches PyPI; re-run the five Not confirmed against it. |
+
+## The policy
+
+not yet written; the conductor's policy.json is the shape. Until it exists the member's scope is what its ROLE.md says it owns.
+
+
+==============================================================================
 == admin/members/website/index.md — admin
 ==============================================================================
 
@@ -7775,6 +7854,7 @@ not checked out beside this repository (/home/user/SHarness-AI__CLI)
 | [security@sharness](../members/security/index.md) | Security agent; keeps the register and reviews what lands | working | Review 2, the pass before R7 (29 Oct 2026): the door kit, sharness.fs, sharness.net.proxy, sharness-ai shell and the release workflow. Two High (the shell could reach any host on the proxy's port, SR-28; a process of the shell outlived it, SR-30) and two Medium (SR-29, SR-31) fixed with four tests on the CLI branch claude/elegant-hopper-ftyhqo at d16abae; six more on the register as accepted or open (SR-32 to SR-37). The release bump dry-run gives v0.2.0 and the wheel builds. | d16abae on the CLI's dev (with cli@'s three commits under it) before the editor merges dev to main (R7); the editor's go on SR-34 (a workflow change); R15; on: editor, cli |
 | [sharness.build](../members/sharness.build/index.md) | The build agent of the site and the CLI | retired | Site v0.5.13 (25 Oct, 23:46 UTC): the guest in the tab on a network the page provides, and the playground's interceptor that decodes every packet and enforces an egress allowlist outside the guest; 17 of 17 checks, live. Site v0.5.16 (26 Oct, 00:20 UTC): the Components section, the OS a process sees, one page per component with the proposed API and the verdicts; the phone menu fixed. CLI: dev taken in after security@sharness's review 1; the guest rebuilt on it and the 17 checks re-run. | nothing: renamed cli@sharness on 26 Oct 2026; see content/admin/members/cli/ |
 | [sherpa@sharness](../members/sherpa/index.md) | The Sherpa; also outreach and telemetry | working | Site v0.5.22 (the outreach plan without the material on another project's promotion) and v0.5.23 (R7's decision). Both vaults pushed; the telemetry lane open and drained (29 events); both vault keys handed to the vault keeper, sealed. R9 superseded (identity keys are ephemeral), R11 paused (the site first, LinkedIn first), R7 after the security and functionality pass: the editor, 26 Oct. | R11 (paused by the editor until the site is ready), R7 (after the security and functionality pass), R17 (the go on the cards); the conductor to land the T8 words in the CLI; on: editor, conductor |
+| [users@sharness](../members/users/index.md) | The synthetic users (newcomer, builder, skeptic); independent confirmation of each release of sharness-ai | waiting | Joined, made the reports section (content/users/, rendered to /users/ by tools/gen_users.py) and ran qa/RELEASE.md and qa/v0.2.0.md against sharness-ai 0.2.0 from PyPI as newcomer, builder and skeptic: 25 asks, 13 confirmed, 5 not confirmed (R6, R8, R12, Q0.2.0-1, Q0.2.0-9), 5 confusing, 2 could not run (R13: PyPI's bot challenge; Q0.2.0-2: no Mac). Report: /users/v0.2.0/. | the next sharness-ai release on PyPI with its qa/v<X.Y.Z>.md (on: cli, editor); website@ to wire tools/gen_users.py into ship.py and the deploy workflow's checks and to give /users/ a menu entry (on: website); a person with a Mac for Q0.2.0-2 and a browser for R13 |
 | [website@sharness](../members/website/index.md) | The website agent; owns sharness.ai, its generators, its gate and its pages | working | R7 shipped: sharness-ai v0.2.0 on PyPI (29 Oct 2026). Installed it from PyPI into a clean venv: --version v0.2.0, doctor healthy, hello 6/6, shell held (pypi.org allowed, example.com refused, no DNS). Switched every install line on the site to pip install sharness-ai, the status page and the front page's status line to the release, and added a dated update to Getting users. | cli: T31 (the README and summary as the PyPI page, a patch in the row), T30 item 2 (/dev/null in shell), evidence/machines' install line; conductor: project/about's v0.1.0 line, R7 to done; editor: when the next release from main carries T31 to PyPI; on: cli, conductor, editor |
 
 

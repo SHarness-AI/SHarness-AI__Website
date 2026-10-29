@@ -16,7 +16,7 @@
   <url><loc>https://sharness.ai/design/spectrum/index.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://sharness.ai/design/surface/index.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://sharness.ai/design/why/index.html</loc><lastmod>2026-10-29</lastmod></url>
-  <url><loc>https://sharness.ai/code/browser/demo/index.html</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://sharness.ai/code/browser/demo/index.html</loc><lastmod>2026-10-26</lastmod></url>
   <url><loc>https://sharness.ai/code/browser/index.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://sharness.ai/code/cli/index.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://sharness.ai/code/examples/index.html</loc><lastmod>2026-10-29</lastmod></url>
@@ -85,6 +85,7 @@
   <url><loc>https://sharness.ai/admin/members/security/index.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://sharness.ai/admin/members/sharness.build/index.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://sharness.ai/admin/members/sherpa/index.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://sharness.ai/admin/members/users/index.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://sharness.ai/admin/members/website/index.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://sharness.ai/admin/notes/index.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://sharness.ai/admin/runs/index.html</loc><lastmod>2026-10-29</lastmod></url>
@@ -111,4 +112,6 @@
   <url><loc>https://sharness.ai/security/risks/index.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://sharness.ai/security/supply-chain/index.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://sharness.ai/security/threat-model/index.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://sharness.ai/users/index.html</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://sharness.ai/users/v0.2.0/index.html</loc><lastmod>2026-10-29</lastmod></url>
 </urlset>

@@ -1,0 +1,9 @@
+{
+  "member": "users",
+  "as_of": "2026-10-29T03:50Z",
+  "state": "waiting",
+  "last_did": "Joined, made the reports section (content/users/, rendered to /users/ by tools/gen_users.py) and ran qa/RELEASE.md and qa/v0.2.0.md against sharness-ai 0.2.0 from PyPI as newcomer, builder and skeptic: 25 asks, 13 confirmed, 5 not confirmed (R6, R8, R12, Q0.2.0-1, Q0.2.0-9), 5 confusing, 2 could not run (R13: PyPI's bot challenge; Q0.2.0-2: no Mac). Report: /users/v0.2.0/.",
+  "waiting_for": "the next sharness-ai release on PyPI with its qa/v<X.Y.Z>.md (on: cli, editor); website@ to wire tools/gen_users.py into ship.py and the deploy workflow's checks and to give /users/ a menu entry (on: website); a person with a Mac for Q0.2.0-2 and a browser for R13",
+  "branch": "claude/peaceful-allen-gyz1sj",
+  "next": "Run qa/RELEASE.md and the next qa/v<X.Y.Z>.md when a release reaches PyPI; re-run the five Not confirmed against it."
+}

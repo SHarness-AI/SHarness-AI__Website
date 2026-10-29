@@ -204,6 +204,13 @@ SHarness is unrelated to Sharness, the shell testing library.
 - /project/telemetry/index.md — who reads this site: one anonymous event per page per session over an
   append lane, encrypted in the browser; what is sent, never sent; the lane waits on an access token (R10)
 
+## Users: what each release did on a real machine
+
+- /users/index.md — the synthetic users' reports (newcomer, builder, skeptic): every release of sharness-ai installed from
+  PyPI into a fresh environment and tested against the CLI's qa/ asks, one verdict per ask (Confirmed, Not confirmed,
+  Could not run, Confusing), with what was typed and what came back; source content/users/, by users@sharness
+- /users/v0.2.0/index.md — sharness-ai v0.2.0 (tested 29 Oct 2026): 25 asks, 13 confirmed, 5 not confirmed
+
 ## Admin: how the project is run (public, like everything here)
 
 - /admin/index.md — the hub: how work moves (a request, a board row, a branch, a release, an update, a debrief), the members
