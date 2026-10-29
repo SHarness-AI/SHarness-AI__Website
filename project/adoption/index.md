@@ -1,5 +1,7 @@
 # Getting users: the review and the plan
 
+> **Update, 29 Oct 2026: the first item is done.** The CLI's `dev` was released to PyPI as v0.2.0 (R7), so `pip install sharness-ai` now gives `probe`, `hello`, `run`, the levels, the two doors and `shell`, and every install line on the site says so. The rest of the page is as written on 25 Oct.
+>
 > **Status: a plan, as of 25 Oct 2026.** This page is the build agent's review of the site and the code from one angle: a person who could use this, arriving cold. It says what was wrong for that person, what changed in this release because of it, what is still open, who the users are, where to find them, and how to tell whether it is working. It is published because the project is built in the open and because the plan only works if the people it names can read it.
 
 ## 1. What the project needs from users

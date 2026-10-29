@@ -7,12 +7,12 @@
 > browser to prove it, and a design for the launcher that binds the agent itself.
 
 *Source: <https://sharness.ai/index.html> · site v0.6.32 · markdown twin of the front page.*
-*Status: **experiments**. Two doors, sharness.fs and sharness.net, run as MVPs, with the launcher's first slice (a Setting, except for the one shell it starts); no other component is built; every measured figure carries its date.*
+*Status: **experiments**. `sharness-ai` v0.2.0 is on PyPI (29 Oct 2026). Two doors, sharness.fs and sharness.net, run as MVPs, with the launcher's first slice (a Setting, except for the one shell it starts); no other component is built; every measured figure carries its date.*
 
 ## Start in 60 seconds
 
 - **In your browser, nothing installed:** [the playground](code/playground/index.html), `pip install sharness-ai` in Pyodide next to a shell on a Linux kernel with Landlock; or [watch the kernel boot](code/browser/demo/index.html).
-- **On Linux:** `pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev`, then `sharness-ai probe`, `sharness-ai hello`, `sharness-ai run --policy p2-tool-server.json -- my-tool`, and `sharness-ai shell --sites pypi.org` for a shell whose only way out is the hosts you name (as root, under a fresh user made for it). PyPI carries the skeleton (v0.1.0); the experiments ship with the next release.
+- **On Linux:** `pip install sharness-ai`, then `sharness-ai probe`, `sharness-ai hello`, `sharness-ai run --policy p2-tool-server.json -- my-tool`, and `sharness-ai shell --sites pypi.org` for a shell whose only way out is the hosts you name (as root, under a fresh user made for it). PyPI carries v0.2.0 (released 29 Oct 2026); `pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev` installs the latest.
 - **In a Claude Code session:** the [skill](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/.claude/skills/sharness-hello/SKILL.md) runs `probe` and `hello` inside the session, with the caveat that the session itself is not bound.
 
 ## The one idea
@@ -84,7 +84,7 @@ The memo's method is to start with very simple examples. [Mockups and experiment
 ## What this site claims
 
 Measured figures carry their environment and date, with method on the Evidence page. Everything else is designed or proposed. The site never claims a component is a Boundary
-before the launcher exists, or anything released beyond PyPI v0.1.0, never claims protection against root or kernel compromise, and says nothing about any
+before the launcher exists, never claims protection against root or kernel compromise, and says nothing about any
 platform's plans.
 
 By Dinis Cruz. Design session written up with Claude, 24 October 2026.

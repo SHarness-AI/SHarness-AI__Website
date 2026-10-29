@@ -5,7 +5,7 @@
 ## Install
 
 ```
-pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev     # the experiments (unreleased to PyPI)
+pip install sharness-ai     # v0.2.0; the latest: pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev
 sharness-ai --version
 ```
 

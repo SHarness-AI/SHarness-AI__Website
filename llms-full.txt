@@ -260,12 +260,12 @@ SHarness is unrelated to Sharness, the shell testing library.
 > browser to prove it, and a design for the launcher that binds the agent itself.
 
 *Source: <https://sharness.ai/index.html> · site v0.6.32 · markdown twin of the front page.*
-*Status: **experiments**. Two doors, sharness.fs and sharness.net, run as MVPs, with the launcher's first slice (a Setting, except for the one shell it starts); no other component is built; every measured figure carries its date.*
+*Status: **experiments**. `sharness-ai` v0.2.0 is on PyPI (29 Oct 2026). Two doors, sharness.fs and sharness.net, run as MVPs, with the launcher's first slice (a Setting, except for the one shell it starts); no other component is built; every measured figure carries its date.*
 
 ## Start in 60 seconds
 
 - **In your browser, nothing installed:** [the playground](code/playground/index.html), `pip install sharness-ai` in Pyodide next to a shell on a Linux kernel with Landlock; or [watch the kernel boot](code/browser/demo/index.html).
-- **On Linux:** `pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev`, then `sharness-ai probe`, `sharness-ai hello`, `sharness-ai run --policy p2-tool-server.json -- my-tool`, and `sharness-ai shell --sites pypi.org` for a shell whose only way out is the hosts you name (as root, under a fresh user made for it). PyPI carries the skeleton (v0.1.0); the experiments ship with the next release.
+- **On Linux:** `pip install sharness-ai`, then `sharness-ai probe`, `sharness-ai hello`, `sharness-ai run --policy p2-tool-server.json -- my-tool`, and `sharness-ai shell --sites pypi.org` for a shell whose only way out is the hosts you name (as root, under a fresh user made for it). PyPI carries v0.2.0 (released 29 Oct 2026); `pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev` installs the latest.
 - **In a Claude Code session:** the [skill](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/.claude/skills/sharness-hello/SKILL.md) runs `probe` and `hello` inside the session, with the caveat that the session itself is not bound.
 
 ## The one idea
@@ -337,7 +337,7 @@ The memo's method is to start with very simple examples. [Mockups and experiment
 ## What this site claims
 
 Measured figures carry their environment and date, with method on the Evidence page. Everything else is designed or proposed. The site never claims a component is a Boundary
-before the launcher exists, or anything released beyond PyPI v0.1.0, never claims protection against root or kernel compromise, and says nothing about any
+before the launcher exists, never claims protection against root or kernel compromise, and says nothing about any
 platform's plans.
 
 By Dinis Cruz. Design session written up with Claude, 24 October 2026.
@@ -2217,7 +2217,7 @@ Source: [00-README](../../project/sources/sharness-brief-pack/docs/00-README.md)
 
 | What | Where | Status |
 |---|---|---|
-| the `sharness-ai` package | [`sharness_ai/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/sharness_ai) on the `dev` branch; v0.1.0 on [PyPI](https://pypi.org/project/sharness-ai/) carries only `--version` | runnable from the repository; unreleased |
+| the `sharness-ai` package | [`sharness_ai/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/sharness_ai) on the `dev` branch; v0.1.0 on [PyPI](https://pypi.org/project/sharness-ai/) carries only `--version` | released to PyPI as v0.2.0, 29 Oct 2026 |
 | the experiments, numbered | [`experiments/README.md`](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md) | E01 to E04 and E09 to E13 runnable; E05 to E08 planned |
 | the example policies: two minimal, five profiles P0 to P4 | [`experiments/policies/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/experiments/policies) | runnable; run natively 25 Oct 2026 |
 | the playground: `sharness-ai` in Pyodide and in a shell on the Linux guest | [`experiments/browser/playground.js`](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/browser/playground.js), one ES module; served on this site at [code/playground](playground/index.html); `test_playground.mjs` drives both tabs | runnable; 11 of 11 checks 25 Oct 2026 |
@@ -2292,12 +2292,12 @@ The [research note](../evidence/research/index.md#4-what-is-still-open-in-the-or
 
 | Where | What |
 |---|---|
-| [PyPI, v0.1.0](https://pypi.org/project/sharness-ai/) | reports its version and prints its help; also installs a `sharness` shorthand, removed on `dev` |
-| the `dev` branch | `sharness-ai` as the only command; the experiments E01 to E05, E09 and E10; MVP 1, MVP 2 and MVP 3 below; `doctor` and `help --format json`; 243 tests, all passing in website@'s run on Python 3.13 as root, 29 Oct 2026 (`dev` f9e51c8, from a virtualenv under `/opt`: one test starts a shell as a temporary user, which needs an interpreter that user can reach, so a virtualenv under a root-only directory fails it). Not released until `dev` is merged to `main` ([R7](../../admin/board/index.md)) |
+| [PyPI, v0.2.0](https://pypi.org/project/sharness-ai/) | released 29 Oct 2026 from `dev` at the go of security review 2: `sharness-ai` as the only command, the experiments and MVP 1, MVP 2 and MVP 3 below |
+| the `dev` branch | `sharness-ai` as the only command; the experiments E01 to E05, E09 and E10; MVP 1, MVP 2 and MVP 3 below; `doctor` and `help --format json`; 243 tests, all passing in website@'s run on Python 3.13 as root, 29 Oct 2026 (`dev` f9e51c8, from a virtualenv under `/opt`: one test starts a shell as a temporary user, which needs an interpreter that user can reach, so a virtualenv under a root-only directory fails it). Released to PyPI as v0.2.0 on 29 Oct 2026 ([R7](../../admin/board/index.md)); later work lands here first |
 
 ```
-$ pip install sharness-ai            # v0.1.0: version and help only
-$ pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev     # the experiments and the MVPs, unreleased
+$ pip install sharness-ai            # v0.2.0: the experiments and the MVPs
+$ pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev     # the latest, before the next release
 $ sharness-ai help                   # every command, read from the parser itself
 ```
 
@@ -2650,7 +2650,7 @@ Sources: the modules `cli.py`, `policy.py`, `landlock.py`, `run.py`, `hello.py` 
 ## Install
 
 ```
-pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev     # the experiments (unreleased to PyPI)
+pip install sharness-ai     # v0.2.0; the latest: pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev
 sharness-ai --version
 ```
 
@@ -3344,8 +3344,8 @@ Source: [04-environment-evidence](../project/sources/sharness-brief-pack/docs/04
 
 | Thing | Where to check it |
 |---|---|
-| **The `sharness-ai` package on PyPI**, v0.1.0: reports its version and prints its help | [pypi.org/project/sharness-ai](https://pypi.org/project/sharness-ai/) |
-| **Experiments E01 to E04, E09 and E10** (and E11 to E13, the three MVPs below; `probe`, `policy hash`, `run`, `hello`, the harness under a second kernel in Node, in a browser tab and through chroot, `policy translate`), with the CLI's tests (243 on 29 Oct 2026) run in CI on Python 3.11 to 3.13 on every push to the CLI's `dev` branch; unreleased to PyPI | [the code](../../code/index.md) · [experiments/README.md](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md) · E04 and E09 measured on [Evidence §9](../index.md#9-the-first-experiments-run-by-the-cli) |
+| **The `sharness-ai` package on PyPI**, v0.2.0 (released 29 Oct 2026): the experiments and the three MVPs below; v0.1.0 was the skeleton | [pypi.org/project/sharness-ai](https://pypi.org/project/sharness-ai/) |
+| **Experiments E01 to E04, E09 and E10** (and E11 to E13, the three MVPs below; `probe`, `policy hash`, `run`, `hello`, the harness under a second kernel in Node, in a browser tab and through chroot, `policy translate`), with the CLI's tests (243 on 29 Oct 2026) run in CI on Python 3.11 to 3.13 on every push to the CLI's `dev` branch; on PyPI since v0.2.0 | [the code](../../code/index.md) · [experiments/README.md](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md) · E04 and E09 measured on [Evidence §9](../index.md#9-the-first-experiments-run-by-the-cli) |
 | **MVP 1, the levels in the terminal**: `contain` (a sentence), `profile` (six profiles with blanks), `explain` (any document down to the kernel, one hash per level), with vectors per level; on the CLI's `dev` | [The CLI §MVP 1](../../code/cli/index.md#mvp-1-the-levels-in-the-terminal) · [the levels](../../design/levels/index.md) |
 | **MVP 2, the first door, `sharness.fs`**: the door kit (session CA by openssl, mutual TLS 1.3, contracts, rows, verdicts, audit) over the disk and its twin, 18 conformance vectors; a Setting for the app until the launcher gives it its own uid; the five known issues of the 26 Oct review fixed by 29 Oct 2026 (a secret split more than 4 KiB apart is not caught) | [sharness.fs](../../components/fs/index.md) · [the issues](../../components/fs/index.md#5-known-issues-as-of-28-oct-2026) |
 | **MVP 3, the network door and a shell under the harness (E13)**: `sharness-ai net serve` (an allowlisting proxy for one uid), `sharness-ai shell` (a unique user, the door, a policy whose only network row is the proxy's port); a Boundary for that shell where run as root, a Setting otherwise; since security review 2 (29 Oct 2026) the shell has a network namespace of its own, loopback only, and nothing of it outlives it; checked by website@ on 28 and 29 Oct 2026 | [sharness.net](../../components/net/index.md) · [sharness.launcher](../../components/launcher/index.md) |
@@ -3363,7 +3363,6 @@ Source: [04-environment-evidence](../project/sources/sharness-brief-pack/docs/04
 | Missing | Status |
 |---|---|
 | **Any SHarness component but `sharness.fs`, `sharness.net` and the launcher's first slice** (kms, bash, llm; the launcher's manifest) | Not built. Designed on [Components](../../design/components/index.md). `sharness.fs` runs as an MVP, a Setting, until the launcher gives it its own uid; `sharness.net` is a Boundary only for the shell `sharness-ai shell` starts. |
-| **A CLI release beyond `--version`** | v0.1.0 on PyPI is the skeleton and the pipeline; the experiments are on `dev`, unreleased ([R7](../../project/comms.html#r7)). |
 | **The launcher above the agent** | Not built. Every experiment applies a policy to a child process; nothing yet binds the agent itself. |
 | **The process-tree proof of concept** (E06) | Started, not completed, not run. See [Enforcing the process tree](../../design/process-tree/index.md). |
 | **seccomp, the `cpu` cgroup, read-only binds** | Available in the measured kernel; not yet applied by the CLI or measured (memory and pids caps are, since 25 Oct 2026). See [Containment](../../design/containment/index.md). |
@@ -4918,7 +4917,7 @@ What `sharness.kms` would sit beside or draw from.
 
 **Complements** (SHarness could be their enforcement layer): the platforms in §7, which monitor and block at API hooks and would gain a kernel-enforced boundary to point at; identity products (Okta, Entra Agent ID, Keycard, Oasis, Teleport), which issue identity but do not confine; secrets managers (1Password's broker, Infisical, Vault, AgentCore Identity) as the upstream for `sharness.kms`; LLM gateways, which could sit behind `sharness.llm`; MCP gateways (ToolHive, Docker's), whose servers could run as harnessed apps; and ABP, which measures grants and would use SHarness as the control that turns an *expectation* into a *boundary*.
 
-**Honest gaps.** As of 28 Oct 2026 SHarness is experiments and three MVPs, unreleased beyond a PyPI skeleton, while the competitors ship today with daily users. SHarness is Linux-only by construction (Landlock 5.13+, TCP rules in newer kernels, `memfd_secret`), while buyers' desktops are often macOS and Windows, which Anthropic, OpenAI and Google cover with Seatbelt and AppContainer. Landlock and unprivileged user namespaces are often unavailable inside CI containers and hardened distributions. Root and kernel compromise are out of scope, whereas microVM vendors sell a hardware boundary. There is no cloud offering, no user interface, no team, no compliance story (SOC 2, ISO 42001 mapping, ACS traces), no CVE process. Several processes, a session CA and a KMS protocol are more surface than one bubblewrap profile. And the site's own caveat decides the value: "who runs the launcher decides what the locks are" ([Components](../../design/components/index.md#sharness-launcher)).
+**Honest gaps.** As of 28 Oct 2026 SHarness is experiments and three MVPs, released to PyPI as v0.2.0 on 29 Oct 2026, while the competitors ship today with daily users. SHarness is Linux-only by construction (Landlock 5.13+, TCP rules in newer kernels, `memfd_secret`), while buyers' desktops are often macOS and Windows, which Anthropic, OpenAI and Google cover with Seatbelt and AppContainer. Landlock and unprivileged user namespaces are often unavailable inside CI containers and hardened distributions. Root and kernel compromise are out of scope, whereas microVM vendors sell a hardware boundary. There is no cloud offering, no user interface, no team, no compliance story (SOC 2, ISO 42001 mapping, ACS traces), no CVE process. Several processes, a session CA and a KMS protocol are more surface than one bubblewrap profile. And the site's own caveat decides the value: "who runs the launcher decides what the locks are" ([Components](../../design/components/index.md#sharness-launcher)).
 
 ## 10. Market signals, with numbers
 
@@ -5150,6 +5149,8 @@ All content CC BY 4.0.
 
 # Getting users: the review and the plan
 
+> **Update, 29 Oct 2026: the first item is done.** The CLI's `dev` was released to PyPI as v0.2.0 (R7), so `pip install sharness-ai` now gives `probe`, `hello`, `run`, the levels, the two doors and `shell`, and every install line on the site says so. The rest of the page is as written on 25 Oct.
+>
 > **Status: a plan, as of 25 Oct 2026.** This page is the build agent's review of the site and the code from one angle: a person who could use this, arriving cold. It says what was wrong for that person, what changed in this release because of it, what is still open, who the users are, where to find them, and how to tell whether it is working. It is published because the project is built in the open and because the plan only works if the people it names can read it.
 
 ## 1. What the project needs from users

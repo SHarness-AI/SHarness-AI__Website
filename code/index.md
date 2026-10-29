@@ -6,7 +6,7 @@
 
 | What | Where | Status |
 |---|---|---|
-| the `sharness-ai` package | [`sharness_ai/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/sharness_ai) on the `dev` branch; v0.1.0 on [PyPI](https://pypi.org/project/sharness-ai/) carries only `--version` | runnable from the repository; unreleased |
+| the `sharness-ai` package | [`sharness_ai/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/sharness_ai) on the `dev` branch; v0.1.0 on [PyPI](https://pypi.org/project/sharness-ai/) carries only `--version` | released to PyPI as v0.2.0, 29 Oct 2026 |
 | the experiments, numbered | [`experiments/README.md`](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md) | E01 to E04 and E09 to E13 runnable; E05 to E08 planned |
 | the example policies: two minimal, five profiles P0 to P4 | [`experiments/policies/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/experiments/policies) | runnable; run natively 25 Oct 2026 |
 | the playground: `sharness-ai` in Pyodide and in a shell on the Linux guest | [`experiments/browser/playground.js`](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/browser/playground.js), one ES module; served on this site at [code/playground](playground/index.html); `test_playground.mjs` drives both tabs | runnable; 11 of 11 checks 25 Oct 2026 |

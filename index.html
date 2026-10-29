@@ -141,7 +141,7 @@
     <a class="cta2" href="#start">Start in 60 seconds</a>
     <a class="cta2" href="design/index.html">Read the design →</a>
   </div>
-  <div class="status"><span class="stage-pill">status: experiments</span> Two doors, sharness.fs and sharness.net, run as MVPs, with the launcher's first slice (a Setting, except for the one shell it starts); no other component is built; every measured figure carries its date. <a href="evidence/status/index.html">What exists today →</a></div>
+  <div class="status"><span class="stage-pill">status: experiments</span> <code>sharness-ai</code> v0.2.0 is on PyPI (29 Oct 2026). Two doors, sharness.fs and sharness.net, run as MVPs, with the launcher's first slice (a Setting, except for the one shell it starts); no other component is built; every measured figure carries its date. <a href="evidence/status/index.html">What exists today →</a></div>
 </header>
 
 <section class="band alt" id="idea">
@@ -180,12 +180,12 @@
     <div class="step"><span class="tag">In your browser · nothing to install</span><h3>The playground</h3><p>Two terminals in one tab. <b>Pyodide</b>: Python in WebAssembly, where <code>pip install sharness-ai</code> gives you <code>policy hash</code>, <code>check</code> and <code>translate</code>. <b>Linux</b>: Alpine with a Landlock kernel, where every <code>sharness-ai run</code> is enforced. One policy, hashed three ways.</p><pre><span class="g">$</span> pip install sharness-ai
 <span class="g">sharness:/work#</span> sharness-ai hello
 <span class="d">result      6/6 held</span></pre><a class="go" href="code/playground/index.html">Open the playground →</a> &nbsp; <a class="go" href="code/browser/demo/index.html">Or just watch the kernel boot →</a></div>
-    <div class="step"><span class="tag">On Linux · 5.13 or later</span><h3>In a terminal</h3><p>Standard library only, so the install is one line. <code>probe</code> prints what a process here can do before any policy; <code>hello</code> checks that a policy holds; <code>run</code> puts any command under one; <code>shell</code> opens a shell whose only way out is the hosts you name (as root, under a fresh user made for it).</p><pre><span class="g">$</span> pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev
+    <div class="step"><span class="tag">On Linux · 5.13 or later</span><h3>In a terminal</h3><p>Standard library only, so the install is one line. <code>probe</code> prints what a process here can do before any policy; <code>hello</code> checks that a policy holds; <code>run</code> puts any command under one; <code>shell</code> opens a shell whose only way out is the hosts you name (as root, under a fresh user made for it).</p><pre><span class="g">$</span> pip install sharness-ai
 <span class="g">$</span> sharness-ai probe
 <span class="g">$</span> sharness-ai hello
 <span class="g">$</span> sharness-ai run --policy p2-tool-server.json -- my-tool
 <span class="g">$</span> sharness-ai shell --sites pypi.org
-<span class="d"># PyPI carries the skeleton (v0.1.0); the experiments ship with the next release</span></pre><a class="go" href="code/cli/index.html">The CLI →</a> &nbsp; <a class="go" href="code/examples/index.html">Every command with its output →</a></div>
+<span class="d"># v0.2.0 on PyPI; the latest: pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev</span></pre><a class="go" href="code/cli/index.html">The CLI →</a> &nbsp; <a class="go" href="code/examples/index.html">Every command with its output →</a></div>
     <div class="step"><span class="tag">In a Claude Code session</span><h3>A skill that runs the experiments</h3><p>The CLI repository carries a skill that installs the package, runs <code>probe</code> and <code>hello</code> inside the session under the design's safety rules, and reports in the site's status words. It also says, every time, that a policy the session applies to its child does not bind the session.</p><pre><span class="g">&gt;</span> run the sharness hello
 <span class="d">sharness-ai hello … result 6/6 held
 caveat: a Boundary for the child, a Setting for this session</span></pre><a class="go" href="https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/.claude/skills/sharness-hello/SKILL.md">The skill →</a> &nbsp; <a class="go" href="code/experiments/index.html#what-claude-codes-own-sandbox-already-gives-and-what-sharness-adds">What Claude Code's sandbox gives, and what this adds →</a></div>
@@ -217,7 +217,7 @@ caveat: a Boundary for the child, a Setting for this session</span></pre><a clas
 
 <section class="band" id="report">
   <h2>Help us measure it</h2>
-  <div class="ask"><div class="box">A claim that the kernel enforces a policy is only as good as the kernels it was checked on. So far that is one cloud session, one browser and one emulator. Your machine is the next row. Run the acceptance test and paste what it said:<pre><span class="g">$</span> pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev
+  <div class="ask"><div class="box">A claim that the kernel enforces a policy is only as good as the kernels it was checked on. So far that is one cloud session, one browser and one emulator. Your machine is the next row. Run the acceptance test and paste what it said:<pre><span class="g">$</span> pip install sharness-ai
 <span class="g">$</span> sharness-ai hello --json</pre>then open <a href="https://github.com/SHarness-AI/SHarness-AI__CLI/issues/new?template=hello-report.yml">a hello report</a> on GitHub (two fields: the JSON, and anything odd). Every report goes on <a href="evidence/machines/index.html">the machines page</a> with its kernel, Landlock ABI and result, including the ones that did not hold: a refusal that did not happen is the most useful thing you can send. Nothing in the JSON identifies you; <code>probe</code> prints the names of proxy variables, never their values.</div></div>
 </section>
 
@@ -260,7 +260,7 @@ caveat: a Boundary for the child, a Setting for this session</span></pre><a clas
         <tr><td><b>Measured</b></td><td>Probed or timed in a named environment on a named date, with the method on <a href="evidence/index.html">Evidence</a>. For example: <code>hello</code> 6 of 6 in five places; a mutual TLS handshake between components ≈ 3.2 ms; a <code>memfd_secret</code> page unreadable even by root.</td></tr>
         <tr><td><b>Runnable</b></td><td>The code is in the repository and its tests pass: <code>probe</code>, <code>policy hash</code>, <code>check</code>, <code>translate</code>, <code>run</code>, <code>hello</code>, <code>doctor</code>; <code>contain</code>, <code>profile</code> and <code>explain</code> (the levels); <code>fs serve</code> and <code>net serve</code> (two doors, Settings until the launcher gives each its own uid); <code>shell</code> (the launcher's first slice); the browser bench, the playground.</td></tr>
         <tr><td><b>Designed / proposed</b></td><td>How SHarness would work: <code>.kms</code>, the launcher above the agent and its manifest, the KMS protocol, the policy layers, <code>.llm</code>, <code>.bash</code>, the deployment topologies.</td></tr>
-        <tr><td><b>Never claimed</b></td><td>That any component is released, or is a Boundary before the launcher gives it its own uid; protection against root or kernel compromise; anything about any platform's plans; that a schema bounds intent (it bounds shape).</td></tr>
+        <tr><td><b>Never claimed</b></td><td>That any component is a Boundary before the launcher gives it its own uid; protection against root or kernel compromise; anything about any platform's plans; that a schema bounds intent (it bounds shape).</td></tr>
       </tbody>
     </table>
     <p class="cap"><a href="design/roadmap/index.html">The roadmap and open decisions →</a> · <a href="project/sources/index.html">the source documents, verbatim →</a> · <a href="project/about/index.html">about and naming →</a> · <a href="project/adoption/index.html">getting users: the review and the plan →</a></p>

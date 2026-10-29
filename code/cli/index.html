@@ -152,12 +152,12 @@
 <div class="tablewrap"><table>
 <thead><tr><th>Where</th><th>What</th></tr></thead>
 <tbody>
-<tr><td><a href="https://pypi.org/project/sharness-ai/">PyPI, v0.1.0</a></td><td>reports its version and prints its help; also installs a <code>sharness</code> shorthand, removed on <code>dev</code></td></tr>
-<tr><td>the <code>dev</code> branch</td><td><code>sharness-ai</code> as the only command; the experiments E01 to E05, E09 and E10; MVP 1, MVP 2 and MVP 3 below; <code>doctor</code> and <code>help --format json</code>; 243 tests, all passing in website@'s run on Python 3.13 as root, 29 Oct 2026 (<code>dev</code> f9e51c8, from a virtualenv under <code>/opt</code>: one test starts a shell as a temporary user, which needs an interpreter that user can reach, so a virtualenv under a root-only directory fails it). Not released until <code>dev</code> is merged to <code>main</code> (<a href="../../admin/board/index.html">R7</a>)</td></tr>
+<tr><td><a href="https://pypi.org/project/sharness-ai/">PyPI, v0.2.0</a></td><td>released 29 Oct 2026 from <code>dev</code> at the go of security review 2: <code>sharness-ai</code> as the only command, the experiments and MVP 1, MVP 2 and MVP 3 below</td></tr>
+<tr><td>the <code>dev</code> branch</td><td><code>sharness-ai</code> as the only command; the experiments E01 to E05, E09 and E10; MVP 1, MVP 2 and MVP 3 below; <code>doctor</code> and <code>help --format json</code>; 243 tests, all passing in website@'s run on Python 3.13 as root, 29 Oct 2026 (<code>dev</code> f9e51c8, from a virtualenv under <code>/opt</code>: one test starts a shell as a temporary user, which needs an interpreter that user can reach, so a virtualenv under a root-only directory fails it). Released to PyPI as v0.2.0 on 29 Oct 2026 (<a href="../../admin/board/index.html">R7</a>); later work lands here first</td></tr>
 </tbody>
 </table></div>
-<pre class="diagram">$ pip install sharness-ai            # v0.1.0: version and help only
-$ pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev     # the experiments and the MVPs, unreleased
+<pre class="diagram">$ pip install sharness-ai            # v0.2.0: the experiments and the MVPs
+$ pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev     # the latest, before the next release
 $ sharness-ai help                   # every command, read from the parser itself</pre>
 <p>The command surface on <code>dev</code>, from <code>sharness-ai help --format json</code> (the parser is the source; this table is read from it):</p>
 <div class="tablewrap"><table>

@@ -169,7 +169,7 @@ label.small{display:block;margin:.3rem 0 .2rem}
   </div>
 
   <h2 id="check">Check it against the CLI</h2>
-  <pre class="shell">$ pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev
+  <pre class="shell">$ pip install sharness-ai
 $ sharness-ai policy hash experiments/policies/deny-all-example.json
 <span class="g">sha256:ab1d3e4e779313274f7a1d3ef3e46f6eacef038d8cfaa6198151a45cd82dcc76</span></pre>
   <p>Load the deny-all example above: the hash must be the same. Change one character in the policy and it is not. The CLI's test suite pins this vector, so a change to either side fails a build.</p>

@@ -6,12 +6,12 @@
 
 | Where | What |
 |---|---|
-| [PyPI, v0.1.0](https://pypi.org/project/sharness-ai/) | reports its version and prints its help; also installs a `sharness` shorthand, removed on `dev` |
-| the `dev` branch | `sharness-ai` as the only command; the experiments E01 to E05, E09 and E10; MVP 1, MVP 2 and MVP 3 below; `doctor` and `help --format json`; 243 tests, all passing in website@'s run on Python 3.13 as root, 29 Oct 2026 (`dev` f9e51c8, from a virtualenv under `/opt`: one test starts a shell as a temporary user, which needs an interpreter that user can reach, so a virtualenv under a root-only directory fails it). Not released until `dev` is merged to `main` ([R7](../../admin/board/index.md)) |
+| [PyPI, v0.2.0](https://pypi.org/project/sharness-ai/) | released 29 Oct 2026 from `dev` at the go of security review 2: `sharness-ai` as the only command, the experiments and MVP 1, MVP 2 and MVP 3 below |
+| the `dev` branch | `sharness-ai` as the only command; the experiments E01 to E05, E09 and E10; MVP 1, MVP 2 and MVP 3 below; `doctor` and `help --format json`; 243 tests, all passing in website@'s run on Python 3.13 as root, 29 Oct 2026 (`dev` f9e51c8, from a virtualenv under `/opt`: one test starts a shell as a temporary user, which needs an interpreter that user can reach, so a virtualenv under a root-only directory fails it). Released to PyPI as v0.2.0 on 29 Oct 2026 ([R7](../../admin/board/index.md)); later work lands here first |
 
 ```
-$ pip install sharness-ai            # v0.1.0: version and help only
-$ pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev     # the experiments and the MVPs, unreleased
+$ pip install sharness-ai            # v0.2.0: the experiments and the MVPs
+$ pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev     # the latest, before the next release
 $ sharness-ai help                   # every command, read from the parser itself
 ```
 
