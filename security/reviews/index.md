@@ -112,6 +112,8 @@ The weight is the reviewer's judgement of what the finding would cost someone re
 
 **Go**, once `d16abae` is on `dev` and `dev`'s tests are green: the two High findings are fixed with tests, the Medium findings that change what the shell claims are fixed, and what stays is on the register with its reason. Without `d16abae` it is a **no-go**: `sharness-ai shell` would publish a host allowlist the shell can step around.
 
+**Confirmed 29 Oct 2026, 02:15 UTC: go.** The CLI's `dev` at `f9e51c8` carries `d16abae` (merged as `16b108b`) and one later commit, cli@'s rewording of `run`'s UDP line inside a loopback-only namespace, read and found to change no enforcement. At that commit: `tests`, `security` and `codeql` green on GitHub; 243 tests pass here as root with Landlock ABI 7, the four review tests and the namespace test run, not skipped; `ruff` and `bandit -ll` clean; `sharness-ai shell --sites pypi.org` end to end gives pypi.org 200 through the proxy, example.com refused, 1.1.1.1 direct refused at once, and no user left behind. Still open and not a blocker: the release run itself (SR-05), the settings on R15 (SR-24), `/dev/null` inside the shell (T30, a function gap, not a security one).
+
 ## Next review
 
 When the launcher exists as a script (E06 and after), before any component is called a Boundary for the agent. Then on each release that adds a component. Each review is a new section on this page; the register grows, and nothing on it is removed.
