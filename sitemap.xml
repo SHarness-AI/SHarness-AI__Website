@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://sharness.ai/index.html</loc><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://sharness.ai/index.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://sharness.ai/design/agents/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/design/architecture/index.html</loc><lastmod>2026-10-28</lastmod></url>
-  <url><loc>https://sharness.ai/design/components/index.html</loc><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://sharness.ai/design/components/index.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://sharness.ai/design/containment/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/design/decision/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/design/index.html</loc><lastmod>2026-10-28</lastmod></url>
@@ -12,7 +12,7 @@
   <url><loc>https://sharness.ai/design/pbp/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/design/policies/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/design/process-tree/index.html</loc><lastmod>2026-10-28</lastmod></url>
-  <url><loc>https://sharness.ai/design/roadmap/index.html</loc><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://sharness.ai/design/roadmap/index.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://sharness.ai/design/spectrum/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/design/surface/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/design/why/index.html</loc><lastmod>2026-10-28</lastmod></url>
@@ -20,9 +20,9 @@
   <url><loc>https://sharness.ai/code/browser/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/code/cli/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/code/examples/index.html</loc><lastmod>2026-10-28</lastmod></url>
-  <url><loc>https://sharness.ai/code/experiments/index.html</loc><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://sharness.ai/code/experiments/index.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://sharness.ai/code/flows/index.html</loc><lastmod>2026-10-28</lastmod></url>
-  <url><loc>https://sharness.ai/code/index.html</loc><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://sharness.ai/code/index.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://sharness.ai/code/languages/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/code/playground/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/code/standards/index.html</loc><lastmod>2026-10-28</lastmod></url>
@@ -30,11 +30,11 @@
   <url><loc>https://sharness.ai/evidence/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/evidence/machines/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/evidence/research/index.html</loc><lastmod>2026-10-28</lastmod></url>
-  <url><loc>https://sharness.ai/evidence/status/index.html</loc><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://sharness.ai/evidence/status/index.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://sharness.ai/landscape/enforceability/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/landscape/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/landscape/integrations/index.html</loc><lastmod>2026-10-28</lastmod></url>
-  <url><loc>https://sharness.ai/landscape/market/index.html</loc><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://sharness.ai/landscape/market/index.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://sharness.ai/landscape/ruflo/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/explain/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/explain/mockups/edges.html</loc><lastmod>2026-10-28</lastmod></url>
@@ -75,21 +75,21 @@
   <url><loc>https://sharness.ai/admin/briefs/2026-10-26__brief__the-release-script/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/admin/briefs/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/admin/guidance/index.html</loc><lastmod>2026-10-28</lastmod></url>
-  <url><loc>https://sharness.ai/admin/index.html</loc><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://sharness.ai/admin/index.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://sharness.ai/admin/members/cli/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/admin/members/conductor/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/admin/members/dev/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/admin/members/editor/index.html</loc><lastmod>2026-10-28</lastmod></url>
-  <url><loc>https://sharness.ai/admin/members/index.html</loc><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://sharness.ai/admin/members/index.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://sharness.ai/admin/members/pbp/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/admin/members/security/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/admin/members/sharness.build/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/admin/members/sherpa/index.html</loc><lastmod>2026-10-28</lastmod></url>
-  <url><loc>https://sharness.ai/admin/members/website/index.html</loc><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://sharness.ai/admin/members/website/index.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://sharness.ai/admin/notes/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/admin/runs/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/admin/schedule/index.html</loc><lastmod>2026-10-28</lastmod></url>
-  <url><loc>https://sharness.ai/admin/status/index.html</loc><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://sharness.ai/admin/status/index.html</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://sharness.ai/admin/updates/2026-10-25T2330Z/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/admin/updates/2026-10-25T2345Z/index.html</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://sharness.ai/admin/updates/2026-10-26T0010Z/index.html</loc><lastmod>2026-10-28</lastmod></url>
