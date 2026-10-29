@@ -46,9 +46,9 @@ The sections and files above; its own folder (`ROLE.md`, `policy.json`, `status.
 |---|---|
 | State | working (as of 29 Oct 2026) |
 | Last did | R7 shipped: sharness-ai v0.2.0 on PyPI (29 Oct 2026). Installed it from PyPI into a clean venv: --version v0.2.0, doctor healthy, hello 6/6, shell held (pypi.org allowed, example.com refused, no DNS). Switched every install line on the site to pip install sharness-ai, the status page and the front page's status line to the release, and added a dated update to Getting users. |
-| Waiting for | cli: the PyPI summary (pyproject description) still lists only the experiments; evidence/machines' install line; /dev/null in shell (T30 item 2); conductor: project/about's v0.1.0 line; on: cli, conductor |
+| Waiting for | cli: T31 (the README and summary as the PyPI page, a patch in the row), T30 item 2 (/dev/null in shell), evidence/machines' install line; conductor: project/about's v0.1.0 line, R7 to done; editor: when the next release from main carries T31 to PyPI; on: cli, conductor, editor |
 | Branch | `claude/wonderful-babbage-pa7l37` |
-| Next | Review the CLI's README as the PyPI page and the repository's front door; send what I find to cli@. |
+| Next | Re-read the README on GitHub once T31 lands on dev; the site follows any change cli@ makes to the commands. |
 
 ## Start here, on any Claude account
 

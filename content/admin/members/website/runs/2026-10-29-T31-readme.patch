@@ -1,0 +1,134 @@
+From ef9bda934d045b51dedf55b7d83b48c503ba2e2c Mon Sep 17 00:00:00 2001
+From: "website@sharness" <website@sharness.ai>
+Date: Thu, 29 Oct 2026 03:15:27 +0000
+Subject: [PATCH] README and summary as the PyPI page: absolute image and file
+ links, the not-here-yet lines, the shell's network namespace, the description
+ with the MVPs
+
+---
+ README.md      | 28 +++++++++++++++-------------
+ pyproject.toml |  2 +-
+ 2 files changed, 16 insertions(+), 14 deletions(-)
+
+diff --git a/README.md b/README.md
+index 78ec067..df16caa 100644
+--- a/README.md
++++ b/README.md
+@@ -11,7 +11,7 @@ what it may read, write, run and connect to, named by one hash the person suppli
+ by the Linux kernel. A tricked agent cannot widen it, because the kernel was told before the
+ process started. Standard library only, Python 3.11+.
+ 
+-![The one idea: a policy is written, hashed to one name, and handed to the kernel before the agent's tool starts; reads and workspace writes are allowed, a connect to port 80 and a 200 MiB allocation are refused](docs/anim/one-idea.svg)
++![The one idea: a policy is written, hashed to one name, and handed to the kernel before the agent's tool starts; reads and workspace writes are allowed, a connect to port 80 and a 200 MiB allocation are refused](https://raw.githubusercontent.com/SHarness-AI/SHarness-AI__CLI/main/docs/anim/one-idea.svg)
+ 
+ ## Try it in 60 seconds
+ 
+@@ -36,7 +36,7 @@ sharness-ai itself) and the row of the policy to change. On a pipe, under `NO_CO
+ console or with `--plain`, the same screens are drawn in ASCII; `--json` is on every command that has
+ data. The design, written before the code: [The CLI is the front door](https://sharness.ai/articles/the-cli-is-the-front-door.html).
+ 
+-![sharness-ai hello replayed: read allowed; two writes, a connect, a 400 MiB allocation and a wrong hash refused; result 6 of 6 held; then the caveat](docs/anim/hello-replay.svg)
++![sharness-ai hello replayed: read allowed; two writes, a connect, a 400 MiB allocation and a wrong hash refused; result 6 of 6 held; then the caveat](https://raw.githubusercontent.com/SHarness-AI/SHarness-AI__CLI/main/docs/anim/hello-replay.svg)
+ 
+ **Then tell us what it said.** `sharness-ai hello --json` and
+ [a two-field report](https://github.com/SHarness-AI/SHarness-AI__CLI/issues/new?template=hello-report.yml):
+@@ -63,8 +63,9 @@ and a refusal that did not happen is the most useful thing you can send.
+ | `process.no_new_privs` | `prctl(PR_SET_NO_NEW_PRIVS)` | set before every run |
+ | the hash | `--expect-hash sha256:…` refuses to run anything else, exit 125 | a wrong hash runs nothing |
+ 
+-Not here yet: seccomp, per-component uids, mutual TLS, hostnames (ports only), UDP (Landlock does not
+-see it, so without the namespace DNS still resolves), the launcher, any component.
++Not here yet: seccomp; UDP (Landlock does not see it, so without a network namespace DNS still resolves;
++`sharness-ai shell` gives its shell one with loopback only); host names except through `sharness.net`;
++the launcher above the agent; kms, bash and llm. The two doors and the shell are below.
+ 
+ **The caveat is part of every result.** A policy a process applies to its own children is a
+ Boundary for them and only a Setting for itself: it could have skipped it. Making it a Boundary for
+@@ -73,7 +74,7 @@ the agent too needs the launcher above the agent, which is the design, not yet c
+ 
+ ## A real Linux kernel, in a browser tab
+ 
+-![A browser tab opens sharness.ai, v86 starts, Linux 6.18 boots and prints landlock: Up and running, hello holds 6 of 6 at 28.5 seconds, and the example policies refuse a write, a port and an allocation](docs/anim/kernel-in-a-tab.svg)
++![A browser tab opens sharness.ai, v86 starts, Linux 6.18 boots and prints landlock: Up and running, hello holds 6 of 6 at 28.5 seconds, and the example policies refuse a write, a port and an allocation](https://raw.githubusercontent.com/SHarness-AI/SHarness-AI__CLI/main/docs/anim/kernel-in-a-tab.svg)
+ 
+ `experiments/browser/` builds one Alpine x86 guest (Alpine's `linux-virt` kernel, Landlock on, Python
+ 3.12, this package, the example policies) with the standard library, and runs it three ways:
+@@ -83,7 +84,7 @@ in all three on 25 Oct 2026. The story, with screenshots: [Linux in a tab](https
+ 
+ ## Example policies
+ 
+-Seven in [experiments/policies/](experiments/policies/README.md): two minimal examples and five
++Seven in [experiments/policies/](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/main/experiments/policies/README.md): two minimal examples and five
+ profiles with `/work` as the workspace, from P0 (a hello world, 64 MiB, 8 processes) through P1 (a
+ coding agent's session), P2 (a tool or MCP server on stdio, read-only, no network), P3 (the sgit.ai
+ newsroom agent) to P4 (the sgit CLI). Each hashes to the same value in Python, in the browser and
+@@ -100,7 +101,7 @@ SHarness is unrelated to Sharness, the shell testing library.
+ 
+ ## The commands: the first experiments
+ 
+-Numbered and described in [experiments/README.md](experiments/README.md); the map of mockups,
++Numbered and described in [experiments/README.md](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/main/experiments/README.md); the map of mockups,
+ experiments and storyboards is [sharness.ai/code/experiments](https://sharness.ai/code/experiments/index.html).
+ 
+ | Command | Experiment | What it shows |
+@@ -124,7 +125,7 @@ experiments and storyboards is [sharness.ai/code/experiments](https://sharness.a
+ | `sharness-ai door conformance sharness.fs.disk.twin\|sharness.fs.disk` | | the door's 18 vectors against a fresh instance, the twin first, then the disk; exit 0 only when every vector held |
+ | `sharness-ai net serve --hosts github.com pypi.org`, `net hello\|log` | the second door | `sharness.net.proxy`: an HTTP proxy on loopback for one uid under a host allowlist (exact or `*.suffix`), ports 443 and 80, IP literals refused, a tunnel whose TLS hello names another host cut, one audit line per request. Point any program's `HTTPS_PROXY` at it and watch the verdicts |
+ | `sharness-ai shell --workspace . --sites github.com [-- CMD]` | the launcher's first slice | an interactive shell under the harness: a unique system uid where the launcher is root, the net door started for that uid, the shell's policy compiled from the sentence with the proxy's port as its **only** network row (the kernel holds the port, `sharness.net` holds the hosts, so the host allowlist is a Boundary for the shell), `HTTPS_PROXY` set, a live page on loopback showing traffic, processes and every refusal as they happen, the user removed on exit |
+-| `sharness-ai doctor` | | can a policy hold here? Seven checks in order (kernel, Landlock files, Landlock TCP, network namespace, cgroups, process count, a real write refused under a deny-write policy), each pass, warn, fail or skip with what to do about it; a fatal failure skips the rest; `--json` is the report. Exit 0 healthy or degraded, 1 failed |
++| `sharness-ai doctor` | | can a policy hold here? Nine checks in order (kernel, Landlock files, Landlock TCP, network namespace, cgroups, process count, a real write refused under a deny-write policy, `openssl`, the two doors answering over mutual TLS), each pass, warn, fail or skip with what to do about it; a fatal failure skips the rest; `--json` is the report. Exit 0 healthy or degraded, 1 failed |
+ | `sharness-ai help [--format json]` | | every command, read from the parser itself, so no page can describe a flag that does not exist; the JSON is what the site's CLI page is written from |
+ 
+ ```
+@@ -175,13 +176,13 @@ is refused before anything runs: the policy's page must be what the kernel binds
+ above 2 is closed in the child, because Landlock binds new opens, not inherited ones. **Not covered,
+ and said on stderr every run:** Unix-domain sockets by path (Landlock has no rule for them), the
+ environment the child inherits (v0 has no row for it), UDP when no network namespace could be made.
+-Not here yet: seccomp, per-component uids, mutual TLS, the launcher, any component. Standard library only; Python 3.11+.
++Not here yet: seccomp, the launcher above the agent, kms, bash and llm. Standard library only; Python 3.11+.
+ 
+ **The caveat is part of the result.** A policy a process applies to its own children is a Boundary
+ for them and only a Setting for itself (it could have skipped it). Making it a Boundary for the
+ agent too needs the launcher above the agent: [who enforces decides](https://sharness.ai/design/policies/index.html#2-who-enforces-decides-the-barrier-kind).
+ 
+-**For a Claude Code session:** the skill in [.claude/skills/sharness-hello](.claude/skills/sharness-hello/SKILL.md)
++**For a Claude Code session:** the skill in [.claude/skills/sharness-hello](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/main/.claude/skills/sharness-hello/SKILL.md)
+ runs E01 and E04 inside the session under the design's safety rules and reports the result in the
+ site's status words.
+ 
+@@ -222,15 +223,16 @@ $ touch /etc/x                                  → Permission denied (Landlock)
+ Measured 26 Oct 2026 on this kernel (Linux 6.18, Landlock ABI 7, root): exactly that, and the live page in
+ headless Chromium showed the three requests with their verdicts, the shell's three processes and the two
+ refusals with who made them. Not on the page yet: the kernel's own refusals (Landlock audit is the next step);
+-the shell sees them as `EACCES`. DNS: a program that resolves names itself speaks UDP the kernel does not see;
+-clients that honour `HTTPS_PROXY` resolve nothing.
++the shell sees them as `EACCES`. Since security review 2 (29 Oct 2026) the shell runs in a network namespace of
++its own with loopback only, so nothing resolves names and the proxy's port is reachable only on loopback; on
++exit every process of the shell's uid is killed before the user is removed.
+ 
+ ## Security
+ 
+ This is a security product, so the project keeps its own register of what it knows about itself:
+ the threat model, every known risk and whether it is fixed or accepted, every review's findings
+ with dates, and the hardening guidance are on [sharness.ai/security](https://sharness.ai/security/index.html).
+-[SECURITY.md](SECURITY.md) says how to report a vulnerability (GitHub private reporting). Each fix
++[SECURITY.md](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/main/SECURITY.md) says how to report a vulnerability (GitHub private reporting). Each fix
+ is pinned by a test in `tests/unit/test_security.py`; `.github/workflows/security.yml` runs ruff's
+ bandit rules, bandit, zizmor, pip-audit, npm audit and an SBOM on every push; `codeql.yml` runs CodeQL.
+ Every download the browser bench makes is pinned by sha256 and refused on mismatch. The release
+diff --git a/pyproject.toml b/pyproject.toml
+index 9c6c3f1..100e49f 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -1,7 +1,7 @@
+ [tool.poetry]
+ name        = "sharness-ai"
+ version     = "v0.2.0"
+-description = "SHarness: runs agents and their tools as small, single-purpose, kernel-locked processes talking over mutually authenticated connections. Experiments stage: probe, policy hash/check/translate, run, hello."
++description = "SHarness: a policy the Linux kernel enforces, for every process an AI agent starts, named by one hash. Experiments and three MVPs: probe, hello, run, the levels (contain, explain), two doors (sharness.fs, sharness.net) and a shell under the harness."
+ readme      = "README.md"
+ license     = "Apache-2.0"
+ authors     = ["The Cyber Boardroom"]
+-- 
+2.43.0
+
