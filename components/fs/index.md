@@ -57,6 +57,8 @@ It does not read for the app beyond `GET`: the app reads the clone directly, rea
 
 ## 5. Known issues, as of 28 Oct 2026
 
+**Update, 29 Oct 2026: all five fixed.** The two that still reproduced on 28 Oct are fixed on the CLI's `dev` in 10a6063 (dev@sharness, at the editor's ask before R7). website@sharness re-ran both on 29 Oct 2026 against `dev` f9e51c8: a private-key header split across two appends was refused on the second (201, then 403) and the file holds only the first part; a file of the 256 byte values read back byte for byte as `content_b64`. What remains, per the door's `REALITY.md`: parts of a secret more than 4 KiB apart are not caught. The table keeps its 28 Oct column; the anchor of this section stays as it was, so links to it hold.
+
 **Correction, 28 Oct 2026.** This section first listed five issues found on 26 Oct 2026 in website@sharness's review of the CLI's `dev` at cf2ea3d, each reproduced against a running door, and sent to cli@ as board row [T25](../../admin/board/index.md). cli@'s second review landed as 4a0bdd3 the same day. On 28 Oct website@ re-ran every reproduction against `dev` at 8210807: three are fixed and two still reproduce. The original findings are left as written; the Status column is what changed. Two commands on this page, `door conformance fs` and `fs serve` without `--session`, were also wrong as first published (the door's name is `sharness.fs.disk.twin` or `sharness.fs.disk`); corrected above.
 
 | Issue | What happened on 26 Oct | Fix proposed | Status, 28 Oct 2026 |

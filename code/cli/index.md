@@ -7,7 +7,7 @@
 | Where | What |
 |---|---|
 | [PyPI, v0.1.0](https://pypi.org/project/sharness-ai/) | reports its version and prints its help; also installs a `sharness` shorthand, removed on `dev` |
-| the `dev` branch | `sharness-ai` as the only command; the experiments E01 to E05, E09 and E10; MVP 1, MVP 2 and MVP 3 below; `doctor` and `help --format json`; 229 tests (228 pass in website@'s run on Python 3.13 as root, 28 Oct 2026; the 229th starts a shell as a temporary user and needs an interpreter that user can reach, which a virtualenv under a root-only directory is not). Not released until `dev` is merged to `main` ([R7](../../admin/board/index.md)) |
+| the `dev` branch | `sharness-ai` as the only command; the experiments E01 to E05, E09 and E10; MVP 1, MVP 2 and MVP 3 below; `doctor` and `help --format json`; 243 tests, all passing in website@'s run on Python 3.13 as root, 29 Oct 2026 (`dev` f9e51c8, from a virtualenv under `/opt`: one test starts a shell as a temporary user, which needs an interpreter that user can reach, so a virtualenv under a root-only directory fails it). Not released until `dev` is merged to `main` ([R7](../../admin/board/index.md)) |
 
 ```
 $ pip install sharness-ai            # v0.1.0: version and help only
@@ -101,7 +101,7 @@ Its hash, from `sharness-ai policy hash` and from the [browser mockup](../../exp
 
 ## MVP 3: the network door and a shell under the harness
 
-`sharness-ai shell` starts a command, by default a shell, as a unique system user (where it runs as root; `--no-user` runs it as the caller, a Setting), with a policy whose only network row is the port of `sharness.net`, an HTTP proxy that holds the host allowlist and checks the server name inside the TLS hello against the CONNECT host. The kernel holds the port, the proxy holds the hosts, and the proxy answers only that user, so for the shell it starts the host allowlist is outside its reach: a Boundary. What it does not cover is named in the CLI's `REALITY.md`: UDP, Unix sockets by path, TLS termination, the fs door for the workspace. Checked by website@ on 28 Oct 2026: [sharness.net](../../components/net/index.md#update-28-oct-2026) and [sharness.launcher](../../components/launcher/index.md). Unreleased, like the rest of `dev`.
+`sharness-ai shell` starts a command, by default a shell, as a unique system user (where it runs as root; `--no-user` runs it as the caller, a Setting), with a policy whose only network row is the port of `sharness.net`, an HTTP proxy that holds the host allowlist and checks the server name inside the TLS hello against the CONNECT host. The kernel holds the port, the proxy holds the hosts, and the proxy answers only that user, so for the shell it starts the host allowlist is outside its reach: a Boundary. Since security review 2 (29 Oct 2026) the shell runs in a network namespace of its own, loopback only, so UDP has no route, and on exit every process of its user is killed before the user is removed. What it does not cover is named in the CLI's `REALITY.md`: Unix sockets by path, TLS termination, the fs door for the workspace. Checked by website@ on 28 Oct 2026: [sharness.net](../../components/net/index.md#update-28-oct-2026) and [sharness.launcher](../../components/launcher/index.md). Unreleased, like the rest of `dev`.
 
 ## Why sharness-ai, not sharness
 
