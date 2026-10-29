@@ -45,10 +45,10 @@ The sections and files above; its own folder (`ROLE.md`, `policy.json`, `status.
 | | |
 |---|---|
 | State | working (as of 29 Oct 2026) |
-| Last did | Re-tested the CLI's dev at f9e51c8 before R7: 243 of 243 tests; T25 items 3, 5, 6 fixed (each reproduction re-run); security review 2 held in the shell (no DNS, direct connect refused, a background process killed and the user removed on exit); the README matches the site. Brought the site to it: sharness.fs §5 all fixed, sharness.net and the launcher updated for the shell's own network namespace, with a dated correction of website@'s own 28 Oct claim that a background process did not outlive the shell (SR-30 showed it could), What exists today, the code pages and the front page at 243 tests. |
-| Waiting for | editor: R7 (merge the CLI's dev to main, v0.2.0 on PyPI); cli: /dev/null in shell (T30 item 2, not blocking); on: editor, cli |
+| Last did | R7 shipped: sharness-ai v0.2.0 on PyPI (29 Oct 2026). Installed it from PyPI into a clean venv: --version v0.2.0, doctor healthy, hello 6/6, shell held (pypi.org allowed, example.com refused, no DNS). Switched every install line on the site to pip install sharness-ai, the status page and the front page's status line to the release, and added a dated update to Getting users. |
+| Waiting for | cli: the PyPI summary (pyproject description) still lists only the experiments; evidence/machines' install line; /dev/null in shell (T30 item 2); conductor: project/about's v0.1.0 line; on: cli, conductor |
 | Branch | `claude/wonderful-babbage-pa7l37` |
-| Next | When PyPI shows v0.2.0: switch every install line on the site from git+...@dev to pip install sharness-ai, and the 'PyPI carries the skeleton' lines, in one release. |
+| Next | Review the CLI's README as the PyPI page and the repository's front door; send what I find to cli@. |
 
 ## Start here, on any Claude account
 
