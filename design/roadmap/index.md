@@ -1,6 +1,6 @@
 # Roadmap and open decisions
 
-> **Status: design.** Nothing is built. This page lists what is decided, what is open, and the first tasks for the agents that will build SHarness. Decisions below are dated as of 24 Oct 2026 unless marked otherwise.
+> **Status: design.** As of 28 Oct 2026 the first experiments and three MVPs run on the CLI's `dev` ([what exists today](../../evidence/status/index.md)); everything else on this page is designed. This page lists what is decided, what is open, and the first tasks for the agents that will build SHarness. Decisions below are dated as of 24 Oct 2026 unless marked otherwise.
 
 ## Decided
 

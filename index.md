@@ -12,7 +12,7 @@
 ## Start in 60 seconds
 
 - **In your browser, nothing installed:** [the playground](code/playground/index.html), `pip install sharness-ai` in Pyodide next to a shell on a Linux kernel with Landlock; or [watch the kernel boot](code/browser/demo/index.html).
-- **On Linux:** `pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev`, then `sharness-ai probe`, `sharness-ai hello`, `sharness-ai run --policy p2-tool-server.json -- my-tool`. PyPI carries the skeleton (v0.1.0); the experiments ship with the next release.
+- **On Linux:** `pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev`, then `sharness-ai probe`, `sharness-ai hello`, `sharness-ai run --policy p2-tool-server.json -- my-tool`, and `sharness-ai shell --sites pypi.org` for a shell whose only way out is the hosts you name (as root, under a fresh user made for it). PyPI carries the skeleton (v0.1.0); the experiments ship with the next release.
 - **In a Claude Code session:** the [skill](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/.claude/skills/sharness-hello/SKILL.md) runs `probe` and `hello` inside the session, with the caveat that the session itself is not bound.
 
 ## The one idea
@@ -21,11 +21,11 @@ A policy you can hash, a kernel that enforces it on the process, and a launcher 
 
 ## See it hold
 
-`sharness-ai hello`: six probes under a deny-all policy, 6 of 6 held in five places (a cloud session, Dinis Cruz's browser, headless Chromium, Node, a chroot on the host kernel), as of 25 Oct 2026; 60 tests on Python 3.11 to 3.13; seven example policies hashing identically in Python, the browser and the Linux guest. Method on [Evidence §9](evidence/index.md#9-the-first-experiments-run-by-the-cli). Your machine is the next row: run `sharness-ai hello --json` and [report it](https://github.com/SHarness-AI/SHarness-AI__CLI/issues/new?template=hello-report.yml); every report is on [hello on your machine](evidence/machines/index.md).
+`sharness-ai hello`: six probes under a deny-all policy, 6 of 6 held in five places (a cloud session, Dinis Cruz's browser, headless Chromium, Node, a chroot on the host kernel), as of 25 Oct 2026; 229 tests on Python 3.11 to 3.13 (as of 28 Oct 2026); seven example policies hashing identically in Python, the browser and the Linux guest. Method on [Evidence §9](evidence/index.md#9-the-first-experiments-run-by-the-cli). Your machine is the next row: run `sharness-ai hello --json` and [report it](https://github.com/SHarness-AI/SHarness-AI__CLI/issues/new?template=hello-report.yml); every report is on [hello on your machine](evidence/machines/index.md).
 
 ## The operating system a process sees
 
-Bound everything a process can do and what is left is its policy: no filesystem of its own to write, no network stack, no key, no shell, no model API. In their place, five doors, each a small REST service on loopback with its own uid and policy, and the bootstrap that started them: [sharness.bash](components/bash/index.md) (the shell as a service; start here), [sharness.net](components/net/index.md) (the only network client; worth adopting alone), [sharness.kms](components/kms/index.md), [sharness.fs](components/fs/index.md), [sharness.llm](components/llm/index.md), [sharness.launcher](components/launcher/index.md), [sharness.policy](components/policy/index.md). Each page: the API (proposed), the requests and their verdicts, what it enforces with what, what you get from this one alone. The hub: [the components](components/index.md).
+Bound everything a process can do and what is left is its policy: no filesystem of its own to write, no network stack, no key, no shell, no model API. In their place, five doors, each a small REST service on loopback with its own uid and policy, and the bootstrap that started them. Two run today as MVPs, `sharness.fs` and `sharness.net`, with the launcher's first slice, `sharness-ai shell`; the others are designed: [sharness.bash](components/bash/index.md) (the shell as a service; start here), [sharness.net](components/net/index.md) (the only network client; worth adopting alone), [sharness.kms](components/kms/index.md), [sharness.fs](components/fs/index.md), [sharness.llm](components/llm/index.md), [sharness.launcher](components/launcher/index.md), [sharness.policy](components/policy/index.md). Each page: the API (proposed), the requests and their verdicts, what it enforces with what, what you get from this one alone. The hub: [the components](components/index.md).
 
 ## Who it is for
 
@@ -60,7 +60,7 @@ widen it. sgit (sgit.ai's encrypted vault CLI) is the first app designed to run 
 
 ## Where it is going: mockups, experiments, storyboards
 
-The memo's method is to start with very simple examples. [Mockups and experiments](code/experiments/index.md) is the ladder: browser mockups ([the policy hash](explain/mockups/policy-hash.html), [the edge matrix](explain/mockups/edges.html)), then experiments any Claude session can run, then Linux experiments (E01 to E04, E09 and E10 are runnable in the [CLI](code/cli/index.md): `probe`, `policy hash`, `run`, `hello`, `policy translate`; E04 measured 24 Oct 2026; E09, [a real Linux kernel in a browser tab](code/browser/demo/index.html) running `hello` under Landlock, measured 25 Oct 2026, with [five example policies](code/experiments/index.md#the-example-policies) from a hello world to sgit), then components, then the launcher above the agent. Three [storyboards](explain/storyboards/index.md) tell the design as short strips. A [research note](evidence/research/index.md) says what holds up and what to improve; a [market and competitive analysis](landscape/market/index.md) says what already exists and where SHarness sits.
+The memo's method is to start with very simple examples. [Mockups and experiments](code/experiments/index.md) is the ladder: browser mockups ([the policy hash](explain/mockups/policy-hash.html), [the edge matrix](explain/mockups/edges.html)), then experiments any Claude session can run, then Linux experiments (E01 to E04 and E09 to E13 are runnable in the [CLI](code/cli/index.md): `probe`, `policy hash`, `run`, `hello`, `policy translate`, the levels (`contain`, `explain`), the doors (`fs serve`, `net serve`) and `shell`; E04 measured 24 Oct 2026; E09, [a real Linux kernel in a browser tab](code/browser/demo/index.html) running `hello` under Landlock, measured 25 Oct 2026, with [five example policies](code/experiments/index.md#the-example-policies) from a hello world to sgit), then components, then the launcher above the agent. Three [storyboards](explain/storyboards/index.md) tell the design as short strips. A [research note](evidence/research/index.md) says what holds up and what to improve; a [market and competitive analysis](landscape/market/index.md) says what already exists and where SHarness sits.
 
 ## The site, in six sections (every page also as markdown at `<page>/index.md`)
 
@@ -75,11 +75,10 @@ The memo's method is to start with very simple examples. [Mockups and experiment
 
 ## Articles
 
-- [One standard, many languages](articles/one-standard-many-languages.md), by dev@sharness, 25 Oct 2026
+- [From a sentence to the kernel](articles/from-a-sentence-to-the-kernel.md), by cli@sharness, 26 Oct 2026
+- [The CLI is the front door](articles/the-cli-is-the-front-door.md), by cli@sharness, 26 Oct 2026
 - [Linux in a tab](articles/linux-in-a-tab.md), by cli@sharness, 25 Oct 2026
 - [A secure harness for agents](articles/secure-harness-for-agents.md), by Dinis Cruz, 24 Oct 2026
-- [The first experiments](articles/the-first-experiments.md), by cli@sharness, 24 Oct 2026
-- [What shipped on day one](articles/what-shipped-on-day-one.md), by cli@sharness, 24 Oct 2026
 - [All articles](articles/index.md)
 
 ## What this site claims

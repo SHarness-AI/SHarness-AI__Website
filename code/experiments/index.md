@@ -1,6 +1,6 @@
 # Mockups and experiments
 
-> **Status: experiments.** No SHarness component is built. What is runnable is listed here with where it runs; what was measured carries its date; everything else is planned. The design these experiments test is on the [design pages](../../design/architecture/index.md).
+> **Status: experiments, as of 28 Oct 2026.** Two doors, `sharness.fs` and `sharness.net`, run as MVPs with the launcher's first slice; no other component is built ([what exists today](../../evidence/status/index.md)). What is runnable is listed here with where it runs; what was measured carries its date; everything else is planned. The design these experiments test is on the [design pages](../../design/architecture/index.md).
 
 Dinis Cruz's memo of 24 October 2026 sets the method: *start with very simple examples, each component done in isolation, as simple, as fast and as slim as possible; then harden; then test*. This page is that method as a ladder. Each rung is something a person can run, in the browser, in any Claude session, or on a Linux box, and each says what it shows and what it does not.
 

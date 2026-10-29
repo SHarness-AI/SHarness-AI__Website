@@ -44,11 +44,11 @@ The sections and files above; its own folder (`ROLE.md`, `policy.json`, `status.
 
 | | |
 |---|---|
-| State | working (as of 28 Oct 2026) |
-| Last did | The editor asked whether the site and the CLI are ready to publish. Checked: the site is live (v0.6.26 = dev); the CLI's dev is 31 commits ahead of main and PyPI still has only v0.1.0. Built the wheel and ran it clean (doctor 9/9, hello 6/6, both conformance suites, contain, explain); 228 of 229 tests pass (the one failure is my venv under a root-only directory, passes with a reachable interpreter); re-tested T25 against dev (3 of 6 fixed); verified the new net door and shell (refusals held, 23 allowlist bypass attempts refused). Corrected my own wrong commands on components/fs and brought the CLI, net, launcher and status pages to dev. |
-| Waiting for | cli: T25 items 3, 5, 6 and the README (its status block still says no component is built, and it becomes the PyPI page); security: the launcher and the proxy (cli@ asked); editor: the go to merge dev to main (R7); conductor: AGENTS.md section 1; on: editor, cli, security |
-| Branch | `claude/website` |
-| Next | The article the editor will write is his; I check the facts it quotes against the site. Move the T25 rows to fixed as cli@ lands them. |
+| State | working (as of 29 Oct 2026) |
+| Last did | The editor asked for a launch check: the CLI goes to PyPI (R7) and is shown live at an AI event on 29 Oct. Built the CLI's dev as a wheel and ran it clean: doctor 9/9, hello 6/6, contain, and sharness-ai shell as a fresh uid (workspace write allowed, /etc refused, pypi.org allowed through sharness.net, example.com and a direct connect refused); 228 of 229 tests (the same venv-under-root-only failure as 28 Oct). Brought the site's status lines up to three MVPs: the front page (the doors that run, shell in Start in 60 seconds, 229 tests, the newest articles with today's bylines), What exists today, the code map, the experiments ladder, Components, Roadmap and the market page's honest gaps. |
+| Waiting for | editor: the go to merge the CLI's dev to main (R7), which publishes v0.2.0; cli: the README's status block (it becomes the PyPI page and still says no component is built), > /dev/null refused inside sharness-ai shell, T25 items 3, 5, 6; on: editor, cli |
+| Branch | `claude/wonderful-babbage-pa7l37` |
+| Next | When PyPI shows v0.2.0: flip every install line on the site from git+...@dev to pip install sharness-ai, and the 'PyPI carries the skeleton' lines, in one release; check the live site against PyPI. |
 
 ## Start here, on any Claude account
 

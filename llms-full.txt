@@ -265,7 +265,7 @@ SHarness is unrelated to Sharness, the shell testing library.
 ## Start in 60 seconds
 
 - **In your browser, nothing installed:** [the playground](code/playground/index.html), `pip install sharness-ai` in Pyodide next to a shell on a Linux kernel with Landlock; or [watch the kernel boot](code/browser/demo/index.html).
-- **On Linux:** `pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev`, then `sharness-ai probe`, `sharness-ai hello`, `sharness-ai run --policy p2-tool-server.json -- my-tool`. PyPI carries the skeleton (v0.1.0); the experiments ship with the next release.
+- **On Linux:** `pip install git+https://github.com/SHarness-AI/SHarness-AI__CLI@dev`, then `sharness-ai probe`, `sharness-ai hello`, `sharness-ai run --policy p2-tool-server.json -- my-tool`, and `sharness-ai shell --sites pypi.org` for a shell whose only way out is the hosts you name (as root, under a fresh user made for it). PyPI carries the skeleton (v0.1.0); the experiments ship with the next release.
 - **In a Claude Code session:** the [skill](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/.claude/skills/sharness-hello/SKILL.md) runs `probe` and `hello` inside the session, with the caveat that the session itself is not bound.
 
 ## The one idea
@@ -274,11 +274,11 @@ A policy you can hash, a kernel that enforces it on the process, and a launcher 
 
 ## See it hold
 
-`sharness-ai hello`: six probes under a deny-all policy, 6 of 6 held in five places (a cloud session, Dinis Cruz's browser, headless Chromium, Node, a chroot on the host kernel), as of 25 Oct 2026; 60 tests on Python 3.11 to 3.13; seven example policies hashing identically in Python, the browser and the Linux guest. Method on [Evidence §9](evidence/index.md#9-the-first-experiments-run-by-the-cli). Your machine is the next row: run `sharness-ai hello --json` and [report it](https://github.com/SHarness-AI/SHarness-AI__CLI/issues/new?template=hello-report.yml); every report is on [hello on your machine](evidence/machines/index.md).
+`sharness-ai hello`: six probes under a deny-all policy, 6 of 6 held in five places (a cloud session, Dinis Cruz's browser, headless Chromium, Node, a chroot on the host kernel), as of 25 Oct 2026; 229 tests on Python 3.11 to 3.13 (as of 28 Oct 2026); seven example policies hashing identically in Python, the browser and the Linux guest. Method on [Evidence §9](evidence/index.md#9-the-first-experiments-run-by-the-cli). Your machine is the next row: run `sharness-ai hello --json` and [report it](https://github.com/SHarness-AI/SHarness-AI__CLI/issues/new?template=hello-report.yml); every report is on [hello on your machine](evidence/machines/index.md).
 
 ## The operating system a process sees
 
-Bound everything a process can do and what is left is its policy: no filesystem of its own to write, no network stack, no key, no shell, no model API. In their place, five doors, each a small REST service on loopback with its own uid and policy, and the bootstrap that started them: [sharness.bash](components/bash/index.md) (the shell as a service; start here), [sharness.net](components/net/index.md) (the only network client; worth adopting alone), [sharness.kms](components/kms/index.md), [sharness.fs](components/fs/index.md), [sharness.llm](components/llm/index.md), [sharness.launcher](components/launcher/index.md), [sharness.policy](components/policy/index.md). Each page: the API (proposed), the requests and their verdicts, what it enforces with what, what you get from this one alone. The hub: [the components](components/index.md).
+Bound everything a process can do and what is left is its policy: no filesystem of its own to write, no network stack, no key, no shell, no model API. In their place, five doors, each a small REST service on loopback with its own uid and policy, and the bootstrap that started them. Two run today as MVPs, `sharness.fs` and `sharness.net`, with the launcher's first slice, `sharness-ai shell`; the others are designed: [sharness.bash](components/bash/index.md) (the shell as a service; start here), [sharness.net](components/net/index.md) (the only network client; worth adopting alone), [sharness.kms](components/kms/index.md), [sharness.fs](components/fs/index.md), [sharness.llm](components/llm/index.md), [sharness.launcher](components/launcher/index.md), [sharness.policy](components/policy/index.md). Each page: the API (proposed), the requests and their verdicts, what it enforces with what, what you get from this one alone. The hub: [the components](components/index.md).
 
 ## Who it is for
 
@@ -313,7 +313,7 @@ widen it. sgit (sgit.ai's encrypted vault CLI) is the first app designed to run 
 
 ## Where it is going: mockups, experiments, storyboards
 
-The memo's method is to start with very simple examples. [Mockups and experiments](code/experiments/index.md) is the ladder: browser mockups ([the policy hash](explain/mockups/policy-hash.html), [the edge matrix](explain/mockups/edges.html)), then experiments any Claude session can run, then Linux experiments (E01 to E04, E09 and E10 are runnable in the [CLI](code/cli/index.md): `probe`, `policy hash`, `run`, `hello`, `policy translate`; E04 measured 24 Oct 2026; E09, [a real Linux kernel in a browser tab](code/browser/demo/index.html) running `hello` under Landlock, measured 25 Oct 2026, with [five example policies](code/experiments/index.md#the-example-policies) from a hello world to sgit), then components, then the launcher above the agent. Three [storyboards](explain/storyboards/index.md) tell the design as short strips. A [research note](evidence/research/index.md) says what holds up and what to improve; a [market and competitive analysis](landscape/market/index.md) says what already exists and where SHarness sits.
+The memo's method is to start with very simple examples. [Mockups and experiments](code/experiments/index.md) is the ladder: browser mockups ([the policy hash](explain/mockups/policy-hash.html), [the edge matrix](explain/mockups/edges.html)), then experiments any Claude session can run, then Linux experiments (E01 to E04 and E09 to E13 are runnable in the [CLI](code/cli/index.md): `probe`, `policy hash`, `run`, `hello`, `policy translate`, the levels (`contain`, `explain`), the doors (`fs serve`, `net serve`) and `shell`; E04 measured 24 Oct 2026; E09, [a real Linux kernel in a browser tab](code/browser/demo/index.html) running `hello` under Landlock, measured 25 Oct 2026, with [five example policies](code/experiments/index.md#the-example-policies) from a hello world to sgit), then components, then the launcher above the agent. Three [storyboards](explain/storyboards/index.md) tell the design as short strips. A [research note](evidence/research/index.md) says what holds up and what to improve; a [market and competitive analysis](landscape/market/index.md) says what already exists and where SHarness sits.
 
 ## The site, in six sections (every page also as markdown at `<page>/index.md`)
 
@@ -328,11 +328,10 @@ The memo's method is to start with very simple examples. [Mockups and experiment
 
 ## Articles
 
-- [One standard, many languages](articles/one-standard-many-languages.md), by dev@sharness, 25 Oct 2026
+- [From a sentence to the kernel](articles/from-a-sentence-to-the-kernel.md), by cli@sharness, 26 Oct 2026
+- [The CLI is the front door](articles/the-cli-is-the-front-door.md), by cli@sharness, 26 Oct 2026
 - [Linux in a tab](articles/linux-in-a-tab.md), by cli@sharness, 25 Oct 2026
 - [A secure harness for agents](articles/secure-harness-for-agents.md), by Dinis Cruz, 24 Oct 2026
-- [The first experiments](articles/the-first-experiments.md), by cli@sharness, 24 Oct 2026
-- [What shipped on day one](articles/what-shipped-on-day-one.md), by cli@sharness, 24 Oct 2026
 - [All articles](articles/index.md)
 
 ## What this site claims
@@ -688,7 +687,7 @@ Sources: [05-sharness](../../project/sources/sharness-brief-pack/docs/05-sharnes
 
 # Components
 
-> **Status: design.** Every component below is proposed; none is built. Measured figures are as of 24 Oct 2026, in one Claude agent workspace.
+> **Status: design.** Every component below is proposed. As of 28 Oct 2026 two run as MVPs, `sharness.fs` and `sharness.net`, with the launcher's first slice, `sharness-ai shell`; each door is a Setting until the launcher gives it its own uid ([what exists today](../../evidence/status/index.md)). Measured figures are as of 24 Oct 2026, in one Claude agent workspace.
 
 | Component | Its one job | Was (early docs) |
 |---|---|---|
@@ -2122,7 +2121,7 @@ Sources: [Components](../components/index.md) (transparent vs harness-aware); [A
 
 # Roadmap and open decisions
 
-> **Status: design.** Nothing is built. This page lists what is decided, what is open, and the first tasks for the agents that will build SHarness. Decisions below are dated as of 24 Oct 2026 unless marked otherwise.
+> **Status: design.** As of 28 Oct 2026 the first experiments and three MVPs run on the CLI's `dev` ([what exists today](../../evidence/status/index.md)); everything else on this page is designed. This page lists what is decided, what is open, and the first tasks for the agents that will build SHarness. Decisions below are dated as of 24 Oct 2026 unless marked otherwise.
 
 ## Decided
 
@@ -2212,19 +2211,19 @@ Source: [00-README](../../project/sources/sharness-brief-pack/docs/00-README.md)
 
 # The code: where it is and what it does
 
-> **Status: experiments, as of 25 Oct 2026.** The site publishes the design; the code lives in one repository, [SHarness-AI/SHarness-AI__CLI](https://github.com/SHarness-AI/SHarness-AI__CLI), and today it carries experiments, not a component. This page is the map: the package, its modules, the commands, and where each thing on this site has code behind it.
+> **Status: experiments, as of 28 Oct 2026.** The site publishes the design; the code lives in one repository, [SHarness-AI/SHarness-AI__CLI](https://github.com/SHarness-AI/SHarness-AI__CLI), and today it carries the experiments and three MVPs: the levels, the first door `sharness.fs`, and the network door with `sharness-ai shell`. The doors are Settings until the launcher gives each its own uid ([what exists today](../evidence/status/index.md)). This page is the map: the package, its modules, the commands, and where each thing on this site has code behind it.
 
 ## Where everything is
 
 | What | Where | Status |
 |---|---|---|
 | the `sharness-ai` package | [`sharness_ai/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/sharness_ai) on the `dev` branch; v0.1.0 on [PyPI](https://pypi.org/project/sharness-ai/) carries only `--version` | runnable from the repository; unreleased |
-| the experiments, numbered | [`experiments/README.md`](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md) | E01 to E04, E09 and E10 runnable; E05 to E08 planned |
+| the experiments, numbered | [`experiments/README.md`](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md) | E01 to E04 and E09 to E13 runnable; E05 to E08 planned |
 | the example policies: two minimal, five profiles P0 to P4 | [`experiments/policies/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/experiments/policies) | runnable; run natively 25 Oct 2026 |
 | the playground: `sharness-ai` in Pyodide and in a shell on the Linux guest | [`experiments/browser/playground.js`](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/browser/playground.js), one ES module; served on this site at [code/playground](playground/index.html); `test_playground.mjs` drives both tabs | runnable; 11 of 11 checks 25 Oct 2026 |
 | E09, the harness under a second kernel: the guest build, the Node and browser runners, the chroot form | [`experiments/browser/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/experiments/browser): `build_guest.py` (standard library), `init.sh`, `page.html`, `boot_node.mjs`, `boot_browser.mjs`, `chroot_native.sh`; v86 pinned in its own `package.json` | runnable; measured 25 Oct 2026 ([Linux in the browser](browser/index.md)) |
 | the skill for a Claude Code session | [`.claude/skills/sharness-hello/SKILL.md`](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/.claude/skills/sharness-hello/SKILL.md) | runnable |
-| the tests | [`tests/unit/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/tests/unit), 92 tests (32 of them the security tests that pin each finding of the 25 Oct 2026 review), run on every push to `dev` by `tests.yml` on Python 3.11, 3.12 and 3.13; Landlock tests skip where it is absent | green on 25 Oct 2026 |
+| the tests | [`tests/unit/`](https://github.com/SHarness-AI/SHarness-AI__CLI/tree/dev/tests/unit), 229 tests as of 28 Oct 2026 (92 on 25 Oct, 32 of them the security tests that pin each finding of that day's review), run on every push to `dev` by `tests.yml` on Python 3.11, 3.12 and 3.13; Landlock tests skip where it is absent | 228 of 229 pass in website@'s run of 28 Oct 2026; the one failure is the run's own venv under a root-only directory ([The CLI](cli/index.md)) |
 | the ground rules for agents working in the repository | [`CLAUDE.md`](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/CLAUDE.md) | |
 | the code published on this site at immutable paths, with a manifest of hashes and a `latest` | [`code/releases/`](releases/index.md): `releases.json`, `latest.json`, `vN/vN.M/vN.M.P/`, `dev/`; `tools/releases.py` cuts and checks them | v0.1.0 and the dev snapshot, 25 Oct 2026 |
 | the release pipeline | [`.github/workflows/workflow.yml`](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/.github/workflows/workflow.yml): tests, version bump, tag, PyPI by Trusted Publishing | runs on a push to `main` |
@@ -2421,7 +2420,7 @@ The repository carries a `CLAUDE.md` with the ground rules (status words, threat
 
 # Mockups and experiments
 
-> **Status: experiments.** No SHarness component is built. What is runnable is listed here with where it runs; what was measured carries its date; everything else is planned. The design these experiments test is on the [design pages](../../design/architecture/index.md).
+> **Status: experiments, as of 28 Oct 2026.** Two doors, `sharness.fs` and `sharness.net`, run as MVPs with the launcher's first slice; no other component is built ([what exists today](../../evidence/status/index.md)). What is runnable is listed here with where it runs; what was measured carries its date; everything else is planned. The design these experiments test is on the [design pages](../../design/architecture/index.md).
 
 Dinis Cruz's memo of 24 October 2026 sets the method: *start with very simple examples, each component done in isolation, as simple, as fast and as slim as possible; then harden; then test*. This page is that method as a ladder. Each rung is something a person can run, in the browser, in any Claude session, or on a Linux box, and each says what it shows and what it does not.
 
@@ -3339,14 +3338,14 @@ Source: [04-environment-evidence](../project/sources/sharness-brief-pack/docs/04
 
 # What exists today, and what does not
 
-> **The honest column, as of 26 Oct 2026.** SHarness is at the design stage with the first experiments runnable, and two MVPs: the levels in the terminal and the first door, `sharness.fs`, a Setting until the launcher exists. What exists as running code is listed here and kept apart from the design, so a reader, human or agent, can tell what they can rely on.
+> **The honest column, as of 28 Oct 2026.** SHarness is at the design stage with the first experiments runnable, and three MVPs: the levels in the terminal; the first door, `sharness.fs`, a Setting until the launcher exists; and the network door with a shell under the harness, `sharness-ai shell`, the launcher's first slice. What exists as running code is listed here and kept apart from the design, so a reader, human or agent, can tell what they can rely on.
 
 ## Exists, and can be checked
 
 | Thing | Where to check it |
 |---|---|
 | **The `sharness-ai` package on PyPI**, v0.1.0: reports its version and prints its help | [pypi.org/project/sharness-ai](https://pypi.org/project/sharness-ai/) |
-| **Experiments E01 to E04, E09 and E10** (`probe`, `policy hash`, `run`, `hello`, the harness under a second kernel in Node, in a browser tab and through chroot, `policy translate`), with the CLI's tests (229 on 28 Oct 2026) run in CI on Python 3.11 to 3.13 on every push to the CLI's `dev` branch; unreleased to PyPI | [the code](../../code/index.md) · [experiments/README.md](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md) · E04 and E09 measured on [Evidence §9](../index.md#9-the-first-experiments-run-by-the-cli) |
+| **Experiments E01 to E04, E09 and E10** (and E11 to E13, the three MVPs below; `probe`, `policy hash`, `run`, `hello`, the harness under a second kernel in Node, in a browser tab and through chroot, `policy translate`), with the CLI's tests (229 on 28 Oct 2026) run in CI on Python 3.11 to 3.13 on every push to the CLI's `dev` branch; unreleased to PyPI | [the code](../../code/index.md) · [experiments/README.md](https://github.com/SHarness-AI/SHarness-AI__CLI/blob/dev/experiments/README.md) · E04 and E09 measured on [Evidence §9](../index.md#9-the-first-experiments-run-by-the-cli) |
 | **MVP 1, the levels in the terminal**: `contain` (a sentence), `profile` (six profiles with blanks), `explain` (any document down to the kernel, one hash per level), with vectors per level; on the CLI's `dev` | [The CLI §MVP 1](../../code/cli/index.md#mvp-1-the-levels-in-the-terminal) · [the levels](../../design/levels/index.md) |
 | **MVP 2, the first door, `sharness.fs`**: the door kit (session CA by openssl, mutual TLS 1.3, contracts, rows, verdicts, audit) over the disk and its twin, 18 conformance vectors; a Setting for the app until the launcher gives it its own uid; known issues, three of five fixed by 28 Oct 2026 | [sharness.fs](../../components/fs/index.md) · [the issues](../../components/fs/index.md#5-known-issues-as-of-28-oct-2026) |
 | **MVP 3, the network door and a shell under the harness (E13)**: `sharness-ai net serve` (an allowlisting proxy for one uid), `sharness-ai shell` (a unique user, the door, a policy whose only network row is the proxy's port); a Boundary for that shell where run as root, a Setting otherwise; checked by website@ on 28 Oct 2026 | [sharness.net](../../components/net/index.md) · [sharness.launcher](../../components/launcher/index.md) |
@@ -4855,7 +4854,7 @@ What `sharness.kms` would sit beside or draw from.
 
 **Complements** (SHarness could be their enforcement layer): the platforms in §7, which monitor and block at API hooks and would gain a kernel-enforced boundary to point at; identity products (Okta, Entra Agent ID, Keycard, Oasis, Teleport), which issue identity but do not confine; secrets managers (1Password's broker, Infisical, Vault, AgentCore Identity) as the upstream for `sharness.kms`; LLM gateways, which could sit behind `sharness.llm`; MCP gateways (ToolHive, Docker's), whose servers could run as harnessed apps; and ABP, which measures grants and would use SHarness as the control that turns an *expectation* into a *boundary*.
 
-**Honest gaps.** Nothing is built, while the competitors ship today with daily users. SHarness is Linux-only by construction (Landlock 5.13+, TCP rules in newer kernels, `memfd_secret`), while buyers' desktops are often macOS and Windows, which Anthropic, OpenAI and Google cover with Seatbelt and AppContainer. Landlock and unprivileged user namespaces are often unavailable inside CI containers and hardened distributions. Root and kernel compromise are out of scope, whereas microVM vendors sell a hardware boundary. There is no cloud offering, no user interface, no team, no compliance story (SOC 2, ISO 42001 mapping, ACS traces), no CVE process. Several processes, a session CA and a KMS protocol are more surface than one bubblewrap profile. And the site's own caveat decides the value: "who runs the launcher decides what the locks are" ([Components](../../design/components/index.md#sharness-launcher)).
+**Honest gaps.** As of 28 Oct 2026 SHarness is experiments and three MVPs, unreleased beyond a PyPI skeleton, while the competitors ship today with daily users. SHarness is Linux-only by construction (Landlock 5.13+, TCP rules in newer kernels, `memfd_secret`), while buyers' desktops are often macOS and Windows, which Anthropic, OpenAI and Google cover with Seatbelt and AppContainer. Landlock and unprivileged user namespaces are often unavailable inside CI containers and hardened distributions. Root and kernel compromise are out of scope, whereas microVM vendors sell a hardware boundary. There is no cloud offering, no user interface, no team, no compliance story (SOC 2, ISO 42001 mapping, ACS traces), no CVE process. Several processes, a session CA and a KMS protocol are more surface than one bubblewrap profile. And the site's own caveat decides the value: "who runs the launcher decides what the locks are" ([Components](../../design/components/index.md#sharness-launcher)).
 
 ## 10. Market signals, with numbers
 
@@ -4879,7 +4878,7 @@ What `sharness.kms` would sit beside or draw from.
 
 - It is a survey on one day by one agent session, with a second pass on five rows. Prices, round sizes and dates from secondary sources are marked as such; none is confirmed with the companies.
 - It does not rank products, recommend any, or describe any platform's plans beyond what its public pages say.
-- Nothing about SHarness in it is built; the comparison is between products that exist and a design.
+- When it was written (24 Oct 2026) nothing about SHarness in it was built; the comparison is between products that exist and a design. Since then the first experiments and three MVPs run ([what exists today](../../evidence/status/index.md)).
 
 Sources: every row's links, all read 24 Oct 2026; [sharness.ai/llms.txt](../../llms.txt) and [Components](../../design/components/index.md) for the SHarness claims; the [research note](../../evidence/research/index.md) for the design review this analysis follows.
 

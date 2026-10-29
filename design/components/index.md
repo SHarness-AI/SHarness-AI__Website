@@ -1,6 +1,6 @@
 # Components
 
-> **Status: design.** Every component below is proposed; none is built. Measured figures are as of 24 Oct 2026, in one Claude agent workspace.
+> **Status: design.** Every component below is proposed. As of 28 Oct 2026 two run as MVPs, `sharness.fs` and `sharness.net`, with the launcher's first slice, `sharness-ai shell`; each door is a Setting until the launcher gives it its own uid ([what exists today](../../evidence/status/index.md)). Measured figures are as of 24 Oct 2026, in one Claude agent workspace.
 
 | Component | Its one job | Was (early docs) |
 |---|---|---|
