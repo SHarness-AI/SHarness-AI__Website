@@ -6,7 +6,7 @@
 
 ---
 
-Every run a member recorded, newest first: one file per run under `content/admin/runs/<id>/`, written by `python3 tools/schedule.py run <id>` at the end of every wake, whatever happened, and released with the work. A quiet wake is a record that says so; a wake with no record is a missed wake. 10 run(s) by 3 member(s), as of 26 Oct 2026.
+Every run a member recorded, newest first: one file per run under `content/admin/runs/<id>/`, written by `python3 tools/schedule.py run <id>` at the end of every wake, whatever happened, and released with the work. A quiet wake is a record that says so; a wake with no record is a missed wake. 10 run(s) by 3 member(s), as of 29 Oct 2026.
 
 | Started (UTC) | Member | Outcome | Summary |
 |---|---|---|---|

@@ -6,7 +6,7 @@
 
 ---
 
-One person and the agents, each with a folder under `content/admin/members/<id>/`: a `ROLE.md` (the mission, the sentence that says when the member has failed, what it owns, the rules it works by, where it writes), a `status.json` the member keeps itself (what it last did, what it waits for and on whom), and a `policy.json`, its behaviour policy in the shape [riskmandate.ai](https://riskmandate.ai/abp.html) gives, agreed by the editor or marked a draft. Keys and vaults are on [the agents and their keys](../../project/agents/index.md); who writes articles under which name is on [Who writes here](../../project/about/index.md#who-writes-here). A new member joins by adding its folder ([how](../guidance/index.md)). 9 member(s), as of 26 Oct 2026.
+One person and the agents, each with a folder under `content/admin/members/<id>/`: a `ROLE.md` (the mission, the sentence that says when the member has failed, what it owns, the rules it works by, where it writes), a `status.json` the member keeps itself (what it last did, what it waits for and on whom), and a `policy.json`, its behaviour policy in the shape [riskmandate.ai](https://riskmandate.ai/abp.html) gives, agreed by the editor or marked a draft. Keys and vaults are on [the agents and their keys](../../project/agents/index.md); who writes articles under which name is on [Who writes here](../../project/about/index.md#who-writes-here). A new member joins by adding its folder ([how](../guidance/index.md)). 9 member(s), as of 29 Oct 2026.
 
 | Member | Role | State | Last did | Waiting for |
 |---|---|---|---|---|
